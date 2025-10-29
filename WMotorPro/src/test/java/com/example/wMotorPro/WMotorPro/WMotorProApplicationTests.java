@@ -1,4 +1,4 @@
-package com.Taller.WMotorPro.WMotorPro;
+package com.example.wMotorPro.WMotorPro;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
