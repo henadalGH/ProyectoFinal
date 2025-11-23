@@ -1,0 +1,37 @@
+<div class="titulo">
+    <h1>Registrar vehiculo</h1>
+</div>
+
+<div class="formulario">
+    <p>Complete los campos</p>
+    <form >
+        <div class="campos">
+            <label for="">Marca:</label>
+            <input type="text" name="marca" id="marca" placeholder="Tu marca" required>
+        </div>
+        <div class="campos">
+            <label>Modelo:</label>
+            <input type="text" id="modelo" placeholder="Ingresa tu modelo" required>
+        </div>
+        <div class="campos">
+            <label>Patente:</label>
+            <input type="text" id="patente" placeholder="Ingrese la patente">
+        </div>
+        <div class="campos">
+            <label>Año:</label>
+            <input type="text" id="año" placeholder="Ingrese el año">
+        </div>
+        <div class="campos">
+            <label>Kilometraje del vehiculo:</label>
+            <input type="text" id="kilometraje" required placeholder="Ingresar el kilometraje">
+        </div>
+
+        <div class="campos">
+            <label>Chacis: </label>
+            <input type="text"  id="chacis" required placeholder="Ingresar el numero chacis">
+        </div>
+
+        <button type="submit">Registrar</button>
+    </form>
+        <button [routerLink]="['/registrarCliente']">Cancelar</button>
+</div>
