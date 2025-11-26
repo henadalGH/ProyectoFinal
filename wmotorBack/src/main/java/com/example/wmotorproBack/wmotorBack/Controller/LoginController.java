@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.LoginDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
 
 import com.example.wmotorproBack.wmotorBack.Servicio.AuthService;
-
+import com.example.wmotorproBack.wmotorBack.Servicio.RegistroService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,12 +26,16 @@ public class LoginController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private RegistroService registroService;
+
 
     
     @PostMapping("/registro")
-    public ResponseEntity<ResponceDTO> registro(@RequestBody UsuarioEntity usuario) throws Exception {
+    public ResponseEntity<ResponceDTO> registro(@RequestBody UsuarioEntity usuario
+    ) throws Exception {
 
-        return new ResponseEntity<>(authService.register(usuario), HttpStatus.CREATED);
+        return new ResponseEntity<>(registroService.register(usuario), HttpStatus.CREATED);
     }
 
 

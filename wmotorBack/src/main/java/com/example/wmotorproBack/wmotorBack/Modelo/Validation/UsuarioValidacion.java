@@ -12,8 +12,8 @@ public class UsuarioValidacion {
 
         // ✅ Validación del nombre (entre 3 y 15 caracteres)
         if(usuario.getNombre() == null || 
-           usuario.getNombre().length() < 3 || 
-           usuario.getNombre().length() > 15)
+            usuario.getNombre().length() < 3 || 
+            usuario.getNombre().length() > 15)
         {
             responce.setNumOfErrors(responce.getNumOfErrors() + 1);
             responce.setMensage("El nombre no puede ser nulo y debe tener entre 3 y 15 caracteres");
@@ -21,8 +21,8 @@ public class UsuarioValidacion {
 
         // ✅ Validación del apellido (entre 3 y 15 caracteres)
         if(usuario.getApellido() == null || 
-           usuario.getApellido().length() < 3 || 
-           usuario.getApellido().length() > 15)
+            usuario.getApellido().length() < 3 || 
+            usuario.getApellido().length() > 15)
         {
             responce.setNumOfErrors(responce.getNumOfErrors() + 1);
             responce.setMensage("El apellido no puede ser nulo y debe tener entre 3 y 15 caracteres");
@@ -47,5 +47,5 @@ public class UsuarioValidacion {
         }
 
         return responce;
-    }
+}
 }

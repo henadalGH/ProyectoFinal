@@ -2,15 +2,15 @@
 <p>Complete los campos</p>
 
 <div class="formulario">
-    <form>
+    <form [formGroup]="form" (ngSubmit)="login()">
         <div class="campos">
-            <label>Correo electronico:</label>
-            <input type="text" placeholder="Correo">
+            <label for="email">Correo electronico:</label>
+            <input type="email" id="email" formControlName="email" placeholder=" Tu correo">
         </div>
 
         <div class="campos">
-            <label>contraseña:</label>
-            <input type="password" placeholder="Contraseña">
+            <label for="password">contraseña:</label>
+            <input type="password" id="password" formControlName="password" placeholder="Contraseña">
         </div>
         <button type="submit">Ingresar</button>
     </form>
