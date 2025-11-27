@@ -25,7 +25,7 @@ export class AuthService {
         if(response && response.success){
           this.loggedIn.next(email);
           localStorage.setItem('email', email);
-          this.router.navigate(['/homeAdmin']);
+          this.router.navigate(['homeAdmin']);
         }
         else {
           alert('usuario o contraseña incorrecto')

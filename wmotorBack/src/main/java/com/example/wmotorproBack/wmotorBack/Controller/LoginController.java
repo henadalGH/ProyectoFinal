@@ -16,6 +16,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.AuthService;
 import com.example.wmotorproBack.wmotorBack.Servicio.RegistroService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -40,14 +42,30 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<HashMap<String, String>> login(@RequestBody LoginDTO loginRequest) throws Exception {
-        
-        HashMap<String, String> login = authService.login(loginRequest);
-        if (login.containsKey("jwt")) {
-            return new ResponseEntity<>(login, HttpStatus.OK);
-        } else{
-            return new ResponseEntity<>(login, HttpStatus.UNAUTHORIZED);
+public ResponseEntity<HashMap<String, String>> login(@RequestBody LoginDTO loginRequest) throws Exception {
+
+    System.out.println("EMAIL RECIBIDO: " + loginRequest.getEmail());
+    System.out.println("PASSWORD RECIBIDO: " + loginRequest.getPassword());
+
+    HashMap<String, String> login = authService.login(loginRequest);
+
+    if (login.containsKey("jwt")) {
+        return ResponseEntity.ok(login);
+    } else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(login);
+    }
+}
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+
+        if(authHeader == null || !authHeader.startsWith("Bearer ")){
+            return ResponseEntity.badRequest().body("Token no proporcionado");
         }
+        String token = authHeader.substring(7);
+        authService.logout(token);
+        return ResponseEntity.ok("Seccion serrada con exito");
     }
     
 }

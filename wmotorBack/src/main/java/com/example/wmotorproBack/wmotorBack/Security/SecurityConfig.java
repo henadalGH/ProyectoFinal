@@ -33,8 +33,9 @@ public class SecurityConfig {
         .authorizeHttpRequests(authRequest ->
             authRequest
                 .requestMatchers("/auth/login").permitAll()   // pública
-                    .requestMatchers("/auth/registro").permitAll() 
+                .requestMatchers("/auth/registro").permitAll() 
                 .requestMatchers("/usuario/**").permitAll()
+                .requestMatchers("/auth/logout").permitAll()
                 .anyRequest().authenticated()
         )
         .sessionManagement(sessionM ->

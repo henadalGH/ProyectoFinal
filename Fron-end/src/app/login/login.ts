@@ -1,52 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../Auth/auth-service';
+import { LoginServide } from './login-servicio';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [FormsModule],
   templateUrl: './login.html',
   standalone: true,
   styleUrl: './login.css',
 })
-export class Login implements OnInit {
+export class Login {
 
-form!: FormGroup<any>;
-private formSubmitAttempt: any;
+email: String = "";
+password: String = "";
 
+constructor(private loginService: LoginServide, private router: Router)
+{}
 
-constructor(private authService: AuthService, private formB: FormBuilder) {
-    
+Login(): void {
+  console.log(this.email, this.password);
+  this.loginService.login(this.email, this.password).subscribe(
+    (Response) => {
+      this.loginService.setToken(Response.token);
+
+      this.router.navigate(['/homeAdmin']);
+    },
+    (error)=> {
+      console.error('Error de login', error);
+      alert('Correo o contraseña incorrecta');
+      
+    }
+  )
 }
 
-  ngOnInit(): void {
-    this.form = this.formB.group(
-      {
-        email: ['', Validators.required],
-        password:['', Validators.required]
-      });
-  }
-
- isFieldInvalid(field: string) {
-  return (
-    (!this.form?.get(field)?.valid && this.form?.get(field)?.touched) ||
-    (this.form?.get(field)?.untouched && this.formSubmitAttempt)
-  );
-}
-login() {
-  this.formSubmitAttempt = true;
-    if(this.form.valid){
-      const {email, password} = this.form.value;
-      this.authService.login(email, password).subscribe({
-        next: (res)=> {
-          const user = res.usuario
-          console.log('login completo');
-          
-        }
-      });
-}
+  
 
 
-}
 }

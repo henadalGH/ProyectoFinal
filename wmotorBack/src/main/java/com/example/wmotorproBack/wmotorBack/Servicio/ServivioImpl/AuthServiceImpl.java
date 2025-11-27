@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -55,6 +55,14 @@ public class AuthServiceImpl implements AuthService {
         respuesta.put("jwt", token);
 
         return respuesta;
+    }
+
+    private final Map<String, String> revokedTokens = new HashMap<>();
+    
+    public void logout(String token) {
+        // Si tienes un sistema de lista negra de tokens, puedes invalidar el token aquí.
+        revokedTokens.put(token, "revoked");
+        System.out.println("Token invalidado: " + token);
     }
     
 }
