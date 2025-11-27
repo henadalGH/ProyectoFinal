@@ -46,7 +46,7 @@ public class VehiculoEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
-    private ClienteEntity idCliente;
+    private ClienteEntity cliente;
 
     @OneToMany(mappedBy = "vehiculo")
     private List<HistorialEntity> historial = new ArrayList<>();

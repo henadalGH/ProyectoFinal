@@ -36,6 +36,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/registro").permitAll() 
                 .requestMatchers("/usuario/**").permitAll()
                 .requestMatchers("/auth/logout").permitAll()
+                .requestMatchers("/vehiculo/agregar").permitAll()
                 .anyRequest().authenticated()
         )
         .sessionManagement(sessionM ->
