@@ -3,10 +3,13 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.VehiculoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.VehiculoService;
+
+import lombok.NonNull;
 
 @Service
 public class VehiculoServiceImpl implements VehiculoService{
@@ -31,4 +34,26 @@ public class VehiculoServiceImpl implements VehiculoService{
 
         return vehiculoRepository.save(vehiculo);
     }
+
+    @Override
+public ResponceDTO obtenerVehiculoPorID(@NonNull Long id) {
+
+    ResponceDTO response = new ResponceDTO();
+
+    VehiculoEntity vehiculo = vehiculoRepository.findById(id).orElse(null);
+
+    if (vehiculo == null) {
+        response.setNumOfErrors(1);
+        response.setMensage("Vehículo no encontrado");
+        return response;
+    }
+
+    response.setNumOfErrors(0);
+    response.setMensage("Vehículo obtenido correctamente");
+    
+
+    return response;
+}
+
+    
 }
