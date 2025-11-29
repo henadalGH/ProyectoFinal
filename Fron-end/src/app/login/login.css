@@ -1,0 +1,72 @@
+.formulario h2{
+    font-size: 50px; 
+    text-align: center;
+
+}
+
+p{
+    text-align: center;
+    font-size: 25px;
+}
+
+input{
+    align-items: center;
+    display: flex;
+    margin-top: 10px;
+    
+}
+
+.boton1, .boton2{
+    margin-top: 25px;
+}
+
+input, .inputs{
+    text-align: center;
+    padding: 7px;
+    border-radius: 5px;
+    display: block; /* Permite aplicar margin auto */
+    margin: 0 auto; 
+    margin-top: 10px;
+    border: 1px;
+}
+
+input:active{
+    border: 5px;
+}
+
+.boton1{
+    padding: 10px;
+    background-color: rgba(219, 163, 219, 0.675);
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.boton2{
+    padding: 10px;
+    background-color: rgba(82, 69, 193, 0.675);
+    font-size: 15px;
+    border-radius: 10px;
+    border: none;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.boton1:hover{
+    background-color: blueviolet;
+}
+
+
+
+.formulario{
+    padding: 30px;
+    width: 50%;
+    margin: auto;
+    background-color: rgb(181, 175, 175);
+    border-radius: 30px;
+    background: linear-gradient(to right,#a8edea, #fed6e3)
+}

@@ -1,14 +1,33 @@
-<h1>Bienvendos a nuestra Empresa:</h1>
-<h1 class="nombreEmpresa">W Motor Pro</h1>
+<div class="header">
+    <h1>W Motor Pro</h1>
+    <div class="links">
+        <a href="#servicios">Nuestros servicios</a>
+        <a href="#algo">algo mas</a>
+        <a href="#quienes">Quienes somos</a>
+        <a href="#contacto">Contactos</a>
+    </div>
 
-<div class="frace">
-<p>“Cada detalle importa. Por eso trabajamos con dedicación, para que te vayas seguro y conforme.”</p>
+    <button class="boton1" [routerLink]="['/login']">Ingresar</button>
 </div>
 
-<div class="ingresar">
-    <p>Si tienes cuesta precione aqui</p>
-    <button [routerLink]="['/login']">Ingresar</button>
-    
-    <button [routerLink]="['/homeAdmin']">Administrador</button>
-    <button [routerLink]="['/homeCliente']">Cliente</button>
-</div> 
+<div class="titulos">
+    <h1>Bienvenidos a nuestra Empresa</h1>
+    <p class="frase">“Cada detalle importa. <br> Por eso trabajamos con dedicación, para que te vayas seguro y conforme.”</p>
+</div>
+
+<div id="servicios" class="servicios">
+    <h2>Nuestros servicios</h2>
+    <p>Acá van los servicios</p>
+</div>
+
+<div id="algo" class="quien">
+    <p>Acá va "algo más"</p>
+</div>
+
+<div id="quienes" class="quien">
+    <h2>¿Quienes somos?</h2>
+</div>
+
+<div class="contactos">
+    <h2>contactos</h2>
+</div>

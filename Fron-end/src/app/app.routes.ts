@@ -29,7 +29,7 @@ export const routes: Routes = [
     {path: "homeCliente", component: HomeCliente},
     {path: "homeEmpleado", component: HomeEmpleado},
     {path: "header", component: Header},
-    {path:'', redirectTo: '/login', pathMatch: 'full'},
+    {path:'', redirectTo: '/principal', pathMatch: 'full'},
     {path: "contra", component: RecuperarContrasenia},
     {path:"headerAdmin", component: HeaderAdmin},
     {path:"gestionCliente", component: GestionCliente},

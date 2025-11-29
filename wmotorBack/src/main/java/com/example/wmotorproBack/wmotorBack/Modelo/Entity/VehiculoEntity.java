@@ -41,9 +41,6 @@ public class VehiculoEntity {
     @Column
     private int kilometraje;
 
-    @Column
-    private String numeroChasis;
-
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private ClienteEntity cliente;

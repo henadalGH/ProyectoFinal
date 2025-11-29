@@ -1,0 +1,156 @@
+/* ====== Configuración general ====== */
+body {
+    margin: 0;                                      /* Quita márgenes del navegador */
+    padding: 0;                                     /* Quita padding por defecto */
+    font-family: "Segoe UI", Arial, sans-serif;      /* Fuente general */
+    background-color: #f5f5f5;                       /* Color de fondo */
+    color: #222;                                     /* Color principal del texto */
+}
+
+/* Centrar secciones y dar espacio superior */
+.ingresar,  
+.servicios, 
+.contactos,
+.quien {
+    width: 100%;                                     /* Ocupan todo el ancho */
+    text-align: center;                              /* Centra el contenido */
+    margin-top: 40px;                                /* Separación superior */
+}
+
+.titulos{
+    width: 100%;                                     /* Ocupan todo el ancho */
+    text-align: center;                              /* Centra el contenido */
+    background-color: #1E88E5;
+    padding-block: unset;
+
+    
+}
+
+/* ====== Botón Principal ====== */
+.boton1 {
+    padding: 14px 35px;                              /* Tamaño del botón */
+    font-size: 18px;                                 /* Tamaño del texto */
+    font-weight: bold;                               /* Texto en negrita */
+    border: none;                                    /* Sin borde */
+    border-radius: 8px;                              /* Bordes redondeados */
+    background-color: #1E88E5;                       /* Azul principal */
+    color: white;                                    /* Texto blanco */
+    cursor: pointer;                                 /* Manito al pasar el mouse */
+    transition: all 0.3s ease;                       /* Animación suave */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);         /* Sombra */
+    display: flex;
+    justify-content: center;
+}
+
+.boton1:hover {
+    background-color: #1565C0;                       /* Azul más oscuro */
+    transform: scale(1.05);                          /* Aumenta un poco el tamaño */
+}
+
+/* ====== Títulos ====== */
+.titulos h1 {
+    margin: 10px 0;                                  /* Separación vertical */
+    font-size: 45px;                                 /* Tamaño grande */
+    letter-spacing: 1px;                             /* Espaciado entre letras */
+    padding: 25px;
+}
+
+/* Nombre de empresa destacado */
+.nombreEmpresa {
+    color: #1E88E5;                                  /* Azul destacado */
+    font-size: 45px;                                 /* Letra grande */
+    font-weight: bold;                               /* Negrita */
+}
+
+/* Frase secundaria */
+.frace {
+    margin-top: 10px;                                /* Separación arriba */
+    font-size: 18px;                                 /* Tamaño mediano */
+    color: #444;                                     /* Gris suave */
+    font-style: italic;                              /* Cursiva */
+}
+
+/* Párrafos de la sección títulos */
+.titulos p {
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+
+/* ====== Sección Servicios ====== */
+.servicios {
+    background-color: white;                         /* Fondo blanco */
+    padding: 40px 20px;                              /* Espaciado interior */
+    border-radius: 12px;                             /* Bordes redondeados */
+    width: 80%;                                      /* Ancho del contenedor */
+    margin: 50px auto;                               /* Centrado automático */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);          /* Sombra */
+}
+
+/* Títulos de secciones */
+.servicios, .quien, .contactos h2 {
+    margin-bottom: 10px;
+    font-size: 30px;
+    color: #1E88E5;
+}
+
+/* ====== Sección Contactos y Quienes Somos ====== */
+.contactos, .quien {
+    width: 80%;                                      /* Ancho */
+    margin: 60px auto;                               /* Centrado con margen vertical */
+    background-color: white;                         /* Fondo blanco */
+    padding: 30px;                                   /* Padding interno */
+    border-radius: 12px;                             /* Bordes redondeados */
+    color: black;                                    /* Color texto */
+    font-size: 20px;                                 /* Tamaño del texto */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);          /* Sombra más marcada */
+    text-align: center;                              /* Todo centrado */
+}
+
+/* ====== HEADER ====== */
+.header {
+    position: relative;                              /* Necesario para centrar el menú */
+    align-items: center;                             /* Alineación vertical */
+    display: flex;                                   /* Flexbox para alinear izquierda-centro-derecha */
+    background-color: aliceblue;                     /* Fondo del header */
+    padding: 25px;                                   /* Espaciado interno */
+    border-radius: 25px;                             /* Bordes redondeados */
+    height: 80px;                                    /* Altura del header */
+}
+
+/* Título del header (izquierda) */
+.header h1 {
+    margin: 0;                                       /* Quita margen por defecto */
+    font-weight: bold;                               /* Negrita */
+    font-size: 32px;                                 /* Tamaño del título */
+}
+
+/* ====== Links centrados ====== */
+.links {
+    position: absolute;                              /* Centrado independiente del flex */
+    left: 50%;
+    transform: translateX(-50%);                     /* Centro perfecto */
+    display: flex;
+    gap: 30px;                                       /* Espacio entre links */
+}
+
+/* Estilos de los links */
+.links a {
+    text-decoration: none;
+    font-size: 25px;
+    color: #1E88E5;
+}
+
+/* ====== Botón alineado a la derecha ====== */
+.header .boton1 {
+    margin-left: auto;                               /* ← Esto lo separa totalmente hacia la derecha */
+}
+
+/* Color de texto en la sección Quienes somos */
+.quien {
+    color: #222;
+}
+
+/* Efecto de scroll suave */
+html {
+    scroll-behavior: smooth;
+}
