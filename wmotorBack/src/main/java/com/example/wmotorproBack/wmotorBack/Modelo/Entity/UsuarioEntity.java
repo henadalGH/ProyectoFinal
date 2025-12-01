@@ -42,10 +42,6 @@ public class UsuarioEntity implements UserDetails {
     @Column
     private String contacto;
 
-    @Column
-    private Boolean estado;
-
-
     @OneToOne
     @JoinColumn(name = "id_rol")
     private RolesEntity rol;
@@ -91,9 +87,4 @@ public class UsuarioEntity implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
-    
-
-
-    
 }
