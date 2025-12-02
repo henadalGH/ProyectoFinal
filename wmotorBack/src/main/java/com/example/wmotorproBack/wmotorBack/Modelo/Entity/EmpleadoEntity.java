@@ -1,8 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-import java.sql.Date;
 
-
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

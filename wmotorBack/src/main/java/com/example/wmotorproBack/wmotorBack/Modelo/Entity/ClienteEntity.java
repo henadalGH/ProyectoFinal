@@ -29,7 +29,7 @@ public class ClienteEntity {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
-    private UsuarioEntity id_usuario;
+    private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "cliente")
     private List<VehiculoEntity> vehiculos = new ArrayList<>();

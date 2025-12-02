@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.util.List;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 
 import jakarta.persistence.Column;
@@ -9,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -27,6 +30,7 @@ public class RolesEntity {
     @Enumerated(EnumType.STRING)
     private RolesEnum nombre;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+    @OneToMany(mappedBy = "rol")
+    private List<UsuarioEntity> usuario;
+    
 }

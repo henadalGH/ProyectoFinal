@@ -1,11 +1,12 @@
 package com.example.wmotorproBack.wmotorBack.Servicio;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RegistroDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
-
-import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 
 public interface RegistroService {
 
-    ResponceDTO register(UsuarioEntity usuario) throws Exception;
+    public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol) throws Exception;
+
 
 }

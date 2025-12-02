@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,8 +23,8 @@ public class AdminEntity {
     private Long id_admin;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
-    private UsuarioEntity usuarioId;
+    private UsuarioEntity usuario;
  
 }
