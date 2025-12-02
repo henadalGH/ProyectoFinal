@@ -14,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -34,7 +35,7 @@ public class UsuarioEntity implements UserDetails {
     @Column
     private String apellido;
 
-    @Column
+    @Column(name = "email")
     private String email;
 
     @Column String password;
@@ -42,9 +43,18 @@ public class UsuarioEntity implements UserDetails {
     @Column
     private String contacto;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_rol")
     private RolesEntity rol;
+
+    @OneToOne(mappedBy = "usuario")
+    private AdminEntity administrador;
+
+    @OneToOne(mappedBy = "usuario")
+    private EmpleadoEntity empleado;
+
+    @OneToOne(mappedBy = "usuario")
+    private ClienteEntity cliente;
 
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Repository;
 
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 @Repository
 public interface RolesRepository extends JpaRepository<RolesEntity, Long> {
 
-    Optional<RolesEntity> findByNombre(RolesEnum rol);
+    boolean existsByNombre(RolesEnum nombre);
+
+    Optional<RolesEntity> findByNombre(RolesEnum nombre);
 }

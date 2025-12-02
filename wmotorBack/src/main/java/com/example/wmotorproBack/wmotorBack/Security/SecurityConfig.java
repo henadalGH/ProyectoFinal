@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/logout").permitAll()
                 .requestMatchers("/vehiculo/agregar").permitAll()
                 .requestMatchers("/vehiculo/buscar/{id}").permitAll()
+                .requestMatchers("/registro/nuevo").permitAll()
                 .anyRequest().authenticated()
         )
         .sessionManagement(sessionM ->
@@ -61,4 +62,3 @@ public class SecurityConfig {
     }
 
 }
-
