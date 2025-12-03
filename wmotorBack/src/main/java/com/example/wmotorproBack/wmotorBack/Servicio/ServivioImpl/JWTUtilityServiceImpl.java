@@ -15,11 +15,9 @@ import java.security.spec.X509EncodedKeySpec;
 import java.text.ParseException;
 import java.util.Base64;
 import java.util.Date;
-
 import org.springframework.stereotype.Service;
 import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Value;
-
 import com.example.wmotorproBack.wmotorBack.Servicio.JWTUtilityService;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jose.JWSAlgorithm;

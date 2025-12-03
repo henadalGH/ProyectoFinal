@@ -44,9 +44,6 @@ public class LoginController {
     @PostMapping("/login")
 public ResponseEntity<HashMap<String, String>> login(@RequestBody LoginDTO loginRequest) throws Exception {
 
-    System.out.println("EMAIL RECIBIDO: " + loginRequest.getEmail());
-    System.out.println("PASSWORD RECIBIDO: " + loginRequest.getPassword());
-
     HashMap<String, String> login = authService.login(loginRequest);
 
     if (login.containsKey("jwt")) {
