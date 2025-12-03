@@ -1,11 +1,12 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Validation;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RegistroDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
-import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
+
 
 public class UsuarioValidacion {
 
-    public ResponceDTO validation(UsuarioEntity usuario){
+    public ResponceDTO validation(RegistroDTO usuario){
 
         ResponceDTO responce = new ResponceDTO();
         responce.setNumOfErrors(0);
