@@ -1,11 +1,12 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 import java.util.HashMap;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.LoginDTO;
@@ -37,9 +38,16 @@ public ResponseEntity<HashMap<String, String>> login(@RequestBody LoginDTO login
 }
 
 @GetMapping("/admin/solo")
-@PreAuthorize("hasRole('ADMIN')")
-public String soloAdmin() {
-    return "OK";
+@PreAuthorize("hasRole('CLIENTE')")
+public Map<String, Object> soloAdmin() {
+
+    var auth = SecurityContextHolder.getContext().getAuthentication();
+
+    Map<String, Object> data = new HashMap<>();
+    data.put("usuario", auth.getName());
+    data.put("roles", auth.getAuthorities());
+
+    return data;
 }
 
 

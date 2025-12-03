@@ -69,6 +69,7 @@ public class JWTUtilityServiceImpl implements JWTUtilityService {
         }
 
         JWTClaimsSet claimsSet = signedJWT.getJWTClaimsSet();
+        
 
         if (claimsSet.getExpirationTime().before(new Date())) {
             throw new JOSEException("Expired token");

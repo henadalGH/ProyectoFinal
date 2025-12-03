@@ -21,44 +21,48 @@ import jakarta.servlet.http.HttpServletResponse;
 @EnableMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
 
-    
     @Autowired
     private JWTUtilityService jwtUtilityService;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-    return http
-        .csrf(csrf -> csrf.disable())
-        .authorizeHttpRequests(authRequest ->
-            authRequest
-                .requestMatchers("/auth/login").permitAll()   // pública
-                .requestMatchers("/auth/registro").permitAll() 
-                .requestMatchers("/usuario/**").permitAll()
-                .requestMatchers("/auth/logout").permitAll()
-                .requestMatchers("/vehiculo/agregar").permitAll()
-                .requestMatchers("/vehiculo/buscar/{id}").permitAll()
-                .requestMatchers("/registro/nuevo").permitAll()
-                .anyRequest().authenticated()
-        )
-        .sessionManagement(sessionM ->
-            sessionM.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        )
-        .addFilterBefore(
-            new JWTAuthorizationFilter(jwtUtilityService),
-            UsernamePasswordAuthenticationFilter.class
-        )
-        .exceptionHandling(exceptionHandling ->
-            exceptionHandling.authenticationEntryPoint((request, response, authException) -> {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado");
-            })
-        )
-        .build();
-}
-
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+    public JWTAuthorizationFilter jwtAuthorizationFilter() {
+        return new JWTAuthorizationFilter(jwtUtilityService);
     }
 
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        return http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authRequest ->
+                        authRequest
+                                .requestMatchers("/auth/login").permitAll()
+                                .requestMatchers("/auth/registro").permitAll()
+                                .requestMatchers("/usuario/**").permitAll()
+                                .requestMatchers("/auth/logout").permitAll()
+                                .requestMatchers("/vehiculo/agregar").permitAll()
+                                .requestMatchers("/vehiculo/buscar/{id}").permitAll()
+                                .requestMatchers("/registro/nuevo").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                )
+                .sessionManagement(sessionM ->
+                        sessionM.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+                .addFilterBefore(
+                        jwtAuthorizationFilter(),
+                        UsernamePasswordAuthenticationFilter.class
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling.authenticationEntryPoint((request, response, authException) -> {
+                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autorizado");
+                        })
+                )
+                .build();
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
