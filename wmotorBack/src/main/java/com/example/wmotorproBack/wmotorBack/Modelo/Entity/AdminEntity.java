@@ -19,7 +19,6 @@ import lombok.Data;
 @Table(name = "administrador" , schema = "wmotorpro")
 public class AdminEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_admin")
@@ -34,5 +33,6 @@ public class AdminEntity {
     private List<MovimientoFinancieroEntity>  movimiento;
 
     @OneToMany(mappedBy = "admin")
-    private List<EstadisticasEntity> estadisticas;
+    private List<ReportesEntity> reportes;
+
 }
