@@ -35,4 +35,6 @@ public class AdminEntity {
     @OneToMany(mappedBy = "admin")
     private List<ReportesEntity> reportes;
 
+    @OneToMany(mappedBy = "admin")
+    private List<PresupuestoEntity> presupuesto;
 }
