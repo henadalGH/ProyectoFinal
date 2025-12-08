@@ -49,7 +49,9 @@ public class VehiculoEntity {
     private List<HistorialEntity> historial = new ArrayList<>();
 
     @OneToMany(mappedBy = "vehiculo")
-    private List<PresupuestoEntity> presupuesto;
+    private List<PresupuestoEntity> presupuesto = new ArrayList<>();
 
+    @OneToMany(mappedBy = "vehiculo")
+    private List<OrdenTrabajoEntity> orden = new ArrayList<>();
 
 }

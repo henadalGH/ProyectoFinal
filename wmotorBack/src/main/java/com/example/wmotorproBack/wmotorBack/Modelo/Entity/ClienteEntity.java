@@ -33,4 +33,7 @@ public class ClienteEntity {
 
     @OneToMany(mappedBy = "cliente")
     private List<VehiculoEntity> vehiculos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cliente")
+    private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 }
