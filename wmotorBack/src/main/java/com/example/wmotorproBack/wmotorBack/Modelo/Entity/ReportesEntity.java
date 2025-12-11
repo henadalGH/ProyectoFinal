@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -43,5 +44,5 @@ public class ReportesEntity {
     private AdminEntity admin;
 
     @OneToMany(mappedBy = "reportes")
-    private List<DetalleReportesEntity> detalleReportes;
+    private List<DetalleReportesEntity> detalleReportes = new ArrayList<>();
 }

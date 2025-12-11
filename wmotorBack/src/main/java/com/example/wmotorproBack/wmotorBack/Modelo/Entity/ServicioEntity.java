@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -13,11 +15,12 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "servicio")
+@Table(name = "servicio", schema = "wmotorpro")
 public class ServicioEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_servicio")
     private Long id;
 
 
@@ -34,5 +37,5 @@ public class ServicioEntity {
     private String duracionEstimada;
 
     @OneToMany(mappedBy = "servicio")
-    private List<ServicioEntity> servicio;
+    private List<TurnoEntity> turno = new ArrayList<>();
 }

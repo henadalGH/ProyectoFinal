@@ -54,4 +54,7 @@ public class VehiculoEntity {
     @OneToMany(mappedBy = "vehiculo")
     private List<OrdenTrabajoEntity> orden = new ArrayList<>();
 
+    @OneToMany(mappedBy = "vehiculo")
+    private List<TurnoEntity> turno = new ArrayList<>();
+
 }

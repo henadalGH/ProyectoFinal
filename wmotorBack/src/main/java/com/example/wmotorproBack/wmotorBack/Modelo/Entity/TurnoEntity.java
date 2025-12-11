@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "turno", schema = "turno")
+@Table(name = "turno", schema = "wmotoropro")
 public class TurnoEntity {
 
     @Id

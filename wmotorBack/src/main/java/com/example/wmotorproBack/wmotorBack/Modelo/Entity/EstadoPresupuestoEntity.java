@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
@@ -15,7 +16,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "estado_presupuesto")
+@Table(name = "estado_presupuesto", schema = "wmotorpro")
 public class EstadoPresupuestoEntity {
 
     @Id
@@ -28,5 +29,5 @@ public class EstadoPresupuestoEntity {
     private EstadoPresupuestoEnum estadoPresupuesto;
 
     @OneToMany(mappedBy = "estadoPresupuesto")
-    private List<PresupuestoEntity> presupuesto;
+    private List<PresupuestoEntity> presupuesto = new ArrayList<>();
 }

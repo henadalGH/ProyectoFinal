@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -30,11 +31,11 @@ public class AdminEntity {
     private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "admin")
-    private List<MovimientoFinancieroEntity>  movimiento;
+    private List<MovimientoFinancieroEntity>  movimiento = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin")
-    private List<ReportesEntity> reportes;
+    private List<ReportesEntity> reportes = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin")
-    private List<PresupuestoEntity> presupuesto;
+    private List<PresupuestoEntity> presupuesto =  new ArrayList<>();
 }

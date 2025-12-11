@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "orden_trabajo")
+@Table(name = "orden_trabajo", schema = "wmotorpro")
 public class OrdenTrabajoEntity {
 
     @Id
@@ -56,5 +57,5 @@ public class OrdenTrabajoEntity {
     private EstadoOrdenEntity estadoOrden;
 
     @OneToMany(mappedBy = "orden")
-    private List<EvalucionServicioEntity> evalucion;
+    private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 }

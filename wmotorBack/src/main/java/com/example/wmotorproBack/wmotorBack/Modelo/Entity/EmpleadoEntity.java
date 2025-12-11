@@ -19,7 +19,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table( name = "empleado" ,schema = "wmotorpro0")
+@Table( name = "empleado" ,schema = "wmotorpro")
 public class EmpleadoEntity {
     
     @Id
