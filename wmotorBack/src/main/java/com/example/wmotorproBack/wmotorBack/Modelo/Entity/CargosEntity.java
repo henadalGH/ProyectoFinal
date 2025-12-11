@@ -22,6 +22,7 @@ public class CargosEntity {
     @Column(name = "cargo")
     private String cargo;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "sueldo_base")
+    private Double sueldoBase;
+
 }

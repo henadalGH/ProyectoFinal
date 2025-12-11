@@ -47,4 +47,6 @@ public class EmpleadoEntity {
 
     @OneToMany(mappedBy = "empleado")
     private List<OrdenTrabajoEntity> orden = new ArrayList<>();
+
+   
 }
