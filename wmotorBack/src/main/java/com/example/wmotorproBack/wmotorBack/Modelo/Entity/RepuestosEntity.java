@@ -1,9 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-
-
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -11,33 +8,28 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "historial", schema = "wmotorpro")
-public class HistorialEntity {
-    
+@Table(name = "repuesto", schema = "wmotorpro")
+public class RepuestosEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    
+    @Column(name = "id_repuesto")
+    private Long id;
 
-    @Column(name = "fecha_inicio")
-    private Date fechaInicio;
+    @Column(name = "nombre")
+    private String nombre;
 
-    @Column(name = "fecha_fin")
-    private Date fechaFin;
+    @Column(name = "marca")
+    private String marca;
 
-    @Column
-    private String descripcion;
-
-    @ManyToOne
-    @JoinColumn(name = "id_vehiculo")
-    private VehiculoEntity vehiculo;
+    @Column(name = "codigo")
+    private String codigo;
 
     @OneToMany
     private List<DetalleRepuestoEntity> repuesto = new ArrayList<>();
