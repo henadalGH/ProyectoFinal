@@ -22,7 +22,7 @@ public class OrdenTrabajoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_orden_trabajo")
+    @Column(name = "id_asignacion")
     private Long id;
 
     @Column(name = "km_ingreso")
@@ -58,4 +58,7 @@ public class OrdenTrabajoEntity {
 
     @OneToMany(mappedBy = "orden")
     private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
+
+    @OneToMany(mappedBy = "orden")
+    private List<DetalleOrdenEntity> ordenes = new ArrayList<>();
 }

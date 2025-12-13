@@ -38,4 +38,9 @@ public class ServicioEntity {
 
     @OneToMany(mappedBy = "servicio")
     private List<TurnoEntity> turno = new ArrayList<>();
+
+    @OneToMany(mappedBy = "servicio")
+    private List<DetalleOrdenEntity> orden = new ArrayList<>();
+
+    
 }
