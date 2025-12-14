@@ -49,5 +49,5 @@ public class EmpleadoEntity {
     private List<OrdenTrabajoEntity> orden = new ArrayList<>();
 
     @OneToMany(mappedBy = "empleado")
-    private List<RegistrarHoras> horas;
+    private List<RegistrarHorasEntity> horas;
 }

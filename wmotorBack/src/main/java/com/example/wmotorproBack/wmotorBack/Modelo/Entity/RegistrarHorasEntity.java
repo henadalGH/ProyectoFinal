@@ -1,8 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-
 import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +14,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "registro_horas", schema = "wmotorpro")
-public class RegistrarHoras {
+public class RegistrarHorasEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

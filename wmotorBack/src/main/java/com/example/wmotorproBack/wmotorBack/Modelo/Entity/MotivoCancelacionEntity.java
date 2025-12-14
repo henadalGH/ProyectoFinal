@@ -11,7 +11,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "motivo_cancelacion", schema = "wmotorpro")
-public class MotivoCancelacion {
+public class MotivoCancelacionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
