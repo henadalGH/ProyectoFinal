@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 .requestMatchers("/vehiculo/agregar").permitAll()
                                 .requestMatchers("/vehiculo/buscar/{id}").permitAll()
                                 .requestMatchers("/registro/nuevo").permitAll()
+                                .requestMatchers("/cargos/obtener").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

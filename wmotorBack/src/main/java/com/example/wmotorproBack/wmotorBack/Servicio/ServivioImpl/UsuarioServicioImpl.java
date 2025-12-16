@@ -16,6 +16,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
     @Override
     public List<UsuarioEntity> findAllUsers() {
         return usuarioRepository.findAll();    

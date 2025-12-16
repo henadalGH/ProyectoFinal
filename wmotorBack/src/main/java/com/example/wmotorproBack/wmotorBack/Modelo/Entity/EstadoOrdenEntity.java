@@ -4,6 +4,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,6 +22,7 @@ public class EstadoOrdenEntity {
     @Column(name = "id_orden")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private EstadoOrdenEnums estadoOrden;
 }
