@@ -2,6 +2,7 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 import java.util.Date;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -9,13 +10,16 @@ import org.springframework.stereotype.Service;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RegistroDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CargosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.RolesEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Validation.UsuarioValidacion;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.CargoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.ClienteRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.RolesRepository;
@@ -45,75 +49,72 @@ public class RegistroServiceImpl implements RegistroService{
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
+    @Autowired
+    private CargoRepository cargoRepository;
 
     @Override
-public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol) throws Exception{
+public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEnum cargo) throws Exception {
 
-    try {
+    ResponceDTO responce = usuarioValidacion.validation(usuario);
 
-        ResponceDTO responce = usuarioValidacion.validation(usuario);
+    if (responce == null) {
+        responce = new ResponceDTO();
+        responce.setNumOfErrors(0);
+    }
 
-        if (responce.getNumOfErrors() > 0) {
-            return responce;
-        }
+    if (responce.getNumOfErrors() > 0) {
+        return responce;
+    }
 
-        if (usuarioRepository.existsByEmail(usuario.getEmail())) {
-            responce.setNumOfErrors(1);
-            responce.setMensage("El email ya existe");
-            return responce;
-        }
+    if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+        responce.setNumOfErrors(1);
+        responce.setMensage("El email ya existe");
+        return responce;
+    }
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-        String passwordEncoder = encoder.encode(usuario.getPassword());
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    String passwordEncoder = encoder.encode(usuario.getPassword());
 
-        // 1. Crear usuario
-        UsuarioEntity nuevoUsuario = new UsuarioEntity();
-        nuevoUsuario.setNombre(usuario.getNombre());
-        nuevoUsuario.setApellido(usuario.getApellido());
-        nuevoUsuario.setEmail(usuario.getEmail());
-        nuevoUsuario.setPassword(passwordEncoder);
+    UsuarioEntity nuevoUsuario = new UsuarioEntity();
+    nuevoUsuario.setNombre(usuario.getNombre());
+    nuevoUsuario.setApellido(usuario.getApellido());
+    nuevoUsuario.setEmail(usuario.getEmail());
+    nuevoUsuario.setPassword(passwordEncoder);
 
-        RolesEntity roles = rolesRepository.findByNombre(rol)
+    RolesEntity roles = rolesRepository.findByNombre(rol)
         .orElseThrow(() -> new Exception("Rol no encontrado: " + rol));
 
-        nuevoUsuario.setRol(roles);
+    nuevoUsuario.setRol(roles);
+    usuarioRepository.save(nuevoUsuario);
 
-        // 2. Guardar primero el usuario
-        usuarioRepository.save(nuevoUsuario);
-
-        // 3. Crear la relación según el rol
-        if(rol == RolesEnum.ADMIN){
-            AdminEntity usuarioAdmin = new AdminEntity();
-            usuarioAdmin.setUsuario(nuevoUsuario);
-            adminRepository.save(usuarioAdmin);
-        }
-
-        if(rol == RolesEnum.CLIENTE){
-            ClienteEntity cliente = new ClienteEntity();
-            cliente.setDireccion(usuario.getDireccion()); // AHORA SI
-            cliente.setUsuario(nuevoUsuario);
-            clienteRepository.save(cliente);
-        }
-
-        if(rol == RolesEnum.EMPLEADO){
-            EmpleadoEntity empleardo = new EmpleadoEntity();
-            empleardo.setDni(usuario.getDni());
-            empleardo.setFechaIngreso(new Date());
-            empleardo.setFechaNacimiento(usuario.getFechaNacimieto());
-            empleardo.setUsuario(nuevoUsuario);
-            empleadoRepository.save(empleardo);
-        }
-
-        responce.setMensage("Usuario registrado");
-        System.out.println(usuario.getDireccion());
-        return responce;
-
-    } catch (Exception e) {
-        throw new Exception(e.toString());
+    if (rol == RolesEnum.ADMIN) {
+        AdminEntity admin = new AdminEntity();
+        admin.setUsuario(nuevoUsuario);
+        adminRepository.save(admin);
     }
+
+    if (rol == RolesEnum.CLIENTE) {
+        ClienteEntity cliente = new ClienteEntity();
+        cliente.setDireccion(usuario.getDireccion());
+        cliente.setUsuario(nuevoUsuario);
+        clienteRepository.save(cliente);
+    }
+
+    if (rol == RolesEnum.EMPLEADO) {
+        EmpleadoEntity empleado = new EmpleadoEntity();
+        empleado.setDni(usuario.getDni());
+        empleado.setFechaIngreso(new Date());
+        empleado.setFechaNacimiento(usuario.getFechaNacimieto());
+
+        CargosEntity cargos = cargoRepository.findByCargo(cargo)
+            .orElseThrow(() -> new Exception("Cargo no encontrado: " + cargo));
+
+        empleado.setCargo(cargos);
+        empleado.setUsuario(nuevoUsuario);
+        empleadoRepository.save(empleado);
+    }
+
+    responce.setMensage("Usuario registrado correctamente");
+    return responce;
 }
-
-
-
-
 }

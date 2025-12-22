@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RegistroDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
-
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 import com.example.wmotorproBack.wmotorBack.Servicio.RegistroService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,10 +26,12 @@ public class RegistroController {
     @PostMapping("/nuevo")
 public ResponseEntity<ResponceDTO> nuevoUsuario(
         @RequestBody RegistroDTO registroDTO,
-        @RequestParam RolesEnum rolesEnum) throws Exception {
+        @RequestParam RolesEnum rolesEnum,
+        @RequestParam CargosEnum cargoEnum
+    ) throws Exception {
 
     return new ResponseEntity<>(
-            registroService.registrarUsuario(registroDTO, rolesEnum),
+            registroService.registrarUsuario(registroDTO, rolesEnum, cargoEnum),
             HttpStatus.CREATED
     );
 }

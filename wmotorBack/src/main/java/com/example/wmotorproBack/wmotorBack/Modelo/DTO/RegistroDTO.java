@@ -2,6 +2,7 @@ package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
 import java.util.Date;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 
 public class RegistroDTO {
@@ -21,7 +22,14 @@ public class RegistroDTO {
     private Date fechaNacimieto;
     private String dni;
     private Date fechaIngreso;
+    private CargosEnum cargo;
 
+    public CargosEnum getCargo() {
+        return cargo;
+    }
+    public void setCargo(CargosEnum cargo) {
+        this.cargo = cargo;
+    }
     // GETTERS Y SETTERS
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }

@@ -31,7 +31,6 @@ public class VehiculoServiceImpl implements VehiculoService{
         vehiculo.setPatente(vehiculoDTO.getPatente());
         vehiculo.setKilometraje(vehiculoDTO.getKilometraje());
 
-
         return vehiculoRepository.save(vehiculo);
     }
 
