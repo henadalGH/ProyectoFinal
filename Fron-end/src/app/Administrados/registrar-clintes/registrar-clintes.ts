@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ClienteService } from '../gestion-cliente/cliente-service';
 import { FormsModule } from '@angular/forms';
+import { RegistroClienteServicio } from '../../servicio/registro-cliente-servicio';
 
 
 @Component({
@@ -19,23 +20,18 @@ export class RegistrarClintes {
   password: string='';
   contacto: string = '';
   direccion: string = '';
-  rol: string = '';
+  rol: string = 'CLIENTE';
 
-  constructor(private cliente: ClienteService, private router: Router){}
+  constructor(private servicoRegistro: RegistroClienteServicio, private router: Router){}
 
-
-  registrarCliente(): void{
-    console.log(this.nombre, this.apellido, this.contacto, this.email, this.password, this.direccion, this.rol)
-  
-    this.cliente.agregarCliente(this.nombre, this.apellido, this.email,this.password, this.direccion, this.contacto, this.rol)
-    .subscribe({
-      next: (res)=> {
-        console.log('Clientente agregado exitosamente');
+  registrarCliente() {
+    this.servicoRegistro.crearCliente(this.nombre, this.apellido, this.email, this.password,
+      this.contacto,this.direccion, this.rol
+    ).subscribe(
+      (Response)=> {
         this.router.navigate(['/gestionCliente'])
       }
-    })
-  
+
+    )
   }
-
-
 }
