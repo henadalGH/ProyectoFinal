@@ -10,3 +10,35 @@ button{
     margin-top: 15px;
     margin-left: 15px;
 }
+.formuario{
+    border: solid 1px;
+    padding: 25px;
+    width: 25%;
+    margin: auto;
+    text-align: center;
+    background-color: rgba(255, 228, 196, 0.521);
+    border-radius: 20px;
+}
+
+.botoncancelar{
+    background-color: rgba(255, 0, 0, 0.541);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.botoncancelar:hover{
+    background-color: red;
+}
+
+
+.botonvehiculo{
+    background-color: rgba(79, 97, 201, 0.541);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.botonregistro{
+    background-color: rgba(73, 170, 54, 0.596);
+    padding: 15px;
+    border-radius: 10px;
+}

@@ -16,7 +16,7 @@ public class CrossConfig implements WebMvcConfigurer {
 
         // Rutas privadas
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200/")
+                .allowedOrigins("http://localhost:4200")
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)
@@ -24,7 +24,7 @@ public class CrossConfig implements WebMvcConfigurer {
 
         // Rutas públicas
         registry.addMapping("/auth/**")
-                .allowedOrigins("http://localhost:4200/")
+                .allowedOrigins("http://localhost:4200")
                 .allowedMethods("*")
                 .allowedHeaders("*")
                 .allowCredentials(true)

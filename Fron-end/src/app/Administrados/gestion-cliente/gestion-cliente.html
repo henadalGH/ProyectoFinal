@@ -1,3 +1,19 @@
-<button [routerLink]="['/registrarCliente']">Agregar Cliente</button>
+<app-header-admin></app-header-admin>
 
-<h1>Lista de clientes</h1>
+<div class="titulo">
+    <h1>Lista de clientes</h1>
+    <button class="botonagregar" [routerLink]="['/registrarCliente']">Agregar Cliente</button>
+</div>
+
+@for (cliente of clientes2; track $index) {
+    
+    <div class="clientes">
+        <h2>Datos del cliente</h2>
+        <p>Nombre: </p><h3>{{cliente.usuario.nombre }} {{cliente.usuario.apellido}}</h3>
+        <p>{{"Direccion: "}}{{cliente.direccion}}</p>
+        <button class="botonver">Ver cliente</button>
+    </div>
+    
+    
+    
+}

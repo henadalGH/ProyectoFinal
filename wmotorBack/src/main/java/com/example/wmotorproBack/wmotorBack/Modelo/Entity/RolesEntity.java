@@ -3,6 +3,7 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -31,6 +32,7 @@ public class RolesEntity {
     private RolesEnum nombre;
 
     @OneToMany(mappedBy = "rol")
+    @JsonManagedReference
     private List<UsuarioEntity> usuario;
     
 }

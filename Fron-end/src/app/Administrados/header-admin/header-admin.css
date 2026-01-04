@@ -1,3 +1,28 @@
 button{
     margin-left: 15px;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgb(52, 52, 227);
+    color:white;
+    font-size: 15px;
+}
+
+button:hover{
+    background-color: rgb(200, 41, 27);
+    border-radius: 15px;
+    border: none;
+}
+
+.but{
+    background-color: rgb(147, 219, 181);
+    padding: 25px; 
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+h1{
+    font-size: 50px;
+    text-align: center;
 }

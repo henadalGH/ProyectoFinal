@@ -7,9 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class LoginServide {
 
-  /**
-   *
-   */
+  
   constructor(private http: HttpClient) {}
   
   private urlApi= "http://localhost:8080/auth/login";
@@ -22,7 +20,4 @@ export class LoginServide {
   setToken(token: string): void {
     localStorage.setItem('token', token);
   }
-
-  
-  
 }

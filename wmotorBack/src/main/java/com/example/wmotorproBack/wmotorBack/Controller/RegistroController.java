@@ -27,7 +27,7 @@ public class RegistroController {
 public ResponseEntity<ResponceDTO> nuevoUsuario(
         @RequestBody RegistroDTO registroDTO,
         @RequestParam RolesEnum rolesEnum,
-        @RequestParam CargosEnum cargoEnum
+        @RequestParam(required = false) CargosEnum cargoEnum
     ) throws Exception {
 
     return new ResponseEntity<>(

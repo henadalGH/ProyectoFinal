@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,26 +38,33 @@ public class UsuarioEntity implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column String password;
+    @Column 
+    @JsonIgnore
+    private String password;
 
     @Column
     private String contacto;
 
     @ManyToOne
     @JoinColumn(name = "id_rol")
+    @JsonIgnore
     private RolesEntity rol;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
     private AdminEntity administrador;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
     private EmpleadoEntity empleado;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore
     private ClienteEntity cliente;
 
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
         
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
@@ -68,32 +75,38 @@ public class UsuarioEntity implements UserDetails {
 
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return email;
     }
 
     @Override
+    @JsonIgnore
     public String getPassword()
     {
         return password;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
