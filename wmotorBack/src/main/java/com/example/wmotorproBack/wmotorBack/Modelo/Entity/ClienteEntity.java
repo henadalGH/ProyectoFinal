@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,13 +28,13 @@ public class ClienteEntity {
     @Column(name = "direccion")
     private String direccion;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente" ,fetch = FetchType.LAZY)
     private List<VehiculoEntity> vehiculos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 }

@@ -6,4 +6,5 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 
 public interface ClienteService {
     public List<ClienteEntity> obtenerClientes();
+    public ClienteEntity obtenerClientePorId(Long id);
 }

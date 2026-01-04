@@ -19,4 +19,9 @@ public class ClienteServiceImpl implements ClienteService {
     {
         return clienteRepository.findAll();
     }
+
+    @Override
+    public ClienteEntity obtenerClientePorId(Long id) {
+        return clienteRepository.getReferenceById(id);
+    }
 }

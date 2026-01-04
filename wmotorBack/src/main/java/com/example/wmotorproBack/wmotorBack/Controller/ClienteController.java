@@ -11,6 +11,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 
 @RestController
@@ -24,6 +27,12 @@ public class ClienteController {
     public ResponseEntity<List<ClienteEntity>> obtenerClientes() {
         return ResponseEntity.ok(clienteService.obtenerClientes());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteEntity> obtenerClientePorId(@PathVariable Long id) {
+        return ResponseEntity.ok(clienteService.obtenerClientePorId(id));
+    }
+    
     
 
 }
