@@ -3,7 +3,6 @@ package com.example.wmotorproBack.wmotorBack.Security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -34,7 +33,6 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http
-                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest ->
                         authRequest
@@ -45,7 +43,6 @@ public class SecurityConfig {
                                 .requestMatchers("/vehiculo/agregar").permitAll()
                                 .requestMatchers("/vehiculo/buscar/{id}").permitAll()
                                 .requestMatchers("/registro/nuevo").permitAll()
-                                .requestMatchers("/cargos/obtener").permitAll()
                                 .requestMatchers("/clientes/todos").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()

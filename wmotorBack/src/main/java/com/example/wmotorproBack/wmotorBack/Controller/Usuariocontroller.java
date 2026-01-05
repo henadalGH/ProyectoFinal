@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping("/usuario")
 public class Usuariocontroller {
-
+ 
     @Autowired
     private UsuarioServicio usuarioServicio;
 

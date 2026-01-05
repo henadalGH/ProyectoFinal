@@ -9,6 +9,7 @@ import com.example.wmotorproBack.wmotorBack.Servicio.ClienteService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,12 +26,12 @@ public class ClienteController {
 
     @GetMapping("/todos")
     public ResponseEntity<List<ClienteEntity>> obtenerClientes() {
-        return ResponseEntity.ok(clienteService.obtenerClientes());
+        return new ResponseEntity<>(clienteService.obtenerClientes(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ClienteEntity> obtenerClientePorId(@PathVariable Long id) {
-        return ResponseEntity.ok(clienteService.obtenerClientePorId(id));
+        return new ResponseEntity<>(clienteService.obtenerClientePorId(id), HttpStatus.OK);
     }
     
     
