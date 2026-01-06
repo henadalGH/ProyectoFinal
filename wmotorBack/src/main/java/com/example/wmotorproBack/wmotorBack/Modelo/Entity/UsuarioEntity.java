@@ -8,6 +8,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -45,15 +47,19 @@ public class UsuarioEntity implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name = "id_rol")
+    @JsonIgnore
     private RolesEntity rol;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore 
     private AdminEntity administrador;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore 
     private EmpleadoEntity empleado;
 
     @OneToOne(mappedBy = "usuario")
+    @JsonIgnore 
     private ClienteEntity cliente;
 
 

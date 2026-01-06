@@ -1,12 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ClienteServicio } from '../../Servicio/cliente-servicio';
+import { HeaderAdmin } from "../header-admin/header-admin";
 
 @Component({
   selector: 'app-gestion-cliente',
-  imports: [RouterLink],
+  imports: [RouterLink, HeaderAdmin],
   templateUrl: './gestion-cliente.html',
   styleUrl: './gestion-cliente.css',
 })
-export class GestionCliente {
+export class GestionCliente implements OnInit{
+  
+  constructor(private clienteServicio: ClienteServicio
+  ){}
+
+  ngOnInit(): void {
+    this.obtenerCliente();
+  }
+
+  clientes: any [] =[];
+
+  obtenerCliente() {
+    this.clienteServicio.obtenerTodosLosClientes().subscribe(
+      (repuesta: any)=> {this.clientes = repuesta;});
+  }
 
 }

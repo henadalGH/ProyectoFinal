@@ -3,6 +3,8 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +34,10 @@ public class ClienteEntity {
     private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore 
     private List<VehiculoEntity> vehiculos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cliente")
+    @JsonIgnore 
     private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 }
