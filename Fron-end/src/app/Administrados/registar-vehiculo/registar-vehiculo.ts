@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Vehiculoservice } from './vehiculoservice';
+import { HeaderAdmin } from "../header-admin/header-admin";
 
 @Component({
   selector: 'app-registar-vehiculo',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, HeaderAdmin],
   standalone: true,
   templateUrl: './registar-vehiculo.html',
   styleUrl: './registar-vehiculo.css',

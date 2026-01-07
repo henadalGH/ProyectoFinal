@@ -35,6 +35,7 @@ public class ClienteServiceImpl implements ClienteService {
         dto.setApellido(usuario.getApellido());
         dto.setEmail(usuario.getEmail());
         dto.setContacto(usuario.getContacto());
+        dto.setDireccion(cliente.getDireccion());
 
         return dto;
     }

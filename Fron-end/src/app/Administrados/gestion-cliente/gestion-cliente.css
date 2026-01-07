@@ -9,6 +9,7 @@
 .boton1{
     padding: 15px;
     margin-left: 100px;
+    border-radius: 10px;
 }
 
 /* ✅ CONTENEDOR DE TODAS LAS TARJETAS */

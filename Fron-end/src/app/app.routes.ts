@@ -20,6 +20,7 @@ import { HomeCliente } from './Cliente/home-cliente/home-cliente';
 import { SolicitarTurno } from './Cliente/solicitar-turno/solicitar-turno';
 import { MisVehiculos } from './Cliente/mis-vehiculos/mis-vehiculos';
 import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
+import { VerCliente } from './Administrados/ver-cliente/ver-cliente';
 
 export const routes: Routes = [
 
@@ -44,5 +45,6 @@ export const routes: Routes = [
     {path: "crearPresupuesto", component: CrearPresupuesto},
     {path: "solicitarTurno", component: SolicitarTurno},
     {path: "misVehiculos", component: MisVehiculos},
-    {path:"headerEmpleado", component: HeaderEmpleado}
+    {path:"headerEmpleado", component: HeaderEmpleado},
+    {path:"verCliente/:id", component: VerCliente}
 ];
