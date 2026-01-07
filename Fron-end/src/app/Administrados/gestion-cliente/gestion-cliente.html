@@ -1,19 +1,31 @@
 <app-header-admin></app-header-admin>
 
-<button [routerLink]="['/registrarCliente']">Agregar Cliente</button>
+<div class="general">
+    <div class="encabezado">
+    <h1>Lista de clientes</h1>
+    <button class="boton1" [routerLink]="['/registrarCliente']">Agregar Cliente</button>
+</div>
 
-<h1>Lista de clientes</h1>
+<div class="contenedor-clientes">
 
-@for ( cli of clientes; track $index) {
+    @for (cli of clientes; track $index) {
 
     <div class="cliente">
+        <div class="tarjeta">
+
         <h3>Nombre: {{cli.usuario.nombre}} {{cli.usuario.apellido}}</h3>
-        
+
         <div class="direccion">
             <h5>Direccion:</h5>
-        <p>{{cli.direccion}}</p>
+            <p>{{cli.direccion}}</p>
         </div>
-        <button>Ver Cliente</button>
+
+        <button class="boton2">Ver Cliente</button>
+
+        </div>
     </div>
-    
-}
+
+    }
+
+</div>
+</div>

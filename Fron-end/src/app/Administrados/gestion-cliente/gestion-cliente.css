@@ -1,0 +1,57 @@
+.encabezado{
+    margin: auto;
+    width: 40%;
+    display: flex;
+    align-items: center;
+
+}
+
+.boton1{
+    padding: 15px;
+    margin-left: 100px;
+}
+
+/* ✅ CONTENEDOR DE TODAS LAS TARJETAS */
+.contenedor-clientes{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    padding: 30px;
+}
+
+.direccion{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    text-align: center;
+}
+
+p{
+    margin-left: 12px;
+}
+
+.tarjeta{
+        background: #f1dff1;
+        width: 320px;              /* clave */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+.boton2{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.boton2:hover{
+    background-color: rgb(38, 233, 120);
+}
+
+.general{
+    background-color: rgb(216, 220, 213);
+    border-radius: 40px;
+    margin-top: 50px;
+    
+}
