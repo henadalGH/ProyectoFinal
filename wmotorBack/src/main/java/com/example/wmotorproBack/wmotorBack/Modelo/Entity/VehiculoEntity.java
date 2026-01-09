@@ -4,8 +4,11 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,7 +36,7 @@ public class VehiculoEntity {
     private String modelo;
 
     @Column(name = "anio")
-    private String anio;
+    private Integer anio;
 
     @Column 
     private String patente;
@@ -41,14 +44,15 @@ public class VehiculoEntity {
     @Column
     private int kilometraje;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "id_cliente")
     private ClienteEntity cliente;
 
-    @OneToMany(mappedBy = "vehiculo")
+    @OneToMany(mappedBy = "vehiculo", fetch = FetchType.LAZY)
     private List<HistorialEntity> historial = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vehiculo")
+    @OneToMany(mappedBy = "vehiculo", fetch = FetchType.LAZY)
     private List<PresupuestoEntity> presupuesto = new ArrayList<>();
 
     @OneToMany(mappedBy = "vehiculo")

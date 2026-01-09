@@ -2,10 +2,12 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.VehiculoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Validation.VehiculoValidacion;
+import com.example.wmotorproBack.wmotorBack.Repository.ClienteRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.VehiculoService;
 
@@ -17,22 +19,61 @@ public class VehiculoServiceImpl implements VehiculoService{
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
+    @Autowired
+    private ClienteRepository clienteRepository;
+    
+    @Autowired
+    private VehiculoValidacion vehiculoValidacion;
+
     @Override
-    public VehiculoEntity agregarVehiculo(VehiculoDTO vehiculoDTO) {
+    public ResponceDTO agregarVehiculo(VehiculoDTO vehiculoDTO, Long id) throws Exception {
         
-        if (vehiculoRepository.existsByPatente(vehiculoDTO.getPatente())) {
-            throw new RuntimeException("La patente ya se encuestra registrada");
+        
+        try {
+
+            ResponceDTO responceDTO = vehiculoValidacion.validacionVehiculo(vehiculoDTO);
+
+            if (responceDTO.getNumOfErrors() > 0) {
+                return responceDTO;
+            }
+
+            if (vehiculoRepository.existsByPatente(vehiculoDTO.getPatente())) {
+                responceDTO.setNumOfErrors(1);
+                responceDTO.setMensage("La patente ya se encuestra registrada");
+                return responceDTO;
+            }
+
+            ClienteEntity cliente = clienteRepository.getReferenceById(id);
+
+            if (cliente == null) {
+                throw new RuntimeException("El id del cliente no existe");
+            }
+
+            VehiculoEntity vehiculo = new VehiculoEntity();
+            vehiculo.setMarca(vehiculoDTO.getMarca());
+            vehiculo.setModelo(vehiculoDTO.getModelo());
+            vehiculo.setAnio(vehiculoDTO.getAnio());
+            vehiculo.setPatente(vehiculoDTO.getPatente());
+            vehiculo.setKilometraje(vehiculoDTO.getKilometraje());
+            vehiculo.setCliente(cliente);
+
+            vehiculoRepository.save(vehiculo);
+            responceDTO.setMensage("Vehiculo registrado");
+            return responceDTO;
         }
+        catch (Exception e) {
+            throw new Exception(e.toString());
+        }
+        
+        
 
-        VehiculoEntity vehiculo = new VehiculoEntity();
-        vehiculo.setMarca(vehiculoDTO.getMarca());
-        vehiculo.setModelo(vehiculoDTO.getModelo());
-        vehiculo.setAnio(vehiculoDTO.getAnio());
-        vehiculo.setPatente(vehiculoDTO.getPatente());
-        vehiculo.setKilometraje(vehiculoDTO.getKilometraje());
+        
+
+        
+        
 
 
-        return vehiculoRepository.save(vehiculo);
+        
     }
 
     @Override

@@ -2,9 +2,10 @@ package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
 public class VehiculoDTO {
 
+    
     private String marca;
     private String modelo;
-    private String anio;
+    private Integer anio;
     private String patente;
     
     public String getMarca() {
@@ -19,10 +20,10 @@ public class VehiculoDTO {
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
-    public String getAnio() {
+    public Integer getAnio() {
         return anio;
     }
-    public void setAnio(String anio) {
+    public void setAnio(Integer anio) {
         this.anio = anio;
     }
     public String getPatente() {

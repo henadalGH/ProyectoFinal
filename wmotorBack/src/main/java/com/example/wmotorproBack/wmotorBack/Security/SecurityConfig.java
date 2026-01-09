@@ -40,7 +40,7 @@ public class SecurityConfig {
                                 .requestMatchers("/auth/registro").permitAll()
                                 .requestMatchers("/usuario/**").permitAll()
                                 .requestMatchers("/auth/logout").permitAll()
-                                .requestMatchers("/vehiculo/agregar").permitAll()
+                                .requestMatchers("/vehiculo/agregar/{id}").permitAll()
                                 .requestMatchers("/vehiculo/buscar/{id}").permitAll()
                                 .requestMatchers("/registro/nuevo").permitAll()
                                 .requestMatchers("/cliente/**").permitAll()
