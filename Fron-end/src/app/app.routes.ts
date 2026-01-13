@@ -36,7 +36,7 @@ export const routes: Routes = [
     {path:"gestionCliente", component: GestionCliente},
     {path: "gestionarVehiculo", component: GestionarVehiculo},
     {path: "registrarCliente", component: RegistrarClintes},
-    {path: "registrarVehiculo", component:  RegistarVehiculo},
+    {path: "registrarVehiculo/:id", component:  RegistarVehiculo},
     {path: "homeFinanzas", component: HomeFinanzas},
     {path:"reportes", component: Reportes},
     {path: "finanzas", component: MovimientosFinancieros},
