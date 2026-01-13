@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -55,6 +56,7 @@ public class VehiculoServiceImpl implements VehiculoService{
             vehiculo.setAnio(vehiculoDTO.getAnio());
             vehiculo.setPatente(vehiculoDTO.getPatente());
             vehiculo.setKilometraje(vehiculoDTO.getKilometraje());
+            vehiculo.setActivo(vehiculo.getActivo());
             vehiculo.setCliente(cliente);
 
             vehiculoRepository.save(vehiculo);
@@ -64,15 +66,6 @@ public class VehiculoServiceImpl implements VehiculoService{
         catch (Exception e) {
             throw new Exception(e.toString());
         }
-        
-        
-
-        
-
-        
-        
-
-
         
     }
 
@@ -96,5 +89,28 @@ public ResponceDTO obtenerVehiculoPorID(@NonNull Long id) {
     return response;
 }
 
-    
+    @Override
+    public Boolean eliminarVehiculo(Long id) {
+        if (vehiculoRepository.existsById(id)) {
+            clienteRepository.deleteById(id);
+            return true;
+        }
+        throw new RuntimeException("Menu no encontrado");
+    }
+
+   @Override
+        public void darDeBajaVehiculo(Long idCliente, Long idVehiculo) {
+
+            VehiculoEntity vehiculo = vehiculoRepository.findById(idVehiculo)
+                .orElseThrow(() -> new RuntimeException("Vehiculo no encontrado"));
+
+            if (!vehiculo.getCliente().getId_cliente().equals(idCliente)) {
+                throw new RuntimeException("El vehiculo no pertenece a este cliente");
+            }
+
+            vehiculo.setActivo(false);
+            vehiculoRepository.save(vehiculo);
+        }
+
+
 }

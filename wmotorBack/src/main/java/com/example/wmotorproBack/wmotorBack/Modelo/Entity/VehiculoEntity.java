@@ -26,7 +26,7 @@ public class VehiculoEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_vehculo")
+    @Column (name = "id_vehiculo")
     private Long id;
 
     @Column(name = "marca")
@@ -43,6 +43,9 @@ public class VehiculoEntity {
 
     @Column
     private int kilometraje;
+
+    @Column(name = "activo")
+    private Boolean activo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore

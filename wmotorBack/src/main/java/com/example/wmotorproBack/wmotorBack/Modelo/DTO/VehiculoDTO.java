@@ -7,7 +7,14 @@ public class VehiculoDTO {
     private String modelo;
     private Integer anio;
     private String patente;
+    private Boolean activo;
     
+    public Boolean getActivo() {
+        return activo;
+    }
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
     public String getMarca() {
         return marca;
     }

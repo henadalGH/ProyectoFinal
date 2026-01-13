@@ -44,6 +44,8 @@ public class SecurityConfig {
                                 .requestMatchers("/vehiculo/buscar/{id}").permitAll()
                                 .requestMatchers("/registro/nuevo").permitAll()
                                 .requestMatchers("/cliente/**").permitAll()
+                                .requestMatchers("/vehiculo/clientes/{idCliente}/vehiculos/{idVehiculo}/baja").permitAll()
+                                .requestMatchers("vehiculo/porCliente/{id}").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
