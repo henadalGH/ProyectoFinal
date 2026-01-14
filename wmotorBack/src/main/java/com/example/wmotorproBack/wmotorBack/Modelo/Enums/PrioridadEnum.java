@@ -2,7 +2,7 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Enums;
 
 public enum PrioridadEnum {
 
-    ALTA,
+    ALTA, 
     MEDIA,
     BAJA
 

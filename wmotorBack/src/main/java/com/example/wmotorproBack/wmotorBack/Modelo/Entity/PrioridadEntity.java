@@ -6,6 +6,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +26,8 @@ public class PrioridadEntity {
     private Long id;
 
     @Column(name = "prioridad")
-    private PrioridadEnum prioridad;
+    @Enumerated(EnumType.STRING)
+    private PrioridadEnum prioridad;  
 
     @OneToMany(mappedBy = "prioridad")
     private List<DetalleOrdenEntity> orden;
