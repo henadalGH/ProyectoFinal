@@ -7,6 +7,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,6 +28,7 @@ public class EstadoPresupuestoEntity {
 
 
     @Column(name = "tipo_estado")
+    @Enumerated(EnumType.STRING)
     private EstadoPresupuestoEnum estadoPresupuesto;
 
     @OneToMany(mappedBy = "estadoPresupuesto")

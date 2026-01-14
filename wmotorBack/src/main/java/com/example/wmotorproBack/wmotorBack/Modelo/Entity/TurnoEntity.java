@@ -2,6 +2,8 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,4 +37,9 @@ public class TurnoEntity {
     @ManyToOne
     @JoinColumn(name = "id_servicio")
     private ServicioEntity servicio;
+
+    @ManyToOne
+    @JoinColumn(name = "id_estado_turno")
+    @JsonIgnore
+    private EstadoTurnosEntity estado;
 }

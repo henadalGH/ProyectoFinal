@@ -11,6 +11,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.UnidadMedidasEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,6 +31,7 @@ public class EstadisticasEntity {
     private Long id;
 
     @Column(name = "tipo_estadisticas")
+    @Enumerated(EnumType.STRING)
     private TiposEstadisticasEnum tipoEstadisticas;
 
     @Column(name = "indicador")

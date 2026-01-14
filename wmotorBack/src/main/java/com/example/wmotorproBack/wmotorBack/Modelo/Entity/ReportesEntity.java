@@ -8,6 +8,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TiposReporteEnums;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,6 +33,7 @@ public class ReportesEntity {
     private String titulo;
 
     @Column(name = "tiposReportes")
+    @Enumerated(EnumType.STRING)
     private TiposReporteEnums tiposReportes;
 
     @Column(name = "fecha_generacion")
