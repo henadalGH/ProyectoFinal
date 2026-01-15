@@ -3,10 +3,9 @@ package com.example.wmotorproBack.wmotorBack.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CajaEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 
 @Repository
-public interface CajaRepository extends JpaRepository<CajaEntity, Long> {
-
+public interface EstadoTurnoRepository extends JpaRepository<EstadoTurnosEntity, Long> {
 
 }

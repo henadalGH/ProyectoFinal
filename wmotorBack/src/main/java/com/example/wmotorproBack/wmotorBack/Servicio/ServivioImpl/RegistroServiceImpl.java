@@ -9,13 +9,16 @@ import org.springframework.stereotype.Service;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RegistroDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CargosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.RolesEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Validation.UsuarioValidacion;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.CargoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.ClienteRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.RolesRepository;
@@ -45,9 +48,12 @@ public class RegistroServiceImpl implements RegistroService{
     @Autowired
     private EmpleadoRepository empleadoRepository;
 
+    @Autowired
+    private CargoRepository cargoRepository;
+
 
     @Override
-public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol) throws Exception{
+public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEnum cargos) throws Exception{
 
     try {
 
@@ -101,6 +107,12 @@ public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol) throws E
             empleardo.setFechaIngreso(new Date());
             empleardo.setFechaNacimiento(usuario.getFechaNacimieto());
             empleardo.setUsuario(nuevoUsuario);
+
+            CargosEntity cargo = cargoRepository.findByCargo(cargos)
+            .orElseThrow(() -> new Exception("Cergos no encontrado"+ cargos));
+
+            empleardo.setCargo(cargo);
+
             empleadoRepository.save(empleardo);
         }
 

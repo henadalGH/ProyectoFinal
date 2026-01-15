@@ -48,6 +48,8 @@ public class SecurityConfig {
                                 .requestMatchers("/servicio/{id}").permitAll()
                                 .requestMatchers("/repuesto/todos").permitAll()
                                 .requestMatchers("/repuesto/{id}").permitAll()
+                                .requestMatchers("/emplado/todos").permitAll()
+                                .requestMatchers("/empleado/{id}").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

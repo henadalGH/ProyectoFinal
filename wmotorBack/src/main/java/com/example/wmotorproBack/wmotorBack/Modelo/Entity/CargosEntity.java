@@ -1,7 +1,11 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +24,8 @@ public class CargosEntity {
 
 
     @Column(name = "cargo")
-    private String cargo;
+    @Enumerated(EnumType.STRING)
+    private CargosEnum cargo;
 
     @Column(name = "sueldo_base")
     private Double sueldoBase;

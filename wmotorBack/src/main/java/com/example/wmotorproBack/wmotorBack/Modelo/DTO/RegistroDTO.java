@@ -21,6 +21,8 @@ public class RegistroDTO {
     private Date fechaNacimieto;
     private String dni;
     private Date fechaIngreso;
+    
+    
 
     // GETTERS Y SETTERS
     public String getNombre() { return nombre; }
