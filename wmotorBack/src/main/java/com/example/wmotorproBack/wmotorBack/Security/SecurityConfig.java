@@ -50,6 +50,7 @@ public class SecurityConfig {
                                 .requestMatchers("/repuesto/{id}").permitAll()
                                 .requestMatchers("/emplado/todos").permitAll()
                                 .requestMatchers("/empleado/{id}").permitAll()
+                                .requestMatchers("/movimiento/registro").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

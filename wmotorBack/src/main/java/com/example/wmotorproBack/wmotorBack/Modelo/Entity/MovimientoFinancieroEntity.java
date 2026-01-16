@@ -2,8 +2,12 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 import java.util.Date;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,7 +27,8 @@ public class MovimientoFinancieroEntity {
     private Long id;
 
     @Column(name = "tipo_movimiento")
-    private String tipo_movimiento;
+    @Enumerated(EnumType.STRING)
+    private MovimientosEnum tipo_movimiento;
 
     @Column(name = "categoria")
     private String categoria;
@@ -32,9 +37,9 @@ public class MovimientoFinancieroEntity {
     private String concepto;
 
     @Column(name = "importe")
-    private Integer importe;
+    private Double importe;
 
-    @Column(name = "recha_registro")
+    @Column(name = "fecha_registro")
     private Date fechaRegistro;
 
     @ManyToOne

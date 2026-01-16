@@ -118,7 +118,6 @@ public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEn
         }
 
         responce.setMensage("Usuario registrado");
-        System.out.println(usuario.getDireccion());
         return responce;
 
     } catch (Exception e) {

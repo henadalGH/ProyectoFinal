@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 
 @Repository
-public interface MovimmientoFinancieroRepository extends JpaRepository<MovimientoFinancieroEntity, Long> {
+public interface MovimientoFinancieroRepository extends JpaRepository<MovimientoFinancieroEntity, Long> {
 
 }
