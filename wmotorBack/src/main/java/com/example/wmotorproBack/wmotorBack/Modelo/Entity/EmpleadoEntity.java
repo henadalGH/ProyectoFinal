@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,16 +40,20 @@ public class EmpleadoEntity {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
+    @JsonIgnore 
     private UsuarioEntity usuario;
 
 
     @ManyToOne
     @JoinColumn(name = "id_cargo")
+    @JsonIgnore 
     private CargosEntity cargo;
 
     @OneToMany(mappedBy = "empleado")
+    @JsonIgnore 
     private List<OrdenTrabajoEntity> orden = new ArrayList<>();
 
     @OneToMany(mappedBy = "empleado")
+    @JsonIgnore 
     private List<RegistrarHorasEntity> horas;
 }

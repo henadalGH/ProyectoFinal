@@ -3,6 +3,8 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,14 +30,18 @@ public class AdminEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
+    @JsonIgnore 
     private UsuarioEntity usuario;
 
     @OneToMany(mappedBy = "admin")
+    @JsonIgnore 
     private List<MovimientoFinancieroEntity>  movimiento = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin")
+    @JsonIgnore 
     private List<ReportesEntity> reportes = new ArrayList<>();
 
     @OneToMany(mappedBy = "admin")
+    @JsonIgnore 
     private List<PresupuestoEntity> presupuesto =  new ArrayList<>();
 }

@@ -77,6 +77,7 @@ public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEn
         nuevoUsuario.setNombre(usuario.getNombre());
         nuevoUsuario.setApellido(usuario.getApellido());
         nuevoUsuario.setEmail(usuario.getEmail());
+        nuevoUsuario.setContacto(usuario.getContacto());
         nuevoUsuario.setPassword(passwordEncoder);
 
         RolesEntity roles = rolesRepository.findByNombre(rol)
