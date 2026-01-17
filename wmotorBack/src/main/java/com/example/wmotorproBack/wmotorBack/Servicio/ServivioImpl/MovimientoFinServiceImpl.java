@@ -53,4 +53,10 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
         
     }
 
+
+    @Override
+    public List<MovimientoFinancieroEntity> getFechaInicioAFin(Date fechaInicio, Date fechaFin) {
+        return movimientoFinancieroRepository.findByFechaRegistroBetween(fechaInicio, fechaFin);
+    }
+
 }

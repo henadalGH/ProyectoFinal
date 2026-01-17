@@ -6,14 +6,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 import com.example.wmotorproBack.wmotorBack.Servicio.MovimientoFinService;
+
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 @RestController
@@ -29,6 +36,12 @@ public class MovimientosController {
         
         return new ResponseEntity<>(movimientoFinService.crearMovimiento(movimiento, movimientosEnum), HttpStatus.CREATED);
     }
+
+    @GetMapping("/inicioFin")
+    public ResponseEntity<List<MovimientoFinancieroEntity>> getMethodName(@PathVariable Date fechaInicio, Date fechaFin) {
+        return new ResponseEntity<>(movimientoFinService.getFechaInicioAFin(fechaInicio, fechaFin), HttpStatus.OK);
+    }
+    
     
 
 }
