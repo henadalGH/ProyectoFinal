@@ -10,9 +10,9 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 public interface MovimientoFinService {
 
     List<MovimientoFinancieroEntity> getAllMovimiento();
-
+    ResponceDTO crearMovimiento(MovimientoDTO movimiento, MovimientosEnum movimientosEnum) throws Exception;
+    
+    
+}
     
 
-    ResponceDTO crearMovimiento(MovimientoDTO movimiento, MovimientosEnum movimientosEnum) throws Exception;
-
-}

@@ -51,6 +51,7 @@ public class SecurityConfig {
                                 .requestMatchers("/emplado/todos").permitAll()
                                 .requestMatchers("/empleado/{id}").permitAll()
                                 .requestMatchers("/movimiento/registro").permitAll()
+                                .requestMatchers("/movimiento/fecha").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

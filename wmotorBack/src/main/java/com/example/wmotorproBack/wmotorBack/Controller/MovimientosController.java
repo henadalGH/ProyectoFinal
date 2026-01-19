@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
+
 @RestController
 @RequestMapping("/movimiento")
 public class MovimientosController {
@@ -29,6 +30,9 @@ public class MovimientosController {
         
         return new ResponseEntity<>(movimientoFinService.crearMovimiento(movimiento, movimientosEnum), HttpStatus.CREATED);
     }
+
+
+    
     
 
 }
