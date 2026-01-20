@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
 
@@ -12,25 +12,10 @@ public class EmpleadoDTO {
     private String email;
     private String contacto;
     private String dni;
-    private Date fechaIngreso;
-    private Date fechaNacimiento;
+    private LocalDate fechaIngreso;
+    private LocalDate fechaNacimiento;
     private CargosEnum cargo;
     private Double sueldo;
-
-    
-    public Double getSueldo() {
-        return sueldo;
-    }
-    public void setSueldo(Double sueldo) {
-        this.sueldo = sueldo;
-    }
-    public CargosEnum getCargo() {
-        return cargo;
-    }
-    public void setCargo(CargosEnum cargo) {
-        this.cargo = cargo;
-    }
-    
     public String getNombre() {
         return nombre;
     }
@@ -61,18 +46,31 @@ public class EmpleadoDTO {
     public void setDni(String dni) {
         this.dni = dni;
     }
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-    public Date getFechaNacimiento() {
+    public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+    public CargosEnum getCargo() {
+        return cargo;
+    }
+    public void setCargo(CargosEnum cargo) {
+        this.cargo = cargo;
+    }
+    public Double getSueldo() {
+        return sueldo;
+    }
+    public void setSueldo(Double sueldo) {
+        this.sueldo = sueldo;
+    }
+
     
     
 

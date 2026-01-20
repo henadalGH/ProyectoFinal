@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -105,7 +105,7 @@ public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEn
         if(rol == RolesEnum.EMPLEADO){
             EmpleadoEntity empleardo = new EmpleadoEntity();
             empleardo.setDni(usuario.getDni());
-            empleardo.setFechaIngreso(new Date());
+            empleardo.setFechaIngreso(LocalDate.now());
             empleardo.setFechaNacimiento(usuario.getFechaNacimieto());
             empleardo.setUsuario(nuevoUsuario);
 

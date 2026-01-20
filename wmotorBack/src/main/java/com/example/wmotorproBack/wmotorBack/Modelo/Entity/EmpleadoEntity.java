@@ -1,8 +1,8 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -33,10 +33,10 @@ public class EmpleadoEntity {
     private String dni;
 
     @Column(name = "fecha_nacimiento")
-    private Date fechaNacimiento;
+    private LocalDate fechaNacimiento;
 
     @Column(name = "fecha_ingreso")
-    private Date fechaIngreso;
+    private LocalDate fechaIngreso;
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
