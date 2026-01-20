@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 
@@ -40,7 +40,7 @@ public class MovimientoFinancieroEntity {
     private Double importe;
 
     @Column(name = "fecha_registro")
-    private Date fechaRegistro;
+    private LocalDate fechaRegistro;
 
     @ManyToOne
     @JoinColumn(name = "id_admin")
