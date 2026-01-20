@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ClienteServicio } from '../../Servicio/cliente-servicio';
+import { ClienteServicio } from '../../../Servicio/cliente-servicio';
 import { HeaderAdmin } from "../header-admin/header-admin";
 
 @Component({

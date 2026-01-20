@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { RegistroClienteServicio } from '../../Servicio/registro-cliente-servicio';
+import { RegistroClienteServicio } from '../../../Servicio/registro-cliente-servicio';
 import { HeaderAdmin } from "../header-admin/header-admin";
 
 @Component({
