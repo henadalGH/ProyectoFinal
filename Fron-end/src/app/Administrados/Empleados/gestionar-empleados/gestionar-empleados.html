@@ -1,7 +1,20 @@
+<app-header-admin></app-header-admin>
+
+<div class="tutulo">
+    <h1>Lista de empleados</h1>
+    <button>Agregar Empleado</button>
+</div>
+
 @for (empl of empleados; track $index) {
 
-    <p>{{empl.dni}}</p>
-    <p>{{empl.usuario.nombre}}</p>
+<div class="empleado">
+    <h3>Nombre: {{empl.usuario.nombre}} {{empl.usuario.apellido}}</h3>
+    <p>Email: {{empl.usuario.email}}</p>
+    <p>Contacto: {{empl.usuario.contacto}}</p>
+    <p>Cargo: {{empl.cargo.cargo}}</p>
+    <button>Ver empleado</button>
+</div>    
+
 }
 
 

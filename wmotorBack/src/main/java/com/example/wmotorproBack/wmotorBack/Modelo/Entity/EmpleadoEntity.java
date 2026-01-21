@@ -45,7 +45,6 @@ public class EmpleadoEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_cargo")
-    @JsonIgnore 
     private CargosEntity cargo;
 
     @OneToMany(mappedBy = "empleado")
