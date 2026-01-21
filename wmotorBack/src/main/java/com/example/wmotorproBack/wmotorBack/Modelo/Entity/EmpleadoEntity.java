@@ -40,7 +40,6 @@ public class EmpleadoEntity {
 
     @OneToOne
     @JoinColumn(name = "id_usuario")
-    @JsonIgnore 
     private UsuarioEntity usuario;
 
 
