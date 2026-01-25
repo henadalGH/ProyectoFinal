@@ -22,6 +22,7 @@ import { MisVehiculos } from './Cliente/mis-vehiculos/mis-vehiculos';
 import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
 import { Component } from '@angular/core';
 import { GestionarEmpleados } from './Administrados/Empleados/gestionar-empleados/gestionar-empleados';
+import { RegistrarEmpleado } from './Administrados/Empleados/registrar-empleado/registrar-empleado';
 
 export const routes: Routes = [
 
@@ -47,5 +48,6 @@ export const routes: Routes = [
     {path: "solicitarTurno", component: SolicitarTurno},
     {path: "misVehiculos", component: MisVehiculos},
     {path:"headerEmpleado", component: HeaderEmpleado},
-    {path:"gestionEmpleado", component: GestionarEmpleados}
+    {path:"gestionEmpleado", component: GestionarEmpleados},
+    {path:"registrarEmpleado", component: RegistrarEmpleado}
 ];

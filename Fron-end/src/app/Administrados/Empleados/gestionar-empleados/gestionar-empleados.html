@@ -1,8 +1,8 @@
 <app-header-admin></app-header-admin>
 
-<div class="tutulo">
+<div class="titulo">
     <h1>Lista de empleados</h1>
-    <button>Agregar Empleado</button>
+    <button class="botonAgregar" [routerLink]="['/registrarEmpleado']">Agregar Empleado</button>
 </div>
 
 @for (empl of empleados; track $index) {

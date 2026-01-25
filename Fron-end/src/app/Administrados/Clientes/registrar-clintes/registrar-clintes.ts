@@ -29,7 +29,8 @@ export class RegistrarClintes {
   }
 
 crearUsuario() {
-  this.registroCliente.crearCliente(this.nombre, this.apellido, this.email, this.password, this.contacto, this.direccion, this.rol).subscribe(
+  this.registroCliente.crearCliente(this.nombre, this.apellido, this.email, 
+    this.password, this.contacto, this.direccion,  this.rol).subscribe(
     (Response)=>{
       this.router.navigate(['/gestionCliente']);
     }

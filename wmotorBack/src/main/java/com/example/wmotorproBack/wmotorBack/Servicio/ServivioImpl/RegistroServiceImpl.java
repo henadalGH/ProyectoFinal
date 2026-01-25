@@ -25,7 +25,10 @@ import com.example.wmotorproBack.wmotorBack.Repository.RolesRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.UsuarioRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.RegistroService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+
 public class RegistroServiceImpl implements RegistroService{
 
     
@@ -53,9 +56,10 @@ public class RegistroServiceImpl implements RegistroService{
 
 
     @Override
+    @Transactional
 public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEnum cargos) throws Exception{
 
-    try {
+    try { 
 
         ResponceDTO responce = usuarioValidacion.validation(usuario);
 
@@ -97,24 +101,24 @@ public ResponceDTO registrarUsuario(RegistroDTO usuario, RolesEnum rol, CargosEn
 
         if(rol == RolesEnum.CLIENTE){
             ClienteEntity cliente = new ClienteEntity();
-            cliente.setDireccion(usuario.getDireccion()); // AHORA SI
+            cliente.setDireccion(usuario.getDireccion());
             cliente.setUsuario(nuevoUsuario);
             clienteRepository.save(cliente);
         }
 
-        if(rol == RolesEnum.EMPLEADO){
-            EmpleadoEntity empleardo = new EmpleadoEntity();
-            empleardo.setDni(usuario.getDni());
-            empleardo.setFechaIngreso(LocalDate.now());
-            empleardo.setFechaNacimiento(usuario.getFechaNacimieto());
-            empleardo.setUsuario(nuevoUsuario);
+        if(RolesEnum.EMPLEADO.equals(rol)){
+            EmpleadoEntity empleado = new EmpleadoEntity();
+            empleado.setDni(usuario.getDni());
+            empleado.setFechaIngreso(LocalDate.now());
+            empleado.setFechaNacimiento(usuario.getFechaNacimieto());
+            empleado.setUsuario(nuevoUsuario);
 
             CargosEntity cargo = cargoRepository.findByCargo(cargos)
             .orElseThrow(() -> new Exception("Cergos no encontrado"+ cargos));
 
-            empleardo.setCargo(cargo);
+            empleado.setCargo(cargo);
 
-            empleadoRepository.save(empleardo);
+            empleadoRepository.save(empleado);
         }
 
         responce.setMensage("Usuario registrado");

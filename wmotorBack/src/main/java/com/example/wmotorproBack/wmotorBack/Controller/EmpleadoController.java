@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/empleado")
 public class EmpleadoController {
 
-    @Autowired
+    @Autowired 
     private EmpleadoService empleadoService;
 
     @GetMapping("/todos")

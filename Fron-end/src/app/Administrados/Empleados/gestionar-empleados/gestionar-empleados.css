@@ -1,0 +1,13 @@
+.titulo{
+    display: flex;
+    align-items: center;
+}
+
+.empleado{
+    text-align: center;
+}
+
+.botonAgregar{
+    padding: 5px;
+    margin-left: 10px;
+}

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { HeaderAdmin } from "../../Clientes/header-admin/header-admin";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-gestionar-empleados',
-  imports: [HeaderAdmin],
+  imports: [HeaderAdmin, RouterLink],
   templateUrl: './gestionar-empleados.html',
   styleUrl: './gestionar-empleados.css',
 })

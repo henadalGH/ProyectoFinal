@@ -11,7 +11,8 @@ export class RegistroClienteServicio {
 
   private urlApiRegs= 'http://localhost:8080/registro/nuevo'
 
-  crearCliente(nombre: string, apellido: string, email: string, password:string, contacto: string, direccion:string, rol: string): Observable<any>{
+  crearCliente(nombre: string, apellido: string, email: string,
+  password:string, contacto: string, direccion:string, rol: string): Observable<any>{
     const params = new HttpParams().set('rolesEnum', rol);
   const body = {
     nombre, apellido, email, password, contacto, direccion

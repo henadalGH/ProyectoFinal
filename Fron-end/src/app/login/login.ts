@@ -13,7 +13,7 @@ import { LoginServide } from './login-servicio';
 export class Login {
 
 email: String = "";
-password: String = "";
+password: String = ""; 
 
 constructor(private loginService: LoginServide, private router: Router)
 {}

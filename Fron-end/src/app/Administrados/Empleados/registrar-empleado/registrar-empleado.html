@@ -1,0 +1,52 @@
+
+<div class="titulo">
+    <h1>Registrar un empleado</h1>
+</div>
+
+<p>Complete el formulario con todos los datos</p>
+
+<div class="formulario">
+    <form (ngSubmit)="registrarEmpleado()">
+        <div class="campos">
+            <label>Nombre: </label>
+            <input type="text" name="nombre" [(ngModel)]="nombre">
+        </div>
+        <div class="campos">
+            <label>Apellido:</label>
+            <input type="text" name="apellido" [(ngModel)]="apellido">
+        </div>
+        <div class="campos">
+            <label>Correo electronico:</label>
+            <input type="email" name="email" [(ngModel)]="email">
+        </div>
+        <div class="campos">
+            <label>Contraseña: </label>
+            <input type="password" name="password" [(ngModel)]="password">
+        </div>
+        <div class="campos">
+            <label>Contacto: </label>
+            <input type="text" name="Contacto" [(ngModel)]="contacto">
+        </div>
+        <div class="campos">
+            <label>Dni: </label>
+            <input type="text" name="dni" [(ngModel)]="dni">
+        </div>
+        <div class="campos">
+            <label>Fecha nacimiento</label>
+            <input type="date" name="fechaNacimmiento" [(ngModel)]="fechaNacimiento">
+        </div>
+        <div class="campos">
+
+            <label>Cargo: </label>
+            
+                <select name="cargo" [(ngModel)]="cargo" >
+                    <option value="AYUDANTE">AYUDANTE</option>
+                    <option value="MECANICO">MECANICO</option>
+                </select>
+            
+        </div>
+
+        <button class="agregar" type="submit">Registrar</button>
+    </form>
+        <button class="cancelar">Volver</button>
+</div>
