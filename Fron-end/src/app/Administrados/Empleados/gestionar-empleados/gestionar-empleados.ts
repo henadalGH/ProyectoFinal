@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { HeaderAdmin } from "../../Clientes/header-admin/header-admin";
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-gestionar-empleados',
@@ -10,9 +10,9 @@ import { RouterLink } from "@angular/router";
   styleUrl: './gestionar-empleados.css',
 })
 export class GestionarEmpleados implements OnInit{
-  
   constructor(
-    private empleadosService: EmpleadoService
+    private empleadosService: EmpleadoService,
+    private router: Router
   ){}
   
   ngOnInit(): void {
@@ -24,6 +24,10 @@ export class GestionarEmpleados implements OnInit{
   obtenerEmpleado(){
       return this.empleadosService.obtenerEmpleados().subscribe(
         (repuesta: any) => {this.empleados = repuesta});
+  }
+
+  verEmpleado(id: number) {
+    this.router.navigate(['/verEmpleado',id]);
   }
 
 }

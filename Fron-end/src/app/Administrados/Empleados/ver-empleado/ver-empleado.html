@@ -1,1 +1,59 @@
-<p>ver-empleado works!</p>
+<app-header-admin></app-header-admin>
+
+
+
+<div class="titulo">
+    <h1>Datos del empleado: {{empleado.nombre}}       {{empleado.apellido}}</h1>
+    <button [routerLink]="['/gestionEmpleado']">Volver</button>
+</div>
+
+<div class="contenedor">
+    @if (empleado) {
+
+    <div class="dato">
+        <h4>Nombre: </h4>
+        <p>{{empleado.nombre}}</p>
+    </div>
+    <div class="dato">
+        <h4>Apellido: </h4>
+        <p>{{empleado.apellido}}</p>
+    </div>
+    <div class="dato">
+        <h4>Correo electronico: </h4>
+        <p>{{empleado.email}}</p>
+    </div>
+    <div class="dato">
+        <h4>Contacto: </h4>
+        <p>{{empleado.contacto}}</p>
+    </div>
+    
+    <div class="dato">
+        <h4>Dni: </h4>
+        <p>{{empleado.dni}}</p>
+    </div>
+    
+    <div class="dato">
+        <h4>Fecha nacimmiento:</h4>
+        <p>{{empleado.fechaNacimiento}}</p>
+    </div>
+    
+    <div class="dato">
+        <h4>Fecha de ingreso:</h4>
+        <p>{{empleado.fechaIngreso}}</p>
+    </div>
+    
+    <div class="dato">
+        <h4>Cargo: </h4>
+        <p>{{empleado.cargo}}</p>
+    </div>
+    
+    <div class="dato">
+        <h4>Sueldo: </h4>
+        <p>{{empleado.sueldo}}</p>
+    </div>
+
+}
+</div>
+
+
+

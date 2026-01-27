@@ -8,7 +8,7 @@ public class EmpleadoDTO {
 
     
     private String nombre;
-    private String apellodo;
+    private String apellido;
     private String email;
     private String contacto;
     private String dni;
@@ -22,11 +22,12 @@ public class EmpleadoDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getApellodo() {
-        return apellodo;
+    
+    public String getApellido() {
+        return apellido;
     }
-    public void setApellodo(String apellodo) {
-        this.apellodo = apellodo;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
     public String getEmail() {
         return email;

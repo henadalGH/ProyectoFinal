@@ -11,7 +11,8 @@ export class EmpleadoService {
 
   private urlTodos = 'http://localhost:8080/empleado/todos';
   private urlApiRegs = 'http://localhost:8080/registro/nuevo';
-
+  private urlPorid = 'http://localhost:8080/empleado';
+  
   obtenerEmpleados() {
     return this.http.get(this.urlTodos);
   }
@@ -46,4 +47,12 @@ export class EmpleadoService {
 
     return this.http.post<any>(this.urlApiRegs, body, { params });
   }
+
+  verEmpleado(id: number)
+  {
+    return this.http.get(`http://localhost:8080/empleado/${id}`);
+  }
+
+
+
 }

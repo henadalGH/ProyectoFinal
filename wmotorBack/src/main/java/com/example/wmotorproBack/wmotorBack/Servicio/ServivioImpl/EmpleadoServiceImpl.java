@@ -32,7 +32,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
             EmpleadoDTO empleados = new EmpleadoDTO();
             empleados.setNombre(empleado.getUsuario().getNombre());
-            empleados.setApellodo(empleado.getUsuario().getApellido());
+            empleados.setApellido(empleado.getUsuario().getApellido());
             empleados.setEmail(empleado.getUsuario().getEmail());
             empleados.setDni(empleado.getDni());
             empleados.setContacto(empleado.getUsuario().getContacto());

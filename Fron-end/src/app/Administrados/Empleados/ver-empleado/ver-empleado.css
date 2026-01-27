@@ -1,0 +1,24 @@
+.dato{
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+p{
+    margin-left: 10px;
+}
+
+.titulo{
+    margin-left: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.contenedor{
+    background-color: rgb(164, 193, 146);
+    border-radius: 25px;
+}
+button{
+    margin-left: 50px;
+    padding: 5px;
+}

@@ -20,9 +20,10 @@ import { HomeCliente } from './Cliente/home-cliente/home-cliente';
 import { SolicitarTurno } from './Cliente/solicitar-turno/solicitar-turno';
 import { MisVehiculos } from './Cliente/mis-vehiculos/mis-vehiculos';
 import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
-import { Component } from '@angular/core';
+
 import { GestionarEmpleados } from './Administrados/Empleados/gestionar-empleados/gestionar-empleados';
 import { RegistrarEmpleado } from './Administrados/Empleados/registrar-empleado/registrar-empleado';
+import { VerEmpleado } from './Administrados/Empleados/ver-empleado/ver-empleado';
 
 export const routes: Routes = [
 
@@ -49,5 +50,6 @@ export const routes: Routes = [
     {path: "misVehiculos", component: MisVehiculos},
     {path:"headerEmpleado", component: HeaderEmpleado},
     {path:"gestionEmpleado", component: GestionarEmpleados},
-    {path:"registrarEmpleado", component: RegistrarEmpleado}
+    {path:"registrarEmpleado", component: RegistrarEmpleado}, 
+    {path:"verEmpleado/:id", component:VerEmpleado}
 ];
