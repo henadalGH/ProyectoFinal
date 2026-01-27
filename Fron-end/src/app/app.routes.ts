@@ -10,11 +10,6 @@ import { GestionCliente } from './Administrados/Clientes/gestion-cliente/gestion
 import { GestionarVehiculo } from './Administrados/Clientes/gestionar-vehiculo/gestionar-vehiculo';
 import { RegistrarClintes } from './Administrados/Clientes/registrar-clintes/registrar-clintes';
 import { RegistarVehiculo } from './Administrados/Clientes/registar-vehiculo/registar-vehiculo';
-import { HomeFinanzas } from './Finanzas/home-finanzas/home-finanzas';
-import { Reportes } from './Finanzas/reportes/reportes';
-import { MovimientosFinancieros } from './Finanzas/movimientos-financieros/movimientos-financieros';
-import { Presupuesto } from './Finanzas/presupuesto/presupuesto';
-import { HeaderFinanzas } from './Finanzas/header-finanzas/header-finanzas';
 import { CrearPresupuesto } from './utilidades/crear-presupuesto/crear-presupuesto';
 import { HomeCliente } from './Cliente/home-cliente/home-cliente';
 import { SolicitarTurno } from './Cliente/solicitar-turno/solicitar-turno';
@@ -41,11 +36,6 @@ export const routes: Routes = [
     {path: "gestionarVehiculo", component: GestionarVehiculo},
     {path: "registrarCliente", component: RegistrarClintes},
     {path: "registrarVehiculo", component:  RegistarVehiculo},
-    {path: "homeFinanzas", component: HomeFinanzas},
-    {path:"reportes", component: Reportes},
-    {path: "finanzas", component: MovimientosFinancieros},
-    {path: "presupuestos", component: Presupuesto},
-    {path: "headerFinanzas", component: HeaderFinanzas},
     {path: "crearPresupuesto", component: CrearPresupuesto},
     {path: "solicitarTurno", component: SolicitarTurno},
     {path: "misVehiculos", component: MisVehiculos},
