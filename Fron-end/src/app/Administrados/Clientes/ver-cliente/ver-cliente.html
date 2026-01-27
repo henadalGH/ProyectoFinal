@@ -1,1 +1,30 @@
-<p>ver-cliente works!</p>
+<app-header-admin></app-header-admin>
+
+ <div class="titulo">
+    <h1>Datos del clietne {{cliente.nombre}}   {{cliente.apellido}}</h1>
+ </div>
+@if (cliente) {
+
+    <div class="campo">
+        <h4>Nombre: </h4>
+        <p>{{cliente.nombre}}</p>
+    </div>
+    <div class="campo">
+        <h4>Apellido: </h4>
+        <p>{{cliente.apellido}}</p>
+    </div>
+    <div class="campo">
+        <h4>Correo electronico: </h4>
+        <p>{{cliente.email}}</p>
+    </div>
+    <div class="campo">
+        <h4>Contacto: </h4>
+        <p>{{cliente.contacto}}</p>
+    </div>
+    <div class="campo">
+        <h4>Direccion: </h4>
+        <p>{{cliente.direccion}}</p>
+    </div>
+    
+    <button>Ver los vehiculos</button>
+}

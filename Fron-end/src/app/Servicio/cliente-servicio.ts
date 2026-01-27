@@ -18,7 +18,7 @@ export class ClienteServicio {
 
 
   obtenerClientePorId(id: number){
-    return this.http.get(`{ this.urlApiClienteId}/${id}`);
+    return this.http.get(`http://localhost:8080/cliente/${id}`);
 
   }
   

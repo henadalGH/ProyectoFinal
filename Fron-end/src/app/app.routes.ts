@@ -24,6 +24,7 @@ import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
 import { GestionarEmpleados } from './Administrados/Empleados/gestionar-empleados/gestionar-empleados';
 import { RegistrarEmpleado } from './Administrados/Empleados/registrar-empleado/registrar-empleado';
 import { VerEmpleado } from './Administrados/Empleados/ver-empleado/ver-empleado';
+import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
 
 export const routes: Routes = [
 
@@ -51,5 +52,6 @@ export const routes: Routes = [
     {path:"headerEmpleado", component: HeaderEmpleado},
     {path:"gestionEmpleado", component: GestionarEmpleados},
     {path:"registrarEmpleado", component: RegistrarEmpleado}, 
-    {path:"verEmpleado/:id", component:VerEmpleado}
+    {path:"verEmpleado/:id", component:VerEmpleado},
+    {path:"verCliente/:id", component: VerCliente}
 ];

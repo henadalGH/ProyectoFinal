@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ClienteServicio } from '../../../Servicio/cliente-servicio';
 import { HeaderAdmin } from "../header-admin/header-admin";
 
@@ -11,7 +11,8 @@ import { HeaderAdmin } from "../header-admin/header-admin";
 })
 export class GestionCliente implements OnInit{
   
-  constructor(private clienteServicio: ClienteServicio
+  constructor(private clienteServicio: ClienteServicio,
+    private router: Router
   ){}
 
   ngOnInit(): void {
@@ -24,5 +25,10 @@ export class GestionCliente implements OnInit{
     this.clienteServicio.obtenerTodosLosClientes().subscribe(
       (repuesta: any)=> {this.clientes = repuesta;});
   }
+
+  verCliente(id: number){
+    this.router.navigate(['/verCliente', id]);
+  }
+
 
 }
