@@ -20,6 +20,8 @@ import { GestionarEmpleados } from './Administrados/Empleados/gestionar-empleado
 import { RegistrarEmpleado } from './Administrados/Empleados/registrar-empleado/registrar-empleado';
 import { VerEmpleado } from './Administrados/Empleados/ver-empleado/ver-empleado';
 import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
+import { RegistrarGastosIngresos } from './Administrados/Fianzas/registrar-gastos-ingresos/registrar-gastos-ingresos';
+import { HomeMovimientos } from './Administrados/Fianzas/home-movimientos/home-movimientos';
 
 export const routes: Routes = [
 
@@ -43,5 +45,7 @@ export const routes: Routes = [
     {path:"gestionEmpleado", component: GestionarEmpleados},
     {path:"registrarEmpleado", component: RegistrarEmpleado}, 
     {path:"verEmpleado/:id", component:VerEmpleado},
-    {path:"verCliente/:id", component: VerCliente}
+    {path:"verCliente/:id", component: VerCliente},
+    {path:"registrasMovimientos", component: RegistrarGastosIngresos},
+    {path:"homeMovimientos", component: HomeMovimientos}
 ];

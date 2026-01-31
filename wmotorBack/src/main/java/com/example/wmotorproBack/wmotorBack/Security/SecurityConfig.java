@@ -56,7 +56,7 @@ public class SecurityConfig {
                                 .requestMatchers("/mes").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
-                )
+                ) 
                 .sessionManagement(sessionM ->
                         sessionM.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )

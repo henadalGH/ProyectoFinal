@@ -1,0 +1,40 @@
+<div class="titulo">
+    <h1>Regitrar un movimiento</h1>
+    <p>Complete el formulario</p>
+</div>
+
+<form (ngSubmit)="registrasGastos()">
+
+    <div class="campo">
+        <label>Tipo de movimiento</label>
+        <select name="tipo" [(ngModel)]="tipo">
+            <option value="INGRESO">Ingreso</option>
+            <option value="GASTOS">Gastos</option>
+        </select>
+    </div>
+
+    <div class="campo">
+        <label>Categoria</label>
+        <input type="text" name="categoria" [(ngModel)]="categoria">
+    </div>
+
+    <div class="campo">
+        <label>Concepto</label>
+        <textarea 
+            name="descripcion"
+            rows="5"
+            cols="40"
+            [(ngModel)]="concepto"
+            placeholder="Escriba el concepto aquí...">
+        </textarea>
+    </div>
+
+    <div class="campo">
+        <label>Importe</label>
+        <input type="number" name="importe" [(ngModel)]="importe">
+    </div>
+
+    <button type="submit" class="registro">Registrar</button>
+    <button class="cancelar" [routerLink]="['/homeMovimientos']" >Cancelar</button>
+</form>
+    

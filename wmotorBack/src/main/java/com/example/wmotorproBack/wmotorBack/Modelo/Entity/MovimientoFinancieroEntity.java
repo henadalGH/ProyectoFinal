@@ -28,7 +28,7 @@ public class MovimientoFinancieroEntity {
 
     @Column(name = "tipo_movimiento")
     @Enumerated(EnumType.STRING)
-    private MovimientosEnum tipo_movimiento;
+    private MovimientosEnum tipomovimiento;
 
     @Column(name = "categoria")
     private String categoria;

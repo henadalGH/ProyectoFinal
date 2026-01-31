@@ -1,0 +1,61 @@
+<app-header-admin></app-header-admin>
+
+<div class="contenedor">
+
+    <!-- ===== TITULO ===== -->
+    <div class="titulo">
+        <h1>Movimientos del día "{{fechaHoy}}"</h1>
+        <button [routerLink]="['/registrasMovimientos']">
+            + Registrar movimiento
+        </button>
+    </div>
+
+
+    <!-- ================= INGRESOS ================= -->
+    <div class="card ingreso">
+
+        <h2>Ingresos del día</h2>
+
+        <div class="fila header">
+            <span>Tipo</span>
+            <span>Categoría</span>
+            <span>Importe</span>
+        </div>
+
+        @for (fec of movimiento; track $index) {
+            @if (fec.tipomovimiento == 'INGRESO') {
+                <div class="fila ingreso-item">
+                    <span>{{fec.tipomovimiento}}</span>
+                    <span>{{fec.categoria}}</span>
+                    <span>$ {{fec.importe}}</span>
+                </div>
+            }
+        }
+
+    </div>
+
+
+    <!-- ================= GASTOS ================= -->
+    <div class="card gastos">
+
+        <h2>Gastos del día</h2>
+
+        <div class="fila header">
+            <span>Tipo</span>
+            <span>Categoría</span>
+            <span>Importe</span>
+        </div>
+
+        @for (fec of movimiento; track $index) {
+            @if (fec.tipomovimiento == 'GASTOS') {
+                <div class="fila gasto-item">
+                    <span>{{fec.tipomovimiento}}</span>
+                    <span>{{fec.categoria}}</span>
+                    <span>$ {{fec.importe}}</span>
+                </div>
+            }
+        }
+
+    </div>
+
+</div>
