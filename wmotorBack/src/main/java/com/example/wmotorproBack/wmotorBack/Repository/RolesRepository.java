@@ -12,7 +12,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.RolesEnum;
 @Repository
 public interface RolesRepository extends JpaRepository<RolesEntity, Long> {
 
-    boolean existsByNombre(RolesEnum nombre);
+     boolean existsByNombre(RolesEnum nombre);
 
     Optional<RolesEntity> findByNombre(RolesEnum nombre);
 }
