@@ -1,23 +1,123 @@
-.header{
-    padding: 50px;
-    border-radius: 25px;
-    background-color: azure;
+.header-admin {
+    background-color: #0a0a0a;
+    height: 70px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 2px solid #1a1a1a;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-button{
-    padding: 15px;
-    margin-left: 25px;
-    border-radius: 10px;
-    background-color: rgb(108, 113, 212);
-    font-size: 15px;
+/* Logo */
+.logo-section h1 {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0;
+    letter-spacing: 1px;
 }
 
-button:hover{
-    background-color: red;
+.logo-section h1 span {
+    color: #ffc107; /* Amarillo Oro */
 }
 
-h1{
-    font-size: 40px;
+/* Contenedor de Navegación */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.nav-group {
+    display: flex;
+    gap: 5px;
+}
+
+/* Botones de Navegación */
+.nav-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #a0a0a0;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn i {
+    font-size: 1rem;
+    color: #555; /* Iconos más apagados por defecto */
+    transition: color 0.3s ease;
+}
+
+/* Hover y Activo */
+.nav-btn:hover {
+    color: #fff;
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+.nav-btn:hover i {
+    color: #ffc107;
+}
+
+.nav-btn.active {
+    background-color: rgba(255, 193, 7, 0.1);
+    border-color: #ffc107;
+    color: #ffc107;
+}
+
+.nav-btn.active i {
+    color: #ffc107;
+}
+
+/* Divisores entre grupos */
+.divider {
+    width: 1px;
+    height: 30px;
+    background-color: #2a2a2a;
+    margin: 0 10px;
+}
+
+/* Control de usuario (Logout) */
+.logout-btn {
+    background: #1a1a1a;
+    border: none;
+    color: #ff4444; /* Rojo para salir */
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background: #ff4444;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Responsive: Si la pantalla es chica, ocultamos texto y dejamos iconos */
+@media (max-width: 1100px) {
+    .nav-btn {
+        padding: 10px;
+        font-size: 0; /* Oculta el texto */
+    }
+    .nav-btn i {
+        margin: 0;
+        font-size: 1.2rem;
+    }
+    .divider { margin: 0 5px; }
 }

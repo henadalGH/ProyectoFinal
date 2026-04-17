@@ -1,55 +1,69 @@
 <app-header-admin></app-header-admin>
-<div class="titulo">
-    <h1>Registrar un empleado</h1>
-</div>
 
-<p>Complete el formulario con todos los datos</p>
+<div class="registro-wrapper">
+    <div class="titulo">
+        <h1>Registrar un <span>Empleado</span></h1>
+        <p>Complete el formulario para dar de alta al nuevo integrante del taller</p>
+    </div>
 
-<div class="formulario">
-    <form (ngSubmit)="registrarEmpleado()">
-        <div class="campos">
-            <label>Nombre: </label>
-            <input type="text" name="nombre" [(ngModel)]="nombre">
-        </div>
-        <div class="campos">
-            <label>Apellido:</label>
-            <input type="text" name="apellido" [(ngModel)]="apellido">
-        </div>
-        <div class="campos">
-            <label>Correo electronico:</label>
-            <input type="email" name="email" [(ngModel)]="email">
-        </div>
-        <div class="campos">
-            <label>Contraseña: </label>
-            <input type="password" name="password" [(ngModel)]="password">
-        </div>
-        <div class="campos">
-            <label>Contacto: </label>
-            <input type="text" name="Contacto" [(ngModel)]="contacto">
-        </div>
-        <div class="campos">
-            <label>Dni: </label>
-            <input type="text" name="dni" [(ngModel)]="dni">
-        </div>
-        <div class="campos">
-            <label>Fecha nacimiento</label>
-            <input type="date" name="fechaNacimmiento" [(ngModel)]="fechaNacimiento">
-        </div>
-        <div class="campos">
+    <div class="formulario-container">
+        <form (ngSubmit)="registrarEmpleado()" class="form-grid">
 
-            <label>Cargo: </label>
-            
-                <select name="cargo" [(ngModel)]="cargo" >
+            <div class="campos">
+                <label>Nombre</label>
+                <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Ej: Juan">
+            </div>
+
+            <div class="campos">
+                <label>Apellido</label>
+                <input type="text" name="apellido" [(ngModel)]="apellido" placeholder="Ej: Pérez">
+            </div>
+
+            <div class="campos">
+                <label>Correo electrónico</label>
+                <input type="email" name="email" [(ngModel)]="email" placeholder="juan.perez@motorpro.com">
+            </div>
+
+            <div class="campos">
+                <label>Contraseña</label>
+                <input type="password" name="password" [(ngModel)]="password" placeholder="••••••••">
+            </div>
+
+            <div class="campos">
+                <label>Contacto (Teléfono)</label>
+                <input type="text" name="Contacto" [(ngModel)]="contacto" placeholder="+54 342...">
+            </div>
+
+            <div class="campos">
+                <label>DNI / Identificación</label>
+                <input type="text" name="dni" [(ngModel)]="dni" placeholder="Sin puntos">
+            </div>
+
+            <div class="campos">
+                <label>Fecha de Nacimiento</label>
+                <input type="date" name="fechaNacimmiento" [(ngModel)]="fechaNacimiento">
+            </div>
+
+            <div class="campos">
+                <label>Cargo en el Taller</label>
+                <select name="cargo" [(ngModel)]="cargo">
+                    <option value="" disabled selected>Seleccione un cargo</option>
                     <option value="AYUDANTE">AYUDANTE</option>
                     <option value="MECANICO">MECANICO</option>
                     <option value="ENCARGADO">ENCARGADO</option>
                     <option value="JEFE_TALLER">JEFE TALLER</option>
                     <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
                 </select>
-            
-        </div>
+            </div>
 
-        <button class="agregar" type="submit">Registrar</button>
-    </form>
-        <button class="cancelar" [routerLink]="['/gestionEmpleado']">Volver</button>
+            <div class="acciones">
+                <button class="agregar" type="submit">
+                    <i class="fas fa-save"></i> Registrar Empleado
+                </button>
+                <button class="cancelar" type="button" [routerLink]="['/gestionEmpleado']">
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
 </div>

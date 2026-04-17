@@ -1,156 +1,174 @@
-/* ====== Configuración general ====== */
-body {
-    margin: 0;                                      /* Quita márgenes del navegador */
-    padding: 0;                                     /* Quita padding por defecto */
-    font-family: "Segoe UI", Arial, sans-serif;      /* Fuente general */
-    background-color: #f5f5f5;                       /* Color de fondo */
-    color: #222;                                     /* Color principal del texto */
+/* 1. CONTENEDOR PRINCIPAL Y FONDO */
+.landing-wrapper {
+    --black-deep: #050505;
+    --black-card: #121212;
+    --accent: #ffc107;
+    --text-white: #ffffff;
+    --text-gray: #a0a0a0;
+
+    background: radial-gradient(circle at top center, #1a1a1a 0%, var(--black-deep) 100%);
+    color: var(--text-white);
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
 }
 
-/* Centrar secciones y dar espacio superior */
-.ingresar,  
-.servicios, 
-.contactos,
-.quien {
-    width: 100%;                                     /* Ocupan todo el ancho */
-    text-align: center;                              /* Centra el contenido */
-    margin-top: 40px;                                /* Separación superior */
-}
-
-.titulos{
-    width: 100%;                                     /* Ocupan todo el ancho */
-    text-align: center;                              /* Centra el contenido */
-    background-color: #1E88E5;
-    padding-block: unset;
-
-    
-}
-
-/* ====== Botón Principal ====== */
-.boton1 {
-    padding: 14px 35px;                              /* Tamaño del botón */
-    font-size: 18px;                                 /* Tamaño del texto */
-    font-weight: bold;                               /* Texto en negrita */
-    border: none;                                    /* Sin borde */
-    border-radius: 8px;                              /* Bordes redondeados */
-    background-color: #1E88E5;                       /* Azul principal */
-    color: white;                                    /* Texto blanco */
-    cursor: pointer;                                 /* Manito al pasar el mouse */
-    transition: all 0.3s ease;                       /* Animación suave */
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);         /* Sombra */
+/* 2. NAVBAR (Ajustada para que no empuje el contenido) */
+.navbar {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    box-sizing: border-box;
 }
 
-.boton1:hover {
-    background-color: #1565C0;                       /* Azul más oscuro */
-    transform: scale(1.05);                          /* Aumenta un poco el tamaño */
+.logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
-/* ====== Títulos ====== */
-.titulos h1 {
-    margin: 10px 0;                                  /* Separación vertical */
-    font-size: 45px;                                 /* Tamaño grande */
-    letter-spacing: 1px;                             /* Espaciado entre letras */
-    padding: 25px;
-}
+.logo span { color: var(--accent); }
 
-/* Nombre de empresa destacado */
-.nombreEmpresa {
-    color: #1E88E5;                                  /* Azul destacado */
-    font-size: 45px;                                 /* Letra grande */
-    font-weight: bold;                               /* Negrita */
-}
-
-/* Frase secundaria */
-.frace {
-    margin-top: 10px;                                /* Separación arriba */
-    font-size: 18px;                                 /* Tamaño mediano */
-    color: #444;                                     /* Gris suave */
-    font-style: italic;                              /* Cursiva */
-}
-
-/* Párrafos de la sección títulos */
-.titulos p {
-    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
-    font-size: 20px;
-}
-
-/* ====== Sección Servicios ====== */
-.servicios {
-    background-color: white;                         /* Fondo blanco */
-    padding: 40px 20px;                              /* Espaciado interior */
-    border-radius: 12px;                             /* Bordes redondeados */
-    width: 80%;                                      /* Ancho del contenedor */
-    margin: 50px auto;                               /* Centrado automático */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);          /* Sombra */
-}
-
-/* Títulos de secciones */
-.servicios, .quien, .contactos h2 {
-    margin-bottom: 10px;
-    font-size: 30px;
-    color: #1E88E5;
-}
-
-/* ====== Sección Contactos y Quienes Somos ====== */
-.contactos, .quien {
-    width: 80%;                                      /* Ancho */
-    margin: 60px auto;                               /* Centrado con margen vertical */
-    background-color: white;                         /* Fondo blanco */
-    padding: 30px;                                   /* Padding interno */
-    border-radius: 12px;                             /* Bordes redondeados */
-    color: black;                                    /* Color texto */
-    font-size: 20px;                                 /* Tamaño del texto */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);          /* Sombra más marcada */
-    text-align: center;                              /* Todo centrado */
-}
-
-/* ====== HEADER ====== */
-.header {
-    position: relative;                              /* Necesario para centrar el menú */
-    align-items: center;                             /* Alineación vertical */
-    display: flex;                                   /* Flexbox para alinear izquierda-centro-derecha */
-    background-color: aliceblue;                     /* Fondo del header */
-    padding: 25px;                                   /* Espaciado interno */
-    border-radius: 25px;                             /* Bordes redondeados */
-    height: 80px;                                    /* Altura del header */
-}
-
-/* Título del header (izquierda) */
-.header h1 {
-    margin: 0;                                       /* Quita margen por defecto */
-    font-weight: bold;                               /* Negrita */
-    font-size: 32px;                                 /* Tamaño del título */
-}
-
-/* ====== Links centrados ====== */
-.links {
-    position: absolute;                              /* Centrado independiente del flex */
-    left: 50%;
-    transform: translateX(-50%);                     /* Centro perfecto */
-    display: flex;
-    gap: 30px;                                       /* Espacio entre links */
-}
-
-/* Estilos de los links */
-.links a {
+.nav-links .link {
+    color: var(--text-white);
     text-decoration: none;
-    font-size: 25px;
-    color: #1E88E5;
+    margin-right: 20px;
+    font-weight: 500;
 }
 
-/* ====== Botón alineado a la derecha ====== */
-.header .boton1 {
-    margin-left: auto;                               /* ← Esto lo separa totalmente hacia la derecha */
+/* 3. HERO SECTION (La parte que se te salía de pantalla) */
+.hero {
+    min-height: 100vh; /* Usa min-height para que crezca si hay mucho texto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 120px 20px 60px 20px; /* Espacio para la navbar y respiro abajo */
+    box-sizing: border-box;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=2072') center/cover;
 }
 
-/* Color de texto en la sección Quienes somos */
-.quien {
-    color: #222;
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
 }
 
-/* Efecto de scroll suave */
-html {
-    scroll-behavior: smooth;
+.hero h1 {
+    font-size: clamp(2rem, 8vw, 3.5rem); /* Tamaño fluido según pantalla */
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero h1 span { color: var(--accent); }
+
+.hero p {
+    font-size: clamp(1rem, 4vw, 1.25rem);
+    color: var(--text-gray);
+    margin-bottom: 40px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 4. BOTONES Y CTA GROUP */
+.cta-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap; /* Evita que se salgan horizontalmente */
+}
+
+.btn {
+    padding: 14px 32px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: #000;
+}
+
+.btn-outline {
+    border: 1px solid var(--text-gray);
+    color: var(--text-white);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* 5. SECCIÓN DE SERVICIOS (FEATURES) */
+.features {
+    padding: 100px 5%;
+    background-color: var(--black-deep);
+}
+
+.section-header { text-align: center; margin-bottom: 60px; }
+
+.underline {
+    width: 60px; height: 4px;
+    background: var(--accent);
+    margin: 15px auto;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background: var(--black-card);
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #1a1a1a;
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.feature-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+/* 6. FOOTER */
+.footer {
+    padding: 40px;
+    text-align: center;
+    border-top: 1px solid #1a1a1a;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* 7. RESPONSIVE (Celulares) */
+@media (max-width: 600px) {
+    .nav-links { display: none; } /* Ocultar links en móvil para limpiar el diseño */
+
+    .hero { padding-top: 80px; }
+
+    .cta-group { flex-direction: column; width: 100%; }
+
+    .btn { width: 100%; box-sizing: border-box; }
+
+    .btn-outline { margin-left: 0; margin-top: 10px; }
 }

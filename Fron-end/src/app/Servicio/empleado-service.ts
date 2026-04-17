@@ -12,7 +12,7 @@ export class EmpleadoService {
   private urlTodos = 'http://localhost:8080/empleado/todos';
   private urlApiRegs = 'http://localhost:8080/registro/nuevo';
   private urlPorid = 'http://localhost:8080/empleado';
-  
+
   obtenerEmpleados() {
     return this.http.get(this.urlTodos);
   }
@@ -25,27 +25,23 @@ export class EmpleadoService {
     contacto: string,
     dni: string,
     fechaNacimiento: string,
-    rol: string,
+    rol: string = "EMPLEADO",
     cargo: string
   ): Observable<any> {
 
-    
-    const params = new HttpParams()
-      .set('rolesEnum', rol.toUpperCase())
-      .set('cargo', cargo.toUpperCase());
-
-      
     const body = {
       nombre,
       apellido,
       email,
       password,
+      rol,
       contacto,
       dni,
-      fechaNacimiento
+      fechaNacimiento,
+      cargo
     };
 
-    return this.http.post<any>(this.urlApiRegs, body, { params });
+    return this.http.post<any>(this.urlApiRegs, body);
   }
 
   verEmpleado(id: number)

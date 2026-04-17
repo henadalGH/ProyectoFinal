@@ -1,13 +1,213 @@
-.titulo{
+/* Variables de tema */
+:host {
+    --bg-dark: #050505;
+    --card-dark: #121212;
+    --accent: #ffc107;
+    --text-white: #ffffff;
+    --text-muted: #888;
+    --border: #222;
+}
+
+.gestion-container {
+    padding: 40px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Titular de la página */
+.titulo-seccion {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    border-left: 4px solid var(--accent);
+    padding-left: 20px;
+}
+
+.titulo-seccion h1 {
+    color: var(--text-white);
+    font-size: 2rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.titulo-seccion p {
+    color: var(--text-muted);
+    margin: 5px 0 0 0;
+}
+
+.boton-agregar {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
     display: flex;
     align-items: center;
+    gap: 10px;
 }
 
-.empleado{
+.boton-agregar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Grid de tarjetas */
+.grid-empleados {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Tarjeta de Empleado */
+.card-empleado {
+    background: var(--card-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.card-empleado:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid var(--border);
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    background: #1a1a1a;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.2rem;
+}
+
+.user-info h3 {
+    color: var(--text-white);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.badge-cargo {
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(255, 193, 7, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.info-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
+
+.info-row i {
+    width: 20px;
+    color: var(--accent);
+}
+
+.card-footer {
+    padding: 15px 20px;
+    background: rgba(255,255,255,0.02);
+}
+
+.btn-ver {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #333;
+    color: var(--text-white);
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.btn-ver:hover {
+    background: var(--text-white);
+    color: #000;
+}
+
+/* Estados de Alerta (Error y Vacío) */
+.alerta-estado {
+    background: var(--card-dark);
+    padding: 60px;
     text-align: center;
+    border-radius: 20px;
+    border: 1px dashed #333;
+    max-width: 600px;
+    margin: 50px auto;
 }
 
-.botonAgregar{
-    padding: 5px;
-    margin-left: 10px;
+.icon-circle {
+    width: 80px;
+    height: 80px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2.5rem;
+}
+
+.error .icon-circle { color: #ff4444; border: 1px solid #ff4444; }
+.vacio .icon-circle { color: var(--text-muted); }
+
+.btn-accion {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* Animaciones */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+.pulse { animation: pulse 2s infinite; }
+
+/* Responsive */
+@media (max-width: 600px) {
+    .titulo-seccion { flex-direction: column; text-align: center; padding-left: 0; border-left: none; }
+    .boton-agregar { width: 100%; margin-top: 20px; }
 }

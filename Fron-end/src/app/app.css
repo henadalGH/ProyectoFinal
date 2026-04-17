@@ -1,3 +1,45 @@
-body{
-    background-color: black;
+/* RESET GENERAL Y FONDO BASE */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* Fondo oscuro con un ligero toque de azul/gris para que no se vea "muerto" */
+    background-color: #050505;
+    /* Degradado radial: el centro es levemente más claro que los bordes */
+    background-image: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #050505 100%);
+    background-attachment: fixed;
+    color: #e0e0e0;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Opcional: Una textura sutil de "puntos" para darle un toque tecnológico */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px; /* Tamaño de la cuadrícula de puntos */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Scrollbar personalizada para que no rompa la estética oscura */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffc107; /* El amarillo de tu marca al pasar el mouse */
 }

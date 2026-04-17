@@ -1,13 +1,49 @@
-<div class="header">
+<header class="header-admin">
+  <div class="logo-section">
+    <h1>W Motor <span>Pro</span></h1>
+  </div>
 
-    <h1>W Motor Pro</h1>
-    <button [routerLink]="['/homeAdmin']"></button>
-    <button [routerLink]="['/homeFinanzas']">Finansas</button>
-    <button [routerLink]="['/gestionEmpleado']">Empleados</button>
-    <button [routerLink]="['/gestionCliente']">Clientes</button>
-    <button>Presupuesto</button>
-    <button>Turnos</button>
-    <button>Ordenes</button>
-    <button>Dashboard</button>
-</div>
+  <nav class="nav-menu">
+    <button class="nav-btn" [routerLink]="['/homeAdmin']" title="Inicio">
+      <i class="fas fa-home"></i>
+    </button>
 
+    <div class="nav-group">
+      <button class="nav-btn" [routerLink]="['/homeFinanzas']">
+        <i class="fas fa-chart-line"></i> Finanzas
+      </button>
+      <button class="nav-btn" [routerLink]="['/gestionEmpleado']">
+        <i class="fas fa-user-tie"></i> Empleados
+      </button>
+      <button class="nav-btn" [routerLink]="['/gestionCliente']">
+        <i class="fas fa-users"></i> Clientes
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="nav-group">
+      <button class="nav-btn">
+        <i class="fas fa-file-invoice-dollar"></i> Presupuesto
+      </button>
+      <button class="nav-btn">
+        <i class="fas fa-calendar-alt"></i> Turnos
+      </button>
+      <button class="nav-btn">
+        <i class="fas fa-clipboard-list"></i> Ordenes
+      </button>
+    </div>
+
+    <div class="divider"></div>
+
+    <button class="nav-btn active">
+      <i class="fas fa-tachometer-alt"></i> Dashboard
+    </button>
+  </nav>
+
+  <div class="user-control">
+    <button class="logout-btn" title="Cerrar Sesión">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</header>

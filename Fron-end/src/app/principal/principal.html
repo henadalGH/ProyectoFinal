@@ -1,33 +1,53 @@
-<div class="header">
-    <h1>W Motor Pro</h1>
-    <div class="links">
-        <a href="#servicios">Nuestros servicios</a>
-        <a href="#algo">algo mas</a>
-        <a href="#quienes">Quienes somos</a>
-        <a href="#contacto">Contactos</a>
+<div class="landing-wrapper">
+  <nav class="navbar">
+    <div class="logo">GENESIS<span>PRO</span></div>
+    <div class="nav-links">
+      <a routerLink="/login" class="link">Iniciar Sesión</a>
+      <a routerLink="/register" class="btn btn-primary">Registrarme</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>MANTENIMIENTO DE <span>ALTO NIVEL</span> PARA TU VEHÍCULO</h1>
+      <p>Gestiona tus turnos, sigue reparaciones en tiempo real y mantén el historial clínico de tu auto en un solo lugar.</p>
+
+      <div class="cta-group">
+        <a routerLink="/register" class="btn btn-lg btn-primary">EMPEZAR AHORA</a>
+        <a href="#servicios" class="btn btn-lg btn-outline">VER SERVICIOS</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="servicios" class="features">
+    <div class="section-header">
+      <h2>Nuestra Plataforma</h2>
+      <div class="underline"></div>
     </div>
 
-    <button class="boton1" [routerLink]="['/login']">Ingresar</button>
-</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <i class="fas fa-calendar-check"></i>
+        <h3>Turnos Online</h3>
+        <p>Reserva tu lugar en el taller sin llamadas, las 24 horas del día.</p>
+      </div>
 
-<div class="titulos">
-    <h1>Bienvenidos a nuestra Empresa</h1>
-    <p class="frase">“Cada detalle importa. <br> Por eso trabajamos con dedicación, para que te vayas seguro y conforme.”</p>
-</div>
+      <div class="feature-card">
+        <i class="fas fa-tools"></i>
+        <h3>Seguimiento</h3>
+        <p>Mira el avance de la orden de reparación de tu vehículo desde tu perfil.</p>
+      </div>
 
-<div id="servicios" class="servicios">
-    <h2>Nuestros servicios</h2>
-    <p>Acá van los servicios</p>
-</div>
+      <div class="feature-card">
+        <i class="fas fa-history"></i>
+        <h3>Historial Digital</h3>
+        <p>Accede a todas las reparaciones pasadas y facturas en un clic.</p>
+      </div>
+    </div>
+  </section>
 
-<div id="algo" class="quien">
-    <p>Acá va "algo más"</p>
-</div>
-
-<div id="quienes" class="quien">
-    <h2>¿Quienes somos?</h2>
-</div>
-
-<div class="contactos">
-    <h2>contactos</h2>
+  <footer class="footer">
+    <p>&copy; 2026 GenesisPro Taller Mecánico - Tecnología y Precisión.</p>
+  </footer>
 </div>

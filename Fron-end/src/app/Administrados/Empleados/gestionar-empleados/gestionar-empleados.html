@@ -1,20 +1,71 @@
 <app-header-admin></app-header-admin>
 
-<div class="titulo">
-    <h1>Lista de empleados</h1>
-    <button class="botonAgregar" [routerLink]="['/registrarEmpleado']">Agregar Empleado</button>
+<div class="gestion-container">
+  <div class="titulo-seccion">
+    <div class="texto">
+      <h1>Panel de Empleados</h1>
+      <p>Administración y control del personal del taller</p>
+    </div>
+    <button class="boton-agregar" [routerLink]="['/registrarEmpleado']">
+      <i class="fas fa-plus"></i> Agregar Nuevo
+    </button>
+  </div>
+
+  <div class="contenido-principal">
+    @if (error) {
+      <div class="alerta-estado error pulse">
+        <div class="icon-circle">
+          <i class="fas fa-wifi-slash"></i>
+        </div>
+        <h2>Error de Conexión</h2>
+        <p>No pudimos obtener la lista del servidor. Por favor, verifica tu conexión a la red del taller.</p>
+        <button (click)="obtenerEmpleado()" class="btn-accion">
+          <i class="fas fa-sync-alt"></i> Intentar de nuevo
+        </button>
+      </div>
+    }
+    @else {
+      <div class="grid-empleados">
+        @for (empl of empleados; track empl.id) {
+          <div class="card-empleado">
+            <div class="card-header">
+              <div class="avatar">
+                {{ empl.usuario.nombre.charAt(0) }}{{ empl.usuario.apellido.charAt(0) }}
+              </div>
+              <div class="user-info">
+                <h3>{{empl.usuario.nombre}} {{empl.usuario.apellido}}</h3>
+                <span class="badge-cargo">{{empl.cargo.cargo}}</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="info-row">
+                <i class="fas fa-envelope"></i>
+                <span>{{empl.usuario.email}}</span>
+              </div>
+              <div class="info-row">
+                <i class="fas fa-phone"></i>
+                <span>{{empl.usuario.contacto}}</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn-ver" (click)="verEmpleado(empl.id)">
+                Gestionar Perfil <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        }
+        @empty {
+          <div class="alerta-estado vacio">
+            <div class="icon-circle">
+              <i class="fas fa-users-slash"></i>
+            </div>
+            <h2>Sin Personal</h2>
+            <p>Aún no has registrado empleados en el sistema. Comienza agregando uno nuevo.</p>
+          </div>
+        }
+      </div>
+    }
+  </div>
 </div>
-
-@for (empl of empleados; track $index) {
-
-<div class="empleado">
-    <h3>Nombre: {{empl.usuario.nombre}} {{empl.usuario.apellido}}</h3>
-    <p>Email: {{empl.usuario.email}}</p>
-    <p>Contacto: {{empl.usuario.contacto}}</p>
-    <p>Cargo: {{empl.cargo.cargo}}</p>
-    <button (click)="verEmpleado(empl.id)">Ver empleado</button>
-</div>    
-
-}
-
-
