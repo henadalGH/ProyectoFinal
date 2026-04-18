@@ -1,11 +1,135 @@
-.campos{
-    margin-top: 15px;
+/* Contenedor General */
+:host {
+    display: block;
+    background-color: #050505;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'Inter', sans-serif;
 }
 
-button{
-    margin-top: 15px;
+/* Cabecera */
+.titulo {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-input{
-    margin-left: 15px;
+.titulo h1 {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+}
+
+.titulo h1::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: #ffc107; /* Amarillo mecánico */
+    margin: 10px auto;
+}
+
+/* Caja del Formulario */
+.formulario {
+    background-color: #121212;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.formulario p {
+    color: #888;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Campos de Entrada */
+.campos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.campos label {
+    color: #ffc107;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+input {
+    background-color: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 12px 15px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ffc107;
+    background-color: #161616;
+    box-shadow: 0 0 10px rgba(255, 193, 7, 0.1);
+}
+
+/* Botones */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Botón Registrar (Submit) */
+button[type="submit"] {
+    background-color: #ffc107;
+    color: #000;
+    border: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #e5ac00;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+}
+
+/* Botón Cancelar */
+button:not([type="submit"]) {
+    background-color: transparent;
+    color: #a0a0a0;
+    border: 1px solid #2a2a2a;
+}
+
+button:not([type="submit"]):hover {
+    color: #fff;
+    border-color: #555;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .formulario {
+        padding: 25px;
+        width: 100%;
+    }
+    
+    .titulo h1 {
+        font-size: 1.6rem;
+    }
 }

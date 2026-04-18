@@ -1,24 +1,119 @@
-.dato{
+/* 1. CONTENEDOR PRINCIPAL */
+:host {
+    display: block;
+    background-color: #050505;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    padding-bottom: 50px;
+}
+
+/* 2. ENCABEZADO / TÍTULO */
+.titulo {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-left: 15px;
+    padding: 40px 5%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-p{
-    margin-left: 10px;
+.titulo h1 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    color: #fff;
 }
 
-.titulo{
-    margin-left: 400px;
+.titulo h1 span {
+    color: #ffc107; /* Si quieres envolver el nombre en un span luego */
+}
+
+.titulo button {
+    background-color: transparent;
+    color: #a0a0a0;
+    border: 1px solid #333;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.titulo button:hover {
+    color: #fff;
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* 3. CONTENEDOR DE DATOS (FICHA) */
+.contenedor {
+    background-color: #121212;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas de datos */
+    gap: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* 4. BLOQUE DE DATO INDIVIDUAL */
+.dato {
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 15px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.contenedor{
-    background-color: rgb(164, 193, 146);
-    border-radius: 25px;
+.dato h4 {
+    color: #ffc107; /* Amarillo mecánico para las etiquetas */
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin: 0;
 }
-button{
-    margin-left: 50px;
-    padding: 5px;
+
+.dato p {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* 5. ESTILOS ESPECIALES PARA CIERTOS DATOS */
+/* Resaltar Sueldo y Cargo */
+.dato:nth-last-child(1) p, 
+.dato:nth-last-child(2) p {
+    color: #fff;
+    font-weight: 700;
+}
+
+/* 6. RESPONSIVE (Móviles) */
+@media (max-width: 768px) {
+    .titulo {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .titulo h1 {
+        font-size: 1.4rem;
+    }
+
+    .contenedor {
+        grid-template-columns: 1fr; /* Una columna en móvil */
+        width: 90%;
+        padding: 25px;
+    }
+
+    .dato {
+        text-align: left;
+    }
 }

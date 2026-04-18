@@ -1,8 +1,11 @@
 <div class="header">
     <h1>W Motor Pro</h1>
-    <p>Trasformarlo en un menu lateral</p>
+    <p>Finanzas</p>
     <button [routerLink]="['/homeFinanzas']">Inicio</button>
     <button [routerLink]="['/presupuestos']">Presupuestos</button>
     <button [routerLink]="['/finanzas']">Movimientos</button>
     <button [routerLink]="['/reportes']">Reportes</button>
+    <button class="logout-btn" (click)="logout()" title="Cerrar Sesión">
+      <i class="fas fa-sign-out-alt"></i> Salir
+    </button>
 </div>

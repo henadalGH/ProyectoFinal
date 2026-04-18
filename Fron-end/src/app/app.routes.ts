@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Principal } from './principal/principal';
-import { Login } from './login/login';
 import { HomeAdministrador } from './Administrados/Clientes/home-administrador/home-administrador';
 import { HomeEmpleado } from './Empleados/home-empleado/home-empleado';
 import { Header } from './header/header';
@@ -20,38 +19,51 @@ import { HomeCliente } from './Cliente/home-cliente/home-cliente';
 import { SolicitarTurno } from './Cliente/solicitar-turno/solicitar-turno';
 import { MisVehiculos } from './Cliente/mis-vehiculos/mis-vehiculos';
 import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
-
 import { GestionarEmpleados } from './Administrados/Empleados/gestionar-empleados/gestionar-empleados';
 import { RegistrarEmpleado } from './Administrados/Empleados/registrar-empleado/registrar-empleado';
 import { VerEmpleado } from './Administrados/Empleados/ver-empleado/ver-empleado';
 import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
+import { Login } from './ComponentesPublico/login/login';
+import { AuthGuard } from './AuthServicio/auth-guard';
 
 export const routes: Routes = [
+    // 🔓 RUTAS PÚBLICAS
+    { path: 'login', component: Login },
+    { path: 'inicio', component: Principal },
+    { path: 'principal', component: Principal },
+    { path: 'contra', component: RecuperarContrasenia },
+    { path: '', redirectTo: '/inicio', pathMatch: 'full' },
 
-    {path: "principal", component: Principal},
-    {path: "login", component: Login},
-    {path: "homeAdmin", component: HomeAdministrador},
-    {path: "homeCliente", component: HomeCliente},
-    {path: "homeEmpleado", component: HomeEmpleado},
-    {path: "header", component: Header},
-    {path:'', redirectTo: '/principal', pathMatch: 'full'},
-    {path: "contra", component: RecuperarContrasenia},
-    {path:"headerAdmin", component: HeaderAdmin},
-    {path:"gestionCliente", component: GestionCliente},
-    {path: "gestionarVehiculo", component: GestionarVehiculo},
-    {path: "registrarCliente", component: RegistrarClintes},
-    {path: "registrarVehiculo", component:  RegistarVehiculo},
-    {path: "homeFinanzas", component: HomeFinanzas},
-    {path:"reportes", component: Reportes},
-    {path: "finanzas", component: MovimientosFinancieros},
-    {path: "presupuestos", component: Presupuesto},
-    {path: "headerFinanzas", component: HeaderFinanzas},
-    {path: "crearPresupuesto", component: CrearPresupuesto},
-    {path: "solicitarTurno", component: SolicitarTurno},
-    {path: "misVehiculos", component: MisVehiculos},
-    {path:"headerEmpleado", component: HeaderEmpleado},
-    {path:"gestionEmpleado", component: GestionarEmpleados},
-    {path:"registrarEmpleado", component: RegistrarEmpleado}, 
-    {path:"verEmpleado/:id", component:VerEmpleado},
-    {path:"verCliente/:id", component: VerCliente}
+    // 🔐 RUTAS PROTEGIDAS - ADMIN
+    { path: 'homeAdmin', component: HomeAdministrador, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'headerAdmin', component: HeaderAdmin, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'gestionCliente', component: GestionCliente, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'gestionarVehiculo', component: GestionarVehiculo, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'registrarCliente', component: RegistrarClintes, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'registrarVehiculo', component: RegistarVehiculo, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'verCliente/:id', component: VerCliente, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'gestionEmpleado', component: GestionarEmpleados, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'registrarEmpleado', component: RegistrarEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'verEmpleado/:id', component: VerEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+
+    // 🔐 RUTAS PROTEGIDAS - CLIENTE
+    { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
+    { path: 'solicitarTurno', component: SolicitarTurno, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
+    { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
+
+    // 🔐 RUTAS PROTEGIDAS - EMPLEADO
+    { path: 'homeEmpleado', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
+    { path: 'inicioSocio', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
+    { path: 'headerEmpleado', component: HeaderEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
+
+    // 🔐 RUTAS PROTEGIDAS - FINANZAS
+    { path: 'homeFinanzas', component: HomeFinanzas, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+    { path: 'reportes', component: Reportes, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+    { path: 'finanzas', component: MovimientosFinancieros, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+    { path: 'presupuestos', component: Presupuesto, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+    { path: 'headerFinanzas', component: HeaderFinanzas, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+    { path: 'crearPresupuesto', component: CrearPresupuesto, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+
+    // Ruta general
+    { path: 'header', component: Header }
 ];

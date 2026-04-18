@@ -39,7 +39,7 @@ public class JWTUtilityServiceImpl implements JWTUtilityService {
     private Resource publicResource;
 
     @Override
-    public String generateJWT(Long userId) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, JOSEException {
+    public String generateJWT(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, JOSEException {
         PrivateKey privateKey = loadPrivateKey(privateResource);
         JWSSigner signer = new RSASSASigner(privateKey);
 
@@ -47,6 +47,7 @@ public class JWTUtilityServiceImpl implements JWTUtilityService {
 
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                 .subject(userId.toString())
+                .claim("role", role)
                 .issueTime(now)
                 .expirationTime(new Date(now.getTime() + 14400000)) // 4 horas
                 .build();

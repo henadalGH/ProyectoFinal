@@ -1,1 +1,20 @@
-<p>header works!</p>
+<header class="header-general">
+  <div class="logo-section">
+    <h1>W Motor <span>Pro</span></h1>
+  </div>
+
+  <nav class="nav-menu">
+    <button class="nav-btn" [routerLink]="['/principal']" routerLinkActive="active">
+      <i class="fas fa-home"></i> Inicio
+    </button>
+    <button class="nav-btn" [routerLink]="['/login']" routerLinkActive="active">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </button>
+  </nav>
+
+  <div class="user-control">
+    <button class="logout-btn" title="Cerrar Sesión" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+  </div>
+</header>

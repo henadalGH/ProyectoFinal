@@ -1,1 +1,22 @@
-<p>header-empleado works!</p>
+<header class="header-empleado">
+  <div class="logo-section">
+    <h1>W Motor <span>Pro</span></h1>
+    <span class="user-role">Empleado</span>
+  </div>
+
+  <nav class="nav-menu">
+    <button class="nav-btn" [routerLink]="['/homeEmpleado']" routerLinkActive="active">
+      <i class="fas fa-home"></i> Inicio
+    </button>
+    <button class="nav-btn" [routerLink]="['/headerEmpleado']" routerLinkActive="active">
+      <i class="fas fa-user"></i> Perfil
+    </button>
+  </nav>
+
+  <div class="user-control">
+    <button class="logout-btn" title="Cerrar Sesión" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Salir</span>
+    </button>
+  </div>
+</header>
