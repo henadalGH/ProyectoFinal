@@ -9,4 +9,6 @@ public interface VehiculoService {
     public VehiculoEntity agregarVehiculo(VehiculoDTO vehiculoDTO);
     
     ResponceDTO obtenerVehiculoPorID(Long id);
+
+    public ResponceDTO obtenrVehiculoPorIdCliente(Long id);
 }

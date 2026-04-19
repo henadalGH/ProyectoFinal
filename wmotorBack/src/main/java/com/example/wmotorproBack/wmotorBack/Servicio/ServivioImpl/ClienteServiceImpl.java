@@ -28,7 +28,7 @@ public class ClienteServiceImpl implements ClienteService {
 
         ClienteDTO dto = new ClienteDTO();
 
-        dto.setId(cliente.getId_cliente());
+        dto.setId(cliente.getId());
 
         UsuarioEntity usuario = cliente.getUsuario();
         dto.setNombre(usuario.getNombre());

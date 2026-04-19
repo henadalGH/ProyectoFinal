@@ -54,6 +54,8 @@ public class SecurityConfig {
                                 .requestMatchers("/movimiento/{fecha}").permitAll()
                                 .requestMatchers("/movimiento/entre").permitAll()
                                 .requestMatchers("/mes").permitAll()
+                                .requestMatchers("/turno/crear").permitAll()
+                                .requestMatchers("/vehiculo/buscar/cliente/{id}").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

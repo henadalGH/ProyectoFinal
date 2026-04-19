@@ -1,1 +1,25 @@
-<p>solicitar-turno works!</p>
+<app-headercliente></app-headercliente>
+<h1>Solicitar su turno</h1>
+
+<form action="">
+    <div class="campo"><label>Seleccione su vehiculo</label>
+        <select name="" id=""></select>
+    </div>
+    <div class="campo"><label>Seleccione un servicio</label>
+    
+        <select name="servicio">
+            @for (serv of servicio; track $index) {
+                <option value="{{serv.id}}">{{serv.nombre}}</option>
+            }
+        </select>
+    </div>
+    <div class="campo">
+        <label>Descripcion problema</label>
+        <input type="text"></div>
+
+        <div class="btn-aceptar"><button>
+            solicitar
+        </button></div>
+</form>
+
+

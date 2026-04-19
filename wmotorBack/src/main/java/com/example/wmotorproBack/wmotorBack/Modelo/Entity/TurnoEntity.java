@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +28,7 @@ public class TurnoEntity {
     private String descripcion;
 
     @Column(name = "fecha_hora")
-    private Date fechaHora;
+    private LocalDate fechaHora;
 
     @ManyToOne
     @JoinColumn(name = "id_vehiculo")

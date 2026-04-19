@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,25 @@ public ResponceDTO obtenerVehiculoPorID(@NonNull Long id) {
 
     return response;
 }
+
+    @Override
+    public ResponceDTO obtenrVehiculoPorIdCliente(Long id) {
+        ResponceDTO response = new ResponceDTO();
+
+           List< VehiculoEntity> vehiculo = vehiculoRepository.findByClienteId(id);
+
+            if (vehiculo == null) {
+                response.setNumOfErrors(1);
+                response.setMensage("No pocee ningun vehiculo");
+                return response;
+            }
+
+            response.setNumOfErrors(0);
+            response.setMensage("Vehículo obtenido correctamente");
+            
+
+            return response;
+        }
 
     
 }

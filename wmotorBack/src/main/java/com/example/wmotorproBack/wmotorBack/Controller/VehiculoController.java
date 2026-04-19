@@ -2,6 +2,7 @@ package com.example.wmotorproBack.wmotorBack.Controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -36,5 +38,11 @@ public class VehiculoController {
     @GetMapping("/buscar/{id}")
     public ResponseEntity<ResponceDTO> obtener(@PathVariable @NotNull Long id) {
     return ResponseEntity.ok(vehiculoService.obtenerVehiculoPorID(id));
-}
+    }
+    
+    @GetMapping("/buscar/cliente/{id}")
+    public ResponseEntity<ResponceDTO> obtenerPorCliente(@PathVariable Long id) {
+        return new ResponseEntity<>(vehiculoService.obtenrVehiculoPorIdCliente(id), HttpStatus.OK);
+    }
+    
 }
