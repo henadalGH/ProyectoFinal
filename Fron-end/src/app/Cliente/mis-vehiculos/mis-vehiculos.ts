@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Headercliente } from "../headercliente/headercliente";
-import { ActivatedRoute, RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { VehiculoService } from '../../Servicio/vehiculo-service';
 import { AuthService } from '../../AuthServicio/auth-service';
+import { Location } from '@angular/common';
+import { ServiciosService } from '../../Servicio/servicios-service';
 
 @Component({
   selector: 'app-mis-vehiculos',
@@ -13,10 +15,16 @@ import { AuthService } from '../../AuthServicio/auth-service';
 export class MisVehiculos implements OnInit{
 
   constructor(private vehiculoService: VehiculoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
+    private locacion: Location, 
+    private servicio: ServiciosService
   ){}
 
-  vehiculo: any[]= []
+  vehiculo: any[]= [];
+  servicios: any[]= [];
+  mostrarModal: boolean = false;
+  vehiculoIdSeleccionado: number | null = null;
 
   ngOnInit(): void {
     
@@ -34,6 +42,39 @@ export class MisVehiculos implements OnInit{
   }
 
   }
+
+  verMiHistorial(id: number){
+    this.router.navigate(['/miHistorial', id]);
+  }
+
+  volverAtras(){
+    this.locacion.back();
+  }
+
+  //Seccion model
+
+  abrirModel(id: number){
+    this.vehiculoIdSeleccionado = id;
+    this.mostrarModal = true;
+
+    this.servicio.obtenerServicios().subscribe({
+
+      next: (datos : any)=>{
+        this.servicios = datos;
+      }
+    })
+  }
+
+  cerrarModel(){
+    this.mostrarModal=false;
+  }
+
+
+  
+
+  
+
+  
 
  
 }

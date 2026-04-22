@@ -27,15 +27,50 @@
           </div>
 
           <div class="card-actions">
-            <button class="btn-secondary">Ver historial</button>
-            <button class="btn-primary">Solicitar turno</button>
+            <button class="btn-secondary" (click)="verMiHistorial(vehi.id)">Ver historial</button>
+            <button class="btn-primary" (click)="abrirModel(vehi.id)">Solicitar turno</button>
           </div>
         </div>
+      
+
       }
     </div>
   }
 
   <div class="footer">
-    <button class="btn-back">⬅ Volver</button>
+    <button class="btn-back" (click)="volverAtras()">⬅ Volver</button>
   </div>
+
+  
 </div>
+
+@if (mostrarModal) {
+  <div class="modal-overlay">
+    <form> <h2>Solicitar Turno</h2>
+      
+      <div class="campo">
+        <label>Seleccione un servicio</label>
+        <select name="servicio">
+          @for (serv of servicios; track $index) {
+            <option value="{{serv.id}}">{{serv.nombre}}</option>
+          }
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Descripción del problema</label>
+        <input type="text" placeholder="Ej: Ruido en el motor...">
+      </div>
+
+      <div class="btn-aceptar">
+        <button type="submit">Solicitar Turno</button>
+      </div>
+      
+      <button type="button" (click)="cerrarModel()">Cerrar</button>
+    </form>
+  </div>
+}
+
+
+
+

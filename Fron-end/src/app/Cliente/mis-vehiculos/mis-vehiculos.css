@@ -158,3 +158,101 @@
 .btn-back:hover {
   color: #fff;
 }
+
+/* --- ESTILOS DEL MODAL --- */
+
+/* Fondo oscurecido detrás del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Oscurece el fondo */
+  backdrop-filter: blur(4px);    /* Efecto de desenfoque */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Caja del modal */
+form {
+  background: #1a1d29;
+  width: 90%;
+  max-width: 450px;
+  padding: 2rem;
+  border-radius: 20px;
+  border: 1px solid #3f445e;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.campo label {
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+/* Estilo para Select e Inputs del Modal */
+select, input[type="text"] {
+  background: #0f111a;
+  border: 1px solid #3f445e;
+  border-radius: 10px;
+  padding: 0.8rem;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.3s;
+}
+
+select:focus, input:focus {
+  border-color: #4f46e5;
+}
+
+/* Botones del Modal */
+.btn-aceptar button {
+  width: 100%;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-aceptar button:hover {
+  background: #6366f1;
+}
+
+/* Botón Cerrar (fuera del form o al final) */
+button:not(.btn-primary):not(.btn-secondary):not(.btn-aceptar button) {
+  width: 100%;
+  background: transparent;
+  color: #94a3b8;
+  border: none;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+button:hover {
+  color: #fff;
+}

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class TurnoController {
     private TurnoService turnoService;
     
     @PostMapping("/crear")
-    public ResponseEntity<TurnosDTO>postMethodName(@RequestBody TurnosDTO turno) {
+    public ResponseEntity<TurnoEntity> postMethodName(@RequestBody TurnosDTO turno) {
         return new ResponseEntity<>( turnoService.creaTurnosDTO(turno), HttpStatus.OK);
     }
     

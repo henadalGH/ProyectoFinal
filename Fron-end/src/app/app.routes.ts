@@ -25,6 +25,7 @@ import { VerEmpleado } from './Administrados/Empleados/ver-empleado/ver-empleado
 import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
 import { Login } from './ComponentesPublico/login/login';
 import { AuthGuard } from './AuthServicio/auth-guard';
+import { HistorialVehiculo } from './Cliente/historial-vehiculo/historial-vehiculo';
 
 export const routes: Routes = [
     // 🔓 RUTAS PÚBLICAS
@@ -50,6 +51,7 @@ export const routes: Routes = [
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'solicitarTurno', component: SolicitarTurno, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
+    {path: 'miHistorial/:id', component: HistorialVehiculo, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
 
     // 🔐 RUTAS PROTEGIDAS - EMPLEADO
     { path: 'homeEmpleado', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },

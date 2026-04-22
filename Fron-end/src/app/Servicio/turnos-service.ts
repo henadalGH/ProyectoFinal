@@ -8,8 +8,10 @@ export class TurnosService {
 
   constructor(private http: HttpClient){}
 
+  private urlComun =' ';
+
  
-  solicitarTurno(vehiculo: number, descripcion: string, servicio: string){
+  solicitarTurno(idVehiculo: number, descripcion: string, servicio: number, idCliente: number){
 
   }
   
