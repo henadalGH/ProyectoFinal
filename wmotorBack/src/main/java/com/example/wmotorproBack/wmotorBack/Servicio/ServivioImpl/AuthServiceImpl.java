@@ -51,7 +51,21 @@ public class AuthServiceImpl implements AuthService {
             return respuesta;
         }
 
-        String token = jwtUtilityService.generateJWT(usuario.getId(), usuario.getRol().getNombre().toString());
+        String role = usuario.getRol().getNombre().toString();
+
+        Long clienteId = null;
+        Long empleadoId = null;
+        Long adminId = null;
+
+        if ("CLIENTE".equals(role) && usuario.getCliente() != null) {
+            clienteId = usuario.getCliente().getId();
+        } else if ("EMPLEADO".equals(role) && usuario.getEmpleado() != null) {
+            empleadoId = usuario.getEmpleado().getId();
+        } else if ("ADMIN".equals(role) && usuario.getAdministrador() != null) {
+            adminId = usuario.getAdministrador().getId_admin();
+        }
+
+        String token = jwtUtilityService.generateJWT(usuario.getId(), role, clienteId, empleadoId, adminId);
         respuesta.put("jwt", token);
 
         return respuesta;

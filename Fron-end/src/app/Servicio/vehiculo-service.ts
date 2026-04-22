@@ -12,7 +12,7 @@ export class VehiculoService {
 
   obtenerVehiculoCliente(idCliente: number)
   {
-    return this.http.get(`http://localhost:8080/vehiculo/buscar/cliente/${idCliente}`);
+    return this.http.get<any []>(`http://localhost:8080/vehiculo/buscar/cliente/${idCliente}`);
   }
   
 }

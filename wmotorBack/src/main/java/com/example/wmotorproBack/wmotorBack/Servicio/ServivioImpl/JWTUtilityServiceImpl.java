@@ -39,18 +39,30 @@ public class JWTUtilityServiceImpl implements JWTUtilityService {
     private Resource publicResource;
 
     @Override
-    public String generateJWT(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, JOSEException {
+    public String generateJWT(Long userId, String role, Long clienteId, Long empleadoId, Long adminId) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, JOSEException {
         PrivateKey privateKey = loadPrivateKey(privateResource);
         JWSSigner signer = new RSASSASigner(privateKey);
 
         Date now = new Date();
 
-        JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
+        JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder()
                 .subject(userId.toString())
                 .claim("role", role)
                 .issueTime(now)
-                .expirationTime(new Date(now.getTime() + 14400000)) // 4 horas
-                .build();
+                .expirationTime(new Date(now.getTime() + 14400000)); // 4 horas
+
+        // Agregar claims adicionales según el rol
+        if (clienteId != null) {
+            builder.claim("clienteId", clienteId);
+        }
+        if (empleadoId != null) {
+            builder.claim("empleadoId", empleadoId);
+        }
+        if (adminId != null) {
+            builder.claim("adminId", adminId);
+        }
+
+        JWTClaimsSet claimsSet = builder.build();
 
         SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.RS256), claimsSet);
         signedJWT.sign(signer);

@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Servicio;
 
+import java.util.List;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.VehiculoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
@@ -10,5 +12,7 @@ public interface VehiculoService {
     
     ResponceDTO obtenerVehiculoPorID(Long id);
 
-    public ResponceDTO obtenrVehiculoPorIdCliente(Long id);
+    public VehiculoDTO mapToDto(VehiculoEntity vehiculo);
+
+    public List<VehiculoDTO> ontenerVehiculoPorIdCliente(Long id);
 }

@@ -4,6 +4,17 @@ import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 import { LoginService } from './login-service';
 import { jwtDecode } from 'jwt-decode';
 
+// Interfaz para el token decodificado
+interface DecodedToken {
+  sub?: string | number;
+  role?: string;
+  clienteId?: number;
+  empleadoId?: number;
+  adminId?: number;
+  exp?: number;
+  iat?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -70,77 +81,69 @@ export class AuthService {
   }
 
   // ========================
-  // 🎭 ROL DESDE JWT
+  // 📋 TOKEN DECODIFICADO
   // ========================
-  getRol(): string | null {
-
+  getDecodedToken(): DecodedToken | null {
     const token = this.getToken();
     if (!token) return null;
 
     try {
-      const decoded: any = jwtDecode(token);
-
-      let role =
-        decoded.authorities?.[0] ||
-        decoded.roles?.[0] ||
-        decoded.role ||
-        decoded.rol ||
-        null;
-
-      if (!role) return null;
-
-      // 🔥 Normalizamos (case-insensitive)
-      role = role.toString().toUpperCase();
-
-      if (!role.startsWith('ROLE_')) {
-        role = `ROLE_${role}`;
-      }
-
-      return role;
-
-    } catch (e) {
-      console.error('Error leyendo rol del token', e);
+      return jwtDecode<DecodedToken>(token);
+    } catch (error) {
+      console.error('Error decodificando token:', error);
       return null;
     }
   }
 
   // ========================
-  // 🆔 ID DESDE JWT (FIX CLAVE)
+  // 🎭 ROL DESDE JWT
   // ========================
-  getUserId(): number | null {
+  getRol(): string | null {
+    const decoded = this.getDecodedToken();
+    if (!decoded?.role) return null;
 
-    const token = this.getToken();
-    if (!token) return null;
+    let role = decoded.role.toString().toUpperCase();
 
-    try {
-      const decoded: any = jwtDecode(token);
-
-      const rol = this.getRol();
-
-      let rawId: any = null;
-
-      if (rol === 'ROLE_EMPLEADO') {
-        rawId = decoded.socioId;
-      } else if (rol === 'ROLE_CLIENTE') {
-        rawId = decoded.jugadorId;
-      } else if (rol === 'ROLE_ADMIN') {
-        rawId = decoded.adminId;
-      } else {
-        // Fallback a sub o id general
-        rawId = decoded.sub || decoded.id;
-      }
-
-      if (!rawId) return null;
-
-      const parsedId =
-        typeof rawId === 'number' ? rawId : parseInt(rawId, 10);
-
-      return Number.isNaN(parsedId) ? null : parsedId;
-
-    } catch (e) {
-      console.error('Error leyendo ID del token', e);
-      return null;
+    if (!role.startsWith('ROLE_')) {
+      role = `ROLE_${role}`;
     }
+
+    return role;
+  }
+
+  // ========================
+  // 🆔 ID DE ENTIDAD DESDE JWT
+  // ========================
+  getEntityId(): number | null {
+    const decoded = this.getDecodedToken();
+    if (!decoded) return null;
+
+    // Prioridad: clienteId > empleadoId > adminId > sub
+    const entityId = decoded.clienteId || decoded.empleadoId || decoded.adminId || decoded.sub;
+
+    if (entityId == null) return null;
+
+    const parsedId = typeof entityId === 'number' ? entityId : parseInt(entityId.toString(), 10);
+
+    return Number.isNaN(parsedId) ? null : parsedId;
+  }
+
+  // ========================
+  // ⏰ TOKEN EXPIRADO
+  // ========================
+  isTokenExpired(): boolean {
+    const decoded = this.getDecodedToken();
+    if (!decoded?.exp) return true; // Si no hay exp, considerarlo expirado
+
+    const currentTime = Math.floor(Date.now() / 1000); // Tiempo actual en segundos
+    return decoded.exp < currentTime;
+  }
+
+  // ========================
+  // 📧 EMAIL DESDE LOCALSTORAGE
+  // ========================
+  getEmail(): string | null {
+    return localStorage.getItem('email');
   }
 
   private hasToken(): boolean {
@@ -151,57 +154,45 @@ export class AuthService {
   // 🧪 DEBUG TOKEN
   // ========================
   debugToken(): void {
-
     const token = this.getToken();
+    const decoded = this.getDecodedToken();
 
     if (!token) {
       console.warn('❌ No hay token');
       return;
     }
 
-    try {
-      const decoded: any = jwtDecode(token);
-
-      console.log('📋 Token Decodificado:', decoded);
-      console.log('👤 Rol:', this.getRol());
-      console.log('🆔 User ID:', this.getUserId());
-      console.log('📧 Email:', localStorage.getItem('email'));
-
-    } catch (e) {
-      console.error('❌ Error decodificando token:', e);
-    }
+    console.log('📋 Token Decodificado:', decoded);
+    console.log('👤 Rol:', this.getRol());
+    console.log('🆔 Entity ID:', this.getEntityId());
+    console.log('⏰ Token Expirado:', this.isTokenExpired());
+    console.log('📧 Email:', this.getEmail());
   }
 
   // ========================
   // 🔁 REDIRECCIÓN POR ROL
   // ========================
   redirectByRole(): void {
-
     const rol = this.getRol();
     console.log('🔄 Redirigiendo por rol:', rol);
 
     switch (rol) {
-
       case 'ROLE_ADMIN':
-        console.log('👑 Redirigiendo a admin');
+
         this.router.navigate(['/homeAdmin']);
         break;
 
       case 'ROLE_EMPLEADO':
         console.log('👔 Redirigiendo a empleado');
-        this.router.navigate(['/inicioSocio']);
         break;
 
       case 'ROLE_CLIENTE':
-        console.log('👤 Redirigiendo a cliente');
         this.router.navigate(['/homeCliente']);
         break;
 
       default:
-        console.log('❓ Rol desconocido, redirigiendo a inicio:', rol);
         this.router.navigate(['/inicio']);
     }
   }
-  
 }
 

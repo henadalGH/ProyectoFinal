@@ -1,6 +1,8 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -40,9 +43,19 @@ public class VehiculoController {
     return ResponseEntity.ok(vehiculoService.obtenerVehiculoPorID(id));
     }
     
-    @GetMapping("/buscar/cliente/{id}")
-    public ResponseEntity<ResponceDTO> obtenerPorCliente(@PathVariable Long id) {
-        return new ResponseEntity<>(vehiculoService.obtenrVehiculoPorIdCliente(id), HttpStatus.OK);
+    @GetMapping("/buscar/cliente/{clienteId}")
+    public ResponseEntity<?> obtenerVehiculoPorId(@PathVariable Long clienteId) {
+        List<VehiculoDTO> lista = vehiculoService.ontenerVehiculoPorIdCliente(clienteId);
+
+    if (lista.isEmpty()) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body("No se encontraron vehículos para este usuario");
     }
+
+    return ResponseEntity.ok(lista);
+    }
+    
+    
     
 }

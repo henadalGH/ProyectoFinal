@@ -1,5 +1,41 @@
 <app-headercliente></app-headercliente>
 
+<div class="contenedor">
+  <div class="header">
+    <h1>Mis vehículos</h1>
+    <button class="btn-primary" [routerLink]="['/registrarVehiculo']">
+      + Agregar vehículo
+    </button>
+  </div>
 
-<h1>Mis vehiculos</h1>
-<button [routerLink]="['/registrarVehiculo']">Agregar vehiculo</button>
+  @if (vehiculo.length === 0) {
+    <div class="empty">
+      <p>No tenés vehículos registrados 🚗</p>
+    </div>
+  } @else {
+    <div class="grid">
+      @for (vehi of vehiculo; track $index) {
+        <div class="card">
+          <div class="card-header">
+            <h2>{{ vehi.marca }} {{ vehi.modelo }}</h2>
+            <span class="anio">{{ vehi.anio }}</span>
+          </div>
+
+          <div class="card-body">
+            <p><strong>Patente:</strong> {{ vehi.patente }}</p>
+            <p><strong>Kilometraje:</strong> {{ vehi.kilometraje }} km</p>
+          </div>
+
+          <div class="card-actions">
+            <button class="btn-secondary">Ver historial</button>
+            <button class="btn-primary">Solicitar turno</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <div class="footer">
+    <button class="btn-back">⬅ Volver</button>
+  </div>
+</div>

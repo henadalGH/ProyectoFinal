@@ -11,6 +11,6 @@ import com.nimbusds.jwt.JWTClaimsSet;
 
 public interface JWTUtilityService {
 
-    public String generateJWT(Long userId, String role) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, JOSEException;
+    public String generateJWT(Long userId, String role, Long clienteId, Long empleadoId, Long adminId) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, JOSEException;
     public JWTClaimsSet parseJWT(String jwt) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ParseException, JOSEException;
 }
