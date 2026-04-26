@@ -27,12 +27,14 @@
           </div>
 
           <div class="card-actions">
-            <button class="btn-secondary" (click)="verMiHistorial(vehi.id)">Ver historial</button>
-            <button class="btn-primary" (click)="abrirModel(vehi.id)">Solicitar turno</button>
+            <button class="btn-secondary" (click)="verMiHistorial(vehi.id)">
+              Ver historial
+            </button>
+            <button class="btn-primary" (click)="abrirModel(vehi.id)">
+              Solicitar turno
+            </button>
           </div>
         </div>
-      
-
       }
     </div>
   }
@@ -40,37 +42,49 @@
   <div class="footer">
     <button class="btn-back" (click)="volverAtras()">⬅ Volver</button>
   </div>
-
-  
 </div>
 
 @if (mostrarModal) {
   <div class="modal-overlay">
-    <form> <h2>Solicitar Turno</h2>
-      
+    
+    <form (ngSubmit)="crearTurno()" #form="ngForm">
+
+      <h2>Solicitar Turno</h2>
+
+      <!-- Servicio -->
       <div class="campo">
         <label>Seleccione un servicio</label>
-        <select name="servicio">
+        <select [(ngModel)]="idServicio" name="idServicio" required>
+          <option [ngValue]="null" disabled selected>Seleccione...</option>
           @for (serv of servicios; track $index) {
-            <option value="{{serv.id}}">{{serv.nombre}}</option>
+            <option [value]="serv.id">{{ serv.nombre }}</option>
           }
         </select>
       </div>
 
+      <!-- Descripción -->
       <div class="campo">
         <label>Descripción del problema</label>
-        <input type="text" placeholder="Ej: Ruido en el motor...">
+        <input 
+          type="text"
+          placeholder="Ej: Ruido en el motor..."
+          [(ngModel)]="descripcion"
+          name="descripcion"
+          required>
       </div>
 
+      <!-- Botón -->
       <div class="btn-aceptar">
-        <button type="submit">Solicitar Turno</button>
+        <button type="submit" [disabled]="!form.valid">
+          Solicitar Turno
+        </button>
       </div>
-      
-      <button type="button" (click)="cerrarModel()">Cerrar</button>
+
+      <!-- Cerrar -->
+      <button type="button" (click)="cerrarModel()">
+        Cerrar
+      </button>
+
     </form>
   </div>
 }
-
-
-
-

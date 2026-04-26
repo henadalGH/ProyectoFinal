@@ -47,7 +47,7 @@ public class turnoServiceImpl implements TurnoService{
 
     
         EstadoTurnosEntity estado = estadoTurnoRepository
-        .findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        .findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         turnos.setEstado(estado);

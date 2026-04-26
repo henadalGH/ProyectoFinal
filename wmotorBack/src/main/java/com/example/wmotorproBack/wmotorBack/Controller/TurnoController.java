@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoResponseDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
@@ -21,8 +22,32 @@ public class TurnoController {
     private TurnoService turnoService;
     
     @PostMapping("/crear")
-    public ResponseEntity<TurnoEntity> postMethodName(@RequestBody TurnosDTO turno) {
-        return new ResponseEntity<>( turnoService.creaTurnosDTO(turno), HttpStatus.OK);
+    public ResponseEntity<TurnoResponseDTO> crearTurno(@RequestBody TurnosDTO turno) {
+        TurnoEntity turnoGuardado = turnoService.creaTurnosDTO(turno);
+        return new ResponseEntity<>(toResponseDTO(turnoGuardado), HttpStatus.OK);
+    }
+
+    private TurnoResponseDTO toResponseDTO(TurnoEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        TurnoResponseDTO response = new TurnoResponseDTO();
+        response.setId(entity.getId());
+        response.setDescripcion(entity.getDescripcion());
+        response.setFechaHora(entity.getFechaHora());
+
+        if (entity.getVehiculo() != null) {
+            response.setIdVehiculo(entity.getVehiculo().getId());
+        }
+        if (entity.getServicio() != null) {
+            response.setIdServicio(entity.getServicio().getId());
+        }
+        if (entity.getEstado() != null && entity.getEstado().getEstadoTurno() != null) {
+            response.setEstado(entity.getEstado().getEstadoTurno().name());
+        }
+
+        return response;
     }
     
 }

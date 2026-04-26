@@ -6,5 +6,6 @@ public enum EstadoTurnoEnums {
     EN_PROCESO,      // el turno ya empezó (cliente en atención)
     FINALIZADO,      // servicio completado
     CANCELADO,       // cancelado por cliente o por el local
-    AUSENTE 
+    AUSENTE,
+    PENDIENTE_ASIGNACION
 }
