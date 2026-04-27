@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class TurnosService {
 
   private urlComun = 'http://localhost:8080/turno/crear';
+  private urlAsignacion = 'http://localhost:8080/turno/pendientesAsignacion'
 
   constructor(private http: HttpClient){}
 
@@ -23,4 +24,13 @@ export class TurnosService {
       idServicio
     });
   }
+
+
+  obtenerTurnosAsignacion(){
+
+    return this.http.get<any>(this.urlAsignacion);
+  }
+
+
+
 }

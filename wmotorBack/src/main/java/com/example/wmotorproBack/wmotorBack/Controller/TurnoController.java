@@ -1,17 +1,22 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoPendenteAsignacionDto;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoResponseDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+
 
 
 @RestController
@@ -49,5 +54,12 @@ public class TurnoController {
 
         return response;
     }
+
+
+    @GetMapping("/pendientesAsignacion")
+    public ResponseEntity<List<TurnoPendenteAsignacionDto>> obtenerTurnosPendienteAsignacion() {
+        return new ResponseEntity<List<TurnoPendenteAsignacionDto>>(turnoService.obtenerTodosTurnosPendienteAsignacion(), HttpStatus.OK);
+    }
+    
     
 }

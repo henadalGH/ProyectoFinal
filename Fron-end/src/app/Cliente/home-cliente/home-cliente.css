@@ -1,0 +1,84 @@
+.inicio-container {
+  padding: 40px;
+  color: #fff;
+  background: linear-gradient(180deg, #0a0f1c, #050814);
+  min-height: 100vh;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 32px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+/* TURNOS */
+.turno {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.03);
+}
+
+.estado {
+  padding: 5px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.estado.finalizado {
+  background: #1f8b4c;
+}
+
+.estado.pendiente {
+  background: #c98c1d;
+}
+
+/* BOTONES */
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background: #5b5bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #4a4ad1;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #5b5bff;
+  color: #5b5bff;
+}
+
+.btn-secondary:hover {
+  background: rgba(91,91,255,0.1);
+}

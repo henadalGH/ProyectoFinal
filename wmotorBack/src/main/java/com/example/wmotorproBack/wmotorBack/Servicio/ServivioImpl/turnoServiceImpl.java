@@ -2,9 +2,14 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoPendenteAsignacionDto;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ServicioEntity;
@@ -33,6 +38,7 @@ public class turnoServiceImpl implements TurnoService{
     private TurnoRepository turnoRepository;
 
 
+
     @Override
     public TurnoEntity creaTurnosDTO(TurnosDTO turno) {
 
@@ -55,5 +61,41 @@ public class turnoServiceImpl implements TurnoService{
         return turnoRepository.save(turnos);
         
     }
+
+
+    @Override
+    public TurnoPendenteAsignacionDto toMapTurnoDto(TurnoEntity turno) {
+
+        TurnoPendenteAsignacionDto turnoDto = new TurnoPendenteAsignacionDto();
+
+        turnoDto.setId(turno.getId());
+        turnoDto.setDescripcion(turno.getDescripcion());
+        turnoDto.setIdVehiculo(turno.getVehiculo().getId());
+        turnoDto.setMarca(turno.getVehiculo().getMarca());
+        turnoDto.setModelo(turno.getVehiculo().getModelo());
+        turnoDto.setNombreCliente(turno.getVehiculo().getCliente().getUsuario().getNombre());
+        turnoDto.setApellidoCliente(turno.getVehiculo().getCliente().getUsuario().getApellido());
+        turnoDto.setContacto(turno.getVehiculo().getCliente().getUsuario().getContacto());
+        turnoDto.setNombreServicio(turno.getServicio().getNombre());
+    
+        return turnoDto;
+    }
+
+
+    @Override
+    public List<TurnoPendenteAsignacionDto> obtenerTodosTurnosPendienteAsignacion() {
+        // 1. Obtenemos el objeto de estado de la base de datos
+        EstadoTurnosEntity estadoPendiente = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
+                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        // 2. Filtramos la lista completa usando Stream
+        return turnoRepository.findAll().stream()
+                .filter(turno -> turno.getEstado().equals(estadoPendiente)) // Filtrado por el objeto estado
+                .map(this::toMapTurnoDto)                                   // Conversión a DTO
+                .collect(Collectors.toList());
+    }
+    
+
+
 
 }

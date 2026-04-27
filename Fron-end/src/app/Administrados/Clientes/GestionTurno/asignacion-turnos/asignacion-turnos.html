@@ -1,0 +1,39 @@
+<app-header-admin></app-header-admin>
+
+<div class="container">
+  <div class="titulo">
+    <h1>Turnos pendientes a asignación</h1>
+  </div>
+
+  <div class="lista-turnos">
+    @for (asig of asignacion; track $index) {
+      <div class="card-turno">
+
+        <div class="fila">
+          <span class="label">Cliente:</span>
+          <span class="valor">{{asig.nombreCliente}}</span>
+        </div>
+
+        <div class="fila">
+          <span class="label">Contacto:</span>
+          <span class="valor">{{asig.contacto}}</span>
+        </div>
+
+        <div class="fila">
+          <span class="label">Vehículo:</span>
+          <span class="valor">{{asig.marca}}</span>
+        </div>
+
+        <div class="fila">
+          <span class="label">Servicio:</span>
+          <span class="valor">{{asig.nombreServicio}}</span>
+        </div>
+
+        <div class="acciones">
+          <button class="btn-detalle">Ver detalle</button>
+        </div>
+
+      </div>
+    }
+  </div>
+</div>

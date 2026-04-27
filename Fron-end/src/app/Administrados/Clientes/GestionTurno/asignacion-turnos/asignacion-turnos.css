@@ -1,0 +1,76 @@
+.container {
+  padding: 20px;
+  background: #0f1115;
+  min-height: 100vh;
+  color: #e4e6eb;
+}
+
+.titulo {
+  margin-bottom: 20px;
+}
+
+.titulo h1 {
+  font-size: 28px;
+  color: #ffffff;
+}
+
+/* GRID */
+.lista-turnos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* TARJETAS */
+.card-turno {
+  background: linear-gradient(145deg, #1a1d24, #121418);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: all 0.25s ease;
+}
+
+.card-turno:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.9);
+}
+
+/* FILAS */
+.fila {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.label {
+  font-weight: 600;
+  color: #9aa0a6;
+}
+
+.valor {
+  color: #ffffff;
+}
+
+/* BOTÓN */
+.acciones {
+  margin-top: 18px;
+  text-align: right;
+}
+
+.btn-detalle {
+  background: linear-gradient(135deg, #3a3f47, #1f2329);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-detalle:hover {
+  background: linear-gradient(135deg, #4b515b, #2a2f36);
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}

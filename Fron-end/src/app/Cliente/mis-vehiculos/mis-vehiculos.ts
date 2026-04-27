@@ -53,6 +53,10 @@ export class MisVehiculos implements OnInit {
     this.router.navigate(['/miHistorial', id]);
   }
 
+  verDetalles(id:number){
+    this.router.navigate(['/verVehiculo', id])
+  }
+
   volverAtras(){
     this.locacion.back();
   }

@@ -26,6 +26,8 @@ import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
 import { Login } from './ComponentesPublico/login/login';
 import { AuthGuard } from './AuthServicio/auth-guard';
 import { HistorialVehiculo } from './Cliente/historial-vehiculo/historial-vehiculo';
+import { VerMiVehucilo } from './Cliente/ver-mi-vehucilo/ver-mi-vehucilo';
+import { AsignacionTurnos } from './Administrados/Clientes/GestionTurno/asignacion-turnos/asignacion-turnos';
 
 export const routes: Routes = [
     // 🔓 RUTAS PÚBLICAS
@@ -46,12 +48,14 @@ export const routes: Routes = [
     { path: 'gestionEmpleado', component: GestionarEmpleados, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'registrarEmpleado', component: RegistrarEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'verEmpleado/:id', component: VerEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
 
     // 🔐 RUTAS PROTEGIDAS - CLIENTE
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'solicitarTurno', component: SolicitarTurno, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     {path: 'miHistorial/:id', component: HistorialVehiculo, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
+    {path: 'verVehiculo/:id', component: VerMiVehucilo,canActivate: [AuthGuard], data: {role:['ROLE_CLIENTE']}},
 
     // 🔐 RUTAS PROTEGIDAS - EMPLEADO
     { path: 'homeEmpleado', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
