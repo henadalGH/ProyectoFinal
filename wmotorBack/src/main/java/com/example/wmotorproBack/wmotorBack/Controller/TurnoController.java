@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,10 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoResponseDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -59,6 +61,13 @@ public class TurnoController {
     @GetMapping("/pendientesAsignacion")
     public ResponseEntity<List<TurnoPendenteAsignacionDto>> obtenerTurnosPendienteAsignacion() {
         return new ResponseEntity<List<TurnoPendenteAsignacionDto>>(turnoService.obtenerTodosTurnosPendienteAsignacion(), HttpStatus.OK);
+    }
+    
+    
+    @PutMapping("/asignarFecha/{id}")
+    public ResponseEntity<TurnoResponseDTO> asignarFecha(@PathVariable Long id, @RequestBody LocalDateTime fecha) {
+        TurnoEntity turnoActualizado = turnoService.asignarFecha(id, fecha);
+        return new ResponseEntity<>(toResponseDTO(turnoActualizado), HttpStatus.OK);
     }
     
     

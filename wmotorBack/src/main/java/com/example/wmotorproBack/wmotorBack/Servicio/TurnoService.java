@@ -2,6 +2,7 @@ package com.example.wmotorproBack.wmotorBack.Servicio;
 
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoPendenteAsignacionDto;
@@ -16,5 +17,7 @@ public interface TurnoService {
     public List<TurnoPendenteAsignacionDto> obtenerTodosTurnosPendienteAsignacion();
 
     public TurnoPendenteAsignacionDto toMapTurnoDto(TurnoEntity turno);
+
+    public TurnoEntity asignarFecha(Long idTurno, LocalDateTime fecha);
 
 }
