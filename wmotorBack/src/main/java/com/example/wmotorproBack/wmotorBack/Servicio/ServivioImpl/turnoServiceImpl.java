@@ -3,13 +3,14 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoPendenteAsignacionDto;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
@@ -95,10 +96,11 @@ public class turnoServiceImpl implements TurnoService{
                 .map(this::toMapTurnoDto)                                   // Conversión a DTO
                 .collect(Collectors.toList());
     }
-    
+
 
     @Override
-    public TurnoEntity asignarFecha(Long idTurno, LocalDateTime fecha) {
+    public TurnoEntity asignarFecha(Long idTurno, LocalDate fecha) {
+        
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
         turno.setFechaHora(fecha);
@@ -106,4 +108,33 @@ public class turnoServiceImpl implements TurnoService{
     }
 
 
-}
+    @Override
+    public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadoTurnoEnums estadoEnum) {
+        
+        ResponceDTO responce = new ResponceDTO();
+        
+        TurnoEntity turno = turnoRepository.findById(idTurno)
+                .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
+
+        EstadoTurnosEntity estado = estadoTurnoRepository
+        .findByEstadoTurno(estadoEnum)
+        .orElseThrow();
+
+        turno.setEstado(estado);
+        turnoRepository.save(turno);
+
+        responce.setMensage("Se actualizo el estado del turno a: ");
+
+        return responce;
+
+    }
+
+
+    
+    }
+    
+
+    
+
+
+
