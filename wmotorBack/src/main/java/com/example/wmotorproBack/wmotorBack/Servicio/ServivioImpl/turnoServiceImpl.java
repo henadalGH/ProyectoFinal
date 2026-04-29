@@ -9,9 +9,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
-import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoPendenteAsignacionDto;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ServicioEntity;
@@ -66,9 +65,9 @@ public class turnoServiceImpl implements TurnoService{
 
 
     @Override
-    public TurnoPendenteAsignacionDto toMapTurnoDto(TurnoEntity turno) {
+    public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
 
-        TurnoPendenteAsignacionDto turnoDto = new TurnoPendenteAsignacionDto();
+        TurnoEstadosDTO turnoDto = new TurnoEstadosDTO();
 
         turnoDto.setId(turno.getId());
         turnoDto.setDescripcion(turno.getDescripcion());
@@ -85,9 +84,9 @@ public class turnoServiceImpl implements TurnoService{
 
 
     @Override
-    public List<TurnoPendenteAsignacionDto> obtenerTodosTurnosPendienteAsignacion() {
+    public List<TurnoEstadosDTO> obtenerTurnosPorEstado(EstadoTurnoEnums estado) {
         // 1. Obtenemos el objeto de estado de la base de datos
-        EstadoTurnosEntity estadoPendiente = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
+        EstadoTurnosEntity estadoPendiente = estadoTurnoRepository.findByEstadoTurno(estado)
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         // 2. Filtramos la lista completa usando Stream

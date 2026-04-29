@@ -7,7 +7,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import lombok.Data;
 
 @Data
-public class TurnoPendenteAsignacionDto {
+public class TurnoEstadosDTO {
 
     private Long id;
     private LocalDate fecha;
@@ -20,6 +20,4 @@ public class TurnoPendenteAsignacionDto {
     private String apellidoCliente;
     private String contacto;
     private String nombreServicio;
-   
-
 }

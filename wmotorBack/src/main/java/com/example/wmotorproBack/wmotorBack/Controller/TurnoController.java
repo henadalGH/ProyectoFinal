@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
-import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoPendenteAsignacionDto;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoResponseDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
@@ -62,9 +62,9 @@ public class TurnoController {
     }
 
 
-    @GetMapping("/pendientesAsignacion")
-    public ResponseEntity<List<TurnoPendenteAsignacionDto>> obtenerTurnosPendienteAsignacion() {
-        return new ResponseEntity<List<TurnoPendenteAsignacionDto>>(turnoService.obtenerTodosTurnosPendienteAsignacion(), HttpStatus.OK);
+    @GetMapping("/obtenerEstado")
+    public ResponseEntity<List<TurnoEstadosDTO>> obtenerTurnosPendienteAsignacion(@RequestParam EstadoTurnoEnums estado) {
+        return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenerTurnosPorEstado(estado), HttpStatus.OK);
     }
     
     
@@ -79,6 +79,5 @@ public class TurnoController {
     public ResponseEntity<ResponceDTO> actualizarEstadoTurno(@PathVariable Long id, @RequestParam EstadoTurnoEnums estado) {
         ResponceDTO respoce = turnoService.actualizarEstadoTurno(id, estado);
         return ResponseEntity.ok(respoce);
-        
     }
 }
