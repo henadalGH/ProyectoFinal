@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -65,7 +66,7 @@ public class TurnoController {
     
     
     @PutMapping("/asignarFecha/{id}")
-    public ResponseEntity<TurnoResponseDTO> asignarFecha(@PathVariable Long id, @RequestBody LocalDateTime fecha) {
+    public ResponseEntity<TurnoResponseDTO> asignarFecha(@PathVariable Long id, @RequestBody LocalDate fecha) {
         TurnoEntity turnoActualizado = turnoService.asignarFecha(id, fecha);
         return new ResponseEntity<>(toResponseDTO(turnoActualizado), HttpStatus.OK);
     }

@@ -3,7 +3,7 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -98,7 +98,7 @@ public class turnoServiceImpl implements TurnoService{
     
 
     @Override
-    public TurnoEntity asignarFecha(Long idTurno, LocalDateTime fecha) {
+    public TurnoEntity asignarFecha(Long idTurno, LocalDate fecha) {
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
         turno.setFechaHora(fecha);
