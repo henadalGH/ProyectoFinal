@@ -16,7 +16,6 @@ import { Presupuesto } from './Finanzas/presupuesto/presupuesto';
 import { HeaderFinanzas } from './Finanzas/header-finanzas/header-finanzas';
 import { CrearPresupuesto } from './utilidades/crear-presupuesto/crear-presupuesto';
 import { HomeCliente } from './Cliente/home-cliente/home-cliente';
-import { SolicitarTurno } from './Cliente/solicitar-turno/solicitar-turno';
 import { MisVehiculos } from './Cliente/mis-vehiculos/mis-vehiculos';
 import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
 import { GestionarEmpleados } from './Administrados/Empleados/gestionar-empleados/gestionar-empleados';
@@ -52,7 +51,6 @@ export const routes: Routes = [
 
     // 🔐 RUTAS PROTEGIDAS - CLIENTE
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
-    { path: 'solicitarTurno', component: SolicitarTurno, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     {path: 'miHistorial/:id', component: HistorialVehiculo, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
     {path: 'verVehiculo/:id', component: VerMiVehucilo,canActivate: [AuthGuard], data: {role:['ROLE_CLIENTE']}},

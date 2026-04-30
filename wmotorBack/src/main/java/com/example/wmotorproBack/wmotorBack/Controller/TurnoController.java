@@ -69,9 +69,9 @@ public class TurnoController {
     
     
     @PutMapping("/asignarFecha/{id}")
-    public ResponseEntity<TurnoResponseDTO> asignarFecha(@PathVariable Long id, @RequestBody LocalDate fecha) {
-        TurnoEntity turnoActualizado = turnoService.asignarFecha(id, fecha);
-        return new ResponseEntity<>(toResponseDTO(turnoActualizado), HttpStatus.OK);
+    public ResponseEntity<ResponceDTO> asignarFecha(@PathVariable Long id, @RequestBody LocalDate fecha) {
+        ResponceDTO turnoActualizado = turnoService.asignarFecha(id, fecha);
+        return new ResponseEntity<ResponceDTO>(turnoActualizado, HttpStatus.OK);
     }
     
 

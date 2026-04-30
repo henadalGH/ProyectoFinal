@@ -18,7 +18,7 @@ public interface TurnoService {
 
     public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno);
 
-    public TurnoEntity asignarFecha(Long idTurno, LocalDate fecha);
+    public ResponceDTO asignarFecha(Long idTurno, LocalDate fecha);
 
     public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadoTurnoEnums estadoEnum);
 

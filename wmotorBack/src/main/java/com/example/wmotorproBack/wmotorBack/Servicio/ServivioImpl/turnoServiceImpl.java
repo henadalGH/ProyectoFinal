@@ -71,6 +71,7 @@ public class turnoServiceImpl implements TurnoService{
 
         turnoDto.setId(turno.getId());
         turnoDto.setDescripcion(turno.getDescripcion());
+        turnoDto.setFecha(turno.getFechaHora());
         turnoDto.setIdVehiculo(turno.getVehiculo().getId());
         turnoDto.setMarca(turno.getVehiculo().getMarca());
         turnoDto.setModelo(turno.getVehiculo().getModelo());
@@ -98,12 +99,24 @@ public class turnoServiceImpl implements TurnoService{
 
 
     @Override
-    public TurnoEntity asignarFecha(Long idTurno, LocalDate fecha) {
+    public ResponceDTO asignarFecha(Long idTurno, LocalDate fecha) {
+        
+        ResponceDTO responce = new ResponceDTO();
         
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
         turno.setFechaHora(fecha);
-        return turnoRepository.save(turno);
+
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        turno.setEstado(estado);
+        turnoRepository.save(turno);
+
+        responce.setMensage("Se a acutlizado la fecha del turno");
+
+
+        return responce;
     }
 
 
@@ -128,12 +141,4 @@ public class turnoServiceImpl implements TurnoService{
 
     }
 
-
-    
     }
-    
-
-    
-
-
-
