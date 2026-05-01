@@ -1,9 +1,9 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +28,17 @@ public class PresupuestoEntity {
     @Column(name = "numero_presupuesto")
     private String numeroPresupuesto;
 
+    @Column(name = "fechaValidez")
+    private LocalDate fechaValidez;
+
     @Column(name = "fecha_Registro")
-    private String fechaRegistro;
+    private LocalDate fechaRegistro;
+
+    @Column(name = "total")
+    private Double total;
+
+    @Column(name = "observaciones")
+    private String observaciones;
 
     @ManyToOne
     @JoinColumn( name = "id_administrador")
@@ -42,6 +51,10 @@ public class PresupuestoEntity {
     @ManyToOne
     @JoinColumn(name = "id_estado")
     private EstadoPresupuestoEntity estadoPresupuesto;
+
+    @ManyToOne
+    @JoinColumn(name = "id_turno")
+    private TurnoEntity turno;
 
     @OneToMany(mappedBy = "presupuesto")
     private List<DetallePresupuestoEntity> detalle = new ArrayList<>();

@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +30,18 @@ public class DetallePresupuestoEntity {
 
     @Column(name = "precio_unitario")
     private Double precioUnitario;
+
+    @Column(name = "tipo_item")
+    private TipoItemEnums tipo;
+
+    @Column(name = "sub_total")
+    private Double subTotal;
+
+    @Column(name = "codigo")
+    private String codigo;
+
+    @Column( name = "horas")
+    private Double horas;
 
     @ManyToOne
     @JoinColumn(name = "id_presupuesto")

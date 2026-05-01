@@ -1,6 +1,8 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -42,4 +45,8 @@ public class TurnoEntity {
     @JoinColumn(name = "id_estado_turno")
     @JsonIgnore
     private EstadoTurnosEntity estado;
+
+
+    @OneToMany(mappedBy = "turno")
+    private List<PresupuestoEntity> presupuesto = new ArrayList<>();
 }
