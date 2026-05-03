@@ -59,6 +59,7 @@ public class SecurityConfig {
                                 .requestMatchers("turno/asignarFecha/{id}").permitAll()
                                 .requestMatchers("turno/cambiarEstado/{id}").permitAll()
                                 .requestMatchers("/vehiculo/buscar/cliente/{clienteId}").permitAll()
+                                .requestMatchers("/presupuesto/crear").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

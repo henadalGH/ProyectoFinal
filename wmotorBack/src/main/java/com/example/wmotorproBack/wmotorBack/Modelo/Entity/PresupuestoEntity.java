@@ -26,7 +26,7 @@ public class PresupuestoEntity {
     private Long id;
 
     @Column(name = "numero_presupuesto")
-    private String numeroPresupuesto;
+    private Long numeroPresupuesto;
 
     @Column(name = "fechaValidez")
     private LocalDate fechaValidez;

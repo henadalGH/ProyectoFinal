@@ -8,5 +8,6 @@ public enum EstadoPresupuestoEnum {
     RECHAZADO,
     VENCIDO,
     CANCELADO,
-    EN_REVISION
+    EN_REVISION,
+    PENDIENTE
 }
