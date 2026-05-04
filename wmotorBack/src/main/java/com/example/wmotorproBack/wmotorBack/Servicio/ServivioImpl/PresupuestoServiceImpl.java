@@ -14,6 +14,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEnti
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionPresupuestoService;
@@ -33,6 +34,8 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     @Autowired
     private NumeracionPresupuestoService numeradorService;
 
+    @Autowired
+    private DetallePresupuestoRepository detallePresupuestoRepository;
 
 
     @Override
@@ -55,6 +58,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         Long numero = numeradorService.generarNumero();
         presupuestoEntity.setNumeroPresupuesto(numero);
 
+       
         double total = 0;
         List<DetallePresupuestoEntity> detalles = new ArrayList<>();
 
@@ -64,9 +68,10 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
             detalleEntity.setCantidad(detalleDto.getCantidad());
             detalleEntity.setDescripcion(detalleDto.getDescripcion());
-            detalleEntity.setPrecioUnitario(detalleDto.getPrescioUnitario());
+            detalleEntity.setPrecioUnitario(detalleDto.getPrecioUnitario());
+            detalleEntity.setTipo(detalleDto.getTipoItem());
 
-            double subTotal = detalleDto.getCantidad() * detalleDto.getPrescioUnitario();
+            double subTotal = detalleDto.getCantidad() * detalleDto.getPrecioUnitario();
             detalleEntity.setSubTotal(subTotal);
 
             // relación
@@ -74,7 +79,10 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
             total += subTotal;
             detalles.add(detalleEntity);
+            detallePresupuestoRepository.save(detalleEntity);
         }
+
+       
 
         // ✅ ESTO TE FALTABA (CLAVE)
         presupuestoEntity.setDetalle(detalles);

@@ -10,9 +10,13 @@ public class DetallePresupuestoDTO {
     private Long id;
     private String descripcion;
     private Integer cantidad;
-    private Double prescioUnitario;
+    private Double precioUnitario;
     private TipoItemEnums tipoItem;
     private Double subTotal;
     private Double hora;
     private String codigo;
+    private Long idVehiculo;
+    private Long idCliente;
+    private Long idAdministrador;
+    private Long idTurno;
 }

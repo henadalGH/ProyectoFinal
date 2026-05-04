@@ -14,13 +14,14 @@ public class NumeracionPresupuestoImpl implements NumeracionPresupuestoService{
     @Autowired
     private NumeracionPresupuestoReposistory numeracionPresupuestoReposistory;
     
-
     @Override
     public Long generarNumero() {
 
-        NumeroPresupuestoEntity numero = numeracionPresupuestoReposistory.findById("FACTURA").orElseThrow();
+        NumeroPresupuestoEntity numero = numeracionPresupuestoReposistory.findById("PRESUPUESTO").orElseThrow();
 
         Long nuevoNumero = numero.getValor() + 1;
+
+         numero.setValor(nuevoNumero);
 
         numeracionPresupuestoReposistory.save(numero);
 
