@@ -18,7 +18,7 @@ public class NumeracionPresupuestoImpl implements NumeracionPresupuestoService{
     @Override
     public Long generarNumero() {
 
-        NumeroPresupuestoEntity numero = numeracionPresupuestoReposistory.findById("FACTURA").orElseThrow();
+        NumeroPresupuestoEntity numero = numeracionPresupuestoReposistory.findById("PRESUPUESTO").orElseThrow();
 
         Long nuevoNumero = numero.getValor() + 1;
 

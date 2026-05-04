@@ -17,6 +17,7 @@ public class PresupuestoDTO {
     private String obserbaciones;
     private EstadoPresupuestoEnum estadoPresupuesto;
     private List<DetallePresupuestoDTO> detallePresupuesto;
+    private Long idAdmin;
     
 
 }

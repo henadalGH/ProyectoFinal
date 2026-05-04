@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetallePresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionPresupuestoService;
@@ -33,6 +35,9 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     @Autowired
     private NumeracionPresupuestoService numeradorService;
 
+    @Autowired
+    private AdminRepository adminRepository;
+
 
 
     @Override
@@ -44,6 +49,11 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         PresupuestoEntity presupuestoEntity = new PresupuestoEntity();
         presupuestoEntity.setFechaRegistro(LocalDate.now());
         presupuestoEntity.setObservaciones(presupuestoDTO.getObserbaciones());
+
+        AdminEntity admin = adminRepository.findById(presupuestoDTO.getIdAdmin())
+        .orElseThrow(() -> new RuntimeException("Id admin no encontrado"));
+
+        presupuestoEntity.setAdmin(admin);
 
         EstadoPresupuestoEntity estado = estadoPresupuestoReposistory
                 .findByEstadoPresupuesto(EstadoPresupuestoEnum.PENDIENTE)
