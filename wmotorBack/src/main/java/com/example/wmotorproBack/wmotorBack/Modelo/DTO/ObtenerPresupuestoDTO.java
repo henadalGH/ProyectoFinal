@@ -2,23 +2,29 @@ package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
 
 @Data
-public class PresupuestoDTO {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ObtenerPresupuestoDTO {
 
     private Long id;
     private Long numeroPresupuesto;
-    private LocalDate fechaValidez;
+    private LocalDate fechaVencimiesto;
     private LocalDate fechaRegistro;
-    private Integer total;
+    private Double total;
     private String observaciones;
     private EstadoPresupuestoEnum estadoPresupuesto;
     private List<DetallePresupuestoDTO> detallePresupuesto;
-    private Long idAdmin;
-    private Long idVehiculo;
-    
-
+    private String nombreCliente;
+    private String apellidoCliente;
+    private String direccionCliente;
+    private String correoCliente;
+    private String marcaVehiculo;
+    private String modeloVehiculo;
+    private String nombreAdmin;
 }

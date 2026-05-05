@@ -1,6 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
 
