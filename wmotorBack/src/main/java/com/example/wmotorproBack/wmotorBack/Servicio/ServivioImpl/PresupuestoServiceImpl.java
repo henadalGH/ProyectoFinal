@@ -12,6 +12,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetallePresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
@@ -22,6 +24,7 @@ import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionPresupuestoService;
 import com.example.wmotorproBack.wmotorBack.Servicio.PresupuestoService;
@@ -48,6 +51,9 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
     @Autowired
     private VehiculoRepository vehiculoRepository;
+
+    @Autowired
+    private TurnoRepository turnoRepository;
 
 
     @Override
@@ -79,8 +85,18 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         VehiculoEntity vehiculo = vehiculoRepository.findById(presupuestoDTO.getIdVehiculo())
         .orElseThrow(() -> new RuntimeException("id vehiculo no encontrado"));
 
-
         presupuestoEntity.setVehiculo(vehiculo);
+
+        // Validar que haya un turno confirmado o en proceso para el vehículo
+        List<TurnoEntity> turnos = turnoRepository.findByVehiculo(vehiculo);
+        boolean tieneTurnoAceptado = turnos.stream()
+            .anyMatch(turno -> turno.getEstado() != null && 
+                (turno.getEstado().getEstadoTurno() == EstadoTurnoEnums.CONFIRMADO || 
+                 turno.getEstado().getEstadoTurno() == EstadoTurnoEnums.EN_PROCESO));
+        
+        if (!tieneTurnoAceptado) {
+            throw new RuntimeException("No se puede crear presupuesto: debe haber un turno confirmado o en proceso para el vehículo");
+        }
 
 
 
@@ -220,5 +236,72 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         return toMapPresupuestoDto(presupuesto);
     }
 
+    @Override
+    @Transactional
+    public ResponceDTO actualizarPresupuesto(PresupuestoDTO presupuestoDTO, Long idPresupuesto) {
+        ResponceDTO response = new ResponceDTO();
+
+        PresupuestoEntity presupuesto = presuspuestoRepository.findById(idPresupuesto)
+            .orElseThrow(() -> new RuntimeException("Presupuesto no encontrado con id: " + idPresupuesto));
+
+        // Actualizar observaciones
+        presupuesto.setObservaciones(presupuestoDTO.getObservaciones());
+
+        // Actualizar detalles: eliminar antiguos y crear nuevos
+        if (presupuesto.getDetalle() != null) {
+            detallePresupuestoRepository.deleteAll(presupuesto.getDetalle());
+        }
+
+        double total = 0;
+        List<DetallePresupuestoEntity> nuevosDetalles = new ArrayList<>();
+        for (DetallePresupuestoDTO detalleDto : presupuestoDTO.getDetallePresupuesto()) {
+            DetallePresupuestoEntity detalleEntity = new DetallePresupuestoEntity();
+            detalleEntity.setCantidad(detalleDto.getCantidad());
+            detalleEntity.setDescripcion(detalleDto.getDescripcion());
+            detalleEntity.setPrecioUnitario(detalleDto.getPrecioUnitario());
+            detalleEntity.setTipo(detalleDto.getTipoItem());
+            double subTotal = detalleDto.getCantidad() * detalleDto.getPrecioUnitario();
+            detalleEntity.setSubTotal(subTotal);
+            detalleEntity.setPresupuesto(presupuesto);
+            nuevosDetalles.add(detalleEntity);
+            detallePresupuestoRepository.save(detalleEntity);
+            total += subTotal;
+        }
+
+        presupuesto.setDetalle(nuevosDetalles);
+        presupuesto.setTotal(total);
+
+        presuspuestoRepository.save(presupuesto);
+
+        response.setMensage("Presupuesto actualizado correctamente");
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public ResponceDTO eliminarPresupuesto(Long idPresupuesto) {
+        ResponceDTO response = new ResponceDTO();
+
+        PresupuestoEntity presupuesto = presuspuestoRepository.findById(idPresupuesto)
+            .orElseThrow(() -> new RuntimeException("Presupuesto no encontrado con id: " + idPresupuesto));
+
+        // Eliminar detalles primero
+        if (presupuesto.getDetalle() != null) {
+            detallePresupuestoRepository.deleteAll(presupuesto.getDetalle());
+        }
+
+        presuspuestoRepository.delete(presupuesto);
+
+        response.setMensage("Presupuesto eliminado correctamente");
+        return response;
+    }
+
+    @Override
+    public List<ObtenerPresupuestoDTO> obtenerTodosLosPresupuestos() {
+        return presuspuestoRepository.findAll()
+            .stream()
+            .map(this::toMapPresupuestoDto)
+            .collect(Collectors.toList());
+    }
 
 }

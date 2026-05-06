@@ -18,6 +18,12 @@ public interface PresupuestoService {
 
     public ObtenerPresupuestoDTO toMapPresupuestoDto(PresupuestoEntity presupuesto);
 
-    ObtenerPresupuestoDTO obtenerPresupuestoPorId(Long id);
+    public ObtenerPresupuestoDTO obtenerPresupuestoPorId(Long id);
+
+    public ResponceDTO actualizarPresupuesto(PresupuestoDTO presupuestoDTO, Long idPresupuesto);
+
+    public ResponceDTO eliminarPresupuesto(Long idPresupuesto);
+
+    public List<ObtenerPresupuestoDTO> obtenerTodosLosPresupuestos();
 
 }
