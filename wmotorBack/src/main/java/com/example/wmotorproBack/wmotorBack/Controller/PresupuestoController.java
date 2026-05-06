@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 import com.example.wmotorproBack.wmotorBack.Servicio.PresupuestoService;
 
 import java.util.List;
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
+
 
 
 
@@ -40,6 +44,18 @@ public class PresupuestoController {
         return new ResponseEntity<List<ObtenerPresupuestoDTO>>
         (presupuestoService.obtenerPresupuestoPorIdVehiculo(idVehiculo), HttpStatus.OK);
     }
+
+    @PutMapping("cambiarEstado/{idPresupuesto}")
+    public ResponseEntity<ResponceDTO> cambiarEstadoPresupuesto(@PathVariable Long idPresupuesto, @RequestBody EstadoPresupuestoEnum estado
+    ) {
+        return new ResponseEntity<ResponceDTO>(presupuestoService.cambiarEstadoPresupuesto(estado, idPresupuesto), HttpStatus.OK);
+    }
+
+    @GetMapping("/{idPresupuesto}")
+    public ResponseEntity<ObtenerPresupuestoDTO> obtenerPorId(@PathVariable Long idPresupuesto) {
+        return new ResponseEntity<ObtenerPresupuestoDTO>(presupuestoService.obtenerPresupuestoPorId(idPresupuesto), HttpStatus.OK);
+    }
+    
     
     
 

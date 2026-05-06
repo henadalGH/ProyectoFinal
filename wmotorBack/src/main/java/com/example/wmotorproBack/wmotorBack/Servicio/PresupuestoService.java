@@ -12,10 +12,12 @@ public interface PresupuestoService {
 
     public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO);
     
-    public ResponceDTO cambiarEstadoPresupuesto(EstadoPresupuestoEnum estado);
+    public ResponceDTO cambiarEstadoPresupuesto(EstadoPresupuestoEnum estado, Long idPresupuesto);
 
     public List<ObtenerPresupuestoDTO> obtenerPresupuestoPorIdVehiculo(Long id);
 
     public ObtenerPresupuestoDTO toMapPresupuestoDto(PresupuestoEntity presupuesto);
+
+    ObtenerPresupuestoDTO obtenerPresupuestoPorId(Long id);
 
 }

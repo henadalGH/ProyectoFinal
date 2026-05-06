@@ -131,8 +131,17 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
 
     @Override
-    public ResponceDTO cambiarEstadoPresupuesto(EstadoPresupuestoEnum estado) {
+    public ResponceDTO cambiarEstadoPresupuesto(EstadoPresupuestoEnum estado, Long idPresupuesto) {
         ResponceDTO response = new ResponceDTO();
+
+        EstadoPresupuestoEntity estadoPre = estadoPresupuestoReposistory.findByEstadoPresupuesto(estado)
+        .orElseThrow(() -> new RuntimeException("El estado ingrasado no existe"));
+
+        PresupuestoEntity presupuesto = presuspuestoRepository.findById(idPresupuesto)
+        .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
+
+        presupuesto.setEstadoPresupuesto(estadoPre);
+        presuspuestoRepository.save(presupuesto);
 
         response.setMensage("EL estado del presupuesto se a actualizado");
         return response;
@@ -146,10 +155,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         .stream()
         .map( this::toMapPresupuestoDto)
         .collect(Collectors.toList());
-
-
-
-
     }
 
 
@@ -205,4 +210,15 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     }
 
 
+
+    @Override
+    public ObtenerPresupuestoDTO obtenerPresupuestoPorId(Long id) {
+
+        PresupuestoEntity presupuesto = presuspuestoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Presupuesto no encontrado con id: " + id));
+
+        return toMapPresupuestoDto(presupuesto);
     }
+
+
+}
