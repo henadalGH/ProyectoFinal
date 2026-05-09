@@ -12,3 +12,4 @@ public interface EstadoPresupuestoReposistory extends JpaRepository<EstadoPresup
     Optional<EstadoPresupuestoEntity> findByEstadoPresupuesto(EstadoPresupuestoEnum estado);
 
 }
+ 

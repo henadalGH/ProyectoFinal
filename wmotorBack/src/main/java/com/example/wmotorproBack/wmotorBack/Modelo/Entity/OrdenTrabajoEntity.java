@@ -1,8 +1,9 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,20 +26,28 @@ public class OrdenTrabajoEntity {
     @Column(name = "id_asignacion")
     private Long id;
 
+    @Column(name = "numero_orden")
+    private Long nuemeroOrden;
+
     @Column(name = "km_ingreso")
-    private Integer kmIngreso;
+    private Long kmIngreso;
 
     @Column(name = "fecha_emicion")
-    private Date fechaEminsion;
+    private LocalDate fechaEminsion;
 
     @Column(name = "fecha_fin")
-    private Date fechaFin;
+    private LocalDate fechaFin;
 
-    @Column(name = "costo_total")
-    private Double constoTotal;
+    @Column(name = "fecha_entrega_cliente")
+    private LocalDate fechaEntragaCliente;
 
-    @Column(name = "tiempo_estinado")
-    private String tiempoEstimado;
+    @Column(name = "motivo_cancelacion")
+    private String motivoCancelacion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_prioridad")
+    private PrioridadEntity prioridad;
+
 
     @ManyToOne
     @JoinColumn(name = "id_vehiculo")
@@ -60,5 +69,5 @@ public class OrdenTrabajoEntity {
     private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 
     @OneToMany(mappedBy = "orden")
-    private List<DetalleOrdenEntity> ordenes = new ArrayList<>();
+    private List<DetalleOrdenEntity> detalleOrden = new ArrayList<>();
 }

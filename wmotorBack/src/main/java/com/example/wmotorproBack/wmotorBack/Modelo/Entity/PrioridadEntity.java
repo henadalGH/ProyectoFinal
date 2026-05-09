@@ -30,5 +30,5 @@ public class PrioridadEntity {
     private PrioridadEnum prioridad;  
 
     @OneToMany(mappedBy = "prioridad")
-    private List<DetalleOrdenEntity> orden;
+    private List<OrdenTrabajoEntity> orden;
 }

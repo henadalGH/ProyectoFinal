@@ -26,7 +26,7 @@ import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposist
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
-import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionPresupuestoService;
+import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionService;
 import com.example.wmotorproBack.wmotorBack.Servicio.PresupuestoService;
 
 import jakarta.transaction.Transactional;
@@ -41,7 +41,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     private EstadoPresupuestoReposistory estadoPresupuestoReposistory;
 
     @Autowired
-    private NumeracionPresupuestoService numeradorService;
+    private NumeracionService numeracionService;
 
     @Autowired
     private DetallePresupuestoRepository detallePresupuestoRepository;
@@ -102,7 +102,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
 
         // ✅ numeración (mejor genérica)
-        Long numero = numeradorService.generarNumero();
+        Long numero = numeracionService.generarNumero();
         presupuestoEntity.setNumeroPresupuesto(numero);
 
        

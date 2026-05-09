@@ -9,11 +9,11 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "numeroPresupuesto")
-public class NumeroPresupuestoEntity {
+public class NumeracionEntity {
 
     @Id
-    @Column(name = "idTotal")
-    private String factura;
+    @Column(name = "id")
+    private String id;
 
     @Column(name = "valor")
     private Long valor;

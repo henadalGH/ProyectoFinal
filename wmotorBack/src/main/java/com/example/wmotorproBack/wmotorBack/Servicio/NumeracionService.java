@@ -1,7 +1,8 @@
 package com.example.wmotorproBack.wmotorBack.Servicio;
 
-public interface NumeracionPresupuestoService {
+public interface NumeracionService {
 
     public Long generarNumero();
+    public Long generarNumeroOrden();
 
 }

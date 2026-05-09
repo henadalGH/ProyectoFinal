@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,11 +22,20 @@ public class DetalleOrdenEntity {
     @Column(name = "id_detalle_orden")
     private Long id;
 
-    @Column(name = "descripcion")
-    private String descripcion;
+    @Column(name = "trabajo_realizado")
+    private String trabajoRealizados;
 
-    @Column
-    private String observacion;
+    @Column(name = "cantidad")
+    private Long cantidad;
+
+    @Column(name = "tipo_item")
+    private TipoItemEnums tipoItem;
+
+    @Column(name = "codigo")
+    private String codigo;
+    
+    @Column(name = "observaciones")
+    private String observaciones;
 
     @ManyToOne
     @JoinColumn(name = "id_asignacion")
@@ -33,9 +44,5 @@ public class DetalleOrdenEntity {
     @ManyToOne
     @JoinColumn(name = "id_servicio")
     private ServicioEntity servicio;
-
-    @ManyToOne
-    @JoinColumn(name = "id_prioridad")
-    private PrioridadEntity prioridad;
 
 }
