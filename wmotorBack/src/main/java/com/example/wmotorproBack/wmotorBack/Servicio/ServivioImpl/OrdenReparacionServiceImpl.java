@@ -3,6 +3,8 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,32 +72,45 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenTrabajoEntity.setFechaFin(orden.getFechaCierre());
         ordenTrabajoEntity.setFechaEntragaCliente(orden.getFechaEntragaCliente());
 
-
         //Estado de la orden 
-        EstadoOrdenEntity estadoOrden = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA)
-        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
-        ordenTrabajoEntity.setEstadoOrden(estadoOrden);
+        Optional<EstadoOrdenEntity> estadoOpt = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA);
+        if (estadoOpt.isEmpty()) {
+            response.setMensage("Error: Estado ASIGNADA no encontrado");
+            return response;
+        }
+        ordenTrabajoEntity.setEstadoOrden(estadoOpt.get());
 
         //Seteando el empleado
-        EmpleadoEntity empleado = empleadoRepository.findById(orden.getIdEmpleado())
-        .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
-        ordenTrabajoEntity.setEmpleado(empleado);
-
+        Optional<EmpleadoEntity> empleadoOpt = empleadoRepository.findById(orden.getIdEmpleado());
+        if (empleadoOpt.isEmpty()) {
+            response.setMensage("Error: Empleado no encontrado");
+            return response;
+        }
+        ordenTrabajoEntity.setEmpleado(empleadoOpt.get());
 
         //Relacion con el vehiculo a reparar
-        VehiculoEntity vehiculo = vehiculoRepository.findById(orden.getIdVehiculo())
-        .orElseThrow(() -> new RuntimeException("Vehiculo no encontrado"));
-        ordenTrabajoEntity.setVehiculo(vehiculo);
+        Optional<VehiculoEntity> vehiculoOpt = vehiculoRepository.findById(orden.getIdVehiculo());
+        if (vehiculoOpt.isEmpty()) {
+            response.setMensage("Error: Vehículo no encontrado");
+            return response;
+        }
+        ordenTrabajoEntity.setVehiculo(vehiculoOpt.get());
 
         //Prioridar de la orden
-        PrioridadEntity prioridad = prioridadRepository.findByPrioridad(PrioridadEnum.MEDIA)
-        .orElseThrow(() -> new RuntimeException("Prioridad no encontrada"));
-        ordenTrabajoEntity.setPrioridad(prioridad);
+        Optional<PrioridadEntity> prioridadOpt = prioridadRepository.findByPrioridad(PrioridadEnum.MEDIA);
+        if (prioridadOpt.isEmpty()) {
+            response.setMensage("Error: Prioridad MEDIA no encontrada");
+            return response;
+        }
+        ordenTrabajoEntity.setPrioridad(prioridadOpt.get());
 
         //presupuesto relacionado
-        PresupuestoEntity presupuesto = presuspuestoRepository.findById(orden.getId())
-        .orElseThrow(() -> new RuntimeException("id de presupusto no encontrado"));
-        ordenTrabajoEntity.setPresupuesto(presupuesto);
+        Optional<PresupuestoEntity> presupuestoOpt = presuspuestoRepository.findById(orden.getId());
+        if (presupuestoOpt.isEmpty()) {
+            response.setMensage("Error: ID de presupuesto no encontrado");
+            return response;
+        }
+        ordenTrabajoEntity.setPresupuesto(presupuestoOpt.get());
 
         //Detalle de la orden
 
@@ -123,45 +138,133 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
 
         ordenTrabajoRepository.save(ordenTrabajoEntity);
 
-        response.setMensage("La orden se a creado con exito");
+        response.setMensage("La orden se ha creado con éxito");
         return response;
     }
 
 
     @Override
     public List<ObtenerOrdenDTO> obtenerTodaLasOrdenes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerTodaLasOrdenes'");
+        return ordenTrabajoRepository.findAll()
+        .stream()
+        .map(this:: toMapObtenerOrdenDTO)
+        .collect(Collectors.toList());
     }
 
     @Override
     public ObtenerOrdenDTO obtnerOrdenPorId(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtnerOrdenPorId'");
+        Optional<OrdenTrabajoEntity> ordenOpt = ordenTrabajoRepository.findById(id);
+        if (ordenOpt.isEmpty()) {
+            return null;
+        }
+        return toMapObtenerOrdenDTO(ordenOpt.get());
     }
 
     @Override
-    public ResponceDTO actualizarEstaOrden(EstadoOrdenEnums estado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actualizarEstaOrden'");
+    public ResponceDTO actualizarEstaOrden(EstadoOrdenEnums estado, Long id) {
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        Optional<EstadoOrdenEntity> estadoOpt = estadoOrdenRepository.findByEstadoOrden(estado);
+        if (estadoOpt.isEmpty()) {
+            responceDTO.setMensage("Error: El estado ingresado no es válido");
+            return responceDTO;
+        }
+        EstadoOrdenEntity estados = estadoOpt.get();
+
+        Optional<OrdenTrabajoEntity> ordenOpt = ordenTrabajoRepository.findById(id);
+        if (ordenOpt.isEmpty()) {
+            responceDTO.setMensage("Error: La orden no existe");
+            return responceDTO;
+        }
+        OrdenTrabajoEntity ordenTrabajoEntity = ordenOpt.get();
+
+        ordenTrabajoEntity.setEstadoOrden(estados);
+        ordenTrabajoRepository.save(ordenTrabajoEntity);
+        
+        responceDTO.setMensage("El estado de la orden se ha actualizado correctamente");
+        return responceDTO;
     }
 
     @Override
     public ObtenerOrdenDTO obtenerPorIdVehiculo(Long idVehiculo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerPorIdVehiculo'");
+        
+        Optional<VehiculoEntity> vehiculoOpt = vehiculoRepository.findById(idVehiculo);
+        if (vehiculoOpt.isEmpty()) {
+            return null;
+        }
+        VehiculoEntity vehiculo = vehiculoOpt.get();
+
+        List<OrdenTrabajoEntity> ordenes = ordenTrabajoRepository.findByVehiculo(vehiculo);
+        
+        if (ordenes.isEmpty()) {
+            return null;
+        }
+        
+        // Retorna la primera orden encontrada
+        return toMapObtenerOrdenDTO(ordenes.get(0));
     }
 
     @Override
     public List<ObtenerOrdenDTO> obtenerOrdenPorEstado(EstadoOrdenEnums estado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerOrdenPorEstado'");
+        
+        Optional<EstadoOrdenEntity> estadoOpt = estadoOrdenRepository.findByEstadoOrden(estado);
+        if (estadoOpt.isEmpty()) {
+            return new ArrayList<>();
+        }
+        EstadoOrdenEntity estadoOrden = estadoOpt.get();
+        
+        List<OrdenTrabajoEntity> ordenes = ordenTrabajoRepository.findByEstadoOrden(estadoOrden);
+        
+        return ordenes.stream()
+            .map(this::toMapObtenerOrdenDTO)
+            .collect(Collectors.toList());
     }
 
     @Override
     public ObtenerOrdenDTO toMapObtenerOrdenDTO(OrdenTrabajoEntity ordenTrabajo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toMapObtenerOrdenDTO'");
-    }
+        
+        ObtenerOrdenDTO ordenDTO = new ObtenerOrdenDTO();
 
+        //Dato de las orden
+        ordenDTO.setId(ordenTrabajo.getId());
+        ordenDTO.setNumeroOrden(ordenTrabajo.getNuemeroOrden());
+        ordenDTO.setFechaEmicion(ordenTrabajo.getFechaEminsion());
+        ordenDTO.setFechaCierre(ordenTrabajo.getFechaFin());
+        ordenDTO.setFechaEntragaCliente(ordenTrabajo.getFechaEntragaCliente());
+        ordenDTO.setEstado(ordenTrabajo.getEstadoOrden().getEstadoOrden());
+        ordenDTO.setMotivoCancelacion(ordenTrabajo.getMotivoCancelacion());
+        ordenDTO.setPrioridad(ordenTrabajo.getPrioridad().getPrioridad());
+
+        //Datos del empleado
+        ordenDTO.setNombreEmpleado(ordenTrabajo.getEmpleado().getUsuario().getNombre() + " " + 
+        ordenTrabajo.getEmpleado().getUsuario().getApellido() );
+
+        //Datos del vehiculo
+        ordenDTO.setMarcaVehiculo(ordenTrabajo.getVehiculo().getMarca());
+        ordenDTO.setModeloVehiculo(ordenTrabajo.getVehiculo().getModelo());
+        ordenDTO.setPatenteVehiculo(ordenTrabajo.getVehiculo().getPatente());
+        ordenDTO.setKilometroVehiculo(ordenTrabajo.getVehiculo().getKilometraje());
+        
+        List<DetalleOrdenDTO> listaDetalles = new ArrayList<>();
+
+        if (listaDetalles != null) {
+
+            for (DetalleOrdenEntity detalleOrdenEntity : ordenTrabajo.getDetalleOrden()) {
+                
+                DetalleOrdenDTO detalleOrdenDTO = new DetalleOrdenDTO();
+
+                detalleOrdenDTO.setCantidad(detalleOrdenEntity.getCantidad());
+                detalleOrdenDTO.setTrabajoRealizado(detalleOrdenEntity.getTrabajoRealizados());
+                detalleOrdenDTO.setCodigo(detalleOrdenEntity.getCodigo());
+                detalleOrdenDTO.setTipoItem(detalleOrdenEntity.getTipoItem());
+                detalleOrdenDTO.setObservaciones(detalleOrdenEntity.getObservaciones());
+
+                listaDetalles.add(detalleOrdenDTO);
+            }
+        }
+
+        ordenDTO.setDetalleOrden(listaDetalles);
+
+        return ordenDTO;
+    }
 }

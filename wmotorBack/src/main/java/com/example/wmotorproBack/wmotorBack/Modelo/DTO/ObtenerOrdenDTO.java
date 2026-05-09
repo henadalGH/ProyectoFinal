@@ -1,10 +1,10 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
-import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
 
 import lombok.Data;
 
@@ -30,11 +30,7 @@ public class ObtenerOrdenDTO {
     private String nombreEmpleado;
 
     //Detalle de orden
-    private Long cantidad;
-    private TipoItemEnums tipoItem;
-    private String codigo;
-    private String trabajorealizado;
-    private String observaciones;
+    private List<DetalleOrdenDTO> detalleOrden;
 
     private PrioridadEnum prioridad;
     

@@ -1,5 +1,8 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 
 import jakarta.persistence.Column;
@@ -9,6 +12,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,4 +29,7 @@ public class EstadoOrdenEntity {
     @Column(name = "estado")
     @Enumerated(EnumType.STRING)
     private EstadoOrdenEnums estadoOrden;
+
+    @OneToMany(mappedBy = "estadoOrden")
+    private List<OrdenTrabajoEntity> orden = new ArrayList<>();
 }

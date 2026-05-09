@@ -13,7 +13,7 @@ public interface OrdenReparacionService {
     ResponceDTO crearReparacion(OrdenReparacionDTO orden);
     List<ObtenerOrdenDTO> obtenerTodaLasOrdenes();
     ObtenerOrdenDTO obtnerOrdenPorId(Long id);
-    ResponceDTO actualizarEstaOrden(EstadoOrdenEnums estado);
+    ResponceDTO actualizarEstaOrden(EstadoOrdenEnums estado, Long id);
     ObtenerOrdenDTO obtenerPorIdVehiculo(Long idVehiculo);
     List<ObtenerOrdenDTO> obtenerOrdenPorEstado(EstadoOrdenEnums estado);
     ObtenerOrdenDTO toMapObtenerOrdenDTO(OrdenTrabajoEntity ordenTrabajo);

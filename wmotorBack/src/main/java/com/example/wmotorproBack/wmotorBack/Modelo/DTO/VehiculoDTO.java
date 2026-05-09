@@ -10,10 +10,10 @@ public class VehiculoDTO {
     private String modelo;
     private String anio;
     private String patente;
-    private Integer Kilometraje;
+    private Long Kilometraje;
     private Long idCliente;
     
-    public VehiculoDTO(Long id, String marca, String modelo, String anio, String patente, Integer kilometraje) {
+    public VehiculoDTO(Long id, String marca, String modelo, String anio, String patente, Long kilometraje) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;

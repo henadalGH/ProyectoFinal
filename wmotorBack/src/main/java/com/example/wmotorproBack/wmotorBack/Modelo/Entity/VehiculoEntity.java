@@ -39,7 +39,7 @@ public class VehiculoEntity {
     private String patente;
 
     @Column
-    private int kilometraje;
+    private Long kilometraje;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
