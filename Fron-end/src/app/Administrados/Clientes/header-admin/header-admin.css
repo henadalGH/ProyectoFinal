@@ -1,123 +1,139 @@
+
+/* ===== HEADER BASE ===== */
 .header-admin {
-    background-color: #0a0a0a;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 30px;
-    border-bottom: 2px solid #1a1a1a;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  height: 72px;
+  width: 100%;
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  font-family: 'Inter', sans-serif;
 }
 
-/* Logo */
+/* ===== LOGO ===== */
 .logo-section h1 {
-    color: #fff;
-    font-size: 1.3rem;
-    font-weight: 800;
-    margin: 0;
-    letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
 }
 
-.logo-section h1 span {
-    color: #ffc107; /* Amarillo Oro */
+.logo-section span {
+  color: #3b82f6;
 }
 
-/* Contenedor de Navegación */
+/* ===== NAV ===== */
 .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
+/* grupos */
 .nav-group {
-    display: flex;
-    gap: 5px;
+  display: flex;
+  gap: 10px;
 }
 
-/* Botones de Navegación */
-.nav-btn {
-    background: transparent;
-    border: 1px solid transparent;
-    color: #a0a0a0;
-    padding: 8px 15px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-}
-
-.nav-btn i {
-    font-size: 1rem;
-    color: #555; /* Iconos más apagados por defecto */
-    transition: color 0.3s ease;
-}
-
-/* Hover y Activo */
-.nav-btn:hover {
-    color: #fff;
-    background-color: #1a1a1a;
-    border-color: #333;
-}
-
-.nav-btn:hover i {
-    color: #ffc107;
-}
-
-.nav-btn.active {
-    background-color: rgba(255, 193, 7, 0.1);
-    border-color: #ffc107;
-    color: #ffc107;
-}
-
-.nav-btn.active i {
-    color: #ffc107;
-}
-
-/* Divisores entre grupos */
+/* divisor */
 .divider {
-    width: 1px;
-    height: 30px;
-    background-color: #2a2a2a;
-    margin: 0 10px;
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.08);
 }
 
-/* Control de usuario (Logout) */
+/* ===== BOTONES ===== */
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+
+  background: transparent;
+  color: #94a3b8;
+
+  font-size: 13px;
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+/* iconos */
+.nav-btn i {
+  font-size: 14px;
+  transition: transform 0.2s;
+}
+
+/* hover elegante */
+.nav-btn:hover {
+  background: rgba(255,255,255,0.06);
+  color: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+/* micro interacción icono */
+.nav-btn:hover i {
+  transform: scale(1.1);
+}
+
+/* estado activo */
+.nav-btn.active {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  box-shadow: 
+    0 6px 18px rgba(59,130,246,0.4),
+    0 0 12px rgba(59,130,246,0.3);
+}
+
+/* ===== USER CONTROL ===== */
+.user-control {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== LOGOUT ===== */
 .logout-btn {
-    background: #1a1a1a;
-    border: none;
-    color: #ff4444; /* Rojo para salir */
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+
+  background: rgba(255,255,255,0.05);
+  color: #f87171;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
+/* hover logout */
 .logout-btn:hover {
-    background: #ff4444;
-    color: #fff;
-    transform: scale(1.1);
+  background: rgba(239,68,68,0.15);
+  color: #ef4444;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(239,68,68,0.3);
 }
 
-/* Responsive: Si la pantalla es chica, ocultamos texto y dejamos iconos */
-@media (max-width: 1100px) {
-    .nav-btn {
-        padding: 10px;
-        font-size: 0; /* Oculta el texto */
-    }
-    .nav-btn i {
-        margin: 0;
-        font-size: 1.2rem;
-    }
-    .divider { margin: 0 5px; }
+/* ===== RESPONSIVE (opcional) ===== */
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none; /* listo para convertirlo en menú hamburguesa si querés */
+  }
 }

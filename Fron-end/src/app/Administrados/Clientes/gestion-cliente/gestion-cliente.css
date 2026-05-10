@@ -1,145 +1,139 @@
-/* 1. CONTENEDOR GENERAL */
-.general {
-    padding: 40px 5%;
-    background-color: #050505; /* Fondo oscuro base */
-    min-height: 100vh;
-    font-family: 'Inter', sans-serif;
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* 2. ENCABEZADO (Título y Botón Agregar) */
+/* ===== CONTENEDOR GENERAL ===== */
+.general {
+  padding: 30px;
+  background: #020617;
+  min-height: 100vh;
+  color: #e2e8f0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== ENCABEZADO ===== */
 .encabezado {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto 40px auto;
-    border-bottom: 1px solid #1a1a1a;
-    padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 .encabezado h1 {
-    color: #ffffff;
-    font-size: 2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin: 0;
+  font-size: 26px;
+  font-weight: 600;
 }
 
+/* BOTON AGREGAR */
 .boton1 {
-    background-color: #ffc107; /* Amarillo Oro */
-    color: #000;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: white;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .boton1:hover {
-    background-color: #e5ac00;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(59,130,246,0.4);
 }
 
-/* 3. GRID DE CLIENTES */
+/* ===== GRID ===== */
 .contenedor-clientes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
-/* 4. TARJETA DE CLIENTE */
+/* ===== CARD ===== */
 .tarjeta {
-    background-color: #121212;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 25px;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+  padding: 22px;
+  border-radius: 18px;
+
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+
+  /* 🔥 CENTRADO REAL */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  transition: all 0.3s ease;
 }
 
+/* hover PRO */
 .tarjeta:hover {
-    border-color: #ffc107;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(59,130,246,0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.7);
 }
 
+/* ===== NOMBRE ===== */
 .tarjeta h3 {
-    color: #fff;
-    font-size: 1.2rem;
-    margin: 0 0 15px 0;
-    font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
 }
 
-/* Sección Dirección */
+/* ===== DIRECCION ===== */
 .direccion {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #0a0a0a;
-    border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .direccion h5 {
-    color: #ffc107;
-    margin: 0 0 5px 0;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 3px;
 }
 
 .direccion p {
-    color: #a0a0a0;
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.4;
+  font-size: 14px;
+  color: #cbd5f5;
+  text-align: center;
 }
 
-/* 5. BOTÓN VER CLIENTE */
+/* ===== BOTON ===== */
 .boton2 {
-    background-color: transparent;
-    color: #ffffff;
-    border: 1px solid #333;
-    padding: 10px;
-    border-radius: 6px;
-    width: 100%;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.85rem;
+  margin-top: 15px;
+  width: 80%;
+
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+
+  background: rgba(255,255,255,0.05);
+  color: #e2e8f0;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
 .boton2:hover {
-    background-color: #ffffff;
-    color: #000000;
-    border-color: #ffffff;
+  background: rgba(59,130,246,0.2);
+  color: #93c5fd;
+  transform: translateY(-2px);
 }
 
-/* 6. RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-    .encabezado {
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
-    }
-    
-    .boton1 {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .contenedor-clientes {
-        grid-template-columns: 1fr;
-    }
+  .encabezado {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
 }
