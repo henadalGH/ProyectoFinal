@@ -3,7 +3,7 @@
     <div class="logo">GENESIS<span>PRO</span></div>
     <div class="nav-links">
       <a routerLink="/login" class="link">Iniciar Sesión</a>
-      <a routerLink="/register" class="btn btn-primary">Registrarme</a>
+      <a [routerLink]="['/registro']" class="btn btn-primary">Registrarme</a>
     </div>
   </nav>
 
@@ -14,7 +14,7 @@
       <p>Gestiona tus turnos, sigue reparaciones en tiempo real y mantén el historial clínico de tu auto en un solo lugar.</p>
 
       <div class="cta-group">
-        <a routerLink="/register" class="btn btn-lg btn-primary">EMPEZAR AHORA</a>
+        <a class="btn btn-lg btn-primary">EMPEZAR AHORA</a>
         <a href="#servicios" class="btn btn-lg btn-outline">VER SERVICIOS</a>
       </div>
     </div>

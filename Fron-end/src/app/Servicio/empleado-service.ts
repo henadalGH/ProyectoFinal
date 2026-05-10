@@ -24,7 +24,7 @@ export class EmpleadoService {
     password: string,
     contacto: string,
     dni: string,
-    fechaNacimiento: string,
+    fechaNacimieto: string,
     rol: string = "EMPLEADO",
     cargo: string
   ): Observable<any> {
@@ -37,7 +37,7 @@ export class EmpleadoService {
       rol,
       contacto,
       dni,
-      fechaNacimiento,
+      fechaNacimieto,
       cargo
     };
 

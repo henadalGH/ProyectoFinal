@@ -1,0 +1,65 @@
+<div class="page">
+  <div class="card">
+
+    <div class="card-header">
+      <div class="avatar">
+        <i class="ti ti-user-plus"></i>
+      </div>
+      <div class="header-text">
+        <h1>Crear cuenta</h1>
+        <p>Completá tus datos para registrarte</p>
+      </div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <div class="card-body">
+      <p class="section-label">Datos personales</p>
+      <form (ngSubmit)="crearUsuario()" #registroForm="ngForm">
+        <div class="row">
+          <div class="campo">
+            <label>Nombre</label>
+            <input type="text" name="nombre" [(ngModel)]="nombre" required placeholder="Juan" />
+          </div>
+          <div class="campo">
+            <label>Apellido</label>
+            <input type="text" name="apellido" [(ngModel)]="apellido" required placeholder="García" />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label>Correo electrónico</label>
+          <input type="email" name="email" [(ngModel)]="email" required placeholder="correo@ejemplo.com" />
+        </div>
+
+        <div class="campo">
+          <label>Contraseña</label>
+          <div class="pwd-wrap">
+            <input [type]="mostrarPassword ? 'text' : 'password'" name="password" [(ngModel)]="password" required placeholder="Mínimo 8 caracteres" />
+            <button type="button" class="pwd-eye" (click)="mostrarPassword = !mostrarPassword">
+              <i [class]="mostrarPassword ? 'ti ti-eye-off' : 'ti ti-eye'"></i>
+            </button>
+          </div>
+        </div>
+
+        <p class="section-label mt">Información de contacto</p>
+
+        <div class="campo">
+          <label>Teléfono de contacto</label>
+          <input type="tel" name="contacto" [(ngModel)]="contacto" required placeholder="+54 11 0000-0000" />
+        </div>
+
+        <div class="campo">
+          <label>Domicilio</label>
+          <input type="text" name="direccion" [(ngModel)]="direccion" required placeholder="Dirección" />
+        </div>
+
+        <div class="card-footer">
+          <button type="submit" class="btn-primary">Registrarme</button>
+          <button type="button" class="btn-cancel" (click)="volverAtras()">Cancelar</button>
+          <p class="trust">Tus datos están protegidos con cifrado SSL</p>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

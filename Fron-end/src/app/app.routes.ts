@@ -27,11 +27,13 @@ import { AuthGuard } from './AuthServicio/auth-guard';
 import { HistorialVehiculo } from './Cliente/historial-vehiculo/historial-vehiculo';
 import { VerMiVehucilo } from './Cliente/ver-mi-vehucilo/ver-mi-vehucilo';
 import { AsignacionTurnos } from './Administrados/Clientes/GestionTurno/asignacion-turnos/asignacion-turnos';
+import { Registro } from './ComponentesPublico/registro/registro';
 
-export const routes: Routes = [
+export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
     { path: 'login', component: Login },
     { path: 'inicio', component: Principal },
+    {path:'registro', component: Registro},
     { path: 'principal', component: Principal },
     { path: 'contra', component: RecuperarContrasenia },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -41,7 +43,7 @@ export const routes: Routes = [
     { path: 'headerAdmin', component: HeaderAdmin, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'gestionCliente', component: GestionCliente, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'gestionarVehiculo', component: GestionarVehiculo, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
-    { path: 'registrarCliente', component: RegistrarClintes, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'registrarCliente', component: RegistrarClintes},
     { path: 'registrarVehiculo', component: RegistarVehiculo, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_CLIENTE'] } },
     { path: 'verCliente/:id', component: VerCliente, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'gestionEmpleado', component: GestionarEmpleados, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },

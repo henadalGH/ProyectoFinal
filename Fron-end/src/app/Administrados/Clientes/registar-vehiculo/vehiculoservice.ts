@@ -11,9 +11,9 @@ export class Vehiculoservice {
 
   private utlApi = "http://localhost:8080/vehiculo/agregar"
 
-  agregarVehiculo(marca: String, modelo: String, patente: String, kilometraje: number, anio: String){
+  agregarVehiculo(marca: String, modelo: String, patente: String, kilometraje: number, anio: String, idCliente: number){
     console.log("Se recibio lo siguente", modelo, marca, patente, anio, kilometraje);
-    return this.http.post<any>(this.utlApi, {marca:  marca, modelo: modelo, patente: patente, anio: anio, kilometraje: kilometraje })
+    return this.http.post<any>(this.utlApi, {marca:  marca, modelo: modelo, patente: patente, anio: anio, kilometraje: kilometraje, idCliente: idCliente })
   }
 
   
