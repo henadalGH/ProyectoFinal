@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { HeaderFinanzas } from "../header-finanzas/header-finanzas";
+import { HeaderAdmin } from "../../Administrados/Clientes/header-admin/header-admin";
 
 @Component({
   selector: 'app-home-finanzas',
-  imports: [HeaderFinanzas],
+  imports: [ HeaderAdmin],
   templateUrl: './home-finanzas.html',
   styleUrl: './home-finanzas.css',
 })

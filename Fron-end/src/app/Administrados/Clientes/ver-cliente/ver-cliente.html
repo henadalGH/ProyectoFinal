@@ -1,38 +1,42 @@
 <app-header-admin></app-header-admin>
 
 <div class="container-cliente">
-    <div class="titulo">
-        @if(cliente){
-            <h1>Ficha de Cliente</h1>
-            <p style="text-align: center; color: #fff; font-weight: 600;">
-                {{cliente.nombre}} {{cliente.apellido}}
-            </p>
-        }
+  
+  @if(cliente){
+    <div class="header-cliente">
+      <div class="avatar">
+        {{cliente.nombre.charAt(0)}}{{cliente.apellido.charAt(0)}}
+      </div>
+
+      <h1>Ficha de Cliente</h1>
+      <p class="nombre">{{cliente.nombre}} {{cliente.apellido}}</p>
     </div>
 
-    @if (cliente) {
-        <div class="campo">
-            <h4>Nombre y Apellido</h4>
-            <p>{{cliente.nombre}} {{cliente.apellido}}</p>
-        </div>
-        
-        <div class="campo">
-            <h4>Email Corporativo</h4>
-            <p>{{cliente.email}}</p>
-        </div>
-        
-        <div class="campo">
-            <h4>Teléfono de Contacto</h4>
-            <p>{{cliente.contacto}}</p>
-        </div>
-        
-        <div class="campo" style="border: none;">
-            <h4>Dirección de Entrega</h4>
-            <p>{{cliente.direccion}}</p>
-        </div>
-        
-        <button class="btn-vehiculos">
-            🏎️ Gestionar Vehículos
-        </button>
-    }
+    <div class="card-info">
+      <div class="campo">
+        <h4>Nombre completo</h4>
+        <p>{{cliente.nombre}} {{cliente.apellido}}</p>
+      </div>
+      
+      <div class="campo">
+        <h4>Email</h4>
+        <p>{{cliente.email}}</p>
+      </div>
+      
+      <div class="campo">
+        <h4>Teléfono</h4>
+        <p>{{cliente.contacto}}</p>
+      </div>
+      
+      <div class="campo">
+        <h4>Dirección</h4>
+        <p>{{cliente.direccion}}</p>
+      </div>
+    </div>
+
+    <button  class="btn-vehiculos">
+      🏎️ Gestionar Vehículos
+    </button>
+  }
+
 </div>
