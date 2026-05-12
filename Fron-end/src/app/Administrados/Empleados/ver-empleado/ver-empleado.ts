@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
-import { HeaderAdmin } from "../../Clientes/header-admin/header-admin";
+import { HeaderAdmin } from "../../Administrador/header-admin/header-admin";
 
 @Component({
   selector: 'app-ver-empleado',

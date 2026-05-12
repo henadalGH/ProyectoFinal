@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { Router, RouterLink } from '@angular/router';
-import { HeaderAdmin } from "../../Clientes/header-admin/header-admin";
+import { HeaderAdmin } from "../../Administrador/header-admin/header-admin";
 
 @Component({
   selector: 'app-registrar-empleado',
