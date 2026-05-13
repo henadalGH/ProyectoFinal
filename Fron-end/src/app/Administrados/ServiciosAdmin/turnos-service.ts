@@ -13,7 +13,7 @@ export class TurnosService {
 
 
   obtenerTurnosAsignacion(){
-    return this.http.get<any>(this.urlComun);
+    return this.http.get<any>(`${this.urlComun}/`);
   }
   
 }
