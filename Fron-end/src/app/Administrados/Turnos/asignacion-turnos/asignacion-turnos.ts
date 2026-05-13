@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderAdmin } from "../../Administrador/header-admin/header-admin"; // 👈 IMPORTANTE por ngModel
+import { HeaderAdmin } from "../../Adminstrador/header-admin/header-admin";
 
 @Component({
   selector: 'app-asignacion-turnos',

@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 import { Principal } from './principal/principal';
-import { HomeAdministrador } from './Administrados/Administrador/home-administrador/home-administrador';
 import { HomeEmpleado } from './Empleados/home-empleado/home-empleado';
 import { Header } from './header/header';
 import { RecuperarContrasenia } from './recuperar-contrasenia/recuperar-contrasenia';
-import { HeaderAdmin } from './Administrados/Administrador/header-admin/header-admin';
 import { GestionCliente } from './Administrados/Clientes/gestion-cliente/gestion-cliente';
 import { GestionarVehiculo } from './Administrados/Clientes/gestionar-vehiculo/gestionar-vehiculo';
 import { RegistrarClintes } from './Administrados/Clientes/registrar-clintes/registrar-clintes';
@@ -27,9 +25,10 @@ import { AuthGuard } from './AuthServicio/auth-guard';
 import { HistorialVehiculo } from './Cliente/historial-vehiculo/historial-vehiculo';
 import { VerMiVehucilo } from './Cliente/ver-mi-vehucilo/ver-mi-vehucilo';
 import { Registro } from './ComponentesPublico/registro/registro';
-import { InicioOrdenes } from './Administrados/Ordenes/inicio-ordenes/inicio-ordenes';
 import { InicioPresupuestos } from './Administrados/Presupuestos/inicio-presupuestos/inicio-presupuestos';
 import { AsignacionTurnos } from './Administrados/Turnos/asignacion-turnos/asignacion-turnos';
+import { HomeAdmin } from './Administrados/Adminstrador/home-admin/home-admin';
+import { HeaderAdmin } from './Administrados/Adminstrador/header-admin/header-admin';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -41,7 +40,7 @@ export const routes: Routes = [
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
 
     // 🔐 RUTAS PROTEGIDAS - ADMIN
-    { path: 'homeAdmin', component: HomeAdministrador, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
+    { path: 'homeAdmin', component: HomeAdmin, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'headerAdmin', component: HeaderAdmin, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'gestionCliente', component: GestionCliente, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'gestionarVehiculo', component: GestionarVehiculo, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
@@ -52,7 +51,6 @@ export const routes: Routes = [
     { path: 'registrarEmpleado', component: RegistrarEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'verEmpleado/:id', component: VerEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
-    {path:'inicioOrdenes', component: InicioOrdenes},
     {path:'inicioPresupuesto' , component: InicioPresupuestos},
 
     // 🔐 RUTAS PROTEGIDAS - CLIENTE

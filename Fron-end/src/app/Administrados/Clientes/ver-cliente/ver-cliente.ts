@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteServicio } from '../../../Servicio/cliente-servicio';
-import { HeaderAdmin } from "../../Administrador/header-admin/header-admin";
+import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
 
 @Component({
   selector: 'app-ver-cliente',

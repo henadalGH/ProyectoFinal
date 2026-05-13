@@ -87,13 +87,13 @@ public class turnoServiceImpl implements TurnoService{
     @Override
     public List<TurnoEstadosDTO> obtenerTurnosPorEstado(EstadoTurnoEnums estado) {
         // 1. Obtenemos el objeto de estado de la base de datos
-        EstadoTurnosEntity estadoPendiente = estadoTurnoRepository.findByEstadoTurno(estado)
+        EstadoTurnosEntity estadoEntity = estadoTurnoRepository.findByEstadoTurno(estado)
                 .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         // 2. Filtramos la lista completa usando Stream
-        return turnoRepository.findAll().stream()
-                .filter(turno -> turno.getEstado().equals(estadoPendiente)) // Filtrado por el objeto estado
-                .map(this::toMapTurnoDto)                                   // Conversión a DTO
+        return turnoRepository.findByEstado(estadoEntity)
+                .stream()
+                .map(this::toMapTurnoDto)                                   
                 .collect(Collectors.toList());
     }
 

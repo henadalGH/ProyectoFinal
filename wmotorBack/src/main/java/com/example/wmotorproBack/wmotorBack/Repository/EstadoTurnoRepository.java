@@ -15,3 +15,4 @@ public interface EstadoTurnoRepository extends JpaRepository<EstadoTurnosEntity,
     
 
 }
+ 
