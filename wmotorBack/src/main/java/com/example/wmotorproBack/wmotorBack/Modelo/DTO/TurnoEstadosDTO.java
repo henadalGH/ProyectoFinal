@@ -13,6 +13,7 @@ public class TurnoEstadosDTO {
     private Long idVehiculo;
     private String Marca;
     private String Modelo;
+    private String patente;
     private String nombreCliente;
     private String apellidoCliente;
     private String contacto;

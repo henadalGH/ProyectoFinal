@@ -75,6 +75,7 @@ public class turnoServiceImpl implements TurnoService{
         turnoDto.setIdVehiculo(turno.getVehiculo().getId());
         turnoDto.setMarca(turno.getVehiculo().getMarca());
         turnoDto.setModelo(turno.getVehiculo().getModelo());
+        turnoDto.setPatente(turno.getVehiculo().getPatente());
         turnoDto.setNombreCliente(turno.getVehiculo().getCliente().getUsuario().getNombre());
         turnoDto.setApellidoCliente(turno.getVehiculo().getCliente().getUsuario().getApellido());
         turnoDto.setContacto(turno.getVehiculo().getCliente().getUsuario().getContacto());

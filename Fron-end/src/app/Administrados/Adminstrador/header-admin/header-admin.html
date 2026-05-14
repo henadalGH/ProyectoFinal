@@ -23,7 +23,7 @@
     <div class="divider"></div>
 
     <div class="nav-group">
-      <button class="nav-btn">
+      <button class="nav-btn" [routerLink]="['/inicioPresupuesto']">
         <i class="fas fa-file-invoice-dollar"></i> Presupuesto
       </button>
       <button class="nav-btn" [routerLink]="['/turnosAsignacion']">
@@ -43,7 +43,7 @@
 
   <div class="user-control">
     <button class="logout-btn" title="Cerrar Sesión" (click)="logout()">
-      <i class="fas fa-sign-out-alt"></i>
+      <i class="fas fa-sign-out-alt"></i>Salir
     </button>
   </div>
 </header>
