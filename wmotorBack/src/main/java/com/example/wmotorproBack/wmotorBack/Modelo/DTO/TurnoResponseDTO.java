@@ -1,7 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
-import java.time.LocalDate;
 
+import java.time.LocalDate;
 import lombok.Data;
 
 @Data

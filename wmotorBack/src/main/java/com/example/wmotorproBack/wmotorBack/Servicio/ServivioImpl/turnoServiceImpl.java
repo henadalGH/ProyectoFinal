@@ -2,13 +2,11 @@ package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
-
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
@@ -100,13 +98,13 @@ public class turnoServiceImpl implements TurnoService{
 
 
     @Override
-    public ResponceDTO asignarFecha(Long idTurno, LocalDate fecha) {
+    public ResponceDTO asignarFecha(Long idTurno, FechaDTO fecha) {
         
         ResponceDTO responce = new ResponceDTO();
         
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
-        turno.setFechaHora(fecha);
+        turno.setFechaHora(fecha.getFechas());
 
         EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));

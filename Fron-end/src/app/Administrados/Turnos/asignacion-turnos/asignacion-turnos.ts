@@ -21,13 +21,11 @@ export class AsignacionTurnos implements OnInit {
   turnoSeleccionado: number | null = null;
 
   fechaMinima: string = '';
-  fechaAsignacion: string = '';
+  fechaAsignada: string = '';
 
   ngOnInit(): void {
     this.asignarTurno();
 
-    const hoy = new Date();
-    this.fechaMinima = hoy.toISOString().split('T')[0];
   }
 
  
@@ -39,7 +37,7 @@ export class AsignacionTurnos implements OnInit {
   cerrarModal(){
     this.mostrarModal = false;
     this.turnoSeleccionado = null;
-    this.fechaAsignacion = '';
+    this.fechaAsignada = '';
   }
 
   asignarTurno(){
@@ -49,7 +47,7 @@ export class AsignacionTurnos implements OnInit {
       });
   }
 
-  // ✅ ACÁ USÁS EL ID + VALIDACIÓN
+  
   asignarFechaTurno(){
 
     if (!this.turnoSeleccionado) {
@@ -57,29 +55,30 @@ export class AsignacionTurnos implements OnInit {
       return;
     }
 
-    if (!this.fechaAsignacion) {
+    if (!this.fechaAsignada) {
       alert('Seleccioná una fecha');
       return;
     }
 
     const hoy = new Date().toISOString().split('T')[0];
 
-    if (this.fechaAsignacion < hoy) {
+    if (this.fechaAsignada < hoy) {
       alert('No podés elegir una fecha pasada');
       return;
     }
+    
 
-
-    this.turnoService.asignarFecha(this.turnoSeleccionado, this.fechaAsignacion)
+    this.turnoService.asignarFecha(this.turnoSeleccionado, this.fechaAsignada)
       .subscribe({
         next: () => {
           alert('Fecha asignada correctamente');
           this.cerrarModal();
-          this.asignarTurno(); // recarga la lista
+          this.asignarTurno();
         },
         error: (err) => {
           console.error(err);
           alert('Error al asignar la fecha');
+          console.log()
         }
       });
   }

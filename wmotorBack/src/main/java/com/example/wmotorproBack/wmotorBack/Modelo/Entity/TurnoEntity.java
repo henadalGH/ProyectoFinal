@@ -49,4 +49,7 @@ public class TurnoEntity {
 
     @OneToMany(mappedBy = "turno")
     private List<PresupuestoEntity> presupuesto = new ArrayList<>();
+
+
+    
 }

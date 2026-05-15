@@ -47,7 +47,7 @@
 
     <div class="modal" (click)="$event.stopPropagation()">
       <h2>Asignar fecha</h2>
-      <input type="date" [min]="fechaMinima" [(ngModel)]="fechaAsignacion">
+      <input type="date" [min]="fechaMinima" [(ngModel)]="fechaAsignada">
 
       <div class="acciones-modal">
         <button class="asignar" (click)="asignarFechaTurno()">Asignar</button>
