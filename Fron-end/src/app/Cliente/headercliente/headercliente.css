@@ -1,95 +1,137 @@
+/* ===== HEADER ===== */
 .header-cliente {
-    background-color: #0a0a0a;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+  height: 70px;
+  width: 100%;
+
+  padding: 0 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(2, 6, 23, 0.9);
+  backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  font-family: 'Inter', sans-serif;
 }
 
+/* ===== LOGO ===== */
 .logo {
-    color: #fff;
-    font-weight: 800;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #e2e8f0;
+  letter-spacing: 0.5px;
 }
 
 .logo span {
-    color: #ffc107;
+  color: #3b82f6;
+  margin-left: 2px;
 }
 
+/* ===== NAV ===== */
 .nav-links {
-    display: flex;
-    gap: 15px;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-/* Botones de navegación simples */
+/* ===== BOTONES NAV ===== */
 .nav-btn {
-    background: transparent;
-    border: none;
-    color: #a0a0a0;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+  color: #94a3b8;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.nav-btn:hover, .nav-btn.active {
-    color: #fff;
+/* iconos */
+.nav-btn i {
+  font-size: 14px;
 }
 
-/* Botón Destacado: Solicitar Turno */
-.btn-primary {
-    background-color: #ffc107;
-    color: #000;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: 0.3s;
+/* hover */
+.nav-btn:hover {
+  background: rgba(255,255,255,0.06);
+  color: #e2e8f0;
+  transform: translateY(-1px);
 }
 
-.btn-primary:hover {
-    background-color: #e5ac00;
-    transform: scale(1.05);
+/* ===== ACTIVO ===== */
+.nav-btn.active {
+  background: rgba(59,130,246,0.18);
+  color: #93c5fd;
+
+  border: 1px solid rgba(59,130,246,0.25);
 }
 
-/* Botón de Salida */
+/* ===== USER ACTIONS ===== */
+.user-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== LOGOUT ===== */
 .btn-logout {
-    background: rgba(255, 68, 68, 0.1);
-    border: 1px solid #ff4444;
-    color: #ff4444;
-    padding: 8px 15px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 9px 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: rgba(239,68,68,0.12);
+  color: #f87171;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
+/* hover logout */
 .btn-logout:hover {
-    background: #ff4444;
-    color: #fff;
+  background: rgba(239,68,68,0.2);
+  color: #ef4444;
+  transform: translateY(-1px);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .nav-btn span, .btn-logout span {
-        display: none; /* En móvil solo dejamos iconos */
-    }
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+
+  .header-cliente {
+    padding: 0 15px;
+  }
+
+  .nav-btn span,
+  .btn-logout span {
+    display: none;
+  }
+
+  .nav-btn,
+  .btn-logout {
+    padding: 10px;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
 }

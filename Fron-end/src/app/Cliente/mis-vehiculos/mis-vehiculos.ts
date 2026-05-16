@@ -54,7 +54,7 @@ export class MisVehiculos implements OnInit {
   }
 
   verDetalles(id:number){
-    this.router.navigate(['/verVehiculo', id])
+    this.router.navigate(['/detalleVehiculo', id])
   }
 
   volverAtras(){
