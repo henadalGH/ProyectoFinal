@@ -1,9 +1,65 @@
 <app-headercliente></app-headercliente>
 
-<h1>Detalles de mi vehiculo</h1>
+<div class="vehiculo-container">
 
+  <div class="titulo">
+    <h1>Detalles de mi vehículo</h1>
+    <p>Información general y estado actual del vehículo</p>
+  </div>
 
-@for (vehicul of vehiculo; track $index) {
+  @for (vehi of vehiculo; track $index) {
 
-    {{vehicul.patente}}
-}
+    <div class="vehiculo-card">
+
+      <div class="vehiculo-top">
+        <div class="icono-auto">
+          <i class="fas fa-car-side"></i>
+        </div>
+
+        <div class="vehiculo-nombre">
+          <h2>{{vehi.marca}} {{vehi.modelo}}</h2>
+          <span>{{vehi.patente}}</span>
+        </div>
+      </div>
+
+      <div class="vehiculo-info">
+
+        <div class="item">
+          <h3>Marca</h3>
+          <p>{{vehi.marca}}</p>
+        </div>
+
+        <div class="item">
+          <h3>Modelo</h3>
+          <p>{{vehi.modelo}}</p>
+        </div>
+
+        <div class="item">
+          <h3>Patente</h3>
+          <p>{{vehi.patente}}</p>
+        </div>
+
+        <div class="item">
+          <h3>Año</h3>
+          <p>{{vehi.anio}}</p>
+        </div>
+
+        <div class="item">
+          <h3>Kilometraje</h3>
+          <p>{{vehi.kilometraje}} km</p>
+        </div>
+
+      </div>
+
+      <div class="acciones">
+        <button class="btn-historial" (click)="verMiHistorial(vehi.id)">
+          <i class="fas fa-clock-rotate-left"></i>
+          Ver historial
+        </button>
+      </div>
+
+    </div>
+
+  }
+
+</div>
