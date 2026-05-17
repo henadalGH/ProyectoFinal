@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Headercliente } from "../../headercliente/headercliente";
 import { VehiculoService } from '../../../Servicio/vehiculo-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-vehiculo',
@@ -12,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class DetalleVehiculo implements OnInit{
 
   constructor(private vehiculoServicio: VehiculoService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ){
   }
 
@@ -28,8 +29,10 @@ export class DetalleVehiculo implements OnInit{
       }
     )
   }
+
+
+  verMiHistorial(id: number){
+    this.router.navigate(['/miHistorial', id]);
+  }
     
-  
-
-
 }

@@ -22,13 +22,13 @@ import { VerEmpleado } from './Administrados/Empleados/ver-empleado/ver-empleado
 import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
 import { Login } from './ComponentesPublico/login/login';
 import { AuthGuard } from './AuthServicio/auth-guard';
-import { HistorialVehiculo } from './Cliente/historial-vehiculo/historial-vehiculo';
 import { Registro } from './ComponentesPublico/registro/registro';
 import { InicioPresupuestos } from './Administrados/Presupuestos/inicio-presupuestos/inicio-presupuestos';
 import { AsignacionTurnos } from './Administrados/Turnos/asignacion-turnos/asignacion-turnos';
 import { HomeAdmin } from './Administrados/Adminstrador/home-admin/home-admin';
 import { HeaderAdmin } from './Administrados/Adminstrador/header-admin/header-admin';
 import { DetalleVehiculo } from './Cliente/Vehiculo/detalle-vehiculo/detalle-vehiculo';
+import { MiHistorial } from './Cliente/Vehiculo/mi-historial/mi-historial';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -56,8 +56,9 @@ export const routes: Routes = [
     // 🔐 RUTAS PROTEGIDAS - CLIENTE
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
-    {path: 'miHistorial/:id', component: HistorialVehiculo, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
+    {path: 'miHistorial/:id', component: MiHistorial, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
     {path: "detalleVehiculo/:id", component: DetalleVehiculo},
+    
 
     // 🔐 RUTAS PROTEGIDAS - EMPLEADO
     { path: 'homeEmpleado', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
