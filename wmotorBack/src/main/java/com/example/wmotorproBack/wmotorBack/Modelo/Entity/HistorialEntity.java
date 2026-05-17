@@ -41,4 +41,7 @@ public class HistorialEntity {
 
     @OneToMany
     private List<DetalleRepuestoEntity> repuesto = new ArrayList<>();
+
+    @OneToMany(mappedBy = "historial"    )
+    private List<OrdenTrabajoEntity> orden = new ArrayList<>();
 }

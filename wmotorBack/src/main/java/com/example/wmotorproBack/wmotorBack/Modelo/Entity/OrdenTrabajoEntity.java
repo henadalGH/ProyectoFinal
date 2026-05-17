@@ -65,6 +65,10 @@ public class OrdenTrabajoEntity {
     @JoinColumn(name = "id_estado_orden")
     private EstadoOrdenEntity estadoOrden;
 
+    @ManyToOne
+    @JoinColumn(name = "id_historial")
+    private HistorialEntity historial;
+
     @OneToMany(mappedBy = "orden")
     private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 
