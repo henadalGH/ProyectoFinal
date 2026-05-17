@@ -155,3 +155,21 @@
   }
 
 }
+
+.volver button {
+  padding: 9px 16px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(59,130,246,0.25);
+
+  background: rgba(59,130,246,0.08);
+  color: #93c5fd;
+
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.volver button:hover {
+  background: rgba(59,130,246,0.18);
+  transform: translateY(-1px);
+}

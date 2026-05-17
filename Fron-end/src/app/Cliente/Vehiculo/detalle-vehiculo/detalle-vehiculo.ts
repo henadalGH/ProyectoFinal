@@ -32,11 +32,7 @@ export class DetalleVehiculo implements OnInit{
 
 
   verMiHistorial(id: number){
-
     this.router.navigate(['/miHistorial', id]);
   }
     
-  
-
-
 }

@@ -1,21 +1,59 @@
 <header class="header-cliente">
+
+  <!-- LOGO -->
   <div class="logo">
     GENESIS<span>CLIENTE</span>
   </div>
 
+  <!-- MENU -->
   <nav class="nav-links">
-    <button class="nav-btn" [routerLink]="['/homeCliente']" routerLinkActive="active">
-      <i class="fas fa-home"></i> Inicio
+
+    <button class="nav-btn"
+      [routerLink]="['/homeCliente']"
+      routerLinkActive="active">
+      <i class="fas fa-home"></i>
+      <span>Inicio</span>
     </button>
-    
-    <button class="nav-btn" [routerLink]="['/misVehiculos']" routerLinkActive="active">
-      <i class="fas fa-car"></i> Mis vehículos
+
+    <button class="nav-btn"
+      [routerLink]="['/misVehiculos']"
+      routerLinkActive="active">
+      <i class="fas fa-car"></i>
+      <span>Mis vehículos</span>
     </button>
+
+    <button class="nav-btn">
+      <i class="fas fa-calendar-check"></i>
+      <span>Turnos</span>
+    </button>
+
+    <button class="nav-btn">
+      <i class="fas fa-file-invoice-dollar"></i>
+      <span>Presupuesto</span>
+    </button>
+
+    <button class="nav-btn">
+      <i class="fas fa-clock-rotate-left"></i>
+      <span>Historial</span>
+    </button>
+
   </nav>
 
+  <!-- ACCIONES -->
   <div class="user-actions">
-    <button class="btn-logout" title="Cerrar Sesión" (click)="logout()">
-      <i class="fas fa-sign-out-alt"></i> <span>Salir</span>
+
+    <button class="btn-notificacion">
+      <i class="fas fa-bell"></i>
+      <span>Notificaciones</span>
     </button>
+
+    <button class="btn-logout"
+      title="Cerrar Sesión"
+      (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Salir</span>
+    </button>
+
   </div>
+
 </header>
