@@ -22,5 +22,7 @@ public interface TurnoService {
 
     public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadoTurnoEnums estadoEnum);
 
+    public List<TurnoEstadosDTO> obtenerturnoPorIdVehiculoEstado(Long id);
+
 
 }

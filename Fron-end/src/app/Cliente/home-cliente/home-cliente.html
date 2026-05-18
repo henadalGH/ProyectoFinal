@@ -1,39 +1,95 @@
 <app-headercliente></app-headercliente>
 
-<div class="titulo">
-  <h2>Bienvenido</h2>
-  <p>Bienvenido nuevamente. Consultá el estado de tus vehículos, turnos y presupuestos desde tu panel principal.</p>
-</div>
+<div class="dashboard-container">
 
-<div class="total">
-  <div class="cantidad">
-      <h3>Vehiculo</h3>
-      <p>Vehiculos registrados</p>
-    </div>
-    <div class="cantidad">
-      <h3>Turnos</h3>
-      <p>Turnos pendientes</p>
-    </div>
-    <div class="cantidad">
-      <h3>Presupuesto</h3>
-      <p>Esperando aprobacion</p>
-    </div>
-
-    <div class="cantidad">
-      <h3>Reparaciones</h3>
-      <p>Vehiculo en el taller</p>
-    </div>
+  <!-- ===== BIENVENIDA ===== -->
+  <div class="titulo">
+    <h2>Bienvenido</h2>
+    <p>
+      Bienvenido nuevamente. Consultá el estado de tus vehículos,
+      turnos y presupuestos desde tu panel principal.
+    </p>
   </div>
 
+  <!-- ===== RESUMEN ===== -->
+  <div class="total">
 
-  <div class="presu">
-    <h2>Presupuestos pendientes</h2>
+    <div class="cantidad">
+      <div class="icono">
+        <i class="fas fa-car"></i>
+      </div>
+
+      <div class="info">
+        <h3>Vehículos</h3>
+        <p>Vehículos registrados</p>
+      </div>
+    </div>
+
+    <div class="cantidad">
+      <div class="icono">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+
+      <div class="info">
+        <h3>Turnos</h3>
+        <p>Turnos pendientes</p>
+      </div>
+    </div>
+
+    <div class="cantidad">
+      <div class="icono">
+        <i class="fas fa-file-invoice-dollar"></i>
+      </div>
+
+      <div class="info">
+        <h3>Presupuestos</h3>
+        <p>Esperando aprobación</p>
+      </div>
+    </div>
+
+    <div class="cantidad">
+      <div class="icono">
+        <i class="fas fa-tools"></i>
+      </div>
+
+      <div class="info">
+        <h3>Reparaciones</h3>
+        <p>Vehículos en el taller</p>
+      </div>
+    </div>
+
   </div>
 
-<div class="vehiculo">
-  <h2>Vehiculo en el taller</h2>
-</div>
+  <!-- ===== GRID PRINCIPAL ===== -->
+  <div class="panel-grid">
 
-<div class="turno">
-  <h2>Proximos turnos</h2>
+    <div class="panel-card presu">
+      <div class="panel-header">
+        <i class="fas fa-file-signature"></i>
+        <h2>Presupuestos pendientes</h2>
+      </div>
+
+      <p>No hay presupuestos pendientes actualmente.</p>
+    </div>
+
+    <div class="panel-card vehiculo">
+      <div class="panel-header">
+        <i class="fas fa-car-side"></i>
+        <h2>Vehículos en el taller</h2>
+      </div>
+
+      <p>No hay vehículos en reparación.</p>
+    </div>
+
+    <div class="panel-card turno">
+      <div class="panel-header">
+        <i class="fas fa-calendar-alt"></i>
+        <h2>Próximos turnos</h2>
+      </div>
+
+      <p>No hay turnos programados.</p>
+    </div>
+
+  </div>
+
 </div>

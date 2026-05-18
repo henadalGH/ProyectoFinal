@@ -16,4 +16,11 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Long>{
 
     List<TurnoEntity> findByEstado(EstadoTurnosEntity estado);
 
+    List<TurnoEntity> findByVehiculo_IdAndEstado(
+        Long idVehiculo,
+        EstadoTurnosEntity estado
+);
+
+    
+
 }

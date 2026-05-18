@@ -71,13 +71,20 @@ public class TurnoController {
     @PutMapping("/asignarFecha/{id}")
     public ResponseEntity<ResponceDTO> asignarFecha(@PathVariable Long id, @RequestBody FechaDTO fecha) {
         ResponceDTO turnoActualizado = turnoService.asignarFecha(id, fecha);
+        System.out.print(fecha);
         return new ResponseEntity<ResponceDTO>(turnoActualizado, HttpStatus.OK);
     }
     
 
-    @PutMapping("cambiarEstado/{id}")
+    @PutMapping("/cambiarEstado/{id}")
     public ResponseEntity<ResponceDTO> actualizarEstadoTurno(@PathVariable Long id, @RequestParam EstadoTurnoEnums estado) {
         ResponceDTO respoce = turnoService.actualizarEstadoTurno(id, estado);
         return ResponseEntity.ok(respoce);
     }
+
+    @GetMapping("/obtenerPorVehiculo/{idVehiculo}")
+    public ResponseEntity<List<TurnoEstadosDTO>> obtenerTurnosPendientePorIdVehiculo(@PathVariable Long idVehiculo) {
+        return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenerturnoPorIdVehiculoEstado(idVehiculo), HttpStatus.OK);
+    }
+    
 }

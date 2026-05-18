@@ -140,4 +140,18 @@ public class turnoServiceImpl implements TurnoService{
 
     }
 
+
+    @Override
+    public List<TurnoEstadosDTO> obtenerturnoPorIdVehiculoEstado(Long id) {
+
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        .orElseThrow(() -> new RuntimeException("El turnos no  es correcto"));
+    
+        return turnoRepository.findByVehiculo_IdAndEstado(id, estado)
+                .stream()
+                .map(this::toMapTurnoDto)                                   
+                .collect(Collectors.toList());
+
+    }
+
     }
