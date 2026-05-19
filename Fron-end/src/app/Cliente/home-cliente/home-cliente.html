@@ -1,4 +1,28 @@
-<app-headercliente></app-headercliente>
+<header class="header-cliente">
+
+  <!-- LOGO -->
+  <div class="logo">
+    WMotorPro<span>CLIENTE</span>
+  </div>
+
+  <!-- ACCIONES -->
+  <div class="user-actions">
+
+    <button class="btn-notificacion">
+      <i class="fas fa-bell"></i>
+      <span>Notificaciones</span>
+    </button>
+
+    <button class="btn-logout"
+      title="Cerrar Sesión"
+      (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Salir</span>
+    </button>
+
+  </div>
+
+</header>
 
 <div class="dashboard-container">
 
@@ -91,5 +115,77 @@
     </div>
 
   </div>
+
+</div>
+
+
+<div class="vehiculo">
+
+  <div class="vehiculo-header">
+    <h1>Mis vehículos</h1>
+    <p>Consulta rápidamente la información de tus vehículos registrados.</p>
+  </div>
+
+  @if (vehiculo.length > 0) {
+
+    <div class="vehiculo-grid">
+
+      @for (vehi of vehiculo; track $index) {
+
+        <div class="vehiculo-card">
+
+          <div class="card-top">
+
+            <div class="icono-vehiculo">
+              <i class="fas fa-car-side"></i>
+            </div>
+
+            <div class="vehiculo-info">
+              <h2>{{vehi.marca}} {{vehi.modelo}}</h2>
+              <span>{{vehi.patente}}</span>
+            </div>
+
+          </div>
+
+          <div class="card-body">
+
+            <p>
+              <strong>Marca:</strong>
+              {{vehi.marca}}
+            </p>
+
+            <p>
+              <strong>Modelo:</strong>
+              {{vehi.modelo}}
+            </p>
+
+            <p>
+              <strong>Patente:</strong>
+              {{vehi.patente}}
+            </p>
+
+          </div>
+
+          <div class="card-footer">
+            <button class="btn-ver" (click)="verVehiculo(vehi.id)">
+              <i class="fas fa-eye"></i>
+              Ver vehículo
+            </button>
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <div class="sin-vehiculos">
+      <i class="fas fa-car-crash"></i>
+      <h3>No posee vehículos registrados</h3>
+    </div>
+
+  }
 
 </div>

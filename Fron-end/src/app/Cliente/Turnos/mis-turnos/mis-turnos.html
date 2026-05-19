@@ -1,0 +1,12 @@
+<app-headercliente></app-headercliente>
+
+<div class="titulo">
+    <h1>Mis tunros</h1>
+</div>
+
+<h2>Turno Pendientes</h2>
+
+@for (pen of pendientes; track $index) {
+
+    <p><strong>Fecha: </strong>{{pen.descripcion}}</p>
+}

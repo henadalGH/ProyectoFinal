@@ -22,14 +22,12 @@ export class MisVehiculos implements OnInit {
     private authService: AuthService,
     private router: Router,
     private locacion: Location,
-    private servicioService: ServiciosService,
     private turnoService: TurnosService
   ){}
 
   vehiculo: any[] = [];
   servicios: any[] = [];
 
-  mostrarModal: boolean = false;
   vehiculoIdSeleccionado: number | null = null;
 
   descripcion: string = '';
@@ -48,40 +46,16 @@ export class MisVehiculos implements OnInit {
     }
   }
 
-  // 🔹 Navegación
-  verMiHistorial(id: number){
-    this.router.navigate(['/miHistorial', id]);
-  }
-
-  verDetalles(id:number){
-    this.router.navigate(['/detalleVehiculo', id])
-  }
-
+  
   volverAtras(){
     this.locacion.back();
   }
 
-  // 🔹 Modal
-  abrirModel(id: number){
-    this.vehiculoIdSeleccionado = id;
-    this.mostrarModal = true;
-
-    this.servicioService.obtenerServicios().subscribe({
-      next: (datos: any) => {
-        this.servicios = datos;
-      },
-      error: (err) => console.error(err)
-    });
+  verVehiculo(id: number){
+    this.router.navigate(['/detalleVehiculo', id]);
   }
 
-  cerrarModel(){
-    this.mostrarModal = false;
-
-    // limpiar datos
-    this.descripcion = '';
-    this.idServicio = null;
-    this.vehiculoIdSeleccionado = null;
-  }
+  
 
   // 🔹 Crear turno
   crearTurno(){
@@ -98,7 +72,6 @@ export class MisVehiculos implements OnInit {
     ).subscribe({
       next: () => {
         console.log("Turno creado correctamente");
-        this.cerrarModel();
         this.router.navigate(['/misVehiculos']);
       },
       error: (err) => {

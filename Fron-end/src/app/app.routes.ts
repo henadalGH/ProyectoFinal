@@ -29,6 +29,7 @@ import { HomeAdmin } from './Administrados/Adminstrador/home-admin/home-admin';
 import { HeaderAdmin } from './Administrados/Adminstrador/header-admin/header-admin';
 import { DetalleVehiculo } from './Cliente/Vehiculo/detalle-vehiculo/detalle-vehiculo';
 import { MiHistorial } from './Cliente/Vehiculo/mi-historial/mi-historial';
+import { MisTurnos } from './Cliente/Turnos/mis-turnos/mis-turnos';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -58,6 +59,7 @@ export const routes: Routes = [
     { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     {path: 'miHistorial/:id', component: MiHistorial, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
     {path: "detalleVehiculo/:id", component: DetalleVehiculo},
+    {path: "misTurnos", component: MisTurnos},
     
 
     // 🔐 RUTAS PROTEGIDAS - EMPLEADO

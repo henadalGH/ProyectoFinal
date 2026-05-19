@@ -61,7 +61,7 @@ public class SecurityConfig {
                                 .requestMatchers("/vehiculo/buscar/cliente/{clienteId}").permitAll()
                                 .requestMatchers("/presupuesto/crear").permitAll()
                                 .requestMatchers("presupuesto/cambiarEstado/{idPresupuesto}").permitAll()
-                                .requestMatchers("/obtenerPorVehiculo/{idVehiculo}").permitAll()
+                                .requestMatchers("turno/obtenerPorVehiculo/{idVehiculo}").permitAll()
                                 .requestMatchers("presupuesto/{idPresupuesto}").permitAll()
                                 .requestMatchers("presupuesto/todos").permitAll()
                                 .requestMatchers("orden/**").permitAll()

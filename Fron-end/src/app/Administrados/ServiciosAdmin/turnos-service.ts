@@ -26,5 +26,9 @@ export class TurnosService {
     return this.http.put<any>(`${this.urlComun}/asignarFecha/${id}`, {fecha: fecha });
       
   }
+
+  obtenerPorIdVehiculo(idVehiculo: number){
+    return this.http.get<any>(`${this.urlComun}/obtenerPorVehiculo/${idVehiculo}`);
+  }
   
 }
