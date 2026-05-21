@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from "@angular/router";
+import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../AuthServicio/auth-service';
 
 @Component({
@@ -10,9 +10,17 @@ import { AuthService } from '../../AuthServicio/auth-service';
 })
 export class Headercliente {
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,
+    private router: Router
+  ) {}
 
   logout(): void {
     this.authService.logout();
+  }
+
+  verHitorial(id: number){
+
+    this.router.navigate(['/miHistorial'])
+
   }
 }

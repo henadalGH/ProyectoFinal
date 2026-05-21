@@ -57,7 +57,7 @@ export class RegistarVehiculo {
         if (rol === 'ROLE_ADMIN') {
           this.router.navigate(['/homeAdmin']);
         } else if (rol === 'ROLE_CLIENTE') {
-          this.router.navigate(['/misVehiculos']);
+          this.router.navigate(['/homeCliente']);
         } else {
           this.locacion.back();
         }

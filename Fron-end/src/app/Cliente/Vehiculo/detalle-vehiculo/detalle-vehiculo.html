@@ -2,67 +2,78 @@
 
 <div class="vehiculo-container">
 
+  <!-- TITULO -->
   <div class="titulo">
     <h1>Detalles de mi vehículo</h1>
     <p>Información general y estado actual del vehículo</p>
   </div>
 
-  @for (vehi of vehiculo; track $index) {
+  @if (vehiculo != null) {
 
     <div class="vehiculo-card">
 
-      <div class="vehiculo-top">
+      <!-- HEADER -->
+      <div class="card-top">
+
         <div class="icono-auto">
           <i class="fas fa-car-side"></i>
         </div>
 
-        <div class="vehiculo-nombre">
-          <h2>{{vehi.marca}} {{vehi.modelo}}</h2>
-          <span>{{vehi.patente}}</span>
+        <div class="nombre-vehiculo">
+          <h2>{{vehiculo.marca}} {{vehiculo.modelo}}</h2>
+          <span>{{vehiculo.patente}}</span>
         </div>
+
       </div>
 
+      <!-- INFO -->
       <div class="vehiculo-info">
 
         <div class="item">
-          <h3>Marca</h3>
-          <p>{{vehi.marca}}</p>
+          <strong>Marca</strong>
+          <p>{{vehiculo.marca}}</p>
         </div>
 
         <div class="item">
-          <h3>Modelo</h3>
-          <p>{{vehi.modelo}}</p>
+          <strong>Modelo</strong>
+          <p>{{vehiculo.modelo}}</p>
         </div>
 
         <div class="item">
-          <h3>Patente</h3>
-          <p>{{vehi.patente}}</p>
+          <strong>Patente</strong>
+          <p>{{vehiculo.patente}}</p>
         </div>
 
         <div class="item">
-          <h3>Año</h3>
-          <p>{{vehi.anio}}</p>
+          <strong>Kilometraje</strong>
+          <p>{{vehiculo.kilometraje}} km</p>
         </div>
 
         <div class="item">
-          <h3>Kilometraje</h3>
-          <p>{{vehi.kilometraje}} km</p>
+          <strong>Año</strong>
+          <p>{{vehiculo.anio}}</p>
         </div>
 
       </div>
 
-      <div class="acciones">
-        <button class="btn-historial" (click)="verMiHistorial(vehi.id)">
-          <i class="fas fa-clock-rotate-left"></i>
-          Ver historial
-        </button>
+      <!-- ULTIMO SERVICIO -->
+      <div class="ultimo-servicio">
+
+        <div class="servicio-header">
+          <i class="fas fa-screwdriver-wrench"></i>
+          <h3>Último servicio</h3>
+        </div>
+
+        <p>
+          Aquí podrás visualizar la última reparación o mantenimiento realizado.
+        </p>
+
       </div>
 
-      <div class="volver"><button>Volver</button></div>
-
+      
 
     </div>
 
-  }
+  } 
 
 </div>

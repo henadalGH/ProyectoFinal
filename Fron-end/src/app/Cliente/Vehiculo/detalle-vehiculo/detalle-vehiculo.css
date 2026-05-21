@@ -1,65 +1,68 @@
 /* ===== CONTENEDOR ===== */
 .vehiculo-container {
-  padding: 35px 20px;
-  background: #020617;
   min-height: 100vh;
 
-  color: #e2e8f0;
+  padding: 40px 25px;
+
+  background: #020617;
+
   font-family: 'Inter', sans-serif;
+  color: #e2e8f0;
 }
 
 /* ===== TITULO ===== */
 .titulo {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
 }
 
 .titulo h1 {
-  font-size: 30px;
-  margin-bottom: 6px;
+  font-size: 34px;
+  margin-bottom: 10px;
+
+  color: #f8fafc;
 }
 
 .titulo p {
   color: #94a3b8;
-  font-size: 14px;
+  font-size: 15px;
+
+  max-width: 600px;
+  margin: auto;
+
+  line-height: 1.6;
 }
 
 /* ===== CARD ===== */
 .vehiculo-card {
   max-width: 850px;
-  margin: 0 auto 20px auto;
+  margin: auto;
 
-  padding: 22px;
-  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.78);
 
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(12px);
-
+  border-radius: 22px;
   border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
 
-  transition: 0.25s ease;
+  padding: 28px;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35);
 }
 
-.vehiculo-card:hover {
-  border-color: rgba(59,130,246,0.25);
-  transform: translateY(-2px);
-}
-
-/* ===== HEADER CARD ===== */
-.vehiculo-top {
+/* ===== TOP ===== */
+.card-top {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 18px;
 
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
-/* icono */
+/* ===== ICONO ===== */
 .icono-auto {
-  width: 55px;
-  height: 55px;
-  border-radius: 14px;
+  width: 65px;
+  height: 65px;
+
+  border-radius: 18px;
 
   background: rgba(59,130,246,0.15);
   color: #60a5fa;
@@ -68,84 +71,208 @@
   align-items: center;
   justify-content: center;
 
-  font-size: 22px;
+  font-size: 26px;
 }
 
-/* nombre */
-.vehiculo-nombre h2 {
-  font-size: 20px;
+/* ===== NOMBRE ===== */
+.nombre-vehiculo h2 {
+  font-size: 24px;
+  color: #f8fafc;
+
+  margin-bottom: 5px;
 }
 
-.vehiculo-nombre span {
+.nombre-vehiculo span {
   color: #94a3b8;
-  font-size: 13px;
+  font-size: 14px;
+
+  letter-spacing: 1px;
 }
 
 /* ===== INFO ===== */
 .vehiculo-info {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
-  margin-bottom: 20px;
+  gap: 16px;
+
+  margin-bottom: 30px;
 }
 
-/* item */
+/* ===== ITEM ===== */
 .item {
-  padding: 12px;
-  border-radius: 12px;
-
   background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.04);
 
-  text-align: center;
+  border-radius: 14px;
+
+  padding: 16px;
 }
 
-/* titulo item */
-.item h3 {
-  font-size: 12px;
+.item strong {
+  display: block;
+
+  margin-bottom: 8px;
+
   color: #94a3b8;
-  margin-bottom: 5px;
+  font-size: 13px;
+  font-weight: 600;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* dato */
 .item p {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
+
+  color: #f8fafc;
 }
 
-/* ===== BOTON ===== */
+/* ===== SERVICIO ===== */
+.ultimo-servicio {
+  margin-bottom: 28px;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  background: rgba(59,130,246,0.08);
+
+  border: 1px solid rgba(59,130,246,0.15);
+}
+
+/* ===== HEADER SERVICIO ===== */
+.servicio-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.servicio-header i {
+  color: #60a5fa;
+  font-size: 18px;
+}
+
+.servicio-header h3 {
+  color: #f8fafc;
+  font-size: 18px;
+}
+
+/* ===== TEXTO ===== */
+.ultimo-servicio p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+/* ===== BOTONES ===== */
 .acciones {
   display: flex;
   justify-content: flex-end;
+  gap: 12px;
+
+  flex-wrap: wrap;
 }
 
-.btn-historial {
+/* ===== BOTON ===== */
+.btn-historial,
+.btn-volver {
   display: flex;
   align-items: center;
   gap: 8px;
 
-  padding: 10px 16px;
+  padding: 11px 18px;
 
   border: none;
-  border-radius: 10px;
-
-  background: #3b82f6;
-  color: white;
+  border-radius: 12px;
 
   cursor: pointer;
-  transition: 0.25s;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: 0.25s ease;
+}
+
+/* historial */
+.btn-historial {
+  background: linear-gradient(
+    135deg,
+    #2563eb,
+    #3b82f6
+  );
+
+  color: white;
 }
 
 .btn-historial:hover {
-  background: #2563eb;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 20px rgba(37,99,235,0.3);
+}
+
+/* volver */
+.btn-volver {
+  background: rgba(255,255,255,0.05);
+  color: #cbd5e1;
+}
+
+.btn-volver:hover {
+  background: rgba(255,255,255,0.1);
+
+  color: white;
+}
+
+/* ===== SIN VEHICULO ===== */
+.sin-vehiculo {
+  max-width: 600px;
+  margin: auto;
+
+  text-align: center;
+
+  background: rgba(15, 23, 42, 0.75);
+
+  border-radius: 22px;
+
+  padding: 45px 30px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.sin-vehiculo i {
+  font-size: 45px;
+  color: #475569;
+
+  margin-bottom: 18px;
+}
+
+.sin-vehiculo h2 {
+  color: #f8fafc;
+  margin-bottom: 10px;
+}
+
+.sin-vehiculo p {
+  color: #94a3b8;
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 700px) {
 
-  .vehiculo-top {
+  .vehiculo-container {
+    padding: 30px 15px;
+  }
+
+  .titulo h1 {
+    font-size: 28px;
+  }
+
+  .vehiculo-card {
+    padding: 20px;
+  }
+
+  .card-top {
     flex-direction: column;
     text-align: center;
   }
@@ -154,22 +281,10 @@
     justify-content: center;
   }
 
-}
+  .btn-historial,
+  .btn-volver {
+    width: 100%;
+    justify-content: center;
+  }
 
-.volver button {
-  padding: 9px 16px;
-
-  border-radius: 10px;
-  border: 1px solid rgba(59,130,246,0.25);
-
-  background: rgba(59,130,246,0.08);
-  color: #93c5fd;
-
-  cursor: pointer;
-  transition: 0.25s;
-}
-
-.volver button:hover {
-  background: rgba(59,130,246,0.18);
-  transform: translateY(-1px);
 }

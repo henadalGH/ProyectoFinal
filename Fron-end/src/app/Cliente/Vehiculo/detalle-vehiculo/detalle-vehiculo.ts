@@ -17,13 +17,13 @@ export class DetalleVehiculo implements OnInit{
   ){
   }
 
-  vehiculo: any[] = [];
+  vehiculo!: any;
   id!: number   
   
   ngOnInit(): void {
     const id = Number (this.route.snapshot.paramMap.get('id'));
 
-    this.vehiculoServicio.obtenerVehiculoCliente(id).subscribe(
+    this.vehiculoServicio.obtenerVehiculoPorId(id).subscribe(
       datos => {
         this.vehiculo = datos;
       }

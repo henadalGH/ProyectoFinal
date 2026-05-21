@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.VehiculoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
@@ -14,7 +12,6 @@ import com.example.wmotorproBack.wmotorBack.Repository.ClienteRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.VehiculoService;
 
-import lombok.NonNull;
 
 @Service
 public class VehiculoServiceImpl implements VehiculoService{
@@ -46,39 +43,33 @@ public class VehiculoServiceImpl implements VehiculoService{
 
 
         return vehiculoRepository.save(vehiculo);
-    }
+    } 
 
     @Override
-public ResponceDTO obtenerVehiculoPorID(@NonNull Long id) {
+public VehiculoDTO obtenerVehiculoPorID(Long id) {
 
-    ResponceDTO response = new ResponceDTO();
+    VehiculoEntity  vehiculoEntity = vehiculoRepository.findById(id)
+    .orElseThrow(()-> new  RuntimeException("No se encuentra vehiculo registrado"));
 
-    VehiculoEntity vehiculo = vehiculoRepository.findById(id).orElse(null);
+    return mapToVehiculoDto(vehiculoEntity);
 
-    if (vehiculo == null) {
-        response.setNumOfErrors(1);
-        response.setMensage("Vehículo no encontrado");
-        return response;
-    }
-
-    response.setNumOfErrors(0);
-    response.setMensage("Vehículo obtenido correctamente");
     
-
-    return response;
 }
 
     @Override
-    public VehiculoDTO mapToDto(VehiculoEntity vehiculo) {
+    public VehiculoDTO mapToVehiculoDto(VehiculoEntity vehiculo) {
         
-        return new VehiculoDTO(
-            vehiculo.getId(),
-            vehiculo.getMarca(),
-            vehiculo.getModelo(),
-            vehiculo.getAnio(),
-            vehiculo.getPatente(),
-            vehiculo.getKilometraje()
-        ); 
+        VehiculoDTO vehiculoDTO = new VehiculoDTO();
+
+        vehiculoDTO.setId(vehiculo.getId());
+        vehiculoDTO.setMarca(vehiculo.getMarca());
+        vehiculoDTO.setModelo(vehiculo.getModelo());
+        vehiculoDTO.setPatente(vehiculo.getPatente());
+        vehiculoDTO.setAnio(vehiculo.getAnio());
+        vehiculoDTO.setKilometraje(vehiculo.getKilometraje());
+    
+        
+        return vehiculoDTO;
     }
 
     @Override
@@ -86,7 +77,7 @@ public ResponceDTO obtenerVehiculoPorID(@NonNull Long id) {
 
         return vehiculoRepository.findByClienteId(id)
         .stream()
-        .map(this::mapToDto)
+        .map(this::mapToVehiculoDto)
         .toList();
     }
 

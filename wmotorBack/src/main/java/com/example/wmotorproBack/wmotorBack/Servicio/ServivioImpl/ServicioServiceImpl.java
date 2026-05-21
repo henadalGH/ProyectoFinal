@@ -37,9 +37,6 @@ public class ServicioServiceImpl implements ServicioService {
         dto.setDescripcion(servicio.getDescripcion());
         dto.setDuracion(servicio.getDuracionEstimada());
         dto.setPrecioBase(servicio.getPrecion_base());
-
-
-
         return dto;
     }
 

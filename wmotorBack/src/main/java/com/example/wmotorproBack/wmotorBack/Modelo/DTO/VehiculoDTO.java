@@ -13,15 +13,4 @@ public class VehiculoDTO {
     private Long Kilometraje;
     private Long idCliente;
     
-    public VehiculoDTO(Long id, String marca, String modelo, String anio, String patente, Long kilometraje) {
-        this.id = id;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.anio = anio;
-        this.patente = patente;
-        Kilometraje = kilometraje;
-    }
-
-    
-   
 }

@@ -3,11 +3,11 @@ import { Headercliente } from "../headercliente/headercliente";
 import { AuthService } from '../../AuthServicio/auth-service';
 import { MisVehiculos } from "../mis-vehiculos/mis-vehiculos";
 import { VehiculoService } from '../../Servicio/vehiculo-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home-cliente',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home-cliente.html',
   styleUrl: './home-cliente.css',
 })
