@@ -24,5 +24,7 @@ public interface TurnoService {
 
     public List<TurnoEstadosDTO> obtenerturnoPorIdVehiculoEstado(Long id);
 
+    List<TurnoEstadosDTO> obtenerturnoPorIdClienteEstado(Long idCliente);
+
 
 }

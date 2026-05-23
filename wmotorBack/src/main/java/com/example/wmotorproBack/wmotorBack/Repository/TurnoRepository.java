@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 
 @Repository
 public interface TurnoRepository extends JpaRepository<TurnoEntity, Long>{
@@ -20,6 +21,8 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Long>{
         Long idVehiculo,
         EstadoTurnosEntity estado
 );
+
+    List<TurnoEntity> findByVehiculoClienteIdAndEstado(Long idCliente, EstadoTurnoEnums estado);
 
     
 

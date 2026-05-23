@@ -86,5 +86,11 @@ public class TurnoController {
     public ResponseEntity<List<TurnoEstadosDTO>> obtenerTurnosPendientePorIdVehiculo(@PathVariable Long idVehiculo) {
         return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenerturnoPorIdVehiculoEstado(idVehiculo), HttpStatus.OK);
     }
+
+    @GetMapping("/obtenerTurnoCliente/{idCliente}")
+    public ResponseEntity<List<TurnoEstadosDTO>> obtenerTurnoPendientesPorCliente(@PathVariable Long idCliente) {
+        return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenerturnoPorIdClienteEstado(idCliente), HttpStatus.OK);
+    }
+    
     
 }

@@ -56,6 +56,14 @@
 
       </div>
 
+      <!-- BOTON -->
+      <div class="acciones">
+        <button class="btn-turno" (click)="abrirModal(vehiculo.id)">
+          <i class="fas fa-calendar-check"></i>
+          Solicitar turno
+        </button>
+      </div>
+
       <!-- ULTIMO SERVICIO -->
       <div class="ultimo-servicio">
 
@@ -70,10 +78,63 @@
 
       </div>
 
-      
+    </div>
+
+  }
+
+</div>
+
+@if (mostrarModal) {
+
+  <div class="modal-overlay">
+
+    <div class="form">
+
+      <button class="btn-cerrar" (click)="cerrarModal()">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <form (ngSubmit)="solicitarTurno()">
+
+        <div class="reg">
+          <h1>Solicitar turno</h1>
+          <p>Complete la información para solicitar un nuevo turno</p>
+        </div>
+
+        <div class="servicio">
+          <label>Seleccione un servicio</label>
+
+          <select name="idServicio" [(ngModel)]="idServicio">
+
+            @for (serv of servicio; track $index) {
+              <option value="{{serv.id}}">
+                {{serv.nombre}}
+              </option>
+            }
+
+          </select>
+        </div>
+
+        <div class="descrip">
+          <label>Describa su problema</label>
+
+          <input
+            type="text"
+            [(ngModel)]="descripcion"
+            placeholder="Ej: ruido en el motor, pérdida de aceite..."
+            name="descripcion"
+          >
+        </div>
+
+        <button class="btn-solicitar">
+          <i class="fas fa-paper-plane"></i>
+          Solicitar turno
+        </button>
+
+      </form>
 
     </div>
 
-  } 
+  </div>
 
-</div>
+}

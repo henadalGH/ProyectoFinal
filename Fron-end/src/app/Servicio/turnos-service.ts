@@ -9,6 +9,7 @@ export class TurnosService {
 
   private urlComun = 'http://localhost:8080/turno/crear';
   private urlAsignacion = 'http://localhost:8080/turno/pendientesAsignacion'
+  private url = 'http://localhost:8080/turno';
 
   constructor(private http: HttpClient){}
 
@@ -30,6 +31,16 @@ export class TurnosService {
 
     return this.http.get<any>(this.urlAsignacion);
   }
+
+
+  obtenerTurnosPendientePorCliente(id: number){
+
+    return this.http.get<any []>(`${this.url}/obtenerTurnoCliente/${id}`)
+
+  }
+
+
+  
 
   
 
