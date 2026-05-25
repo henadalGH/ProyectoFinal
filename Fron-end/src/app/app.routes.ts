@@ -30,6 +30,7 @@ import { HeaderAdmin } from './Administrados/Adminstrador/header-admin/header-ad
 import { DetalleVehiculo } from './Cliente/Vehiculo/detalle-vehiculo/detalle-vehiculo';
 import { MiHistorial } from './Cliente/Vehiculo/mi-historial/mi-historial';
 import { MisTurnos } from './Cliente/Turnos/mis-turnos/mis-turnos';
+import { RegistrarFinanzas } from './Administrados/Finanzas/registrar-finanzas/registrar-finanzas';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -76,5 +77,6 @@ export const routes: Routes = [
     { path: 'crearPresupuesto', component: CrearPresupuesto, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
 
     // Ruta general
-    { path: 'header', component: Header }
+    { path: 'homeFinanzas', component: HomeFinanzas},
+    {path: 'registraMovimiento', component: RegistrarFinanzas}
 ];
