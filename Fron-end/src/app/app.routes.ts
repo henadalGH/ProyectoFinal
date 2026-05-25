@@ -54,7 +54,7 @@ export const routes: Routes = [
     { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
     {path:'inicioPresupuesto' , component: InicioPresupuestos},
 
-    // 🔐 RUTAS PROTEGIDAS - CLIENTE
+    // 🔐 RUTAS PROTEGIDAS  - CLIENTE
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     { path: 'misVehiculos', component: MisVehiculos, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },
     {path: 'miHistorial/:id', component: MiHistorial, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},

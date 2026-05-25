@@ -2,6 +2,7 @@ package com.example.wmotorproBack.wmotorBack.Servicio;
 
 import java.util.List;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
@@ -20,7 +21,7 @@ public interface TurnoService {
 
     public ResponceDTO asignarFecha(Long idTurno, FechaDTO fecha);
 
-    public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadoTurnoEnums estadoEnum);
+    public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadosDTO estado);
 
     public List<TurnoEstadosDTO> obtenerturnoPorIdVehiculoEstado(Long id);
 

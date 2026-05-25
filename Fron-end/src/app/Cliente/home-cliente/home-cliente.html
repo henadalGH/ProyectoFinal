@@ -56,7 +56,14 @@
 
       <div class="info">
         <h3>Turnos</h3>
-        <p>Turnos pendientes</p>
+        @if (turnosPen != null) {
+          <button [routerLink]="['/misTurnos']">Ver detalles</button>
+        }
+        @else {
+          <p>No ahi turnos pendientes</p>
+        }
+
+
       </div>
     </div>
 
@@ -110,8 +117,6 @@
         <i class="fas fa-calendar-alt"></i>
         <h2>Próximos turnos</h2>
       </div>
-
-      <p>No hay turnos programados.</p>
     </div>
 
   </div>

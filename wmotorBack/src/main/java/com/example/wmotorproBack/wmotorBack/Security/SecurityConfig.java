@@ -57,7 +57,7 @@ public class SecurityConfig {
                                 .requestMatchers("/turno/crear").permitAll()
                                 .requestMatchers("/turno/obtenerEstado").permitAll()
                                 .requestMatchers("turno/asignarFecha/{id}").permitAll()
-                                .requestMatchers("turno/cambiarEstado/{id}").permitAll()
+                                .requestMatchers("/turno/cambiarEstado/{id}").permitAll()
                                 .requestMatchers("/turno/obtenerTurnoCliente/{idCliente}").permitAll()
                                 .requestMatchers("/vehiculo/buscar/cliente/{clienteId}").permitAll()
                                 .requestMatchers("/presupuesto/crear").permitAll()

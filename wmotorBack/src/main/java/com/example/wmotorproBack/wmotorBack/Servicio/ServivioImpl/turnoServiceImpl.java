@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
@@ -104,11 +106,12 @@ public class turnoServiceImpl implements TurnoService{
         
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
-        turno.setFechaHora(fecha.getFechas());
+        
 
         EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
+        turno.setFechaHora(fecha.getFechas());
         turno.setEstado(estado);
         turnoRepository.save(turno);
 
@@ -120,21 +123,29 @@ public class turnoServiceImpl implements TurnoService{
 
 
     @Override
-    public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadoTurnoEnums estadoEnum) {
+    public ResponceDTO actualizarEstadoTurno(Long idTurno, EstadosDTO estado) {
         
         ResponceDTO responce = new ResponceDTO();
         
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Turno no encontrado"));
 
-        EstadoTurnosEntity estado = estadoTurnoRepository
-        .findByEstadoTurno(estadoEnum)
-        .orElseThrow();
+        String estadoStr = estado.getEstado();
+        EstadoTurnoEnums estadoEnum;
+        try {
+            estadoEnum = EstadoTurnoEnums.valueOf(estadoStr);
+        } catch (Exception ex) {
+            throw new RuntimeException("Estado inválido: " + estadoStr);
+        }
 
-        turno.setEstado(estado);
+        EstadoTurnosEntity estados = estadoTurnoRepository
+        .findByEstadoTurno(estadoEnum)
+        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        turno.setEstado(estados);
         turnoRepository.save(turno);
 
-        responce.setMensage("Se actualizo el estado del turno a: ");
+        responce.setMensage("Se actualizo el estado del turno ");
 
         return responce;
 

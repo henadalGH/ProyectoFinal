@@ -12,7 +12,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 public interface EstadoTurnoRepository extends JpaRepository<EstadoTurnosEntity, Long> {
 
     Optional<EstadoTurnosEntity> findByEstadoTurno(EstadoTurnoEnums estado);
-    
+
 
 }
  

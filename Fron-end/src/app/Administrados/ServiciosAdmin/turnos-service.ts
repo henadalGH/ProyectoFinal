@@ -23,7 +23,7 @@ export class TurnosService {
 
 
   asignarFecha(id: number, fecha: string){
-    return this.http.put<any>(`${this.urlComun}/asignarFecha/${id}`, {fecha: fecha });
+    return this.http.put<any>(`${this.urlComun}/asignarFecha/${id}`, {fechas: fecha });
       
   }
 

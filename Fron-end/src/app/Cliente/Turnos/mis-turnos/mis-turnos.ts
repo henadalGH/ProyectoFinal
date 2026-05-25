@@ -1,32 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { Headercliente } from "../../headercliente/headercliente";
-import { TurnosService } from '../../../Administrados/ServiciosAdmin/turnos-service';
+import { AuthService } from '../../../AuthServicio/auth-service';
+import { TurnosService } from '../../../Servicio/turnos-service';
+import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-mis-turnos',
-  imports: [Headercliente],
+  imports: [],
   templateUrl: './mis-turnos.html',
   styleUrl: './mis-turnos.css',
 })
 export class MisTurnos implements OnInit{
   
-  constructor(private turnoService: TurnosService){}
+  constructor(private turnoService: TurnosService,
+    private authService: AuthService,
+    private router: Router
+  ){}
 
+  pendiente: any[] = [];
+  
   ngOnInit(): void {
+
+    const idCliente = this.authService.getEntityId()
+
+    if(idCliente){
+      this.turnoService.obtenerTurnosPendientePorCliente(idCliente).subscribe(
+        (repueste: any) => {
+          this.pendiente = repueste;
+        }
+      )
+    }
     
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 
   pendientes: any[]= [];
 
-  obtenerTurnosPrendientePorVehiculo(idVehiculo: number){
 
-    this.turnoService.obtenerPorIdVehiculo(idVehiculo).subscribe(
-        (repuesta) =>{
-          this.pendientes = repuesta;
+  confirmarTurno(idTurno: number){
+      const estado = "CONFIRMADO"
+
+      this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
+        (next: any) => {
+          this.router.navigate(['misTurnos']);
         }
-    )
-
+      )
   }
 
+
+  cancelarTurno(idTurno: number){
+    const estado = "CANCELADO"
+
+      this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
+        (next: any) => {
+          this.router.navigate(['misTurnos']);
+        }
+      )
+  }
 }

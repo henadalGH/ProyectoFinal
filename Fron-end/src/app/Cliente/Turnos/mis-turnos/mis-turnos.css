@@ -1,0 +1,451 @@
+/* ================================================= */
+/* =================== GENERAL ===================== */
+/* ================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(
+    180deg,
+    #020617 0%,
+    #071224 100%
+  );
+
+  font-family: 'Inter', sans-serif;
+
+  color: #e2e8f0;
+}
+
+/* ================================================= */
+/* ==================== HEADER ===================== */
+/* ================================================= */
+
+.header-cliente {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 40px;
+
+  background: rgba(15, 23, 42, 0.92);
+
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+
+  backdrop-filter: blur(14px);
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+/* ===== LOGO ===== */
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+
+  color: #f8fafc;
+
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: #3b82f6;
+
+  margin-left: 4px;
+}
+
+/* ===== ACCIONES ===== */
+
+.user-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+/* ===== BOTONES HEADER ===== */
+
+.btn-notificacion,
+.btn-logout {
+  border: none;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 12px 18px;
+
+  border-radius: 12px;
+
+  font-weight: 600;
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+/* ===== NOTIFICACION ===== */
+
+.btn-notificacion {
+  background: rgba(59,130,246,0.12);
+
+  color: #60a5fa;
+}
+
+.btn-notificacion:hover {
+  background: rgba(59,130,246,0.22);
+
+  transform: translateY(-2px);
+}
+
+/* ===== LOGOUT ===== */
+
+.btn-logout {
+  background: rgba(239,68,68,0.12);
+
+  color: #f87171;
+}
+
+.btn-logout:hover {
+  background: rgba(239,68,68,0.22);
+
+  color: #ef4444;
+
+  transform: translateY(-2px);
+}
+
+/* ================================================= */
+/* ================= CONTENEDOR ==================== */
+/* ================================================= */
+
+.contenedor-turnos {
+  max-width: 1200px;
+
+  margin: auto;
+
+  padding: 45px 25px;
+}
+
+/* ================================================= */
+/* ==================== TITULO ===================== */
+/* ================================================= */
+
+.titulo {
+  text-align: center;
+
+  margin-bottom: 45px;
+}
+
+.titulo h1 {
+  font-size: 42px;
+
+  color: #f8fafc;
+
+  margin-bottom: 12px;
+}
+
+.titulo p {
+  color: #94a3b8;
+
+  font-size: 16px;
+
+  max-width: 650px;
+
+  margin: auto;
+
+  line-height: 1.6;
+}
+
+/* ================================================= */
+/* ================== SUBTITULO ==================== */
+/* ================================================= */
+
+.subtitulo {
+  margin-bottom: 25px;
+}
+
+.subtitulo h2 {
+  color: #e2e8f0;
+
+  font-size: 24px;
+}
+
+/* ================================================= */
+/* ==================== CARDS ====================== */
+/* ================================================= */
+
+.turno-card {
+  background: rgba(15, 23, 42, 0.88);
+
+  border-radius: 24px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  padding: 28px;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+
+  transition: 0.3s ease;
+}
+
+.turno-card:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(59,130,246,0.2);
+
+  box-shadow: 0 22px 45px rgba(0,0,0,0.45);
+}
+
+/* ================================================= */
+/* ================= HEADER CARD =================== */
+/* ================================================= */
+
+.turno-header {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 28px;
+}
+
+/* ===== ICONO ===== */
+
+.icono-turno {
+  width: 70px;
+  height: 70px;
+
+  border-radius: 18px;
+
+  background: rgba(59,130,246,0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #60a5fa;
+
+  font-size: 26px;
+}
+
+/* ===== INFO ===== */
+
+.vehiculo-info h3 {
+  font-size: 24px;
+
+  color: #f8fafc;
+
+  margin-bottom: 5px;
+}
+
+.vehiculo-info span {
+  color: #94a3b8;
+
+  font-size: 14px;
+
+  letter-spacing: 1px;
+}
+
+/* ================================================= */
+/* =================== BODY CARD =================== */
+/* ================================================= */
+
+.turno-body {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 28px;
+}
+
+/* ===== ITEM ===== */
+
+.item {
+  background: rgba(255,255,255,0.03);
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.item h4 {
+  color: #94a3b8;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+.item p {
+  color: #f8fafc;
+
+  font-size: 16px;
+
+  font-weight: 600;
+}
+
+/* ================================================= */
+/* ==================== BOTONES ==================== */
+/* ================================================= */
+
+.botones {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+/* ===== ACEPTAR ===== */
+
+.btn-aceptar {
+  border: none;
+
+  padding: 13px 24px;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    135deg,
+    #16a34a,
+    #22c55e
+  );
+
+  color: white;
+
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.btn-aceptar:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 10px 22px rgba(34,197,94,0.28);
+}
+
+/* ===== CANCELAR ===== */
+
+.btn-cancelar {
+  border: none;
+
+  padding: 13px 24px;
+
+  border-radius: 12px;
+
+  background: rgba(239,68,68,0.12);
+
+  color: #f87171;
+
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+
+  transition: 0.25s ease;
+}
+
+.btn-cancelar:hover {
+  background: rgba(239,68,68,0.22);
+
+  color: #ef4444;
+
+  transform: translateY(-2px);
+}
+
+/* ================================================= */
+/* ================== RESPONSIVE =================== */
+/* ================================================= */
+
+@media (max-width: 900px) {
+
+  .header-cliente {
+    padding: 18px 20px;
+
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .titulo h1 {
+    font-size: 34px;
+  }
+
+  .turno-header {
+    flex-direction: column;
+
+    text-align: center;
+  }
+
+  .botones {
+    justify-content: center;
+  }
+
+  .btn-aceptar,
+  .btn-cancelar {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .user-actions {
+    width: 100%;
+
+    flex-direction: column;
+  }
+
+  .btn-notificacion,
+  .btn-logout {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .contenedor-turnos {
+    padding: 30px 15px;
+  }
+
+  .turno-card {
+    padding: 22px;
+  }
+
+}

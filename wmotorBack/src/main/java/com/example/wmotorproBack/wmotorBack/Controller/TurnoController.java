@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
@@ -77,7 +78,7 @@ public class TurnoController {
     
 
     @PutMapping("/cambiarEstado/{id}")
-    public ResponseEntity<ResponceDTO> actualizarEstadoTurno(@PathVariable Long id, @RequestParam EstadoTurnoEnums estado) {
+    public ResponseEntity<ResponceDTO> actualizarEstadoTurno(@PathVariable Long id, @RequestBody EstadosDTO estado) {
         ResponceDTO respoce = turnoService.actualizarEstadoTurno(id, estado);
         return ResponseEntity.ok(respoce);
     }
