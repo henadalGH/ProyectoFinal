@@ -1,67 +1,165 @@
-<div class="contabilidad-container">
+<div class="finanzas-container">
 
-    <!-- HEADER -->
-    <div class="reg">
+  <!-- HEADER -->
+  <div class="topbar">
 
-        <div class="titulo">
-            <h1>Contabilidad del taller</h1>
+    <div class="mes">
+      <h1>Septiembre 2026</h1>
+      <button>Cambiar mes</button>
+    </div>
 
-            <div class="fecha">
-                <i class="fas fa-calendar-alt"></i>
-                <h3>Fecha: 25/05/2026</h3>
-            </div>
+    <div class="saludo">
+      <h2>Hola 👋</h2>
+    </div>
+
+  </div>
+
+  <!-- TARJETAS -->
+  <div class="cards-finanzas">
+
+    <!-- INGRESOS -->
+    <div class="card ingreso-card">
+
+      <div class="card-info">
+        <p>Ingresos del mes</p>
+        <h2>$4.892.359</h2>
+      </div>
+
+      <div class="icon-card ingreso-icon">
+        <i class="fas fa-arrow-trend-up"></i>
+      </div>
+
+    </div>
+
+    <!-- GASTOS -->
+    <div class="card gasto-card">
+
+      <div class="card-info">
+        <p>Gastos del mes</p>
+        <h2>$4.177.996</h2>
+      </div>
+
+      <div class="icon-card gasto-icon">
+        <i class="fas fa-arrow-trend-down"></i>
+      </div>
+
+    </div>
+
+    <!-- BALANCE -->
+    <div class="card balance-card">
+
+      <div class="card-info">
+        <p>Balance del mes</p>
+        <h2>$714.363</h2>
+      </div>
+
+      <div class="icon-card balance-icon">
+        <i class="fas fa-wallet"></i>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- GRID -->
+  <div class="finanzas-grid">
+
+    <!-- MOVIMIENTOS -->
+    <div class="movimientos-card">
+
+      <div class="section-title">
+        <h2>Últimos movimientos</h2>
+      </div>
+
+      <div class="movimientos-list">
+
+        <div class="movimiento">
+          <div class="movimiento-info">
+            <h4>Pago reparación</h4>
+            <p>Hoy • 13:08 • Tarjeta de crédito</p>
+          </div>
+
+          <strong class="ingreso-text">
+            +$99.390
+          </strong>
         </div>
 
-        <button class="btn-registrar">
-            <i class="fas fa-plus-circle"></i>
-            Registrar movimientos
+        <div class="movimiento">
+          <div class="movimiento-info">
+            <h4>Compra proveedor</h4>
+            <p>Hoy • 12:09 • Transferencia</p>
+          </div>
+
+          <strong class="gasto-text">
+            -$4.076.927
+          </strong>
+        </div>
+
+        <div class="movimiento">
+          <div class="movimiento-info">
+            <h4>Orden de trabajo</h4>
+            <p>Hoy • 11:22 • Débito</p>
+          </div>
+
+          <strong class="ingreso-text">
+            +$4.892.359
+          </strong>
+        </div>
+
+        <div class="movimiento">
+          <div class="movimiento-info">
+            <h4>Pago servicios</h4>
+            <p>Hoy • 10:15 • Efectivo</p>
+          </div>
+
+          <strong class="gasto-text">
+            -$52.000
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- PANEL LATERAL -->
+    <div class="resumen-card">
+
+      <div class="fecha-box">
+        <h2>29 Sept 2026</h2>
+        <span>Abierta</span>
+      </div>
+
+      <div class="resumen-item">
+        <p>Ingresos</p>
+        <strong class="ingreso-text">$4.892.359</strong>
+      </div>
+
+      <div class="resumen-item">
+        <p>Egresos</p>
+        <strong class="gasto-text">$4.177.996</strong>
+      </div>
+
+      <div class="resumen-item">
+        <p>Balance</p>
+        <strong>$714.363</strong>
+      </div>
+
+      <div class="resumen-item">
+        <p>Saldo efectivo</p>
+        <strong>$12.384</strong>
+      </div>
+
+      <div class="acciones-finanzas">
+
+        <button class="btn-ingreso">
+          <i class="fas fa-plus"></i>
+          Registrar movimiento
         </button>
 
-    </div>
-
-    <!-- GRID -->
-    <div class="panel-finanzas">
-
-        <!-- INGRESOS -->
-        <div class="ingresos">
-
-            <div class="card-header">
-                <div class="icono ingreso-icono">
-                    <i class="fas fa-arrow-trend-up"></i>
-                </div>
-
-                <div>
-                    <h1>Ingresos del día</h1>
-                    <p>Movimientos positivos registrados</p>
-                </div>
-            </div>
-
-            <div class="monto ingreso">
-                + $0
-            </div>
-
-        </div>
-
-        <!-- GASTOS -->
-        <div class="gastos">
-
-            <div class="card-header">
-                <div class="icono gasto-icono">
-                    <i class="fas fa-arrow-trend-down"></i>
-                </div>
-
-                <div>
-                    <h1>Gastos del día</h1>
-                    <p>Egresos y pagos registrados</p>
-                </div>
-            </div>
-
-            <div class="monto gasto">
-                - $0
-            </div>
-
-        </div>
+      </div>
 
     </div>
+
+  </div>
 
 </div>

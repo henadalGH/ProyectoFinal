@@ -7,12 +7,6 @@ import { GestionCliente } from './Administrados/Clientes/gestion-cliente/gestion
 import { GestionarVehiculo } from './Administrados/Clientes/gestionar-vehiculo/gestionar-vehiculo';
 import { RegistrarClintes } from './Administrados/Clientes/registrar-clintes/registrar-clintes';
 import { RegistarVehiculo } from './Administrados/Clientes/registar-vehiculo/registar-vehiculo';
-import { HomeFinanzas } from './Finanzas/home-finanzas/home-finanzas';
-import { Reportes } from './Finanzas/reportes/reportes';
-import { MovimientosFinancieros } from './Finanzas/movimientos-financieros/movimientos-financieros';
-import { Presupuesto } from './Finanzas/presupuesto/presupuesto';
-import { HeaderFinanzas } from './Finanzas/header-finanzas/header-finanzas';
-import { CrearPresupuesto } from './utilidades/crear-presupuesto/crear-presupuesto';
 import { HomeCliente } from './Cliente/home-cliente/home-cliente';
 import { MisVehiculos } from './Cliente/mis-vehiculos/mis-vehiculos';
 import { HeaderEmpleado } from './Empleados/header-empleado/header-empleado';
@@ -31,6 +25,7 @@ import { DetalleVehiculo } from './Cliente/Vehiculo/detalle-vehiculo/detalle-veh
 import { MiHistorial } from './Cliente/Vehiculo/mi-historial/mi-historial';
 import { MisTurnos } from './Cliente/Turnos/mis-turnos/mis-turnos';
 import { RegistrarFinanzas } from './Administrados/Finanzas/registrar-finanzas/registrar-finanzas';
+import { HomeFinanzas } from './Administrados/Finanzas/home-finanzas/home-finanzas';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -68,13 +63,7 @@ export const routes: Routes = [
     { path: 'inicioSocio', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
     { path: 'headerEmpleado', component: HeaderEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
 
-    // 🔐 RUTAS PROTEGIDAS - FINANZAS
-    { path: 'homeFinanzas', component: HomeFinanzas, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
-    { path: 'reportes', component: Reportes, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
-    { path: 'finanzas', component: MovimientosFinancieros, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
-    { path: 'presupuestos', component: Presupuesto, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
-    { path: 'headerFinanzas', component: HeaderFinanzas, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
-    { path: 'crearPresupuesto', component: CrearPresupuesto, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN', 'ROLE_FINANZAS'] } },
+    
 
     // Ruta general
     { path: 'homeFinanzas', component: HomeFinanzas},
