@@ -30,9 +30,6 @@ public class MovimientoFinancieroEntity {
     @Enumerated(EnumType.STRING)
     private MovimientosEnum tipo_movimiento;
 
-    @Column(name = "categoria")
-    private String categoria;
-
     @Column(name = "concepto")
     private String concepto;
 
@@ -45,4 +42,8 @@ public class MovimientoFinancieroEntity {
     @ManyToOne
     @JoinColumn(name = "id_admin")
     private AdminEntity admin;
+
+    @ManyToOne
+    @JoinColumn(name = "id_categoria")
+    private CategoriaMovimientoEntity categoria;
 }

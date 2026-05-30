@@ -26,6 +26,8 @@ import { MiHistorial } from './Cliente/Vehiculo/mi-historial/mi-historial';
 import { MisTurnos } from './Cliente/Turnos/mis-turnos/mis-turnos';
 import { RegistrarFinanzas } from './Administrados/Finanzas/registrar-finanzas/registrar-finanzas';
 import { HomeFinanzas } from './Administrados/Finanzas/home-finanzas/home-finanzas';
+import { HomeOrdenes } from './Administrados/Ordenes/home-ordenes/home-ordenes';
+import { CrearOrden } from './Administrados/Ordenes/crear-orden/crear-orden';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -67,5 +69,10 @@ export const routes: Routes = [
 
     // Ruta general
     { path: 'homeFinanzas', component: HomeFinanzas},
-    {path: 'registraMovimiento', component: RegistrarFinanzas}
+    {path: 'registraMovimiento', component: RegistrarFinanzas},
+
+
+    //Rutas de ordenes
+    {path: 'homeOrdenes', component: HomeOrdenes},
+    {path: 'crearOrden/:id', component: CrearOrden}
 ];

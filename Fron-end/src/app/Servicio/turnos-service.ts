@@ -39,11 +39,17 @@ export class TurnosService {
 
   }
 
-
   actualizarEstadoTurno(idTurno: number, estado:string){
     return this.http.put<any>(`${this.url}/cambiarEstado/${idTurno}`, {estado});
   }
 
+  obtenerPorEstado(estado: string): Observable<any> {
+    return this.http.get(`${this.url}/obtenerEstado`, {
+      params: {
+        estado: estado
+      }
+    });
+  }
   
 
 

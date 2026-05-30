@@ -174,7 +174,7 @@ public class turnoServiceImpl implements TurnoService{
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
 
-        return turnoRepository.findByVehiculo_IdAndEstado(idCliente, estado)
+        return turnoRepository.findByVehiculoClienteIdAndEstado(idCliente, estado)
                 .stream()
                 .map(this::toMapTurnoDto)                                   
                 .collect(Collectors.toList());

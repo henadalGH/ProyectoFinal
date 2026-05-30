@@ -1,0 +1,91 @@
+<app-header-admin></app-header-admin>
+
+<div class="titulo">
+    <h1>Ordenes de trabajos</h1>
+    <p>Gestina todas las ordenes de trabajos a partir de turno</p>
+</div>
+
+<div class="encabezado">
+    <h2>Turnos confirmados</h2>
+<p>Turnos listos para generar un orden</p>
+
+
+</div>
+
+<div class="tabla-wrapper">
+      <table class="tabla-roster" border="1">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Vehiculo</th>
+            <th>Patente</th>
+            <th>Servicio</th>
+            
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (tur of turnos; track $index) {
+            <tr class="roster-row">
+              
+                <td>{{tur.fecha}}</td>
+    
+
+              <td class="col-perfil">
+                <div class="player-info">
+                  <div class="avatar-box">
+                    <span class="initials">{{ tur.nombreCliente }}{{ tur.apellidoCliente}}</span>
+                  </div>
+                  <div class="player-name">
+                    <span class="nombre">{{ tur.nombre }}</span>
+                    <span class="apellido">{{ tur.apellido }}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td class="col-contacto">
+                <div class="contacto-wrapper">
+                  <span class="email">{{ tur.marca }} {{tur.modelo}}</span>
+                </div>
+              </td>
+
+              <td class="col-vehiculo">
+                <div class="patente-sticker">
+                  {{ tur.patente || 'SIN VEHÍCULO' }}
+                </div>
+              </td>
+
+              <td class="text-center">
+                <div class="patente-sticker">
+                  {{ tur.nombreServicio}}
+                </div>
+              </td>
+
+              <td class="text-center">
+                <button (click)="crearOrden(tur.id)">
+                  Crear Orden
+                </button>
+              </td>
+
+              
+
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="6" class="tabla-vacia">
+                <div class="vacio-content">
+                  <span class="vacio-icon">👟</span>
+                  <p>Sin jugadores registrados en el plantel actual.</p>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+
+
+

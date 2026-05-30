@@ -12,8 +12,6 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetallePresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
-import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
-import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
@@ -24,7 +22,6 @@ import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
-import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionService;
 import com.example.wmotorproBack.wmotorBack.Servicio.PresupuestoService;
@@ -52,8 +49,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
-    @Autowired
-    private TurnoRepository turnoRepository;
 
 
     @Override
@@ -86,20 +81,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         .orElseThrow(() -> new RuntimeException("id vehiculo no encontrado"));
 
         presupuestoEntity.setVehiculo(vehiculo);
-
-        // Validar que haya un turno confirmado o en proceso para el vehículo
-        List<TurnoEntity> turnos = turnoRepository.findByVehiculo(vehiculo);
-        boolean tieneTurnoAceptado = turnos.stream()
-            .anyMatch(turno -> turno.getEstado() != null && 
-                (turno.getEstado().getEstadoTurno() == EstadoTurnoEnums.CONFIRMADO || 
-                 turno.getEstado().getEstadoTurno() == EstadoTurnoEnums.EN_PROCESO));
-        
-        if (!tieneTurnoAceptado) {
-            throw new RuntimeException("No se puede crear presupuesto: debe haber un turno confirmado o en proceso para el vehículo");
-        }
-
-
-
 
         // ✅ numeración (mejor genérica)
         Long numero = numeracionService.generarNumero();
