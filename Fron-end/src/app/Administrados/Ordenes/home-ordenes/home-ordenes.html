@@ -64,8 +64,8 @@
               </td>
 
               <td class="text-center">
-                <button (click)="crearOrden(tur.id)">
-                  Crear Orden
+                <button (click)="abrilModal(tur.id)">
+                  Asignar empleado
                 </button>
               </td>
 
@@ -85,6 +85,26 @@
         </tbody>
       </table>
     </div>
+
+   
+    
+
+    @if (modal) {
+
+      
+
+        <div class="item">
+          <label>Seleccione a un empleado</label>
+          <select name="MECANICO">
+            @for (emp of empleados; track $index) {
+              <option value="{{emp.id}}">{{emp.nombre}} {{emp.apellido}}</option>
+            }
+          </select>
+        </div>
+      
+      
+      <button (click)="cerrarmodal()">cerrar</button>
+    }
 
 
 

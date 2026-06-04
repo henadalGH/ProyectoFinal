@@ -180,4 +180,12 @@ public class turnoServiceImpl implements TurnoService{
                 .collect(Collectors.toList());
     }
 
+
+    @Override
+    public TurnoEstadosDTO obtenerTurnoPorId(Long id) {
+        TurnoEntity turno = turnoRepository.findById(id)
+        .orElseThrow(()-> new RuntimeException( "Id del turno no encontrado"));
+        return toMapTurnoDto(turno);
+    }
+
     }

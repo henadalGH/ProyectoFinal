@@ -27,5 +27,7 @@ public interface TurnoService {
 
     List<TurnoEstadosDTO> obtenerturnoPorIdClienteEstado(Long idCliente);
 
+    public TurnoEstadosDTO obtenerTurnoPorId(Long id);
+
 
 }

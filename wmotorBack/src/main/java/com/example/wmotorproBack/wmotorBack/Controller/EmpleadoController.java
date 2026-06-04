@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
+
 @RestController
 @RequestMapping("/empleado")
 public class EmpleadoController {
@@ -45,6 +46,12 @@ public class EmpleadoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(r);
         }
     }
+
+    @GetMapping("/mecanico")
+    public ResponseEntity<List<EmpleadoDTO>> ontenerEmpleadoMecanico() {
+        return new ResponseEntity<List<EmpleadoDTO>>(empleadoService.obtenerEmpleadoCargoMecanico(), HttpStatus.OK);
+    }
+    
 
     
     

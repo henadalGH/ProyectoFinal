@@ -50,9 +50,10 @@ export class TurnosService {
       }
     });
   }
+
+
+  obtenerTurnoPorId(idTurnno: number){
+    return this.http.get<any>(`${this.url}/${idTurnno}`);
+  }
   
-
-
-
-
 }
