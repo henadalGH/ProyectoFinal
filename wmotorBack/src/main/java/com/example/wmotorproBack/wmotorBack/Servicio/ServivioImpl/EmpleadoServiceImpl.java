@@ -39,6 +39,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
             empleado.getId(); // fuerza la carga
 
             EmpleadoDTO empleados = new EmpleadoDTO();
+            empleados.setId(empleado.getId());
             empleados.setNombre(empleado.getUsuario().getNombre());
             empleados.setApellido(empleado.getUsuario().getApellido());
             empleados.setEmail(empleado.getUsuario().getEmail());
@@ -75,6 +76,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public EmpleadoDTO toMapEmpleado(EmpleadoEntity empleado) {
 
         EmpleadoDTO empleados = new EmpleadoDTO();
+            empleados.setId(empleado.getId());
             empleados.setNombre(empleado.getUsuario().getNombre());
             empleados.setApellido(empleado.getUsuario().getApellido());
             empleados.setEmail(empleado.getUsuario().getEmail());

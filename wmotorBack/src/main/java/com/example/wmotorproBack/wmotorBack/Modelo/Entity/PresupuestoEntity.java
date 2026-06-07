@@ -59,6 +59,5 @@ public class PresupuestoEntity {
     @OneToMany(mappedBy = "presupuesto")
     private List<DetallePresupuestoEntity> detalle = new ArrayList<>();
 
-    @OneToMany(mappedBy = "presupuesto")
-    private List<OrdenTrabajoEntity> orden = new ArrayList<>();
+    
 }

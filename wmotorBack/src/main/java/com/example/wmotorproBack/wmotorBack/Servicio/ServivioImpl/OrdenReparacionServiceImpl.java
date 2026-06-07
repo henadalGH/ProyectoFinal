@@ -12,22 +12,26 @@ import org.springframework.stereotype.Service;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetalleOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetalleOrdenEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
-import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PrioridadEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
 import com.example.wmotorproBack.wmotorBack.Repository.DetalleOrdenReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoOrdenRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.EstadoTurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
-import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.PrioridadRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionService;
 import com.example.wmotorproBack.wmotorBack.Servicio.OrdenReparacionService;
@@ -36,7 +40,7 @@ import com.example.wmotorproBack.wmotorBack.Servicio.OrdenReparacionService;
 public class OrdenReparacionServiceImpl implements OrdenReparacionService{
 
 
-    @Autowired
+    @Autowired 
     private VehiculoRepository vehiculoRepository;
 
     @Autowired
@@ -52,13 +56,16 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
     private PrioridadRepository prioridadRepository;
 
     @Autowired
-    private PresuspuestoRepository presuspuestoRepository;
-
-    @Autowired
     private NumeracionService numeracionService;
 
     @Autowired
     private DetalleOrdenReposistory detalleOrdenReposistory;
+
+    @Autowired
+    private TurnoRepository turnoRepository;
+
+    @Autowired
+    private EstadoTurnoRepository estadoTurnoRepository;
 
 
     @Override
@@ -103,14 +110,6 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
             return response;
         }
         ordenTrabajoEntity.setPrioridad(prioridadOpt.get());
-
-        //presupuesto relacionado
-        Optional<PresupuestoEntity> presupuestoOpt = presuspuestoRepository.findById(orden.getId());
-        if (presupuestoOpt.isEmpty()) {
-            response.setMensage("Error: ID de presupuesto no encontrado");
-            return response;
-        }
-        ordenTrabajoEntity.setPresupuesto(presupuestoOpt.get());
 
         //Detalle de la orden
 
@@ -266,5 +265,77 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenDTO.setDetalleOrden(listaDetalles);
 
         return ordenDTO;
+    }
+
+
+    @Override
+    public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadEnum prioridadEnum) {
+
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        TurnoEntity turno = turnoRepository.findById(idTurno)
+                .orElseThrow(() -> new RuntimeException("Id del turno no encontrado"));
+
+        PrioridadEntity prioridad = prioridadRepository.findByPrioridad(prioridadEnum)
+                .orElseThrow(() -> new RuntimeException("Prioridad no encontrada"));
+
+        EmpleadoEntity empleado = empleadoRepository.findById(idEmpleado)
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
+        .orElseThrow();
+
+
+        TurnoEntity turnoEntity = new TurnoEntity();
+        turnoEntity.setEstado(estado);
+
+        OrdenTrabajoEntity orden = new OrdenTrabajoEntity();
+        orden.setTurno(turno);
+        orden.setEmpleado(empleado);
+        orden.setFechaEminsion(LocalDate.now());
+        orden.setPrioridad(prioridad);
+
+        turnoRepository.save(turnoEntity);
+        ordenTrabajoRepository.save(orden);
+
+        responceDTO.setMensage("Orden asignada con exito");
+
+        return responceDTO;
+    }
+
+
+    @Override
+    public List<OrdenTrabajoEmpleadoDTO> obtenerOrdenePorEmpleado(Long idEmpleado, LocalDate fecha) {
+        
+        EmpleadoEntity empleadoEntity = empleadoRepository.findById(idEmpleado)
+        .orElseThrow();
+        
+        return ordenTrabajoRepository.findByEmpleadoAndTurnoFechaHora(empleadoEntity, fecha)
+            .stream()
+            .map(this::toOrdenTrabajoEmpleadoDTO)
+            .collect(Collectors.toList());
+        
+    }
+
+
+    @Override
+    public OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orden) {
+        
+        OrdenTrabajoEmpleadoDTO ordenTrabajoEmpleado = new OrdenTrabajoEmpleadoDTO();
+
+        ordenTrabajoEmpleado.setNombreCliente(orden.getTurno().getVehiculo().getCliente().getUsuario().getNombre() + 
+        orden.getTurno().getVehiculo().getCliente().getUsuario().getApellido());
+        ordenTrabajoEmpleado.setContacto(orden.getTurno().getVehiculo().getCliente().getUsuario().getContacto());
+        ordenTrabajoEmpleado.setEmail(orden.getTurno().getVehiculo().getCliente().getUsuario().getEmail());
+        ordenTrabajoEmpleado.setMarca(orden.getTurno().getVehiculo().getMarca());
+        ordenTrabajoEmpleado.setModelo(orden.getTurno().getVehiculo().getModelo());
+        ordenTrabajoEmpleado.setPatente(orden.getTurno().getVehiculo().getPatente());
+        ordenTrabajoEmpleado.setKiometraje(orden.getTurno().getVehiculo().getKilometraje());
+        ordenTrabajoEmpleado.setNombreCliente(orden.getTurno().getServicio().getNombre());
+        ordenTrabajoEmpleado.setDescripcionProblema(orden.getTurno().getDescripcion());
+        ordenTrabajoEmpleado.setPrioridad(orden.getPrioridad().getPrioridad());
+
+
+        return ordenTrabajoEmpleado;
     }
 }

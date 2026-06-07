@@ -7,5 +7,6 @@ public enum EstadoTurnoEnums {
     FINALIZADO,      // servicio completado
     CANCELADO,       // cancelado por cliente o por el local
     AUSENTE,
-    PENDIENTE_ASIGNACION
+    PENDIENTE_ASIGNACION,
+    ASIGNADO_ORDEN
 }

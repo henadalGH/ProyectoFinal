@@ -68,6 +68,8 @@ public class SecurityConfig {
                                 .requestMatchers("presupuesto/{idPresupuesto}").permitAll()
                                 .requestMatchers("presupuesto/todos").permitAll()
                                 .requestMatchers("orden/**").permitAll()
+                                .requestMatchers("orden/asignacion/{idTurno}/{idEmpleado}/{prioridad}").permitAll()
+                                .requestMatchers("orden//obtenerOrdenesEmpledo/{idEmpleado}").permitAll()
                                 .requestMatchers("presupuesto/actualizar/{idPresupuesto}").permitAll()
                                 .requestMatchers("presupuesto/obtener/{idVehiculo}/vehiculo").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")

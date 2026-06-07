@@ -22,7 +22,6 @@ public class OrdenReparacionDTO {
     private Long idPrioridad;
     private Long idVehiculo;
     private Long idEmpleado;
-    private Long idPresupuesto;
 
 
 }

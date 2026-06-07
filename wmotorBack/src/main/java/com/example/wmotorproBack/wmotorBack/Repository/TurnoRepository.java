@@ -20,5 +20,5 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Long>{
 
     
 
-}
+} 
  

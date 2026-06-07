@@ -1,14 +1,19 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
 import com.example.wmotorproBack.wmotorBack.Servicio.OrdenReparacionService;
 
+
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -69,6 +75,24 @@ public class OrdenReparacionController {
         List<ObtenerOrdenDTO> ordenes = ordenReparacionService.obtenerOrdenPorEstado(estado);
         return new ResponseEntity<>(ordenes, HttpStatus.OK);
     }
+
+    @PostMapping("asignacion/{idTurno}/{idEmpleado}/{prioridad}")
+    public ResponseEntity<ResponceDTO> asignarOrdenEmpleado(@PathVariable PrioridadEnum prioridad, 
+        @PathVariable Long idTurno,
+        @PathVariable Long idEmpleado) {
+        
+        return new ResponseEntity<ResponceDTO>(ordenReparacionService.asignarOrdeEmpleado(idTurno, idEmpleado, prioridad), HttpStatus.OK);
+    }
+
+
+    @GetMapping("/obtenerOrdenesEmpledo/{idEmpleado}")
+    public ResponseEntity<List<OrdenTrabajoEmpleadoDTO>> obtenerOrdenesPorEmpleado(@PathVariable Long idEmplead
+        , @RequestParam LocalDate fecha
+    ) {
+        return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.obtenerOrdenePorEmpleado(idEmplead, fecha), HttpStatus.OK);
+    }
+    
+    
     
 
 }

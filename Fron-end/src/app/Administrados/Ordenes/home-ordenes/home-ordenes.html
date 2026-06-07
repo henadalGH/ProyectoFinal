@@ -91,19 +91,38 @@
 
     @if (modal) {
 
-      
+          <form (ngSubmit)="AsignarOrden()">
 
-        <div class="item">
-          <label>Seleccione a un empleado</label>
-          <select name="MECANICO">
-            @for (emp of empleados; track $index) {
-              <option value="{{emp.id}}">{{emp.nombre}} {{emp.apellido}}</option>
-            }
-          </select>
-        </div>
-      
-      
-      <button (click)="cerrarmodal()">cerrar</button>
+      <div class="item">
+        <label>Seleccione un empleado</label>
+
+        <select name="idEmpleado" [(ngModel)]="idEmpleado" required>
+          <option [ngValue]="null">Seleccione un empleado</option>
+
+          @for (emp of empleados; track emp.id) {
+            <option [ngValue]="emp.id">
+              {{ emp.nombre }} {{ emp.apellido }}
+            </option>
+          }
+        </select>
+      </div>
+
+      <div class="item">
+        <label>Elija su prioridad</label>
+
+        <select name="prioridad" [(ngModel)]="prioridad" required>
+          <option value="">Seleccione una prioridad</option>
+          <option value="ALTA">Alta</option>
+          <option value="MEDIA">Media</option>
+          <option value="BAJA">Baja</option>
+        </select>
+      </div>
+
+      <button type="submit">Asignar</button>
+
+    </form>
+
+    <button (click)="cerrarmodal()">Cerrar</button>
     }
 
 
