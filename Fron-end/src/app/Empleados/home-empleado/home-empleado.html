@@ -1,1 +1,52 @@
 <app-header-empleado></app-header-empleado>
+
+<div class="titulo">
+    <h1>Trabajos del día {{ fecha | date:'dd/MM/yyyy' }}</h1>
+    <p>Órdenes asignadas para la jornada actual</p>
+</div>
+
+<div class="ordenes">
+
+    @for (ord of ordenes; track $index) {
+
+        <div class="orden-card">
+
+            <div class="orden-header">
+                <div class="icono">
+                    <i class="fas fa-car"></i>
+                </div>
+
+                <div class="vehiculo">
+                    <h3>{{ord.marca}} {{ord.modelo}}</h3>
+                    <span>{{ord.patente}}</span>
+                </div>
+            </div>
+
+            <div class="orden-body">
+
+                <div class="dato">
+                    <strong>Servicio</strong>
+                    <p>{{ord.nombreServicio}}</p>
+                </div>
+
+            </div>
+
+            <div class="orden-footer">
+                <button class="btn-detalle" (click)="verOrden(ord.idOrden)">
+                    Ver detalle
+                </button>
+            </div>
+
+        </div>
+
+    } @empty {
+
+        <div class="sin-ordenes">
+            <i class="fas fa-clipboard-list"></i>
+            <h2>Sin trabajos asignados</h2>
+            <p>No hay órdenes para el día de hoy.</p>
+        </div>
+
+    }
+
+</div>

@@ -28,6 +28,7 @@ import { RegistrarFinanzas } from './Administrados/Finanzas/registrar-finanzas/r
 import { HomeFinanzas } from './Administrados/Finanzas/home-finanzas/home-finanzas';
 import { HomeOrdenes } from './Administrados/Ordenes/home-ordenes/home-ordenes';
 import { CrearOrden } from './Administrados/Ordenes/crear-orden/crear-orden';
+import { DetalleOrden } from './Empleados/detalle-orden/detalle-orden';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -64,6 +65,7 @@ export const routes: Routes = [
     { path: 'homeEmpleado', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
     { path: 'inicioSocio', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
     { path: 'headerEmpleado', component: HeaderEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
+    {path: 'detalleOrden/:id', component: DetalleOrden},
 
     
 

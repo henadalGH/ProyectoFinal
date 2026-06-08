@@ -49,11 +49,6 @@ public class OrdenTrabajoEntity {
     @JoinColumn(name = "id_prioridad")
     private PrioridadEntity prioridad;
 
-
-    @ManyToOne
-    @JoinColumn(name = "id_vehiculo")
-    private VehiculoEntity vehiculo;
-
     @ManyToOne
     @JoinColumn(name = "id_empleado")
     private EmpleadoEntity empleado;

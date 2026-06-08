@@ -21,7 +21,6 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PrioridadEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
-import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
@@ -32,16 +31,12 @@ import com.example.wmotorproBack.wmotorBack.Repository.EstadoTurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.PrioridadRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
-import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionService;
 import com.example.wmotorproBack.wmotorBack.Servicio.OrdenReparacionService;
 
 @Service
 public class OrdenReparacionServiceImpl implements OrdenReparacionService{
 
-
-    @Autowired 
-    private VehiculoRepository vehiculoRepository;
 
     @Autowired
     private OrdenTrabajoRepository ordenTrabajoRepository;
@@ -95,14 +90,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         }
         ordenTrabajoEntity.setEmpleado(empleadoOpt.get());
 
-        //Relacion con el vehiculo a reparar
-        Optional<VehiculoEntity> vehiculoOpt = vehiculoRepository.findById(orden.getIdVehiculo());
-        if (vehiculoOpt.isEmpty()) {
-            response.setMensage("Error: Vehículo no encontrado");
-            return response;
-        }
-        ordenTrabajoEntity.setVehiculo(vehiculoOpt.get());
-
+    
         //Prioridar de la orden
         Optional<PrioridadEntity> prioridadOpt = prioridadRepository.findByPrioridad(PrioridadEnum.MEDIA);
         if (prioridadOpt.isEmpty()) {
@@ -184,25 +172,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         return responceDTO;
     }
 
-    @Override
-    public ObtenerOrdenDTO obtenerPorIdVehiculo(Long idVehiculo) {
-        
-        Optional<VehiculoEntity> vehiculoOpt = vehiculoRepository.findById(idVehiculo);
-        if (vehiculoOpt.isEmpty()) {
-            return null;
-        }
-        VehiculoEntity vehiculo = vehiculoOpt.get();
-
-        List<OrdenTrabajoEntity> ordenes = ordenTrabajoRepository.findByVehiculo(vehiculo);
-        
-        if (ordenes.isEmpty()) {
-            return null;
-        }
-        
-        // Retorna la primera orden encontrada
-        return toMapObtenerOrdenDTO(ordenes.get(0));
-    }
-
+    
     @Override
     public List<ObtenerOrdenDTO> obtenerOrdenPorEstado(EstadoOrdenEnums estado) {
         
@@ -238,11 +208,12 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenDTO.setNombreEmpleado(ordenTrabajo.getEmpleado().getUsuario().getNombre() + " " + 
         ordenTrabajo.getEmpleado().getUsuario().getApellido() );
 
-        //Datos del vehiculo
-        ordenDTO.setMarcaVehiculo(ordenTrabajo.getVehiculo().getMarca());
-        ordenDTO.setModeloVehiculo(ordenTrabajo.getVehiculo().getModelo());
-        ordenDTO.setPatenteVehiculo(ordenTrabajo.getVehiculo().getPatente());
-        ordenDTO.setKilometroVehiculo(ordenTrabajo.getVehiculo().getKilometraje());
+        //Tados del vehiculo
+        ordenDTO.setMarcaVehiculo(ordenTrabajo.getTurno().getVehiculo().getMarca());
+        ordenDTO.setModeloVehiculo(ordenTrabajo.getTurno().getVehiculo().getModelo());
+        ordenDTO.setPatenteVehiculo(ordenTrabajo.getTurno().getVehiculo().getPatente());
+        ordenDTO.setKilometroVehiculo(ordenTrabajo.getTurno().getVehiculo().getKilometraje());
+        
         
         List<DetalleOrdenDTO> listaDetalles = new ArrayList<>();
 
@@ -282,6 +253,8 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         EmpleadoEntity empleado = empleadoRepository.findById(idEmpleado)
                 .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
 
+        EstadoOrdenEntity estadoOrden = ordenTrabajoRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA);
+
         EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
         .orElseThrow();
 
@@ -294,6 +267,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         orden.setEmpleado(empleado);
         orden.setFechaEminsion(LocalDate.now());
         orden.setPrioridad(prioridad);
+        orden.setEstadoOrden(estadoOrden);
 
         turnoRepository.save(turnoEntity);
         ordenTrabajoRepository.save(orden);
@@ -323,6 +297,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         
         OrdenTrabajoEmpleadoDTO ordenTrabajoEmpleado = new OrdenTrabajoEmpleadoDTO();
 
+        ordenTrabajoEmpleado.setIdOrden(orden.getId());
         ordenTrabajoEmpleado.setNombreCliente(orden.getTurno().getVehiculo().getCliente().getUsuario().getNombre() + 
         orden.getTurno().getVehiculo().getCliente().getUsuario().getApellido());
         ordenTrabajoEmpleado.setContacto(orden.getTurno().getVehiculo().getCliente().getUsuario().getContacto());
@@ -331,7 +306,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenTrabajoEmpleado.setModelo(orden.getTurno().getVehiculo().getModelo());
         ordenTrabajoEmpleado.setPatente(orden.getTurno().getVehiculo().getPatente());
         ordenTrabajoEmpleado.setKiometraje(orden.getTurno().getVehiculo().getKilometraje());
-        ordenTrabajoEmpleado.setNombreCliente(orden.getTurno().getServicio().getNombre());
+        ordenTrabajoEmpleado.setNombreServicio(orden.getTurno().getServicio().getNombre());
         ordenTrabajoEmpleado.setDescripcionProblema(orden.getTurno().getDescripcion());
         ordenTrabajoEmpleado.setPrioridad(orden.getPrioridad().getPrioridad());
 

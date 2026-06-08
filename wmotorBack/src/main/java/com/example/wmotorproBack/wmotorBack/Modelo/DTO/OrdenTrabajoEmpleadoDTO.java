@@ -8,6 +8,7 @@ import lombok.Data;
 public class OrdenTrabajoEmpleadoDTO {
 
     //Poner datos del cliente
+    private Long idOrden;
     private String nombreCliente;
     private String contacto;
     private String email;

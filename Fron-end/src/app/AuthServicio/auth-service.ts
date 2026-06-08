@@ -183,7 +183,7 @@ export class AuthService {
         break;
 
       case 'ROLE_EMPLEADO':
-        console.log('👔 Redirigiendo a empleado');
+        this.router.navigate(['homeEmpleado'])
         break;
 
       case 'ROLE_CLIENTE':

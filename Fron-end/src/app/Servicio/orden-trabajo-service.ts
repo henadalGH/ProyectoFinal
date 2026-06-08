@@ -30,4 +30,9 @@ export class OrdenTrabajoService {
       }});
 
   }
+
+
+  obtenerOrdenPorId(idOrden: number){
+    return this.http.get<any []>(`${this.urlComun}/${idOrden}`);
+  }
 }

@@ -16,7 +16,6 @@ public interface OrdenReparacionService {
     List<ObtenerOrdenDTO> obtenerTodaLasOrdenes();
     ObtenerOrdenDTO obtnerOrdenPorId(Long id);
     ResponceDTO actualizarEstaOrden(EstadoOrdenEnums estado, Long id);
-    ObtenerOrdenDTO obtenerPorIdVehiculo(Long idVehiculo);
     List<ObtenerOrdenDTO> obtenerOrdenPorEstado(EstadoOrdenEnums estado);
     ObtenerOrdenDTO toMapObtenerOrdenDTO(OrdenTrabajoEntity ordenTrabajo);
     ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadEnum prioridad);

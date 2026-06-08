@@ -61,15 +61,6 @@ public class OrdenReparacionController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/vehiculo/{idVehiculo}")
-    public ResponseEntity<ObtenerOrdenDTO> obtenerOrdenPorVehiculo(@PathVariable Long idVehiculo) {
-        ObtenerOrdenDTO orden = ordenReparacionService.obtenerPorIdVehiculo(idVehiculo);
-        if (orden == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(orden, HttpStatus.OK);
-    }
-
     @GetMapping("/estado/{estado}")
     public ResponseEntity<List<ObtenerOrdenDTO>> obtenerOrdenesPorEstado(@PathVariable EstadoOrdenEnums estado) {
         List<ObtenerOrdenDTO> ordenes = ordenReparacionService.obtenerOrdenPorEstado(estado);
@@ -86,10 +77,10 @@ public class OrdenReparacionController {
 
 
     @GetMapping("/obtenerOrdenesEmpledo/{idEmpleado}")
-    public ResponseEntity<List<OrdenTrabajoEmpleadoDTO>> obtenerOrdenesPorEmpleado(@PathVariable Long idEmplead
+    public ResponseEntity<List<OrdenTrabajoEmpleadoDTO>> obtenerOrdenesPorEmpleado(@PathVariable Long idEmpleado
         , @RequestParam LocalDate fecha
     ) {
-        return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.obtenerOrdenePorEmpleado(idEmplead, fecha), HttpStatus.OK);
+        return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.obtenerOrdenePorEmpleado(idEmpleado, fecha), HttpStatus.OK);
     }
     
     
