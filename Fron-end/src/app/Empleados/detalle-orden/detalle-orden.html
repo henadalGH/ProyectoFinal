@@ -1,6 +1,152 @@
 <app-header-empleado></app-header-empleado>
 
-@for (ord of orden; track $index) {
+<div class="orden-container">
 
-    
-}
+    <div class="titulo">
+        <h1>Orden de Trabajo</h1>
+        <p>Detalle y ejecución de tareas asignadas</p>
+    </div>
+
+    @if (orden != null) {
+
+    <div class="orden-card">
+
+        <div class="orden-numero">
+            <h2>ORDEN DE REPARACIÓN</h2>
+            <span>N° {{orden.idOrden}}</span>
+        </div>
+
+        <div class="encabezadoOrden">
+
+            <div class="datosCliente">
+                <h3>Cliente</h3>
+
+                <p><strong>Nombre:</strong> {{orden.nombreCliente}}</p>
+                <p><strong>Contacto:</strong> {{orden.contacto}}</p>
+                <p><strong>Email:</strong> {{orden.email}}</p>
+            </div>
+
+            <div class="datosVehiculo">
+                <h3>Vehículo</h3>
+
+                <p><strong>Marca:</strong> {{orden.marcaVehiculo}}</p>
+                <p><strong>Modelo:</strong> {{orden.modeloVehiculo}}</p>
+                <p><strong>Patente:</strong> {{orden.patenteVehiculo}}</p>
+            </div>
+
+        </div>
+
+        <div class="seccion">
+
+            <div class="seccion-header">
+                <h3>Trabajos Realizados</h3>
+
+                <button class="btn-agregar" (click)="agregarFila()">
+                    + Agregar línea
+                </button>
+            </div>
+
+            <div class="tabla-wrapper">
+
+                <table class="tabla-detalle">
+
+                    <thead>
+                        <tr>
+                            <th>Cantidad</th>
+                            <th>Código</th>
+                            <th>Trabajo realizado</th>
+                            <th>Tipo item</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @for (fil of filas; track fil.id) {
+
+                        <tr>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    placeholder="Cantidad"
+                                    name="cantidad"
+                                    [(ngModel)]="fil.cantidad">
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Código"
+                                    name="codigo"
+                                    [(ngModel)]="fil.codigo">
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Trabajo realizado"
+                                    name="trabajo"
+                                    [(ngModel)]="fil.trabajo">
+                            </td>
+
+                            <td>
+                                <select
+                                    name="tipoItem"
+                                    [(ngModel)]="fil.tipoItem">
+
+                                    <option value="REPUESTO">Repuesto</option>
+                                    <option value="MANO_OBRA">Mano de obra</option>
+                                    <option value="SERVICIO">Servicio</option>
+
+                                </select>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="btn-eliminar"
+                                    (click)="eliminarFila(fil.id)">
+                                    Eliminar
+                                </button>
+                            </td>
+
+                        </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <div class="seccion">
+
+            <h3>Observaciones del Mecánico</h3>
+
+            <textarea
+                rows="5"
+                placeholder="Detalle aquí observaciones, diagnósticos o recomendaciones...">
+            </textarea>
+
+        </div>
+
+        <div class="acciones">
+
+            <button class="btn-guardar">
+                Guardar Orden
+            </button>
+
+            <button class="btn-finalizar">
+                Finalizar Trabajo
+            </button>
+
+        </div>
+
+    </div>
+
+    }
+
+</div>

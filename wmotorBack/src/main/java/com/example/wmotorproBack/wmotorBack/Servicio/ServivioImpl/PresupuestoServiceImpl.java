@@ -85,7 +85,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         // ✅ numeración (mejor genérica)
         Long numero = numeracionService.generarNumero();
         presupuestoEntity.setNumeroPresupuesto(numero);
-
+ 
        
         double total = 0;
         List<DetallePresupuestoEntity> detalles = new ArrayList<>();

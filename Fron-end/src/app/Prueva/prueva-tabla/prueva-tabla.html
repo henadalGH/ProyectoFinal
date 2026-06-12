@@ -1,0 +1,51 @@
+<h1>Probando tabla</h1>
+
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>Cantidad</th>
+            <th>Código</th>
+            <th>Trabajo</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (fil of filas; track fil.id) {
+            <tr>
+
+                <td>
+                    <input
+                        type="number">
+                </td>
+
+                <td>
+                    <input
+                        type="text"
+                        >
+                </td>
+
+                <td>
+                    <input
+                        type="text"
+                        >
+                </td>
+
+                <td>
+                    <button (click)="eliminarFila(fil.id)">
+                        Eliminar
+                    </button>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<br>
+
+<button (click)="agregarFila()">
+    Agregar Fila
+</button>

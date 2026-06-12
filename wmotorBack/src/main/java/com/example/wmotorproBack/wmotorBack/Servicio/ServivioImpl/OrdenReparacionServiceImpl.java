@@ -63,6 +63,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
     private EstadoTurnoRepository estadoTurnoRepository;
 
 
+
     @Override
     public ResponceDTO crearReparacion(OrdenReparacionDTO orden) {
 
@@ -113,7 +114,6 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
             detalleOrdenEntity.setCantidad(detalle.getCantidad());
             detalleOrdenEntity.setCodigo(detalle.getCodigo());
             detalleOrdenEntity.setTipoItem(detalle.getTipoItem());
-            detalleOrdenEntity.setObservaciones(detalle.getObservaciones());
 
             detalleOrdenEntity.setOrden(ordenTrabajoEntity);
 
@@ -213,6 +213,13 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenDTO.setModeloVehiculo(ordenTrabajo.getTurno().getVehiculo().getModelo());
         ordenDTO.setPatenteVehiculo(ordenTrabajo.getTurno().getVehiculo().getPatente());
         ordenDTO.setKilometroVehiculo(ordenTrabajo.getTurno().getVehiculo().getKilometraje());
+
+
+        //Datos del cliente
+        ordenDTO.setNombreCliente(ordenTrabajo.getTurno().getVehiculo().getCliente().getUsuario().getNombre() + ' ' +
+        ordenTrabajo.getTurno().getVehiculo().getCliente().getUsuario().getApellido());
+        ordenDTO.setContacto(ordenTrabajo.getTurno().getVehiculo().getCliente().getUsuario().getContacto());
+        ordenDTO.setEmail(ordenTrabajo.getTurno().getVehiculo().getCliente().getUsuario().getEmail());
         
         
         List<DetalleOrdenDTO> listaDetalles = new ArrayList<>();
@@ -227,7 +234,6 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
                 detalleOrdenDTO.setTrabajoRealizado(detalleOrdenEntity.getTrabajoRealizados());
                 detalleOrdenDTO.setCodigo(detalleOrdenEntity.getCodigo());
                 detalleOrdenDTO.setTipoItem(detalleOrdenEntity.getTipoItem());
-                detalleOrdenDTO.setObservaciones(detalleOrdenEntity.getObservaciones());
 
                 listaDetalles.add(detalleOrdenDTO);
             }
@@ -244,6 +250,8 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
 
         ResponceDTO responceDTO = new ResponceDTO();
 
+
+
         TurnoEntity turno = turnoRepository.findById(idTurno)
                 .orElseThrow(() -> new RuntimeException("Id del turno no encontrado"));
 
@@ -258,12 +266,19 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
         .orElseThrow();
 
+        //Detalle de la orden
+
+        Long numeroOrden = numeracionService.generarNumeroOrden();
+        
+
+
 
         TurnoEntity turnoEntity = new TurnoEntity();
         turnoEntity.setEstado(estado);
 
         OrdenTrabajoEntity orden = new OrdenTrabajoEntity();
         orden.setTurno(turno);
+        orden.setNuemeroOrden(numeroOrden);
         orden.setEmpleado(empleado);
         orden.setFechaEminsion(LocalDate.now());
         orden.setPrioridad(prioridad);

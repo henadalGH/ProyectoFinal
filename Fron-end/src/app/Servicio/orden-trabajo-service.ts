@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,8 @@ export class OrdenTrabajoService {
 
 
   private urlComun = 'http://localhost:8080/orden';
-  
+  private urlDetalle = 'http://localhost:8080/detalleOrden'  
+
   asignarOrden(idTurno: number, idEmpleado: number, prioridad: string) {
 
   return this.http.post(
@@ -34,5 +36,10 @@ export class OrdenTrabajoService {
 
   obtenerOrdenPorId(idOrden: number){
     return this.http.get<any []>(`${this.urlComun}/${idOrden}`);
+  }
+
+  agregarDetalleOrden(idOrden: number): Observable<any>{
+
+    return this.http.post(`${this.urlDetalle}/agregarDetalle/${idOrden}`, {});
   }
 }

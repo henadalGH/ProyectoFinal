@@ -29,6 +29,7 @@ import { HomeFinanzas } from './Administrados/Finanzas/home-finanzas/home-finanz
 import { HomeOrdenes } from './Administrados/Ordenes/home-ordenes/home-ordenes';
 import { CrearOrden } from './Administrados/Ordenes/crear-orden/crear-orden';
 import { DetalleOrden } from './Empleados/detalle-orden/detalle-orden';
+import { PruevaTabla } from './Prueva/prueva-tabla/prueva-tabla';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -76,5 +77,9 @@ export const routes: Routes = [
 
     //Rutas de ordenes
     {path: 'homeOrdenes', component: HomeOrdenes},
-    {path: 'crearOrden/:id', component: CrearOrden}
+    {path: 'crearOrden/:id', component: CrearOrden},
+
+
+    //DE Prueba
+    {path: 'prueva', component: PruevaTabla}
 ];

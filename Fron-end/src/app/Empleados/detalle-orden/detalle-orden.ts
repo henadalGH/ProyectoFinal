@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HeaderAdmin } from "../../Administrados/Adminstrador/header-admin/header-admin";
 import { HeaderEmpleado } from "../header-empleado/header-empleado";
 import { OrdenTrabajoService } from '../../Servicio/orden-trabajo-service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-detalle-orden',
-  imports: [HeaderEmpleado],
+  imports: [HeaderEmpleado, FormsModule],
   templateUrl: './detalle-orden.html',
   styleUrl: './detalle-orden.css',
 })
@@ -17,7 +17,16 @@ export class DetalleOrden implements OnInit{
   ){}
 
   idOrden: number = 0;
-  orden: any[] = [];
+  orden!: any;
+  filas: any[] = [];
+  private contadorId = 1;
+
+  //variables del detalle de la orden
+  tipoItem: string = '';
+  cantidad: number = 0;
+  codigo: string = '';
+  trabajo: string = '';
+
 
   ngOnInit(): void {
     
@@ -27,11 +36,28 @@ export class DetalleOrden implements OnInit{
        this.ordenService.obtenerOrdenPorId(this.idOrden).subscribe(
         (repuesta: any) => {
           this.orden = repuesta;
-        }
+        })};
 
-       )
-
-    };
+        this.agregarFila();
   }
+
+  agregarFila(): void {
+
+    this.filas.push({
+      id: this.contadorId++,
+      cantidad: 0,
+      codigo: '',
+      trabajo: ''
+    });
+
+  }
+  eliminarFila(id: number): void {
+
+    this.filas = this.filas.filter(
+      fila => fila.id !== id
+    );
+
+  }
+
 
 }

@@ -33,6 +33,11 @@ public class ObtenerOrdenDTO {
     private List<DetalleOrdenDTO> detalleOrden;
 
     private PrioridadEnum prioridad;
+
+    //Datos del cliente
+    private String nombreCliente;
+    private String contacto;
+    private String email;
     
 
 }

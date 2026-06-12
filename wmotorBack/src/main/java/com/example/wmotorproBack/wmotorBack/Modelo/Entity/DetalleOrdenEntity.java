@@ -4,6 +4,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,14 +31,12 @@ public class DetalleOrdenEntity {
     private Long cantidad;
 
     @Column(name = "tipo_item")
+    @Enumerated(EnumType.STRING)
     private TipoItemEnums tipoItem;
 
     @Column(name = "codigo")
     private String codigo;
     
-    @Column(name = "observaciones")
-    private String observaciones;
-
     @ManyToOne
     @JoinColumn(name = "id_asignacion")
     private OrdenTrabajoEntity orden;
