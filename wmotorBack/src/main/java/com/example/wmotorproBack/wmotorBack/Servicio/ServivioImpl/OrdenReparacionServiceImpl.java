@@ -246,52 +246,45 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
 
 
     @Override
-    public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadEnum prioridadEnum) {
+public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadEnum prioridadEnum) {
 
-        ResponceDTO responceDTO = new ResponceDTO();
+    ResponceDTO responceDTO = new ResponceDTO();
 
+    TurnoEntity turno = turnoRepository.findById(idTurno)
+            .orElseThrow(() -> new RuntimeException("Id del turno no encontrado"));
 
+    PrioridadEntity prioridad = prioridadRepository.findByPrioridad(prioridadEnum)
+            .orElseThrow(() -> new RuntimeException("Prioridad no encontrada"));
 
-        TurnoEntity turno = turnoRepository.findById(idTurno)
-                .orElseThrow(() -> new RuntimeException("Id del turno no encontrado"));
+    EmpleadoEntity empleado = empleadoRepository.findById(idEmpleado)
+            .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
 
-        PrioridadEntity prioridad = prioridadRepository.findByPrioridad(prioridadEnum)
-                .orElseThrow(() -> new RuntimeException("Prioridad no encontrada"));
+    EstadoOrdenEntity estadoOrden = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA)
+            .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
-        EmpleadoEntity empleado = empleadoRepository.findById(idEmpleado)
-                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+    EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
+            .orElseThrow();
 
-        EstadoOrdenEntity estadoOrden = ordenTrabajoRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA);
+    Long numeroOrden = numeracionService.generarNumeroOrden();
 
-        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
-        .orElseThrow();
+    // Modificas el turno existente
+    turno.setEstado(estado);
 
-        //Detalle de la orden
+    OrdenTrabajoEntity orden = new OrdenTrabajoEntity();
+    orden.setTurno(turno);
+    orden.setNuemeroOrden(numeroOrden);
+    orden.setEmpleado(empleado);
+    orden.setFechaEminsion(LocalDate.now());
+    orden.setPrioridad(prioridad);
+    orden.setEstadoOrden(estadoOrden);
 
-        Long numeroOrden = numeracionService.generarNumeroOrden();
-        
+    turnoRepository.save(turno);
+    ordenTrabajoRepository.save(orden);
 
+    responceDTO.setMensage("Orden asignada con éxito");
 
-
-        TurnoEntity turnoEntity = new TurnoEntity();
-        turnoEntity.setEstado(estado);
-
-        OrdenTrabajoEntity orden = new OrdenTrabajoEntity();
-        orden.setTurno(turno);
-        orden.setNuemeroOrden(numeroOrden);
-        orden.setEmpleado(empleado);
-        orden.setFechaEminsion(LocalDate.now());
-        orden.setPrioridad(prioridad);
-        orden.setEstadoOrden(estadoOrden);
-
-        turnoRepository.save(turnoEntity);
-        ordenTrabajoRepository.save(orden);
-
-        responceDTO.setMensage("Orden asignada con exito");
-
-        return responceDTO;
-    }
-
+    return responceDTO;
+}
 
     @Override
     public List<OrdenTrabajoEmpleadoDTO> obtenerOrdenePorEmpleado(Long idEmpleado, LocalDate fecha) {
@@ -307,7 +300,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
     }
 
 
-    @Override
+    @Override 
     public OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orden) {
         
         OrdenTrabajoEmpleadoDTO ordenTrabajoEmpleado = new OrdenTrabajoEmpleadoDTO();
@@ -324,6 +317,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenTrabajoEmpleado.setNombreServicio(orden.getTurno().getServicio().getNombre());
         ordenTrabajoEmpleado.setDescripcionProblema(orden.getTurno().getDescripcion());
         ordenTrabajoEmpleado.setPrioridad(orden.getPrioridad().getPrioridad());
+        ordenTrabajoEmpleado.setEstado(orden.getEstadoOrden().getEstadoOrden());
 
 
         return ordenTrabajoEmpleado;

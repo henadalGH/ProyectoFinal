@@ -41,7 +41,9 @@
             <div class="seccion-header">
                 <h3>Trabajos Realizados</h3>
 
-                <button class="btn-agregar" (click)="agregarFila()">
+                <button
+                    class="btn-agregar"
+                    (click)="agregarFila()">
                     + Agregar línea
                 </button>
             </div>
@@ -62,6 +64,55 @@
 
                     <tbody>
 
+                        <!-- Detalles guardados -->
+                        @for (detalle of detalleOrden; track detalle.id) {
+
+                        <tr>
+
+                            <td>
+                                <input
+                                    type="number"
+                                    placeholder="Cantidad"
+                                    [(ngModel)]="detalle.cantidad">
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Código"
+                                    [(ngModel)]="detalle.codigo">
+                            </td>
+
+                            <td>
+                                <input
+                                    type="text"
+                                    placeholder="Trabajo realizado"
+                                    [(ngModel)]="detalle.trabajoRealizado">
+                            </td>
+
+                            <td>
+                                <select [(ngModel)]="detalle.tipoItem">
+
+                                    <option value="REPUESTO">Repuesto</option>
+                                    <option value="MANO_OBRA">Mano de obra</option>
+                                    <option value="SERVICIO">Servicio</option>
+
+                                </select>
+                            </td>
+
+                            <td>
+                                <button
+                                    class="btn-eliminar"
+                                    (click)="eliminarFila(detalle.id)">
+                                    Eliminar
+                                </button>
+                            </td>
+
+                        </tr>
+
+                        }
+
+                        <!-- Nuevas filas -->
                         @for (fil of filas; track fil.id) {
 
                         <tr>
@@ -70,7 +121,6 @@
                                 <input
                                     type="number"
                                     placeholder="Cantidad"
-                                    name="cantidad"
                                     [(ngModel)]="fil.cantidad">
                             </td>
 
@@ -78,7 +128,6 @@
                                 <input
                                     type="text"
                                     placeholder="Código"
-                                    name="codigo"
                                     [(ngModel)]="fil.codigo">
                             </td>
 
@@ -86,14 +135,11 @@
                                 <input
                                     type="text"
                                     placeholder="Trabajo realizado"
-                                    name="trabajo"
-                                    [(ngModel)]="fil.trabajo">
+                                    [(ngModel)]="fil.trabajoRealizado">
                             </td>
 
                             <td>
-                                <select
-                                    name="tipoItem"
-                                    [(ngModel)]="fil.tipoItem">
+                                <select [(ngModel)]="fil.tipoItem">
 
                                     <option value="REPUESTO">Repuesto</option>
                                     <option value="MANO_OBRA">Mano de obra</option>
@@ -135,11 +181,25 @@
 
         <div class="acciones">
 
-            <button class="btn-guardar">
-                Guardar Orden
+            <button class="bnt-volver">Volver
+                
+            </button>
+            
+            
+            
+            <button
+                type="button"
+                class="btn-guardar"
+                (click)="guardarDetalle()">
+
+                Guardar detalle
+
             </button>
 
-            <button class="btn-finalizar">
+            <button
+                class="btn-finalizar"
+                (click)="terminarOrden()"
+                [disabled]="botonDeshabilitado">
                 Finalizar Trabajo
             </button>
 

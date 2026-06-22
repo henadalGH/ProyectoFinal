@@ -61,6 +61,8 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         presupuestoEntity.setFechaRegistro(LocalDate.now());
         presupuestoEntity.setFechaValidez(LocalDate.now().plusDays(15));
         presupuestoEntity.setObservaciones(presupuestoDTO.getObservaciones());
+        presupuestoEntity.setTipoFactura(presupuestoDTO.getTipoFactura());
+
 
         //Estado del presupuesto
         EstadoPresupuestoEntity estado = estadoPresupuestoReposistory
@@ -180,6 +182,8 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         obtenerPresupuesto.setFechaVencimiesto(presupuesto.getFechaValidez());
         obtenerPresupuesto.setObservaciones(presupuesto.getObservaciones());
         obtenerPresupuesto.setTotal(presupuesto.getTotal());
+        obtenerPresupuesto.setTipoFacturaDTO(presupuesto.getTipoFactura());
+        
 
 
         //Detalle presupuesto

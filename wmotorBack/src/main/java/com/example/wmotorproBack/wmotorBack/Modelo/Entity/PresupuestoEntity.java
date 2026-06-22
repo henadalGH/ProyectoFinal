@@ -4,6 +4,9 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -43,6 +46,9 @@ public class PresupuestoEntity {
     @ManyToOne
     @JoinColumn( name = "id_administrador")
     private AdminEntity admin;
+
+    @Column(name = "tipo_factura")
+    private TipoFacturaDTO tipoFactura;
 
     @ManyToOne
     @JoinColumn(name = "id_vehiculo")

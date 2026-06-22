@@ -69,7 +69,7 @@ public class TurnoController {
     }
     
     
-    @PutMapping("/asignarFecha/{id}")
+    @PutMapping("/asignarFecha/{id}") 
     public ResponseEntity<ResponceDTO> asignarFecha(@PathVariable Long id, @RequestBody FechaDTO fecha) {
         ResponceDTO turnoActualizado = turnoService.asignarFecha(id, fecha);
         System.out.print(fecha);

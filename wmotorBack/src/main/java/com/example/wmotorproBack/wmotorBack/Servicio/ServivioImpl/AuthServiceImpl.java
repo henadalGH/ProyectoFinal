@@ -6,7 +6,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +22,15 @@ import com.nimbusds.jose.JOSEException;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    @Autowired
-    private JWTUtilityService jwtUtilityService;
+    private final JWTUtilityService jwtUtilityService;
+
+
+    AuthServiceImpl(UsuarioRepository usuarioRepository, JWTUtilityService jwtUtilityService) {
+        this.usuarioRepository = usuarioRepository;
+        this.jwtUtilityService = jwtUtilityService;
+    }
 
     
 

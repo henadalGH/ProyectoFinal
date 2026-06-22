@@ -1,0 +1,137 @@
+<app-header-admin></app-header-admin>
+<div class="factura-container">
+
+    <div class="factura-header">
+
+        <div class="empresa">
+            <h1>WMOTOR PRO</h1>
+            <p>Taller Mecánico Integral</p>
+            <p>Av. Siempre Viva 123</p>
+            <p>Tel: 342-123456</p>
+        </div>
+
+        <div class="factura-tipo">
+            <div class="tipo_factura">
+
+            <label>Tipo de factura</label>
+
+            <select name="tipo">
+                <option value="A"><h2>A</h2></option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+            </select>
+
+        </div>
+            <span>N° 0001-00000001</span>
+        </div>
+
+    </div>
+
+
+    @if (datos != null) {
+
+    <div class="factura-info">
+
+        <div class="cliente-box">
+
+            <h3>Datos del Cliente</h3>
+
+            <p><strong>Nombre:</strong> {{datos.nombreCliente}}</p>
+            <p><strong>Contacto:</strong> {{datos.contacto}}</p>
+            <p><strong>Email:</strong> {{datos.email}}</p>
+
+        </div>
+
+
+        <div class="vehiculo-box">
+
+            <h3>Datos del Vehículo</h3>
+
+            <p><strong>Marca:</strong> {{datos.marcaVehiculo}}</p>
+            <p><strong>Modelo:</strong> {{datos.modeloVehiculo}}</p>
+            <p><strong>Patente:</strong> {{datos.patenteVehiculo}}</p>
+
+        </div>
+
+    </div>
+
+    }
+
+
+    <div class="tabla-contenedor">
+
+    
+        <table class="factura-tabla">
+
+            <thead>
+
+            <tr>
+                <th>Cantidad</th>
+                <th>Descripción</th>
+                <th>Precio Unitario</th>
+                <th>Importe</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            @for (detalle of detalleOrden; track $index) {
+
+            <tr>
+
+                <td>{{detalle.cantidad}}</td>
+
+                <td>{{detalle.trabajoRealizado}}</td>
+
+                <td>
+                    <input type="number">
+                </td>
+
+                <td>
+                    <input type="number">
+                </td>
+
+            </tr>
+
+            }
+
+            </tbody>
+
+            <button>Agregar fila</button>
+
+        </table>
+
+    </div>
+
+    <div class="totales">
+
+        <div>
+            <p>Subtotal:</p>
+            <p>IVA:</p>
+            <h2>Total:</h2>
+        </div>
+
+        <div>
+            
+            <h2>$0</h2>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="factura-botones">
+
+        <button class="btn-guardar">
+            Crear Factura
+        </button>
+
+        <button class="btn-volver">
+            Volver
+        </button>
+
+    </div>
+
+</div>

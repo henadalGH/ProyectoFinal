@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HeaderEmpleado } from "../header-empleado/header-empleado";
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderEmpleado } from '../header-empleado/header-empleado';
 import { OrdenTrabajoService } from '../../Servicio/orden-trabajo-service';
 import { FormsModule } from '@angular/forms';
 
@@ -10,35 +10,61 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './detalle-orden.html',
   styleUrl: './detalle-orden.css',
 })
-export class DetalleOrden implements OnInit{
+export class DetalleOrden implements OnInit {
 
-  constructor(private aRoute: ActivatedRoute,
-    private ordenService: OrdenTrabajoService
-  ){}
+  constructor(
+    private aRoute: ActivatedRoute,
+    private ordenService: OrdenTrabajoService,
+    private router: Router
+  ) {}
 
   idOrden: number = 0;
-  orden!: any;
+  orden: any = null;
   filas: any[] = [];
-  private contadorId = 1;
-
-  //variables del detalle de la orden
-  tipoItem: string = '';
-  cantidad: number = 0;
-  codigo: string = '';
-  trabajo: string = '';
-
+  contadorId: number = 1;
+  detalleOrden: any[]=[];
+  botonDeshabilitado = false;
 
   ngOnInit(): void {
-    
-    this.idOrden = Number (this.aRoute.snapshot.paramMap.get('id'))
+
+    this.idOrden = Number(
+      this.aRoute.snapshot.paramMap.get('id')
+    );
 
     if (this.idOrden) {
-       this.ordenService.obtenerOrdenPorId(this.idOrden).subscribe(
-        (repuesta: any) => {
-          this.orden = repuesta;
-        })};
 
-        this.agregarFila();
+      this.ordenService
+        .obtenerOrdenPorId(this.idOrden)
+        .subscribe({
+          next: (respuesta: any) => {
+            this.orden = respuesta;
+            this.botonDeshabilitado = this.orden.estado === 'PARA_FACTURAR';
+            console.log(this.orden.estado);
+            console.log(this.botonDeshabilitado);
+          },
+          error: (err) => {
+            console.error(err);
+          }
+        });
+
+    }
+
+
+    if(this.idOrden){
+
+      this.ordenService.obtenerDetalleOrden(this.idOrden).subscribe(
+      
+        (repuesta:any) =>{
+          this.detalleOrden = repuesta;
+        }
+      
+    )
+
+    }
+
+    this.agregarFila();
+
+
   }
 
   agregarFila(): void {
@@ -47,10 +73,12 @@ export class DetalleOrden implements OnInit{
       id: this.contadorId++,
       cantidad: 0,
       codigo: '',
-      trabajo: ''
+      trabajoRealizado: '',
+      tipoItem: ''
     });
 
   }
+
   eliminarFila(id: number): void {
 
     this.filas = this.filas.filter(
@@ -59,5 +87,43 @@ export class DetalleOrden implements OnInit{
 
   }
 
+  guardarDetalle(): void {
 
+    const detalles = this.filas.map(fila => ({
+      cantidad: fila.cantidad,
+      codigo: fila.codigo,
+      trabajoRealizado: fila.trabajoRealizado,
+      tipoItem: fila.tipoItem
+    }));
+
+    console.log(detalles);
+
+    this.ordenService
+      .agregarDetalleOrden(this.idOrden, detalles)
+      .subscribe({
+        next: (resp) => {
+          console.log('Detalles guardados');
+          console.log(resp);
+        },
+        error: (err) => {
+          console.error(err);
+        }
+      });
+
+  }
+
+  estadoTerminado : string = 'PARA_FACTURAR';
+  terminarOrden(){
+
+    this.ordenService.actualizarEstadoOrden(this.idOrden, this.estadoTerminado).subscribe(
+      
+        (next: any) => {
+            this.router.navigate(['/homeEmpleado'])
+        }
+      
+    )
+
+  }
+
+  
 }

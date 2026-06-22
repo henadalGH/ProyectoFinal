@@ -27,9 +27,17 @@ public class DetalleOrdenController {
 
 
     @PostMapping("/agregarDetalle/{idOrden}")
-    public ResponseEntity<ResponceDTO> agregarDetalles(@RequestBody List<DetalleOrdenDTO> detalles, Long idOrden ) {
-        return new ResponseEntity<ResponceDTO>(detalleOrdenService.agregarDetalles(detalles, idOrden), HttpStatus.OK);
-    }
+public ResponseEntity<ResponceDTO> agregarDetalles(
+        @RequestBody List<DetalleOrdenDTO> detalles,
+        @PathVariable Long idOrden) {
+
+
+            System.out.println(detalles);
+
+    return new ResponseEntity<>(
+            detalleOrdenService.agregarDetalles(detalles, idOrden),
+            HttpStatus.OK);
+}
 
     @GetMapping("/obtenerDetalle/{idOrden}")
     public ResponseEntity<List<DetalleOrdenDTO>> obtenerDetalleOrdenPorIdOrden(@PathVariable Long idOrden) {

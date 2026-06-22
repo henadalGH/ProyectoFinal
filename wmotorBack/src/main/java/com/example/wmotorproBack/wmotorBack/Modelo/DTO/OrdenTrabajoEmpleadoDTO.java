@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
 
 import lombok.Data;
@@ -28,5 +29,6 @@ public class OrdenTrabajoEmpleadoDTO {
 
     //Datos de la orden 
     private PrioridadEnum prioridad;
+    private EstadoOrdenEnums estado;
 
 }

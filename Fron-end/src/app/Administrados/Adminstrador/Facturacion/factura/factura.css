@@ -1,0 +1,93 @@
+.facturacion{
+    padding: 30px;
+    color: white;
+}
+
+.titulo{
+    margin-bottom: 30px;
+}
+
+.titulo p{
+    color: #9ca3af;
+}
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.card{
+    background: #18243d;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,.4);
+}
+
+.card h3{
+    color: #a8b4c8;
+    margin-bottom: 20px;
+}
+
+.card span{
+    font-size: 40px;
+    font-weight: bold;
+    color: #3b82f6;
+}
+
+.contenido{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+}
+
+.facturas-recientes,
+.panel-lateral{
+    background: #18243d;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th{
+    color: #a8b4c8;
+}
+
+th,td{
+    padding: 18px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    text-align: left;
+}
+
+.pagada{
+    color: #22c55e;
+}
+
+.pendiente{
+    color: #f59e0b;
+}
+
+.alerta{
+    background: rgba(255,255,255,.05);
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+.resumen{
+    margin-top: 40px;
+}
+
+.dato{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}

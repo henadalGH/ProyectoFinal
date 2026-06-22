@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
@@ -16,6 +17,7 @@ public class ObtenerPresupuestoDTO {
     private Long numeroPresupuesto;
     private LocalDate fechaVencimiesto;
     private LocalDate fechaRegistro;
+    private TipoFacturaDTO tipoFacturaDTO;
     private Double total;
     private String observaciones;
     private EstadoPresupuestoEnum estadoPresupuesto;

@@ -30,6 +30,9 @@ import { HomeOrdenes } from './Administrados/Ordenes/home-ordenes/home-ordenes';
 import { CrearOrden } from './Administrados/Ordenes/crear-orden/crear-orden';
 import { DetalleOrden } from './Empleados/detalle-orden/detalle-orden';
 import { PruevaTabla } from './Prueva/prueva-tabla/prueva-tabla';
+import { Factura } from './Administrados/Adminstrador/Facturacion/factura/factura';
+import { ParaFacturar } from './Administrados/Adminstrador/Facturacion/para-facturar/para-facturar';
+import { DetalleFactura } from './Administrados/Adminstrador/Facturacion/detalle-factura/detalle-factura';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -53,6 +56,11 @@ export const routes: Routes = [
     { path: 'verEmpleado/:id', component: VerEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
     {path:'inicioPresupuesto' , component: InicioPresupuestos},
+    {path:'factura', component: Factura},
+
+    //Retas de factura
+    {path: 'paraFacturar', component: ParaFacturar},
+    {path: 'crearFactura/:id', component: DetalleFactura},
 
     // 🔐 RUTAS PROTEGIDAS  - CLIENTE
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },

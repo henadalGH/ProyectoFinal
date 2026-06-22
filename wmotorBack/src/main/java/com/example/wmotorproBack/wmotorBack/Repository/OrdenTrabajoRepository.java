@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
-import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
 
@@ -14,6 +13,6 @@ public interface OrdenTrabajoRepository extends JpaRepository<OrdenTrabajoEntity
 
     List<OrdenTrabajoEntity> findByEstadoOrden(EstadoOrdenEntity estadoOrden);
     List<OrdenTrabajoEntity> findByEmpleadoAndTurnoFechaHora(EmpleadoEntity empleado, LocalDate fecha);
-    EstadoOrdenEntity findByEstadoOrden(EstadoOrdenEnums estado);
+    
 
 }
