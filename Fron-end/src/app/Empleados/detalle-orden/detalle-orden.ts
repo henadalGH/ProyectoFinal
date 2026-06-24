@@ -63,8 +63,6 @@ export class DetalleOrden implements OnInit {
     }
 
     this.agregarFila();
-
-
   }
 
   agregarFila(): void {

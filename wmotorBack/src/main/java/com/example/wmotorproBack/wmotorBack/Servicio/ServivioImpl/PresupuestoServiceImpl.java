@@ -55,77 +55,68 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     @Transactional
     public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
 
-        ResponceDTO responce = new ResponceDTO();
+    ResponceDTO response = new ResponceDTO();
 
-        PresupuestoEntity presupuestoEntity = new PresupuestoEntity();
-        presupuestoEntity.setFechaRegistro(LocalDate.now());
-        presupuestoEntity.setFechaValidez(LocalDate.now().plusDays(15));
-        presupuestoEntity.setObservaciones(presupuestoDTO.getObservaciones());
-        presupuestoEntity.setTipoFactura(presupuestoDTO.getTipoFactura());
+    PresupuestoEntity presupuestoEntity = new PresupuestoEntity();
+    presupuestoEntity.setFechaRegistro(LocalDate.now());
+    presupuestoEntity.setFechaValidez(LocalDate.now().plusDays(15));
+    presupuestoEntity.setTipoFactura(presupuestoDTO.getTipoFactura());
 
+    // Estado
+    EstadoPresupuestoEntity estado = estadoPresupuestoReposistory
+            .findByEstadoPresupuesto(EstadoPresupuestoEnum.PENDIENTE)
+            .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
-        //Estado del presupuesto
-        EstadoPresupuestoEntity estado = estadoPresupuestoReposistory
-                .findByEstadoPresupuesto(EstadoPresupuestoEnum.PENDIENTE)
-                .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+    presupuestoEntity.setEstadoPresupuesto(estado);
 
-        presupuestoEntity.setEstadoPresupuesto(estado);
+    // Admin
+    AdminEntity admin = adminRepository.findById(presupuestoDTO.getIdAdmin())
+            .orElseThrow(() -> new RuntimeException("Id admin no encontrado"));
 
-        //relacion con admin
+    presupuestoEntity.setAdmin(admin);
 
-        AdminEntity admin = adminRepository.findById(presupuestoDTO.getIdAdmin())
-        .orElseThrow(() -> new RuntimeException("Id admin no encontrado"));
+    // Vehículo
+    VehiculoEntity vehiculo = vehiculoRepository.findById(presupuestoDTO.getIdVehiculo())
+            .orElseThrow(() -> new RuntimeException("Id vehículo no encontrado"));
 
-        presupuestoEntity.setAdmin(admin);
+    presupuestoEntity.setVehiculo(vehiculo);
 
-        //Relacion con vehiculo
-        VehiculoEntity vehiculo = vehiculoRepository.findById(presupuestoDTO.getIdVehiculo())
-        .orElseThrow(() -> new RuntimeException("id vehiculo no encontrado"));
+    // Número de presupuesto
+    Long numero = numeracionService.generarNumero();
+    presupuestoEntity.setNumeroPresupuesto(numero);
 
-        presupuestoEntity.setVehiculo(vehiculo);
+    // Detalles y total
+    List<DetallePresupuestoEntity> detalles = new ArrayList<>();
+    double total = 0;
 
-        // ✅ numeración (mejor genérica)
-        Long numero = numeracionService.generarNumero();
-        presupuestoEntity.setNumeroPresupuesto(numero);
- 
-       
-        double total = 0;
-        List<DetallePresupuestoEntity> detalles = new ArrayList<>();
+    for (DetallePresupuestoDTO detalleDTO : presupuestoDTO.getDetallePresupuesto()) {
 
-        for (DetallePresupuestoDTO detalleDto : presupuestoDTO.getDetallePresupuesto()) {
+        DetallePresupuestoEntity detalleEntity = new DetallePresupuestoEntity();
 
-            DetallePresupuestoEntity detalleEntity = new DetallePresupuestoEntity();
+        detalleEntity.setCantidad(detalleDTO.getCantidad());
+        detalleEntity.setDescripcion(detalleDTO.getDescripcion());
+        detalleEntity.setPrecioUnitario(detalleDTO.getPrecioUnitario());
 
-            detalleEntity.setCantidad(detalleDto.getCantidad());
-            detalleEntity.setDescripcion(detalleDto.getDescripcion());
-            detalleEntity.setPrecioUnitario(detalleDto.getPrecioUnitario());
-            detalleEntity.setTipo(detalleDto.getTipoItem());
+        double subTotal = detalleDTO.getCantidad() * detalleDTO.getPrecioUnitario();
+        detalleEntity.setSubTotal(subTotal);
 
-            double subTotal = detalleDto.getCantidad() * detalleDto.getPrecioUnitario();
-            detalleEntity.setSubTotal(subTotal);
+        // Relación con presupuesto
+        detalleEntity.setPresupuesto(presupuestoEntity);
 
-            // relación
-            detalleEntity.setPresupuesto(presupuestoEntity);
-
-            total += subTotal;
-            detalles.add(detalleEntity);
-            detallePresupuestoRepository.save(detalleEntity);
-        }
-
-       
-
-        // ✅ ESTO TE FALTABA (CLAVE)
-        presupuestoEntity.setDetalle(detalles);
-        presupuestoEntity.setTotal(total);
-
-        // guardar
-        presuspuestoRepository.save(presupuestoEntity);
-
-        // respuesta básica (podés mejorarla después)
-        responce.setMensage("Presupuesto creado correctamente");
-
-        return responce;
+        detalles.add(detalleEntity);
+        total += subTotal;
     }
+
+    presupuestoEntity.setDetalle(detalles);
+    presupuestoEntity.setTotal(total);
+
+    // Guardar presupuesto y detalles (con CascadeType.ALL)
+    presuspuestoRepository.save(presupuestoEntity);
+
+    response.setMensage("Presupuesto creado correctamente");
+
+    return response;
+}
 
 
 
@@ -196,7 +187,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
             detalle.setDescripcion(detallePresupuesto.getDescripcion());
             detalle.setCantidad(detallePresupuesto.getCantidad());
             detalle.setPrecioUnitario(detallePresupuesto.getPrecioUnitario());
-            detalle.setTipoItem(detallePresupuesto.getTipo());
             detalle.setSubTotal(detallePresupuesto.getSubTotal());
             
 
@@ -229,9 +219,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         PresupuestoEntity presupuesto = presuspuestoRepository.findById(idPresupuesto)
             .orElseThrow(() -> new RuntimeException("Presupuesto no encontrado con id: " + idPresupuesto));
 
-        // Actualizar observaciones
-        presupuesto.setObservaciones(presupuestoDTO.getObservaciones());
-
         // Actualizar detalles: eliminar antiguos y crear nuevos
         if (presupuesto.getDetalle() != null) {
             detallePresupuestoRepository.deleteAll(presupuesto.getDetalle());
@@ -244,7 +231,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
             detalleEntity.setCantidad(detalleDto.getCantidad());
             detalleEntity.setDescripcion(detalleDto.getDescripcion());
             detalleEntity.setPrecioUnitario(detalleDto.getPrecioUnitario());
-            detalleEntity.setTipo(detalleDto.getTipoItem());
             double subTotal = detalleDto.getCantidad() * detalleDto.getPrecioUnitario();
             detalleEntity.setSubTotal(subTotal);
             detalleEntity.setPresupuesto(presupuesto);

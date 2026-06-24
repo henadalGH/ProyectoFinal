@@ -3,16 +3,13 @@ package com.example.wmotorproBack.wmotorBack.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 import com.example.wmotorproBack.wmotorBack.Servicio.MovimientoFinService;
-
 import java.time.LocalDate;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -21,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-
 
 
 @RestController
@@ -64,7 +59,6 @@ public class MovimientosController {
         if (lista.isEmpty()) {
             
             ResponceDTO responce = new ResponceDTO();
-
             responce.setNumOfErrors(1);
             responce.setMensage("No hay datos del mes solicitado: " + " " + mes + "/" + anio);
             

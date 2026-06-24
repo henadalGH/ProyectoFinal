@@ -79,10 +79,23 @@
             @for (detalle of detalleOrden; track $index) {
 
             <tr>
+                <td>
+                    @if (detalle.cantidad == 0) {
+                    <input type="number">
+                    }@else {
+                        <p>{{detalle.cantidad}}</p>
+                    }
+                </td>
 
-                <td>{{detalle.cantidad}}</td>
 
-                <td>{{detalle.trabajoRealizado}}</td>
+                <td>
+                    @if(detalle.trabajoRealizado == null){
+                        <input type="text" name="descripcion">
+
+                    }@else{
+                        {{detalle.trabajoRealizado}}
+                    }
+                    </td>
 
                 <td>
                     <input type="number">
@@ -98,7 +111,8 @@
 
             </tbody>
 
-            <button>Agregar fila</button>
+            <button (click)="agregarFila()">Agregar fila</button>
+            <button (click)="quitarFila()">Quitar fila</button>
 
         </table>
 
@@ -128,7 +142,7 @@
             Crear Factura
         </button>
 
-        <button class="btn-volver">
+        <button (click)="volverAtras()" class="btn-volver">
             Volver
         </button>
 

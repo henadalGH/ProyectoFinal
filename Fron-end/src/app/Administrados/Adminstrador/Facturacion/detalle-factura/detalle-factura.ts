@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderAdmin } from "../../header-admin/header-admin";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdenTrabajoService } from '../../../../Servicio/orden-trabajo-service';
+import { Location } from '@angular/common';
+import { FacturaServicio } from '../../../../Servicio/factura-servicio';
 
 @Component({
   selector: 'app-detalle-factura',
@@ -14,12 +16,17 @@ export class DetalleFactura implements OnInit{
 
   constructor(
     private aRouter: ActivatedRoute,
-    private ordenService: OrdenTrabajoService
+    private ordenService: OrdenTrabajoService,
+    private router: Router,
+    private location: Location,
+    private facturaService: FacturaServicio
   ){}
 
 
   datos: any = null;
   detalleOrden: any[]=[];
+  contador: number = 0;
+  
 
   ngOnInit(): void {
     
@@ -45,4 +52,26 @@ export class DetalleFactura implements OnInit{
     }
   }
 
+  agregarFila() :void{
+
+    this.detalleOrden.push(
+      {
+      idDetalle: this.contador++,
+      cantidad: 0,
+      descripcion: '',
+      precioUnitario: 0,
+      importe: 0
+  
+    });
+  }
+
+  quitarFila(){
+    this.detalleOrden.pop()
+  }
+
+  volverAtras(){
+    this.location.back();
+  }
+
+  
 }
