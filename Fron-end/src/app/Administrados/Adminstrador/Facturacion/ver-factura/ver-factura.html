@@ -1,0 +1,90 @@
+<app-header-admin></app-header-admin>
+
+@if (factura != null) {
+
+<div class="factura-container">
+
+    <!-- ENCABEZADO -->
+    <div class="factura-header">
+
+        <div class="empresa">
+            <h1>WMOTOR PRO</h1>
+            <p>Taller Mecánico Integral</p>
+            <p>Av. Siempre Viva 123</p>
+            <p>Santa Fe - Argentina</p>
+            <p>Tel: 342-123456</p>
+        </div>
+
+        <div class="factura-datos">
+
+            <div class="tipo-factura">
+                <span class="titulo">FACTURA</span>
+                <span class="letra">{{ factura.tipoFactura }}</span>
+            </div>
+
+            <div class="numero-factura">
+                <label>Número</label>
+                <span>{{ numeroFacturaFormateado }}</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- DATOS -->
+    <div class="factura-info">
+
+        <div class="cliente-box">
+
+            <h3>DATOS DEL CLIENTE</h3>
+
+            <p>
+                <strong>Nombre:</strong>
+                {{ factura.nombreCliente }}
+                {{ factura.apellidoCliente }}
+            </p>
+
+            <p>
+                <strong>Contacto:</strong>
+                {{ factura.contactoCliente }}
+            </p>
+
+            <p>
+                <strong>Dirección:</strong>
+                {{ factura.direccionCliente }}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                {{ factura.correoCliente }}
+            </p>
+
+        </div>
+
+        <div class="vehiculo-box">
+
+            <h3>DATOS DEL VEHÍCULO</h3>
+
+            <p>
+                <strong>Marca:</strong>
+                {{ factura.marcaVehiculo }}
+            </p>
+
+            <p>
+                <strong>Modelo:</strong>
+                {{ factura.modeloVehiculo }}
+            </p>
+
+            <p>
+                <strong>Patente:</strong>
+                {{ factura.patenteVehiculo }}
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+}
+```

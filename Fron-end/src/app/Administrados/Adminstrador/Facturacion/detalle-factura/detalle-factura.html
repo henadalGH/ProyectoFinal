@@ -1,4 +1,5 @@
 <app-header-admin></app-header-admin>
+
 <div class="factura-container">
 
     <div class="factura-header">
@@ -11,26 +12,24 @@
         </div>
 
         <div class="factura-tipo">
+
             <div class="tipo_factura">
+                <label>Tipo de factura</label>
 
-            <label>Tipo de factura</label>
+                <select [(ngModel)]="tipoFactura">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                </select>
+            </div>
 
-            <select name="tipo">
-                <option value="A"><h2>A</h2></option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-            </select>
-
-        </div>
             <span>N° 0001-00000001</span>
+
         </div>
 
     </div>
 
-
-    @if (datos != null) {
-
-    <div class="factura-info">
+    <div class="factura-info" *ngIf="datos">
 
         <div class="cliente-box">
 
@@ -41,7 +40,6 @@
             <p><strong>Email:</strong> {{datos.email}}</p>
 
         </div>
-
 
         <div class="vehiculo-box">
 
@@ -55,95 +53,118 @@
 
     </div>
 
-    }
-
-
     <div class="tabla-contenedor">
 
-    
         <table class="factura-tabla">
 
             <thead>
-
-            <tr>
-                <th>Cantidad</th>
-                <th>Descripción</th>
-                <th>Precio Unitario</th>
-                <th>Importe</th>
-            </tr>
-
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Precio Unitario</th>
+                    <th>Importe</th>
+                </tr>
             </thead>
 
             <tbody>
 
-            @for (detalle of detalleOrden; track $index) {
+                    <tr *ngFor="let detalle of detalleOrden; let i = index">
 
-            <tr>
-                <td>
-                    @if (detalle.cantidad == 0) {
-                    <input type="number">
-                    }@else {
-                        <p>{{detalle.cantidad}}</p>
-                    }
-                </td>
-
-
-                <td>
-                    @if(detalle.trabajoRealizado == null){
-                        <input type="text" name="descripcion">
-
-                    }@else{
-                        {{detalle.trabajoRealizado}}
-                    }
+                    <!-- Cantidad -->
+                    <td>
+                        <ng-container *ngIf="detalle.cantidad === 0; else cantidadValor">
+                            <input
+                                type="number"
+                                min="1"
+                                [(ngModel)]="detalle.cantidad"
+                                (input)="calcularTotales()">
+                        </ng-container>
+                        <ng-template #cantidadValor>
+                            {{detalle.cantidad}}
+                        </ng-template>
                     </td>
 
-                <td>
-                    <input type="number">
-                </td>
+                    <!-- Descripción -->
+                    <td>
+                        <ng-container *ngIf="!detalle.trabajoRealizado; else descripcionValor">
+                            <input
+                                type="text"
+                                [(ngModel)]="detalle.descripcion">
+                        </ng-container>
+                        <ng-template #descripcionValor>
+                            {{detalle.trabajoRealizado}}
+                        </ng-template>
+                    </td>
 
-                <td>
-                    <input type="number">
-                </td>
+                    <!-- Precio unitario -->
+                    <td>
+                        <input
+                            type="number"
+                            min="0"
+                            [(ngModel)]="detalle.precioUnitario"
+                            (input)="calcularTotales()">
+                    </td>
 
-            </tr>
+                    <!-- Importe -->
+                    <td>
+                        {{detalle.importe}}
+                    </td>
 
-            }
+                </tr>
 
             </tbody>
 
-            <button (click)="agregarFila()">Agregar fila</button>
-            <button (click)="quitarFila()">Quitar fila</button>
-
         </table>
+
+        <div class="acciones-tabla">
+
+            <button (click)="agregarFila()">
+                Agregar fila
+            </button>
+
+            <button (click)="quitarFila()">
+                Quitar fila
+            </button>
+
+        </div>
 
     </div>
 
     <div class="totales">
 
         <div>
+
             <p>Subtotal:</p>
-            <p>IVA:</p>
+            <p>IVA (21%):</p>
             <h2>Total:</h2>
+
         </div>
 
         <div>
-            
-            <h2>$0</h2>
-        </div>
+
+            <p>${{subtotal | number:'1.2-2'}}</p>
+
+                <p>${{iva | number:'1.2-2'}}</p>
+        
 
     </div>
 
-
-
-
     <div class="factura-botones">
 
-        <button class="btn-guardar">
+        <button
+            class="btn-guardar"
+            (click)="crearFactura()">
+
             Crear Factura
+
         </button>
 
-        <button (click)="volverAtras()" class="btn-volver">
+        <button
+            class="btn-volver"
+            (click)="volverAtras()">
+
             Volver
+
         </button>
 
     </div>

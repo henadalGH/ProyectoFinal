@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,30 @@ export class FacturaServicio {
 
   private urlFactura = 'http://localhost:8080/presupuesto';
 
-  
-  crearFactura( factura: any){
-  
-    return this.http.post(`${this.urlFactura}`, factura);
+  crearFactura(factura: any): Observable<any> {
+    return this.http.post<any>(`${this.urlFactura}/crear`, factura);
   }
-  
+
+
+  obtenerFacturas(){
+    return this.http.get<any[]>(`${this.urlFactura}/todos`);
+  }
+
+  obtenerFacturaPorid(idFactura: number){
+    return this.http.get<any>(`${this.urlFactura}/${idFactura}`)
+  }
+
+
+  obtenerFacturaPorIdVehiculo(idVehiculo: number){
+    return this.http.get<any>(`${this.urlFactura}/${idVehiculo}/vehiculo`);
+  }
+
+  actualizarEstadoFactura(idPresupuesto: number, estado: string) {
+    return this.http.put(
+      `${this.urlFactura}/cambiarEstdo/${idPresupuesto}`,
+      `"${estado}"`,
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
 }

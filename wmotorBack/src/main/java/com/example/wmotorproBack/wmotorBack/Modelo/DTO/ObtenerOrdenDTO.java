@@ -25,6 +25,7 @@ public class ObtenerOrdenDTO {
     private String modeloVehiculo;
     private String patenteVehiculo;
     private Long kilometroVehiculo;
+    private Long idVehiculo;
 
     //Datos del empleado
     private String nombreEmpleado;

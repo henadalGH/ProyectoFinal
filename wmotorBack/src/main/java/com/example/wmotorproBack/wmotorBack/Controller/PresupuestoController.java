@@ -33,9 +33,10 @@ public class PresupuestoController {
     private PresupuestoService presupuestoService;
 
 
-    @PostMapping("crear")
+    @PostMapping("/crear")
     public ResponseEntity<ResponceDTO> crearPresupuesto(@RequestBody PresupuestoDTO presupuestoDTO) {
-
+        System.out.println(presupuestoDTO.getIdAdmin());
+        System.out.println(presupuestoDTO.getIdVehiculo());
         ResponceDTO responce = presupuestoService.crearPresupuesto(presupuestoDTO);
         return ResponseEntity.ok(responce);
     }

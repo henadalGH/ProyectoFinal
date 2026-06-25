@@ -70,4 +70,7 @@ public class OrdenTrabajoEntity {
 
     @OneToMany(mappedBy = "orden")
     private List<DetalleOrdenEntity> detalleOrden = new ArrayList<>();
+
+    @OneToOne(mappedBy = "orden")
+    private PresupuestoEntity presupuesto;
 }

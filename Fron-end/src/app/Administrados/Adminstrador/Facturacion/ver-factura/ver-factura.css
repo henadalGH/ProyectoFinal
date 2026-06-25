@@ -1,0 +1,159 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f4f6f9;
+}
+
+.factura-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* HEADER */
+
+.factura-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 3px solid #1d3557;
+    padding-bottom: 25px;
+    margin-bottom: 25px;
+}
+
+.empresa h1 {
+    margin: 0;
+    color: #1d3557;
+    font-size: 36px;
+}
+
+.empresa p {
+    margin: 4px 0;
+    color: #0d0d0d;
+    font-size: 14px;
+}
+
+.factura-datos {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 220px;
+}
+
+.tipo-factura {
+    border: 2px solid #1d3557;
+    border-radius: 8px;
+    text-align: center;
+    padding: 12px;
+}
+
+.tipo-factura .titulo {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    letter-spacing: 2px;
+}
+
+.tipo-factura .letra {
+    display: block;
+    font-size: 42px;
+    font-weight: bold;
+    color: #1d3557;
+}
+
+.numero-factura {
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background: #fafafa;
+}
+
+.numero-factura label {
+    display: block;
+    font-size: 12px;
+    color: #181616;
+    margin-bottom: 5px;
+}
+
+.numero-factura span {
+    font-size: 22px;
+    font-weight: bold;
+    color: #222;
+}
+
+/* INFO */
+
+.factura-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.cliente-box,
+.vehiculo-box {
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 20px;
+    background: #fafafa;
+}
+
+.cliente-box h3,
+.vehiculo-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1d3557;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+
+.cliente-box p,
+.vehiculo-box p {
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #000;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    .factura-header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .factura-info {
+        grid-template-columns: 1fr;
+    }
+
+    .factura-datos {
+        width: 100%;
+    }
+}
+
+/* IMPRESIÓN */
+
+@media print {
+
+    body {
+        background: white;
+    }
+
+    .factura-container {
+        margin: 0;
+        max-width: 100%;
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+}
+

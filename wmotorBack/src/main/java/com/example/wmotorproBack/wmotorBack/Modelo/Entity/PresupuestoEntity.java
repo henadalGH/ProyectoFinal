@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -62,8 +64,15 @@ public class PresupuestoEntity {
     @JoinColumn(name = "id_turno")
     private TurnoEntity turno;
 
-    @OneToMany(mappedBy = "presupuesto")
+    @OneToMany(
+    mappedBy = "presupuesto",
+    cascade = CascadeType.ALL,
+    orphanRemoval = true)
     private List<DetallePresupuestoEntity> detalle = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "id_orden")
+    private OrdenTrabajoEntity orden;
 
     
 }

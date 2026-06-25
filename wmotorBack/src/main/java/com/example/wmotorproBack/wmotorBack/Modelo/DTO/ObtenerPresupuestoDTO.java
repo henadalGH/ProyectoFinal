@@ -26,7 +26,9 @@ public class ObtenerPresupuestoDTO {
     private String apellidoCliente;
     private String direccionCliente;
     private String correoCliente;
+    private String contactoCliente;
     private String marcaVehiculo;
     private String modeloVehiculo;
+    private String patenteVehiculo;
     private String nombreAdmin;
 } 

@@ -213,6 +213,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
         ordenDTO.setModeloVehiculo(ordenTrabajo.getTurno().getVehiculo().getModelo());
         ordenDTO.setPatenteVehiculo(ordenTrabajo.getTurno().getVehiculo().getPatente());
         ordenDTO.setKilometroVehiculo(ordenTrabajo.getTurno().getVehiculo().getKilometraje());
+        ordenDTO.setIdVehiculo(ordenTrabajo.getTurno().getVehiculo().getId());
 
 
         //Datos del cliente

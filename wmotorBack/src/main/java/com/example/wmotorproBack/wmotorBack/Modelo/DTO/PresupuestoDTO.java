@@ -18,6 +18,7 @@ public class PresupuestoDTO {
     private Integer total;
     private EstadoPresupuestoEnum estadoPresupuesto;
     private List<DetallePresupuestoDTO> detallePresupuesto;
+    private Long idOrden;
     private Long idAdmin;
     private Long idVehiculo;
     

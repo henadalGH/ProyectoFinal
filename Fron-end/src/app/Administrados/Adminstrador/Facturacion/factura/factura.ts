@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderAdmin } from "../../header-admin/header-admin";
 import { OrdenTrabajoService } from '../../../../Servicio/orden-trabajo-service';
-import { RouterLink } from "@angular/router";
+import { Route, Router, RouterLink } from "@angular/router";
+import { FacturaServicio } from '../../../../Servicio/factura-servicio';
 
 @Component({
   selector: 'app-factura',
@@ -12,12 +13,18 @@ import { RouterLink } from "@angular/router";
 })
 export class Factura implements OnInit{
 
-  constructor(private ordenService: OrdenTrabajoService){}
+  constructor(private ordenService: OrdenTrabajoService
+    ,private facturaService: FacturaServicio,
+    private route: Router
+  ){}
+
+  facturas: any[]= [];
   
   
   
   ngOnInit(): void {
    this.obtenerOrdenParaFacturar();
+   this.obtenerFacturas();
   }
 
   factura: any[] = [];
@@ -31,6 +38,19 @@ export class Factura implements OnInit{
         this.factura = repuesta;
         console.log(this.factura.length);
       });
+    }
+
+
+    obtenerFacturas(){
+      this.facturaService.obtenerFacturas().subscribe(
+        (repuesta: any) => {
+          this.facturas = repuesta;
+        });
+    }
+
+    verFactura(id: number){
+      this.route.navigate(['/verFactura', id]);
+
     }
 
 }

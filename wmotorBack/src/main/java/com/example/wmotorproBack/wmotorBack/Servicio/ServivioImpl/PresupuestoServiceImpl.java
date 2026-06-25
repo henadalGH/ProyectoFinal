@@ -14,13 +14,18 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.EstadoOrdenRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
+import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionService;
@@ -49,6 +54,12 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     @Autowired
     private VehiculoRepository vehiculoRepository;
 
+    @Autowired
+    private OrdenTrabajoRepository ordenTrabajoRepository;
+
+    @Autowired
+    private EstadoOrdenRepository estadoOrdenRepository;
+
 
 
     @Override
@@ -74,6 +85,19 @@ public class PresupuestoServiceImpl implements PresupuestoService {
             .orElseThrow(() -> new RuntimeException("Id admin no encontrado"));
 
     presupuestoEntity.setAdmin(admin);
+
+    //orden
+    OrdenTrabajoEntity orden = ordenTrabajoRepository.findById(presupuestoDTO.getIdOrden()).
+    orElseThrow(() -> new RuntimeException("id no encontrado"));
+
+    presupuestoEntity.setOrden(orden);
+
+
+    EstadoOrdenEntity estadoOrden = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.FACTURADA)
+    .orElseThrow( ()-> new RuntimeException("Estado no se encuentra"));
+
+    orden.setEstadoOrden(estadoOrden);
+    ordenTrabajoRepository.save(orden);
 
     // Vehículo
     VehiculoEntity vehiculo = vehiculoRepository.findById(presupuestoDTO.getIdVehiculo())
@@ -110,12 +134,15 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     presupuestoEntity.setDetalle(detalles);
     presupuestoEntity.setTotal(total);
 
+
     // Guardar presupuesto y detalles (con CascadeType.ALL)
     presuspuestoRepository.save(presupuestoEntity);
 
     response.setMensage("Presupuesto creado correctamente");
 
     return response;
+
+
 }
 
 
@@ -158,6 +185,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         obtenerPresupuesto.setApellidoCliente(presupuesto.getVehiculo().getCliente().getUsuario().getApellido());
         obtenerPresupuesto.setDireccionCliente(presupuesto.getVehiculo().getCliente().getDireccion());
         obtenerPresupuesto.setCorreoCliente(presupuesto.getVehiculo().getCliente().getUsuario().getEmail());
+        obtenerPresupuesto.setContactoCliente(presupuesto.getVehiculo().getCliente().getUsuario().getContacto());
 
         //Datos Admin
         obtenerPresupuesto.setNombreAdmin(presupuesto.getAdmin().getUsuario().getNombre() + " " + presupuesto.getAdmin().getUsuario().getApellido());
@@ -166,14 +194,17 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         //Datos del vehiculo
         obtenerPresupuesto.setMarcaVehiculo(presupuesto.getVehiculo().getMarca());
         obtenerPresupuesto.setModeloVehiculo(presupuesto.getVehiculo().getModelo());
+        obtenerPresupuesto.setPatenteVehiculo(presupuesto.getVehiculo().getPatente());
 
         //Datos del presupuesto
+        obtenerPresupuesto.setId(presupuesto.getId());
         obtenerPresupuesto.setNumeroPresupuesto(presupuesto.getNumeroPresupuesto());
         obtenerPresupuesto.setFechaRegistro(presupuesto.getFechaRegistro());
         obtenerPresupuesto.setFechaVencimiesto(presupuesto.getFechaValidez());
         obtenerPresupuesto.setObservaciones(presupuesto.getObservaciones());
         obtenerPresupuesto.setTotal(presupuesto.getTotal());
         obtenerPresupuesto.setTipoFacturaDTO(presupuesto.getTipoFactura());
+        obtenerPresupuesto.setEstadoPresupuesto(presupuesto.getEstadoPresupuesto().getEstadoPresupuesto());
         
 
 
@@ -199,8 +230,6 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         
         return obtenerPresupuesto;
     }
-
-
 
     @Override
     public ObtenerPresupuestoDTO obtenerPresupuestoPorId(Long id) {

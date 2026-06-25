@@ -46,31 +46,33 @@
                         <th>Fecha</th>
                         <th>Estado</th>
                         <th>Total</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
 
                 <tbody>
+                    @for (fac of facturas; track $index) {
 
-                    <tr>
-                        <td>Juan Pérez</td>
-                        <td>20/06/2026</td>
-                        <td class="pagada">Pagada</td>
-                        <td>$80.000</td>
-                    </tr>
+                        <tr>
+                            <td>
+                                {{fac.nombreCliente}} {{fac.apellidoCliente}}
+                            </td>
+                            <td>
+                                {{fac.fechaRegistro}}
+                            </td>
+                            <td>
+                                {{fac.estadoPresupuesto}}
+                            </td>
+                            <td>
+                                {{fac.total}}
+                            </td>
+                            <td>
+                                <button (click)="verFactura(fac.id)">Ver factura</button>
+                            </td>
 
-                    <tr>
-                        <td>Carlos Gómez</td>
-                        <td>20/06/2026</td>
-                        <td class="pendiente">Pendiente</td>
-                        <td>$150.000</td>
-                    </tr>
 
-                    <tr>
-                        <td>María López</td>
-                        <td>19/06/2026</td>
-                        <td class="pagada">Pagada</td>
-                        <td>$220.000</td>
-                    </tr>
+                        </tr>
+                    }
 
                 </tbody>
 

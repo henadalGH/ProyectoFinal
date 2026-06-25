@@ -33,6 +33,7 @@ import { PruevaTabla } from './Prueva/prueva-tabla/prueva-tabla';
 import { Factura } from './Administrados/Adminstrador/Facturacion/factura/factura';
 import { ParaFacturar } from './Administrados/Adminstrador/Facturacion/para-facturar/para-facturar';
 import { DetalleFactura } from './Administrados/Adminstrador/Facturacion/detalle-factura/detalle-factura';
+import { VerFactura } from './Administrados/Adminstrador/Facturacion/ver-factura/ver-factura';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -61,6 +62,7 @@ export const routes: Routes = [
     //Retas de factura
     {path: 'paraFacturar', component: ParaFacturar},
     {path: 'crearFactura/:id', component: DetalleFactura},
+    {path: 'verFactura/:id', component: VerFactura},
 
     // 🔐 RUTAS PROTEGIDAS  - CLIENTE
     { path: 'homeCliente', component: HomeCliente, canActivate: [AuthGuard], data: { role: ['ROLE_CLIENTE'] } },

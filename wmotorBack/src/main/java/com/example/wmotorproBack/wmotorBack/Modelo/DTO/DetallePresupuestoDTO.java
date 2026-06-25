@@ -10,6 +10,4 @@ public class DetallePresupuestoDTO {
     private Integer cantidad;
     private Double precioUnitario;
     private Double subTotal;
-    private Long idVehiculo;
-    private Long idAdministrador;
 }
