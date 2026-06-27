@@ -43,6 +43,7 @@ export const routes: Routes = [
     { path: 'principal', component: Principal },
     { path: 'contra', component: RecuperarContrasenia },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+    {path: "header", component: Header},
 
     // 🔐 RUTAS PROTEGIDAS - ADMIN
     { path: 'homeAdmin', component: HomeAdmin, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },

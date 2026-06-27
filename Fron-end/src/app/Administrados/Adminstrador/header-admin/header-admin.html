@@ -1,49 +1,76 @@
-<header class="header-admin">
-  <div class="logo-section">
-    <h1>W Motor <span>Pro</span></h1>
-  </div>
+<div class="layout">
 
-  <nav class="nav-menu">
-    <button class="nav-btn" [routerLink]="['/homeAdmin']" title="Inicio">
-      <i class="fas fa-home"></i>Inicio
-    </button>
+    <aside class="sidebar">
 
-    <div class="nav-group">
-      <button class="nav-btn" [routerLink]="['/homeFinanzas']">
-        <i class="fas fa-chart-line"></i> Finanzas
-      </button>
-      <button class="nav-btn" [routerLink]="['/gestionEmpleado']">
-        <i class="fas fa-user-tie"></i> Empleados
-      </button>
-      <button class="nav-btn" [routerLink]="['/gestionCliente']">
-        <i class="fas fa-users"></i> Clientes
-      </button>
-    </div>
+        <div class="logo-section">
+            <h1>W Motor <span>Pro</span></h1>
+        </div>
 
-    <div class="divider"></div>
+        <nav class="nav-menu">
 
-    <div class="nav-group">
-      <button class="nav-btn" [routerLink]="['/factura']">
-        <i class="fas fa-file-invoice-dollar"></i> Facturacion
-      </button>
-      <button class="nav-btn" [routerLink]="['/turnosAsignacion']">
-        <i class="fas fa-calendar-alt"></i> Turnos
-      </button>
-      <button class="nav-btn" [routerLink]="['/homeOrdenes']">
-        <i class="fas fa-clipboard-list"></i> Ordenes
-      </button>
-    </div>
+            <button class="nav-btn" [routerLink]="['/homeAdmin']">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </button>
 
-    <div class="divider"></div>
+            <div class="section-title">
+                Administración
+            </div>
 
-    <button class="nav-btn active">
-      <i class="fas fa-tachometer-alt"></i> Dashboard
-    </button>
-  </nav>
+            <button class="nav-btn" [routerLink]="['/homeFinanzas']">
+                <i class="fas fa-chart-line"></i>
+                <span>Finanzas</span>
+            </button>
 
-  <div class="user-control">
-    <button class="logout-btn" title="Cerrar Sesión" (click)="logout()">
-      <i class="fas fa-sign-out-alt"></i>Salir
-    </button>
-  </div>
-</header>
+            <button class="nav-btn" [routerLink]="['/gestionEmpleado']">
+                <i class="fas fa-user-tie"></i>
+                <span>Empleados</span>
+            </button>
+
+            <button class="nav-btn" [routerLink]="['/gestionCliente']">
+                <i class="fas fa-users"></i>
+                <span>Clientes</span>
+            </button>
+
+            <div class="section-title">
+                Operaciones
+            </div>
+
+            <button class="nav-btn" [routerLink]="['/factura']">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <span>Facturación</span>
+            </button>
+
+            <button class="nav-btn" [routerLink]="['/turnosAsignacion']">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Turnos</span>
+            </button>
+
+            <button class="nav-btn" [routerLink]="['/homeOrdenes']">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Órdenes</span>
+            </button>
+
+            <button class="nav-btn active">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </button>
+
+        </nav>
+
+        <div class="user-control">
+            <button class="logout-btn" (click)="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                Salir
+            </button>
+        </div>
+
+    </aside>
+
+    <main class="content">
+
+        <!-- router-outlet o dashboard -->
+
+    </main>
+
+</div>

@@ -139,11 +139,9 @@ export class DetalleFactura implements OnInit {
 
       next: (resp) => {
 
-        console.log('Factura creada correctamente');
+        alert('Factura creada correctamente');
         console.log(resp);
-
-        // Opcional: volver atrás o navegar
-        // this.router.navigate(['/facturas']);
+        this.router.navigate(['/facturas']);
 
       },
 

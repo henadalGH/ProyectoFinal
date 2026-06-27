@@ -1,10 +1,12 @@
+
 <app-header-admin></app-header-admin>
 
 @if (factura != null) {
 
 <div class="factura-container">
 
-    <!-- ENCABEZADO -->
+    <!-- ================= ENCABEZADO ================= -->
+
     <div class="factura-header">
 
         <div class="empresa">
@@ -27,37 +29,30 @@
                 <span>{{ numeroFacturaFormateado }}</span>
             </div>
 
+            <div class="fecha-factura">
+                <strong>Fecha:</strong>
+                {{ factura.fechaRegistro }}
+            </div>
+
         </div>
 
     </div>
 
-    <!-- DATOS -->
+    <!-- ================= DATOS ================= -->
+
     <div class="factura-info">
 
         <div class="cliente-box">
 
             <h3>DATOS DEL CLIENTE</h3>
 
-            <p>
-                <strong>Nombre:</strong>
-                {{ factura.nombreCliente }}
-                {{ factura.apellidoCliente }}
-            </p>
+            <p><strong>Nombre:</strong> {{ factura.nombreCliente }} {{ factura.apellidoCliente }}</p>
 
-            <p>
-                <strong>Contacto:</strong>
-                {{ factura.contactoCliente }}
-            </p>
+            <p><strong>Contacto:</strong> {{ factura.contactoCliente }}</p>
 
-            <p>
-                <strong>Dirección:</strong>
-                {{ factura.direccionCliente }}
-            </p>
+            <p><strong>Dirección:</strong> {{ factura.direccionCliente }}</p>
 
-            <p>
-                <strong>Email:</strong>
-                {{ factura.correoCliente }}
-            </p>
+            <p><strong>Email:</strong> {{ factura.correoCliente }}</p>
 
         </div>
 
@@ -65,26 +60,105 @@
 
             <h3>DATOS DEL VEHÍCULO</h3>
 
-            <p>
-                <strong>Marca:</strong>
-                {{ factura.marcaVehiculo }}
-            </p>
+            <p><strong>Marca:</strong> {{ factura.marcaVehiculo }}</p>
 
-            <p>
-                <strong>Modelo:</strong>
-                {{ factura.modeloVehiculo }}
-            </p>
+            <p><strong>Modelo:</strong> {{ factura.modeloVehiculo }}</p>
 
-            <p>
-                <strong>Patente:</strong>
-                {{ factura.patenteVehiculo }}
-            </p>
+            <p><strong>Patente:</strong> {{ factura.patenteVehiculo }}</p>
 
         </div>
+
+    </div>
+
+    <!-- ================= DETALLE ================= -->
+
+    <div class="detalle-factura">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Cantidad</th>
+                    <th>Descripción</th>
+                    <th>Precio Unitario</th>
+                    <th>Importe</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @for (fac of factura.detallePresupuesto; track $index) {
+
+                <tr>
+
+                    <td>{{ fac.cantidad }}</td>
+
+                    <td>{{ fac.descripcion }}</td>
+
+                    <td>$ {{ fac.precioUnitario }}</td>
+
+                    <td>$ {{ fac.subTotal }}</td>
+
+                </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- ================= OBSERVACIONES ================= -->
+
+    <div class="observaciones">
+
+        <h3>Observaciones</h3>
+
+        <p>
+            {{ factura.observaciones }}
+        </p>
+
+    </div>
+
+    <!-- ================= TOTALES ================= -->
+
+    <div class="totales">
+
+        <table>
+
+            <tr>
+                <td>Subtotal</td>
+                <td>$ {{ factura.subTotal }}</td>
+            </tr>
+
+            <tr>
+                <td>IVA (21%)</td>
+                <td>$ {{ factura.iva }}</td>
+            </tr>
+
+            <tr class="total-final">
+                <td>TOTAL</td>
+                <td>$ {{ factura.total }}</td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- ================= PIE ================= -->
+
+    <div class="pie-factura">
+
+        <p>
+            Gracias por confiar en WMOTOR PRO.
+        </p>
 
     </div>
 
 </div>
 
 }
-```
+

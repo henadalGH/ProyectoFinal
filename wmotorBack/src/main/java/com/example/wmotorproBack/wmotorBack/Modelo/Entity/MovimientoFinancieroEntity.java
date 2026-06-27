@@ -2,12 +2,8 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 import java.time.LocalDate;
 
-import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -18,32 +14,30 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "movimientosFinancieros", schema = "wmtorpro")
+@Table(name = "movimientos_financieros", schema = "wmtorpro")
 public class MovimientoFinancieroEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_moviento")
+    @Column(name = "id_movimiento")
     private Long id;
 
-    @Column(name = "tipo_movimiento")
-    @Enumerated(EnumType.STRING)
-    private MovimientosEnum tipo_movimiento;
-
-    @Column(name = "concepto")
+    @Column(name = "concepto", nullable = false)
     private String concepto;
 
-    @Column(name = "importe")
+    @Column(name = "importe", nullable = false)
     private Double importe;
 
-    @Column(name = "fecha_registro")
+    @Column(name = "fecha_registro", nullable = false)
     private LocalDate fechaRegistro;
 
+    // Relación con usuario/admin que registra el movimiento
     @ManyToOne
     @JoinColumn(name = "id_admin")
     private AdminEntity admin;
 
+    // Categoría del movimiento (de aquí se obtiene el tipo INGRESO/EGRESO)
     @ManyToOne
-    @JoinColumn(name = "id_categoria")
+    @JoinColumn(name = "id_categoria", nullable = false)
     private CategoriaMovimientoEntity categoria;
 }

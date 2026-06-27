@@ -10,6 +10,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -39,6 +41,12 @@ public class PresupuestoEntity {
     @Column(name = "fecha_Registro")
     private LocalDate fechaRegistro;
 
+    @Column(name = "sub_total")
+    private Double subTotal;
+
+    @Column(name = "iva")
+    private Double iva;
+
     @Column(name = "total")
     private Double total;
 
@@ -50,6 +58,7 @@ public class PresupuestoEntity {
     private AdminEntity admin;
 
     @Column(name = "tipo_factura")
+    @Enumerated(EnumType.STRING)
     private TipoFacturaDTO tipoFactura;
 
     @ManyToOne

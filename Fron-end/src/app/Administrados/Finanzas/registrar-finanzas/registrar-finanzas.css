@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+  height: 100vh; /* ocupa toda la pantalla */
+}
+
+.sidebar {
+  width: 320px;   /* 🔥 antes 250px, ahora más ancho */
+  background: #1f2937;
+  color: white;
+  flex-shrink: 0; /* evita que se achique */
+}
+
+.content {
+  flex: 1;        /* ocupa todo el espacio restante */
+  background: #f3f6fb;
+  padding: 20px;
+}

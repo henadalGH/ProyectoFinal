@@ -10,7 +10,7 @@ export class ClienteServicio {
   constructor(private http: HttpClient){}
 
   private urlApiCliente= 'http://localhost:8080/cliente/todos';
-  private urlApiClienteId = 'http://localhost:8080/cliente'
+  private urlApi = 'http://localhost:8080/cliente'
 
   obtenerTodosLosClientes(){
     return this.http.get(this.urlApiCliente); 
@@ -20,6 +20,10 @@ export class ClienteServicio {
   obtenerClientePorId(id: number){
     return this.http.get(`http://localhost:8080/cliente/${id}`);
 
+  }
+
+  obtenerCantidaCliente(){
+    return this.http.get<number>(`${this.urlApi}/total`);
   }
   
 }

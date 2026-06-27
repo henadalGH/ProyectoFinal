@@ -1,80 +1,148 @@
-<app-header-admin></app-header-admin>
+<div class="admin-page">
 
+    <!-- MENU LATERAL -->
+    <app-header-admin></app-header-admin>
 
-<div class="inicio">
+    <!-- TU CONTENIDO ACTUAL -->
+    <div class="admin-content">
 
-    <div class="bienvenida">
-        <h1>Bienvenido, Hernán</h1>
-        <span>19/06/2026</span>
-    </div>
+        <div class="layout">
 
-    <div class="cards">
+            <!-- HEADER -->
+            <app-header></app-header>
 
-        <div class="card">
-            <h3>Órdenes abiertas</h3>
-            <h2>12</h2>
-        </div>
+            <!-- KPIs -->
+            <section class="kpis">
 
-        <div class="card">
-            <h3>Vehículos en taller</h3>
-            <h2>8</h2>
-        </div>
+                <div class="kpi blue">
+                    <h3>Órdenes</h3>
+                    <p>12</p>
+                </div>
 
-        <div class="card">
-            <h3>Clientes activos</h3>
-            <h2>156</h2>
-        </div>
+                <div class="kpi green">
+                    <h3>Turnos</h3>
+                    <p>9</p>
+                </div>
 
-        <div class="card">
-            <h3>Ingresos del mes</h3>
-            <h2>$2.400.000</h2>
-        </div>
+                <div class="kpi orange">
+                    <h3>Facturación</h3>
+                    <p>$245K</p>
+                </div>
 
-    </div>
+                <div class="kpi purple">
+                    <h3>Clientes</h3>
+                    <p>{{totalClientes}}</p>
+                </div>
 
-    <div class="contenedor">
+            </section>
 
-        <div class="tabla">
-            <h2>Trabajos del día</h2>
+            <!-- MAIN -->
+            <div class="grid">
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Cliente</th>
-                        <th>Vehículo</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
+                <!-- LEFT -->
+                <section>
 
-                <tbody>
-                    <tr>
-                        <td>Juan Pérez</td>
-                        <td>Gol Trend</td>
-                        <td>En proceso</td>
-                    </tr>
+                    <div class="card">
+                        <h2>Turnos del día</h2>
 
-                    <tr>
-                        <td>Carlos Gómez</td>
-                        <td>Hilux</td>
-                        <td>Esperando repuestos</td>
-                    </tr>
+                        <div class="list">
+                            <div>09:00 - Toyota Corolla</div>
+                            <div>10:30 - Ford Ranger</div>
+                            <div>11:00 - Amarok</div>
+                            <div>14:00 - Hilux</div>
+                        </div>
+                    </div>
 
-                    <tr>
-                        <td>María López</td>
-                        <td>Corolla</td>
-                        <td>Completado</td>
-                    </tr>
+                    <div class="card">
+                        <h2>Facturación reciente</h2>
 
-                </tbody>
-            </table>
-        </div>
+                        <table>
+                            <tr>
+                                <th>Factura</th>
+                                <th>Cliente</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                            </tr>
 
-        <div class="alertas">
-            <h2>Alertas</h2>
+                            <tr>
+                                <td>F-1021</td>
+                                <td>Juan Pérez</td>
+                                <td>$45.000</td>
+                                <td class="paid">Pagada</td>
+                            </tr>
 
-            <p>⚠ Stock bajo de filtros de aceite.</p>
-            <p>⚠ 3 turnos pendientes para mañana.</p>
-            <p>⚠ 2 órdenes listas para facturar.</p>
+                            <tr>
+                                <td>F-1022</td>
+                                <td>Pedro López</td>
+                                <td>$32.000</td>
+                                <td class="pending">Pendiente</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="card big">
+                        <h2>Órdenes activas</h2>
+
+                        <table>
+                            <tr>
+                                <th>Orden</th>
+                                <th>Cliente</th>
+                                <th>Vehículo</th>
+                                <th>Estado</th>
+                                <th>Mecánico</th>
+                            </tr>
+
+                            <tr>
+                                <td>OT-125</td>
+                                <td>Juan Pérez</td>
+                                <td>Hilux</td>
+                                <td class="work">Reparando</td>
+                                <td>Carlos</td>
+                            </tr>
+
+                            <tr>
+                                <td>OT-126</td>
+                                <td>Pedro López</td>
+                                <td>Amarok</td>
+                                <td class="wait">Esperando</td>
+                                <td>José</td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </section>
+
+                <!-- RIGHT -->
+                <aside>
+
+                    <div class="card alert">
+                        <h2>Alertas</h2>
+
+                        <ul>
+                            <li>⚠ 2 órdenes vencidas</li>
+                            <li>⚠ 1 factura pendiente</li>
+                            <li>⚠ turnos sin confirmar</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h2>Accesos rápidos</h2>
+
+                        <div class="buttons">
+                            <button>Órdenes</button>
+                            <button>Turnos</button>
+                            <button>Facturas</button>
+                            <button>Clientes</button>
+                            <button>Vehículos</button>
+                            <button>Empleados</button>
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
 
         </div>
 

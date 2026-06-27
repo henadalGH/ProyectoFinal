@@ -1,159 +1,450 @@
 
-* {
-    box-sizing: border-box;
+/*==============================
+        GENERAL
+===============================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Arial, sans-serif;
 }
 
-body {
-    background: #f4f6f9;
+body{
+    background:#eceff3;
+    padding:35px;
+    color:#111;
 }
 
-.factura-container {
-    max-width: 1100px;
-    margin: 30px auto;
-    background: #ffffff;
-    border: 1px solid #dcdcdc;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    font-family: Arial, Helvetica, sans-serif;
+/*==============================
+        HOJA
+===============================*/
+
+.factura-container{
+
+    width:1000px;
+    margin:auto;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
+
+    padding:45px;
 }
 
-/* HEADER */
+/*==============================
+        HEADER
+===============================*/
 
-.factura-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 3px solid #1d3557;
-    padding-bottom: 25px;
-    margin-bottom: 25px;
+.factura-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    border-bottom:3px solid #184a78;
+
+    padding-bottom:25px;
+
+    margin-bottom:35px;
 }
 
-.empresa h1 {
-    margin: 0;
-    color: #1d3557;
-    font-size: 36px;
+/*==============================
+        EMPRESA
+===============================*/
+
+.empresa{
+
+    width:60%;
 }
 
-.empresa p {
-    margin: 4px 0;
-    color: #0d0d0d;
-    font-size: 14px;
+.empresa h1{
+
+    font-size:42px;
+
+    color:#123d68;
+
+    margin-bottom:12px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
 }
 
-.factura-datos {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    min-width: 220px;
+.empresa p{
+
+    font-size:15px;
+
+    color:#111;
+
+    margin:7px 0;
+
 }
 
-.tipo-factura {
-    border: 2px solid #1d3557;
-    border-radius: 8px;
-    text-align: center;
-    padding: 12px;
+/*==============================
+    DATOS FACTURA
+===============================*/
+
+.factura-datos{
+
+    width:260px;
+
 }
 
-.tipo-factura .titulo {
-    display: block;
-    font-size: 12px;
-    color: #666;
-    letter-spacing: 2px;
+.tipo-factura{
+
+    border:2px solid #184a78;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    margin-bottom:15px;
+
 }
 
-.tipo-factura .letra {
-    display: block;
-    font-size: 42px;
-    font-weight: bold;
-    color: #1d3557;
+.tipo-factura .titulo{
+
+    display:block;
+
+    background:#184a78;
+
+    color:white;
+
+    text-align:center;
+
+    padding:10px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
 }
 
-.numero-factura {
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    background: #fafafa;
+.tipo-factura .letra{
+
+    display:block;
+
+    text-align:center;
+
+    font-size:48px;
+
+    color:#123d68;
+
+    font-weight:bold;
+
+    padding:15px;
+
 }
 
-.numero-factura label {
-    display: block;
-    font-size: 12px;
-    color: #181616;
-    margin-bottom: 5px;
+.numero-factura,
+.fecha-factura{
+
+    border:1px solid #bfbfbf;
+
+    border-radius:8px;
+
+    padding:12px;
+
+    text-align:center;
+
+    margin-bottom:10px;
+
+    background:#fafafa;
+
 }
 
-.numero-factura span {
-    font-size: 22px;
-    font-weight: bold;
-    color: #222;
+.numero-factura label{
+
+    display:block;
+
+    color:#111;
+
+    font-weight:600;
+
+    margin-bottom:5px;
+
 }
 
-/* INFO */
+.numero-factura span{
 
-.factura-info {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
+    font-size:22px;
+
+    color:#000;
+
+    font-weight:bold;
+
+}
+
+.fecha-factura{
+
+    color:#111;
+
+    font-weight:600;
+
+}
+
+/*==============================
+        DATOS
+===============================*/
+
+.factura-info{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:25px;
+
+    margin-bottom:35px;
+
 }
 
 .cliente-box,
-.vehiculo-box {
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    padding: 20px;
-    background: #fafafa;
+.vehiculo-box{
+
+    border:1px solid #d5d5d5;
+
+    border-radius:10px;
+
+    padding:20px;
+
 }
 
 .cliente-box h3,
-.vehiculo-box h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: #1d3557;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 8px;
+.vehiculo-box h3{
+
+    text-align:center;
+
+    color:#123d68;
+
+    margin-bottom:18px;
+
+    padding-bottom:8px;
+
+    border-bottom:2px solid #184a78;
+
 }
 
 .cliente-box p,
-.vehiculo-box p {
-    margin: 10px 0;
-    font-size: 14px;
-    line-height: 1.4;
-    color: #000;
+.vehiculo-box p{
+
+    color:#111;
+
+    font-size:15px;
+
+    margin:12px 0;
+
+    line-height:1.6;
+
 }
 
-/* RESPONSIVE */
+.cliente-box strong,
+.vehiculo-box strong{
 
-@media (max-width: 768px) {
+    color:#000;
 
-    .factura-header {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .factura-info {
-        grid-template-columns: 1fr;
-    }
-
-    .factura-datos {
-        width: 100%;
-    }
 }
 
-/* IMPRESIÓN */
+/*==============================
+        TABLA
+===============================*/
 
-@media print {
+.detalle-factura{
 
-    body {
-        background: white;
-    }
+    margin-top:25px;
 
-    .factura-container {
-        margin: 0;
-        max-width: 100%;
-        border: 1px solid #000;
-        box-shadow: none;
-    }
 }
 
+.detalle-factura table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.detalle-factura thead{
+
+    background:#184a78;
+
+}
+
+.detalle-factura th{
+
+    color:white;
+
+    padding:14px;
+
+    text-align:center;
+
+    font-size:14px;
+
+}
+
+.detalle-factura td{
+
+    padding:13px;
+
+    text-align:center;
+
+    border-bottom:1px solid #dcdcdc;
+
+    color:#111;
+
+}
+
+.detalle-factura tbody tr:nth-child(even){
+
+    background:#f6f8fb;
+
+}
+
+/*==============================
+        OBSERVACIONES
+===============================*/
+
+.observaciones{
+
+    margin-top:30px;
+
+    border:1px solid #d5d5d5;
+
+    border-radius:8px;
+
+    padding:20px;
+
+}
+
+.observaciones h3{
+
+    text-align:center;
+
+    color:#123d68;
+
+    margin-bottom:15px;
+
+}
+
+.observaciones p{
+
+    color:#111;
+
+    line-height:1.7;
+
+}
+
+/*==============================
+        TOTALES
+===============================*/
+
+.totales{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:30px;
+
+}
+
+.totales table{
+
+    width:350px;
+
+    border-collapse:collapse;
+
+}
+
+.totales td{
+
+    border:1px solid #d6d6d6;
+
+    padding:13px;
+
+    color:#111;
+
+    font-weight:600;
+
+}
+
+.totales td:last-child{
+
+    text-align:right;
+
+}
+
+.total-final{
+
+    background:#184a78;
+
+    color:white;
+
+    font-size:18px;
+
+}
+
+.total-final td{
+
+    color:white;
+
+}
+
+/*==============================
+        PIE
+===============================*/
+
+.pie-factura{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    border-top:2px solid #184a78;
+
+    padding-top:18px;
+
+    color:#111;
+
+    font-weight:500;
+
+}
+
+/*==============================
+        IMPRESIÓN
+===============================*/
+
+@page{
+
+    size:A4;
+
+    margin:12mm;
+
+}
+
+@media print{
+
+    body{
+
+        background:white;
+
+        padding:0;
+
+    }
+
+    .factura-container{
+
+        width:100%;
+
+        margin:0;
+
+        box-shadow:none;
+
+        border-radius:0;
+
+    }
+
+}

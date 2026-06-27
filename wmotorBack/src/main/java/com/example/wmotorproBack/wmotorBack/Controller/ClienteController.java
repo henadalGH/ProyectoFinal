@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ClienteDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
+import com.example.wmotorproBack.wmotorBack.Repository.ClienteRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.ClienteService;
 import java.util.List;
 
@@ -16,12 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
  
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @GetMapping("/todos")
     public ResponseEntity<List<ClienteEntity>> obtenerClientes() {
@@ -32,6 +37,12 @@ public class ClienteController {
     public ResponseEntity<ClienteDTO> obtenerClientePorID(@PathVariable Long id) {
         return ResponseEntity.ok(clienteService.obtenerClientePorId(id));
     }
+
+    @GetMapping("/total")
+    public Long totalClientes() {
+        return clienteRepository.count();
+    }
+    
     
     
 }

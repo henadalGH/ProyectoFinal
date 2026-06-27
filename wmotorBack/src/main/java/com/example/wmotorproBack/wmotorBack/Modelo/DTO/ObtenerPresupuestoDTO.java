@@ -19,6 +19,8 @@ public class ObtenerPresupuestoDTO {
     private LocalDate fechaRegistro;
     private TipoFacturaDTO tipoFacturaDTO;
     private Double total;
+    private Double subTotal;
+    private Double iva;
     private String observaciones;
     private EstadoPresupuestoEnum estadoPresupuesto;
     private List<DetallePresupuestoDTO> detallePresupuesto;

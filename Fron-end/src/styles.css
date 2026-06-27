@@ -1,46 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
-/* RESET GENERAL Y FONDO BASE */
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    /* Fondo oscuro con un ligero toque de azul/gris para que no se vea "muerto" */
-    background-color: #050505;
-    /* Degradado radial: el centro es levemente más claro que los bordes */
-    background-image: radial-gradient(circle at 50% 30%, #1a1a1a 0%, #050505 100%);
-    background-attachment: fixed;
-    color: #e0e0e0;
-    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #1f2937;
+
+  background: linear-gradient(
+    180deg,
+    #f8fafc 0%,
+    #f1f5f9 50%,
+    #eef2f7 100%
+  );
 }
 
-/* Opcional: Una textura sutil de "puntos" para darle un toque tecnológico */
+/* 🔥 ANGULAR ROOT */
+app-root {
+  display: block;
+  height: 100%;
+}
+
+/* ❌ QUITAMOS DEPENDENCIA INÚTIL (.app-container) */
+
+/* textura */
 body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px; /* Tamaño de la cuadrícula de puntos */
-    pointer-events: none;
-    z-index: 0;
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  background-image: radial-gradient(
+    rgba(15, 23, 42, 0.035) 1px,
+    transparent 1px
+  );
+
+  background-size: 22px 22px;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Scrollbar personalizada para que no rompa la estética oscura */
+/* tarjetas */
+.card,
+.container,
+.panel {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  transition: 0.25s ease;
+}
+
+/* scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: #0a0a0a;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 10px;
+  background: #cbd5e1;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #ffc107; /* El amarillo de tu marca al pasar el mouse */
+  background: #94a3b8;
 }

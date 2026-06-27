@@ -16,8 +16,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-@Data
 @Entity
+@Data
 @Table(name = "categoria_movimiento")
 public class CategoriaMovimientoEntity {
 
@@ -29,11 +29,10 @@ public class CategoriaMovimientoEntity {
     @Column(name = "categoria")
     private String categoria;
 
-    @Column(name = "tipo_movimiento")
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_movimiento")
     private MovimientosEnum movimientos;
 
     @OneToMany(mappedBy = "categoria")
     private List<MovimientoFinancieroEntity> movimiento = new ArrayList<>();
-
 }

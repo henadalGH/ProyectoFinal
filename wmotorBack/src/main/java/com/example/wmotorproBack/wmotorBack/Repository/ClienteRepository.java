@@ -5,4 +5,6 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 
 public interface ClienteRepository extends JpaRepository<ClienteEntity, Long>{
 
+    
+
 }

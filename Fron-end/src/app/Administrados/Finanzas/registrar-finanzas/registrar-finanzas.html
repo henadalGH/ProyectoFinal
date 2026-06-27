@@ -1,11 +1,40 @@
-<div class="titulo">
-    <h1>Registre un nuevo movimiento</h1>
-    <p>Complete el formulario</p>
-</div>
+<div class="layout">
+  <aside class="sidebar">
+    <app-header-admin></app-header-admin>
+  </aside>
 
-<div class="formulario">
+  <main class="content">
+    <app-header></app-header>
+
+    <div class="titulo">
+            <h1>Registre un movimiento</h1>
+            <p>Complete el formulario</p>
+        </div>
     <form>
-        <div class="campo"><label for=""></label><input type="text"></div>
-        <div class="campo"><label for=""></label><input type="text"></div>
+        
+        <div class="campo">
+            <label>Elija un movimiento:</label>
+            <select name="movimiento">
+                <option value="INGRESO">Ingreso</option>
+                <option value="GASTOS">Gastos</option>
+            </select>
+        </div>
+        
+        <div class="campo">
+            <label>Ingrese un concepto:</label>
+            <input type="text">
+        </div>
+        
+        <div class="campo">
+            <label>Ingrese el importe:</label>
+            <input type="text">
+        </div>
+        
+        <div class="campo">
+            <label></label>
+            <input type="text">
+        </div>
+        <button>Registrar</button>
     </form>
+  </main>
 </div>

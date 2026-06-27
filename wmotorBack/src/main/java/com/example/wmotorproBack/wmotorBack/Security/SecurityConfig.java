@@ -44,6 +44,7 @@ public class SecurityConfig {
                                 .requestMatchers("/vehiculo/buscar/{id}").permitAll()
                                 .requestMatchers("/registro/nuevo").permitAll()
                                 .requestMatchers("/cliente/**").permitAll()
+                                .requestMatchers("/cliente/total").permitAll()
                                 .requestMatchers("/servicio/todos").permitAll()
                                 .requestMatchers("/servicio/{id}").permitAll()
                                 .requestMatchers("/repuesto/todos").permitAll()

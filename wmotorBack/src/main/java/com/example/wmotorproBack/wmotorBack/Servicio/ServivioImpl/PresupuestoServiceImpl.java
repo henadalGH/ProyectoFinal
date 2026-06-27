@@ -63,8 +63,8 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
 
     @Override
-    @Transactional
-    public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
+@Transactional
+public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
 
     ResponceDTO response = new ResponceDTO();
 
@@ -86,15 +86,15 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
     presupuestoEntity.setAdmin(admin);
 
-    //orden
-    OrdenTrabajoEntity orden = ordenTrabajoRepository.findById(presupuestoDTO.getIdOrden()).
-    orElseThrow(() -> new RuntimeException("id no encontrado"));
+    // Orden
+    OrdenTrabajoEntity orden = ordenTrabajoRepository.findById(presupuestoDTO.getIdOrden())
+            .orElseThrow(() -> new RuntimeException("Id orden no encontrado"));
 
     presupuestoEntity.setOrden(orden);
 
-
-    EstadoOrdenEntity estadoOrden = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.FACTURADA)
-    .orElseThrow( ()-> new RuntimeException("Estado no se encuentra"));
+    EstadoOrdenEntity estadoOrden = estadoOrdenRepository
+            .findByEstadoOrden(EstadoOrdenEnums.FACTURADA)
+            .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
     orden.setEstadoOrden(estadoOrden);
     ordenTrabajoRepository.save(orden);
@@ -109,9 +109,9 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     Long numero = numeracionService.generarNumero();
     presupuestoEntity.setNumeroPresupuesto(numero);
 
-    // Detalles y total
+    // Detalles
     List<DetallePresupuestoEntity> detalles = new ArrayList<>();
-    double total = 0;
+    double subTotalGeneral = 0.0;
 
     for (DetallePresupuestoDTO detalleDTO : presupuestoDTO.getDetallePresupuesto()) {
 
@@ -121,28 +121,31 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         detalleEntity.setDescripcion(detalleDTO.getDescripcion());
         detalleEntity.setPrecioUnitario(detalleDTO.getPrecioUnitario());
 
-        double subTotal = detalleDTO.getCantidad() * detalleDTO.getPrecioUnitario();
-        detalleEntity.setSubTotal(subTotal);
+        double subTotalLinea = detalleDTO.getCantidad() * detalleDTO.getPrecioUnitario();
 
-        // Relación con presupuesto
+        detalleEntity.setSubTotal(subTotalLinea);
         detalleEntity.setPresupuesto(presupuestoEntity);
 
         detalles.add(detalleEntity);
-        total += subTotal;
+
+        subTotalGeneral += subTotalLinea;
     }
 
+    // Totales
+    double iva = subTotalGeneral * 0.21;
+    double totalFinal = subTotalGeneral + iva;
+
     presupuestoEntity.setDetalle(detalles);
-    presupuestoEntity.setTotal(total);
+    presupuestoEntity.setSubTotal(subTotalGeneral);
+    presupuestoEntity.setIva(iva);
+    presupuestoEntity.setTotal(totalFinal);
 
-
-    // Guardar presupuesto y detalles (con CascadeType.ALL)
+    // Guardar
     presuspuestoRepository.save(presupuestoEntity);
 
     response.setMensage("Presupuesto creado correctamente");
 
     return response;
-
-
 }
 
 
@@ -203,6 +206,8 @@ public class PresupuestoServiceImpl implements PresupuestoService {
         obtenerPresupuesto.setFechaVencimiesto(presupuesto.getFechaValidez());
         obtenerPresupuesto.setObservaciones(presupuesto.getObservaciones());
         obtenerPresupuesto.setTotal(presupuesto.getTotal());
+        obtenerPresupuesto.setIva(presupuesto.getIva());
+        obtenerPresupuesto.setSubTotal(presupuesto.getSubTotal());
         obtenerPresupuesto.setTipoFacturaDTO(presupuesto.getTipoFactura());
         obtenerPresupuesto.setEstadoPresupuesto(presupuesto.getEstadoPresupuesto().getEstadoPresupuesto());
         
