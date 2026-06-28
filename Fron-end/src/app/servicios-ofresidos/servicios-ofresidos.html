@@ -1,0 +1,63 @@
+<nav class="navbar">
+    <div class="logo">
+        GENESIS<span>PRO</span>
+    </div>
+
+    <div class="nav-links">
+        <a routerLink="/login" class="link">Iniciar Sesión</a>
+        <a [routerLink]="['/registro']" class="btn btn-primary">
+            Registrarme
+        </a>
+    </div>
+</nav>
+
+<div class="servicios-page">
+
+    <div class="titulo">
+        <h1>Nuestros Servicios</h1>
+        <p>Los precios corresponden únicamente a la mano de obra.</p>
+    </div>
+
+    @if(servicios){
+
+        <div class="servicios-grid">
+
+            @for(serv of servicios; track $index){
+
+                <div class="servicio-card">
+
+                    <div class="servicio-header">
+                        <h2>{{serv.nombre}}</h2>
+                    </div>
+
+                    <div class="servicio-body">
+
+                        <div class="dato">
+                            <span>Descripción</span>
+                            <p>{{serv.descripcion}}</p>
+                        </div>
+
+                        <div class="dato">
+                            <span>Duración</span>
+                            <p>{{serv.duracionEstimada}} minutos</p>
+                        </div>
+
+                        <div class="precio">
+                            ${{serv.precion_base}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+
+        <div class="acciones">
+            <button class="btn-volver" (click)="volver()">
+                Volver
+            </button>
+        </div>
+    }
+</div>

@@ -2,14 +2,9 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
+
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
@@ -22,6 +17,10 @@ public class MovimientoFinancieroEntity {
     @Column(name = "id_movimiento")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_movimiento", nullable = false)
+    private MovimientosEnum tipoMovimiento;
+
     @Column(name = "concepto", nullable = false)
     private String concepto;
 
@@ -31,13 +30,11 @@ public class MovimientoFinancieroEntity {
     @Column(name = "fecha_registro", nullable = false)
     private LocalDate fechaRegistro;
 
-    // Relación con usuario/admin que registra el movimiento
-    @ManyToOne
-    @JoinColumn(name = "id_admin")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_admin", nullable = false)
     private AdminEntity admin;
 
-    // Categoría del movimiento (de aquí se obtiene el tipo INGRESO/EGRESO)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", nullable = false)
     private CategoriaMovimientoEntity categoria;
 }

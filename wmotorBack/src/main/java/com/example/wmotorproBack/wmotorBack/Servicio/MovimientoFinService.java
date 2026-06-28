@@ -17,30 +17,18 @@ public interface MovimientoFinService {
     // Filtros
     List<MovimientoFinancieroEntity> obtenerPorFecha(LocalDate fecha);
 
-    List<MovimientoFinancieroEntity> obtenerEntreFechas(
-            LocalDate fechaInicio,
-            LocalDate fechaFin);
+    List<MovimientoFinancieroEntity> obtenerEntreFechas(LocalDate fechaInicio, LocalDate fechaFin);
 
-    List<MovimientoFinancieroEntity> obtenerPorMes(
-            int mes,
-            int anio);
+    List<MovimientoFinancieroEntity> obtenerPorMes(int mes, int anio);
 
-    List<MovimientoFinancieroEntity> obtenerPorCategoria(
-            Long idCategoria);
+    List<MovimientoFinancieroEntity> obtenerPorCategoria(Long idCategoria);
 
-    List<MovimientoFinancieroEntity> obtenerPorTipo(
-            String tipoMovimiento);
+    List<MovimientoFinancieroEntity> obtenerPorTipo(String tipoMovimiento);
 
     // Dashboard
-    Double totalIngresos(
-            LocalDate desde,
-            LocalDate hasta);
+    Double totalIngresos( LocalDate desde, LocalDate hasta);
 
-    Double totalEgresos(
-            LocalDate desde,
-            LocalDate hasta);
+    Double totalEgresos(LocalDate desde, LocalDate hasta);
 
-    Double balanceGeneral(
-            LocalDate desde,
-            LocalDate hasta);
+    Double balanceGeneral(LocalDate desde,  LocalDate hasta);
 }

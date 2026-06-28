@@ -1,262 +1,282 @@
-/* ================================================= */
-/* ==================== GENERAL ==================== */
-/* ================================================= */
+/* =======================
+   LAYOUT
+======================= */
 
-body{
-  background: linear-gradient(180deg,#020617,#0f172a);
-  color:#e2e8f0;
-  font-family:'Inter',sans-serif;
+.layout{
+    display: flex;
+    min-height: 100vh;
+    background: #f4f7fb;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ================================================= */
-/* ==================== TITULO ===================== */
-/* ================================================= */
+.sidebar{
+    width: 260px;
+    flex-shrink: 0;
+    background: #111827;
+}
+
+.content{
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* =======================
+   TITULO
+======================= */
 
 .titulo{
-  text-align:center;
-  margin:40px 0 25px;
+    text-align: center;
+    margin: 30px auto;
 }
 
 .titulo h1{
-  font-size:42px;
-  font-weight:800;
-  color:#f8fafc;
-  margin-bottom:10px;
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
 }
 
 .titulo p{
-  color:#94a3b8;
-  font-size:16px;
+    margin-top: 10px;
+    font-size: 15px;
+    color: #6b7280;
 }
 
-/* ================================================= */
-/* ================== ENCABEZADO =================== */
-/* ================================================= */
+/* =======================
+   ENCABEZADO
+======================= */
 
 .encabezado{
-  max-width:1400px;
-  margin:0 auto 25px;
-
-  background:rgba(15,23,42,.85);
-
-  border:1px solid rgba(255,255,255,.05);
-
-  border-radius:20px;
-
-  padding:25px 30px;
-
-  box-shadow:0 15px 35px rgba(0,0,0,.25);
+    max-width: 1400px;
+    margin: 0 auto 25px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
 }
 
 .encabezado h2{
-  color:#f8fafc;
-  font-size:28px;
-  margin-bottom:6px;
+    margin: 0;
+    color: #111827;
+    font-size: 24px;
 }
 
 .encabezado p{
-  color:#94a3b8;
+    margin-top: 8px;
+    color: #6b7280;
 }
 
-/* ================================================= */
-/* ==================== TABLA ====================== */
-/* ================================================= */
+/* =======================
+   TABLA
+======================= */
 
 .tabla-wrapper{
-  max-width:1400px;
-  margin:auto;
-  overflow-x:auto;
-
-  background:rgba(15,23,42,.9);
-
-  border-radius:22px;
-
-  border:1px solid rgba(255,255,255,.05);
-
-  box-shadow:0 15px 35px rgba(0,0,0,.3);
+    max-width: 1400px;
+    margin: auto;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
 }
 
 .tabla-roster{
-  width:100%;
-  border-collapse:collapse;
-  border:none;
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
 }
 
 .tabla-roster thead{
-  background:#1e293b;
+    background: #2563eb;
+    color: white;
 }
 
 .tabla-roster th{
-  padding:18px;
-
-  color:#cbd5e1;
-
-  font-size:14px;
-  font-weight:700;
-
-  text-transform:uppercase;
-  letter-spacing:1px;
-
-  border:none;
+    padding: 18px;
+    text-align: center;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .tabla-roster td{
-  padding:18px;
-
-  border-top:1px solid rgba(255,255,255,.05);
-  border-left:none;
-  border-right:none;
-  border-bottom:none;
+    padding: 18px;
+    text-align: center;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .roster-row{
-  transition:.2s;
+    transition: .2s;
 }
 
 .roster-row:hover{
-  background:rgba(59,130,246,.08);
+    background: #f8fafc;
 }
 
-/* ================================================= */
-/* ==================== CLIENTE ==================== */
-/* ================================================= */
+/* =======================
+   CLIENTE
+======================= */
 
 .player-info{
-  display:flex;
-  align-items:center;
-  gap:12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
 }
 
 .avatar-box{
-  width:48px;
-  height:48px;
-
-  border-radius:50%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:linear-gradient(
-    135deg,
-    #2563eb,
-    #3b82f6
-  );
-
-  color:white;
-  font-weight:700;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    flex-shrink: 0;
 }
 
 .player-name{
-  display:flex;
-  flex-direction:column;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nombre{
-  font-weight:600;
-  color:#f8fafc;
+    font-weight: 600;
+    color: #111827;
 }
 
 .apellido{
-  color:#94a3b8;
-  font-size:13px;
+    font-size: 14px;
+    color: #6b7280;
 }
 
-/* ================================================= */
-/* ==================== VEHICULO =================== */
-/* ================================================= */
+/* =======================
+   VEHICULO
+======================= */
+
+.contacto-wrapper{
+    display: flex;
+    justify-content: center;
+}
 
 .email{
-  color:#e2e8f0;
-  font-weight:500;
+    font-weight: 500;
+    color: #374151;
 }
 
 .patente-sticker{
-  display:inline-block;
-
-  padding:8px 14px;
-
-  border-radius:12px;
-
-  background:rgba(59,130,246,.12);
-
-  border:1px solid rgba(59,130,246,.25);
-
-  color:#60a5fa;
-
-  font-weight:600;
+    display: inline-block;
+    padding: 7px 14px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
 }
 
-/* ================================================= */
-/* ==================== BOTON ====================== */
-/* ================================================= */
+/* =======================
+   BOTONES
+======================= */
+
+button{
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+button:hover{
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
 
 .text-center{
-  text-align:center;
+    text-align: center;
 }
 
-.text-center button{
-  border:none;
-
-  padding:10px 18px;
-
-  border-radius:12px;
-
-  background:linear-gradient(
-    135deg,
-    #2563eb,
-    #3b82f6
-  );
-
-  color:white;
-
-  font-weight:600;
-
-  cursor:pointer;
-
-  transition:.25s;
-}
-
-.text-center button:hover{
-  transform:translateY(-2px);
-
-  box-shadow:0 10px 20px rgba(37,99,235,.35);
-}
-
-/* ================================================= */
-/* ==================== VACIO ====================== */
-/* ================================================= */
+/* =======================
+   TABLA VACIA
+======================= */
 
 .tabla-vacia{
-  padding:50px !important;
+    padding: 50px;
 }
 
 .vacio-content{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:15px;
-
-  color:#94a3b8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 .vacio-icon{
-  font-size:50px;
+    font-size: 40px;
 }
 
-/* ================================================= */
-/* ================= RESPONSIVE ==================== */
-/* ================================================= */
+/* =======================
+   MODAL
+======================= */
 
-@media(max-width:900px){
+form{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.25);
+    z-index: 1000;
+}
 
-  .titulo h1{
-    font-size:32px;
-  }
+.item{
+    margin-bottom: 20px;
+}
 
-  .tabla-roster th,
-  .tabla-roster td{
-    padding:12px;
-  }
+.item label{
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 600;
+    color: #374151;
+}
 
+.item select{
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+form button{
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* =======================
+   BOTON CERRAR MODAL
+======================= */
+
+main > button:last-child{
+    position: fixed;
+    left: 50%;
+    top: calc(50% + 170px);
+    transform: translateX(-50%);
+    background: #dc2626;
+    z-index: 1001;
+}
+
+main > button:last-child:hover{
+    background: #b91c1c;
 }

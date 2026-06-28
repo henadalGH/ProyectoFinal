@@ -34,16 +34,18 @@ import { Factura } from './Administrados/Adminstrador/Facturacion/factura/factur
 import { ParaFacturar } from './Administrados/Adminstrador/Facturacion/para-facturar/para-facturar';
 import { DetalleFactura } from './Administrados/Adminstrador/Facturacion/detalle-factura/detalle-factura';
 import { VerFactura } from './Administrados/Adminstrador/Facturacion/ver-factura/ver-factura';
+import { ServiciosOfresidos } from './servicios-ofresidos/servicios-ofresidos';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
-    { path: 'login', component: Login },
+    { path: 'login', component: Login }, 
     { path: 'inicio', component: Principal },
     {path:'registro', component: Registro},
     { path: 'principal', component: Principal },
     { path: 'contra', component: RecuperarContrasenia },
     { path: '', redirectTo: '/inicio', pathMatch: 'full' },
     {path: "header", component: Header},
+    {path: 'servicios', component: ServiciosOfresidos},
 
     // 🔐 RUTAS PROTEGIDAS - ADMIN
     { path: 'homeAdmin', component: HomeAdmin, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },

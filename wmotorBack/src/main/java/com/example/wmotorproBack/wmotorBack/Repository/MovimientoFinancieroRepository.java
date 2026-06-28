@@ -22,4 +22,7 @@ List<MovimientoFinancieroEntity> findByCategoriaId(
 
 List<MovimientoFinancieroEntity> findByCategoriaMovimientos(
         MovimientosEnum movimiento);
+
+        List<MovimientoFinancieroEntity> findByTipoMovimiento(
+        MovimientosEnum tipoMovimiento);
 }

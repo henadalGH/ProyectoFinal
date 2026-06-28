@@ -3,10 +3,11 @@ import { HeaderAdmin } from "../../header-admin/header-admin";
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FacturaServicio } from '../../../../Servicio/factura-servicio';
+import { Header } from "../../../../header/header";
 
 @Component({
   selector: 'app-ver-factura',
-  imports: [HeaderAdmin],
+  imports: [HeaderAdmin, Header],
   templateUrl: './ver-factura.html',
   styleUrl: './ver-factura.css',
 })
