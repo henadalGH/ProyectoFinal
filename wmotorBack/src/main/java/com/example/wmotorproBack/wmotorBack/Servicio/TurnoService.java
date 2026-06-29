@@ -29,5 +29,7 @@ public interface TurnoService {
 
     public TurnoEstadosDTO obtenerTurnoPorId(Long id);
 
+    public List<TurnoEstadosDTO> obtenerTurnosPorFecha(java.time.LocalDate fecha);
+
 
 }

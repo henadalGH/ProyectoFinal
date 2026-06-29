@@ -46,10 +46,19 @@
                         <h2>Turnos del día</h2>
 
                         <div class="list">
-                            <div>09:00 - Toyota Corolla</div>
-                            <div>10:30 - Ford Ranger</div>
-                            <div>11:00 - Amarok</div>
-                            <div>14:00 - Hilux</div>
+
+                            <ul>
+                                @if (pendiente != null) {
+                                
+                                    @for (pen of pendiente; track $index) {
+                                    <li>{{pen.nombreCliente}} {{pen.apellidoCliente}} {{pen.marca}} {{pen.modelo}} {{pen.nombreServicio}}</li>
+                                }
+                            } @else {
+                                <p>No hay turnos este dia</p>
+                            }
+                                
+                            </ul>
+                            
                         </div>
                     </div>
 
@@ -115,30 +124,6 @@
 
                 <!-- RIGHT -->
                 <aside>
-
-                    <div class="card alert">
-                        <h2>Alertas</h2>
-
-                        <ul>
-                            <li>⚠ 2 órdenes vencidas</li>
-                            <li>⚠ 1 factura pendiente</li>
-                            <li>⚠ turnos sin confirmar</li>
-                        </ul>
-                    </div>
-
-                    <div class="card">
-                        <h2>Accesos rápidos</h2>
-
-                        <div class="buttons">
-                            <button>Órdenes</button>
-                            <button>Turnos</button>
-                            <button>Facturas</button>
-                            <button>Clientes</button>
-                            <button>Vehículos</button>
-                            <button>Empleados</button>
-                        </div>
-
-                    </div>
 
                 </aside>
 

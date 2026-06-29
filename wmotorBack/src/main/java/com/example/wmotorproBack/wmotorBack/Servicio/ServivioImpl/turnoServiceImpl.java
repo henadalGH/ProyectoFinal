@@ -13,6 +13,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
+import java.time.LocalDate;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ServicioEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
@@ -186,6 +187,17 @@ public class turnoServiceImpl implements TurnoService{
         TurnoEntity turno = turnoRepository.findById(id)
         .orElseThrow(()-> new RuntimeException( "Id del turno no encontrado"));
         return toMapTurnoDto(turno);
+    }
+
+
+    @Override
+    public List<TurnoEstadosDTO> obtenerTurnosPorFecha(LocalDate fecha) {
+
+        return turnoRepository.findByFechaHora(fecha)
+            .stream()
+            .map(this::toMapTurnoDto)
+            .collect(Collectors.toList());
+
     }
 
     }

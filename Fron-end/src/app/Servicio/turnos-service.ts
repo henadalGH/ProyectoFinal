@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -54,6 +54,17 @@ export class TurnosService {
 
   obtenerTurnoPorId(idTurnno: number){
     return this.http.get<any>(`${this.url}/${idTurnno}`);
+  }
+
+  obtenerPorFecha(fecha: string): Observable<any[]> {
+
+    const params = new HttpParams()
+      .set('fecha', fecha);
+
+    return this.http.get<any[]>(
+      `${this.url}/obtenerPorFecha`,
+      { params }
+    );
   }
   
 }

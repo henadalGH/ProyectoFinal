@@ -1,8 +1,10 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,6 +100,16 @@ public class TurnoController {
     public ResponseEntity<TurnoEstadosDTO> obtenerTurnoPorId(@PathVariable Long id) {
         return new ResponseEntity<TurnoEstadosDTO>(turnoService.obtenerTurnoPorId(id), HttpStatus.OK);
     }
+
+    @GetMapping("/obtenerPorFecha")
+    public ResponseEntity<List<TurnoEstadosDTO>> obtenerPorFecha(
+            @RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+
+        return ResponseEntity.ok(
+                turnoService.obtenerTurnosPorFecha(fecha)
+        );
+    }
+    
     
     
     
