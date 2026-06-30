@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimasFacturasDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 import com.example.wmotorproBack.wmotorBack.Servicio.PresupuestoService;
 
@@ -31,6 +32,7 @@ public class PresupuestoController {
 
     @Autowired
     private PresupuestoService presupuestoService;
+
 
 
     @PostMapping("/crear")
@@ -76,4 +78,10 @@ public class PresupuestoController {
         return new ResponseEntity<>(presupuestos, HttpStatus.OK);
     }
 
+     @GetMapping("/ultimas")
+    public ResponseEntity<List<UltimasFacturasDTO>> ultimas() {
+        return ResponseEntity.ok(
+                presupuestoService.obtenerUltimasFactura()
+        );
+    }
 }

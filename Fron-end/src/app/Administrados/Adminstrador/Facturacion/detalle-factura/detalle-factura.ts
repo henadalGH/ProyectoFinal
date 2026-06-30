@@ -6,11 +6,12 @@ import { Location, CommonModule } from '@angular/common';
 import { FacturaServicio } from '../../../../Servicio/factura-servicio';
 import { AuthService } from '../../../../AuthServicio/auth-service';
 import { FormsModule } from '@angular/forms';
+import { Header } from "../../../../header/header";
 
 @Component({
   selector: 'app-detalle-factura',
   standalone: true,
-  imports: [CommonModule, HeaderAdmin, FormsModule],
+  imports: [CommonModule, HeaderAdmin, FormsModule, Header],
   templateUrl: './detalle-factura.html',
   styleUrls: ['./detalle-factura.css'],
 })

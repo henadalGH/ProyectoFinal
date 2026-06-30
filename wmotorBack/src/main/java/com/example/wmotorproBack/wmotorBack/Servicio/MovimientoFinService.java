@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimosMovimientosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 
 public interface MovimientoFinService {
@@ -31,4 +32,6 @@ public interface MovimientoFinService {
     Double totalEgresos(LocalDate desde, LocalDate hasta);
 
     Double balanceGeneral(LocalDate desde,  LocalDate hasta);
+
+    List<UltimosMovimientosDTO> ultimosMovimientos();
 }

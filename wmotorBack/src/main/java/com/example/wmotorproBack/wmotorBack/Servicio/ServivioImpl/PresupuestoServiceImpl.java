@@ -12,6 +12,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetallePresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimasFacturasDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
@@ -307,6 +308,36 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
             .stream()
             .map(this::toMapPresupuestoDto)
             .collect(Collectors.toList());
+    }
+
+
+
+    @Override
+    public List<UltimasFacturasDTO> obtenerUltimasFactura() {
+        return presuspuestoRepository.findTop5ByOrderByFechaRegistroDesc()
+                .stream()
+                .map(p -> {
+
+                    UltimasFacturasDTO dto = new UltimasFacturasDTO();
+
+                    dto.setNumeroFactura(p.getNumeroPresupuesto());
+
+                    dto.setNombreCliente(
+                            p.getVehiculo().getCliente().getUsuario().getNombre() + " " +p.getVehiculo().getCliente().getUsuario().getApellido()
+                    );
+
+                    dto.setMonto(p.getTotal());
+
+
+                    dto.setEstado(
+                            p.getEstadoPresupuesto().getEstadoPresupuesto()
+                    );
+
+                    // servicio (ejemplo desde detalle)
+                    dto.setEstado(p.getEstadoPresupuesto().getEstadoPresupuesto());
+                    return dto;
+                })
+                .toList();
     }
 
 }

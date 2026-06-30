@@ -5,6 +5,7 @@ import java.util.List;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimasFacturasDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 
@@ -26,4 +27,5 @@ public interface PresupuestoService {
 
     public List<ObtenerPresupuestoDTO> obtenerTodosLosPresupuestos();
 
+    public List<UltimasFacturasDTO> obtenerUltimasFactura();
 }

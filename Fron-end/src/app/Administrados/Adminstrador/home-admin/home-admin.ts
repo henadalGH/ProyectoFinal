@@ -3,6 +3,8 @@ import { HeaderAdmin } from "../header-admin/header-admin";
 import { ClienteServicio } from '../../../Servicio/cliente-servicio';
 import { Header } from "../../../header/header";
 import { TurnosService } from '../../../Servicio/turnos-service';
+import { FacturaServicio } from '../../../Servicio/factura-servicio';
+import { MovimientosService } from '../../../Servicio/movimientos-service';
 
 @Component({
   selector: 'app-home-admin',
@@ -16,13 +18,17 @@ export class HomeAdmin implements OnInit{
   pendiente: any[]= [];
   
   constructor(private clienteService: ClienteServicio,
-    private turnoService: TurnosService
+    private turnoService: TurnosService,
+    private facturaService: FacturaServicio,
+    private movimientoService: MovimientosService
   ){
 
   }
   
   ngOnInit(): void {
     this.obtenerTotalCliente();
+    this.obtenerUltimasFacturas();
+    this.ingresosPorDia();
   }
 
   obtenerTotalCliente(){
@@ -46,6 +52,45 @@ this.turnoService.obtenerPorFecha(fecha).subscribe(
   }
 );
   }
+
+  ultimas: any[] =[];
+  obtenerUltimasFacturas(){
+    this.facturaService.obtenerUltimasFactura().subscribe(
+      (repuesta: any) => {
+        this.ultimas = repuesta;
+      }
+    )
+  }
+
+  formatearFactura(numero: number | string): string {
+
+    const num = Number(numero);
+
+    const parteSucursal = '0001';
+
+    const parteNumero = num.toString().padStart(8, '0');
+
+    return `${parteSucursal}-${parteNumero}`;
+  }
+
+  //ingresos por dia
+
+
+  ingreso: any = null;
+
+  ingresosPorDia(){
+
+    const fecha = new Date().toISOString().split('T')[0];
+
+    this.movimientoService.obtenerTotalIngresos(fecha , fecha).subscribe(
+      (repuesta: any) => {
+        this.ingreso = repuesta;
+        console.log(this.ingreso)
+      }
+    )
+    
+  }
+
     
     
   }

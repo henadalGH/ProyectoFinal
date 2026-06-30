@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimosMovimientosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CategoriaMovimientoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
@@ -198,6 +199,24 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
 
         return totalIngresos(desde, hasta)
                 - totalEgresos(desde, hasta);
+    }
+
+    @Override
+    public List<UltimosMovimientosDTO> ultimosMovimientos() {
+
+        return movimientoFinancieroRepository.findTop10ByOrderByFechaRegistroDesc()
+        .stream()
+        .map( m -> {
+                UltimosMovimientosDTO dto = new UltimosMovimientosDTO();
+
+                dto.setTipoMovimiento( m.getTipoMovimiento());
+                dto.setCategoria( m.getCategoria().getCategoria());
+                dto.setMonto(m.getImporte());
+                dto.setFechaRegistro(m.getFechaRegistro());
+
+                return dto;
+        })
+        .toList();
     }
 
     

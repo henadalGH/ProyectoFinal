@@ -1,87 +1,103 @@
-<app-header-admin></app-header-admin>
+<div class="layout">
 
-<div class="contenedor">
+    <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <app-header-admin></app-header-admin>
+  </aside>
 
-    <div class="encabezado">
+  <main class="content">
 
-        <div>
-            <h1>Órdenes listas para facturar</h1>
-            <p>Seleccione una orden para consultar los detalles y generar la factura.</p>
-        </div>
+    <div class="contenedor">
 
-        <button class="btn-volver">
-            <i class="fa-solid fa-arrow-left"></i>
-            Volver
-        </button>
+        <app-header></app-header>
 
-    </div>
+        <div class="encabezado">
 
-
-    <div class="lista">
-
-        @for (fac of factura; track $index) {
-
-        <div class="card">
-
-            <div class="estado">
-                PARA FACTURAR
+            <div class="titulo">
+                <h1>Órdenes listas para facturar</h1>
+                <p>Seleccione una orden para consultar los detalles y generar la factura.</p>
             </div>
 
-            <div class="contenido">
+            <button class="btn-volver">
+                <i class="fa-solid fa-arrow-left"></i>
+                Volver
+            </button>
 
-                <div class="cliente">
+        </div>
 
-                    <div class="icono">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
 
-                    <div>
-                        <span>Cliente</span>
-                        <h2>{{fac.nombreCliente}}</h2>
-                        
-                    </div>
+        <div class="lista">
 
+            @for (fac of factura; track $index) {
+
+            <div class="card">
+
+                <div class="estado">
+                    PARA FACTURAR
                 </div>
 
+                <div class="contenido">
 
-                <div class="datos">
+                    <div class="cliente">
 
-                    <div class="dato">
-                        <i class="fa-solid fa-car"></i>
+                        <div class="icono">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
 
                         <div>
-                            <span>Vehículo</span>
-                            <h3>{{fac.marcaVehiculo}}</h3>
+                            <span>Cliente</span>
+                            <h2>{{fac.nombreCliente}}</h2>
+                            
                         </div>
 
                     </div>
 
 
-                    <div class="dato">
-                        <i class="fa-solid fa-id-card"></i>
+                    <div class="datos">
 
-                        <div>
-                            <span>Patente</span>
-                            <h3>{{fac.patenteVehiculo}}</h3>
+                        <div class="dato">
+                            <i class="fa-solid fa-car"></i>
+
+                            <div>
+                                <span>Vehículo</span>
+                                <h3>{{fac.marcaVehiculo}}</h3>
+                            </div>
+
+                        </div>
+
+
+                        <div class="dato">
+                            <i class="fa-solid fa-id-card"></i>
+
+                            <div>
+                                <span>Patente</span>
+                                <h3>{{fac.patenteVehiculo}}</h3>
+                            </div>
+
                         </div>
 
                     </div>
 
                 </div>
 
+                <div class="acciones">
+                    <button class="btn-ver" (click)="crearFactura(fac.id)">
+                        Cerar factura
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
             </div>
 
-            <div class="acciones">
-                <button class="btn-ver" (click)="crearFactura(fac.id)">
-                    Cerar factura
-                    <i class="fa-solid fa-arrow-right"></i>
-                </button>
-            </div>
+            }
 
         </div>
 
-        }
-
     </div>
+
+  </main>
+
 
 </div>
+
+

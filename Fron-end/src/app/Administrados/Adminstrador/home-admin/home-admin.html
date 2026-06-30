@@ -1,32 +1,30 @@
-<div class="admin-page">
+<div class="layout">
 
-    <!-- MENU LATERAL -->
-    <app-header-admin></app-header-admin>
+    <aside class="sidebar">
+        <app-header-admin></app-header-admin>
+    </aside>
 
-    <!-- TU CONTENIDO ACTUAL -->
-    <div class="admin-content">
+    <main class="conten">
 
-        <div class="layout">
+        <div class="contain">
 
-            <!-- HEADER -->
+            <!-- HEADER (NO TOCADO) -->
             <app-header></app-header>
 
-            <!-- KPIs -->
-            <section class="kpis">
+            <div class="cards-container">
 
-                <div class="kpi blue">
-                    <h3>Órdenes</h3>
-                    <p>12</p>
-                </div>
-
-                <div class="kpi green">
+                <div class="cards">
                     <h3>Turnos</h3>
-                    <p>9</p>
+                    @if (pendiente) {
+                        <p>{{pendiente.length}}</p>
+                    }
                 </div>
 
                 <div class="kpi orange">
                     <h3>Facturación</h3>
-                    <p>$245K</p>
+                    @if (ingreso != null) {
+                        <p>$ {{ingreso}}</p>
+                    }
                 </div>
 
                 <div class="kpi purple">
@@ -34,34 +32,57 @@
                     <p>{{totalClientes}}</p>
                 </div>
 
-            </section>
+            </div>
+            
+                
 
-            <!-- MAIN -->
+            
+
+            <!-- GRID -->
             <div class="grid">
 
-                <!-- LEFT -->
-                <section>
+                
 
+                    <!-- TURNOS -->
                     <div class="card">
                         <h2>Turnos del día</h2>
 
                         <div class="list">
-
                             <ul>
-                                @if (pendiente != null) {
-                                
+
+                                @if (pendiente != null && pendiente.length > 0) {
+
                                     @for (pen of pendiente; track $index) {
-                                    <li>{{pen.nombreCliente}} {{pen.apellidoCliente}} {{pen.marca}} {{pen.modelo}} {{pen.nombreServicio}}</li>
+
+                                        <li >
+
+                                            <div class="turno-info">
+                                                <span class="cliente">
+                                                    {{pen.nombreCliente}} {{pen.apellidoCliente}}
+                                                </span>
+
+                                                <span class="vehiculo">
+                                                    {{pen.marca}} {{pen.modelo}}
+                                                </span>
+                                            </div>
+
+                                            <span class="servicio">
+                                                {{pen.nombreServicio}}
+                                            </span>
+
+                                        </li>
+
+                                    }
+
+                                } @else {
+                                    <p class="empty">No hay turnos este día</p>
                                 }
-                            } @else {
-                                <p>No hay turnos este dia</p>
-                            }
-                                
+
                             </ul>
-                            
                         </div>
                     </div>
 
+                    <!-- FACTURAS -->
                     <div class="card">
                         <h2>Facturación reciente</h2>
 
@@ -73,64 +94,23 @@
                                 <th>Estado</th>
                             </tr>
 
-                            <tr>
-                                <td>F-1021</td>
-                                <td>Juan Pérez</td>
-                                <td>$45.000</td>
-                                <td class="paid">Pagada</td>
-                            </tr>
-
-                            <tr>
-                                <td>F-1022</td>
-                                <td>Pedro López</td>
-                                <td>$32.000</td>
-                                <td class="pending">Pendiente</td>
-                            </tr>
+                            @for (ult of ultimas; track $index) {
+                                <tr>
+                                    <td>{{ formatearFactura(ult.numeroFactura) }}</td>
+                                    <td>{{ult.nombreCliente}}</td>
+                                    <td>{{ult.monto}}</td>
+                                    <td class="estado {{ult.estado.toLowerCase()}}">
+                                        {{ult.estado}}
+                                    </td>
+                                </tr>
+                            }
                         </table>
                     </div>
-
-                    <div class="card big">
-                        <h2>Órdenes activas</h2>
-
-                        <table>
-                            <tr>
-                                <th>Orden</th>
-                                <th>Cliente</th>
-                                <th>Vehículo</th>
-                                <th>Estado</th>
-                                <th>Mecánico</th>
-                            </tr>
-
-                            <tr>
-                                <td>OT-125</td>
-                                <td>Juan Pérez</td>
-                                <td>Hilux</td>
-                                <td class="work">Reparando</td>
-                                <td>Carlos</td>
-                            </tr>
-
-                            <tr>
-                                <td>OT-126</td>
-                                <td>Pedro López</td>
-                                <td>Amarok</td>
-                                <td class="wait">Esperando</td>
-                                <td>José</td>
-                            </tr>
-                        </table>
-
-                    </div>
-
-                </section>
-
-                <!-- RIGHT -->
-                <aside>
-
-                </aside>
 
             </div>
 
         </div>
 
-    </div>
+    </main>
 
 </div>

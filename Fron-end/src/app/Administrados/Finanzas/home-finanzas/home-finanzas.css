@@ -64,6 +64,7 @@ app-header-admin {
   padding: 20px;
   background: #f3f6fb;
   overflow-y: auto;
+  
 }
 
 /* =========================
@@ -75,6 +76,7 @@ app-header-admin {
   padding: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.06);
   border: 1px solid #eef2f7;
+  
 }
 
 /* =========================
@@ -82,6 +84,7 @@ app-header-admin {
 ========================= */
 .finanzas-container {
   width: 100%;
+  align-items: center;
 }
 
 /* =========================
@@ -244,9 +247,13 @@ app-header-admin {
 
   .cards-finanzas {
     grid-template-columns: 1fr;
+    
+
   }
 
   .finanzas-grid {
     grid-template-columns: 1fr;
+   
+  
   }
 }

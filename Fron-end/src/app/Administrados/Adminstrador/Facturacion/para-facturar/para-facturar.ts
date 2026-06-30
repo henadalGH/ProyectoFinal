@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-para-facturar',
-  imports: [ HeaderAdmin],
+  imports: [HeaderAdmin, Header],
   templateUrl: './para-facturar.html',
   styleUrl: './para-facturar.css',
 })

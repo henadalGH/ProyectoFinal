@@ -157,3 +157,19 @@
     flex-direction: column;
   }
 }
+.layout {
+  display: flex;
+  height: 100vh; /* ocupa toda la pantalla */
+}
+
+.sidebar {
+  width: 250px;   /* ancho del menú */
+  background: #1f2937;
+  color: white;
+}
+
+.content {
+  flex: 1;        /* ocupa todo el espacio restante */
+  background: #f3f6fb;
+  padding: 20px;
+}

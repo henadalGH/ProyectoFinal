@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-registrar-empleado',
   standalone: true,
-  imports: [FormsModule, RouterLink, HeaderAdmin],
+  imports: [FormsModule, RouterLink, HeaderAdmin, Header],
   templateUrl: './registrar-empleado.html',
   styleUrl: './registrar-empleado.css',
 })

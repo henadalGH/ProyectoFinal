@@ -1,9 +1,13 @@
- <div class="layout">
+<div class="layout">
+
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <app-header-admin></app-header-admin>
   </aside>
 
+  <!-- CONTENIDO -->
   <main class="content">
+ 
     <div class="finanzas-container">
 
       <!-- TOPBAR -->
@@ -14,17 +18,17 @@
 
         <div class="card kpi ingreso">
           <p>Ingresos del mes</p>
-          <h2>$4.892.359</h2>
+          <h2>${{ ingresosMensuales }}</h2>
         </div>
 
         <div class="card kpi gasto">
           <p>Gastos del mes</p>
-          <h2>$4.177.996</h2>
+          <h2>${{ egresosMensuales }}</h2>
         </div>
 
         <div class="card kpi balance">
           <p>Balance del mes</p>
-          <h2>$714.363</h2>
+          <h2>${{ balanceMensual }}</h2>
         </div>
 
       </div>
@@ -35,88 +39,49 @@
         <!-- MOVIMIENTOS -->
         <div class="card">
 
-          <h2>Últimos movimientos</h2>
+          <div class="card-header">
+            <h2>Últimos movimientos</h2>
+
+            <button
+              class="btn-primary"
+              (click)="irRegistroFinansas()">
+              <i class="fas fa-plus"></i>
+              Registrar movimiento 
+            </button>
+          </div>
 
           <div class="movimientos-list">
 
-            <div class="movimiento">
+            @for (ult of ultimoMovi; track $index) {
+              <div class="movimiento">
               <div>
-                <h4>Pago reparación</h4>
-                <span>Hoy • 13:08 • Tarjeta</span>
+                <h4>{{ult.categoria}}</h4>
+                <span>{{ult.fechaRegistro}}</span>
               </div>
-              <strong class="ingreso-text">+$99.390</strong>
+
+              @if (ult.tipoMovimiento == 'INGRESO') {
+                <strong class="ingreso-text" style="color: #22c55e;">+${{ult.monto}}</strong>
+              } @else {
+                <strong class="ingreso-text" style="color: #d6371f;">-${{ult.monto}}</strong>
+              }
+              
             </div>
 
-            <div class="movimiento">
-              <div>
-                <h4>Compra proveedor</h4>
-                <span>Hoy • 12:09 • Transferencia</span>
-              </div>
-              <strong class="gasto-text">-$4.076.927</strong>
-            </div>
-
-            <div class="movimiento">
-              <div>
-                <h4>Orden de trabajo</h4>
-                <span>Hoy • 11:22 • Débito</span>
-              </div>
-              <strong class="ingreso-text">+$4.892.359</strong>
-            </div>
-
-            <div class="movimiento">
-              <div>
-                <h4>Pago servicios</h4>
-                <span>Hoy • 10:15 • Efectivo</span>
-              </div>
-              <strong class="gasto-text">-$52.000</strong>
-            </div>
+            }
 
           </div>
 
         </div>
-
-        <!-- RESUMEN -->
-        <div class="card">
-
-          <div class="resumen-header">
-            <h2>Resumen</h2>
-            <span class="estado">Abierta</span>
-          </div>
-
-          <div class="resumen-item">
-            <p>Ingresos</p>
-            <strong class="ingreso-text">$4.892.359</strong>
-          </div>
-
-          <div class="resumen-item">
-            <p>Egresos</p>
-            <strong class="gasto-text">$4.177.996</strong>
-          </div>
-
-          <div class="resumen-item">
-            <p>Balance</p>
-            <strong>$714.363</strong>
-          </div>
-
-          <div class="resumen-item">
-            <p>Saldo efectivo</p>
-            <strong>$12.384</strong>
-          </div>
-
-          <button class="btn-primary"
-          (click)="irRegistroFinansas()">
-
-            <i class="fas fa-plus"></i>
-            Registrar movimiento
-          </button>
-
-        </div>
+        <!-- FIN CARD MOVIMIENTOS -->
 
       </div>
+      <!-- FIN GRID -->
 
     </div>
-    <!-- contenido principal -->
-  </main>
-</div>
+    <!-- FIN FINANZAS CONTAINER -->
 
-    
+  </main>
+  <!-- FIN CONTENT -->
+
+</div>
+<!-- FIN LAYOUT -->

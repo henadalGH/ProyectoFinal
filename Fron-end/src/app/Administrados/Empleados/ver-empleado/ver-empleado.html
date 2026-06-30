@@ -1,8 +1,13 @@
-<app-header-admin></app-header-admin>
+<div class="layout">
+  <aside class="sidebar">
+    <!-- menú -->
+     <app-header-admin></app-header-admin>
+  </aside>
 
-
-
-<div class="titulo">
+  <main class="content">
+    <!-- contenido principal -->
+     <app-header></app-header>
+     <div class="titulo">
     <h1>Datos del empleado: {{empleado.nombre}}       {{empleado.apellido}}</h1>
     <button [routerLink]="['/gestionEmpleado']">Volver</button>
 </div>
@@ -54,6 +59,13 @@
 
 }
 </div>
+  </main>
+</div>
+
+
+
+
+
 
 
 

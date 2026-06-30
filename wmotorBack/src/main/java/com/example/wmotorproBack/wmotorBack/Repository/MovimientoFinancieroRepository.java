@@ -25,4 +25,8 @@ List<MovimientoFinancieroEntity> findByCategoriaMovimientos(
 
         List<MovimientoFinancieroEntity> findByTipoMovimiento(
         MovimientosEnum tipoMovimiento);
+
+        List<MovimientoFinancieroEntity> findTop10ByOrderByFechaRegistroDesc();
+
+        
 }

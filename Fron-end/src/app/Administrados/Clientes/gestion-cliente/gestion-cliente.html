@@ -1,31 +1,101 @@
-<app-header-admin></app-header-admin>
+<div class="layout">
 
-<div class="general">
-    <div class="encabezado">
-    <h1>Lista de clientes</h1>
-    <button class="boton1" [routerLink]="['/registrarCliente']">Agregar Cliente</button>
-</div>
+    <!-- BARRA LATERAL -->
+    <aside class="sidebar">
+        <app-header-admin></app-header-admin>
+    </aside>
 
-<div class="contenedor-clientes">
+    <!-- CONTENIDO -->
+    <main class="content">
 
-    @for (cli of clientes; track $index) {
+        <!-- HEADER SUPERIOR (SE CONSERVA) -->
+        <app-header></app-header>
 
-    <div class="cliente">
-        <div class="tarjeta">
+        <div class="general">
 
-        <h3>Nombre: {{cli.usuario.nombre}} {{cli.usuario.apellido}}</h3>
+            <!-- ENCABEZADO -->
+            <div class="encabezado">
+                <div>
+                    <h1>Lista de clientes</h1>
+                    <p>Gestione los clientes registrados</p>
+                </div>
 
-        <div class="direccion">
-            <h5>Direccion:</h5>
-            <p>{{cli.direccion}}</p>
+                <button
+                    class="boton1"
+                    [routerLink]="['/registrarCliente']">
+                    Agregar Cliente
+                </button>
+            </div>
+
+            <!-- BUSCADOR -->
+            <div class="buscador">
+                <input
+                    type="text"
+                    placeholder="Buscar cliente por nombre, apellido o dirección..."
+                    [(ngModel)]="busqueda">
+            </div>
+
+            <!-- TABLA -->
+            <div class="tabla-contenedor">
+
+                <table class="tabla-clientes">
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dirección</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @for (cli of clientes; track cli.id) {
+
+                            @if(
+                                busqueda == '' ||
+                                cli.usuario.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+                                cli.usuario.apellido.toLowerCase().includes(busqueda.toLowerCase()) ||
+                                cli.direccion.toLowerCase().includes(busqueda.toLowerCase())
+                            ){
+
+                            <tr>
+                                <td>{{cli.id}}</td>
+
+                                <td>
+                                    {{cli.usuario.nombre}}
+                                </td>
+
+                                <td>
+                                    {{cli.usuario.apellido}}
+                                </td>
+
+                                <td>
+                                    {{cli.direccion}}
+                                </td>
+
+                                <td>
+                                    <button
+                                        class="boton2"
+                                        (click)="verCliente(cli.id)">
+                                        Ver Cliente
+                                    </button>
+                                </td>
+                            </tr>
+
+                            }
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
         </div>
 
-        <button class="boton2" (click)="verCliente(cli.id)">Ver Cliente</button>
+    </main>
 
-        </div>
-    </div>
-
-    }
-
-</div>
 </div>

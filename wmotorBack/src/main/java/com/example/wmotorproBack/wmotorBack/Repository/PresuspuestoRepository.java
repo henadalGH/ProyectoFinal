@@ -12,5 +12,6 @@ public interface PresuspuestoRepository extends JpaRepository<PresupuestoEntity,
 
     List<PresupuestoEntity> findByVehiculoId(Long id);
     Optional<EstadoPresupuestoEntity> findByEstadoPresupuesto(EstadoPresupuestoEnum estado);
+    List<PresupuestoEntity> findTop5ByOrderByFechaRegistroDesc();
 
 }

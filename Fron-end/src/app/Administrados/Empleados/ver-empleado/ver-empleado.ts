@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-ver-empleado',
   templateUrl: './ver-empleado.html',
   styleUrl: './ver-empleado.css',
-  imports: [HeaderAdmin, RouterLink],
+  imports: [HeaderAdmin, RouterLink, Header],
 })
 export class VerEmpleado implements OnInit {
 

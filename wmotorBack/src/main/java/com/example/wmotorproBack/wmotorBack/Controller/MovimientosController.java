@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimosMovimientosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.MovimientoFinService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/movimiento")
@@ -188,4 +192,10 @@ public class MovimientosController {
                 movimientoFinService
                         .balanceGeneral(desde, hasta));
     }
+
+    @GetMapping("/ultimosMovimiento")
+    public ResponseEntity<List<UltimosMovimientosDTO>> ultimmosMovimientos() {
+        return new ResponseEntity<List<UltimosMovimientosDTO>>(movimientoFinService.ultimosMovimientos(), HttpStatus.OK);
+    }
+    
 }
