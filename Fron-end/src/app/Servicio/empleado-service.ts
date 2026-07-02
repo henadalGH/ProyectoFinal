@@ -53,6 +53,36 @@ export class EmpleadoService {
     return this.http.get<any[]>(`${this.urlComun}/mecanico`);
   }
 
+  modificarEmpleado(
+  idEmpleado: number,
+  cargo?: string,
+  email?: string,
+  contacto?: string
+) {
+
+  const body: any = {};
+
+  // CARGO
+  if (cargo !== undefined && cargo !== null && cargo !== '') {
+    body.cargo = cargo;
+  }
+
+  // EMAIL
+  if (email !== undefined && email !== null && email !== '') {
+    body.email = email;
+  }
+
+  // CONTACTO
+  if (contacto !== undefined && contacto !== null && contacto !== '') {
+    body.contacto = contacto;
+  }
+
+  return this.http.put(
+    `${this.urlComun}/modificaEmpleado/${idEmpleado}`,
+    body
+  );
+}
+
 
 
 }

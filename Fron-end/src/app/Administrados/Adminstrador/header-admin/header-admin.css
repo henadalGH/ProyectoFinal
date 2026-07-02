@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: black;
 }
 
 .layout {
@@ -11,16 +12,17 @@ html, body {
 
 /* SIDEBAR */
 .sidebar {
-    width: 270px;
-    height: 100vh;
+  width: 260px;
+  min-width: 260px;
+  background-color: #162454; /* Tu azul */
+  color: white;
+  padding: 24px 16px;
+  box-sizing: border-box;
 
-    background: linear-gradient(180deg, #0f172a, #1e3a8a);
-    color: white;
-
-    display: flex;
-    flex-direction: column;
-
-    box-shadow: 8px 0 25px rgba(0,0,0,.15);
+  /* CAMBIO CRUCIAL: Eliminamos alturas fijas y scroll interno */
+  height: auto !important; 
+  overflow-y: visible !important; 
+  position: relative !important; 
 }
 
 /* LOGO */
@@ -67,7 +69,7 @@ html, body {
     border-radius: 10px;
 
     background: transparent;
-    color: #e0f2fe;
+    color: #e8fee0;
 
     cursor: pointer;
     transition: .2s;

@@ -1,316 +1,419 @@
 /* ==========================
-   LAYOUT
+   RESET
 ========================== */
-
-.layout{
-    display: flex;
-    min-height: 100vh;
-    background: #f4f7fb;
-    font-family: 'Segoe UI', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* BARRA LATERAL MÁS ANCHA */
-
-.sidebar{
-    width: 340px;
-    flex-shrink: 0;
-}
-
-/* NO TOCA EL HEADER */
-
-.content{
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    background: #f4f7fb;
+html,
+body{
+    height:100%;
+    font-family:"Segoe UI",Roboto,Arial,sans-serif;
+    background:#f4f7fb;
+    color:#111827;
 }
 
 /* ==========================
-   CONTENEDOR PRINCIPAL
+   LAYOUT
 ========================== */
+.layout{
+    display:flex;
+    min-height:100vh;
+    background:#f4f7fb;
+}
 
+/* SIDEBAR MÁS GRANDE */
+.sidebar{
+    width:400px;
+    min-width:360px;
+    flex-shrink:0;
+    background:#f4f7fb;
+}
+
+app-header-admin{
+    display:block;
+    width:100%;
+}
+
+/* CONTENIDO */
+.content{
+    flex:1;
+    padding:25px;
+    overflow-y:auto;
+    background:#f4f7fb;
+}
+
+/* ==========================
+   CONTENEDOR
+========================== */
 .gestion-container{
-    max-width: 1250px; /* más chico */
-    margin: 25px auto;
+    max-width:1250px;
+    margin:25px auto;
 }
 
 /* ==========================
    TITULO
 ========================== */
-
 .titulo-seccion{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+    gap:20px;
 }
 
 .texto h1{
-    margin: 0;
-    font-size: 30px;
-    font-weight: 700;
-    color: #111827;
+    font-size:32px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:8px;
 }
 
 .texto p{
-    margin-top: 8px;
-    color: #6b7280;
-    font-size: 15px;
+    font-size:15px;
+    color:#6b7280;
 }
 
 /* ==========================
    BOTON AGREGAR
 ========================== */
-
 .boton-agregar{
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 14px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .2s;
-    box-shadow: 0 8px 20px rgba(37,99,235,.18);
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:14px;
+    padding:14px 24px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    transition:.2s;
+
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.18);
 }
 
 .boton-agregar:hover{
-    background: #1d4ed8;
-    transform: translateY(-2px);
+    background:#1d4ed8;
+    transform:translateY(-2px);
 }
 
 /* ==========================
    GRID EMPLEADOS
 ========================== */
-
 .grid-empleados{
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
-    gap: 20px;
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fill,minmax(340px,1fr));
+    gap:24px;
 }
 
 /* ==========================
    TARJETAS
 ========================== */
-
 .card-empleado{
-    background: white;
-    border-radius: 20px;
-    padding: 22px;
+    background:white;
+    border-radius:22px;
+    padding:24px;
+
+    border:1px solid #eef2f7;
+
     box-shadow:
-        0 2px 8px rgba(0,0,0,.03),
-        0 10px 25px rgba(0,0,0,.03);
-    transition: .2s;
+        0 4px 15px rgba(0,0,0,.04),
+        0 15px 35px rgba(0,0,0,.03);
+
+    transition:.25s;
 }
 
 .card-empleado:hover{
-    transform: translateY(-4px);
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.06),
+        0 20px 40px rgba(0,0,0,.05);
 }
 
+/* ==========================
+   HEADER CARD
+========================== */
 .card-header{
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin-bottom:20px;
 }
 
 /* ==========================
    AVATAR
 ========================== */
-
 .avatar{
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #60a5fa
-    );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    flex-shrink: 0;
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #60a5fa
+        );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+    font-size:20px;
+    font-weight:700;
+
+    flex-shrink:0;
+
+    box-shadow:
+        0 8px 20px rgba(37,99,235,.25);
 }
 
 /* ==========================
-   INFO EMPLEADO
+   DATOS EMPLEADO
 ========================== */
-
 .user-info{
-    flex: 1;
+    flex:1;
 }
 
 .user-info h3{
-    margin: 0;
-    font-size: 19px;
-    color: #111827;
+    font-size:19px;
+    color:#111827;
+    margin-bottom:8px;
 }
 
 .badge-cargo{
-    display: inline-block;
-    margin-top: 8px;
-    padding: 6px 14px;
-    background: #dbeafe;
-    color: #2563eb;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
+    display:inline-block;
+
+    padding:6px 14px;
+
+    background:#dbeafe;
+    color:#2563eb;
+
+    border-radius:30px;
+
+    font-size:12px;
+    font-weight:600;
 }
 
 /* ==========================
-   DATOS
+   BODY
 ========================== */
-
 .card-body{
-    margin: 20px 0;
+    margin:20px 0;
 }
 
 .info-row{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid #eef2f7;
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:14px 0;
+
+    border-bottom:
+        1px solid #eef2f7;
 }
 
 .info-row:last-child{
-    border-bottom: none;
+    border:none;
 }
 
 .info-row i{
-    width: 18px;
-    color: #2563eb;
+    width:20px;
+    color:#2563eb;
 }
 
 .info-row span{
-    color: #4b5563;
-    font-size: 14px;
+    color:#4b5563;
+    font-size:14px;
 }
 
 /* ==========================
    FOOTER
 ========================== */
-
 .card-footer{
-    margin-top: 12px;
+    display:flex;
+    gap:12px;
+    margin-top:18px;
 }
 
 /* ==========================
    BOTON VER
 ========================== */
-
 .btn-ver{
-    width: 100%;
-    border: none;
-    background: #2563eb;
-    color: white;
-    padding: 13px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .2s;
+    flex:1;
+
+    border:none;
+
+    background:#2563eb;
+    color:white;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
 .btn-ver:hover{
-    background: #1d4ed8;
+    background:#1d4ed8;
 }
 
 /* ==========================
    BOTON BAJA
 ========================== */
-
 .btn-baja{
-    width: 100%;
-    border: 1px solid #fecaca;
-    background: #fef2f2;
-    color: #dc2626;
-    padding: 13px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: .2s;
+    flex:1;
+
+    background:#fef2f2;
+    color:#dc2626;
+
+    border:1px solid #fecaca;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
 .btn-baja:hover{
-    background: #fee2e2;
+    background:#fee2e2;
 }
 
 /* ==========================
-   MENSAJES
+   ALERTAS
 ========================== */
-
 .alerta-estado{
-    background: white;
-    padding: 45px;
-    border-radius: 20px;
-    text-align: center;
+    background:white;
+
+    padding:50px;
+
+    border-radius:22px;
+
+    text-align:center;
+
     box-shadow:
-        0 2px 8px rgba(0,0,0,.03),
-        0 10px 25px rgba(0,0,0,.03);
+        0 4px 15px rgba(0,0,0,.04),
+        0 15px 35px rgba(0,0,0,.03);
 }
 
 .icon-circle{
-    width: 80px;
-    height: 80px;
-    margin: auto;
-    border-radius: 50%;
-    background: #fee2e2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width:85px;
+    height:85px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#fee2e2;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .icon-circle i{
-    font-size: 30px;
-    color: #dc2626;
+    font-size:32px;
+    color:#dc2626;
 }
 
 .alerta-estado h2{
-    margin-top: 20px;
-    color: #111827;
+    margin-top:20px;
+    color:#111827;
 }
 
 .alerta-estado p{
-    margin: 15px auto;
-    max-width: 450px;
-    color: #6b7280;
+    margin:15px auto;
+    max-width:450px;
+    color:#6b7280;
+    line-height:1.5;
 }
 
 .btn-accion{
-    margin-top: 20px;
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 13px 24px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: 600;
+    margin-top:20px;
+
+    border:none;
+
+    background:#2563eb;
+    color:white;
+
+    padding:14px 24px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.btn-accion:hover{
+    background:#1d4ed8;
 }
 
 /* ==========================
    RESPONSIVE
 ========================== */
-
 @media(max-width:1200px){
 
     .sidebar{
-        width: 300px;
+        width:320px;
+        min-width:320px;
     }
 
     .titulo-seccion{
-        flex-direction: column;
-        gap: 20px;
-        text-align: center;
+        flex-direction:column;
+        text-align:center;
     }
 
     .grid-empleados{
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:768px){
+
+    .layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-width:100%;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .card-footer{
+        flex-direction:column;
+    }
+
+    .btn-ver,
+    .btn-baja{
+        width:100%;
     }
 }

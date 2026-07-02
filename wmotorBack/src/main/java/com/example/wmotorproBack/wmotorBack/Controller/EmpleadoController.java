@@ -9,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EmpleadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ModificaEmpleadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Servicio.EmpleadoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -50,6 +54,11 @@ public class EmpleadoController {
     @GetMapping("/mecanico")
     public ResponseEntity<List<EmpleadoDTO>> ontenerEmpleadoMecanico() {
         return new ResponseEntity<List<EmpleadoDTO>>(empleadoService.obtenerEmpleadoCargoMecanico(), HttpStatus.OK);
+    }
+
+    @PutMapping("modificaEmpleado/{idEmpleado}")
+    public ResponseEntity<ResponceDTO> putMethodName(@PathVariable Long idEmpleado, @RequestBody ModificaEmpleadoDTO empleadoDTO) {
+        return new ResponseEntity<ResponceDTO>(empleadoService.modificarEmpleado(idEmpleado, empleadoDTO), HttpStatus.OK);
     }
     
 

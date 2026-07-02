@@ -3,10 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RegistroClienteServicio } from '../../../Servicio/registro-cliente-servicio';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-registrar-clintes',
-  imports: [RouterLink, FormsModule, HeaderAdmin],
+  imports: [RouterLink, FormsModule, HeaderAdmin, Header],
   standalone: true,
   templateUrl: './registrar-clintes.html',
   styleUrl: './registrar-clintes.css',

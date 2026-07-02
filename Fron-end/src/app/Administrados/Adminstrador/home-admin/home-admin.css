@@ -32,7 +32,7 @@ body {
 /* Contenedor principal */
 .conten {
     flex: 1;
-    background-color: #f8fafc;
+    background-color: #f1f5f9;
     padding: 20px;
     overflow-y: auto;
 }

@@ -28,7 +28,14 @@
 
         <div class="card kpi balance">
           <p>Balance del mes</p>
-          <h2>${{ balanceMensual }}</h2>
+          $@if (balanceMensual > 0) {
+            <h2>{{balanceMensual}} </h2>
+               
+          } @else {
+            <h2>{{balanceMensual}}</h2>
+              
+          }
+        
         </div>
 
       </div>

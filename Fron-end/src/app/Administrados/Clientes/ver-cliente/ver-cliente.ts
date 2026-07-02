@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ClienteServicio } from '../../../Servicio/cliente-servicio';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-ver-cliente',
-  imports: [HeaderAdmin],
+  imports: [HeaderAdmin, Header],
   templateUrl: './ver-cliente.html',
   styleUrl: './ver-cliente.css',
 })

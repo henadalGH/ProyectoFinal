@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EmpleadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ModificaEmpleadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CargosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
@@ -89,6 +91,40 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
         return empleados;
     }
+
+    @Override
+public ResponceDTO modificarEmpleado(Long id, ModificaEmpleadoDTO empleadoDTO) {
+
+    ResponceDTO responceDTO = new ResponceDTO();
+
+    EmpleadoEntity empleadoEntity = empleadoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("No se encontro al empleado"));
+
+    // EMAIL
+    if (empleadoDTO.getEmail() != null && !empleadoDTO.getEmail().isBlank()) {
+        empleadoEntity.getUsuario().setEmail(empleadoDTO.getEmail());
+    }
+
+    // CONTACTO
+    if (empleadoDTO.getContacto() != null && !empleadoDTO.getContacto().isBlank()) {
+        empleadoEntity.getUsuario().setContacto(empleadoDTO.getContacto());
+    }
+
+    // CARGO
+    if (empleadoDTO.getCargo() != null) {
+
+        CargosEntity cargosEntity = cargoRepository.findByCargo(empleadoDTO.getCargo())
+                .orElseThrow(() -> new RuntimeException("Cargo no encontrado"));
+
+        empleadoEntity.setCargo(cargosEntity);
+    }
+
+    empleadoRepository.save(empleadoEntity);
+
+    responceDTO.setMensage("Se ha actualizado un empleado correctamente");
+
+    return responceDTO;
+}
 
 
 

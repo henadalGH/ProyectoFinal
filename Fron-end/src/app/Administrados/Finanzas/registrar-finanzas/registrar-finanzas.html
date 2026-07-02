@@ -5,87 +5,138 @@
 
   <main class="content">
 
-    
-
     <div class="container">
-        <app-header></app-header>
+      <app-header></app-header>
 
-         <div class="titulo">
+      <div class="titulo">
         <h1>Registrar un movimiento</h1>
         <p>Complete el formulario</p>
-    </div>
+      </div>
 
-    <form class="formulario" (ngSubmit)="registrarMovimiento()">
+      <form class="formulario" (ngSubmit)="registrarMovimiento()">
 
+        <!-- MOVIMIENTO -->
         <div class="campo">
-            <label>Seleccione un movimiento:</label>
-            <select name="movimiento" [(ngModel)]="movimiento">
-                <option value="">Seleccione una opción</option>
-                <option value="INGRESO">Ingreso</option>
-                <option value="GASTOS">Gasto</option>
-            </select>
+          <label>Seleccione un movimiento:</label>
+
+          <select
+            name="movimiento"
+            [(ngModel)]="movimiento"
+            required>
+
+            <option value="">Seleccione una opción</option>
+            <option value="INGRESO">Ingreso</option>
+            <option value="GASTOS">Gasto</option>
+          </select>
+
+          @if(errorMovimiento){
+            <small class="error">
+              Debe seleccionar un movimiento
+            </small>
+          }
         </div>
 
+        <!-- CATEGORIA -->
         <div class="campo">
-            <label>Seleccione una categoría:</label>
+          <label>Seleccione una categoría:</label>
 
-            <select name="categoria" [(ngModel)]="categoria">
-                <option value="">Seleccione una categoría</option>
+          <select
+            name="categoria"
+            [(ngModel)]="categoria"
+            required>
 
-                @if (movimiento == 'INGRESO') {
-                    <option value="REPARACIONES">Reparaciones</option>
-                    <option value="MANO_OBRA">Mano de obra</option>
-                    <option value="VENTA_REPUESTOS">Venta de repuestos</option>
-                    <option value="SERVICIOS">Servicios</option>
-                    <option value="DIAGNOSTICOS">Diagnósticos</option>
-                    <option value="OTROS_INGRESOS">Otros ingresos</option>
-                }
+            <option value="">Seleccione una categoría</option>
 
-                @if (movimiento == 'GASTOS') {
-                    <option value="COMPRA_REPUESTOS">Compra de repuestos</option>
-                    <option value="SUELDOS">Sueldos</option>
-                    <option value="SERVICIOS">Servicios</option>
-                    <option value="ALQUILER">Alquiler</option>
-                    <option value="HERRAMIENTAS">Herramientas</option>
-                    <option value="IMPUESTOS">Impuestos</option>
-                    <option value="MANTENIMIENTO">Mantenimiento</option>
-                    <option value="OTROS_GASTOS">Otros gastos</option>
-                }
-            </select>
+            @if (movimiento == 'INGRESO') {
+              <option value="REPARACIONES">Reparaciones</option>
+              <option value="MANO_OBRA">Mano de obra</option>
+              <option value="VENTA_REPUESTOS">Venta de repuestos</option>
+              <option value="SERVICIOS">Servicios</option>
+              <option value="DIAGNOSTICOS">Diagnósticos</option>
+              <option value="OTROS_INGRESOS">Otros ingresos</option>
+            }
+
+            @if (movimiento == 'GASTOS') {
+              <option value="COMPRA_REPUESTOS">Compra de repuestos</option>
+              <option value="SUELDOS">Sueldos</option>
+              <option value="SERVICIOS">Servicios</option>
+              <option value="ALQUILER">Alquiler</option>
+              <option value="HERRAMIENTAS">Herramientas</option>
+              <option value="IMPUESTOS">Impuestos</option>
+              <option value="MANTENIMIENTO">Mantenimiento</option>
+              <option value="OTROS_GASTOS">Otros gastos</option>
+            }
+          </select>
+
+          @if(errorCategoria){
+            <small class="error">
+              Debe seleccionar una categoría
+            </small>
+          }
         </div>
 
+        <!-- CONCEPTO -->
         <div class="campo">
-            <label>Ingrese un concepto:</label>
-            <input
-                type="text"
-                name="concepto"
-                [(ngModel)]="concepto"
-                placeholder="Ej.: Reparación de motor">
+          <label>Ingrese un concepto:</label>
+
+          <input
+            type="text"
+            name="concepto"
+            [(ngModel)]="concepto"
+            placeholder="Ej.: Reparación de motor"
+            required>
+
+          @if(errorConcepto){
+            <small class="error">
+              Debe ingresar un concepto
+            </small>
+          }
         </div>
 
+        <!-- IMPORTE -->
         <div class="campo">
-            <label>Ingrese el importe:</label>
-            <input
-                type="number"
-                name="importe"
-                [(ngModel)]="importe"
-                placeholder="$ 0,00">
+          <label>Ingrese el importe:</label>
+
+          <input
+            type="number"
+            name="importe"
+            [(ngModel)]="importe"
+            placeholder="$ 0,00"
+            required>
+
+          @if(errorImporte){
+            <small class="error">
+              Debe ingresar un importe mayor a 0
+            </small>
+          }
         </div>
 
+        <!-- BOTONES -->
         <div class="botones">
-            <button type="submit" class="btn-guardar">
-                Registrar
-            </button>
 
-            <button type="button" class="btn-cancelar">
-                Cancelar
-            </button>
+          <button
+            type="submit"
+            class="btn-guardar"
+            [disabled]="
+              !movimiento ||
+              !categoria ||
+              !concepto ||
+              importe == null ||
+              importe <= 0">
+            Registrar
+          </button>
+
+          <button
+            (click)="volverAtras()"
+            type="button"
+            class="btn-cancelar">
+            Cancelar
+          </button>
+
         </div>
 
-    </form>
+      </form>
     </div>
 
-   
-
-</main>
-</div> 
+  </main>
+</div>

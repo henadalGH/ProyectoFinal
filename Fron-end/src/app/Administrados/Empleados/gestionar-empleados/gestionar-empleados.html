@@ -1,89 +1,171 @@
 <div class="layout">
+
   <aside class="sidebar">
-    <!-- menú -->
-     <app-header-admin></app-header-admin>
+    <app-header-admin></app-header-admin>
   </aside>
 
   <main class="content">
-    <!-- contenido principal -->
 
     <app-header></app-header>
-     
-<div class="gestion-container">
-  <div class="titulo-seccion">
-    <div class="texto">
-      <h1>Panel de Empleados</h1>
-      <p>Administración y control del personal del taller</p>
-    </div>
-    <button class="boton-agregar" [routerLink]="['/registrarEmpleado']">
-      <i class="fas fa-plus"></i> Agregar Nuevo
-    </button>
-  </div>
 
-  <div class="contenido-principal">
-    @if (error) {
-      <div class="alerta-estado error pulse">
-        <div class="icon-circle">
-          <i class="fas fa-wifi-slash"></i>
+    <div class="gestion-container">
+
+      <!-- TITULO -->
+      <div class="titulo-seccion">
+
+        <div class="texto">
+          <h1>Panel de Empleados</h1>
+          <p>
+            Administración y control del personal del taller
+          </p>
         </div>
-        <h2>Error de Conexión</h2>
-        <p>No pudimos obtener la lista del servidor. Por favor, verifica tu conexión a la red del taller.</p>
-        <button (click)="obtenerEmpleado()" class="btn-accion">
-          <i class="fas fa-sync-alt"></i> Intentar de nuevo
+
+        <button
+          class="boton-agregar"
+          [routerLink]="['/registrarEmpleado']">
+
+          <i class="fas fa-plus"></i>
+          Agregar Nuevo
+
         </button>
+
       </div>
-    }
-    @else {
-      <div class="grid-empleados">
-        @for (empl of empleados; track empl.id) {
-          <div class="card-empleado">
-            <div class="card-header">
-              <div class="avatar">
-                {{ empl.usuario.nombre.charAt(0) }}{{ empl.usuario.apellido.charAt(0) }}
-              </div>
-              <div class="user-info">
-                <h3>{{empl.usuario.nombre}} {{empl.usuario.apellido}}</h3>
-                <span class="badge-cargo">{{empl.cargo.cargo}}</span>
-              </div>
-            </div>
 
-            <div class="card-body">
-              <div class="info-row">
-                <i class="fas fa-envelope"></i>
-                <span>{{empl.usuario.email}}</span>
-              </div>
-              <div class="info-row">
-                <i class="fas fa-phone"></i>
-                <span>{{empl.usuario.contacto}}</span>
-              </div>
-            </div>
+      <!-- CONTENIDO -->
+      <div class="contenido-principal">
 
-            <div class="card-footer">
-              <button class="btn-ver" (click)="verEmpleado(empl.id)">
-                Gestionar Perfil <i class="fas fa-chevron-right"></i>
-              </button>
-            </div>
-            <div class="card-footer">
-              <button class="btn-baja">
-            Dar baja <i class="fas fa-chevron-right"></i>
-          </button>
-            </div>
-          </div>
-        }
-        @empty {
-          <div class="alerta-estado vacio">
+        @if (error) {
+
+          <div class="alerta-estado error">
+
             <div class="icon-circle">
-              <i class="fas fa-users-slash"></i>
+              <i class="fas fa-wifi-slash"></i>
             </div>
-            <h2>Sin Personal</h2>
-            <p>Aún no has registrado empleados en el sistema. Comienza agregando uno nuevo.</p>
+
+            <h2>Error de Conexión</h2>
+
+            <p>
+              No pudimos obtener la lista del servidor.
+              Por favor, verifica tu conexión.
+            </p>
+
+            <button
+              class="btn-accion"
+              (click)="obtenerEmpleado()">
+
+              <i class="fas fa-sync-alt"></i>
+              Intentar de nuevo
+
+            </button>
+
           </div>
+
         }
+
+        @else {
+
+          <div class="grid-empleados">
+
+            @for (empl of empleados; track empl.id) {
+
+              <div class="card-empleado">
+
+                <!-- HEADER -->
+                <div class="card-header">
+
+                  <div class="avatar">
+                    {{empl.usuario.nombre.charAt(0)}}
+                    {{empl.usuario.apellido.charAt(0)}}
+                  </div>
+
+                  <div class="user-info">
+
+                    <h3>
+                      {{empl.usuario.nombre}}
+                      {{empl.usuario.apellido}}
+                    </h3>
+
+                    <span class="badge-cargo">
+                      {{empl.cargo.cargo}}
+                    </span>
+
+                  </div>
+
+                </div>
+
+                <!-- BODY -->
+                <div class="card-body">
+
+                  <div class="info-row">
+                    <i class="fas fa-envelope"></i>
+
+                    <span>
+                      {{empl.usuario.email}}
+                    </span>
+                  </div>
+
+                  <div class="info-row">
+                    <i class="fas fa-phone"></i>
+
+                    <span>
+                      {{empl.usuario.contacto}}
+                    </span>
+                  </div>
+
+                </div>
+
+                <!-- FOOTER -->
+                <div class="card-footer">
+
+                  <button
+                    class="btn-ver"
+                    (click)="verEmpleado(empl.id)">
+
+                    Gestionar Perfil
+                    <i class="fas fa-chevron-right"></i>
+
+                  </button>
+
+                  <button class="btn-baja">
+
+                    Dar baja
+                    <i class="fas fa-user-minus"></i>
+
+                  </button>
+
+                </div>
+
+              </div>
+
+            }
+
+            @empty {
+
+              <div class="alerta-estado vacio">
+
+                <div class="icon-circle">
+                  <i class="fas fa-users-slash"></i>
+                </div>
+
+                <h2>Sin Personal</h2>
+
+                <p>
+                  Aún no has registrado empleados
+                  en el sistema.
+                </p>
+
+              </div>
+
+            }
+
+          </div>
+
+        }
+
       </div>
-    }
-  </div>
-</div>
+
+    </div>
 
   </main>
-</div>
 
+</div>

@@ -52,6 +52,7 @@ public class SecurityConfig {
                                 .requestMatchers("/emplado/todos").permitAll()
                                 .requestMatchers("/empleado/{id}").permitAll()
                                 .requestMatchers("/empleado/mecanico").permitAll()
+                                .requestMatchers("/empleado/modificaEmpleado/{idEmpleado}").permitAll()
                                 .requestMatchers("/movimiento/registro").permitAll()
                                 .requestMatchers("/movimiento/{fecha}").permitAll()
                                 .requestMatchers("/movimiento/entre").permitAll()

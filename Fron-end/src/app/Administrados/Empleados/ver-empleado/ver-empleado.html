@@ -1,71 +1,152 @@
 <div class="layout">
-  <aside class="sidebar">
-    <!-- menú -->
-     <app-header-admin></app-header-admin>
-  </aside>
 
-  <main class="content">
-    <!-- contenido principal -->
-     <app-header></app-header>
-     <div class="titulo">
-    <h1>Datos del empleado: {{empleado.nombre}}       {{empleado.apellido}}</h1>
-    <button [routerLink]="['/gestionEmpleado']">Volver</button>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <app-header-admin></app-header-admin>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <main class="content">
+
+        <app-header></app-header>
+
+        @if (empleado) {
+
+        <!-- HEADER EMPLEADO -->
+        <section class="empleado-header">
+
+            <div class="perfil">
+
+                <div class="avatar">
+                    {{empleado.nombre.charAt(0)}}{{empleado.apellido.charAt(0)}}
+                </div>
+
+                <div class="info">
+
+                    <h1>
+                        {{empleado.nombre}} {{empleado.apellido}}
+                    </h1>
+
+                    <span class="cargo">
+                        {{empleado.cargo}}
+                    </span>
+
+                    <p>
+                        Empleado registrado desde {{empleado.fechaIngreso}}
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button class="btn-volver" [routerLink]="['/gestionEmpleado']">
+                ← Volver
+            </button>
+
+        </section>
+
+        <!-- DATOS -->
+        <section class="datos-empleado">
+
+            <!-- NOMBRE -->
+            <div class="fila">
+                <div class="etiqueta">👤 Nombre</div>
+                <div class="valor">{{empleado.nombre}}</div>
+            </div>
+
+            <!-- APELLIDO -->
+            <div class="fila">
+                <div class="etiqueta">🧾 Apellido</div>
+                <div class="valor">{{empleado.apellido}}</div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="fila">
+                <div class="etiqueta">📧 Email</div>
+
+                <div class="valor">
+                    @if (!editarEmail) {
+                        <span>{{empleado.email}}</span>
+                    } @else {
+                        <input type="email" [(ngModel)]="empleado.email">
+                    }
+                </div>
+
+                <button class="btn-editar"
+                        (click)="!editarEmail ? editarEmail = true : modificarEmail(empleado.id)">
+                    {{ editarEmail ? '💾' : '✏️' }}
+                </button>
+            </div>
+
+            <!-- CONTACTO -->
+            <div class="fila">
+                <div class="etiqueta">📱 Contacto</div>
+
+                <div class="valor">
+                    @if (!editarContacto) {
+                        <span>{{empleado.contacto}}</span>
+                    } @else {
+                        <input type="text" [(ngModel)]="empleado.contacto">
+                    }
+                </div>
+
+                <button class="btn-editar"
+                        (click)="!editarContacto ? editarContacto = true : modificarContacto(empleado.id)">
+                    {{ editarContacto ? '💾' : '✏️' }}
+                </button>
+            </div>
+
+            <!-- DNI -->
+            <div class="fila">
+                <div class="etiqueta">🪪 DNI</div>
+                <div class="valor">{{empleado.dni}}</div>
+            </div>
+
+            <!-- FECHA NACIMIENTO -->
+            <div class="fila">
+                <div class="etiqueta">🎂 Fecha nacimiento</div>
+                <div class="valor">{{empleado.fechaNacimiento}}</div>
+            </div>
+
+            <!-- FECHA INGRESO -->
+            <div class="fila">
+                <div class="etiqueta">📅 Fecha ingreso</div>
+                <div class="valor">{{empleado.fechaIngreso}}</div>
+            </div>
+
+            <!-- CARGO -->
+            <div class="fila">
+                <div class="etiqueta">💼 Cargo</div>
+
+                <div class="valor">
+                    @if (!editarCargo) {
+                        <span>{{empleado.cargo}}</span>
+                    } @else {
+                        <select [(ngModel)]="empleado.cargo">
+                            <option value="AYUDANTE">AYUDANTE</option>
+                            <option value="MECANICO">MECANICO</option>
+                            <option value="ENCARGADO">ENCARGADO</option>
+                            <option value="JEFE_TALLER">JEFE TALLER</option>
+                            <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
+                        </select>
+                    }
+                </div>
+
+                <button class="btn-editar"
+                        (click)="!editarCargo ? editarCargo = true : modificarCargo(empleado.id)">
+                    {{ editarCargo ? '💾' : '✏️' }}
+                </button>
+            </div>
+
+            <!-- SUELDO -->
+            <div class="fila">
+                <div class="etiqueta">💰 Sueldo</div>
+                <div class="valor">${{empleado.sueldo}}</div>
+            </div>
+
+        </section>
+
+        }
+
+    </main>
 </div>
-
-<div class="contenedor">
-    @if (empleado) {
-
-    <div class="dato">
-        <h4>Nombre: </h4>
-        <p>{{empleado.nombre}}</p>
-    </div>
-    <div class="dato">
-        <h4>Apellido: </h4>
-        <p>{{empleado.apellido}}</p>
-    </div>
-    <div class="dato">
-        <h4>Correo electronico: </h4>
-        <p>{{empleado.email}}</p>
-    </div>
-    <div class="dato">
-        <h4>Contacto: </h4>
-        <p>{{empleado.contacto}}</p>
-    </div>
-    
-    <div class="dato">
-        <h4>Dni: </h4>
-        <p>{{empleado.dni}}</p>
-    </div>
-    
-    <div class="dato">
-        <h4>Fecha nacimmiento:</h4>
-        <p>{{empleado.fechaNacimiento}}</p>
-    </div>
-    
-    <div class="dato">
-        <h4>Fecha de ingreso:</h4>
-        <p>{{empleado.fechaIngreso}}</p>
-    </div>
-    
-    <div class="dato">
-        <h4>Cargo: </h4>
-        <p>{{empleado.cargo}}</p>
-    </div>
-    
-    <div class="dato">
-        <h4>Sueldo: </h4>
-        <p>{{empleado.sueldo}}</p>
-    </div>
-
-}
-</div>
-  </main>
-</div>
-
-
-
-
-
-
-
-

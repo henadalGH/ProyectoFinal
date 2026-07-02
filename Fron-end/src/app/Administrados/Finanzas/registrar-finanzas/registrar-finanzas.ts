@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MovimientosService } from '../../../Servicio/movimientos-service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../AuthServicio/auth-service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-registrar-finanzas',
@@ -14,29 +15,84 @@ import { AuthService } from '../../../AuthServicio/auth-service';
 })
 export class RegistrarFinanzas {
 
-  constructor(private movimientoService: MovimientosService,
+  constructor(
+    private movimientoService: MovimientosService,
     private router: Router,
-    private authService: AuthService
-  ){}
-
+    private authService: AuthService,
+    private location: Location
+  ) {}
 
   movimiento: string = '';
   categoria: string = '';
   concepto: string = '';
-  importe: number = 0;
+  importe: number | null = null;
 
-   
+  // Variables para mostrar errores
+  errorMovimiento = false;
+  errorCategoria = false;
+  errorConcepto = false;
+  errorImporte = false;
 
-  registrarMovimiento(){
-
-    const idAdmin = Number( this.authService.getEntityId());
-
-    this.movimientoService.registrarMovimiento(this.movimiento, this.categoria, this.concepto, this.importe, idAdmin).subscribe(
-
-      (next: any) => {
-        this.router.navigate(['/homeFinanzas']);
-      });
-
+  volverAtras() {
+    this.location.back();
   }
 
+  validarFormulario(): boolean {
+
+    // Limpiar errores anteriores
+    this.errorMovimiento = false;
+    this.errorCategoria = false;
+    this.errorConcepto = false;
+    this.errorImporte = false;
+
+    let valido = true;
+
+    if (!this.movimiento || this.movimiento.trim() === '') {
+      this.errorMovimiento = true;
+      valido = false;
+    }
+
+    if (!this.categoria || this.categoria.trim() === '') {
+      this.errorCategoria = true;
+      valido = false;
+    }
+
+    if (!this.concepto || this.concepto.trim() === '') {
+      this.errorConcepto = true;
+      valido = false;
+    }
+
+    if (this.importe == null || this.importe <= 0) {
+      this.errorImporte = true;
+      valido = false;
+    }
+
+    return valido;
+  }
+
+  registrarMovimiento() {
+
+    if (!this.validarFormulario()) {
+      return;
+    }
+
+    const idAdmin = Number(this.authService.getEntityId());
+
+    this.movimientoService
+      .registrarMovimiento(
+        this.movimiento,
+        this.categoria,
+        this.concepto,
+        this.importe!,
+        idAdmin
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/homeFinanzas']);
+        },
+        error: (error) => {
+          console.error('Error al registrar movimiento', error);
+        }
+      });
+  }
 }

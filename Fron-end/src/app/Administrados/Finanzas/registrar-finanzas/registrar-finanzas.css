@@ -1,172 +1,195 @@
+/* =========================
+   RESET GENERAL
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f3f6fb;
+  color: #111827;
+}
+
+/* =========================
+   LAYOUT
+========================= */
 .layout {
   display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+  height: 100vh;
 }
 
 .sidebar {
-  width: 320px;   /* 🔥 antes 250px, ahora más ancho */
+  width: 320px;
   background: #1f2937;
   color: white;
-  flex-shrink: 0; /* evita que se achique */
+  flex-shrink: 0;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
-  overflow-y: auto;
+app-header-admin {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /* =========================
    CONTENIDO PRINCIPAL
 ========================= */
 .content {
-    flex: 1;
-    background: #f3f6fb;
-    padding: 20px 40px;
-    overflow-y: auto;
+  flex: 1;
+  background: #f3f6fb;
+  padding: 20px 40px;
+  overflow-y: auto;
 }
 
 /* =========================
-   TÍTULO
+   TÍTULO / HEADER
 ========================= */
 .titulo {
-    text-align: center;
-    margin: 35px 0;
+  width: 100%;
+  max-width: 1000px; /* más ancho */
+  margin: 35px auto;
+  text-align: center;
 }
 
 .titulo h1 {
-    margin: 0;
-    font-size: 32px;
-    font-weight: 700;
-    color: #111827;
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  color: #111827;
 }
 
 .titulo p {
-    margin-top: 8px;
-    font-size: 15px;
-    color: #6b7280;
+  margin-top: 8px;
+  font-size: 15px;
+  color: #6b7280;
 }
 
 /* =========================
    FORMULARIO
 ========================= */
 .formulario {
-    background: #ffffff;
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
+  background: #ffffff;
 
-    padding: 35px;
+  width: 100%;
+  max-width: 700px;
 
-    border-radius: 18px;
+  margin: 0 auto;
 
-    border: 1px solid #e5e7eb;
+  padding: 35px;
 
-    box-shadow:
-        0 8px 20px rgba(0,0,0,0.06),
-        0 2px 6px rgba(0,0,0,0.04);
+  border-radius: 18px;
+
+  border: 1px solid #e5e7eb;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.06),
+    0 2px 6px rgba(0,0,0,0.04);
 }
 
 /* =========================
    CAMPOS
 ========================= */
 .campo {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 22px;
 }
 
 .campo label {
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #374151;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
 }
 
 .campo input,
 .campo select {
-    width: 100%;
+  width: 100%;
 
-    padding: 14px 16px;
+  padding: 14px 16px;
 
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
 
-    background: #ffffff;
+  background: #ffffff;
 
-    font-size: 14px;
-    color: #111827;
+  font-size: 14px;
+  color: #111827;
 
-    transition: all .2s ease;
+  transition: all .2s ease;
 }
 
 .campo input:focus,
 .campo select:focus {
-    outline: none;
-    border-color: #2563eb;
+  outline: none;
+  border-color: #2563eb;
 
-    box-shadow:
-        0 0 0 4px rgba(37,99,235,.12);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
 }
 
 /* =========================
    BOTONES
 ========================= */
 .botones {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 30px;
 }
 
 .btn-guardar {
-    background: #2563eb;
-    color: white;
+  background: #2563eb;
+  color: white;
 
-    border: none;
-    border-radius: 10px;
+  border: none;
+  border-radius: 10px;
 
-    padding: 14px 30px;
+  padding: 14px 30px;
 
-    font-size: 14px;
-    font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: .2s;
+  transition: .2s;
 }
 
 .btn-guardar:hover {
-    background: #1d4ed8;
+  background: #1d4ed8;
 }
 
 .btn-cancelar {
-    background: #e5e7eb;
-    color: #374151;
+  background: #e5e7eb;
+  color: #374151;
 
-    border: none;
-    border-radius: 10px;
+  border: none;
+  border-radius: 10px;
 
-    padding: 14px 30px;
+  padding: 14px 30px;
 
-    font-size: 14px;
-    font-weight: 600;
+  font-size: 14px;
+  font-weight: 600;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    transition: .2s;
+  transition: .2s;
 }
 
 .btn-cancelar:hover {
-    background: #d1d5db;
+  background: #d1d5db;
 }
 
 /* =========================
    BOTONES GENERALES
 ========================= */
 button {
-    font-family: inherit;
+  font-family: inherit;
 }
 
 /* =========================
@@ -174,20 +197,33 @@ button {
 ========================= */
 @media (max-width: 768px) {
 
-    .content {
-        padding: 20px;
-    }
+  .content {
+    padding: 20px;
+  }
 
-    .formulario {
-        padding: 25px;
-    }
+  .titulo {
+    max-width: 100%;
+    margin: 25px auto;
+  }
 
-    .botones {
-        flex-direction: column;
-    }
+  .formulario {
+    padding: 25px;
+  }
 
-    .btn-guardar,
-    .btn-cancelar {
-        width: 100%;
-    }
+  .botones {
+    flex-direction: column;
+  }
+
+  .btn-guardar,
+  .btn-cancelar {
+    width: 100%;
+  }
+}
+
+.error{
+    display: block;
+    margin-top: 6px;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 500;
 }

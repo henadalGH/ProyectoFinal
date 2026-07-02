@@ -24,6 +24,11 @@ export class RegistrarEmpleado {
   fechaNacimiento: string = ''; // viene del input type="date"
   cargo: string = '';
 
+
+  editarEmail = false;
+editarContacto = false;
+editarCargo = false;
+
   constructor(
     private empleadoService: EmpleadoService,
     private router: Router

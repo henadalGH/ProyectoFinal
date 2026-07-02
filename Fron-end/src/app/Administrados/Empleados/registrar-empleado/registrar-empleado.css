@@ -1,175 +1,275 @@
-
-/* ===== WRAPPER ===== */
-.registro-wrapper {
-  padding: 30px;
-  background: #020617;
-  min-height: 100vh;
-  color: #e2e8f0;
-  font-family: 'Inter', sans-serif;
+/* =========================
+   RESET
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* ===== TITULO ===== */
-.titulo {
-  max-width: 900px;
-  margin: 0 auto 25px;
+html,body{
+    height:100%;
+    font-family:"Segoe UI",Roboto,Arial,sans-serif;
+    background:#f4f7fb;
+    color:#111827;
 }
 
-.titulo h1 {
-  font-size: 28px;
-  font-weight: 600;
+/* =========================
+   LAYOUT
+========================= */
+.layout{
+    display:flex;
+    min-height:100vh;
 }
 
-.titulo h1 span {
-  color: #3b82f6;
+.sidebar{
+    width:320px;
+    flex-shrink:0;
 }
 
-.titulo p {
-  margin-top: 5px;
-  color: #94a3b8;
-  font-size: 14px;
+.content{
+    flex:1;
+    padding:30px 40px;
+    overflow-y:auto;
+    background:#f4f7fb;
 }
 
-/* ===== CONTENEDOR FORM ===== */
-.formulario-container {
-  max-width: 900px;
-  margin: auto;
-
-  background: rgba(15, 23, 42, 0.75);
-  backdrop-filter: blur(14px);
-
-  border-radius: 18px;
-  padding: 25px;
-
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+/* =========================
+   CONTENEDOR
+========================= */
+.registro-wrapper{
+    max-width:1200px;
+    margin:0 auto;
 }
 
-/* ===== GRID ===== */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 18px;
+/* =========================
+   TITULO
+========================= */
+.titulo{
+    margin:35px 0;
 }
 
-/* ===== CAMPOS ===== */
-.campos {
-  display: flex;
-  flex-direction: column;
+.titulo h1{
+    font-size:38px;
+    font-weight:700;
+    color:#0f172a;
 }
 
-.campos label {
-  font-size: 12px;
-  margin-bottom: 6px;
-  color: #cbd5f5;
+.titulo span{
+    color:#2563eb;
 }
 
-/* INPUTS */
+.titulo p{
+    margin-top:8px;
+    color:#64748b;
+    font-size:16px;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.formulario-container{
+    background:white;
+    border-radius:24px;
+
+    padding:40px;
+
+    border:1px solid #e2e8f0;
+
+    box-shadow:
+        0 4px 6px rgba(0,0,0,.03),
+        0 20px 25px rgba(0,0,0,.04);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:28px;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+.campos{
+    display:flex;
+    flex-direction:column;
+}
+
+.campos label{
+    margin-bottom:10px;
+
+    font-size:13px;
+    font-weight:700;
+
+    text-transform:uppercase;
+    letter-spacing:.5px;
+
+    color:#64748b;
+}
+
 .campos input,
-.campos select {
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.08);
+.campos select{
+    width:100%;
 
-  background: rgba(2, 6, 23, 0.7);
-  color: #e2e8f0;
+    height:54px;
 
-  outline: none;
-  transition: all 0.25s ease;
+    border:1px solid #cbd5e1;
+    border-radius:14px;
+
+    background:#fff;
+
+    padding:0 18px;
+
+    font-size:15px;
+    color:#0f172a;
+
+    transition:.2s;
 }
 
-/* placeholder */
-.campos input::placeholder {
-  color: #64748b;
-}
-
-/* hover */
 .campos input:hover,
-.campos select:hover {
-  border-color: rgba(255,255,255,0.2);
+.campos select:hover{
+    border-color:#94a3b8;
 }
 
-/* focus PRO */
 .campos input:focus,
-.campos select:focus {
-  border-color: #3b82f6;
-  background: rgba(2, 6, 23, 0.95);
-  box-shadow:
-    0 0 0 2px rgba(59,130,246,0.25),
-    0 0 15px rgba(59,130,246,0.25);
-  transform: scale(1.01);
+.campos select:focus{
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37,99,235,.12);
 }
 
-/* ===== ACCIONES ===== */
-.acciones {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 10px;
+/* =========================
+   CAMPOS EDITABLES
+========================= */
+.campo-editable{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-/* BOTON PRINCIPAL */
-.agregar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: none;
-
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: white;
-  font-weight: 500;
-
-  cursor: pointer;
-  transition: all 0.25s ease;
+.campo-editable input,
+.campo-editable select{
+    flex:1;
 }
 
-.agregar:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 10px 25px rgba(59,130,246,0.5),
-    0 0 15px rgba(59,130,246,0.3);
+/* =========================
+   BOTON EDITAR
+========================= */
+.btn-editar{
+    width:54px;
+    height:54px;
+
+    border:none;
+    border-radius:14px;
+
+    background:#eff6ff;
+    color:#2563eb;
+
+    cursor:pointer;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:.2s;
 }
 
-/* BOTON CANCELAR */
-.cancelar {
-  padding: 12px 18px;
-  border-radius: 12px;
-
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-
-  color: #e2e8f0;
-  cursor: pointer;
-
-  transition: 0.25s;
+.btn-editar:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateY(-2px);
 }
 
-.cancelar:hover {
-  background: rgba(255,255,255,0.1);
+.btn-editar i{
+    font-size:15px;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
-  .acciones {
-    flex-direction: column;
-  }
-}
-.layout {
-  display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+/* =========================
+   INPUTS BLOQUEADOS
+========================= */
+input[readonly],
+select:disabled{
+    background:#f8fafc;
+    color:#64748b;
 }
 
-.sidebar {
-  width: 250px;   /* ancho del menú */
-  background: #1f2937;
-  color: white;
+/* =========================
+   BOTONES
+========================= */
+.acciones{
+    grid-column:1/-1;
+
+    display:flex;
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:20px;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+.agregar,
+.cancelar{
+    height:52px;
+
+    padding:0 28px;
+
+    border:none;
+    border-radius:14px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.agregar{
+    background:#2563eb;
+    color:white;
+}
+
+.agregar:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+.cancelar{
+    background:#f1f5f9;
+    color:#334155;
+}
+
+.cancelar:hover{
+    background:#e2e8f0;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:900px){
+
+    .content{
+        padding:20px;
+    }
+
+    .formulario-container{
+        padding:25px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .acciones{
+        flex-direction:column;
+    }
+
+    .agregar,
+    .cancelar{
+        width:100%;
+    }
 }
