@@ -1,409 +1,395 @@
-/* ===== CONTENEDOR ===== */
-.vehiculo-container {
-  min-height: 100vh;
-
-  padding: 40px 25px;
-
-  background: #020617;
-
-  font-family: 'Inter', sans-serif;
-  color: #e2e8f0;
-}
-
-/* ===== TITULO ===== */
-.titulo {
-  text-align: center;
-  margin-bottom: 35px;
-}
-
-.titulo h1 {
-  font-size: 34px;
-  color: #f8fafc;
-
-  margin-bottom: 10px;
-}
-
-.titulo p {
-  max-width: 650px;
-  margin: auto;
-
-  color: #94a3b8;
-  line-height: 1.6;
-}
-
-/* ===== CARD ===== */
-.vehiculo-card {
-  max-width: 900px;
-  margin: auto;
-
-  background: rgba(15, 23, 42, 0.78);
-
-  border-radius: 22px;
-
-  border: 1px solid rgba(255,255,255,0.05);
-
-  padding: 30px;
-
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
-}
-
-/* ===== TOP ===== */
-.card-top {
+.layout {
   display: flex;
-  align-items: center;
-  gap: 18px;
-
-  margin-bottom: 30px;
+  height: 100vh; /* ocupa toda la pantalla */
 }
 
-/* ===== ICONO ===== */
-.icono-auto {
-  width: 70px;
-  height: 70px;
-
-  border-radius: 18px;
-
-  background: rgba(59,130,246,0.15);
-  color: #60a5fa;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 28px;
-}
-
-/* ===== NOMBRE ===== */
-.nombre-vehiculo h2 {
-  color: #f8fafc;
-  font-size: 25px;
-
-  margin-bottom: 5px;
-}
-
-.nombre-vehiculo span {
-  color: #94a3b8;
-  letter-spacing: 1px;
-}
-
-/* ===== INFO ===== */
-.vehiculo-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-  gap: 16px;
-
-  margin-bottom: 25px;
-}
-
-/* ===== ITEM ===== */
-.item {
-  background: rgba(255,255,255,0.03);
-
-  border-radius: 14px;
-
-  padding: 18px;
-}
-
-.item strong {
-  display: block;
-
-  margin-bottom: 8px;
-
-  color: #94a3b8;
-  font-size: 13px;
-
-  text-transform: uppercase;
-}
-
-.item p {
-  color: #f8fafc;
-
-  font-size: 17px;
-  font-weight: 600;
-}
-
-/* ===== ACCIONES ===== */
-.acciones {
-  display: flex;
-  justify-content: flex-end;
-
-  margin-bottom: 25px;
-}
-
-/* ===== BOTON ===== */
-.btn-turno {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 13px 18px;
-
-  border: none;
-  border-radius: 12px;
-
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #3b82f6
-  );
-
+.sidebar {
+  width: 320px;   /* ancho del menú */
+  background: #1f2937;
   color: white;
-
-  font-weight: 600;
-  font-size: 14px;
-
-  cursor: pointer;
-
-  transition: 0.25s ease;
 }
 
-.btn-turno:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 10px 20px rgba(37,99,235,0.3);
-}
-
-/* ===== SERVICIO ===== */
-.ultimo-servicio {
-  padding: 22px;
-
-  border-radius: 16px;
-
-  background: rgba(59,130,246,0.08);
-
-  border: 1px solid rgba(59,130,246,0.15);
-}
-
-/* ===== HEADER SERVICIO ===== */
-.servicio-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  margin-bottom: 12px;
-}
-
-.servicio-header i {
-  color: #60a5fa;
-}
-
-.servicio-header h3 {
-  color: #f8fafc;
-}
-
-.ultimo-servicio p {
-  color: #cbd5e1;
-  line-height: 1.6;
-}
-
-/* ================================================= */
-/* ==================== MODAL ====================== */
-/* ================================================= */
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-
-  background: rgba(0,0,0,0.7);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+.content {
+  flex: 1;        /* ocupa todo el espacio restante */
+  background: #f3f6fb;
   padding: 20px;
-
-  z-index: 999;
 }
 
-/* ===== FORM ===== */
-.form {
-  width: 100%;
-  max-width: 460px;
+/* ==========================
+   CONTENEDOR VEHICULO
+========================== */
 
-  position: relative;
-
-  background: #0f172a;
-
-  border-radius: 24px;
-
-  padding: 30px;
-
-  border: 1px solid rgba(255,255,255,0.05);
-
-  box-shadow: 0 20px 45px rgba(0,0,0,0.45);
-
-  animation: aparecer 0.25s ease;
+.vehiculo-container{
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-/* ===== CERRAR ===== */
-.btn-cerrar {
-  position: absolute;
-
-  top: 15px;
-  right: 15px;
-
-  width: 38px;
-  height: 38px;
-
-  border: none;
-  border-radius: 10px;
-
-  background: rgba(239,68,68,0.12);
-  color: #f87171;
-
-  cursor: pointer;
-
-  transition: 0.25s ease;
+.titulo{
+    margin-bottom: 25px;
 }
 
-.btn-cerrar:hover {
-  background: rgba(239,68,68,0.22);
-
-  color: #ef4444;
-
-  transform: rotate(90deg);
+.titulo h1{
+    margin: 0;
+    font-size: 32px;
+    color: #111827;
+    font-weight: 700;
 }
 
-/* ===== TITULO MODAL ===== */
-.reg {
-  text-align: center;
-  margin-bottom: 25px;
+.titulo p{
+    margin-top: 8px;
+    color: #6b7280;
 }
 
-.reg h1 {
-  color: #f8fafc;
-  font-size: 30px;
+/* ==========================
+   FICHA VEHICULO
+========================== */
 
-  margin-bottom: 8px;
+.vehiculo-card{
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.06);
 }
 
-.reg p {
-  color: #94a3b8;
-  font-size: 14px;
+/* ==========================
+   HEADER
+========================== */
+
+.card-top{
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+
+    color: white;
+
+    padding: 25px 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
 
-/* ===== CAMPOS ===== */
+.icono-auto{
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.15);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 30px;
+}
+
+.nombre-vehiculo h2{
+    margin: 0;
+    font-size: 30px;
+}
+
+.nombre-vehiculo span{
+    display: inline-block;
+
+    margin-top: 8px;
+
+    padding: 6px 14px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,.15);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ==========================
+   DATOS
+========================== */
+
+.vehiculo-info{
+    padding: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+
+    gap: 25px;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+}
+
+.item strong{
+    color: #64748b;
+
+    font-size: 13px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 8px;
+}
+
+.item p{
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    color: #111827;
+}
+
+/* ==========================
+   BOTON
+========================== */
+
+.acciones{
+    padding: 0 30px 30px;
+}
+
+.btn-turno{
+    width: 100%;
+
+    background: #2563eb;
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    padding: 16px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-turno:hover{
+    background: #1d4ed8;
+}
+
+/* ==========================
+   ULTIMO SERVICIO
+========================== */
+
+.ultimo-servicio{
+    background: #f8fafc;
+
+    padding: 25px 30px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.servicio-header{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-bottom: 10px;
+}
+
+.servicio-header i{
+    color: #2563eb;
+    font-size: 18px;
+}
+
+.servicio-header h3{
+    margin: 0;
+    color: #111827;
+}
+
+.ultimo-servicio p{
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.5;
+}
+
+/* ==========================
+   MODAL
+========================== */
+
+.modal-overlay{
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,.55);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(4px);
+}
+
+.form{
+    width: 100%;
+    max-width: 520px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    position: relative;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.25);
+}
+
+/* ==========================
+   CERRAR
+========================== */
+
+.btn-cerrar{
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    width: 40px;
+    height: 40px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-cerrar:hover{
+    background: #e5e7eb;
+}
+
+/* ==========================
+   TITULO MODAL
+========================== */
+
+.reg{
+    margin-bottom: 25px;
+}
+
+.reg h1{
+    margin: 0;
+
+    font-size: 28px;
+
+    color: #111827;
+}
+
+.reg p{
+    margin-top: 8px;
+
+    color: #6b7280;
+}
+
+/* ==========================
+   CAMPOS
+========================== */
+
 .servicio,
-.descrip {
-  display: flex;
-  flex-direction: column;
+.descrip{
+    display: flex;
+    flex-direction: column;
 
-  margin-bottom: 18px;
+    margin-bottom: 20px;
 }
 
 .servicio label,
-.descrip label {
-  margin-bottom: 8px;
+.descrip label{
+    margin-bottom: 8px;
 
-  color: #cbd5e1;
-  font-size: 14px;
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #374151;
 }
 
-/* ===== INPUTS ===== */
 .servicio select,
-.descrip input {
-  padding: 13px 14px;
+.descrip input{
+    width: 100%;
 
-  border-radius: 12px;
+    padding: 14px 16px;
 
-  border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
 
-  background: rgba(255,255,255,0.03);
+    font-size: 14px;
 
-  color: white;
-
-  outline: none;
-
-  transition: 0.25s ease;
+    transition: .2s;
 }
 
 .servicio select:focus,
-.descrip input:focus {
-  border-color: #3b82f6;
+.descrip input:focus{
+    outline: none;
 
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37,99,235,.12);
 }
 
-/* ===== BOTON SOLICITAR ===== */
-.btn-solicitar {
-  width: 100%;
+/* ==========================
+   BOTON SOLICITAR
+========================== */
 
-  margin-top: 10px;
-
-  padding: 14px;
-
-  border: none;
-  border-radius: 12px;
-
-  background: linear-gradient(
-    135deg,
-    #2563eb,
-    #3b82f6
-  );
-
-  color: white;
-
-  font-weight: 600;
-  font-size: 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  cursor: pointer;
-
-  transition: 0.25s ease;
-}
-
-.btn-solicitar:hover {
-  transform: translateY(-2px);
-
-  box-shadow: 0 12px 22px rgba(37,99,235,0.3);
-}
-
-/* ===== ANIMACION ===== */
-@keyframes aparecer {
-
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width: 700px) {
-
-  .vehiculo-container {
-    padding: 30px 15px;
-  }
-
-  .vehiculo-card {
-    padding: 22px;
-  }
-
-  .card-top {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .acciones {
-    justify-content: center;
-  }
-
-  .btn-turno {
+.btn-solicitar{
     width: 100%;
-    justify-content: center;
-  }
 
-  .form {
-    padding: 25px 20px;
-  }
+    background: #2563eb;
+    color: white;
 
+    border: none;
+    border-radius: 10px;
+
+    padding: 15px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.btn-solicitar:hover{
+    background: #1d4ed8;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:768px){
+
+    .card-top{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .vehiculo-info{
+        grid-template-columns: 1fr;
+    }
+
+    .form{
+        margin: 15px;
+        padding: 25px;
+    }
 }

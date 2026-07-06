@@ -35,6 +35,7 @@ import { ParaFacturar } from './Administrados/Adminstrador/Facturacion/para-fact
 import { DetalleFactura } from './Administrados/Adminstrador/Facturacion/detalle-factura/detalle-factura';
 import { VerFactura } from './Administrados/Adminstrador/Facturacion/ver-factura/ver-factura';
 import { ServiciosOfresidos } from './servicios-ofresidos/servicios-ofresidos';
+import { TurnoClienteCasual } from './Administrados/Turnos/turno-cliente-casual/turno-cliente-casual';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -61,6 +62,7 @@ export const routes: Routes = [
     { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
     {path:'inicioPresupuesto' , component: InicioPresupuestos},
     {path:'factura', component: Factura},
+    {path:'turnoCasual', component: TurnoClienteCasual},
 
     //Retas de factura
     {path: 'paraFacturar', component: ParaFacturar},

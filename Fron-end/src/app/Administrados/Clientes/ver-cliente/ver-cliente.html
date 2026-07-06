@@ -41,13 +41,58 @@
         <p>{{cliente.direccion}}</p>
       </div>
     </div>
-
-    <button  class="btn-vehiculos">
-      Ver sus vehiculos
-    </button>
   }
+
+<div class="vehiculos">
+
+    <h1>Vehículos del cliente</h1>
+
+    @if (vehiculo != null) {
+
+        @for (vehi of vehiculo; track $index) {
+
+            <div class="vehiculo-item">
+
+                <div class="vehiculo-info">
+
+                    <div class="dato">
+                        <span class="titulo">Marca</span>
+                        <p>{{vehi.marca}}</p>
+                    </div>
+
+                    <div class="dato">
+                        <span class="titulo">Modelo</span>
+                        <p>{{vehi.modelo}}</p>
+                    </div>
+
+                    <div class="dato">
+                        <span class="titulo">Patente</span>
+                        <p>{{vehi.patente}}</p>
+                    </div>
+
+                </div>
+
+                <button
+                    class="btn-detalle"
+                    (click)="verDetalleVehiculo(vehi.id)">
+
+                    Ver detalle
+                </button>
+
+            </div>
+
+        }
+
+    } @else {
+
+        <div class="sin-vehiculos">
+            <p>El cliente no tiene vehículos registrados</p>
+        </div>
+    }
+</div>
 
 </div>
   </main>
 </div>
 
+ 

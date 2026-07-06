@@ -1,116 +1,143 @@
-/* =========================
-   CONTENEDOR
-========================= */
+/* ==================================
+   LAYOUT GENERAL
+================================== */
+
+.layout {
+  display: flex;
+  height: 100vh; /* ocupa toda la pantalla */
+}
+
+.sidebar {
+  width: 300px;   /* ancho del menú */
+  background: #1f2937;
+  color: white;
+}
+
+.content {
+  flex: 1;        /* ocupa todo el espacio restante */
+  background: #f3f6fb;
+  padding: 20px;
+}
+
+/* ==================================
+   CLIENTE
+================================== */
+
 .container-cliente{
-    max-width:700px;   /* antes 900px */
-    margin:20px auto;
+    max-width:900px;
+    margin:25px auto;
 }
 
-/* =========================
-   HEADER CLIENTE
-========================= */
+/* ==================================
+   CABECERA
+================================== */
+
 .header-cliente{
-    background:white;
-    border-radius:16px;
-    padding:25px;
+    display:flex;
+    align-items:center;
+    gap:25px;
 
-    text-align:center;
+    padding-bottom:25px;
+    margin-bottom:30px;
 
-    box-shadow:
-        0 6px 18px rgba(0,0,0,.05);
-
-    margin-bottom:20px;
+    border-bottom:2px solid #e5e7eb;
 }
 
-/* =========================
-   AVATAR
-========================= */
 .avatar{
-    width:70px;        /* antes 90px */
-    height:70px;
-
-    margin:0 auto 15px;
+    width:80px;
+    height:80px;
 
     border-radius:50%;
 
     background:linear-gradient(
         135deg,
         #2563eb,
-        #3b82f6
+        #60a5fa
     );
-
-    color:white;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    font-size:24px;    /* antes 30px */
+    color:white;
+    font-size:28px;
     font-weight:700;
 
+    flex-shrink:0;
+
     box-shadow:
-        0 6px 16px rgba(37,99,235,.25);
+        0 6px 18px rgba(37,99,235,.25);
 }
 
-/* =========================
-   TITULOS
-========================= */
 .header-cliente h1{
-    font-size:24px;   /* antes 30px */
-    margin-bottom:8px;
+    margin:0;
+    font-size:30px;
+    color:#111827;
 }
 
 .nombre{
-    font-size:16px;
-    color:#64748b;
+    margin-top:6px;
+    color:#6b7280;
+    font-size:18px;
 }
 
-/* =========================
-   CARD INFO
-========================= */
+/* ==================================
+   INFORMACION CLIENTE
+================================== */
+
 .card-info{
     background:white;
 
     border-radius:16px;
 
-    padding:10px 25px;
+    overflow:hidden;
 
     box-shadow:
-        0 6px 18px rgba(0,0,0,.05);
+        0 8px 20px rgba(0,0,0,.05);
 }
 
-/* =========================
-   CAMPOS
-========================= */
 .campo{
-    padding:16px 0;
+    display:flex;
+    align-items:center;
+
+    padding:20px 30px;
+
     border-bottom:1px solid #e5e7eb;
 }
 
 .campo:last-child{
-    border:none;
+    border-bottom:none;
 }
 
 .campo h4{
+    width:180px;
+
+    margin:0;
+
     color:#64748b;
+
     font-size:13px;
-    margin-bottom:5px;
-    font-weight:600;
+    font-weight:700;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
 .campo p{
+    margin:0;
+
     color:#111827;
-    font-size:15px;   /* antes 17px */
+
+    font-size:16px;
     font-weight:500;
 }
 
-/* =========================
-   BOTON
-========================= */
-.btn-vehiculos{
-    display:block;
+/* ==================================
+   BOTON VEHICULOS
+================================== */
 
-    margin:20px auto 0;
+.btn-vehiculos{
+    margin-top:25px;
 
     background:#2563eb;
     color:white;
@@ -118,9 +145,9 @@
     border:none;
     border-radius:12px;
 
-    padding:12px 28px;
+    padding:14px 28px;
 
-    font-size:14px;
+    font-size:15px;
     font-weight:600;
 
     cursor:pointer;
@@ -133,19 +160,157 @@
     transform:translateY(-2px);
 }
 
-.layout {
-  display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+/* ==================================
+   SECCION VEHICULOS
+================================== */
+
+.vehiculos{
+    margin-top:50px;
 }
 
-.sidebar {
-  width: 320px;   /* ancho del menú */
-  background: #1f2937;
-  color: white;
+.vehiculos h1{
+    font-size:26px;
+    color:#111827;
+    margin-bottom:20px;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+/* ==================================
+   FILA VEHICULO
+================================== */
+
+.vehiculo-item{
+    background:white;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 25px;
+
+    margin-bottom:15px;
+
+    border-radius:14px;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.05);
+
+    transition:.2s;
+}
+
+.vehiculo-item:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 24px rgba(0,0,0,.08);
+}
+
+.vehiculo-info{
+    display:flex;
+    gap:50px;
+}
+
+.dato{
+    display:flex;
+    flex-direction:column;
+}
+
+.titulo{
+    color:#64748b;
+
+    font-size:12px;
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    margin-bottom:5px;
+}
+
+.dato p{
+    margin:0;
+
+    color:#111827;
+
+    font-size:16px;
+    font-weight:600;
+}
+
+/* ==================================
+   BOTON DETALLE
+================================== */
+
+.btn-detalle{
+    background:#2563eb;
+    color:white;
+
+    border:none;
+    border-radius:10px;
+
+    padding:12px 22px;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.btn-detalle:hover{
+    background:#1d4ed8;
+}
+
+/* ==================================
+   SIN VEHICULOS
+================================== */
+
+.sin-vehiculos{
+    background:white;
+
+    padding:30px;
+
+    border-radius:14px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    box-shadow:
+        0 6px 18px rgba(0,0,0,.05);
+}
+
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media(max-width:900px){
+
+    .header-cliente{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .campo{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+    }
+
+    .campo h4{
+        width:auto;
+    }
+
+    .vehiculo-item{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .vehiculo-info{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .btn-detalle{
+        width:100%;
+    }
 }

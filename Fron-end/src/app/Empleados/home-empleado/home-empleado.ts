@@ -19,7 +19,7 @@ export class HomeEmpleado implements OnInit{
     private router: Router
   ){}
   
-  fecha: string = '2026-06-30';
+  fecha: string = '2026-07-05';
   ordenes: any[]= [];
   
   ngOnInit(): void {

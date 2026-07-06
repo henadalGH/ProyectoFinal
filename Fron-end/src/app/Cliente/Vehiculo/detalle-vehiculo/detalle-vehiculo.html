@@ -1,6 +1,20 @@
-<app-headercliente></app-headercliente>
+<div class="layout">
 
-<div class="vehiculo-container">
+  <aside class="sidebar">
+    <!-- menú -->
+    @if (rol == 'ROLE_ADMIN') {
+      <app-header-admin></app-header-admin>
+    } @else if (rol == 'ROLE_CLIENTE') {
+
+      <app-headercliente></app-headercliente>
+    }
+  </aside>
+
+  <main class="content">
+    <!-- contenido principal -->
+    <app-header></app-header>
+
+    <div class="vehiculo-container">
 
   <!-- TITULO -->
   <div class="titulo">
@@ -138,3 +152,10 @@
   </div>
 
 }
+  </main>
+</div>
+
+
+
+
+

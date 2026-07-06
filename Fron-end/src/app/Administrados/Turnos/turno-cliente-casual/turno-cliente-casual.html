@@ -1,0 +1,114 @@
+<div class="layout">
+
+  <aside class="sidebar">
+    <app-header-admin></app-header-admin>
+  </aside>
+
+  <main class="content">
+
+    <app-header></app-header>
+
+    <div class="turnoContent">
+
+        <div class="cliente-casual">
+
+          <h1>Complete el formulario</h1>
+          <p>Complete todos los campos</p>
+
+          <form (ngSubmit)="crearTurnoCasual()">
+
+            <div class="campo">
+              <label>Nombre completo</label>
+              <input
+                type="text"
+                name="nombre"
+                [(ngModel)]="nombre">
+            </div>
+
+            <div class="campo">
+              <label>Contacto</label>
+              <input
+                type="text"
+                name="contacto"
+                [(ngModel)]="contacto">
+            </div>
+
+            <div class="campo">
+              <label>Correo electrónico</label>
+              <input
+                type="email"
+                name="email"
+                [(ngModel)]="email">
+            </div>
+
+            <div class="campo">
+              <label>Fecha del turno</label>
+              <input
+                type="date"
+                name="fecha"
+                [(ngModel)]="fecha">
+            </div>
+
+            <div class="campo">
+              <label>Marca del vehículo</label>
+              <input
+                type="text"
+                name="marcaVehiculo"
+                [(ngModel)]="marcaVehiculo">
+            </div>
+
+            <div class="campo">
+              <label>Modelo del vehículo</label>
+              <input
+                type="text"
+                name="modeloVehiculo"
+                [(ngModel)]="modeloVehiculo">
+            </div>
+
+            <div class="campo">
+              <label>Patente del vehículo</label>
+              <input
+                type="text"
+                name="patenteVehiculo"
+                [(ngModel)]="patenteVehiculo">
+            </div>
+
+            <div class="campo">
+              <label>Seleccione un servicio</label>
+
+              <select
+                name="idServicio"
+                [(ngModel)]="idServicio">
+
+                @for (serv of servicios; track serv.id) {
+                  <option [value]="serv.id">
+                    {{ serv.nombre }}
+                  </option>
+                }
+
+              </select>
+            </div>
+
+            <div class="campo">
+              <label>Descripción del problema</label>
+              <input
+                type="text"
+                name="descripcion"
+                [(ngModel)]="descripcion">
+            </div>
+
+            <button type="submit">
+              Crear turno
+            </button>
+
+          </form>
+
+            <button>Cancelar</button>
+
+        </div>
+      
+    </div>
+
+  </main>
+
+</div>

@@ -5,10 +5,13 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ServiciosService } from '../../../Servicio/servicios-service';
 import { FormsModule } from '@angular/forms';
 import { TurnosService } from '../../../Servicio/turnos-service';
+import { AuthService } from '../../../AuthServicio/auth-service';
+import { HeaderAdmin } from "../../../Administrados/Adminstrador/header-admin/header-admin";
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-detalle-vehiculo',
-  imports: [Headercliente, FormsModule],
+  imports: [Headercliente, FormsModule, HeaderAdmin, Header],
   standalone: true,
   templateUrl: './detalle-vehiculo.html',
   styleUrl: './detalle-vehiculo.css',
@@ -20,7 +23,8 @@ export class DetalleVehiculo implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private servicioServise: ServiciosService,
-    private turnoService: TurnosService
+    private turnoService: TurnosService,
+    private authService: AuthService
   ){}
 
   mostrarModal: boolean = false;
@@ -28,6 +32,7 @@ export class DetalleVehiculo implements OnInit{
   vehiculo!: any;
   id!: number;
   servicio: any[] = []; 
+  rol!: any;
   
   ngOnInit(): void {
     this.id = Number (this.route.snapshot.paramMap.get('id'));
@@ -35,10 +40,11 @@ export class DetalleVehiculo implements OnInit{
     this.vehiculoServicio.obtenerVehiculoPorId(this.id).subscribe(
       datos => {
         this.vehiculo = datos;
-      }
-    )
+      });
 
     this.obtenerServicios();
+    
+    this.rol = this.authService.getRol();
   }
 
 

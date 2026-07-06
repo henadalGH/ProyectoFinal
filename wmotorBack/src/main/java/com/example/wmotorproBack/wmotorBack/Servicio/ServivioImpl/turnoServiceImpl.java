@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -15,13 +14,17 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import java.time.LocalDate;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ServicioEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoClienteCasualEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoTurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.ServicioRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.TurnoClienteCasualRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class turnoServiceImpl implements TurnoService{
@@ -39,51 +42,141 @@ public class turnoServiceImpl implements TurnoService{
     @Autowired
     private TurnoRepository turnoRepository;
 
+    @Autowired
+    private TurnoClienteCasualRepository clienteCasualRepository;
+
 
 
     @Override
-    public TurnoEntity creaTurnosDTO(TurnosDTO turno) {
+@Transactional
+public TurnoEntity creaTurnosDTO(TurnosDTO turno) {
 
-        TurnoEntity turnos = new TurnoEntity();
-        turnos.setDescripcion(turno.getDescripcion());
+    System.out.println(turno.getFecha());
 
-        ServicioEntity servicio = servicioRepository.getReferenceById(turno.getIdServicio());
-        turnos.setServicio(servicio);
+    TurnoEntity turnoEntity = new TurnoEntity();
+    turnoEntity.setDescripcion(turno.getDescripcion());
 
-        VehiculoEntity vehiculo = vehiculoRepository.getReferenceById(turno.getIdVehiculo());
-        turnos.setVehiculo(vehiculo);
+    // Servicio
+    ServicioEntity servicio =
+            servicioRepository.getReferenceById(turno.getIdServicio());
+    turnoEntity.setServicio(servicio);
 
-    
-        EstadoTurnosEntity estado = estadoTurnoRepository
-        .findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
-        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
-
-        turnos.setEstado(estado);
-
-        return turnoRepository.save(turnos);
-        
+    // Vehículo del cliente registrado (si existe)
+    if (turno.getIdVehiculo() != null && turno.getIdVehiculo() > 0) {
+        VehiculoEntity vehiculo =
+                vehiculoRepository.getReferenceById(turno.getIdVehiculo());
+        turnoEntity.setVehiculo(vehiculo);
     }
 
+    
+    turnoEntity.setFechaHora(turno.getFecha().getFechas());
 
-    @Override
-    public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
 
-        TurnoEstadosDTO turnoDto = new TurnoEstadosDTO();
+    // Estado inicial según el tipo de cliente
+    EstadoTurnosEntity estado;
 
-        turnoDto.setId(turno.getId());
-        turnoDto.setDescripcion(turno.getDescripcion());
-        turnoDto.setFecha(turno.getFechaHora());
+    if (turno.getTurnoClienteCasualDTO() != null) {
+        estado = estadoTurnoRepository
+                .findByEstadoTurno(EstadoTurnoEnums.CONFIRMADO)
+                .orElseThrow(() -> new RuntimeException("Estado CONFIRMADO no encontrado"));
+    } else {
+        estado = estadoTurnoRepository
+                .findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
+                .orElseThrow(() -> new RuntimeException("Estado PENDIENTE_ASIGNACION no encontrado"));
+    }
+
+    turnoEntity.setEstado(estado);
+
+    // Guardar el turno
+    TurnoEntity turnoGuardado = turnoRepository.save(turnoEntity);
+
+    // Guardar datos del cliente ocasional
+    if (turno.getTurnoClienteCasualDTO() != null) {
+
+        TurnoClienteCasualEntity clienteOcasional =
+                new TurnoClienteCasualEntity();
+
+        clienteOcasional.setNombreCliente(
+                turno.getTurnoClienteCasualDTO().getNombreCliente());
+
+        clienteOcasional.setContactoCliente(
+                turno.getTurnoClienteCasualDTO().getContactoCliente());
+
+        clienteOcasional.setEmail(turno.getTurnoClienteCasualDTO().getEmailCliente());
+
+        clienteOcasional.setMarcaVehiculo(
+                turno.getTurnoClienteCasualDTO().getMarcaVehiculo());
+
+        clienteOcasional.setModeloVehiculo(
+                turno.getTurnoClienteCasualDTO().getModeloVehiculo());
+
+        clienteOcasional.setPatenteVehiculo(
+                turno.getTurnoClienteCasualDTO().getPatenteVehiculo());
+
+        clienteOcasional.setTurno(turnoGuardado);
+
+        clienteCasualRepository.save(clienteOcasional);
+    }
+
+    return turnoGuardado;
+}
+
+
+   @Override
+public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
+
+    TurnoEstadosDTO turnoDto = new TurnoEstadosDTO();
+
+    turnoDto.setId(turno.getId());
+    turnoDto.setDescripcion(turno.getDescripcion());
+    turnoDto.setFecha(turno.getFechaHora());
+    turnoDto.setNombreServicio(turno.getServicio().getNombre());
+
+    if (turno.getVehiculo() != null) {
+
         turnoDto.setIdVehiculo(turno.getVehiculo().getId());
         turnoDto.setMarca(turno.getVehiculo().getMarca());
         turnoDto.setModelo(turno.getVehiculo().getModelo());
         turnoDto.setPatente(turno.getVehiculo().getPatente());
-        turnoDto.setNombreCliente(turno.getVehiculo().getCliente().getUsuario().getNombre());
-        turnoDto.setApellidoCliente(turno.getVehiculo().getCliente().getUsuario().getApellido());
-        turnoDto.setContacto(turno.getVehiculo().getCliente().getUsuario().getContacto());
-        turnoDto.setNombreServicio(turno.getServicio().getNombre());
-    
-        return turnoDto;
+
+        turnoDto.setNombreCliente(
+                turno.getVehiculo()
+                     .getCliente()
+                     .getUsuario()
+                     .getNombre());
+
+        turnoDto.setApellidoCliente(
+                turno.getVehiculo()
+                     .getCliente()
+                     .getUsuario()
+                     .getApellido());
+
+        turnoDto.setContacto(
+                turno.getVehiculo()
+                     .getCliente()
+                     .getUsuario()
+                     .getContacto());
+
+    } else if (turno.getTurnoClienteCasualEntity() != null) {
+
+        turnoDto.setMarca(
+                turno.getTurnoClienteCasualEntity().getMarcaVehiculo());
+
+        turnoDto.setModelo(
+                turno.getTurnoClienteCasualEntity().getModeloVehiculo());
+
+        turnoDto.setPatente(
+                turno.getTurnoClienteCasualEntity().getPatenteVehiculo());
+
+        turnoDto.setNombreCliente(
+                turno.getTurnoClienteCasualEntity().getNombreCliente());
+
+        turnoDto.setContacto(
+                turno.getTurnoClienteCasualEntity().getContactoCliente());
     }
+
+    return turnoDto;
+}
 
 
     @Override

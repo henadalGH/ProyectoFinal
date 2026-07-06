@@ -1,59 +1,115 @@
-<app-header-admin></app-header-admin>
+<div class="layout">
+  <aside class="sidebar">
+    <!-- menú -->
+    <app-header-admin></app-header-admin>
+  </aside>
 
-<div class="turnos-container">
+  <main class="content">
+    <!-- contenido principal -->
+     <app-header></app-header>
 
-  <div class="titulo">
-      <h1 >Lista de turnos</h1>
-  </div>
+        <div class="turnos-container">
 
-  @if (obtenerAsignacion && obtenerAsignacion.length > 0) {
+            <div class="titulo">
+                <h1>Lista de turnos</h1>
+                <p>Solicitudes pendientes de asignación</p>
+                <button class="btn-turno" (click)="idTurnoCasual()">Crear turno</button>
+            </div>
 
-    <div class="lista-turnos">
+            @if (obtenerAsignacion && obtenerAsignacion.length > 0) {
 
-      @for (asig of obtenerAsignacion; track $index) {
+                <div class="tabla-container">
 
-        <div class="card-turno">
+                    <table class="tabla-turnos">
 
-          <h4 class="titulo-servicio">
-            Servicio solicitado: {{asig.nombreServicio}}
-          </h4>
+                        <thead>
+                            <tr>
+                                <th>Servicio</th>
+                                <th>Descripción</th>
+                                <th>Vehículo</th>
+                                <th>Patente</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
 
-          <div class="info">
-            <p><strong>Descripción:</strong> {{asig.descripcion}}</p>
-            <p><strong>Marca:</strong> {{asig.marca}} - {{asig.modelo}}</p>
-            <p><strong>Patente:</strong> {{asig.patente}}</p>
-          </div>
+                        <tbody>
 
-          <div class="acciones">
-            <button class="btn-asignar" (click)="abrirModal(asig.id)">Asignar fecha</button>
-          </div>
+                            @for (asig of obtenerAsignacion; track $index) {
+
+                                <tr>
+                                    <td>{{ asig.nombreServicio }}</td>
+
+                                    <td>{{ asig.descripcion }}</td>
+
+                                    <td>
+                                        {{ asig.marca }}
+                                        {{ asig.modelo }}
+                                    </td>
+
+                                    <td>{{ asig.patente }}</td>
+
+                                    <td>
+                                        <button
+                                            class="btn-asignar"
+                                            (click)="abrirModal(asig.id)">
+                                            Asignar
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            } @else {
+
+                <div class="sin-turnos">
+                    No existen turnos pendientes.
+                </div>
+
+            }
+
+        </div>
+  </main>
+</div>
+
+
+@if (mostrarModal) {
+
+<div class="modal-backdrop" (click)="cerrarModal()">
+
+    <div class="modal" (click)="$event.stopPropagation()">
+
+        <h2>Asignar fecha</h2>
+
+        <input
+            type="date"
+            [min]="fechaMinima"
+            [(ngModel)]="fechaAsignada">
+
+        <div class="acciones-modal">
+
+            <button
+                class="asignar"
+                (click)="asignarFechaTurno()">
+                Confirmar
+            </button>
+
+            <button
+                class="cancelar"
+                (click)="cerrarModal()">
+                Cancelar
+            </button>
 
         </div>
 
-      }
-
     </div>
 
-  } @else {
+</div>
 
-    <div class="sin-turnos">
-      <p>No posee turnos</p>
-    </div>
-
-  }
-
-  @if (mostrarModal) {
-  <div class="modal-backdrop" (click)="cerrarModal()">
-
-    <div class="modal" (click)="$event.stopPropagation()">
-      <h2>Asignar fecha</h2>
-      <input type="date" [min]="fechaMinima" [(ngModel)]="fechaAsignada">
-
-      <div class="acciones-modal">
-        <button class="asignar" (click)="asignarFechaTurno()">Asignar</button>
-        <button class="cancelar" (click)="cerrarModal()">Cancelar</button>
-      </div>
-    </div>
-
-  </div>
 }
+

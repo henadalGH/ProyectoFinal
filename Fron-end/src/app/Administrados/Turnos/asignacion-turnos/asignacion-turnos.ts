@@ -3,17 +3,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderAdmin } from "../../Adminstrador/header-admin/header-admin";
 import { TurnosService } from '../../ServiciosAdmin/turnos-service';
+import { Header } from "../../../header/header";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asignacion-turnos',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderAdmin],
+  imports: [CommonModule, FormsModule, HeaderAdmin, Header],
   templateUrl: './asignacion-turnos.html',
   styleUrls: ['./asignacion-turnos.css'],
 })
 export class AsignacionTurnos implements OnInit {
 
-  constructor(private turnoService: TurnosService){}
+  constructor(private turnoService: TurnosService,
+    private router: Router
+  ){}
 
   obtenerAsignacion: any[] = [];
 
@@ -81,5 +85,10 @@ export class AsignacionTurnos implements OnInit {
           console.log()
         }
       });
+  }
+
+
+  idTurnoCasual(){
+    this.router.navigate(['/turnoCasual']);
   }
 }

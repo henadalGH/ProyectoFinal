@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -49,6 +50,9 @@ public class TurnoEntity {
 
     @OneToMany(mappedBy = "turno")
     private List<PresupuestoEntity> presupuesto = new ArrayList<>();
+
+    @OneToOne (mappedBy = "turno")
+    private TurnoClienteCasualEntity turnoClienteCasualEntity;
 
 
     

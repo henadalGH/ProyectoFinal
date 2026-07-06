@@ -13,5 +13,6 @@ public class TurnosDTO {
     private Long idCliente;
     private Long idServicio;
     private EstadoTurnoEnums estado;
+    private TurnoClienteCasualDTO turnoClienteCasualDTO;
 
 }

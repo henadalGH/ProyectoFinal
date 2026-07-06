@@ -1,51 +1,45 @@
-<h1>Probando tabla</h1>
+<div class="busqueda-cliente">
 
-<table border="1">
+    <h3>Seleccionar cliente registrado</h3>
 
-    <thead>
-        <tr>
-            <th>Cantidad</th>
-            <th>Código</th>
-            <th>Trabajo</th>
-            <th>Acción</th>
-        </tr>
-    </thead>
+    <div class="buscador">
+        <input
+            type="text"
+            placeholder="Buscar por nombre, email o teléfono...">
+    </div>
 
-    <tbody>
-        @for (fil of filas; track fil.id) {
-            <tr>
+    <div class="resultados">
 
-                <td>
-                    <input
-                        type="number">
-                </td>
+        <div class="resultado">
+            <div class="datos">
+                <span class="nombre">Juan Pérez</span>
+                <span class="detalle">juan@gmail.com</span>
+                <span class="detalle">3425123456</span>
+            </div>
 
-                <td>
-                    <input
-                        type="text"
-                        >
-                </td>
+            <button>Seleccionar</button>
+        </div>
 
-                <td>
-                    <input
-                        type="text"
-                        >
-                </td>
+        <div class="resultado">
+            <div class="datos">
+                <span class="nombre">María Gómez</span>
+                <span class="detalle">maria@gmail.com</span>
+                <span class="detalle">3425987654</span>
+            </div>
 
-                <td>
-                    <button (click)="eliminarFila(fil.id)">
-                        Eliminar
-                    </button>
-                </td>
+            <button>Seleccionar</button>
+        </div>
 
-            </tr>
-        }
-    </tbody>
+        <div class="resultado">
+            <div class="datos">
+                <span class="nombre">Carlos Rodríguez</span>
+                <span class="detalle">carlos@gmail.com</span>
+                <span class="detalle">3425111111</span>
+            </div>
 
-</table>
+            <button>Seleccionar</button>
+        </div>
 
-<br>
+    </div>
 
-<button (click)="agregarFila()">
-    Agregar Fila
-</button>
+</div>

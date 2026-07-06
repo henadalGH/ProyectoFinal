@@ -26,6 +26,33 @@ export class TurnosService {
     });
   }
 
+  crearTurnoCasual(
+  descripcion: string,
+  idServicio: number,
+  idVehiculo: number | null,
+  fecha: string,
+  turnoClienteCasualDTO?: {
+    nombreCliente: string,
+    contactoCliente: string,
+    email: string,
+    marcaVehiculo: string,
+    modeloVehiculo: string,
+    patenteVehiculo: string
+  }
+): Observable<any> {
+
+  const body = {
+    descripcion,
+    idServicio,
+    idVehiculo,
+    fecha: {
+      fechas: fecha
+    },
+    turnoClienteCasualDTO
+  };
+
+  return this.http.post<any>(this.urlComun, body);
+}
 
   obtenerTurnosAsignacion(){
 

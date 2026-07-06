@@ -1,0 +1,217 @@
+.layout {
+  display: flex;
+  height: 100vh; /* ocupa toda la pantalla */
+}
+
+.sidebar {
+  width: 320px;   /* ancho del menú */
+  background: #1f2937;
+  color: white;
+}
+
+.content {
+  flex: 1;        /* ocupa todo el espacio restante */
+  background: #f3f6fb;
+  padding: 20px;
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+.turnoContent{
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+
+    padding:40px 20px;
+
+    background:#f4f7fb;
+
+    font-family:"Segoe UI",sans-serif;
+}
+
+/* =========================
+   CARD FORMULARIO
+========================= */
+.cliente-casual{
+    width:100%;
+    max-width:1000px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.06);
+
+    border:1px solid #e5e7eb;
+}
+
+/* =========================
+   TITULOS
+========================= */
+.cliente-casual h1{
+    font-size:32px;
+    font-weight:700;
+    color:#111827;
+
+    margin-bottom:10px;
+}
+
+.cliente-casual p{
+    color:#6b7280;
+    font-size:15px;
+
+    margin-bottom:30px;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+.cliente-casual form{
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:22px;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+.campo{
+    display:flex;
+    flex-direction:column;
+}
+
+.campo label{
+    margin-bottom:8px;
+
+    font-size:14px;
+    font-weight:600;
+
+    color:#374151;
+}
+
+.campo input,
+.campo select{
+    width:100%;
+
+    padding:14px 16px;
+
+    border:1px solid #d1d5db;
+    border-radius:12px;
+
+    background:white;
+
+    font-size:14px;
+
+    transition:.2s;
+}
+
+.campo input:focus,
+.campo select:focus{
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:
+        0 0 0 4px rgba(37,99,235,.12);
+}
+
+/* =========================
+   DESCRIPCION
+========================= */
+.campo:last-of-type{
+    grid-column:1/-1;
+}
+
+/* =========================
+   BOTON CREAR
+========================= */
+form button[type="submit"]{
+    grid-column:1/-1;
+
+    width:220px;
+
+    margin:15px auto 0;
+
+    border:none;
+
+    background:#2563eb;
+    color:white;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+form button[type="submit"]:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   BOTON CANCELAR
+========================= */
+.cliente-casual > button{
+    display:block;
+
+    width:220px;
+
+    margin:15px auto 0;
+
+    background:#f3f4f6;
+    color:#374151;
+
+    border:none;
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.cliente-casual > button:hover{
+    background:#e5e7eb;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media(max-width:800px){
+
+    .cliente-casual{
+        padding:25px;
+    }
+
+    .cliente-casual form{
+        grid-template-columns:1fr;
+    }
+
+    .campo:last-of-type{
+        grid-column:auto;
+    }
+
+    form button[type="submit"],
+    .cliente-casual > button{
+        width:100%;
+    }
+}

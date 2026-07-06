@@ -56,3 +56,5 @@ export class GestionCliente implements OnInit {
     this.router.navigate(['/verCliente', id]);
   }
 }
+
+

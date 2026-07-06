@@ -8,7 +8,7 @@ export class VehiculoService {
 
 
   constructor(private http: HttpClient){}
-
+ 
   private urlComun = 'http://localhost:8080/vehiculo'
 
 
