@@ -1,259 +1,249 @@
-/* =========================
-   RESET GENERAL
-========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ==========================================================================
+   RESET
+========================================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
 }
 
-html, body {
-  height: 100%;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  background: #f3f6fb;
-  color: #111827;
+body{
+    background:#f3f6fb;
+    color:#111827;
 }
 
-/* =========================
-   LAYOUT PRINCIPAL
-========================= */
-.layout {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
+/* ==========================================================================
+   LAYOUT
+========================================================================== */
+
+.layout{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
 }
 
-/* =========================
-   SIDEBAR (MÁS GRANDE)
-========================= */
-.sidebar {
-  width: 320px; /* 🔥 agrandado */
-  background: #1f2937;
-  color: white;
-  height: 100vh;
-  flex-shrink: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
+.sidebar{
+    width:320px;
+    min-width:320px;
+    background:#1f2937;
+    color:#fff;
+    flex-shrink:0;
 }
 
-/* elimina espacios internos del menú */
-.sidebar * {
-  margin: 0;
-  padding: 0;
+.content{
+    flex:1;
+    background:#f3f6fb;
+    padding:20px;
+    overflow-y:auto;
 }
 
-/* Angular component fix */
-app-header-admin {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+/* ==========================================================================
+   CONTENEDOR
+========================================================================== */
+
+.finanzas-container{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
 }
 
-/* =========================
-   CONTENIDO PRINCIPAL
-========================= */
-.content {
-  flex: 1;
-  padding: 20px;
-  background: #f3f6fb;
-  overflow-y: auto;
-  
+/* ==========================================================================
+   KPIs
+========================================================================== */
+
+.cards-finanzas{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-/* =========================
-   CARD BASE
-========================= */
-.card {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-  border: 1px solid #eef2f7;
-  
+.card{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    transition:.25s;
 }
 
-/* =========================
-   FINANZAS CONTAINER
-========================= */
-.finanzas-container {
-  width: 100%;
-  align-items: center;
+.card:hover{
+    transform:translateY(-3px);
 }
 
-/* =========================
-   TOPBAR
-========================= */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
+.kpi{
+    border-left:5px solid transparent;
 }
 
-.mes h1 {
-  font-size: 18px;
-  font-weight: 700;
+.kpi.ingreso{
+    border-left-color:#22c55e;
 }
 
-.mes button {
-  margin-top: 6px;
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  cursor: pointer;
+.kpi.gasto{
+    border-left-color:#ef4444;
 }
 
-.mes button:hover {
-  background: #2563eb;
+.kpi.balance{
+    border-left-color:#2563eb;
 }
 
-.saludo h2 {
-  font-size: 16px;
+.kpi p{
+    color:#64748b;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:10px;
 }
 
-.saludo p {
-  font-size: 12px;
-  color: #6b7280;
+.kpi h2{
+    font-size:34px;
+    font-weight:700;
+    color:#111827;
 }
 
-/* =========================
-   KPI CARDS
-========================= */
-.cards-finanzas {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 20px;
+/* ==========================================================================
+   GRID
+========================================================================== */
+
+.finanzas-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:25px;
 }
 
-.kpi p {
-  font-size: 12px;
-  color: #6b7280;
+/* ==========================================================================
+   HEADER CARD
+========================================================================== */
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:25px;
+    padding-bottom:18px;
+    border-bottom:2px solid #e5e7eb;
 }
 
-.kpi h2 {
-  font-size: 22px;
-  margin-top: 8px;
+.card-header h2{
+    font-size:25px;
+    color:#111827;
+    font-weight:700;
 }
 
-/* COLORES KPI */
-.ingreso h2,
-.ingreso-text {
-  color: #16a34a;
+/* ==========================================================================
+   BOTON
+========================================================================== */
+
+.btn-primary{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    padding:13px 22px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:.2s;
 }
 
-.gasto h2,
-.gasto-text {
-  color: #dc2626;
+.btn-primary:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
 }
 
-.balance h2 {
-  color: #2563eb;
-}
-
-/* =========================
-   GRID PRINCIPAL
-========================= */
-.finanzas-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 16px;
-  margin-top: 20px;
-}
-
-/* =========================
+/* ==========================================================================
    MOVIMIENTOS
-========================= */
-.movimientos-list {
-  margin-top: 10px;
+========================================================================== */
+
+.movimientos-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
 }
 
-.movimiento {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid #f1f5f9;
+.movimiento{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 20px;
+    border-radius:14px;
+    border:1px solid #e5e7eb;
+    background:#fafafa;
+    transition:.2s;
 }
 
-.movimiento h4 {
-  font-size: 13px;
-  margin-bottom: 3px;
+.movimiento:hover{
+    background:#fff;
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
 }
 
-.movimiento span {
-  font-size: 11px;
-  color: #6b7280;
+.movimiento h4{
+    margin-bottom:5px;
+    font-size:17px;
+    color:#111827;
 }
 
-/* =========================
-   RESUMEN
-========================= */
-.resumen-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.movimiento span{
+    color:#6b7280;
+    font-size:14px;
 }
 
-.estado {
-  background: #ecfdf5;
-  color: #16a34a;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
+.ingreso-text{
+    font-size:20px;
+    font-weight:700;
 }
 
-/* =========================
-   BOTÓN
-========================= */
-.btn-primary {
-  margin-top: 16px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  background: #3b82f6;
-  color: white;
-  cursor: pointer;
-  font-weight: 500;
-}
-
-.btn-primary:hover {
-  background: #2563eb;
-}
-
-/* =========================
+/* ==========================================================================
    RESPONSIVE
-========================= */
-@media (max-width: 900px) {
-  .layout {
-    flex-direction: column;
-  }
+========================================================================== */
 
-  .sidebar {
-    width: 100%;
-    height: auto;
-  }
+@media(max-width:992px){
 
-  .cards-finanzas {
-    grid-template-columns: 1fr;
-    
+    .cards-finanzas{
+        grid-template-columns:1fr;
+    }
 
-  }
+    .card-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
 
-  .finanzas-grid {
-    grid-template-columns: 1fr;
-   
-  
-  }
+    .btn-primary{
+        width:100%;
+        justify-content:center;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-width:100%;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .finanzas-container{
+        gap:20px;
+    }
+
+    .movimiento{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
 }

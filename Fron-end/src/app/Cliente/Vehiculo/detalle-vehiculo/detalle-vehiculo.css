@@ -1,395 +1,629 @@
-.layout {
-  display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+/* ==========================================================================
+   RESET
+========================================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
 }
 
-.sidebar {
-  width: 320px;   /* ancho del menú */
-  background: #1f2937;
-  color: white;
+body{
+    background:#f3f6fb;
+    color:#111827;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+
+/* ==========================================================================
+   LAYOUT
+========================================================================== */
+
+.layout{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
 }
 
-/* ==========================
-   CONTENEDOR VEHICULO
-========================== */
 
-.vehiculo-container{
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 20px;
+.sidebar{
+    width:320px;
+    min-width:320px;
+    background:#1f2937;
+    flex-shrink:0;
 }
+
+
+.content{
+    flex:1;
+    background:#f3f6fb;
+    padding:20px;
+    overflow-y:auto;
+}
+
+
+
+/* ==========================================================================
+   CONTENEDOR
+========================================================================== */
+
+.container{
+
+    max-width:1200px;
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+}
+
+
+
+/* ==========================================================================
+   TITULO
+========================================================================== */
+
 
 .titulo{
-    margin-bottom: 25px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
 }
+
 
 .titulo h1{
-    margin: 0;
-    font-size: 32px;
-    color: #111827;
-    font-weight: 700;
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#111827;
+
 }
+
 
 .titulo p{
-    margin-top: 8px;
-    color: #6b7280;
+
+    color:#64748b;
+
+    font-size:15px;
+
 }
 
-/* ==========================
-   FICHA VEHICULO
-========================== */
 
-.vehiculo-card{
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
 
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.06);
+/* ==========================================================================
+   CARD PRINCIPAL
+========================================================================== */
+
+
+.card{
+
+    background:#fff;
+
+    border-radius:16px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+    overflow:hidden;
+
 }
 
-/* ==========================
-   HEADER
-========================== */
 
-.card-top{
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #3b82f6
-    );
 
-    color: white;
+/* ==========================================================================
+   HEADER VEHICULO
+========================================================================== */
 
-    padding: 25px 30px;
 
-    display: flex;
-    align-items: center;
-    gap: 25px;
+.card-header{
+
+    padding:25px 30px;
+
+    border-bottom:2px solid #e5e7eb;
+
 }
+
+
+
+.vehiculo-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+
 
 .icono-auto{
-    width: 75px;
-    height: 75px;
 
-    border-radius: 50%;
+    width:65px;
 
-    background: rgba(255,255,255,.15);
+    height:65px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius:50%;
 
-    font-size: 30px;
+    background:#2563eb;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
 }
+
+
 
 .nombre-vehiculo h2{
-    margin: 0;
-    font-size: 30px;
+
+    font-size:26px;
+
+    color:#111827;
+
+    margin-bottom:5px;
+
 }
+
+
 
 .nombre-vehiculo span{
-    display: inline-block;
 
-    margin-top: 8px;
+    color:#64748b;
 
-    padding: 6px 14px;
+    font-size:15px;
 
-    border-radius: 20px;
-
-    background: rgba(255,255,255,.15);
-
-    font-size: 14px;
-    font-weight: 600;
 }
 
-/* ==========================
-   DATOS
-========================== */
 
-.vehiculo-info{
-    padding: 30px;
 
-    display: grid;
+/* ==========================================================================
+   INFORMACION
+========================================================================== */
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(180px,1fr));
 
-    gap: 25px;
+.info-grid{
+
+    padding:30px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
 }
+
+
 
 .item{
-    display: flex;
-    flex-direction: column;
+
+    background:#f8fafc;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:18px;
+
 }
+
+
 
 .item strong{
-    color: #64748b;
 
-    font-size: 13px;
+    display:block;
 
-    text-transform: uppercase;
+    color:#64748b;
 
-    margin-bottom: 8px;
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+
 }
+
+
 
 .item p{
-    margin: 0;
 
-    font-size: 18px;
-    font-weight: 600;
+    color:#111827;
 
-    color: #111827;
+    font-size:18px;
+
+    font-weight:600;
+
 }
 
-/* ==========================
-   BOTON
-========================== */
+
+
+/* ==========================================================================
+   BOTON ACCION
+========================================================================== */
+
 
 .acciones{
-    padding: 0 30px 30px;
+
+    padding:0 30px 30px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
 }
 
-.btn-turno{
-    width: 100%;
 
-    background: #2563eb;
-    color: white;
 
-    border: none;
-    border-radius: 12px;
+.btn-primary{
 
-    padding: 16px;
+    border:none;
 
-    font-size: 15px;
-    font-weight: 600;
+    background:#2563eb;
 
-    cursor: pointer;
+    color:white;
 
-    transition: .2s;
+    border-radius:12px;
+
+    padding:13px 24px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    transition:.2s;
+
 }
 
-.btn-turno:hover{
-    background: #1d4ed8;
+
+
+.btn-primary:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
 }
 
-/* ==========================
-   ULTIMO SERVICIO
-========================== */
 
-.ultimo-servicio{
-    background: #f8fafc;
 
-    padding: 25px 30px;
+/* ==========================================================================
+   SERVICIO
+========================================================================== */
 
-    border-top: 1px solid #e5e7eb;
+
+.servicio-card{
+
+    margin:0 30px 30px;
+
+    padding:25px;
+
+    background:#f8fafc;
+
+    border-radius:14px;
+
+    border:1px solid #e5e7eb;
+
 }
+
+
 
 .servicio-header{
-    display: flex;
-    align-items: center;
-    gap: 12px;
 
-    margin-bottom: 10px;
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:12px;
+
 }
+
+
 
 .servicio-header i{
-    color: #2563eb;
-    font-size: 18px;
+
+    color:#2563eb;
+
+    font-size:22px;
+
 }
+
+
 
 .servicio-header h3{
-    margin: 0;
-    color: #111827;
+
+    font-size:20px;
+
+    color:#111827;
+
 }
 
-.ultimo-servicio p{
-    margin: 0;
-    color: #6b7280;
-    line-height: 1.5;
+
+
+.servicio-card p{
+
+    color:#64748b;
+
+    font-size:14px;
+
 }
 
-/* ==========================
+
+
+/* ==========================================================================
    MODAL
-========================== */
+========================================================================== */
+
 
 .modal-overlay{
-    position: fixed;
 
-    inset: 0;
+    position:fixed;
 
-    background: rgba(0,0,0,.55);
+    inset:0;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background:rgba(15,23,42,.55);
 
-    z-index: 1000;
+    display:flex;
 
-    backdrop-filter: blur(4px);
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+
 }
 
-.form{
-    width: 100%;
-    max-width: 520px;
 
-    background: white;
 
-    border-radius: 18px;
+.modal{
 
-    padding: 35px;
+    width:450px;
 
-    position: relative;
+    background:#fff;
 
-    box-shadow:
-        0 20px 40px rgba(0,0,0,.25);
+    border-radius:18px;
+
+    padding:30px;
+
+    position:relative;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
 }
 
-/* ==========================
-   CERRAR
-========================== */
+
 
 .btn-cerrar{
-    position: absolute;
 
-    top: 18px;
-    right: 18px;
+    position:absolute;
 
-    width: 40px;
-    height: 40px;
+    right:20px;
 
-    border: none;
-    border-radius: 50%;
+    top:20px;
 
-    background: #f3f4f6;
+    width:35px;
 
-    cursor: pointer;
+    height:35px;
 
-    transition: .2s;
+    border:none;
+
+    border-radius:50%;
+
+    background:#f1f5f9;
+
+    cursor:pointer;
+
 }
 
-.btn-cerrar:hover{
-    background: #e5e7eb;
+
+
+.modal-header{
+
+    margin-bottom:25px;
+
 }
 
-/* ==========================
-   TITULO MODAL
-========================== */
 
-.reg{
-    margin-bottom: 25px;
+
+.modal-header h2{
+
+    font-size:26px;
+
+    color:#111827;
+
+    margin-bottom:5px;
+
 }
 
-.reg h1{
-    margin: 0;
 
-    font-size: 28px;
 
-    color: #111827;
+.modal-header p{
+
+    color:#64748b;
+
+    font-size:14px;
+
 }
 
-.reg p{
-    margin-top: 8px;
 
-    color: #6b7280;
+
+/* ==========================================================================
+   CAMPOS MODAL
+========================================================================== */
+
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    margin-bottom:20px;
+
 }
 
-/* ==========================
-   CAMPOS
-========================== */
 
-.servicio,
-.descrip{
-    display: flex;
-    flex-direction: column;
 
-    margin-bottom: 20px;
+.campo label{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#374151;
+
 }
 
-.servicio label,
-.descrip label{
-    margin-bottom: 8px;
 
-    font-size: 14px;
-    font-weight: 600;
 
-    color: #374151;
+.campo input,
+.campo select{
+
+    width:100%;
+
+    padding:13px 15px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
 }
 
-.servicio select,
-.descrip input{
-    width: 100%;
 
-    padding: 14px 16px;
 
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
+.campo input:focus,
+.campo select:focus{
 
-    font-size: 14px;
+    outline:none;
 
-    transition: .2s;
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
 }
 
-.servicio select:focus,
-.descrip input:focus{
-    outline: none;
 
-    border-color: #2563eb;
 
-    box-shadow:
-        0 0 0 4px rgba(37,99,235,.12);
-}
-
-/* ==========================
-   BOTON SOLICITAR
-========================== */
-
-.btn-solicitar{
-    width: 100%;
-
-    background: #2563eb;
-    color: white;
-
-    border: none;
-    border-radius: 10px;
-
-    padding: 15px;
-
-    font-size: 15px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: .2s;
-}
-
-.btn-solicitar:hover{
-    background: #1d4ed8;
-}
-
-/* ==========================
+/* ==========================================================================
    RESPONSIVE
-========================== */
+========================================================================== */
+
+
+@media(max-width:992px){
+
+
+    .info-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+
+}
+
+
 
 @media(max-width:768px){
 
-    .card-top{
-        flex-direction: column;
-        text-align: center;
+
+    .layout{
+
+        flex-direction:column;
+
     }
 
-    .vehiculo-info{
-        grid-template-columns: 1fr;
+
+    .sidebar{
+
+        width:100%;
+
+        min-width:100%;
+
     }
 
-    .form{
-        margin: 15px;
-        padding: 25px;
+
+    .content{
+
+        padding:15px;
+
     }
+
+
+    .vehiculo-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+
+    .info-grid{
+
+        grid-template-columns:1fr;
+
+        padding:20px;
+
+    }
+
+
+    .acciones{
+
+        padding:0 20px 20px;
+
+    }
+
+
+    .btn-primary{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+
+    .servicio-card{
+
+        margin:0 20px 20px;
+
+    }
+
+
+    .modal{
+
+        width:90%;
+
+    }
+
+
 }

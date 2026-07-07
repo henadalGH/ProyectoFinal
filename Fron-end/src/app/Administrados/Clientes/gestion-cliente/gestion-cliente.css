@@ -1,199 +1,246 @@
-.layout {
-  display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+/* ==================================
+   LAYOUT
+================================== */
+
+.layout{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
 }
 
-.sidebar {
-  width: 320px;   /* ancho del menú */
-  background: #1f2937;
-  color: white;
+.sidebar{
+    width:320px;
+    min-width:320px;
+
+    background:#1f2937;
+    color:white;
+
+    height:100vh;
+    overflow:hidden;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+.content{
+    flex:1;
+
+    background:#f3f6fb;
+
+    padding:20px;
+
+    overflow-y:auto;
 }
 
+/* ==================================
+   CONTENEDOR
+================================== */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.page{
+    max-width:900px;
+    margin:25px auto;
 }
 
-body {
-    background-color: #f4f6f9;
-    color: #333;
-}
+/* ==================================
+   HEADER
+================================== */
 
 .page-header{
-  text-align: center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:25px;
+
+    padding-bottom:25px;
+    margin-bottom:30px;
+
+    border-bottom:2px solid #e5e7eb;
 }
 
-/* Contenedor principal del encabezado */
-.page-header {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 2rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  margin-bottom: 2rem;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  
+.page-header h1{
+    margin:0;
+
+    font-size:30px;
+    font-weight:700;
+
+    color:#111827;
 }
 
-/* Título principal */
-.page-header h1 {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #111827;
-  margin: 0 0 0.35rem 0;
-  
+.page-header p{
+    margin-top:6px;
+
+    color:#6b7280;
+    font-size:18px;
 }
 
-/* Subtítulo / Descripción */
-.page-header p {
-  font-size: 0.95rem;
-  color: #6b7280;
-  margin: 0;
+/* ==================================
+   BOTON PRINCIPAL
+================================== */
+
+.btn-primary{
+    background:#2563eb;
+    color:white;
+
+    border:none;
+    border-radius:12px;
+
+    padding:14px 28px;
+
+    font-size:15px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    box-shadow:
+        0 6px 18px rgba(37,99,235,.20);
 }
 
-/* Botón Primario */
-.btn-primary {
-  background-color: #2563eb; /* Azul moderno */
-  color: #ffffff;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.65rem 1.25rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+.btn-primary:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
 }
 
-/* Efectos para el botón */
-.btn-primary:hover {
-  background-color: #1d4ed8; /* Azul un poco más oscuro */
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+/* ==================================
+   BUSCADOR
+================================== */
+
+.search-box{
+    margin-bottom:25px;
 }
 
-.btn-primary:active {
-  transform: translateY(0);
+.search-box input{
+    width:100%;
+
+    padding:16px 20px;
+
+    border:1px solid #d1d5db;
+    border-radius:14px;
+
+    background:white;
+
+    font-size:15px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.03);
+
+    transition:.2s;
 }
 
-/* ==========================================
-   1. BARRA DE BÚSQUEDA
-   ========================================== */
-.search-box {
-  margin-bottom: 1.5rem;
-  width: 100%;
-  max-width: 450px; /* Limita el ancho para que no ocupe toda la pantalla */
+.search-box input:focus{
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.15);
 }
 
-.search-box input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  color: #1f2937;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-  font-family: inherit;
+/* ==================================
+   TABLA
+================================== */
+
+.table-card{
+    background:white;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.05);
 }
 
-/* Efecto al hacer clic en el buscador */
-.search-box input:focus {
-  outline: none;
-  border-color: #2563eb; /* Azul haciendo juego con el botón anterior */
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+.table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-/* ==========================================
-   2. TARJETA CONTENEDORA DE LA TABLA
-   ========================================== */
-.table-card {
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  overflow: hidden; /* Mantiene las esquinas redondeadas de la tabla */
-  width: 100%;
+.table thead{
+    background:#f8fafc;
 }
 
-/* ==========================================
-   3. ESTILOS DE LA TABLA
-   ========================================== */
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-  font-size: 0.95rem;
+.table th{
+    padding:18px 20px;
+
+    text-align:left;
+
+    color:#64748b;
+
+    font-size:13px;
+    font-weight:700;
+
+    text-transform:uppercase;
+    letter-spacing:1px;
+
+    border-bottom:1px solid #e5e7eb;
 }
 
-/* Encabezado de la tabla (Columnas) */
-.table th {
-  background-color: #f9fafb; /* Gris muy claro */
-  color: #4b5563; /* Texto gris intermedio */
-  font-weight: 600;
-  padding: 0.85rem 1.25rem;
-  border-bottom: 1px solid #e5e7eb;
-  text-transform: uppercase;
-  font-size: 0.75rem; /* Letras un poco más pequeñas para los títulos */
-  letter-spacing: 0.05em;
+.table td{
+    padding:18px 20px;
+
+    font-size:15px;
+    color:#111827;
+
+    border-bottom:1px solid #f1f5f9;
 }
 
-/* Celdas del cuerpo */
-.table td {
-  padding: 1rem 1.25rem;
-  color: #374151;
-  border-bottom: 1px solid #f3f4f6;
-  vertical-align: middle;
+.table tbody tr{
+    transition:.2s;
 }
 
-/* Primera columna (# ID) con un toque más tenue */
-.table td:first-child {
-  color: #9ca3af;
-  font-weight: 500;
+.table tbody tr:hover{
+    background:#f8fafc;
 }
 
-/* Efecto Hover: resalta la fila donde está el mouse */
-.table tbody tr:hover {
-  background-color: #f8fafc;
+.table tbody tr:last-child td{
+    border-bottom:none;
 }
 
-/* Quita el borde inferior a la última fila */
-.table tbody tr:last-child td {
-  border-bottom: none;
+/* ==================================
+   BOTON ACCION
+================================== */
+
+.btn-action{
+    background:#2563eb;
+    color:white;
+
+    border:none;
+    border-radius:10px;
+
+    padding:10px 18px;
+
+    font-size:14px;
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-/* ==========================================
-   4. BOTÓN DE ACCIÓN (Ver Cliente)
-   ========================================== */
-.btn-action {
-  background-color: #f3f4f6;
-  color: #1f2937;
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.45rem 0.9rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+.btn-action:hover{
+    background:#1d4ed8;
 }
 
-.btn-action:hover {
-  background-color: #e5e7eb;
-  color: #000000;
-  border-color: #d1d5db;
+/* ==================================
+   RESPONSIVE
+================================== */
+
+@media(max-width:900px){
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .btn-primary{
+        width:100%;
+    }
+
+    .table-card{
+        overflow-x:auto;
+    }
+
+    .table{
+        min-width:700px;
+    }
 }

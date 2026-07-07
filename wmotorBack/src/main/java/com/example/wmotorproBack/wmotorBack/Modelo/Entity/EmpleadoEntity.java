@@ -38,6 +38,9 @@ public class EmpleadoEntity {
     @Column(name = "fecha_ingreso")
     private LocalDate fechaIngreso;
 
+    @Column(name = "activo")
+    private Boolean activo;
+
     @OneToOne
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;

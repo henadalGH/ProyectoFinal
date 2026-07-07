@@ -126,12 +126,21 @@
 
                   </button>
 
-                  <button class="btn-baja">
 
+                  @if(empl.activo == true){
+                    <button class="btn-baja" (click)="desactivarEmpleado(empl.id)">
                     Dar baja
                     <i class="fas fa-user-minus"></i>
+                  </button> 
+                  }@else if (empl.activo == false) {
 
-                  </button>
+                    <button class="btn-baja" (click)="activarEmpleado(empl.id)">
+                    Dar de alta
+                    <i class="fas fa-user-minus"></i>
+                  </button> 
+                  }
+
+                  
 
                 </div>
 

@@ -1,207 +1,256 @@
-/* =========================
+/* ==========================================================================
    RESET
-========================= */
+========================================================================== */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
 }
 
-html,body{
-    height:100%;
-    font-family:"Segoe UI",Roboto,Arial,sans-serif;
+body{
     background:#f3f6fb;
     color:#111827;
 }
 
-/* =========================
+/* ==========================================================================
    LAYOUT
-========================= */
+========================================================================== */
+
 .layout{
     display:flex;
-    min-height:100vh;
+    height:100vh;
+    overflow:hidden;
 }
 
 .sidebar{
     width:320px;
+    min-width:320px;
+    background:#1f2937;
     flex-shrink:0;
 }
 
 .content{
     flex:1;
     background:#f3f6fb;
-    padding:25px 40px;
+    padding:20px;
     overflow-y:auto;
 }
 
-/* =========================
-   TITULO
-========================= */
-.content h1{
-    font-size:34px;
-    font-weight:700;
-    color:#111827;
-    margin:30px 0 10px;
-    text-align: center;
+/* ==========================================================================
+   CONTENEDOR
+========================================================================== */
+
+.container{
+    max-width:1200px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:30px;
 }
 
-.formuario p{
-    color:#6b7280;
-    margin-bottom:30px;
+/* ==========================================================================
+   TITULO
+========================================================================== */
+
+.titulo{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.titulo h1{
+    font-size:32px;
+    font-weight:700;
+    color:#111827;
+}
+
+.titulo p{
+    color:#64748b;
     font-size:15px;
 }
 
-/* =========================
-   CONTENEDOR FORM
-========================= */
-.formuario{
-    background:white;
-   
-    max-width:800px;
+/* ==========================================================================
+   CARD
+========================================================================== */
 
-    padding:40px;
-    margin:0 auto; /* centra SOLO el formulario */
-
-    border-radius:20px;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.05);
-
-    border:1px solid #e5e7eb;
+.card{
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+    overflow:hidden;
 }
 
-/* =========================
+/* ==========================================================================
+   CARD HEADER
+========================================================================== */
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:24px 30px;
+    border-bottom:2px solid #e5e7eb;
+}
+
+.card-header h2{
+    font-size:25px;
+    font-weight:700;
+    color:#111827;
+    margin-bottom:5px;
+}
+
+.card-header p{
+    color:#64748b;
+    font-size:14px;
+}
+
+/* ==========================================================================
    FORMULARIO
-========================= */
-.formuario form{
+========================================================================== */
+
+.formulario{
+    padding:30px;
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:22px;
+    gap:24px 30px;
 }
 
-/* =========================
+/* ==========================================================================
    CAMPOS
-========================= */
+========================================================================== */
+
 .campo{
     display:flex;
     flex-direction:column;
+    gap:8px;
 }
 
 .campo label{
-    margin-bottom:8px;
-
     font-size:14px;
     font-weight:600;
-
-    color:#475569;
+    color:#374151;
 }
 
 .campo input{
     width:100%;
-
     padding:14px 16px;
-
     border:1px solid #d1d5db;
-    border-radius:12px;
-
+    border-radius:10px;
     font-size:15px;
-
+    background:#fff;
     transition:.2s;
+}
+
+.campo input:hover{
+    border-color:#9ca3af;
 }
 
 .campo input:focus{
     outline:none;
-
     border-color:#2563eb;
-
-    box-shadow:
-        0 0 0 4px rgba(37,99,235,.12);
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
 }
 
-/* =========================
+/* ==========================================================================
    BOTONES
-========================= */
+========================================================================== */
+
 .botones{
     grid-column:1/-1;
 
     display:flex;
     justify-content:flex-end;
+    gap:15px;
 
-    margin-top:15px;
+    margin-top:10px;
+    padding-top:25px;
+
+    border-top:1px solid #e5e7eb;
 }
 
-.botones button{
-    background:#2563eb;
-    color:white;
-
+.btn-primary,
+.btn-secondary{
+    padding:13px 24px;
     border:none;
     border-radius:12px;
-
-    padding:14px 30px;
-
-    font-size:15px;
+    font-size:14px;
     font-weight:600;
-
     cursor:pointer;
-
     transition:.2s;
 }
 
-.botones button:hover{
+.btn-primary{
+    background:#2563eb;
+    color:#fff;
+}
+
+.btn-primary:hover{
     background:#1d4ed8;
     transform:translateY(-2px);
 }
 
-/* =========================
-   CANCELAR
-========================= */
-.formuario > button{
-    margin-top:20px;
-
-    background:#f1f5f9;
-    color:#334155;
-
-    border:none;
-    border-radius:12px;
-
-    padding:14px 30px;
-
-    font-size:15px;
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.2s;
+.btn-secondary{
+    background:#e5e7eb;
+    color:#374151;
 }
 
-.formuario > button:hover{
-    background:#e2e8f0;
+.btn-secondary:hover{
+    background:#d1d5db;
     transform:translateY(-2px);
 }
 
-/* =========================
+/* ==========================================================================
    RESPONSIVE
-========================= */
-@media(max-width:900px){
+========================================================================== */
 
-    .content{
-        padding:20px;
-    }
+@media(max-width:992px){
 
-    .formuario{
-        padding:25px;
-    }
-
-    .formuario form{
+    .formulario{
         grid-template-columns:1fr;
     }
 
     .botones{
-        justify-content:stretch;
+        flex-direction:column;
     }
 
-    .botones button,
-    .formuario > button{
+    .btn-primary,
+    .btn-secondary{
         width:100%;
     }
+
+}
+
+@media(max-width:768px){
+
+    .layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+        min-width:100%;
+    }
+
+    .content{
+        padding:15px;
+    }
+
+    .container{
+        gap:20px;
+    }
+
+    .titulo h1{
+        font-size:28px;
+    }
+
+    .card-header{
+        padding:20px;
+    }
+
+    .formulario{
+        padding:20px;
+    }
+
 }

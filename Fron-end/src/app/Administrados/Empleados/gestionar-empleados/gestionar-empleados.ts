@@ -39,4 +39,29 @@ export class GestionarEmpleados implements OnInit {
   verEmpleado(id: number) {
     this.router.navigate(['/verEmpleado', id]);
   }
+
+  desactivarEmpleado(idEmpleado: number){
+
+
+    this.empleadosService.activaDesactivarEmpleado(idEmpleado, false).subscribe({
+      next: () => {
+        console.log("El empleado fue desactivado correctamente");
+      },
+      error: (err) => {
+        console.error('Error al desactivar el empleado', err);
+        this.error = true; // Activamos el estado de error
+      }});
+    }
+
+
+    activarEmpleado(idEmpleado: number){
+    this.empleadosService.activaDesactivarEmpleado(idEmpleado, true).subscribe({
+      next: () => {
+        console.log("El empleado fue activado correctamente");
+      },
+      error: (err) => {
+        console.error('Error al desactivar el empleado', err);
+        this.error = true; // Activamos el estado de error
+      }});
+    }
 }

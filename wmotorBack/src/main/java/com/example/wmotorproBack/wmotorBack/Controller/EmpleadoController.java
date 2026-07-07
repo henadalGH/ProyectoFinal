@@ -62,6 +62,12 @@ public class EmpleadoController {
     }
     
 
+    @PutMapping("/activaEmpleado/{idEmpleado}")
+    public ResponseEntity<ResponceDTO> ativarDesactivarEmpleado(@PathVariable Long idEmpleado, @RequestBody Boolean activo) {
+        
+        return new ResponseEntity<ResponceDTO>(empleadoService.activarODesactivarEmpleado(activo, idEmpleado), HttpStatus.OK);
+    }
+
     
     
 

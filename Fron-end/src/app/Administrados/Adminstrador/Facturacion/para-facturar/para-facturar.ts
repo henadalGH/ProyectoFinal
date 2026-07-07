@@ -3,6 +3,7 @@ import { OrdenTrabajoService } from '../../../../Servicio/orden-trabajo-service'
 import { Header } from "../../../../header/header";
 import { HeaderAdmin } from "../../header-admin/header-admin";
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-para-facturar',
@@ -13,7 +14,8 @@ import { Router } from '@angular/router';
 export class ParaFacturar implements OnInit{
 
   constructor(private ordenService: OrdenTrabajoService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ){}
     
     
@@ -39,6 +41,9 @@ export class ParaFacturar implements OnInit{
       crearFactura(idOrden: number){
         this.router.navigate(['/crearFactura', idOrden]);
       }
-  
+
+        volverAtras(){
+          this.location.back();
+        }
 
 }

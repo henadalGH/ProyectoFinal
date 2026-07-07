@@ -1,161 +1,370 @@
 <div class="layout">
 
-  <aside class="sidebar">
-    <!-- menú -->
-    @if (rol == 'ROLE_ADMIN') {
-      <app-header-admin></app-header-admin>
-    } @else if (rol == 'ROLE_CLIENTE') {
+    <aside class="sidebar">
 
-      <app-headercliente></app-headercliente>
-    }
-  </aside>
+        @if (rol == 'ROLE_ADMIN') {
 
-  <main class="content">
-    <!-- contenido principal -->
-    <app-header></app-header>
+            <app-header-admin></app-header-admin>
 
-    <div class="vehiculo-container">
+        } @else if (rol == 'ROLE_CLIENTE') {
 
-  <!-- TITULO -->
-  <div class="titulo">
-    <h1>Detalles de mi vehículo</h1>
-    <p>Información general y estado actual del vehículo</p>
-  </div>
+            <app-headercliente></app-headercliente>
 
-  @if (vehiculo != null) {
+        }
 
-    <div class="vehiculo-card">
+    </aside>
 
-      <!-- HEADER -->
-      <div class="card-top">
 
-        <div class="icono-auto">
-          <i class="fas fa-car-side"></i>
-        </div>
+    <main class="content">
 
-        <div class="nombre-vehiculo">
-          <h2>{{vehiculo.marcaVehiculo}} {{vehiculo.modeloVehiculo}}</h2>
-          <span>{{vehiculo.patenteVehiculo}}</span>
-        </div>
 
-      </div>
+        <div class="container">
 
-      <!-- INFO -->
-      <div class="vehiculo-info">
 
-        <div class="item">
-          <strong>Marca</strong>
-          <p>{{vehiculo.marca}}</p>
-        </div>
+            <app-header></app-header>
 
-        <div class="item">
-          <strong>Modelo</strong>
-          <p>{{vehiculo.modelo}}</p>
-        </div>
 
-        <div class="item">
-          <strong>Patente</strong>
-          <p>{{vehiculo.patente}}</p>
-        </div>
+            <!-- TITULO -->
 
-        <div class="item">
-          <strong>Kilometraje</strong>
-          <p>{{vehiculo.kilometraje}} km</p>
-        </div>
+            <div class="titulo">
 
-        <div class="item">
-          <strong>Año</strong>
-          <p>{{vehiculo.anio}}</p>
-        </div>
+                <h1>Detalles de mi vehículo</h1>
 
-      </div>
+                <p>
+                    Información general y estado actual del vehículo
+                </p>
 
-      <!-- BOTON -->
-      <div class="acciones">
-        <button class="btn-turno" (click)="abrirModal(vehiculo.id)">
-          <i class="fas fa-calendar-check"></i>
-          Solicitar turno
-        </button>
-      </div>
+            </div>
 
-      <!-- ULTIMO SERVICIO -->
-      <div class="ultimo-servicio">
 
-        <div class="servicio-header">
-          <i class="fas fa-screwdriver-wrench"></i>
-          <h3>Último servicio</h3>
-        </div>
 
-        <p>
-          Aquí podrás visualizar la última reparación o mantenimiento realizado.
-        </p>
+            @if (vehiculo != null) {
 
-      </div>
 
-    </div>
+                <div class="card">
 
-  }
 
-</div>
+                    <!-- HEADER CARD -->
 
-@if (mostrarModal) {
+                    <div class="card-header">
 
-  <div class="modal-overlay">
 
-    <div class="form">
+                        <div class="vehiculo-header">
 
-      <button class="btn-cerrar" (click)="cerrarModal()">
-        <i class="fas fa-times"></i>
-      </button>
 
-      <form (ngSubmit)="solicitarTurno()">
+                            <div class="icono-auto">
 
-        <div class="reg">
-          <h1>Solicitar turno</h1>
-          <p>Complete la información para solicitar un nuevo turno</p>
-        </div>
+                                <i class="fas fa-car-side"></i>
 
-        <div class="servicio">
-          <label>Seleccione un servicio</label>
+                            </div>
 
-          <select name="idServicio" [(ngModel)]="idServicio">
 
-            @for (serv of servicio; track $index) {
-              <option value="{{serv.id}}">
-                {{serv.nombre}}
-              </option>
+
+                            <div class="nombre-vehiculo">
+
+                                <h2>
+                                    {{vehiculo.marcaVehiculo}}
+                                    {{vehiculo.modeloVehiculo}}
+                                </h2>
+
+                                <span>
+                                    {{vehiculo.patenteVehiculo}}
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <!-- INFORMACION -->
+
+                    <div class="info-grid">
+
+
+                        <div class="item">
+
+                            <strong>Marca</strong>
+
+                            <p>
+                                {{vehiculo.marca}}
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="item">
+
+                            <strong>Modelo</strong>
+
+                            <p>
+                                {{vehiculo.modelo}}
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="item">
+
+                            <strong>Patente</strong>
+
+                            <p>
+                                {{vehiculo.patente}}
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="item">
+
+                            <strong>Kilometraje</strong>
+
+                            <p>
+                                {{vehiculo.kilometraje}} km
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="item">
+
+                            <strong>Año</strong>
+
+                            <p>
+                                {{vehiculo.anio}}
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+                    <!-- ACCIONES -->
+
+                    <div class="acciones">
+
+
+                        <button
+                            class="btn-primary"
+                            (click)="abrirModal(vehiculo.id)">
+
+
+                            <i class="fas fa-calendar-check"></i>
+
+                            Solicitar turno
+
+
+                        </button>
+
+
+                    </div>
+
+
+
+
+
+                    <!-- SERVICIO -->
+
+                    <div class="servicio-card">
+
+
+                        <div class="servicio-header">
+
+
+                            <i class="fas fa-screwdriver-wrench"></i>
+
+
+                            <h3>
+                                Último servicio
+                            </h3>
+
+
+                        </div>
+
+
+
+                        <p>
+
+                            Aquí podrás visualizar la última reparación
+                            o mantenimiento realizado.
+
+                        </p>
+
+
+                    </div>
+
+
+                </div>
+
+
             }
 
-          </select>
+
+
         </div>
 
-        <div class="descrip">
-          <label>Describa su problema</label>
 
-          <input
-            type="text"
-            [(ngModel)]="descripcion"
-            placeholder="Ej: ruido en el motor, pérdida de aceite..."
-            name="descripcion"
-          >
-        </div>
 
-        <button class="btn-solicitar">
-          <i class="fas fa-paper-plane"></i>
-          Solicitar turno
-        </button>
 
-      </form>
 
-    </div>
+        <!-- MODAL -->
 
-  </div>
 
-}
-  </main>
+        @if (mostrarModal) {
+
+
+            <div class="modal-overlay">
+
+
+                <div class="modal">
+
+
+                    <button
+                        class="btn-cerrar"
+                        (click)="cerrarModal()">
+
+
+                        <i class="fas fa-times"></i>
+
+
+                    </button>
+
+
+
+
+                    <form
+                        (ngSubmit)="solicitarTurno()">
+
+
+
+                        <div class="modal-header">
+
+
+                            <h2>
+                                Solicitar turno
+                            </h2>
+
+
+                            <p>
+                                Complete la información para solicitar
+                                un nuevo turno
+                            </p>
+
+
+                        </div>
+
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Seleccione un servicio
+                            </label>
+
+
+
+                            <select
+                                name="idServicio"
+                                [(ngModel)]="idServicio">
+
+
+
+                                @for (serv of servicio; track $index) {
+
+
+                                    <option value="{{serv.id}}">
+
+                                        {{serv.nombre}}
+
+                                    </option>
+
+
+                                }
+
+
+                            </select>
+
+
+                        </div>
+
+
+
+
+
+                        <div class="campo">
+
+
+                            <label>
+                                Describa su problema
+                            </label>
+
+
+
+                            <input
+
+                                type="text"
+
+                                [(ngModel)]="descripcion"
+
+                                name="descripcion"
+
+                                placeholder="Ej: ruido en el motor, pérdida de aceite..."
+
+                            >
+
+
+                        </div>
+
+
+
+
+
+                        <button
+                            class="btn-primary">
+
+
+                            <i class="fas fa-paper-plane"></i>
+
+                            Solicitar turno
+
+
+                        </button>
+
+
+
+
+                    </form>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+        }
+
+
+
+    </main>
+
+
 </div>
-
-
-
-
-

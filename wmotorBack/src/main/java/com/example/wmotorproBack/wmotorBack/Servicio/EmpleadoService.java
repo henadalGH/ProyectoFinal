@@ -15,6 +15,8 @@ public interface EmpleadoService {
     EmpleadoDTO toMapEmpleado(EmpleadoEntity empleado);
 
     ResponceDTO modificarEmpleado(Long id, ModificaEmpleadoDTO empleadoDTO);
+
+    ResponceDTO activarODesactivarEmpleado( Boolean activo, Long idEmpleado);
     
     
 }

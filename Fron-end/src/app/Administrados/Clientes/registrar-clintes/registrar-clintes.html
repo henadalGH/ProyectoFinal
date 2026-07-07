@@ -1,57 +1,116 @@
 <div class="layout">
-  <aside class="sidebar">
-    <!-- menú -->
-     <app-header-admin></app-header-admin>
-  </aside>
 
-  <main class="content">
+    <aside class="sidebar">
+        <app-header-admin></app-header-admin>
+    </aside>
 
-    <app-header></app-header>
-    <!-- contenido principal -->
-     <h1>Registar Cliente</h1>
+    <main class="content">
 
-<div class="formuario">
-    <p>Complete los datos del nuevo cliente</p>
-    <form (ngSubmit)="crearUsuario()">
-        <div class="campo">
-            <label>Nombre:</label>
-            <input type="text" name="nombre" id="nombre" required [(ngModel)]="nombre" >
+        <div class="container">
+
+            <app-header></app-header>
+
+            <div class="titulo">
+                <h1>Registrar cliente</h1>
+                <p>Complete los datos para crear un nuevo cliente.</p>
+            </div>
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h2>Nuevo cliente</h2>
+                        <p>Ingrese la información del cliente.</p>
+                    </div>
+
+                </div>
+
+                <form
+                    class="formulario"
+                    (ngSubmit)="crearUsuario()">
+
+                    <div class="campo">
+                        <label>Nombre</label>
+                        <input
+                            type="text"
+                            name="nombre"
+                            [(ngModel)]="nombre"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label>Apellido</label>
+                        <input
+                            type="text"
+                            name="apellido"
+                            [(ngModel)]="apellido"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label>Correo electrónico</label>
+                        <input
+                            type="email"
+                            name="email"
+                            [(ngModel)]="email"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label>Contraseña</label>
+                        <input
+                            type="password"
+                            name="password"
+                            [(ngModel)]="password"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label>Contacto</label>
+                        <input
+                            type="text"
+                            name="contacto"
+                            [(ngModel)]="contacto"
+                            required>
+                    </div>
+
+                    <div class="campo">
+                        <label>Domicilio</label>
+                        <input
+                            type="text"
+                            name="direccion"
+                            [(ngModel)]="direccion"
+                            required>
+                    </div>
+
+                    <div class="botones">
+
+                        <button
+                            type="submit"
+                            class="btn-primary">
+
+                            Registrar cliente
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            [routerLink]="['/gestionCliente']">
+
+                            Cancelar
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
         </div>
 
-        <div class="campo">
-            <label>Apellido:</label>
-            <input type="text" required [(ngModel)]="apellido" name="apellido">
-        </div>
-        <div class="campo">
-            <label>Correo electronico:</label>
-            <input type="email" name="email" id="email" required [(ngModel)]="email">
-        </div>
-        <div class="campo">
-            <label for="">Contraseña:</label>
-            <input type="password" required [(ngModel)]="password" name="password">
-        </div>
-        <div class="campo">
-            <label for="">Contacto:</label>
-            <input type="text" name="contacto" [(ngModel)]="contacto" required>
-        </div>
-        <div class="campo">
-            <label>Domicilio:</label>
-            <input type="text" name="direccion" [(ngModel)]="direccion" required>
-        </div>
+    </main>
 
-        
-
-        <div class="botones">
-            <button type="submit">Registrar</button>
-        </div>
-    </form>
-
-    <button [routerLink]="['/gestionCliente']">Cancelar</button>
-    
 </div>
-  </main>
-</div>
-
-
-
-

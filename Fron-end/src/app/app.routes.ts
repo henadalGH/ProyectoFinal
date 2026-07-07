@@ -17,7 +17,6 @@ import { VerCliente } from './Administrados/Clientes/ver-cliente/ver-cliente';
 import { Login } from './ComponentesPublico/login/login';
 import { AuthGuard } from './AuthServicio/auth-guard';
 import { Registro } from './ComponentesPublico/registro/registro';
-import { InicioPresupuestos } from './Administrados/Presupuestos/inicio-presupuestos/inicio-presupuestos';
 import { AsignacionTurnos } from './Administrados/Turnos/asignacion-turnos/asignacion-turnos';
 import { HomeAdmin } from './Administrados/Adminstrador/home-admin/home-admin';
 import { HeaderAdmin } from './Administrados/Adminstrador/header-admin/header-admin';
@@ -60,7 +59,6 @@ export const routes: Routes = [
     { path: 'registrarEmpleado', component: RegistrarEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path: 'verEmpleado/:id', component: VerEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_ADMIN'] } },
     { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
-    {path:'inicioPresupuesto' , component: InicioPresupuestos},
     {path:'factura', component: Factura},
     {path:'turnoCasual', component: TurnoClienteCasual},
 
@@ -75,6 +73,7 @@ export const routes: Routes = [
     {path: 'miHistorial/:id', component: MiHistorial, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
     {path: "detalleVehiculo/:id", component: DetalleVehiculo},
     {path: "misTurnos", component: MisTurnos},
+    
     
 
     // 🔐 RUTAS PROTEGIDAS - EMPLEADO

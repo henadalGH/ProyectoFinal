@@ -16,6 +16,7 @@ public class EmpleadoDTO {
     private String email;
     private String contacto;
     private String dni;
+    private Boolean activo;
     private LocalDate fechaIngreso;
     private LocalDate fechaNacimiento;
     private CargosEnum cargo;

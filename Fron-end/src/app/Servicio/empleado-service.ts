@@ -84,5 +84,10 @@ export class EmpleadoService {
 }
 
 
+activaDesactivarEmpleado(idEmpleado: number, activo: boolean){
+
+  return this.http.put(`${this.urlComun}/activaEmpleado/${idEmpleado}`, activo);
+}
+
 
 }

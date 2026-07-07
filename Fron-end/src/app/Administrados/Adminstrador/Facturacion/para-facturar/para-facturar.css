@@ -1,323 +1,627 @@
+/* ==========================
+   RESET
+========================== */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
+
 
 html, body {
-  height: 100%;
-  font-family: "Segoe UI", Roboto, Arial, sans-serif;
-  background: #f3f6fb;
-  color: #111827;
+
+    height:100%;
+
+    font-family:"Segoe UI", Roboto, Arial, sans-serif;
+
+    background:#f3f6fb;
+
+    color:#111827;
+
 }
+
+
+
+/* ==========================
+   LAYOUT
+========================== */
 
 .layout {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
+
+    display:flex;
+
+    height:100vh;
+
+    width:100%;
+
+    overflow:hidden;
+
 }
+
+
+
+/* ==========================
+   SIDEBAR
+========================== */
 
 .sidebar {
-  width: 320px; /* 🔥 agrandado */
-  background: #1f2937;
-  color: white;
-  height: 100vh;
-  flex-shrink: 0;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+    width:320px;
 
-  padding: 0;
-  margin: 0;
-  overflow: hidden;
+    min-width:320px;
+
+    height:100vh;
+
+    background:#1f2937;
+
+    color:white;
+
+    flex-shrink:0;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+
+    overflow:hidden;
+
+    padding:0;
+
+    margin:0;
+
 }
 
-/* elimina espacios internos del menú */
+
+
 .sidebar * {
-  margin: 0;
-  padding: 0;
+
+    margin:0;
+
+    padding:0;
+
 }
 
-/* Angular component fix */
+
+
+/* componente angular */
+
 app-header-admin {
-  display: block;
-  width: 100%;
-  margin: 0;
-  padding: 0;
+
+    display:block;
+
+    width:100%;
+
+    height:100%;
+
 }
+
+
+
+/* ==========================
+   CONTENIDO
+========================== */
 
 .content {
-  flex: 1;
-  padding: 20px;
-  background: #f3f6fb;
-  overflow-y: auto;
+
+    flex:1;
+
+    height:100vh;
+
+    padding:20px;
+
+    background:#f3f6fb;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
 }
+
+
+
+/* ==========================
+   HEADER SUPERIOR
+========================== */
+
+
+app-header {
+
+    display:block;
+
+    width:100%;
+
+    margin-bottom:25px;
+
+}
+
+
 
 /* ==========================
    CONTENEDOR
 ========================== */
 
 .contenedor {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+
+    max-width:1200px;
+
+    margin:0 auto;
+
+    padding:20px;
+
 }
+
+
 
 /* ==========================
    ENCABEZADO
 ========================== */
 
 .encabezado {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 25px 0 30px;
-    
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:25px 0 30px;
+
 }
+
+
 
 .encabezado h1 {
-    font-size: 30px;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 6px;
-    text-align: center;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:#1e293b;
+
+    margin-bottom:6px;
+
 }
 
+
+
 .encabezado p {
-    font-size: 14px;
-    color: #64748b;
+
+    font-size:14px;
+
+    color:#64748b;
+
 }
+
+
 
 /* ==========================
    BOTON VOLVER
 ========================== */
 
+
 .btn-volver {
-    background: #d66464;
-    color: white;
-    border: none;
-    border-radius: 12px;
 
-    padding: 12px 20px;
+    background:#d66464;
 
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    color:white;
 
-    font-size: 14px;
-    font-weight: 600;
+    border:none;
 
-    cursor: pointer;
-    transition: .2s;
+    border-radius:12px;
+
+
+    padding:12px 20px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+
+    font-size:14px;
+
+    font-weight:600;
+
+
+    cursor:pointer;
+
+    transition:.2s;
+
 }
+
+
 
 .btn-volver:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(239,68,68,.25);
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(239,68,68,.25);
+
 }
+
+
 
 /* ==========================
    LISTA
 ========================== */
 
+
 .lista {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
 }
+
+
 
 /* ==========================
    TARJETA
 ========================== */
 
+
 .card {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
 
     box-shadow:
-        0 2px 8px rgba(0,0,0,.04),
-        0 8px 24px rgba(0,0,0,.03);
 
-    transition: .2s;
+    0 2px 8px rgba(0,0,0,.04),
+
+    0 8px 24px rgba(0,0,0,.03);
+
+
+    transition:.2s;
+
 }
+
+
 
 .card:hover {
-    transform: translateY(-2px);
+
+    transform:translateY(-2px);
+
 }
+
+
 
 /* ==========================
    ESTADO
 ========================== */
 
+
 .estado {
-    
-    color: black;
 
-    padding: 12px 22px;
+    color:black;
 
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1px;
+    padding:12px 22px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
 }
+
+
 
 /* ==========================
-   CONTENIDO
+   CONTENIDO CARD
 ========================== */
 
+
 .contenido {
-    padding: 22px;
+
+    padding:22px;
+
 }
+
+
 
 /* ==========================
    CLIENTE
 ========================== */
 
-.cliente {
-    display: flex;
-    align-items: center;
-    gap: 16px;
 
-    margin-bottom: 20px;
+.cliente {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:20px;
+
 }
+
+
 
 .icono {
-    width: 55px;
-    height: 55px;
 
-    background: #dbeafe;
-    border-radius: 14px;
+    width:55px;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height:55px;
+
+
+    background:#dbeafe;
+
+    border-radius:14px;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
 }
+
+
 
 .icono i {
-    color: #2563eb;
-    font-size: 20px;
+
+    color:#2563eb;
+
+    font-size:20px;
+
 }
+
+
 
 .cliente span {
-    font-size: 12px;
-    color: #64748b;
+
+    font-size:12px;
+
+    color:#64748b;
+
 }
 
+
+
 .cliente h2 {
-    font-size: 22px;
-    color: #1e293b;
-    margin-top: 4px;
+
+    font-size:22px;
+
+    color:#1e293b;
+
+    margin-top:4px;
+
 }
+
+
 
 /* ==========================
    DATOS
 ========================== */
 
+
 .datos {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
+
+    display:flex;
+
+    gap:16px;
+
+    flex-wrap:wrap;
+
 }
+
+
 
 .dato {
-    flex: 1;
-    min-width: 220px;
 
-    background: #f8fafc;
+    flex:1;
 
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    min-width:220px;
 
-    padding: 15px;
 
-    display: flex;
-    align-items: center;
-    gap: 14px;
+    background:#f8fafc;
+
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+
+    padding:15px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
 }
+
+
 
 .dato i {
-    color: #3b82f6;
-    font-size: 18px;
+
+    color:#3b82f6;
+
+    font-size:18px;
+
 }
+
+
 
 .dato span {
-    font-size: 12px;
-    color: #64748b;
+
+    font-size:12px;
+
+    color:#64748b;
+
 }
 
+
+
 .dato h3 {
-    font-size: 15px;
-    color: #1e293b;
-    margin-top: 3px;
+
+    font-size:15px;
+
+    color:#1e293b;
+
+    margin-top:3px;
+
 }
+
+
 
 /* ==========================
    ACCIONES
 ========================== */
 
+
 .acciones {
-    padding: 18px 22px;
 
-    border-top: 1px solid #e2e8f0;
+    padding:18px 22px;
 
-    display: flex;
-    justify-content: flex-end;
+    border-top:1px solid #e2e8f0;
+
+
+    display:flex;
+
+    justify-content:flex-end;
+
 }
+
+
 
 /* ==========================
    BOTON FACTURA
 ========================== */
 
+
 .btn-ver {
-    background: linear-gradient(135deg,#2563eb,#3b82f6);
 
-    color: white;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
 
-    border: none;
-    border-radius: 10px;
 
-    padding: 12px 20px;
+    color:white;
 
-    display: flex;
-    align-items: center;
-    gap: 10px;
 
-    font-size: 14px;
-    font-weight: 600;
+    border:none;
 
-    cursor: pointer;
-    transition: .2s;
+    border-radius:10px;
+
+
+    padding:12px 20px;
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+
+    font-size:14px;
+
+    font-weight:600;
+
+
+    cursor:pointer;
+
+    transition:.2s;
+
 }
+
+
 
 .btn-ver:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37,99,235,.25);
+
+    transform:translateY(-2px);
+
+    box-shadow:0 8px 20px rgba(37,99,235,.25);
+
 }
+
+
 
 /* ==========================
    RESPONSIVE
 ========================== */
 
-@media (max-width: 900px) {
+
+@media(max-width:900px){
+
+
+    .layout {
+
+        flex-direction:column;
+
+    }
+
+
+
+    .sidebar {
+
+        width:100%;
+
+        min-width:100%;
+
+        height:auto;
+
+    }
+
+
+
+    .content {
+
+        height:calc(100vh - 80px);
+
+    }
+
+
 
     .encabezado {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-        text-align: center;
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:15px;
+
     }
+
+
 
     .datos {
-        flex-direction: column;
+
+        flex-direction:column;
+
     }
+
+
 
     .acciones {
-        justify-content: center;
+
+        justify-content:center;
+
     }
 
+
+
     .btn-ver {
-        width: 100%;
-        justify-content: center;
+
+        width:100%;
+
+        justify-content:center;
+
     }
+
 }

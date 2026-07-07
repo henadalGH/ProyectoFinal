@@ -74,6 +74,8 @@ public class RegistroServicioImpl implements RegistroService {
             throw new Exception("Debe especificar un rol");
 
 
+
+
         // =========================
         // CREAR USUARIO
         // =========================
@@ -132,6 +134,7 @@ public class RegistroServicioImpl implements RegistroService {
                 empleado.setFechaIngreso(LocalDate.now());
                 empleado.setDni(usuarioDTO.getDni());
                 empleado.setCargo(cargo);
+                empleado.setActivo(true);
 
                 empleadoRepository.save(empleado);
             }

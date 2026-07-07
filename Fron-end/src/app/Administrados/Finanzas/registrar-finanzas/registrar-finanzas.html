@@ -1,142 +1,180 @@
 <div class="layout">
-  <aside class="sidebar">
-    <app-header-admin></app-header-admin>
-  </aside>
 
-  <main class="content">
+    <aside class="sidebar">
+        <app-header-admin></app-header-admin>
+    </aside>
 
-    <div class="container">
-      <app-header></app-header>
+    <main class="content">
 
-      <div class="titulo">
-        <h1>Registrar un movimiento</h1>
-        <p>Complete el formulario</p>
-      </div>
+        <div class="container">
 
-      <form class="formulario" (ngSubmit)="registrarMovimiento()">
+            <app-header></app-header>
 
-        <!-- MOVIMIENTO -->
-        <div class="campo">
-          <label>Seleccione un movimiento:</label>
+            <div class="titulo">
+                <h1>Registrar movimiento</h1>
+                <p>Registre un nuevo ingreso o gasto del taller.</p>
+            </div>
 
-          <select
-            name="movimiento"
-            [(ngModel)]="movimiento"
-            required>
+            <div class="card">
 
-            <option value="">Seleccione una opción</option>
-            <option value="INGRESO">Ingreso</option>
-            <option value="GASTOS">Gasto</option>
-          </select>
+                <div class="card-header">
 
-          @if(errorMovimiento){
-            <small class="error">
-              Debe seleccionar un movimiento
-            </small>
-          }
+                    <div>
+                        <h2>Nuevo movimiento</h2>
+                        <p>Complete la información del movimiento financiero.</p>
+                    </div>
+
+                </div>
+
+                <form
+                    class="formulario"
+                    (ngSubmit)="registrarMovimiento()">
+
+                    <!-- MOVIMIENTO -->
+
+                    <div class="campo">
+
+                        <label>Movimiento</label>
+
+                        <select
+                            name="movimiento"
+                            [(ngModel)]="movimiento">
+
+                            <option value="">Seleccione una opción</option>
+
+                            <option value="INGRESO">
+                                Ingreso
+                            </option>
+
+                            <option value="GASTOS">
+                                Gasto
+                            </option>
+
+                        </select>
+
+                        @if(errorMovimiento){
+                            <small class="error">
+                                Debe seleccionar un movimiento
+                            </small>
+                        }
+
+                    </div>
+
+                    <!-- CATEGORIA -->
+
+                    <div class="campo">
+
+                        <label>Categoría</label>
+
+                        <select
+                            name="categoria"
+                            [(ngModel)]="categoria">
+
+                            <option value="">
+                                Seleccione una categoría
+                            </option>
+
+                            @if (movimiento == 'INGRESO') {
+
+                                <option value="REPARACIONES">Reparaciones</option>
+                                <option value="MANO_OBRA">Mano de obra</option>
+                                <option value="VENTA_REPUESTOS">Venta de repuestos</option>
+                                <option value="SERVICIOS">Servicios</option>
+                                <option value="DIAGNOSTICOS">Diagnósticos</option>
+                                <option value="OTROS_INGRESOS">Otros ingresos</option>
+
+                            }
+
+                            @if (movimiento == 'GASTOS') {
+
+                                <option value="COMPRA_REPUESTOS">Compra de repuestos</option>
+                                <option value="SUELDOS">Sueldos</option>
+                                <option value="SERVICIOS">Servicios</option>
+                                <option value="ALQUILER">Alquiler</option>
+                                <option value="HERRAMIENTAS">Herramientas</option>
+                                <option value="IMPUESTOS">Impuestos</option>
+                                <option value="MANTENIMIENTO">Mantenimiento</option>
+                                <option value="OTROS_GASTOS">Otros gastos</option>
+
+                            }
+
+                        </select>
+
+                        @if(errorCategoria){
+                            <small class="error">
+                                Debe seleccionar una categoría
+                            </small>
+                        }
+
+                    </div>
+
+                    <!-- CONCEPTO -->
+
+                    <div class="campo">
+
+                        <label>Concepto</label>
+
+                        <input
+                            type="text"
+                            name="concepto"
+                            [(ngModel)]="concepto"
+                            placeholder="Ej.: Reparación de motor">
+
+                        @if(errorConcepto){
+                            <small class="error">
+                                Debe ingresar un concepto
+                            </small>
+                        }
+
+                    </div>
+
+                    <!-- IMPORTE -->
+
+                    <div class="campo">
+
+                        <label>Importe</label>
+
+                        <input
+                            type="number"
+                            name="importe"
+                            [(ngModel)]="importe"
+                            placeholder="$ 0,00">
+
+                        @if(errorImporte){
+                            <small class="error">
+                                Debe ingresar un importe mayor a 0
+                            </small>
+                        }
+
+                    </div>
+
+                    <div class="botones">
+
+                        <button
+                            type="submit"
+                            class="btn-primary">
+
+                            Registrar movimiento
+
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn-secondary"
+                            (click)="volverAtras()">
+
+                            Cancelar
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
         </div>
 
-        <!-- CATEGORIA -->
-        <div class="campo">
-          <label>Seleccione una categoría:</label>
+    </main>
 
-          <select
-            name="categoria"
-            [(ngModel)]="categoria"
-            required>
-
-            <option value="">Seleccione una categoría</option>
-
-            @if (movimiento == 'INGRESO') {
-              <option value="REPARACIONES">Reparaciones</option>
-              <option value="MANO_OBRA">Mano de obra</option>
-              <option value="VENTA_REPUESTOS">Venta de repuestos</option>
-              <option value="SERVICIOS">Servicios</option>
-              <option value="DIAGNOSTICOS">Diagnósticos</option>
-              <option value="OTROS_INGRESOS">Otros ingresos</option>
-            }
-
-            @if (movimiento == 'GASTOS') {
-              <option value="COMPRA_REPUESTOS">Compra de repuestos</option>
-              <option value="SUELDOS">Sueldos</option>
-              <option value="SERVICIOS">Servicios</option>
-              <option value="ALQUILER">Alquiler</option>
-              <option value="HERRAMIENTAS">Herramientas</option>
-              <option value="IMPUESTOS">Impuestos</option>
-              <option value="MANTENIMIENTO">Mantenimiento</option>
-              <option value="OTROS_GASTOS">Otros gastos</option>
-            }
-          </select>
-
-          @if(errorCategoria){
-            <small class="error">
-              Debe seleccionar una categoría
-            </small>
-          }
-        </div>
-
-        <!-- CONCEPTO -->
-        <div class="campo">
-          <label>Ingrese un concepto:</label>
-
-          <input
-            type="text"
-            name="concepto"
-            [(ngModel)]="concepto"
-            placeholder="Ej.: Reparación de motor"
-            required>
-
-          @if(errorConcepto){
-            <small class="error">
-              Debe ingresar un concepto
-            </small>
-          }
-        </div>
-
-        <!-- IMPORTE -->
-        <div class="campo">
-          <label>Ingrese el importe:</label>
-
-          <input
-            type="number"
-            name="importe"
-            [(ngModel)]="importe"
-            placeholder="$ 0,00"
-            required>
-
-          @if(errorImporte){
-            <small class="error">
-              Debe ingresar un importe mayor a 0
-            </small>
-          }
-        </div>
-
-        <!-- BOTONES -->
-        <div class="botones">
-
-          <button
-            type="submit"
-            class="btn-guardar"
-            [disabled]="
-              !movimiento ||
-              !categoria ||
-              !concepto ||
-              importe == null ||
-              importe <= 0">
-            Registrar
-          </button>
-
-          <button
-            (click)="volverAtras()"
-            type="button"
-            class="btn-cancelar">
-            Cancelar
-          </button>
-
-        </div>
-
-      </form>
-    </div>
-
-  </main>
 </div>

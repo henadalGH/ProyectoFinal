@@ -24,6 +24,7 @@ public class RegistroDTO {
 
     // Empleado
     private CargosEnum cargo;
+    private Boolean activo;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate fechaNacimieto;

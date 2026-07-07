@@ -83,6 +83,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
             empleados.setApellido(empleado.getUsuario().getApellido());
             empleados.setEmail(empleado.getUsuario().getEmail());
             empleados.setDni(empleado.getDni());
+            empleados.setActivo(empleado.getActivo());
             empleados.setContacto(empleado.getUsuario().getContacto());
             empleados.setFechaIngreso(empleado.getFechaIngreso());
             empleados.setFechaNacimiento(empleado.getFechaNacimiento());
@@ -126,6 +127,26 @@ public ResponceDTO modificarEmpleado(Long id, ModificaEmpleadoDTO empleadoDTO) {
     return responceDTO;
 }
 
+   @Override
+public ResponceDTO activarODesactivarEmpleado(Boolean activo, Long idEmpleado) {
+
+    ResponceDTO responceDTO = new ResponceDTO();
+
+    EmpleadoEntity empleadoEntity = empleadoRepository.findById(idEmpleado)
+            .orElseThrow(() -> new RuntimeException("El id no se encuentra registrado"));
+
+    empleadoEntity.setActivo(activo);
+
+    empleadoRepository.save(empleadoEntity);
+
+    if (activo) {
+        responceDTO.setMensage("El empleado fue activado con éxito");
+    } else {
+        responceDTO.setMensage("El empleado fue desactivado con éxito");
+    }
+
+    return responceDTO;
+}
 
 
 

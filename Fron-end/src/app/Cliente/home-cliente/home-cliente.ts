@@ -8,7 +8,7 @@ import { TurnosService } from '../../Servicio/turnos-service';
 
 @Component({
   selector: 'app-home-cliente',
-  imports: [RouterLink],
+  imports: [RouterLink, Headercliente],
   templateUrl: './home-cliente.html',
   styleUrl: './home-cliente.css',
 })

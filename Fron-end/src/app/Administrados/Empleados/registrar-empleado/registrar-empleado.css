@@ -1,134 +1,120 @@
-/* =========================
-   RESET
-========================= */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html,body{
-    height:100%;
-    font-family:"Segoe UI",Roboto,Arial,sans-serif;
-    background:#f4f7fb;
-    color:#111827;
-}
-
-/* =========================
+/* ==========================
    LAYOUT
-========================= */
+========================== */
+
 .layout{
     display:flex;
-    min-height:100vh;
+    height:100vh;
 }
 
 .sidebar{
     width:320px;
-    flex-shrink:0;
+    background:#1f2937;
+    color:white;
 }
 
 .content{
     flex:1;
-    padding:30px 40px;
+    background:#f3f6fb;
+    padding:20px;
     overflow-y:auto;
-    background:#f4f7fb;
 }
 
-/* =========================
+/* ==========================
    CONTENEDOR
-========================= */
+========================== */
+
 .registro-wrapper{
-    max-width:1200px;
-    margin:0 auto;
+    max-width:900px;
+    margin:25px auto;
 }
 
-/* =========================
+/* ==========================
    TITULO
-========================= */
+========================== */
+
 .titulo{
-    margin:35px 0;
+    padding-bottom:25px;
+    margin-bottom:30px;
+    border-bottom:2px solid #e5e7eb;
 }
 
 .titulo h1{
-    font-size:38px;
+    margin:0;
+    font-size:30px;
     font-weight:700;
-    color:#0f172a;
+    color:#111827;
 }
 
-.titulo span{
+.titulo h1 span{
     color:#2563eb;
 }
 
 .titulo p{
-    margin-top:8px;
-    color:#64748b;
-    font-size:16px;
+    margin-top:6px;
+    font-size:18px;
+    color:#6b7280;
 }
 
-/* =========================
+/* ==========================
    FORMULARIO
-========================= */
+========================== */
+
 .formulario-container{
     background:white;
-    border-radius:24px;
 
-    padding:40px;
+    border-radius:16px;
 
-    border:1px solid #e2e8f0;
+    padding:30px;
 
     box-shadow:
-        0 4px 6px rgba(0,0,0,.03),
-        0 20px 25px rgba(0,0,0,.04);
+        0 8px 20px rgba(0,0,0,.05);
 }
 
 .form-grid{
     display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:28px;
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:24px;
 }
 
-/* =========================
+/* ==========================
    CAMPOS
-========================= */
+========================== */
+
 .campos{
     display:flex;
     flex-direction:column;
+    gap:8px;
 }
 
 .campos label{
-    margin-bottom:10px;
+    color:#64748b;
 
     font-size:13px;
     font-weight:700;
 
     text-transform:uppercase;
-    letter-spacing:.5px;
-
-    color:#64748b;
+    letter-spacing:1px;
 }
 
 .campos input,
 .campos select{
     width:100%;
 
-    height:54px;
+    height:48px;
 
-    border:1px solid #cbd5e1;
-    border-radius:14px;
+    padding:0 16px;
 
-    background:#fff;
+    border:1px solid #d1d5db;
+    border-radius:12px;
 
-    padding:0 18px;
+    background:white;
 
     font-size:15px;
-    color:#0f172a;
 
     transition:.2s;
-}
-
-.campos input:hover,
-.campos select:hover{
-    border-color:#94a3b8;
 }
 
 .campos input:focus,
@@ -138,16 +124,22 @@ html,body{
     border-color:#2563eb;
 
     box-shadow:
-        0 0 0 4px rgba(37,99,235,.12);
+        0 0 0 3px rgba(37,99,235,.15);
 }
 
-/* =========================
+.campos input[readonly],
+.campos select:disabled{
+    background:#f9fafb;
+    color:#6b7280;
+}
+
+/* ==========================
    CAMPOS EDITABLES
-========================= */
+========================== */
+
 .campo-editable{
     display:flex;
-    align-items:center;
-    gap:12px;
+    gap:10px;
 }
 
 .campo-editable input,
@@ -155,50 +147,29 @@ html,body{
     flex:1;
 }
 
-/* =========================
-   BOTON EDITAR
-========================= */
 .btn-editar{
-    width:54px;
-    height:54px;
+    width:48px;
+    height:48px;
 
     border:none;
-    border-radius:14px;
+    border-radius:12px;
 
-    background:#eff6ff;
-    color:#2563eb;
+    background:#2563eb;
+    color:white;
 
     cursor:pointer;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
 
     transition:.2s;
 }
 
 .btn-editar:hover{
-    background:#2563eb;
-    color:white;
-    transform:translateY(-2px);
+    background:#1d4ed8;
 }
 
-.btn-editar i{
-    font-size:15px;
-}
-
-/* =========================
-   INPUTS BLOQUEADOS
-========================= */
-input[readonly],
-select:disabled{
-    background:#f8fafc;
-    color:#64748b;
-}
-
-/* =========================
+/* ==========================
    BOTONES
-========================= */
+========================== */
+
 .acciones{
     grid-column:1/-1;
 
@@ -207,17 +178,16 @@ select:disabled{
 
     gap:15px;
 
-    margin-top:20px;
+    margin-top:10px;
 }
 
 .agregar,
 .cancelar{
-    height:52px;
-
-    padding:0 28px;
-
     border:none;
-    border-radius:14px;
+
+    border-radius:12px;
+
+    padding:14px 28px;
 
     font-size:15px;
     font-weight:600;
@@ -238,27 +208,19 @@ select:disabled{
 }
 
 .cancelar{
-    background:#f1f5f9;
-    color:#334155;
+    background:#f3f4f6;
+    color:#374151;
 }
 
 .cancelar:hover{
-    background:#e2e8f0;
-    transform:translateY(-2px);
+    background:#e5e7eb;
 }
 
-/* =========================
+/* ==========================
    RESPONSIVE
-========================= */
+========================== */
+
 @media(max-width:900px){
-
-    .content{
-        padding:20px;
-    }
-
-    .formulario-container{
-        padding:25px;
-    }
 
     .form-grid{
         grid-template-columns:1fr;
