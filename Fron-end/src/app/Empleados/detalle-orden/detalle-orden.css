@@ -1,110 +1,137 @@
-/* ================================= */
-/* CONTENEDOR GENERAL */
-/* ================================= */
+/*=========================
+    LAYOUT
+=========================*/
+
+.layout{
+    display:flex;
+    min-height:100vh;
+    background:#f4f6f9;
+}
+
+.sidebar{
+    width:260px;
+    flex-shrink:0;
+}
+
+.content{
+    flex:1;
+    padding:25px;
+    overflow:auto;
+}
+
+
+/*=========================
+    CONTENEDOR
+=========================*/
 
 .orden-container{
     max-width:1400px;
-    margin:auto;
-    padding:30px;
+    margin:30px auto;
 }
 
+
+/*=========================
+    TITULO
+=========================*/
+
 .titulo{
-    text-align:center;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
 .titulo h1{
-    font-size:42px;
-    color:#ffffff;
-    margin-bottom:8px;
+    font-size:34px;
+    color:#1f2937;
+    margin-bottom:5px;
 }
 
 .titulo p{
-    color:#94a3b8;
+    color:#6b7280;
     font-size:15px;
 }
 
-/* ================================= */
-/* TARJETA */
-/* ================================= */
+
+/*=========================
+    CARD
+=========================*/
 
 .orden-card{
-    background:#111827;
-    border-radius:20px;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
     padding:30px;
-    border:1px solid rgba(255,255,255,.08);
-
-    box-shadow:
-    0 15px 35px rgba(0,0,0,.35);
 }
 
-/* ================================= */
-/* NUMERO DE ORDEN */
-/* ================================= */
+
+/*=========================
+    NUMERO ORDEN
+=========================*/
 
 .orden-numero{
     display:flex;
     justify-content:space-between;
     align-items:center;
-
-    margin-bottom:25px;
     padding-bottom:20px;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid #e5e7eb;
+    margin-bottom:30px;
 }
 
 .orden-numero h2{
-    color:white;
+    color:#1f2937;
     margin:0;
 }
 
 .orden-numero span{
-    color:#60a5fa;
-    font-size:18px;
-    font-weight:bold;
+    background:#2563eb;
+    color:#fff;
+    padding:8px 16px;
+    border-radius:20px;
+    font-weight:600;
 }
 
-/* ================================= */
-/* DATOS CLIENTE Y VEHICULO */
-/* ================================= */
+
+/*=========================
+    DATOS
+=========================*/
 
 .encabezadoOrden{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:25px;
-    margin-bottom:35px;
+    margin-bottom:30px;
 }
 
 .datosCliente,
 .datosVehiculo{
-    background:#1e293b;
-    padding:25px;
-    border-radius:15px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:20px;
 }
 
 .datosCliente h3,
 .datosVehiculo h3{
-    color:#60a5fa;
+    color:#2563eb;
     margin-bottom:15px;
 }
 
 .datosCliente p,
 .datosVehiculo p{
-    color:#e2e8f0;
     margin:8px 0;
+    color:#374151;
 }
 
-/* ================================= */
-/* SECCIONES */
-/* ================================= */
+.datosCliente strong,
+.datosVehiculo strong{
+    color:#111827;
+}
+
+
+/*=========================
+    SECCIONES
+=========================*/
 
 .seccion{
-    margin-top:30px;
-}
-
-.seccion h3{
-    color:white;
-    margin-bottom:15px;
+    margin-top:35px;
 }
 
 .seccion-header{
@@ -114,9 +141,14 @@
     margin-bottom:15px;
 }
 
-/* ================================= */
-/* TABLA */
-/* ================================= */
+.seccion h3{
+    color:#1f2937;
+}
+
+
+/*=========================
+    TABLA
+=========================*/
 
 .tabla-wrapper{
     overflow-x:auto;
@@ -128,98 +160,75 @@
 }
 
 .tabla-detalle th{
-    background:#0f172a;
+    background:#2563eb;
     color:white;
-    padding:15px;
-    text-align:center;
+    padding:14px;
+    font-weight:600;
 }
 
 .tabla-detalle td{
-    background:#f8fafc;
-    padding:10px;
+    padding:12px;
     border-bottom:1px solid #e5e7eb;
+    background:white;
+}
+
+.tabla-detalle tr:nth-child(even){
+    background:#f9fafb;
 }
 
 .tabla-detalle tr:hover td{
-    background:#eef2ff;
+    background:#eef4ff;
 }
 
-/* ================================= */
-/* INPUTS BLANCOS */
-/* ================================= */
+
+/*=========================
+    INPUTS
+=========================*/
 
 .tabla-detalle input,
 .tabla-detalle select{
     width:100%;
-
-    padding:10px 12px;
-
+    padding:10px;
     border:1px solid #d1d5db;
     border-radius:8px;
-
-    background:white;
-    color:#111827;
-
     font-size:14px;
-    box-sizing:border-box;
+    background:white;
 }
 
 .tabla-detalle input:focus,
-.tabla-detalle select:focus{
+.tabla-detalle select:focus,
+textarea:focus{
     outline:none;
     border-color:#2563eb;
-
-    box-shadow:
-    0 0 0 3px rgba(37,99,235,.15);
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
 }
 
-/* ================================= */
-/* TEXTAREA */
-/* ================================= */
+
+/*=========================
+    TEXTAREA
+=========================*/
 
 textarea{
     width:100%;
     min-height:140px;
-
     padding:15px;
-
-    border-radius:12px;
     border:1px solid #d1d5db;
-
-    background:white;
-    color:#111827;
-
+    border-radius:10px;
     resize:vertical;
-
-    box-sizing:border-box;
 }
 
-textarea:focus{
-    outline:none;
 
-    border-color:#2563eb;
-
-    box-shadow:
-    0 0 0 3px rgba(37,99,235,.15);
-}
-
-/* ================================= */
-/* BOTONES */
-/* ================================= */
+/*=========================
+    BOTONES
+=========================*/
 
 .btn-agregar{
     background:#2563eb;
     color:white;
-
     border:none;
-    border-radius:10px;
-
-    padding:12px 20px;
-
+    padding:10px 18px;
+    border-radius:8px;
     cursor:pointer;
-    font-weight:600;
-
-    transition:.2s;
 }
 
 .btn-agregar:hover{
@@ -227,44 +236,49 @@ textarea:focus{
 }
 
 .btn-eliminar{
-    background:#dc2626;
+    background:#ef4444;
     color:white;
-
     border:none;
+    padding:8px 15px;
     border-radius:8px;
-
-    padding:8px 14px;
-
     cursor:pointer;
 }
 
 .btn-eliminar:hover{
-    background:#b91c1c;
+    background:#dc2626;
 }
 
-/* ================================= */
-/* ACCIONES */
-/* ================================= */
+
+/*=========================
+    ACCIONES
+=========================*/
 
 .acciones{
-    margin-top:35px;
-
     display:flex;
     justify-content:flex-end;
     gap:15px;
+    margin-top:35px;
+}
+
+.bnt-volver{
+    background:#6b7280;
+    color:white;
+    border:none;
+    padding:12px 22px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.bnt-volver:hover{
+    background:#4b5563;
 }
 
 .btn-guardar{
     background:#2563eb;
     color:white;
-
     border:none;
-
-    padding:14px 24px;
-
-    border-radius:10px;
-
-    font-weight:600;
+    padding:12px 22px;
+    border-radius:8px;
     cursor:pointer;
 }
 
@@ -275,14 +289,9 @@ textarea:focus{
 .btn-finalizar{
     background:#16a34a;
     color:white;
-
     border:none;
-
-    padding:14px 24px;
-
-    border-radius:10px;
-
-    font-weight:600;
+    padding:12px 22px;
+    border-radius:8px;
     cursor:pointer;
 }
 
@@ -290,11 +299,29 @@ textarea:focus{
     background:#15803d;
 }
 
-/* ================================= */
-/* RESPONSIVE */
-/* ================================= */
+.btn-finalizar:disabled{
+    background:#9ca3af;
+    cursor:not-allowed;
+}
+
+
+/*=========================
+    RESPONSIVE
+=========================*/
 
 @media(max-width:900px){
+
+    .layout{
+        flex-direction:column;
+    }
+
+    .sidebar{
+        width:100%;
+    }
+
+    .content{
+        padding:15px;
+    }
 
     .encabezadoOrden{
         grid-template-columns:1fr;
@@ -303,21 +330,14 @@ textarea:focus{
     .orden-numero{
         flex-direction:column;
         gap:10px;
-        text-align:center;
+        align-items:flex-start;
     }
 
     .acciones{
         flex-direction:column;
     }
 
-    .btn-guardar,
-    .btn-finalizar{
+    .acciones button{
         width:100%;
     }
-}
-
-.btn-finalizar:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: #999;
 }

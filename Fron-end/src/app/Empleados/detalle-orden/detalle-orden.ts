@@ -3,10 +3,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HeaderEmpleado } from '../header-empleado/header-empleado';
 import { OrdenTrabajoService } from '../../Servicio/orden-trabajo-service';
 import { FormsModule } from '@angular/forms';
+import { Header } from "../../header/header";
 
 @Component({
   selector: 'app-detalle-orden',
-  imports: [HeaderEmpleado, FormsModule],
+  imports: [HeaderEmpleado, FormsModule, Header],
   templateUrl: './detalle-orden.html',
   styleUrl: './detalle-orden.css',
 })

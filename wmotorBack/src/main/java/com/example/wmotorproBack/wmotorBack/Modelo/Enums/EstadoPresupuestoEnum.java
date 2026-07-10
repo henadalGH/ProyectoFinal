@@ -9,5 +9,6 @@ public enum EstadoPresupuestoEnum {
     VENCIDO,
     CANCELADO,
     EN_REVISION,
-    PENDIENTE
+    PENDIENTE,
+    PAGADO
 }

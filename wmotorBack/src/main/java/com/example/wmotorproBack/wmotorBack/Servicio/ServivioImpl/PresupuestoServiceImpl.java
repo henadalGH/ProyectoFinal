@@ -308,7 +308,7 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
             .stream()
             .map(this::toMapPresupuestoDto)
             .collect(Collectors.toList());
-    }
+    } 
 
 
 
@@ -340,4 +340,65 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
                 .toList();
     }
 
+
+
+    @Override
+    public List<ObtenerPresupuestoDTO> obtenerPresupuestoPorIdCliente(Long idCliente) {
+        
+        return presuspuestoRepository.findByVehiculoClienteId(idCliente)
+            .stream()
+            .map(this::toMapPresupuestoDto)
+            .collect(Collectors.toList());
+    }
+
+
+
+    @Override
+    public List<ObtenerPresupuestoDTO> obtenerPresupuestPorEstadoAndCliente(Long idCliente,
+            EstadoPresupuestoEnum estado) {
+
+            EstadoPresupuestoEntity estadoPre = estadoPresupuestoReposistory.findByEstadoPresupuesto(estado)
+            .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+                return presuspuestoRepository.findByVehiculoClienteIdAndEstadoPresupuesto(idCliente, estadoPre)
+            .stream()
+            .map(this::toMapPresupuestoDto)
+            .collect(Collectors.toList());
+    }
+
+
+
+   @Override
+public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) {
+
+    return presuspuestoRepository
+            .findTop5ByVehiculoClienteIdAndEstadoPresupuestoEstadoPresupuestoInOrderByFechaRegistroDesc(
+                    idCliente,
+                    List.of(EstadoPresupuestoEnum.ENVIADO, EstadoPresupuestoEnum.PAGADO)
+            )
+            .stream()
+            .map(p -> {
+
+                UltimasFacturasDTO dto = new UltimasFacturasDTO();
+
+                dto.setNumeroFactura(p.getNumeroPresupuesto());
+
+                dto.setNombreCliente(
+                        p.getVehiculo().getCliente().getUsuario().getNombre()
+                        + " "
+                        + p.getVehiculo().getCliente().getUsuario().getApellido()
+                );
+
+                dto.setMonto(p.getTotal());
+
+                dto.setEstado(
+                        p.getEstadoPresupuesto().getEstadoPresupuesto()
+                );
+
+                dto.setFechaRegistro(p.getFechaRegistro());
+
+                return dto;
+            })
+            .toList();
+}
 }

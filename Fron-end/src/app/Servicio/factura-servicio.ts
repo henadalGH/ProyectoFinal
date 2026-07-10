@@ -11,10 +11,6 @@ export class FacturaServicio {
 
   private urlFactura = 'http://localhost:8080/presupuesto';
 
-
-  
-  // -----------------------------------------
-
   crearFactura(factura: any): Observable<any> {
     return this.http.post<any>(`${this.urlFactura}/crear`, factura);
   }
@@ -33,7 +29,7 @@ export class FacturaServicio {
 
   actualizarEstadoFactura(idPresupuesto: number, estado: string) {
     return this.http.put(
-      `${this.urlFactura}/cambiarEstdo/${idPresupuesto}`,
+      `${this.urlFactura}/cambiarEstado/${idPresupuesto}`,
       `"${estado}"`,
       { headers: { 'Content-Type': 'application/json' } }
     );
@@ -41,6 +37,23 @@ export class FacturaServicio {
 
   obtenerUltimasFactura(){
     return this.http.get<any[]>(`${this.urlFactura}/ultimas`);
+  }
+
+  obtenerUltimasFacturaCliente(idCliente: number){
+    return this.http.get<any[]>(`${this.urlFactura}/ultimas/cliente/${idCliente}`);
+  }
+
+  obtenerFacturaPorIdCliente(idCliente: number){
+    return this.http.get<any[]>(`${this.urlFactura}/obtenerPorCliente/${idCliente}`);
+  }
+
+  obtenerFacturaPorIdClienteEstado(idCliente: number, estado: string) {
+  return this.http.get<any[]>(
+    `${this.urlFactura}/obtenerPorCliente/${idCliente}/estado`,
+    {
+        params: { estado }
+      }
+    );
   }
   
 }

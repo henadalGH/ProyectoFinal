@@ -7,11 +7,12 @@ import { Location } from '@angular/common';
 import { ServiciosService } from '../../Servicio/servicios-service';
 import { TurnosService } from '../../Servicio/turnos-service';
 import { FormsModule } from '@angular/forms';
+import { Header } from "../../header/header";
 
 @Component({
   selector: 'app-mis-vehiculos',
   standalone: true,
-  imports: [Headercliente, RouterLink, FormsModule],
+  imports: [Headercliente, RouterLink, FormsModule, Header],
   templateUrl: './mis-vehiculos.html',
   styleUrl: './mis-vehiculos.css',
 })

@@ -110,6 +110,19 @@ public class TurnoController {
                 turnoService.obtenerTurnosPorFecha(fecha)
         );
     }
+
+    @GetMapping("/futuros")
+    public ResponseEntity<List<TurnoEstadosDTO>> obtenerTurnoFuturos(@RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+        return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenerTurnofuturos(fecha), HttpStatus.OK);
+    }
+    
+
+    @GetMapping("/futuros/{idCliente}")
+    public ResponseEntity<List<TurnoEstadosDTO>> obtenerTrunoFuturosPorCliente(@PathVariable Long idCliente,
+         @RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+        
+            return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenrTurnoFururosPorCliente(idCliente, fecha), HttpStatus.OK);
+    }
     
     
     

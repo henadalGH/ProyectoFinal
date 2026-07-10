@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../AuthServicio/auth-service';
 import { TurnosService } from '../../../Servicio/turnos-service';
 import { Router } from '@angular/router';
+import { Headercliente } from "../../headercliente/headercliente";
+import { Header } from "../../../header/header";
 
 
 @Component({
   selector: 'app-mis-turnos',
-  imports: [],
+  imports: [Headercliente, Header],
   templateUrl: './mis-turnos.html',
   styleUrl: './mis-turnos.css',
 })

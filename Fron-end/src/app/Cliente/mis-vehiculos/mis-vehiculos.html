@@ -1,11 +1,19 @@
-<app-headercliente></app-headercliente>
+<div class="layout">
+  <aside class="sidebar">
+    <!-- menú -->
+     <app-headercliente></app-headercliente>
+  </aside>
 
-<div class="contenedor">
+  <main class="content">
+    <!-- contenido principal -->
+     <app-header></app-header>
+     <div class="contenedor">
+  
   <div class="header">
     <h1>Mis vehículos</h1>
 
     <div class="footer">
-      <button class="btn-back" (click)="volverAtras()">⬅ Volver</button>
+      <button class="btn-back" (click)="volverAtras()">Volver</button>
     </div>
     <button class="btn-primary" [routerLink]="['/registrarVehiculo']">
       + Agregar vehículo
@@ -20,7 +28,7 @@
     <div class="grid">
       @for (vehi of vehiculo; track $index) {
         <div class="card">
-          <div class="card-header">
+          <div class="card-header"> 
             <h2>{{ vehi.marca }} {{ vehi.modelo }}</h2>
             <span class="anio">{{ vehi.anio }}</span>
           </div>
@@ -38,5 +46,12 @@
 
   
 </div>
+
+
+
+  </main>
+</div>
+
+
 
 

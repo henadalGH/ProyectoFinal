@@ -1,0 +1,164 @@
+<div class="layout">
+  <!-- MENU LATERAL -->
+  <aside class="sidebar">
+
+      <app-headercliente></app-headercliente>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="content">
+        <app-header></app-header>
+
+    <div class="facturas-container">
+      <!-- TITULO -->
+      <section class="titulo">
+        <h1>Mis Facturas</h1>
+        <p>
+          Consulta tus facturas, pagos pendientes y comprobantes.
+        </p>
+      </section>
+
+      <!-- PENDIENTES -->
+
+      <section class="bloque">
+
+        <h2>Facturas pendientes</h2>
+
+
+          @for (fac of facturas; track $index) {
+
+            <div class="factura-card">
+
+          <div class="icono">
+            <i class="fas fa-file-invoice"></i>
+          </div>
+
+
+          <div class="info">
+
+            <h3>
+              Factura {{numeroFacturaFormateado}}
+            </h3>
+
+            <p>
+              Reparación vehículo {{fac.marcaVehiculo}} {{fac.modeloVehiculo}}
+            </p>
+
+            <small>
+              Fecha emisión: {{fac.fechaRegistro}}
+            </small>
+
+          </div>
+
+
+
+          <div class="importe">
+
+            <strong>
+              ${{fac.total}}
+            </strong>
+
+            
+              @if (fac.estadoPresupuesto == 'ENVIADO') {
+                <span class="pendiente">
+                  Pendiente
+                </span>
+              } @else {
+                <span class="pendiente">
+                  Pagado
+                </span>
+              }
+          </div>
+
+          <div class="acciones">
+
+            <button (click)="verFactura(fac.id)">
+              Ver
+            </button>
+
+            <button class="pagar" (click)="pagarFactura(fac.id)">
+              Pagar
+            </button>
+
+          </div>
+
+
+        </div>
+
+          }
+        
+
+
+      </section>
+
+
+    
+      <!-- ULTIMAS FACTURAS -->
+
+
+      <section class="bloque">
+
+        <h2>Últimas facturas</h2>
+
+
+        <div class="tabla">
+
+
+          <div class="fila cabecera">
+
+            <span>N°</span>
+            <span>Detalle</span>
+            <span>Fecha</span>
+            <span>Monto</span>
+            <span>Estado</span>
+
+          </div>
+
+
+            @for (ult of ultimas; track $index) {
+              <div class="fila">
+
+            <span>
+              Factura {{numeroFacturaFormateado}}
+            </span>
+
+            <span>
+              Cambio de aceite
+            </span>
+
+            <span>
+              {{ult.fechaRegistro}}
+            </span>
+
+            <span>
+              {{ult.monto}}
+            </span>
+
+            <span class="pagada">
+              @if(ult.estado == 'ENVIADO'){
+                Pediente
+              } @else {
+                Pagada
+              }
+              
+            </span>
+
+
+          </div>
+              
+            }
+          
+
+         </div>
+
+
+      </section>
+
+
+
+    </div>
+
+
+  </main>
+
+</div>

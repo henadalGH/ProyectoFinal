@@ -1,29 +1,32 @@
-<header class="header-empleado">
+<aside class="sidebar-empleado">
+
     <div class="brand">
-        <h1>W Motor <span>Staff</span></h1>
+        
+            <h1>W Motor <span>Pro</span></h1>
     </div>
 
     <nav class="nav-empleado">
-        <button class="btn-nav" [routerLink]="['/homeEmpleado']" routerLinkActive="active">
-            <i class="fas fa-th-large"></i> <span>Inicio</span>
+
+        <button class="btn-nav"
+                [routerLink]="['/homeEmpleado']"
+                routerLinkActive="active">
+            <i class="fas fa-th-large"></i>
+            <span>Inicio</span>
         </button>
 
-        <button class="btn-nav" [routerLink]="['']" routerLinkActive="active">
-            <i class="fas fa-calendar-check"></i> <span>Mis ordenes</span>
+        <button class="btn-nav"
+                [routerLink]="['']"
+                routerLinkActive="active">
+            <i class="fas fa-calendar-check"></i>
+            <span>Mis órdenes</span>
         </button>
 
-        <button class="btn-nav" [routerLink]="['/ordenesTrabajo']" routerLinkActive="active">
-            <i class="fas fa-tools"></i> <span>Órdenes</span>
+        <button class="btn-nav"
+                [routerLink]="['/ordenesTrabajo']"
+                routerLinkActive="active">
+            <i class="fas fa-tools"></i>
+            <span>Órdenes</span>
         </button>
+
     </nav>
-
-    <div class="perfil-empleado">
-        <div class="info-user">
-            <span class="nombre">Operador</span>
-            <span class="estado"><i class="fas fa-circle"></i> En línea</span>
-        </div>
-        <button class="btn-salir" title="Cerrar Sesión" (click)="logout()">
-            <i class="fas fa-power-off">Salir</i>
-        </button>
-    </div>
-</header>
+</aside>

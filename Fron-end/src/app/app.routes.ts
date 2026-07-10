@@ -35,6 +35,8 @@ import { DetalleFactura } from './Administrados/Adminstrador/Facturacion/detalle
 import { VerFactura } from './Administrados/Adminstrador/Facturacion/ver-factura/ver-factura';
 import { ServiciosOfresidos } from './servicios-ofresidos/servicios-ofresidos';
 import { TurnoClienteCasual } from './Administrados/Turnos/turno-cliente-casual/turno-cliente-casual';
+import { Headercliente } from './Cliente/headercliente/headercliente';
+import { FacturasCliente } from './Cliente/facturas-cliente/facturas-cliente';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -73,6 +75,8 @@ export const routes: Routes = [
     {path: 'miHistorial/:id', component: MiHistorial, canActivate: [AuthGuard], data: {role: ['ROLE_CLIENTE']}},
     {path: "detalleVehiculo/:id", component: DetalleVehiculo},
     {path: "misTurnos", component: MisTurnos},
+    {path: "headerCliente", component: Headercliente},
+    {path: 'facturaCliente', component: FacturasCliente},
     
     
 

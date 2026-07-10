@@ -48,78 +48,81 @@ public class turnoServiceImpl implements TurnoService{
 
 
     @Override
-@Transactional
-public TurnoEntity creaTurnosDTO(TurnosDTO turno) {
+        @Transactional
+        public TurnoEntity creaTurnosDTO(TurnosDTO turno) {
 
-    System.out.println(turno.getFecha());
+        System.out.println(turno.getFecha());
 
-    TurnoEntity turnoEntity = new TurnoEntity();
-    turnoEntity.setDescripcion(turno.getDescripcion());
+        TurnoEntity turnoEntity = new TurnoEntity();
+        turnoEntity.setDescripcion(turno.getDescripcion());
 
-    // Servicio
-    ServicioEntity servicio =
-            servicioRepository.getReferenceById(turno.getIdServicio());
-    turnoEntity.setServicio(servicio);
+        // Servicio
+        ServicioEntity servicio =
+                servicioRepository.getReferenceById(turno.getIdServicio());
+        turnoEntity.setServicio(servicio);
 
-    // Vehículo del cliente registrado (si existe)
-    if (turno.getIdVehiculo() != null && turno.getIdVehiculo() > 0) {
-        VehiculoEntity vehiculo =
-                vehiculoRepository.getReferenceById(turno.getIdVehiculo());
-        turnoEntity.setVehiculo(vehiculo);
-    }
+        // Vehículo del cliente registrado (si existe)
+        if (turno.getIdVehiculo() != null && turno.getIdVehiculo() > 0) {
+                VehiculoEntity vehiculo =
+                        vehiculoRepository.getReferenceById(turno.getIdVehiculo());
+                turnoEntity.setVehiculo(vehiculo);
+        }
 
-    
-    turnoEntity.setFechaHora(turno.getFecha().getFechas());
+        // Fecha (solo si viene informada)
+        if (turno.getFecha() != null) {
+                turnoEntity.setFechaHora(turno.getFecha().getFechas());
+        } else {
+                turnoEntity.setFechaHora(null);
+        }
 
+        // Estado inicial según el tipo de cliente
+        EstadoTurnosEntity estado;
 
-    // Estado inicial según el tipo de cliente
-    EstadoTurnosEntity estado;
+        if (turno.getTurnoClienteCasualDTO() != null) {
+                estado = estadoTurnoRepository
+                        .findByEstadoTurno(EstadoTurnoEnums.CONFIRMADO)
+                        .orElseThrow(() -> new RuntimeException("Estado CONFIRMADO no encontrado"));
+        } else {
+                estado = estadoTurnoRepository
+                        .findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
+                        .orElseThrow(() -> new RuntimeException("Estado PENDIENTE_ASIGNACION no encontrado"));
+        }
 
-    if (turno.getTurnoClienteCasualDTO() != null) {
-        estado = estadoTurnoRepository
-                .findByEstadoTurno(EstadoTurnoEnums.CONFIRMADO)
-                .orElseThrow(() -> new RuntimeException("Estado CONFIRMADO no encontrado"));
-    } else {
-        estado = estadoTurnoRepository
-                .findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
-                .orElseThrow(() -> new RuntimeException("Estado PENDIENTE_ASIGNACION no encontrado"));
-    }
+        turnoEntity.setEstado(estado);
 
-    turnoEntity.setEstado(estado);
+        // Guardar el turno
+        TurnoEntity turnoGuardado = turnoRepository.save(turnoEntity);
 
-    // Guardar el turno
-    TurnoEntity turnoGuardado = turnoRepository.save(turnoEntity);
+        // Guardar datos del cliente ocasional
+        if (turno.getTurnoClienteCasualDTO() != null) {
 
-    // Guardar datos del cliente ocasional
-    if (turno.getTurnoClienteCasualDTO() != null) {
+                TurnoClienteCasualEntity clienteOcasional = new TurnoClienteCasualEntity();
 
-        TurnoClienteCasualEntity clienteOcasional =
-                new TurnoClienteCasualEntity();
+                clienteOcasional.setNombreCliente(
+                        turno.getTurnoClienteCasualDTO().getNombreCliente());
 
-        clienteOcasional.setNombreCliente(
-                turno.getTurnoClienteCasualDTO().getNombreCliente());
+                clienteOcasional.setContactoCliente(
+                        turno.getTurnoClienteCasualDTO().getContactoCliente());
 
-        clienteOcasional.setContactoCliente(
-                turno.getTurnoClienteCasualDTO().getContactoCliente());
+                clienteOcasional.setEmail(
+                        turno.getTurnoClienteCasualDTO().getEmailCliente());
 
-        clienteOcasional.setEmail(turno.getTurnoClienteCasualDTO().getEmailCliente());
+                clienteOcasional.setMarcaVehiculo(
+                        turno.getTurnoClienteCasualDTO().getMarcaVehiculo());
 
-        clienteOcasional.setMarcaVehiculo(
-                turno.getTurnoClienteCasualDTO().getMarcaVehiculo());
+                clienteOcasional.setModeloVehiculo(
+                        turno.getTurnoClienteCasualDTO().getModeloVehiculo());
 
-        clienteOcasional.setModeloVehiculo(
-                turno.getTurnoClienteCasualDTO().getModeloVehiculo());
+                clienteOcasional.setPatenteVehiculo(
+                        turno.getTurnoClienteCasualDTO().getPatenteVehiculo());
 
-        clienteOcasional.setPatenteVehiculo(
-                turno.getTurnoClienteCasualDTO().getPatenteVehiculo());
+                clienteOcasional.setTurno(turnoGuardado);
 
-        clienteOcasional.setTurno(turnoGuardado);
+                clienteCasualRepository.save(clienteOcasional);
+        }
 
-        clienteCasualRepository.save(clienteOcasional);
-    }
-
-    return turnoGuardado;
-}
+        return turnoGuardado;
+        }
 
 
    @Override
@@ -264,7 +267,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
     public List<TurnoEstadosDTO> obtenerturnoPorIdClienteEstado(Long idCliente) {
 
 
-        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
 
@@ -291,6 +294,25 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
             .map(this::toMapTurnoDto)
             .collect(Collectors.toList());
 
+    }
+
+
+    @Override
+    public List<TurnoEstadosDTO> obtenerTurnofuturos(LocalDate fecha) {
+
+        return turnoRepository.findByFechaHoraGreaterThanEqual(fecha)
+            .stream()
+            .map(this::toMapTurnoDto)
+            .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<TurnoEstadosDTO> obtenrTurnoFururosPorCliente(Long id, LocalDate fecha) {
+       return turnoRepository.findByVehiculoClienteIdAndFechaHoraGreaterThanEqual(id, fecha)
+            .stream()
+            .map(this::toMapTurnoDto)
+            .collect(Collectors.toList());
     }
 
     }

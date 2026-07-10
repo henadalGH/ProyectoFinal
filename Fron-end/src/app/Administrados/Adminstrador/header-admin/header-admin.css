@@ -2,9 +2,8 @@ html, body {
     height: 100%;
     margin: 0;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
-    background-color: black;
 }
-
+ 
 .layout {
     display: flex;
     height: 100vh;

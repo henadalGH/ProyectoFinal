@@ -1,6 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -49,7 +51,7 @@ public class PresupuestoController {
         (presupuestoService.obtenerPresupuestoPorIdVehiculo(idVehiculo), HttpStatus.OK);
     }
 
-    @PutMapping("cambiarEstado/{idPresupuesto}")
+    @PutMapping("/cambiarEstado/{idPresupuesto}")
     public ResponseEntity<ResponceDTO> cambiarEstadoPresupuesto(@PathVariable Long idPresupuesto, @RequestBody EstadoPresupuestoEnum estado
     ) {
         return new ResponseEntity<ResponceDTO>(presupuestoService.cambiarEstadoPresupuesto(estado, idPresupuesto), HttpStatus.OK);
@@ -82,6 +84,23 @@ public class PresupuestoController {
     public ResponseEntity<List<UltimasFacturasDTO>> ultimas() {
         return ResponseEntity.ok(
                 presupuestoService.obtenerUltimasFactura()
+        );
+    }
+
+    @GetMapping("/obtenerPorCliente/{idCliente}")
+    public ResponseEntity<List<ObtenerPresupuestoDTO>> obtenerFachuraPorCliente(@PathVariable Long idCliente) {
+        return new ResponseEntity<List<ObtenerPresupuestoDTO>>(presupuestoService.obtenerPresupuestoPorIdCliente(idCliente), HttpStatus.OK);
+    }
+    
+    @GetMapping("/obtenerPorCliente/{idCliente}/estado")
+    public ResponseEntity<List<ObtenerPresupuestoDTO>> obtenerFachuraPorClienteAndEstado(@PathVariable Long idCliente, @RequestParam EstadoPresupuestoEnum estado) {
+        return new ResponseEntity<List<ObtenerPresupuestoDTO>>(presupuestoService.obtenerPresupuestPorEstadoAndCliente(idCliente, estado), HttpStatus.OK);
+    }
+
+     @GetMapping("/ultimas/cliente/{idCliente}")
+    public ResponseEntity<List<UltimasFacturasDTO>> ultimasdelCliente(@PathVariable Long idCliente) {
+        return ResponseEntity.ok(
+                presupuestoService.obtenerUltimasFacturaPorCliente(idCliente)
         );
     }
 }

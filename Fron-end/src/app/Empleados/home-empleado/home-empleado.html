@@ -1,5 +1,14 @@
-<app-header-empleado></app-header-empleado>
+<div class="layout">
+  <aside class="sidebar">
+    <!-- menú -->
+     <app-header-empleado></app-header-empleado>
+  </aside>
 
+  <main class="content">
+    <!-- contenido principal -->
+
+    <app-header></app-header>
+    
 <div class="titulo">
     <h1>Trabajos del día {{ fecha | date:'dd/MM/yyyy' }}</h1>
     <p>Órdenes asignadas para la jornada actual</p>
@@ -45,6 +54,8 @@
                 <button class="btn-detalle" (click)="verOrden(ord.idOrden)">
                     Ver detalle
                 </button>
+
+                <button class="btn-cancelar">Cancelar</button>
             </div>
 
         </div>
@@ -60,3 +71,7 @@
     }
 
 </div>
+  </main>
+</div>
+
+

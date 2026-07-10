@@ -1,6 +1,13 @@
-<app-headercliente></app-headercliente>
+<div class="layout">
+  <aside class="sidebar">
+    <!-- menú -->
+    <app-headercliente></app-headercliente>
+  </aside>
 
-<div class="dashboard-container">
+  <main class="content">
+    <!-- contenido principal -->
+     <app-header></app-header>
+     <div class="dashboard-container">
 
   <!-- ===== BIENVENIDA ===== -->
   <div class="titulo">
@@ -16,7 +23,7 @@
 
     <div class="cantidad">
       <div class="icono">
-        <i class="fas fa-car"></i>
+        <i class="fas fa-car">{{vehiculo.length}}</i>
       </div>
 
       <div class="info">
@@ -27,30 +34,18 @@
 
     <div class="cantidad">
       <div class="icono">
-        <i class="fas fa-calendar-check"></i>
+        <i class="fas fa-calendar-check">{{turnosPen.length}}</i>
       </div>
 
       <div class="info">
         <h3>Turnos</h3>
-        @if (turnosPen != null) {
+        <p>Turnos pendientes</p>
+        @if (turnosPen.length > 0) {
           <button [routerLink]="['/misTurnos']">Ver detalles</button>
         }
-        @else {
-          <p>No ahi turnos pendientes</p>
-        }
+        
 
 
-      </div>
-    </div>
-
-    <div class="cantidad">
-      <div class="icono">
-        <i class="fas fa-file-invoice-dollar"></i>
-      </div>
-
-      <div class="info">
-        <h3>Presupuestos</h3>
-        <p>Esperando aprobación</p>
       </div>
     </div>
 
@@ -60,8 +55,8 @@
       </div>
 
       <div class="info">
-        <h3>Reparaciones</h3>
-        <p>Vehículos en el taller</p>
+        <h3>Facturas</h3>
+        <p>Facturas pendiente</p>
       </div>
     </div>
 
@@ -70,104 +65,39 @@
   <!-- ===== GRID PRINCIPAL ===== -->
   <div class="panel-grid">
 
-    <div class="panel-card presu">
-      <div class="panel-header">
-        <i class="fas fa-file-signature"></i>
-        <h2>Presupuestos pendientes</h2>
-      </div>
-
-      <p>No hay presupuestos pendientes actualmente.</p>
-    </div>
-
-    <div class="panel-card vehiculo">
-      <div class="panel-header">
-        <i class="fas fa-car-side"></i>
-        <h2>Vehículos en el taller</h2>
-      </div>
-
-      <p>No hay vehículos en reparación.</p>
-    </div>
-
     <div class="panel-card turno">
       <div class="panel-header">
         <i class="fas fa-calendar-alt"></i>
         <h2>Próximos turnos</h2>
       </div>
-    </div>
+      @for (fut of turFuturos; track $index) {
 
-  </div>
+        <div class="fila-turno">
 
-</div>
-
-
-<div class="vehiculo">
-
-  <div class="vehiculo-header">
-    <h1>Mis vehículos</h1>
-    <p>Consulta rápidamente la información de tus vehículos registrados.</p>
-    <button [routerLink]="['/registrarVehiculo']">Agregar Vehiculo</button>
-  </div>
-
-  @if (vehiculo.length > 0) {
-
-    <div class="vehiculo-grid">
-
-      @for (vehi of vehiculo; track $index) {
-
-        <div class="vehiculo-card">
-
-          <div class="card-top">
-
-            <div class="icono-vehiculo">
-              <i class="fas fa-car-side"></i>
+            <div class="col-fecha">
+                {{ fut.fecha }}
             </div>
 
-            <div class="vehiculo-info">
-              <h2>{{vehi.marca}} {{vehi.modelo}}</h2>
-              <span>{{vehi.patente}}</span>
+            <div class="col-vehiculo">
+                {{ fut.marca }} {{ fut.modelo }}
             </div>
 
-          </div>
-
-          <div class="card-body">
-
-            <p>
-              <strong>Marca:</strong>
-              {{vehi.marca}}
-            </p>
-
-            <p>
-              <strong>Modelo:</strong>
-              {{vehi.modelo}}
-            </p>
-
-            <p>
-              <strong>Patente:</strong>
-              {{vehi.patente}}
-            </p>
-
-          </div>
-
-          <div class="card-footer">
-            <button class="btn-ver" (click)="verVehiculo(vehi.id)">
-              <i class="fas fa-eye"></i>
-              Ver vehículo
-            </button>
-          </div>
+            <div class="col-servicio">
+                {{ fut.nombreServicio }}
+            </div>
 
         </div>
 
-      }
-
+        }
     </div>
 
-  } @else {
-
-    <div class="sin-vehiculos">
-      <i class="fas fa-car-crash"></i>
-      <h3>No posee vehículos registrados</h3>
-    </div>
-
-  }
+  </div>
 
 </div>
+
+  </main>
+</div>
+
+
+
+

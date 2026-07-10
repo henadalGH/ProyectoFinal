@@ -94,4 +94,26 @@ export class TurnosService {
     );
   }
   
+
+  obtenerTurnoFuturos(fecha: string): Observable<any[]> {
+
+    const params = new HttpParams()
+      .set('fecha', fecha);
+
+    return this.http.get<any[]>(
+      `${this.url}/futuros`,
+      { params }
+    );
+  }
+
+  obtenerTurnosFuturosPorCliente(fecha: string , idCliente: number): Observable<any[]> {
+
+    const params = new HttpParams()
+      .set('fecha', fecha);
+
+    return this.http.get<any[]>(
+      `${this.url}/futuros/${idCliente}`,
+      { params }
+    );
+  }
 }

@@ -1,7 +1,13 @@
 <div class="layout">
   <aside class="sidebar">
     <!-- menú -->
-     <app-header-admin></app-header-admin>
+
+        @if (rol == 'ADMIN') {
+            <app-header-admin></app-header-admin>
+        } @else{
+            <app-headercliente></app-headercliente>
+        }
+
   </aside>
 
   <main class="content">
@@ -10,8 +16,12 @@
     <app-header></app-header>
 
     <div class="btn">
-        <button class="btn-volver">Volver</button>
-        <button class="btn-enviar">Enviar al Cliente</button>
+        <button class="btn-volver" (click)="volverAtras()">Volver</button>
+
+        @if (factura.estadoPresupuesto == 'PENDIENTE') {
+             <button class="btn-enviar" (click)="enviarFactura(factura.id)">Enviar al Cliente</button>
+        }
+       
     </div>
         @if (factura != null) {
 

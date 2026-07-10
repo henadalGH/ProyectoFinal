@@ -5,7 +5,7 @@
 .header-cliente{
     width: 300px;
     min-height: 100vh;
-    background: #1d2b63;
+    background: #162454;
     display: flex;
     flex-direction: column;
     padding: 25px 22px;
@@ -13,27 +13,20 @@
     color: #fff;
 }
 
-/*==========================
- LOGO
-===========================*/
 
-.logo{
-    font-size: 2rem;
-    font-weight: 800;
-    text-align: center;
-    margin-bottom: 40px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid rgba(255,255,255,.12);
-    letter-spacing: .5px;
+/* LOGO */
+.logo-section {
+    padding: 25px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-.logo span{
-    display: block;
-    font-size: .8rem;
-    color: #53b7ff;
-    margin-top: 8px;
-    font-weight: 600;
-    letter-spacing: 2px;
+.logo-section h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.logo-section span {
+    color: #38bdf8;
 }
 
 /*==========================

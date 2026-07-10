@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Servicio;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
@@ -30,6 +31,9 @@ public interface TurnoService {
     public TurnoEstadosDTO obtenerTurnoPorId(Long id);
 
     public List<TurnoEstadosDTO> obtenerTurnosPorFecha(java.time.LocalDate fecha);
+
+    public List<TurnoEstadosDTO> obtenerTurnofuturos(LocalDate fecha);
+    public List<TurnoEstadosDTO> obtenrTurnoFururosPorCliente(Long id, LocalDate fecha);
 
 
 }

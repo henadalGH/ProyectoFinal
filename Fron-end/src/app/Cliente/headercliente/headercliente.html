@@ -1,14 +1,14 @@
 <header class="header-cliente">
 
   <!-- LOGO -->
-  <div class="logo">
-    WMotorPro<span>CLIENTE</span>
-  </div>
+    <div class="logo-section">
+            <h1>W Motor <span>Pro</span></h1>
+        </div>
 
   <!-- MENU -->
   <nav class="nav-links">
 
-    <button class="nav-btn"
+    <button class="nav-btn"s
       [routerLink]="['/homeCliente']"
       routerLinkActive="active">
       <i class="fas fa-home"></i>
@@ -16,33 +16,22 @@
     </button>
 
 
-    <button class="nav-btn">
+    <button class="nav-btn" [routerLink]="['/misVehiculos']">
       <i class="fas fa-file-invoice-dollar"></i>
-      <span>Presupuesto</span>
+      <span>Mis vehiculo</span>
     </button>
 
-    <button class="nav-btn">
+    <button class="nav-btn" [routerLink]="['/misTurnos']">
       <i class="fas fa-clock-rotate-left"></i>
-      <span>Historial</span>
+      <span>Mis turnos</span>
+    </button>
+
+    <button class="nav-btn" [routerLink]="['/facturaCliente']">
+      <i class="fas fa-clock-rotate-left"></i>
+      <span>Mis facturas</span>
     </button>
 
   </nav>
 
-  <!-- ACCIONES -->
-  <div class="user-actions">
-
-    <button class="btn-notificacion">
-      <i class="fas fa-bell"></i>
-      <span>Notificaciones</span>
-    </button>
-
-    <button class="btn-logout"
-      title="Cerrar Sesión"
-      (click)="logout()">
-      <i class="fas fa-sign-out-alt"></i>
-      <span>Salir</span>
-    </button>
-
-  </div>
 
 </header> 
