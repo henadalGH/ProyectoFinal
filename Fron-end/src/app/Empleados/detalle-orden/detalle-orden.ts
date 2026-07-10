@@ -4,6 +4,7 @@ import { HeaderEmpleado } from '../header-empleado/header-empleado';
 import { OrdenTrabajoService } from '../../Servicio/orden-trabajo-service';
 import { FormsModule } from '@angular/forms';
 import { Header } from "../../header/header";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-orden',
@@ -16,7 +17,8 @@ export class DetalleOrden implements OnInit {
   constructor(
     private aRoute: ActivatedRoute,
     private ordenService: OrdenTrabajoService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   idOrden: number = 0;
@@ -25,6 +27,7 @@ export class DetalleOrden implements OnInit {
   contadorId: number = 1;
   detalleOrden: any[]=[];
   botonDeshabilitado = false;
+  soloLectura: boolean = false;
 
   ngOnInit(): void {
 
@@ -40,6 +43,7 @@ export class DetalleOrden implements OnInit {
           next: (respuesta: any) => {
             this.orden = respuesta;
             this.botonDeshabilitado = this.orden.estado === 'PARA_FACTURAR';
+            this.soloLectura = this.orden.estado === 'CANCELADA';
             console.log(this.orden.estado);
             console.log(this.botonDeshabilitado);
           },
@@ -122,6 +126,10 @@ export class DetalleOrden implements OnInit {
       
     )
 
+  }
+
+  volverAtras(){
+    this.location.back();
   }
 
   

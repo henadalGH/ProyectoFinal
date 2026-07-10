@@ -54,4 +54,8 @@ export class OrdenTrabajoService {
   obtenerOrdenPorEstado(estado: string){
     return this.http.get<any[]>(`${this.urlOrden}/estado/${estado}`);
   }
+
+  cancelarOrden(idOrden: number, motivo: string){
+    return this.http.put(`${this.urlOrden}/cancelar/${idOrden}`, {motivo});
+  }
 }

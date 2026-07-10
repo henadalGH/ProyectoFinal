@@ -1,29 +1,28 @@
-<div class="layout">
+<div class="layout"> 
   <aside class="sidebar">
-    <!-- menú --> 
     <app-header-empleado></app-header-empleado>
-
   </aside>
 
   <main class="content">
-    <!-- contenido principal -->
-     <app-header></app-header>
+
+    <app-header></app-header>
   
     <div class="orden-container">
 
-    <div class="titulo">
-        <h1>Orden de Trabajo</h1>
-        <p>Detalle y ejecución de tareas asignadas</p>
-    </div>
+      <div class="titulo">
+          <h1>Orden de Trabajo</h1>
+          <p>Detalle y ejecución de tareas asignadas</p>
+      </div>
 
-    @if (orden != null) {
+      @if (orden != null) {
 
-    <div class="orden-card">
+      <div class="orden-card">
 
         <div class="orden-numero">
             <h2>ORDEN DE REPARACIÓN</h2>
             <span>N° {{orden.idOrden}}</span>
         </div>
+
 
         <div class="encabezadoOrden">
 
@@ -35,6 +34,7 @@
                 <p><strong>Email:</strong> {{orden.email}}</p>
             </div>
 
+
             <div class="datosVehiculo">
                 <h3>Vehículo</h3>
 
@@ -45,17 +45,26 @@
 
         </div>
 
+
         <div class="seccion">
 
             <div class="seccion-header">
+
                 <h3>Trabajos Realizados</h3>
+
+
+                @if (!soloLectura) {
 
                 <button
                     class="btn-agregar"
                     (click)="agregarFila()">
                     + Agregar línea
                 </button>
+
+                }
+
             </div>
+
 
             <div class="tabla-wrapper">
 
@@ -67,107 +76,140 @@
                             <th>Código</th>
                             <th>Trabajo realizado</th>
                             <th>Tipo item</th>
+
+                            @if (!soloLectura) {
                             <th>Acción</th>
+                            }
+
                         </tr>
                     </thead>
 
+
                     <tbody>
 
-                        <!-- Detalles guardados -->
-                        @for (detalle of detalleOrden; track detalle.id) {
 
-                        <tr>
+                    @for (detalle of detalleOrden; track detalle.id) {
 
-                            <td>
-                                <input
-                                    type="number"
-                                    placeholder="Cantidad"
-                                    [(ngModel)]="detalle.cantidad">
-                            </td>
+                    <tr>
 
-                            <td>
-                                <input
-                                    type="text"
-                                    placeholder="Código"
-                                    [(ngModel)]="detalle.codigo">
-                            </td>
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="Cantidad"
+                                [(ngModel)]="detalle.cantidad"
+                                [disabled]="soloLectura">
+                        </td>
 
-                            <td>
-                                <input
-                                    type="text"
-                                    placeholder="Trabajo realizado"
-                                    [(ngModel)]="detalle.trabajoRealizado">
-                            </td>
 
-                            <td>
-                                <select [(ngModel)]="detalle.tipoItem">
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Código"
+                                [(ngModel)]="detalle.codigo"
+                                [disabled]="soloLectura">
+                        </td>
 
-                                    <option value="REPUESTO">Repuesto</option>
-                                    <option value="MANO_OBRA">Mano de obra</option>
-                                    <option value="SERVICIO">Servicio</option>
 
-                                </select>
-                            </td>
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Trabajo realizado"
+                                [(ngModel)]="detalle.trabajoRealizado"
+                                [disabled]="soloLectura">
+                        </td>
 
-                            <td>
-                                <button
-                                    class="btn-eliminar"
-                                    (click)="eliminarFila(detalle.id)">
-                                    Eliminar
-                                </button>
-                            </td>
 
-                        </tr>
+                        <td>
+                            <select 
+                                [(ngModel)]="detalle.tipoItem"
+                                [disabled]="soloLectura">
+
+                                <option value="REPUESTO">Repuesto</option>
+                                <option value="MANO_OBRA">Mano de obra</option>
+                                <option value="SERVICIO">Servicio</option>
+
+                            </select>
+                        </td>
+
+
+                        @if (!soloLectura) {
+
+                        <td>
+                            <button
+                                class="btn-eliminar"
+                                (click)="eliminarFila(detalle.id)">
+                                Eliminar
+                            </button>
+                        </td>
+
+                        }
+
+                    </tr>
+
+                    }
+
+
+
+                    @for (fil of filas; track fil.id) {
+
+                    <tr>
+
+                        <td>
+                            <input
+                                type="number"
+                                placeholder="Cantidad"
+                                [(ngModel)]="fil.cantidad"
+                                [disabled]="soloLectura">
+                        </td>
+
+
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Código"
+                                [(ngModel)]="fil.codigo"
+                                [disabled]="soloLectura">
+                        </td>
+
+
+                        <td>
+                            <input
+                                type="text"
+                                placeholder="Trabajo realizado"
+                                [(ngModel)]="fil.trabajoRealizado"
+                                [disabled]="soloLectura">
+                        </td>
+
+
+                        <td>
+                            <select 
+                                [(ngModel)]="fil.tipoItem"
+                                [disabled]="soloLectura">
+
+                                <option value="REPUESTO">Repuesto</option>
+                                <option value="MANO_OBRA">Mano de obra</option>
+                                <option value="SERVICIO">Servicio</option>
+
+                            </select>
+                        </td>
+
+
+                        @if (!soloLectura) {
+
+                        <td>
+                            <button
+                                class="btn-eliminar"
+                                (click)="eliminarFila(fil.id)">
+                                Eliminar
+                            </button>
+                        </td>
 
                         }
 
-                        <!-- Nuevas filas -->
-                        @for (fil of filas; track fil.id) {
+                    </tr>
 
-                        <tr>
+                    }
 
-                            <td>
-                                <input
-                                    type="number"
-                                    placeholder="Cantidad"
-                                    [(ngModel)]="fil.cantidad">
-                            </td>
-
-                            <td>
-                                <input
-                                    type="text"
-                                    placeholder="Código"
-                                    [(ngModel)]="fil.codigo">
-                            </td>
-
-                            <td>
-                                <input
-                                    type="text"
-                                    placeholder="Trabajo realizado"
-                                    [(ngModel)]="fil.trabajoRealizado">
-                            </td>
-
-                            <td>
-                                <select [(ngModel)]="fil.tipoItem">
-
-                                    <option value="REPUESTO">Repuesto</option>
-                                    <option value="MANO_OBRA">Mano de obra</option>
-                                    <option value="SERVICIO">Servicio</option>
-
-                                </select>
-                            </td>
-
-                            <td>
-                                <button
-                                    class="btn-eliminar"
-                                    (click)="eliminarFila(fil.id)">
-                                    Eliminar
-                                </button>
-                            </td>
-
-                        </tr>
-
-                        }
 
                     </tbody>
 
@@ -177,25 +219,33 @@
 
         </div>
 
+
+
         <div class="seccion">
 
             <h3>Observaciones del Mecánico</h3>
 
             <textarea
                 rows="5"
-                placeholder="Detalle aquí observaciones, diagnósticos o recomendaciones...">
+                placeholder="Detalle aquí observaciones, diagnósticos o recomendaciones..."
+                [disabled]="soloLectura">
             </textarea>
 
         </div>
 
+
+
         <div class="acciones">
 
-            <button class="bnt-volver">Volver
-                
+
+            <button class="bnt-volver" (click)="volverAtras()">
+                Volver
             </button>
-            
-            
-            
+
+
+
+            @if (!soloLectura) {
+
             <button
                 type="button"
                 class="btn-guardar"
@@ -205,19 +255,29 @@
 
             </button>
 
+
+
             <button
                 class="btn-finalizar"
                 (click)="terminarOrden()"
                 [disabled]="botonDeshabilitado">
+
                 Finalizar Trabajo
+
             </button>
+
+            }
+
 
         </div>
 
+
+      </div>
+
+      }
+
     </div>
 
-    }
+  </main>
 
-</div>
-    </main>
 </div>

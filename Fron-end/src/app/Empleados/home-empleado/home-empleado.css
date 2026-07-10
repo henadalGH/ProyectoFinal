@@ -69,6 +69,32 @@
     box-shadow: 0 12px 25px rgba(0,0,0,.12);
 }
 
+.btn-cancelar{
+    background:#dc2626;
+    color:#fff;
+    border:none;
+    padding:10px 20px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.2s;
+    margin-left: 10px;
+}
+
+.btn-cancelar:hover{
+    background:#b91c1c;
+}
+
+.btn-cancelar:active{
+    transform:scale(.98);
+}
+
+.btn-cancelar:disabled{
+    background:#9ca3af;
+    cursor:not-allowed;
+}
+
 /* ===========================
    HEADER
 =========================== */

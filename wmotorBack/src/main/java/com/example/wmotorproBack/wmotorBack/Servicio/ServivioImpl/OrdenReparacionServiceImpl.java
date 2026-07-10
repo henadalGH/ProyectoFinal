@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.CancelarOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetalleOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
@@ -322,5 +323,24 @@ public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadE
 
 
         return ordenTrabajoEmpleado;
+    }
+
+
+    @Override
+    public ResponceDTO motivoCancelacion(Long idOrden, CancelarOrdenDTO cancelar) {
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        OrdenTrabajoEntity orden = ordenTrabajoRepository.findById(idOrden)
+        .orElseThrow(() -> new RuntimeException("el id de la orden no se encuentra"));
+
+        EstadoOrdenEntity estado = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.CANCELADA)
+        .orElseThrow();
+
+        orden.setEstadoOrden(estado);
+        orden.setMotivoCancelacion(cancelar.getMotivoCAncelacion());
+        ordenTrabajoRepository.save(orden);
+
+        responceDTO.setMensage("Orden cancelada correctamente");
+        return responceDTO;
     }
 }

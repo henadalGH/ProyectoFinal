@@ -2,6 +2,8 @@ package com.example.wmotorproBack.wmotorBack.Servicio;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.CancelarOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
@@ -21,7 +23,7 @@ public interface OrdenReparacionService {
     ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadEnum prioridad);
     List<OrdenTrabajoEmpleadoDTO> obtenerOrdenePorEmpleado(Long idEmpleado, LocalDate fecha);
     OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orden);
-
+    ResponceDTO motivoCancelacion(Long idOrden, CancelarOrdenDTO cancelar);
    
 
 }

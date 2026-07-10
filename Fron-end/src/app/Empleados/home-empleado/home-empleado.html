@@ -55,7 +55,12 @@
                     Ver detalle
                 </button>
 
-                <button class="btn-cancelar">Cancelar</button>
+                @if (ord.estado == 'ASIGNADA') {
+                    
+                <button class="btn-cancelar" (click)="cancelarOrden(ord.idOrden)">
+                    Cancelar
+                </button>
+                }
             </div>
 
         </div>

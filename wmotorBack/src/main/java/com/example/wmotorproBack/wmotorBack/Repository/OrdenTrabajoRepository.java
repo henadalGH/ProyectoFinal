@@ -14,5 +14,6 @@ public interface OrdenTrabajoRepository extends JpaRepository<OrdenTrabajoEntity
     List<OrdenTrabajoEntity> findByEstadoOrden(EstadoOrdenEntity estadoOrden);
     List<OrdenTrabajoEntity> findByEmpleadoAndTurnoFechaHora(EmpleadoEntity empleado, LocalDate fecha);
     
+    
 
 }

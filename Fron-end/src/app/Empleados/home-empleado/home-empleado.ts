@@ -44,8 +44,21 @@ export class HomeEmpleado implements OnInit{
     this.router.navigate(['detalleOrden', idOrden]);
   }
 
-  CancelarOrden(idOrden: number){
+  cancelarOrden(idOrden: number) {
+
+  if (confirm("¿Está seguro de cancelar la orden?")) {
+
+    this.ordenService.cancelarOrden(idOrden, "Cliente no asistió al turno").subscribe({
+      next: () => {
+        alert("Orden cancelada correctamente");
+      },
+      error: () => {
+        alert("Ocurrió un error al cancelar la orden");
+      }
+    });
 
   }
+
+}
 
 }

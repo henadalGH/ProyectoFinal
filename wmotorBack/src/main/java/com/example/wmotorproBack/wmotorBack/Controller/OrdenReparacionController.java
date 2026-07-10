@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.CancelarOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
@@ -81,6 +82,13 @@ public class OrdenReparacionController {
         , @RequestParam LocalDate fecha
     ) {
         return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.obtenerOrdenePorEmpleado(idEmpleado, fecha), HttpStatus.OK);
+    }
+
+
+    @PutMapping("/cancelar/{idOrden}")
+    public ResponseEntity<ResponceDTO> cancelarOrden(@PathVariable Long idOrden, @RequestBody CancelarOrdenDTO cancelar) {
+
+        return new ResponseEntity<ResponceDTO>(ordenReparacionService.motivoCancelacion(idOrden, cancelar), HttpStatus.OK);
     }
     
     
