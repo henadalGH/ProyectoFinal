@@ -33,6 +33,9 @@ public class RepuestosEntity {
     @Column(name = "codigo")
     private String codigo;
 
+    @Column(name = "stock")
+    private Long stock;
+
     @OneToMany
     @JsonIgnore
     private List<DetalleRepuestoEntity> repuesto = new ArrayList<>();
