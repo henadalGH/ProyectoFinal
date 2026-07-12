@@ -1,5 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
+import java.time.LocalDate;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
 
@@ -30,5 +32,6 @@ public class OrdenTrabajoEmpleadoDTO {
     //Datos de la orden 
     private PrioridadEnum prioridad;
     private EstadoOrdenEnums estado;
+    private LocalDate fecha;
 
 }

@@ -99,6 +99,12 @@ public class OrdenReparacionController {
             return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.ordenesfuturasIdempleado(idEmpleado, fecha), HttpStatus.OK); 
         }
     
+        @GetMapping("/historialOrdenes/{idEmpleado}")
+    public ResponseEntity<List<OrdenTrabajoEmpleadoDTO>> obtenerHistorialOrdenesPorEmpleado(@PathVariable Long idEmpleado
+        ) 
+        {
+            return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.obtenerHistorialOrdenes(idEmpleado), HttpStatus.OK); 
+        }
     
 
 }

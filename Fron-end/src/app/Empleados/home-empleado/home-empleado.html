@@ -30,11 +30,17 @@
                     <span>{{ord.prioridad}}</span>
                 </div>
 
-                <div class="estado">
+                @if(ord.estado == 'PARA_FACTURAR'){
+                    <div class="estado">
+                    <h3>Estado: </h3>
+                    <span>TERMINADA</span>
+                </div>
+                } @else {
+                    <div class="estado">
                     <h3>Estado: </h3>
                     <span>{{ord.estado}}</span>
                 </div>
-
+                }
                 <div class="vehiculo">
                     <h3>{{ord.marca}} {{ord.modelo}}</h3>
                     <span>{{ord.patente}}</span>
@@ -50,7 +56,8 @@
 
             </div>
 
-            <div class="orden-footer">
+            @if(ord.estado == 'ASIGNADA'){
+                <div class="orden-footer">
                 <button class="btn-detalle" (click)="verOrden(ord.idOrden)">
                     Ver detalle
                 </button>
@@ -62,6 +69,9 @@
                 </button>
                 }
             </div>
+            }
+
+            
 
         </div>
 

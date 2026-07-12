@@ -1,11 +1,114 @@
 <div class="layout">
-  <aside class="sidebar">
-    <!-- menú -->
-     <app-header-empleado></app-header-empleado>
-  </aside>
 
-  <main class="content">
-    <!-- contenido principal -->
-     <app-header></app-header>
-  </main>
+    <aside class="sidebar">
+        <app-header-empleado></app-header-empleado>
+    </aside>
+
+    <main class="content">
+
+        <app-header></app-header>
+
+        <div class="contenedor">
+
+            <!-- Título -->
+            <div class="titulo">
+                <div>
+                    <h1>Órdenes programadas</h1>
+                    <p>Trabajos asignados para los próximos días.</p>
+                </div>
+            </div>
+
+            <!-- Buscador -->
+            <div class="barra-superior">
+
+                <div class="buscador">
+                    <i class="fas fa-search"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Buscar por cliente, patente, vehículo o servicio..."
+                        [(ngModel)]="textoBusqueda">
+                </div>
+
+                <span class="cantidad">
+                    Total: {{ historial.length }} órdenes
+                </span>
+
+            </div>
+
+            <!-- Cabecera -->
+            <div class="cabecera-lista">
+
+                <div>Servicio</div>
+                <div>Cliente</div>
+                <div>Vehículo</div>
+                <div>Patente</div>
+                <div>Estado</div>
+                <div>Fecha</div>
+                <div>Prioridad</div>
+
+            </div>
+
+            <!-- Filas -->
+            @for (ord of historialFiltrado; track ord.idOrden) {
+
+            <div class="fila">
+
+                <div class="servicio">
+                    {{ ord.nombreServicio }}
+                </div>
+
+                <div>
+                    {{ ord.nombreCliente }}
+                </div>
+
+                <div>
+                    {{ ord.marca }} {{ ord.modelo }}
+                </div>
+
+                <div>
+                    {{ ord.patente }}
+                </div>
+
+                <div>
+                    <span class="estado">
+                        {{ ord.estado }}
+                    </span>
+                </div>
+
+                <div>
+                    {{ ord.fecha }}
+                </div>
+
+                <div>
+                    <span class="prioridad">
+                        {{ ord.prioridad }}
+                    </span>
+                </div>
+
+            </div>
+
+            }
+
+            <!-- Sin resultados -->
+            @if (historialFiltrado.length === 0) {
+
+            <div class="sin-datos">
+
+                <i class="fas fa-search"></i>
+
+                <h3>No se encontraron órdenes</h3>
+
+                <p>
+                    No existe ninguna orden que coincida con la búsqueda.
+                </p>
+
+            </div>
+
+            }
+
+        </div>
+
+    </main>
+
 </div>

@@ -45,6 +45,7 @@ export class DetalleFactura implements OnInit {
       this.ordenService.obtenerOrdenPorId(idOrden).subscribe(
         (respuesta: any) => {
           this.datos = respuesta;
+
         }
       );
 
@@ -57,8 +58,9 @@ export class DetalleFactura implements OnInit {
             precioUnitario: 0,
             importe: 0,
             trabajoRealizado: detalle.trabajoRealizado
+            
           }));
-
+          console.log("detalleOrden:", this.detalleOrden);
           this.calcularTotales();
 
         }
@@ -142,7 +144,7 @@ export class DetalleFactura implements OnInit {
 
         alert('Factura creada correctamente');
         console.log(resp);
-        this.router.navigate(['/facturas']);
+        this.router.navigate(['/paraFacturas']);
 
       },
 

@@ -22,11 +22,12 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PrioridadEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoClienteCasualEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.PrioridadEnum;
-import com.example.wmotorproBack.wmotorBack.Repository.DetalleOrdenReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoOrdenRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoTurnoRepository;
@@ -55,8 +56,6 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
     @Autowired
     private NumeracionService numeracionService;
 
-    @Autowired
-    private DetalleOrdenReposistory detalleOrdenReposistory;
 
     @Autowired
     private TurnoRepository turnoRepository;
@@ -67,70 +66,78 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService{
 
 
     @Override
-    public ResponceDTO crearReparacion(OrdenReparacionDTO orden) {
+public ResponceDTO crearReparacion(OrdenReparacionDTO orden) {
 
-        ResponceDTO response = new ResponceDTO();
+    ResponceDTO response = new ResponceDTO();
 
-        OrdenTrabajoEntity ordenTrabajoEntity = new OrdenTrabajoEntity();
-        ordenTrabajoEntity.setFechaEminsion(LocalDate.now());
-        ordenTrabajoEntity.setMotivoCancelacion(orden.getMotivoCancelacion());
-        ordenTrabajoEntity.setFechaFin(orden.getFechaCierre());
-        ordenTrabajoEntity.setFechaEntragaCliente(orden.getFechaEntragaCliente());
+    OrdenTrabajoEntity ordenTrabajoEntity = new OrdenTrabajoEntity();
+    ordenTrabajoEntity.setFechaEminsion(LocalDate.now());
+    ordenTrabajoEntity.setMotivoCancelacion(orden.getMotivoCancelacion());
+    ordenTrabajoEntity.setFechaFin(orden.getFechaCierre());
+    ordenTrabajoEntity.setFechaEntragaCliente(orden.getFechaEntragaCliente());
 
-        //Estado de la orden 
-        Optional<EstadoOrdenEntity> estadoOpt = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA);
-        if (estadoOpt.isEmpty()) {
-            response.setMensage("Error: Estado ASIGNADA no encontrado");
-            return response;
-        }
-        ordenTrabajoEntity.setEstadoOrden(estadoOpt.get());
+    // Estado de la orden
+    Optional<EstadoOrdenEntity> estadoOpt =
+            estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA);
 
-        //Seteando el empleado
-        Optional<EmpleadoEntity> empleadoOpt = empleadoRepository.findById(orden.getIdEmpleado());
-        if (empleadoOpt.isEmpty()) {
-            response.setMensage("Error: Empleado no encontrado");
-            return response;
-        }
-        ordenTrabajoEntity.setEmpleado(empleadoOpt.get());
-
-    
-        //Prioridar de la orden
-        Optional<PrioridadEntity> prioridadOpt = prioridadRepository.findByPrioridad(PrioridadEnum.MEDIA);
-        if (prioridadOpt.isEmpty()) {
-            response.setMensage("Error: Prioridad MEDIA no encontrada");
-            return response;
-        }
-        ordenTrabajoEntity.setPrioridad(prioridadOpt.get());
-
-        //Detalle de la orden
-
-        Long numeroOrden = numeracionService.generarNumeroOrden();
-        ordenTrabajoEntity.setNuemeroOrden(numeroOrden);
-
-        List<DetalleOrdenEntity> detalles = new ArrayList<>();
-
-        for(DetalleOrdenDTO detalle : orden.getDetalleOrden()){
-            
-            DetalleOrdenEntity detalleOrdenEntity = new DetalleOrdenEntity();
-            detalleOrdenEntity.setTrabajoRealizados(detalle.getTrabajoRealizado());
-            detalleOrdenEntity.setCantidad(detalle.getCantidad());
-            detalleOrdenEntity.setCodigo(detalle.getCodigo());
-            detalleOrdenEntity.setTipoItem(detalle.getTipoItem());
-
-            detalleOrdenEntity.setOrden(ordenTrabajoEntity);
-
-            detalles.add(detalleOrdenEntity);
-            detalleOrdenReposistory.save(detalleOrdenEntity);
-        }
-
-         ordenTrabajoEntity.setDetalleOrden(detalles);
-
-        ordenTrabajoRepository.save(ordenTrabajoEntity);
-
-        response.setMensage("La orden se ha creado con éxito");
+    if (estadoOpt.isEmpty()) {
+        response.setMensage("Error: Estado ASIGNADA no encontrado");
         return response;
     }
 
+    ordenTrabajoEntity.setEstadoOrden(estadoOpt.get());
+
+    // Empleado
+    Optional<EmpleadoEntity> empleadoOpt =
+            empleadoRepository.findById(orden.getIdEmpleado());
+
+    if (empleadoOpt.isEmpty()) {
+        response.setMensage("Error: Empleado no encontrado");
+        return response;
+    }
+
+    ordenTrabajoEntity.setEmpleado(empleadoOpt.get());
+
+    // Prioridad
+    Optional<PrioridadEntity> prioridadOpt =
+            prioridadRepository.findByPrioridad(PrioridadEnum.MEDIA);
+
+    if (prioridadOpt.isEmpty()) {
+        response.setMensage("Error: Prioridad MEDIA no encontrada");
+        return response;
+    }
+
+    ordenTrabajoEntity.setPrioridad(prioridadOpt.get());
+
+    // Número de orden
+    Long numeroOrden = numeracionService.generarNumeroOrden();
+    ordenTrabajoEntity.setNuemeroOrden(numeroOrden);
+
+    // Detalles
+    List<DetalleOrdenEntity> detalles = new ArrayList<>();
+
+    for (DetalleOrdenDTO detalle : orden.getDetalleOrden()) {
+
+        DetalleOrdenEntity detalleEntity = new DetalleOrdenEntity();
+        detalleEntity.setTrabajoRealizados(detalle.getTrabajoRealizado());
+        detalleEntity.setCantidad(detalle.getCantidad());
+        detalleEntity.setCodigo(detalle.getCodigo());
+        detalleEntity.setTipoItem(detalle.getTipoItem());
+
+        // Relación con la orden
+        detalleEntity.setOrden(ordenTrabajoEntity);
+
+        detalles.add(detalleEntity);
+    }
+
+    ordenTrabajoEntity.setDetalleOrden(detalles);
+
+    // Guarda la orden y, con CascadeType.ALL, también los detalles
+    ordenTrabajoRepository.save(ordenTrabajoEntity);
+
+    response.setMensage("La orden se ha creado con éxito");
+    return response;
+}
 
     @Override
     public List<ObtenerOrdenDTO> obtenerTodaLasOrdenes() {
@@ -303,28 +310,71 @@ public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadE
     }
 
 
-    @Override 
-    public OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orden) {
-        
-        OrdenTrabajoEmpleadoDTO ordenTrabajoEmpleado = new OrdenTrabajoEmpleadoDTO();
+    @Override
+public OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orden) {
 
-        ordenTrabajoEmpleado.setIdOrden(orden.getId());
-        ordenTrabajoEmpleado.setNombreCliente(orden.getTurno().getVehiculo().getCliente().getUsuario().getNombre() + 
-        orden.getTurno().getVehiculo().getCliente().getUsuario().getApellido());
-        ordenTrabajoEmpleado.setContacto(orden.getTurno().getVehiculo().getCliente().getUsuario().getContacto());
-        ordenTrabajoEmpleado.setEmail(orden.getTurno().getVehiculo().getCliente().getUsuario().getEmail());
-        ordenTrabajoEmpleado.setMarca(orden.getTurno().getVehiculo().getMarca());
-        ordenTrabajoEmpleado.setModelo(orden.getTurno().getVehiculo().getModelo());
-        ordenTrabajoEmpleado.setPatente(orden.getTurno().getVehiculo().getPatente());
-        ordenTrabajoEmpleado.setKiometraje(orden.getTurno().getVehiculo().getKilometraje());
-        ordenTrabajoEmpleado.setNombreServicio(orden.getTurno().getServicio().getNombre());
-        ordenTrabajoEmpleado.setDescripcionProblema(orden.getTurno().getDescripcion());
-        ordenTrabajoEmpleado.setPrioridad(orden.getPrioridad().getPrioridad());
-        ordenTrabajoEmpleado.setEstado(orden.getEstadoOrden().getEstadoOrden());
+    OrdenTrabajoEmpleadoDTO ordenTrabajoEmpleado = new OrdenTrabajoEmpleadoDTO();
 
+    ordenTrabajoEmpleado.setIdOrden(orden.getId());
 
-        return ordenTrabajoEmpleado;
+    TurnoEntity turno = orden.getTurno();
+
+    if (turno != null) {
+
+        // Cliente registrado
+        if (turno.getVehiculo() != null) {
+
+            VehiculoEntity vehiculo = turno.getVehiculo();
+
+            ordenTrabajoEmpleado.setNombreCliente(
+                    vehiculo.getCliente().getUsuario().getNombre() + " "
+                            + vehiculo.getCliente().getUsuario().getApellido());
+
+            ordenTrabajoEmpleado.setContacto(vehiculo.getCliente().getUsuario().getContacto());
+            ordenTrabajoEmpleado.setEmail(vehiculo.getCliente().getUsuario().getEmail());
+
+            ordenTrabajoEmpleado.setMarca(vehiculo.getMarca());
+            ordenTrabajoEmpleado.setModelo(vehiculo.getModelo());
+            ordenTrabajoEmpleado.setPatente(vehiculo.getPatente());
+            ordenTrabajoEmpleado.setKiometraje(vehiculo.getKilometraje());
+
+        }
+        // Cliente casual
+        else if (turno.getTurnoClienteCasualEntity() != null) {
+
+            TurnoClienteCasualEntity casual = turno.getTurnoClienteCasualEntity();
+
+            ordenTrabajoEmpleado.setNombreCliente(casual.getNombreCliente());
+            ordenTrabajoEmpleado.setContacto(casual.getContactoCliente());
+            ordenTrabajoEmpleado.setEmail(casual.getEmail());
+
+            ordenTrabajoEmpleado.setMarca(casual.getMarcaVehiculo());
+            ordenTrabajoEmpleado.setModelo(casual.getModeloVehiculo());
+            ordenTrabajoEmpleado.setPatente(casual.getPatenteVehiculo());
+
+            // Los clientes casuales no tienen kilometraje
+            ordenTrabajoEmpleado.setKiometraje(null);
+        }
+
+        if (turno.getServicio() != null) {
+            ordenTrabajoEmpleado.setNombreServicio(turno.getServicio().getNombre());
+        }
+
+        ordenTrabajoEmpleado.setDescripcionProblema(turno.getDescripcion());
     }
+
+    if (orden.getPrioridad() != null) {
+        ordenTrabajoEmpleado.setPrioridad(orden.getPrioridad().getPrioridad());
+    }
+
+    if (orden.getEstadoOrden() != null) {
+        ordenTrabajoEmpleado.setEstado(orden.getEstadoOrden().getEstadoOrden());
+    }
+
+    ordenTrabajoEmpleado.setFecha(orden.getFechaEminsion());
+
+    return ordenTrabajoEmpleado;
+}
 
 
     @Override
@@ -354,5 +404,15 @@ public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadE
             .map(this::toOrdenTrabajoEmpleadoDTO)
             .collect(Collectors.toList());
     
+    }
+
+
+    @Override
+    public List<OrdenTrabajoEmpleadoDTO> obtenerHistorialOrdenes(Long idEmpleado) {
+     
+        return ordenTrabajoRepository.findTop15ByEmpleadoIdOrderByFechaEminsionDesc(idEmpleado)
+            .stream()
+            .map(this::toOrdenTrabajoEmpleadoDTO)
+            .collect(Collectors.toList());
     }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpParams  } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -49,13 +49,23 @@ export class OrdenTrabajoService {
     );
   }
 
-
-
   obtenerOrdenPorEstado(estado: string){
     return this.http.get<any[]>(`${this.urlOrden}/estado/${estado}`);
   }
 
   cancelarOrden(idOrden: number, motivo: string){
     return this.http.put(`${this.urlOrden}/cancelar/${idOrden}`, {motivo});
+  }
+
+
+  obtenerOrdenTrabajoFuturasPorempleado(idEmpleado: number, fecha: string){
+
+    const params = new HttpParams()
+      .set('fecha', fecha);
+    return this.http.get<any[]>(`${this.urlOrden}/ordenesFuturas/${idEmpleado}`, {params});
+  }
+
+  obtenrHistorialOrdenes(idEmpleado: number){
+    return this.http.get<any []>(`${this.urlOrden}/historialOrdenes/${idEmpleado}`)
   }
 }

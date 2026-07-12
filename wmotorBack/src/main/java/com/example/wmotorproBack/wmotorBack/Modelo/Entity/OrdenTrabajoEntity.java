@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -68,7 +68,7 @@ public class OrdenTrabajoEntity {
     @OneToMany(mappedBy = "orden")
     private List<EvalucionServicioEntity> evalucion = new ArrayList<>();
 
-    @OneToMany(mappedBy = "orden")
+    @OneToMany(mappedBy = "orden", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<DetalleOrdenEntity> detalleOrden = new ArrayList<>();
 
     @OneToOne(mappedBy = "orden")
