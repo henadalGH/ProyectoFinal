@@ -14,14 +14,14 @@
             <div class="cards-container">
 
                 <div class="cards">
-                    <h3>Turnos</h3>
+                    <h3>Turnos pendientes</h3>
                     @if (pendiente) {
                         <p>{{pendiente.length}}</p>
                     }
                 </div>
 
                 <div class="kpi orange">
-                    <h3>Facturación</h3>
+                    <h3>Ingresos del día</h3>
                     @if (ingreso != null) {
                         <p>$ {{ingreso}}</p>
                     }

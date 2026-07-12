@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { HeaderAdmin } from "../header-admin/header-admin";
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-dashboard',
-  imports: [],
+  imports: [HeaderAdmin, Header],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })

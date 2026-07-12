@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+  height: 100vh; /* ocupa toda la pantalla */
+}
+
+.sidebar {
+  width: 320px;   /* ancho del menú */
+  background: #f3f6fb;
+  color: white;
+}
+
+.content {
+  flex: 1;        /* ocupa todo el espacio restante */
+  background: #f3f6fb;
+  padding: 20px;
+}

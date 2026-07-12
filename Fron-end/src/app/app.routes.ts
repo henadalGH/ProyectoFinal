@@ -39,6 +39,7 @@ import { Headercliente } from './Cliente/headercliente/headercliente';
 import { FacturasCliente } from './Cliente/facturas-cliente/facturas-cliente';
 import { OrdenesProximas } from './Empleados/ordenes-proximas/ordenes-proximas';
 import { HistorialOrdenes } from './Empleados/historial-ordenes/historial-ordenes';
+import { Dashboard } from './Administrados/Adminstrador/dashboard/dashboard';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -65,6 +66,7 @@ export const routes: Routes = [
     { path:'turnosAsignacion', component: AsignacionTurnos, canActivate: [AuthGuard], data: {role: ['ROLE_ADMIN']}},
     {path:'factura', component: Factura},
     {path:'turnoCasual', component: TurnoClienteCasual},
+    {path: 'dashboard', component: Dashboard},
 
     //Retas de factura
     {path: 'paraFacturar', component: ParaFacturar},
