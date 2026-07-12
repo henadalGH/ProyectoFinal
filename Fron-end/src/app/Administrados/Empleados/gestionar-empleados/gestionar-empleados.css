@@ -7,6 +7,38 @@
     height:100vh;
 }
 
+.btn-alta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+.btn-alta:hover {
+    background: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.3);
+}
+
+.btn-alta:active {
+    transform: scale(0.97);
+}
+
+.btn-alta i {
+    font-size: 15px;
+}
+
 .sidebar{
     width:320px;
     background:#1f2937;

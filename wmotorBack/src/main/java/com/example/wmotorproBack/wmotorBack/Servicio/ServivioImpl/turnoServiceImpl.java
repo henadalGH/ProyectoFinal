@@ -267,7 +267,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
     public List<TurnoEstadosDTO> obtenerturnoPorIdClienteEstado(Long idCliente) {
 
 
-        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.ASIGNADO_ORDEN)
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
 

@@ -8,6 +8,7 @@ import { TurnosService } from '../../../Servicio/turnos-service';
 import { AuthService } from '../../../AuthServicio/auth-service';
 import { HeaderAdmin } from "../../../Administrados/Adminstrador/header-admin/header-admin";
 import { Header } from "../../../header/header";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-vehiculo',
@@ -24,7 +25,8 @@ export class DetalleVehiculo implements OnInit{
     private router: Router,
     private servicioServise: ServiciosService,
     private turnoService: TurnosService,
-    private authService: AuthService
+    private authService: AuthService, 
+    private location: Location
   ){}
 
   mostrarModal: boolean = false;
@@ -34,6 +36,9 @@ export class DetalleVehiculo implements OnInit{
   servicio: any[] = []; 
   rol!: any;
   
+  volverAtras(){
+    this.location.back();
+  }
   ngOnInit(): void {
     this.id = Number (this.route.snapshot.paramMap.get('id'));
 

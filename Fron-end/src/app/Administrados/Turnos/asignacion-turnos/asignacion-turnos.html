@@ -24,6 +24,7 @@
 
                         <thead>
                             <tr>
+                                <th>Cliente</th>
                                 <th>Servicio</th>
                                 <th>Descripción</th>
                                 <th>Vehículo</th>
@@ -37,6 +38,8 @@
                             @for (asig of obtenerAsignacion; track $index) {
 
                                 <tr>
+                                    <td>{{asig.nombreCliente}} {{asig.apellidoCliente}}</td>
+
                                     <td>{{ asig.nombreServicio }}</td>
 
                                     <td>{{ asig.descripcion }}</td>

@@ -30,6 +30,10 @@ export class TurnoClienteCasual implements OnInit{
     this.obtenerServicios();
   }
 
+  volverAtras(){
+    this.location.back();
+  }
+
   //Definicion de variables
 
   nombre: string = '';

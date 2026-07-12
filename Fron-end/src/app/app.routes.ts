@@ -37,6 +37,8 @@ import { ServiciosOfresidos } from './servicios-ofresidos/servicios-ofresidos';
 import { TurnoClienteCasual } from './Administrados/Turnos/turno-cliente-casual/turno-cliente-casual';
 import { Headercliente } from './Cliente/headercliente/headercliente';
 import { FacturasCliente } from './Cliente/facturas-cliente/facturas-cliente';
+import { OrdenesProximas } from './Empleados/ordenes-proximas/ordenes-proximas';
+import { HistorialOrdenes } from './Empleados/historial-ordenes/historial-ordenes';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -85,6 +87,8 @@ export const routes: Routes = [
     { path: 'inicioSocio', component: HomeEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
     { path: 'headerEmpleado', component: HeaderEmpleado, canActivate: [AuthGuard], data: { role: ['ROLE_EMPLEADO'] } },
     {path: 'detalleOrden/:id', component: DetalleOrden},
+    {path:'proximasOrdenes', component: OrdenesProximas},
+    {path:'historialOrdenes', component: HistorialOrdenes},
 
     
 

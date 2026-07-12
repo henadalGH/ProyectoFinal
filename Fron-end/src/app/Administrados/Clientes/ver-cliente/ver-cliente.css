@@ -1,7 +1,38 @@
 /* ==================================
    LAYOUT GENERAL
 ================================== */
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 
+    background: #1473d2;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+    margin-left: 200px;
+}
+
+.btn-volver:hover {
+    background: #0f19de;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(73, 80, 87, 0.3);
+}
+
+.btn-volver:active {
+    transform: scale(0.97);
+}
+
+.btn-volver i {
+    font-size: 15px;
+}
 .layout {
   display: flex;
   height: 100vh; /* ocupa toda la pantalla */

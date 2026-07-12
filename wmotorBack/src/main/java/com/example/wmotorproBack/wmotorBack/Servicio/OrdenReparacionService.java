@@ -24,6 +24,7 @@ public interface OrdenReparacionService {
     List<OrdenTrabajoEmpleadoDTO> obtenerOrdenePorEmpleado(Long idEmpleado, LocalDate fecha);
     OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orden);
     ResponceDTO motivoCancelacion(Long idOrden, CancelarOrdenDTO cancelar);
+    List<OrdenTrabajoEmpleadoDTO> ordenesfuturasIdempleado(Long idEmpleado, LocalDate fecha);
    
 
 }

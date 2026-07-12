@@ -4,6 +4,7 @@ import { ClienteServicio } from '../../../Servicio/cliente-servicio';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
 import { Header } from "../../../header/header";
 import { VehiculoService } from '../../../Servicio/vehiculo-service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-ver-cliente',
@@ -17,7 +18,8 @@ export class VerCliente implements OnInit{
     private router: ActivatedRoute,
     private clienteServicio: ClienteServicio,
     private vehiculoServicio: VehiculoService,
-    private routers: Router
+    private routers: Router,
+    private location: Location
 
   ){}
   
@@ -46,5 +48,9 @@ export class VerCliente implements OnInit{
 
   verDetalleVehiculo(id: number){
     this.routers.navigate(['detalleVehiculo', id])
+  }
+
+  volverAtras(){
+    this.location.back();
   }
 }

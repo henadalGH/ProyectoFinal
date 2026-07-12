@@ -40,28 +40,39 @@ export class GestionarEmpleados implements OnInit {
     this.router.navigate(['/verEmpleado', id]);
   }
 
-  desactivarEmpleado(idEmpleado: number){
+  desactivarEmpleado(idEmpleado: number) {
 
+  if (!confirm("¿Está seguro de que desea dar de baja a este empleado?")) {
+    return;
+  }
 
-    this.empleadosService.activaDesactivarEmpleado(idEmpleado, false).subscribe({
-      next: () => {
-        console.log("El empleado fue desactivado correctamente");
-      },
-      error: (err) => {
-        console.error('Error al desactivar el empleado', err);
-        this.error = true; // Activamos el estado de error
-      }});
+  this.empleadosService.activaDesactivarEmpleado(idEmpleado, false).subscribe({
+    next: () => {
+      this.obtenerEmpleado();
+      alert("El empleado fue desactivado correctamente");
+    },
+    error: (err) => {
+      console.error("Error al desactivar el empleado", err);
+      this.error = true;
     }
+  });
+}
 
+activarEmpleado(idEmpleado: number) {
 
-    activarEmpleado(idEmpleado: number){
-    this.empleadosService.activaDesactivarEmpleado(idEmpleado, true).subscribe({
-      next: () => {
-        console.log("El empleado fue activado correctamente");
-      },
-      error: (err) => {
-        console.error('Error al desactivar el empleado', err);
-        this.error = true; // Activamos el estado de error
-      }});
+  if (!confirm("¿Está seguro de que desea darle de alta a este empleado?")) {
+    return;
+  }
+
+  this.empleadosService.activaDesactivarEmpleado(idEmpleado, true).subscribe({
+    next: () => {
+      this.obtenerEmpleado();
+      alert("El empleado fue activado correctamente");
+    },
+    error: (err) => {
+      console.error("Error al activar el empleado", err);
+      this.error = true;
     }
+  });
+}
 }

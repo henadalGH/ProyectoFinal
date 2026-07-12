@@ -27,8 +27,9 @@ export class MisTurnos implements OnInit{
 
     if(idCliente){
       this.turnoService.obtenerTurnosPendientePorCliente(idCliente).subscribe(
-        (repueste: any) => {
-          this.pendiente = repueste;
+        (respueste: any) => {
+          this.pendiente = respueste;
+          console.log(this.pendiente.length, idCliente);
         }
       )
     }
@@ -48,6 +49,7 @@ export class MisTurnos implements OnInit{
       this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
         (next: any) => {
           this.router.navigate(['misTurnos']);
+
         }
       )
   }

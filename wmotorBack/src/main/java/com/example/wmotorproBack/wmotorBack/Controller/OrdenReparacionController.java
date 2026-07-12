@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -91,6 +92,12 @@ public class OrdenReparacionController {
         return new ResponseEntity<ResponceDTO>(ordenReparacionService.motivoCancelacion(idOrden, cancelar), HttpStatus.OK);
     }
     
+    @GetMapping("/ordenesFuturas/{idEmpleado}")
+    public ResponseEntity<List<OrdenTrabajoEmpleadoDTO>> obtenerOrdenesFuturaPorEmpleado(@PathVariable Long idEmpleado,
+        @RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) 
+        {
+            return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.ordenesfuturasIdempleado(idEmpleado, fecha), HttpStatus.OK); 
+        }
     
     
 

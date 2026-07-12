@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -342,5 +343,16 @@ public ResponceDTO asignarOrdeEmpleado(Long idTurno, Long idEmpleado, PrioridadE
 
         responceDTO.setMensage("Orden cancelada correctamente");
         return responceDTO;
+    }
+
+
+    @Override
+    public List<OrdenTrabajoEmpleadoDTO> ordenesfuturasIdempleado(Long idEmpleado, LocalDate fecha) {
+        
+        return ordenTrabajoRepository.findByEmpleadoIdAndFechaEminsionGreaterThanEqual(idEmpleado, fecha)
+            .stream()
+            .map(this::toOrdenTrabajoEmpleadoDTO)
+            .collect(Collectors.toList());
+    
     }
 }
