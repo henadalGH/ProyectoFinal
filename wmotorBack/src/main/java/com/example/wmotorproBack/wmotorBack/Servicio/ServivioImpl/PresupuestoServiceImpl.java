@@ -401,4 +401,15 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
             })
             .toList();
 }
+
+
+
+   @Override
+   public Long contarFacturasPendientes(Long idCliente) {
+
+    EstadoPresupuestoEntity estado = estadoPresupuestoReposistory.findByEstadoPresupuesto(EstadoPresupuestoEnum.ENVIADO)
+    .orElseThrow();
+
+    return presuspuestoRepository.countByVehiculoClienteIdAndEstadoPresupuesto(idCliente, estado);
+   }
 }

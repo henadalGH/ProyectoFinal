@@ -17,5 +17,6 @@ public interface PresuspuestoRepository extends JpaRepository<PresupuestoEntity,
     Long idCliente, List<EstadoPresupuestoEnum> estados);
     List<PresupuestoEntity> findByVehiculoClienteId(Long id);
     List<PresupuestoEntity> findByVehiculoClienteIdAndEstadoPresupuesto(Long idCliente, EstadoPresupuestoEntity estado);
+    Long countByVehiculoClienteIdAndEstadoPresupuesto(Long idCliente, EstadoPresupuestoEntity estado);
 
 }

@@ -22,4 +22,5 @@ public interface PresupuestoService {
     public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente);
     public List<ObtenerPresupuestoDTO> obtenerPresupuestoPorIdCliente(Long idCliente);
     public List<ObtenerPresupuestoDTO> obtenerPresupuestPorEstadoAndCliente(Long idCliente, EstadoPresupuestoEnum estado);
+    public Long contarFacturasPendientes(Long idCliente);
 }

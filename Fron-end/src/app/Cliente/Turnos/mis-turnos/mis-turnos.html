@@ -15,14 +15,15 @@
     <h1>Mis turnos</h1>
     <p>Consulta y administra tus turnos pendientes</p>
   </div>
-
+ 
   <!-- SUBTITULO -->
   <div class="subtitulo">
     <h2>Lista de turnos pendientes</h2>
   </div>
 
   <!-- TURNOS -->
-  @for (pen of pendiente; track $index) {
+   @if (pendiente.length > 0) {
+       @for (pen of pendiente; track $index) {
 
     <div class="turno-card">
 
@@ -80,6 +81,10 @@
     </div>
 
   }
+   }@else {
+    <strong>No tienes turnos pendientes</strong>
+   }
+ 
 
 </div>
   </main>

@@ -12,56 +12,61 @@ import { Header } from "../../../header/header";
   templateUrl: './mis-turnos.html',
   styleUrl: './mis-turnos.css',
 })
-export class MisTurnos implements OnInit{
+export class MisTurnos implements OnInit {
   
-  constructor(private turnoService: TurnosService,
+  constructor(
+    private turnoService: TurnosService,
     private authService: AuthService,
     private router: Router
-  ){}
+  ) {}
 
   pendiente: any[] = [];
   
   ngOnInit(): void {
+    // Cargamos al iniciar el componente
+    this.cargarTurnosPendientes();
+  }
 
-    const idCliente = this.authService.getEntityId()
+  // Separamos la lógica para poder reutilizarla
+  cargarTurnosPendientes(): void {
+    const idCliente = this.authService.getEntityId();
 
-    if(idCliente){
+    if (idCliente) {
       this.turnoService.obtenerTurnosPendientePorCliente(idCliente).subscribe(
-        (respueste: any) => {
-          this.pendiente = respueste;
+        (respuesta: any) => {
+          this.pendiente = respuesta;
           console.log(this.pendiente.length, idCliente);
-        }
-      )
+        },
+        (error) => console.error('Error al cargar turnos', error)
+      );
     }
-    
   }
 
   logout(): void {
     this.authService.logout();
   }
 
-  pendientes: any[]= [];
+  confirmarTurno(idTurno: number) {
+    const estado = "CONFIRMADO";
 
-
-  confirmarTurno(idTurno: number){
-      const estado = "CONFIRMADO"
-
-      this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
-        (next: any) => {
-          this.router.navigate(['misTurnos']);
-
-        }
-      )
+    this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
+      (next: any) => {
+        // Volvemos a traer la lista limpia desde el servidor
+        this.cargarTurnosPendientes();
+      },
+      (error) => console.error('Error al actualizar', error)
+    );
   }
 
+  cancelarTurno(idTurno: number) {
+    const estado = "CANCELADO";
 
-  cancelarTurno(idTurno: number){
-    const estado = "CANCELADO"
-
-      this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
-        (next: any) => {
-          this.router.navigate(['misTurnos']);
-        }
-      )
+    this.turnoService.actualizarEstadoTurno(idTurno, estado).subscribe(
+      (next: any) => {
+        // Volvemos a traer la lista limpia desde el servidor
+        this.cargarTurnosPendientes();
+      },
+      (error) => console.error('Error al actualizar', error)
+    );
   }
 }

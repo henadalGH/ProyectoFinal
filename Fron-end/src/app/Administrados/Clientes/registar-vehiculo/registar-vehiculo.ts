@@ -1,24 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Vehiculoservice } from './vehiculoservice';
 import { Location } from '@angular/common';
 import { AuthService } from '../../../AuthServicio/auth-service';
+import { Headercliente } from "../../../Cliente/headercliente/headercliente";
+import { Header } from "../../../header/header";
 
 @Component({
   selector: 'app-registar-vehiculo',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, Headercliente, Header],
   templateUrl: './registar-vehiculo.html',
   styleUrl: './registar-vehiculo.css',
 })
-export class RegistarVehiculo {
+export class RegistarVehiculo implements OnInit{
 
   marca: string = "";
   modelo: string = "";
   patente: string = "";
   anio: string = "";
   kilometreje: number = 0;
+  rol!: any;
 
   constructor(
     private vehiculoService: Vehiculoservice,
@@ -26,12 +29,16 @@ export class RegistarVehiculo {
     private locacion: Location,
     private authService: AuthService
   ) {}
+  ngOnInit(): void {
+    this.rol = this.authService.getRol();
+  }
 
   volverAtras() {
     this.locacion.back();
   }
 
   agregarVehiculo() {
+    
 
     // ✅ acá obtenés el ID correctamente
     const clienteId = this.authService.getEntityId();

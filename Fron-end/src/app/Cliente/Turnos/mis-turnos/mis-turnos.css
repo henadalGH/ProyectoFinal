@@ -1,265 +1,395 @@
-/* ===========================================
-   RESET
-=========================================== */
+/* ==========================================================================
+   ESTRUCTURA BASE (NO MODIFICAR)
+   ========================================================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+.layout {
+  display:flex;
+  height:100vh;
+  font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-body{
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background:#f5f7fb;
+
+.sidebar {
+  width:320px;
+  background:#f3f6fb;
+  box-shadow:4px 0 10px rgba(0,0,0,0.05);
 }
 
-/* ===========================================
-   LAYOUT
-=========================================== */
 
-.layout{
-    display:flex;
-    min-height:100vh;
+.content {
+  flex:1;
+  background:#f3f6fb;
+  padding:30px;
+  overflow-y:auto;
 }
 
-/* ===========================================
-   SIDEBAR (320px)
-=========================================== */
 
-.sidebar{
-    width:320px;
-    min-width:320px;
-    background:#1e293b;
-    position:fixed;
-    top:0;
-    left:0;
-    bottom:0;
-    overflow-y:auto;
-    z-index:1000;
-    box-shadow:4px 0 15px rgba(0,0,0,.15);
+
+/* ==========================================================================
+   CONTENEDOR
+   ========================================================================== */
+
+.contenedor-turnos {
+
+  max-width:1200px;
+
+  margin:50px auto 0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:25px;
+
 }
 
-/* ===========================================
-   CONTENIDO
-=========================================== */
 
-.content{
-    flex:1;
-    margin-left:320px;
-    min-height:100vh;
-    background:#f5f7fb;
+
+/* ==========================================================================
+   TITULO
+   ========================================================================== */
+
+.titulo {
+
+  text-align:center;
+
 }
 
-.contenedor-turnos{
-    padding:35px;
+
+.titulo h1 {
+
+  margin:0;
+
+  font-size:30px;
+
+  color:#1e293b;
+
+  font-weight:700;
+
 }
 
-/* ===========================================
-   TITULOS
-=========================================== */
 
-.titulo{
-    margin-bottom:35px;
+
+.titulo p {
+
+  margin-top:8px;
+
+  color:#64748b;
+
+  font-size:15px;
+
 }
 
-.titulo h1{
-    font-size:36px;
-    color:#1e293b;
-    margin-bottom:8px;
-    font-weight:700;
+
+
+/* ==========================================================================
+   SUBTITULO
+   ========================================================================== */
+
+.subtitulo h2 {
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-size:20px;
+
+  font-weight:600;
+
 }
 
-.titulo p{
-    color:#64748b;
-    font-size:16px;
+
+
+/* ==========================================================================
+   TARJETA TURNO
+   ========================================================================== */
+
+.turno-card {
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:25px;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+  box-shadow:
+  0 4px 6px rgba(0,0,0,0.03);
+
+  transition:.25s;
+
 }
 
-.subtitulo{
-    margin-bottom:25px;
+
+
+.turno-card:hover {
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 10px 20px rgba(0,0,0,0.06);
+
 }
 
-.subtitulo h2{
-    font-size:24px;
-    color:#334155;
+
+
+/* ==========================================================================
+   CABECERA TURNO
+   ========================================================================== */
+
+.turno-header {
+
+  display:flex;
+
+  align-items:center;
+
+  gap:18px;
+
+  padding-bottom:20px;
+
+  border-bottom:1px solid #f1f5f9;
+
 }
 
-/* ===========================================
-   CARD
-=========================================== */
 
-.turno-card{
-    background:#fff;
-    border-radius:18px;
-    padding:28px;
-    margin-bottom:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
-    transition:.3s;
+
+.icono-turno {
+
+  width:55px;
+
+  height:55px;
+
+  border-radius:12px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  background:#e0f2fe;
+
+  color:#0369a1;
+
+  font-size:22px;
+
 }
 
-.turno-card:hover{
-    transform:translateY(-4px);
-    box-shadow:0 18px 40px rgba(0,0,0,.15);
+
+
+.vehiculo-info h3 {
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-size:21px;
+
 }
 
-/* ===========================================
-   HEADER CARD
-=========================================== */
 
-.turno-header{
-    display:flex;
-    align-items:center;
-    gap:20px;
-    border-bottom:1px solid #e5e7eb;
-    padding-bottom:20px;
-    margin-bottom:25px;
+
+.vehiculo-info span {
+
+  color:#64748b;
+
+  font-size:14px;
+
 }
 
-.icono-turno{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:#2563eb;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-size:28px;
-}
 
-.vehiculo-info h3{
-    color:#1e293b;
-    font-size:24px;
-    margin-bottom:6px;
-}
 
-.vehiculo-info span{
-    color:#64748b;
-    font-size:15px;
-}
-
-/* ===========================================
+/* ==========================================================================
    INFORMACION
-=========================================== */
+   ========================================================================== */
 
-.turno-body{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-    margin-bottom:30px;
+.turno-body {
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+
+  gap:18px;
+
+  padding:25px 0;
+
 }
 
-.item{
-    background:#f8fafc;
-    border-radius:12px;
-    padding:18px;
-    border:1px solid #e5e7eb;
+
+
+.item {
+
+  background:#f8fafc;
+
+  padding:15px;
+
+  border-radius:12px;
+
 }
 
-.item h4{
-    color:#64748b;
-    font-size:13px;
-    text-transform:uppercase;
-    margin-bottom:8px;
+
+
+.item h4 {
+
+  margin:0 0 8px;
+
+  color:#64748b;
+
+  font-size:13px;
+
 }
 
-.item p{
-    color:#1e293b;
-    font-size:18px;
-    font-weight:600;
+
+
+.item p {
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-weight:600;
+
 }
 
-/* ===========================================
+
+
+/* ==========================================================================
    BOTONES
-=========================================== */
+   ========================================================================== */
 
-.botones{
-    display:flex;
-    justify-content:flex-end;
-    gap:15px;
+.botones {
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:15px;
+
+  border-top:1px solid #f1f5f9;
+
+  padding-top:20px;
+
 }
 
-.botones button{
-    border:none;
-    padding:13px 22px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:600;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    transition:.3s;
+
+
+.botones button {
+
+  border:none;
+
+  padding:10px 22px;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+
+  transition:.2s;
+
 }
 
-.btn-aceptar{
-    background:#16a34a;
-    color:white;
+
+
+/* Aceptar */
+
+.btn-aceptar {
+
+  background:#16a34a;
+
+  color:white;
+
 }
 
-.btn-aceptar:hover{
-    background:#15803d;
-    transform:scale(1.03);
+
+.btn-aceptar:hover {
+
+  background:#15803d;
+
 }
 
-.btn-cancelar{
-    background:#dc2626;
-    color:white;
+
+
+/* Cancelar */
+
+.btn-cancelar {
+
+  background:#ef4444;
+
+  color:white;
+
 }
 
-.btn-cancelar:hover{
-    background:#b91c1c;
-    transform:scale(1.03);
+
+.btn-cancelar:hover {
+
+  background:#dc2626;
+
 }
 
-/* ===========================================
+
+
+/* ==========================================================================
+   SIN TURNOS
+   ========================================================================== */
+
+.contenedor-turnos > strong {
+
+  background:white;
+
+  padding:35px;
+
+  border-radius:16px;
+
+  text-align:center;
+
+  color:#64748b;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+  font-size:16px;
+
+}
+
+
+
+/* ==========================================================================
    RESPONSIVE
-=========================================== */
+   ========================================================================== */
 
-@media (max-width:992px){
+@media(max-width:900px){
 
-    .sidebar{
-        width:320px;
-        min-width:320px;
-    }
+  .sidebar{
 
-    .content{
-        margin-left:320px;
-    }
+    width:250px;
 
-}
+  }
 
-@media (max-width:768px){
 
-    .layout{
-        flex-direction:column;
-    }
+  .botones{
 
-    .sidebar{
-        position:relative;
-        width:100%;
-        min-width:100%;
-        height:auto;
-    }
+    justify-content:center;
 
-    .content{
-        margin-left:0;
-    }
+    flex-direction:column;
 
-    .contenedor-turnos{
-        padding:20px;
-    }
+  }
 
-    .turno-body{
-        grid-template-columns:1fr;
-    }
 
-    .botones{
-        flex-direction:column;
-    }
+  .botones button{
 
-    .botones button{
-        width:100%;
-        justify-content:center;
-    }
+    width:100%;
+
+    justify-content:center;
+
+  }
 
 }

@@ -1,213 +1,376 @@
 /* ==========================================================================
-   1. ESTRUCTURA GLOBAL (Layout, Sidebar y Content)
+   1. ESTRUCTURA BASE
    ========================================================================== */
+
 .layout {
   display: flex;
-  height: 100vh; /* Ocupa toda la pantalla */
+  height: 100vh;
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
+
 .sidebar {
-  width: 320px;   /* Ancho fijo para tu menú <app-headercliente> */
-  background: #1f2937;
+  width: 320px;
+  background: #f3f6fb;
   color: white;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 4px 0 10px rgba(0,0,0,0.05);
 }
+
 
 .content {
-  flex: 1;        /* Toma todo el espacio restante a la derecha */
+  flex: 1;
   background: #f3f6fb;
-  padding: 30px;  /* Aire interno para que respire el contenido */
-  overflow-y: auto; /* Scroll por si tenés muchos vehículos */
+  padding: 30px;
+  overflow-y: auto;
 }
 
-/* Contenedor interno que envuelve tu sección de vehículos */
-.contenedor {
-  margin-top: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
+
 
 /* ==========================================================================
-   2. CABECERA DE LA SECCIÓN (Título y Botones)
+   2. CONTENEDOR PRINCIPAL
    ========================================================================== */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Alinea los botones al fondo a la derecha */
-  flex-wrap: wrap;
-  gap: 15px;
-  border-bottom: 1px solid #e2e8f0;
-  padding-bottom: 20px;
+
+.contenedor {
+
+  max-width:1200px;
+
+  margin:50px auto 0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:30px;
+
 }
+
+
+
+/* ==========================================================================
+   3. CABECERA DE LA SECCIÓN
+   ========================================================================== */
+
+.header {
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  background:white;
+
+  padding:25px;
+
+  border-radius:16px;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+  box-shadow:
+  0 4px 6px -1px rgba(0,0,0,0.03);
+
+}
+
+
 
 .header h1 {
-  color: #1e293b;
-  font-size: 28px;
-  font-weight: 700;
-  margin: 0;
-  margin-right: auto; /* Empuja los botones automáticamente a la derecha */
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-size:28px;
+
+  font-weight:700;
+
 }
 
-/* Contenedor del botón volver */
-.footer {
-  margin: 0;
-}
 
-/* Botón Volver */
-.btn-back {
-  background: transparent;
-  color: #64748b;
-  border: 1px solid #cbd5e1;
-  padding: 10px 18px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
 
-.btn-back:hover {
-  background-color: #f1f5f9;
-  color: #1e293b;
-  border-color: #94a3b8;
-}
+/* ==========================================================================
+   4. BOTONES PRINCIPALES
+   ========================================================================== */
 
-/* Botón Agregar Vehículo */
 .btn-primary {
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  padding: 11px 20px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2);
-  transition: background-color 0.2s, transform 0.1s;
+
+  background:#2563eb;
+
+  color:white;
+
+  border:none;
+
+  padding:11px 22px;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+
 }
+
 
 .btn-primary:hover {
-  background-color: #1d4ed8;
+
+  background:#1d4ed8;
+
 }
 
-.btn-primary:active {
-  transform: scale(0.98);
+
+
+.btn-back {
+
+  background:#e2e8f0;
+
+  color:#334155;
+
+  border:none;
+
+  padding:11px 22px;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+
 }
+
+
+.btn-back:hover {
+
+  background:#cbd5e1;
+
+}
+
+
 
 /* ==========================================================================
-   3. ESTADO VACÍO (Si no hay vehículos cargados)
+   5. MENSAJE SIN VEHÍCULOS
    ========================================================================== */
+
 .empty {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 60px 20px;
-  text-align: center;
-  border: 2px dashed #cbd5e1;
-  margin-top: 20px;
+
+  background:white;
+
+  border-radius:16px;
+
+  padding:40px;
+
+  text-align:center;
+
+  color:#64748b;
+
+  font-size:16px;
+
+  border:1px solid rgba(226,232,240,0.8);
+
 }
 
-.empty p {
-  color: #64748b;
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-}
+
 
 /* ==========================================================================
-   4. GRID Y TARJETAS DE VEHÍCULOS
+   6. GRID DE VEHÍCULOS
    ========================================================================== */
+
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 24px;
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+  gap:25px;
+
 }
 
-/* Tarjeta individual */
+
+
+/* ==========================================================================
+   7. TARJETA VEHÍCULO
+   ========================================================================== */
+
 .card {
-  background: #ffffff;
-  border-radius: 16px;
-  border: 1px solid rgba(226, 232, 240, 0.8);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
-  overflow: hidden; /* Mantiene los bordes redondeados con el fondo gris del header */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  display: flex;
-  flex-direction: column;
+
+  background:white;
+
+  border-radius:16px;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+  box-shadow:
+  0 4px 6px -1px rgba(0,0,0,0.03);
+
+  overflow:hidden;
+
+  transition:.25s;
+
 }
+
+
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.06);
+
+  transform:translateY(-3px);
+
+  box-shadow:
+  0 10px 20px rgba(0,0,0,0.06);
+
 }
 
-/* Cabecera interna de la tarjeta */
+
+
+/* Cabecera tarjeta */
+
 .card-header {
-  background-color: #f8fafc;
-  padding: 20px;
-  border-bottom: 1px solid #f1f5f9;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:22px;
+
+  border-bottom:1px solid #f1f5f9;
+
 }
+
+
 
 .card-header h2 {
-  font-size: 18px;
-  color: #1e293b;
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.3;
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-size:20px;
+
 }
 
-/* Badge del Año */
+
+
 .anio {
-  background-color: #e0f2fe;
-  color: #0369a1;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: 20px;
-  white-space: nowrap;
+
+  background:#e0f2fe;
+
+  color:#0369a1;
+
+  padding:5px 12px;
+
+  border-radius:20px;
+
+  font-size:13px;
+
+  font-weight:600;
+
 }
 
-/* Cuerpo de la tarjeta */
+
+
+/* Cuerpo tarjeta */
+
 .card-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  flex-grow: 1; /* Empuja el botón "Ver Vehículo" siempre al fondo */
+
+  padding:22px;
+
 }
+
+
 
 .card-body p {
-  margin: 0;
-  font-size: 15px;
-  color: #475569;
+
+  margin:0 0 20px;
+
+  color:#475569;
+
+  font-size:15px;
+
 }
+
+
 
 .card-body strong {
-  color: #1e293b;
-  font-weight: 600;
+
+  color:#1e293b;
+
 }
 
-/* Botón "Ver Vehiculo" de la tarjeta */
+
+
+/* Botón ver vehículo */
+
 .card-body button {
-  width: 100%;
-  background-color: #f1f5f9;
-  color: #334155;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
+
+  width:100%;
+
+  background:#16a34a;
+
+  color:white;
+
+  border:none;
+
+  padding:10px;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+
 }
+
+
 
 .card-body button:hover {
-  background-color: #e2e8f0;
-  color: #0f172a;
+
+  background:#15803d;
+
+}
+
+
+
+/* ==========================================================================
+   8. RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:900px){
+
+
+  .sidebar{
+
+    width:250px;
+
+  }
+
+
+  .header{
+
+    flex-direction:column;
+
+    gap:20px;
+
+    align-items:stretch;
+
+  }
+
+
+  .btn-primary,
+  .btn-back{
+
+    width:100%;
+
+  }
+
 }

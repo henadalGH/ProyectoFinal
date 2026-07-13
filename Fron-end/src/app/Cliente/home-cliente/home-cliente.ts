@@ -5,6 +5,7 @@ import { VehiculoService } from '../../Servicio/vehiculo-service';
 import { Router, RouterLink } from '@angular/router';
 import { TurnosService } from '../../Servicio/turnos-service';
 import { Header } from "../../header/header";
+import { FacturaServicio } from '../../Servicio/factura-servicio';
 
 @Component({
   selector: 'app-home-cliente',
@@ -17,12 +18,22 @@ export class HomeCliente implements OnInit{
   constructor(private authService: AuthService,
     private vehiculoService: VehiculoService,
     private router: Router,
-    private turnoService: TurnosService
+    private turnoService: TurnosService,
+    private facturaService: FacturaServicio
   ){}
 
 
   ngOnInit(): void {
     const clienteId = this.authService.getEntityId();
+
+    if(clienteId){
+      this.facturaService.contarFacturaPendientesPorCiente(clienteId).subscribe(
+        (repuesta: any) =>
+        {
+          this.contarFac = repuesta;
+        }
+      )
+    }
 
     if (clienteId) {
       this.vehiculoService.obtenerVehiculoCliente(clienteId).subscribe({
@@ -53,6 +64,7 @@ export class HomeCliente implements OnInit{
     turnosPen:  any[]=[];
     vehiculo: any[]=[];
     turFuturos: any[]=[];
+    contarFac: any;
 
     verVehiculo( id: number){
       this.router.navigate(['/detalleVehiculo', id]);

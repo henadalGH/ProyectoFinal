@@ -19,6 +19,7 @@
   background: #f3f6fb;
   padding: 30px;  /* Un poco más de aire para que respire */
   overflow-y: auto; /* Por si el contenido supera la pantalla */
+  
 }
 
 /* ==========================================================================
@@ -30,10 +31,12 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
+  margin-top: 50px;
 }
 
 .titulo {
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .titulo h2 {

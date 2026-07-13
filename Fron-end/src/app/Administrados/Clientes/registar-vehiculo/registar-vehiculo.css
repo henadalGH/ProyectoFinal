@@ -1,109 +1,289 @@
-/* Contenedor del Formulario */
-.formulario {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 2.5rem;
-  background: #1a1d29; /* Gris oscuro azulado (igual que las cards) */
-  border-radius: 20px;
-  border: 1px solid #2d3245;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+/* ==========================================================================
+   1. ESTRUCTURA BASE (NO CAMBIAR)
+   ========================================================================== */
+
+.layout {
+  display:flex;
+  height:100vh;
+  font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Título de la sección */
+
+.sidebar {
+  width:320px;
+  background:#f3f6fb;
+  box-shadow:4px 0 10px rgba(0,0,0,0.05);
+}
+
+
+.content {
+  flex:1;
+  background:#f3f6fb;
+  padding:30px;
+  overflow-y:auto;
+}
+
+
+
+/* ==========================================================================
+   2. CONTENEDOR
+   ========================================================================== */
+
+.contenedor {
+
+  max-width:1200px;
+
+  margin:50px auto 0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:25px;
+
+}
+
+
+
+/* ==========================================================================
+   3. TITULO
+   ========================================================================== */
+
+.titulo {
+
+  text-align:center;
+
+}
+
+
 .titulo h1 {
-  text-align: center;
-  color: #ffffff;
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  font-family: 'Inter', sans-serif;
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-size:28px;
+
+  font-weight:700;
+
 }
 
-.formulario p {
-  text-align: center;
-  color: #94a3b8;
-  margin-bottom: 2rem;
-  font-size: 0.95rem;
+
+
+
+/* ==========================================================================
+   4. FORMULARIO
+   ========================================================================== */
+
+.formulario {
+
+  background:white;
+
+  max-width:700px;
+
+  width:100%;
+
+  margin:0 auto;
+
+  padding:30px;
+
+  border-radius:16px;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+  box-shadow:
+  0 4px 6px rgba(0,0,0,0.03);
+
 }
 
-/* Grupos de campos */
+
+
+.formulario > p {
+
+  margin:0 0 25px;
+
+  color:#64748b;
+
+  font-size:15px;
+
+}
+
+
+
+
+/* ==========================================================================
+   5. CAMPOS
+   ========================================================================== */
+
 .campos {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.2rem;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:8px;
+
+  margin-bottom:20px;
+
 }
+
+
 
 .campos label {
-  color: #cbd5e1;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  margin-left: 0.2rem;
+
+  color:#334155;
+
+  font-size:14px;
+
+  font-weight:600;
+
 }
 
-/* Estilo de los Inputs */
-input {
-  background: #0f111a; /* Fondo más oscuro para el input */
-  border: 1px solid #3f445e;
-  border-radius: 10px;
-  padding: 0.8rem 1rem;
-  color: #ffffff;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  outline: none;
+
+
+.campos input {
+
+  padding:12px 14px;
+
+  border-radius:10px;
+
+  border:1px solid #cbd5e1;
+
+  font-size:14px;
+
+  color:#1e293b;
+
+  outline:none;
+
+  transition:.2s;
+
 }
 
-input:focus {
-  border-color: #4f46e5; /* Resalte azul al escribir */
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+
+
+.campos input:focus {
+
+  border-color:#2563eb;
+
+  box-shadow:0 0 0 3px rgba(37,99,235,.1);
+
 }
 
-/* Botones */
-button[type="submit"] {
-  width: 100%;
-  background: #4f46e5;
-  color: white;
-  border: none;
-  padding: 1rem;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 1rem;
-  transition: background 0.2s, transform 0.1s;
+
+
+
+
+/* ==========================================================================
+   6. BOTONES
+   ========================================================================== */
+
+.botones {
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:15px;
+
+  margin-top:30px;
+
 }
 
-button[type="submit"]:hover {
-  background: #6366f1;
-  transform: translateY(-2px);
+
+
+.botones button {
+
+  padding:11px 25px;
+
+  border:none;
+
+  border-radius:10px;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.2s;
+
 }
 
-button[type="submit"]:active {
-  transform: translateY(0);
+
+
+/* Registrar */
+
+.btn-registrar {
+
+  background:#2563eb;
+
+  color:white;
+
 }
 
-/* Botón Cancelar */
-button:not([type="submit"]) {
-  width: 100%;
-  background: transparent;
-  color: #94a3b8;
-  border: 1px solid #3f445e;
-  padding: 0.8rem;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  margin-top: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
+
+
+.btn-registrar:hover {
+
+  background:#1d4ed8;
+
 }
 
-button:not([type="submit"]):hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  border-color: #ffffff;
+
+
+
+/* Cancelar */
+
+.btn-cancelar {
+
+  background:#e2e8f0;
+
+  color:#334155;
+
 }
 
-/* Eliminar flechas del input number (opcional) */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+
+
+.btn-cancelar:hover {
+
+  background:#cbd5e1;
+
+}
+
+
+
+
+/* ==========================================================================
+   7. RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:900px){
+
+  .sidebar{
+
+    width:250px;
+
+  }
+
+
+  .formulario{
+
+    padding:20px;
+
+  }
+
+
+  .botones{
+
+    flex-direction:column;
+
+  }
+
+
+  .botones button{
+
+    width:100%;
+
+  }
+
 }

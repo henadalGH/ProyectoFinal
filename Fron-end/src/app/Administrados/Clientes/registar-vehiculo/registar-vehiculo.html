@@ -1,32 +1,61 @@
-<div class="titulo">
-    <h1>Registrar vehiculo</h1>
-</div>
+<div class="layout">
+  <aside class="sidebar">
+    <!-- menú -->
+     @if (rol == 'ROLE_CLIENTE') {
+        <app-headercliente></app-headercliente>
+     }
+     
+  </aside>
 
-<div class="formulario">
-    <p>Complete los campos</p>
-    <form (ngSubmit)="agregarVehiculo()">
-        <div class="campos">
-            <label>Marca:</label>
-            <input [(ngModel)]="marca" type="text" name="marca" id="marca"  required>
-        </div>
-        <div class="campos">
-            <label>Modelo:</label>
-            <input [(ngModel)]="modelo" type="text" id="modelo" name="modelo" required>
-        </div>
-        <div class="campos">
-            <label>Patente:</label>
-            <input type="text" id="patente" required [(ngModel)]="patente" name="patente">
-        </div>
-        <div class="campos">
-            <label>Año:</label>
-            <input type="text" id="anio" name="anio" required [(ngModel)]="anio">
-        </div>
-        <div class="campos">
-            <label>Kilometraje del vehiculo:</label>
-            <input type="number" id="kilometraje" name="kilometreje" required [(ngModel)]="kilometreje">
+  <main class="content">
+    <app-header></app-header>
+
+    <div class="contenedor">
+        
+        <div class="titulo">
+            <h1>Registrar vehiculo</h1>
         </div>
 
-        <button type="submit">Registrar</button>
-    </form>
-        <button (click)="volverAtras()">Cancelar</button>
+        <div class="formulario">
+            <p>Complete los campos</p>
+            <form (ngSubmit)="agregarVehiculo()">
+                <div class="campos">
+                    <label>Marca:</label>
+                    <input [(ngModel)]="marca" type="text" name="marca" id="marca"  required>
+                </div>
+                <div class="campos">
+                    <label>Modelo:</label>
+                    <input [(ngModel)]="modelo" type="text" id="modelo" name="modelo" required>
+                </div>
+                <div class="campos">
+                    <label>Patente:</label>
+                    <input type="text" id="patente" required [(ngModel)]="patente" name="patente">
+                </div>
+                <div class="campos">
+                    <label>Año:</label>
+                    <input type="text" id="anio" name="anio" required [(ngModel)]="anio">
+                </div>
+                <div class="campos">
+                    <label>Kilometraje del vehiculo:</label>
+                    <input type="number" id="kilometraje" name="kilometreje" required [(ngModel)]="kilometreje">
+                </div>
+
+                <div class="botones">
+        <button class="btn-registrar" type="submit">
+            Registrar
+        </button>
+
+        <button class="btn-cancelar"
+                    type="button"
+                    (click)="volverAtras()">
+                Cancelar
+            </button>
+        </div>
+            </form>
+                
+        </div>
+
+    </div>
+  </main>
 </div>
+

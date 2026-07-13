@@ -103,4 +103,10 @@ public class PresupuestoController {
                 presupuestoService.obtenerUltimasFacturaPorCliente(idCliente)
         );
     }
+
+    @GetMapping("contarFacturas/{idCliente}")
+    public ResponseEntity<Long>  contarFacturasPendientes(@PathVariable Long idCliente) {
+        return new ResponseEntity<Long>(presupuestoService.contarFacturasPendientes(idCliente), HttpStatus.OK);
+    }
+    
 }
