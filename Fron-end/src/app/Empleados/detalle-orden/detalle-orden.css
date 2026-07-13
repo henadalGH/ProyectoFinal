@@ -1,35 +1,39 @@
 /*=========================
-    LAYOUT
+    LAYOUT (AJUSTADO)
 =========================*/
 
 .layout{
     display:flex;
-    min-height:100vh;
+    height:100vh;
     background:#f4f6f9;
 }
 
+
 .sidebar{
-    width:260px;
+    width:320px;
     flex-shrink:0;
 }
 
+
 .content{
     flex:1;
-    padding:25px;
-    overflow:auto;
+    padding:30px;
+    overflow-y:auto;
 }
+
 
 
 /*=========================
-    CONTENEDOR
+    CONTENEDOR (AJUSTADO)
 =========================*/
 
 .orden-container{
-    max-width:1400px;
-    margin:30px auto;
+
+    max-width:1200px;
+
+    margin:50px auto 0;
+
 }
-
-
 /*=========================
     TITULO
 =========================*/

@@ -1,119 +1,298 @@
-.layout{
-    display: flex;
-    min-height: 100vh;
-    background: #f3f6fb;
+/* ==========================================================================
+   ESTRUCTURA BASE (NO CAMBIAR)
+   ========================================================================== */
+
+.layout {
+  display:flex;
+  height:100vh;
+  font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
-.sidebar{
-    width: 320px;
-    flex-shrink: 0;
-}
 
-.content{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
+.sidebar {
 
-.contenedor{
-    padding: 30px;
-}
+  width:320px;
 
-.titulo{
-    margin-bottom: 25px;
-}
+  background:#f3f6fb;
 
-.titulo h1{
-    margin: 0;
-    font-size: 32px;
-    color: #1f2937;
-    font-weight: 700;
-}
-
-.titulo p{
-    margin-top: 8px;
-    color: #6b7280;
-    font-size: 16px;
-}
-
-/* Cabecera */
-
-.cabecera-lista{
-    display: grid;
-    grid-template-columns: 2fr 2fr 2fr 1fr 1.5fr 1fr;
-    gap: 20px;
-    padding: 16px 20px;
-    background: #2563eb;
-    color: white;
-    font-weight: 600;
-    border-radius: 12px;
-    margin-bottom: 10px;
-}
-
-/* Filas */
-
-.fila{
-    display: grid;
-    grid-template-columns: 2fr 2fr 2fr 1fr 1.5fr 1fr;
-    gap: 20px;
-    align-items: center;
-    padding: 18px 20px;
-    background: white;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #e5e7eb;
-    transition: all .2s ease;
-}
-
-.fila:hover{
-    background: #f8fbff;
-    border-color: #2563eb;
-    transform: translateX(4px);
-}
-
-.fila div{
-    color: #374151;
-    font-size: 15px;
-}
-
-.servicio{
-    font-weight: 600;
-    color: #2563eb;
-}
-
-.prioridad{
-    display: inline-block;
-    background: #e8f0ff;
-    color: #2563eb;
-    padding: 6px 14px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 600;
-    text-align: center;
-}
-
-/* Responsive */
-
-@media (max-width:1200px){
-
-    .cabecera-lista,
-    .fila{
-        grid-template-columns: repeat(3,1fr);
-        row-gap: 15px;
-    }
+  box-shadow:4px 0 10px rgba(0,0,0,0.05);
 
 }
 
-@media (max-width:768px){
 
-    .cabecera-lista{
-        display: none;
-    }
 
-    .fila{
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 18px;
-    }
+.content {
+
+  flex:1;
+
+  background:#f3f6fb;
+
+  padding:30px;
+
+  overflow-y:auto;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================================== */
+
+.contenedor {
+
+  max-width:1200px;
+
+  margin:50px auto 0;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:25px;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   TITULO
+   ========================================================================== */
+
+.titulo {
+
+  text-align:center;
+
+}
+
+
+
+.titulo h1 {
+
+  margin:0;
+
+  color:#1e293b;
+
+  font-size:30px;
+
+  font-weight:700;
+
+}
+
+
+
+.titulo p {
+
+  margin-top:8px;
+
+  color:#64748b;
+
+  font-size:15px;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   CABECERA TABLA
+   ========================================================================== */
+
+.cabecera-lista {
+
+  display:grid;
+
+  grid-template-columns:
+  2fr
+  1.5fr
+  1.5fr
+  1fr
+  1fr
+  1fr;
+
+
+  align-items:center;
+
+  background:#f8fafc;
+
+  padding:16px 20px;
+
+  border-radius:12px;
+
+  color:#334155;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+}
+
+
+
+
+
+/* ==========================================================================
+   FILAS
+   ========================================================================== */
+
+.fila {
+
+  display:grid;
+
+  grid-template-columns:
+  2fr
+  1.5fr
+  1.5fr
+  1fr
+  1fr
+  1fr;
+
+
+  align-items:center;
+
+  background:white;
+
+  padding:18px 20px;
+
+  border-radius:12px;
+
+  border:1px solid rgba(226,232,240,0.8);
+
+  box-shadow:
+  0 3px 6px rgba(0,0,0,0.03);
+
+  transition:.2s;
+
+}
+
+
+
+.fila:hover {
+
+  transform:translateY(-2px);
+
+  box-shadow:
+  0 8px 15px rgba(0,0,0,0.05);
+
+}
+
+
+
+.fila div {
+
+  color:#475569;
+
+  font-size:14px;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SERVICIO DESTACADO
+   ========================================================================== */
+
+.servicio {
+
+  color:#1e293b !important;
+
+  font-weight:600;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   PRIORIDAD
+   ========================================================================== */
+
+.prioridad {
+
+  display:inline-block;
+
+  padding:5px 12px;
+
+  border-radius:20px;
+
+  background:#fef3c7;
+
+  color:#b45309;
+
+  font-size:13px;
+
+  font-weight:600;
+
+  width:max-content;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   SEPARACION ENTRE FILAS
+   ========================================================================== */
+
+.fila + .fila {
+
+  margin-top:12px;
+
+}
+
+
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:1000px){
+
+
+  .sidebar{
+
+    width:250px;
+
+  }
+
+
+  .cabecera-lista {
+
+    display:none;
+
+  }
+
+
+  .fila {
+
+    grid-template-columns:1fr;
+
+    gap:12px;
+
+    padding:20px;
+
+  }
+
+
+  .fila div::before {
+
+    font-weight:700;
+
+    color:#1e293b;
+
+  }
 
 }

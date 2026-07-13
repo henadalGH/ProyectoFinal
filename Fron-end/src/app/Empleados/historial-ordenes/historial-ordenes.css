@@ -1,258 +1,431 @@
-/* ===========================
-   Layout
-=========================== */
+/* ==========================================================================
+   ESTRUCTURA BASE
+   ========================================================================== */
 
 .layout {
-    display: flex;
-    min-height: 100vh;
-    background: #f4f7fb;
+    display:flex;
+    height:100vh;
+    font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background:#f3f6fb;
 }
+
 
 .sidebar {
-    width: 320px;
-    flex-shrink: 0;
+    width:320px;
+    flex-shrink:0;
+    background:#f3f6fb;
 }
+
 
 .content {
-    flex: 1;
-    overflow-y: auto;
+    flex:1;
+    padding:30px;
+    overflow-y:auto;
 }
 
-/* ===========================
-   Contenedor
-=========================== */
+
+
+/* ==========================================================================
+   CONTENEDOR
+   ========================================================================== */
 
 .contenedor {
-    padding: 35px;
+
+    max-width:1200px;
+
+    margin:50px auto 0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
 }
 
-/* ===========================
-   Título
-=========================== */
+
+
+/* ==========================================================================
+   TITULO
+   ========================================================================== */
 
 .titulo {
-    margin-bottom: 30px;
+
+    text-align:center;
+
 }
+
 
 .titulo h1 {
-    margin: 0;
-    font-size: 32px;
-    color: #1f2937;
+
+    margin:0;
+
+    color:#1e293b;
+
+    font-size:30px;
+
+    font-weight:700;
+
 }
+
 
 .titulo p {
-    margin-top: 8px;
-    color: #6b7280;
-    font-size: 15px;
+
+    margin-top:8px;
+
+    color:#64748b;
+
+    font-size:15px;
+
 }
 
-/* ===========================
-   Barra superior
-=========================== */
+
+
+/* ==========================================================================
+   BARRA SUPERIOR
+   ========================================================================== */
 
 .barra-superior {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-    gap: 20px;
-    flex-wrap: wrap;
+
+    background:white;
+
+    padding:18px 20px;
+
+    border-radius:16px;
+
+    border:1px solid rgba(226,232,240,0.8);
+
+    box-shadow:
+    0 4px 6px rgba(0,0,0,0.03);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
 }
+
+
 
 .buscador {
-    width: 420px;
-    max-width: 100%;
-    position: relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex:1;
+
 }
+
+
 
 .buscador i {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #9ca3af;
+
+    color:#64748b;
+
 }
+
+
 
 .buscador input {
-    width: 100%;
-    padding: 13px 18px 13px 46px;
-    border-radius: 12px;
-    border: 1px solid #d1d5db;
-    background: white;
-    font-size: 15px;
-    transition: .25s;
-    outline: none;
+
+    width:100%;
+
+    padding:12px 15px;
+
+    border-radius:10px;
+
+    border:1px solid #cbd5e1;
+
+    outline:none;
+
+    font-size:14px;
+
 }
+
+
 
 .buscador input:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.1);
+
 }
+
+
 
 .cantidad {
-    color: #6b7280;
-    font-weight: 600;
+
+    color:#475569;
+
+    font-weight:600;
+
+    font-size:14px;
+
 }
 
-/* ===========================
-   Cabecera
-=========================== */
+
+
+/* ==========================================================================
+   CABECERA TABLA
+   ========================================================================== */
 
 .cabecera-lista {
-    display: grid;
-    grid-template-columns:
-        2fr
-        2fr
-        2fr
-        1.2fr
-        1.2fr
-        1.4fr
-        1fr;
 
-    background: #2563eb;
-    color: white;
-    padding: 16px 20px;
-    border-radius: 14px;
-    font-weight: 600;
-    margin-bottom: 12px;
+    display:grid;
+
+    grid-template-columns:
+    2fr
+    1.5fr
+    1.5fr
+    1fr
+    1.2fr
+    1fr
+    1fr;
+
+
+    background:#f8fafc;
+
+    padding:16px 20px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(226,232,240,0.8);
+
+    color:#334155;
+
+    font-weight:700;
+
+    font-size:14px;
+
 }
 
-/* ===========================
-   Filas
-=========================== */
+
+
+
+
+/* ==========================================================================
+   FILAS
+   ========================================================================== */
 
 .fila {
-    display: grid;
+
+    display:grid;
+
     grid-template-columns:
-        2fr
-        2fr
-        2fr
-        1.2fr
-        1.2fr
-        1.4fr
-        1fr;
+    2fr
+    1.5fr
+    1.5fr
+    1fr
+    1.2fr
+    1fr
+    1fr;
 
-    align-items: center;
 
-    background: white;
+    align-items:center;
 
-    padding: 18px 20px;
+    background:white;
 
-    border-radius: 14px;
+    padding:18px 20px;
 
-    margin-bottom: 12px;
+    border-radius:12px;
 
-    box-shadow: 0 3px 10px rgba(0,0,0,.05);
+    border:1px solid rgba(226,232,240,0.8);
 
-    transition: .2s;
+    box-shadow:
+    0 3px 6px rgba(0,0,0,0.03);
+
+    transition:.2s;
+
 }
+
+
 
 .fila:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 15px rgba(0,0,0,0.05);
+
 }
+
+
+
+.fila + .fila {
+
+    margin-top:12px;
+
+}
+
+
 
 .fila div {
-    color: #374151;
-    font-size: 14px;
+
+    color:#475569;
+
+    font-size:14px;
+
 }
+
+
 
 .servicio {
-    font-weight: 700;
-    color: #1d4ed8;
+
+    color:#1e293b !important;
+
+    font-weight:600;
+
 }
 
-/* ===========================
-   Estado
-=========================== */
+
+
+
+
+/* ==========================================================================
+   ESTADOS
+   ========================================================================== */
 
 .estado {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 30px;
-    background: #e0f2fe;
-    color: #0369a1;
-    font-weight: 600;
-    font-size: 13px;
+
+    background:#e0f2fe;
+
+    color:#0369a1;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    display:inline-block;
+
 }
 
-/* ===========================
-   Prioridad
-=========================== */
+
+
+
+
+/* ==========================================================================
+   PRIORIDAD
+   ========================================================================== */
 
 .prioridad {
-    display: inline-block;
-    background: #fef3c7;
-    color: #92400e;
-    padding: 6px 12px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: 600;
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    display:inline-block;
+
 }
 
-/* ===========================
-   Sin datos
-=========================== */
+
+
+
+
+/* ==========================================================================
+   SIN DATOS
+   ========================================================================== */
 
 .sin-datos {
-    margin-top: 40px;
-    background: white;
-    border-radius: 18px;
-    padding: 50px;
-    text-align: center;
-    box-shadow: 0 3px 10px rgba(0,0,0,.05);
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:45px;
+
+    text-align:center;
+
+    border:1px solid rgba(226,232,240,0.8);
+
 }
+
+
 
 .sin-datos i {
-    font-size: 45px;
-    color: #cbd5e1;
-    margin-bottom: 20px;
+
+    font-size:40px;
+
+    color:#94a3b8;
+
 }
+
+
 
 .sin-datos h3 {
-    color: #374151;
-    margin-bottom: 10px;
+
+    color:#1e293b;
+
+    margin:15px 0 5px;
+
 }
+
+
 
 .sin-datos p {
-    color: #6b7280;
-}
 
-/* ===========================
-   Responsive
-=========================== */
-
-@media (max-width: 1200px) {
-
-    .cabecera-lista,
-    .fila {
-
-        min-width: 1150px;
-    }
-
-    .contenedor {
-        overflow-x: auto;
-    }
+    color:#64748b;
 
 }
 
-@media (max-width: 768px) {
 
-    .contenedor {
-        padding: 20px;
+
+
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media(max-width:1000px){
+
+
+    .sidebar{
+
+        width:250px;
+
     }
 
-    .barra-superior {
-        flex-direction: column;
-        align-items: stretch;
+
+    .barra-superior{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
     }
 
-    .buscador {
-        width: 100%;
+
+    .cabecera-lista{
+
+        display:none;
+
     }
 
-    .cantidad {
-        text-align: center;
+
+    .fila{
+
+        grid-template-columns:1fr;
+
+        gap:12px;
+
     }
 
 }

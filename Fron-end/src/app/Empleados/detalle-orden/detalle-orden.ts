@@ -46,6 +46,7 @@ export class DetalleOrden implements OnInit {
             this.soloLectura = this.orden.estado === 'CANCELADA';
             console.log(this.orden.estado);
             console.log(this.botonDeshabilitado);
+            console.log(this.orden);
           },
           error: (err) => {
             console.error(err);
