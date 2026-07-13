@@ -1,11 +1,13 @@
 package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.BalanceMensualDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimosMovimientosDTO;
@@ -199,6 +201,38 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
 
         return totalIngresos(desde, hasta)
                 - totalEgresos(desde, hasta);
+    }
+
+    @Override
+    public List<BalanceMensualDTO> obtenerBalanceMensual(int anio) {
+        LocalDate inicio = LocalDate.of(anio, 1, 1);
+        LocalDate fin = LocalDate.of(anio, 12, 31);
+
+        List<MovimientoFinancieroEntity> movimientos = movimientoFinancieroRepository
+                .findByFechaRegistroBetween(inicio, fin);
+
+        List<BalanceMensualDTO> balances = new ArrayList<>();
+
+        for (int mes = 1; mes <= 12; mes++) {
+            BalanceMensualDTO dto = new BalanceMensualDTO(mes);
+
+            for (MovimientoFinancieroEntity movimiento : movimientos) {
+                if (movimiento.getFechaRegistro().getMonthValue() != mes) {
+                    continue;
+                }
+
+                if (movimiento.getTipoMovimiento() == MovimientosEnum.INGRESO) {
+                    dto.setTotalIngresos(dto.getTotalIngresos() + movimiento.getImporte());
+                } else if (movimiento.getTipoMovimiento() == MovimientosEnum.GASTOS) {
+                    dto.setTotalGastos(dto.getTotalGastos() + movimiento.getImporte());
+                }
+            }
+
+            dto.setBalance(dto.getTotalIngresos() - dto.getTotalGastos());
+            balances.add(dto);
+        }
+
+        return balances;
     }
 
     @Override

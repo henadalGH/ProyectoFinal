@@ -3,6 +3,7 @@ package com.example.wmotorproBack.wmotorBack.Servicio;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.BalanceMensualDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimosMovimientosDTO;
@@ -32,6 +33,8 @@ public interface MovimientoFinService {
     Double totalEgresos(LocalDate desde, LocalDate hasta);
 
     Double balanceGeneral(LocalDate desde,  LocalDate hasta);
+
+    List<BalanceMensualDTO> obtenerBalanceMensual(int anio);
 
     List<UltimosMovimientosDTO> ultimosMovimientos();
 }
