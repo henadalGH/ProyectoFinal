@@ -97,7 +97,7 @@ public class PresupuestoController {
         return new ResponseEntity<List<ObtenerPresupuestoDTO>>(presupuestoService.obtenerPresupuestPorEstadoAndCliente(idCliente, estado), HttpStatus.OK);
     }
 
-     @GetMapping("/ultimas/cliente/{idCliente}")
+    @GetMapping("/ultimas/cliente/{idCliente}")
     public ResponseEntity<List<UltimasFacturasDTO>> ultimasdelCliente(@PathVariable Long idCliente) {
         return ResponseEntity.ok(
                 presupuestoService.obtenerUltimasFacturaPorCliente(idCliente)
@@ -108,5 +108,36 @@ public class PresupuestoController {
     public ResponseEntity<Long>  contarFacturasPendientes(@PathVariable Long idCliente) {
         return new ResponseEntity<Long>(presupuestoService.contarFacturasPendientes(idCliente), HttpStatus.OK);
     }
+
+    @GetMapping("/facturasEmitidad")
+    public ResponseEntity<Long> contarFacturas() {
+        return new ResponseEntity<Long>(presupuestoService.contarFacturas(), HttpStatus.OK);
+    }
     
+    @GetMapping("/total-facturado")
+    public ResponseEntity<Double> totalFacturado(){
+
+        return ResponseEntity.ok(
+                presupuestoService.obtenerTotalFacturado()
+        );
+    }
+
+    @GetMapping("/total-cobrado")
+    public ResponseEntity<Double> totalCobrado(){
+
+        return ResponseEntity.ok(
+                presupuestoService.obtenerTotalCobrado()
+        );
+    }
+
+
+
+    @GetMapping("/total-pendiente")
+    public ResponseEntity<Double> totalPendiente(){
+
+        return ResponseEntity.ok(
+                presupuestoService.obtenerTotalPendiente()
+        );
+    }
+
 }

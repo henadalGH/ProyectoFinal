@@ -412,4 +412,27 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
 
     return presuspuestoRepository.countByVehiculoClienteIdAndEstadoPresupuesto(idCliente, estado);
    }
+
+   @Override
+   public Long contarFacturas() {
+    return presuspuestoRepository.count();
+   }
+
+ @Override
+    public Double obtenerTotalFacturado() {
+        return presuspuestoRepository.totalFacturado();
+    }
+
+
+    @Override
+    public Double obtenerTotalCobrado() {
+        return presuspuestoRepository.totalCobrado();
+    }
+
+
+    @Override
+    public Double obtenerTotalPendiente() {
+        return presuspuestoRepository.totalPendiente();
+    }
+
 }

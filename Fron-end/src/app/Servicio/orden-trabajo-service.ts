@@ -68,4 +68,8 @@ export class OrdenTrabajoService {
   obtenrHistorialOrdenes(idEmpleado: number){
     return this.http.get<any []>(`${this.urlOrden}/historialOrdenes/${idEmpleado}`)
   }
+
+  contarOrdenesParaFacturar(){
+    return this.http.get(`${this.urlOrden}/contarOrdenFactura`);
+  }  
 }

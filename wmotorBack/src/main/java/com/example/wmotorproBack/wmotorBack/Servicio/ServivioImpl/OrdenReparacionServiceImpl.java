@@ -415,4 +415,12 @@ public OrdenTrabajoEmpleadoDTO toOrdenTrabajoEmpleadoDTO(OrdenTrabajoEntity orde
             .map(this::toOrdenTrabajoEmpleadoDTO)
             .collect(Collectors.toList());
     }
+
+    @Override
+    public Long obtenerOrdenTerminadaParaFecturar() {
+        EstadoOrdenEntity estado = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.PARA_FACTURAR)
+        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        return ordenTrabajoRepository.countByEstadoOrden(estado);
+    }
 }

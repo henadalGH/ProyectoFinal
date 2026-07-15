@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoResponseDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
@@ -122,6 +123,26 @@ public class TurnoController {
          @RequestParam("fecha") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
             return new ResponseEntity<List<TurnoEstadosDTO>>(turnoService.obtenrTurnoFururosPorCliente(idCliente, fecha), HttpStatus.OK);
     }
+
+    @GetMapping("/contarTurnoPendientes")
+    public ResponseEntity<Long> contarTurnoPendiente() {
+        return new ResponseEntity<Long>(turnoService.contarTurnosPendientes(), HttpStatus.OK); 
+    }
+
+    @GetMapping("/contarTurnoConirmados")
+    public ResponseEntity<Long> contarTurnoConfirmados() {
+        return new ResponseEntity<Long>(turnoService.contarTurnosConfirmados(), HttpStatus.OK); 
+    }
+
+    @GetMapping("/servicioMasSolicitados")
+    public ResponseEntity<List<ServicioMasSolicitadosDTO>> ontenerServicioMasSolicitaods() {
+        return new ResponseEntity<List<ServicioMasSolicitadosDTO>>(turnoService.obtenerServicioMasSolicitados(),HttpStatus.OK);
+    }
+    
+
+    
+
+    
     
     
     

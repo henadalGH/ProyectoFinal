@@ -6,6 +6,7 @@ import java.util.List;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
@@ -34,6 +35,9 @@ public interface TurnoService {
 
     public List<TurnoEstadosDTO> obtenerTurnofuturos(LocalDate fecha);
     public List<TurnoEstadosDTO> obtenrTurnoFururosPorCliente(Long id, LocalDate fecha);
+    public Long contarTurnosPendientes();
+    public Long contarTurnosConfirmados();
 
+    public List<ServicioMasSolicitadosDTO> obtenerServicioMasSolicitados();
 
 }

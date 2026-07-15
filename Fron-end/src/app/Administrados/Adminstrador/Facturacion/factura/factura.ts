@@ -20,12 +20,14 @@ export class Factura implements OnInit{
   ){}
 
   facturas: any[]= [];
+  facEmitida!: any;
   
   
   
   ngOnInit(): void {
    this.obtenerOrdenParaFacturar();
    this.obtenerFacturas();
+   this.contarFacturasEmitidas();
   }
 
   factura: any[] = [];
@@ -52,6 +54,15 @@ export class Factura implements OnInit{
     verFactura(id: number){
       this.route.navigate(['/verFactura', id]);
 
+    }
+
+    contarFacturasEmitidas(){
+      this.facturaService.contarFacturasEmitida().subscribe(
+        
+          (repuesta: any) => {
+            this.facEmitida = repuesta;
+            console.log("Facturas emitidad " + this.facEmitida)
+          });
     }
 
 }

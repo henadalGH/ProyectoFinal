@@ -118,5 +118,11 @@ export class TurnosService {
     );
   }
 
-  
+  contarTurnoPendientes(){
+    return this.http.get(`${this.url}/contarTurnoPendientes`);
+  }
+
+  contarTurnoConfirmados(){
+    return this.http.get(`${this.url}/contarTurnoConirmados`);
+  }  
 }

@@ -23,4 +23,8 @@ public interface PresupuestoService {
     public List<ObtenerPresupuestoDTO> obtenerPresupuestoPorIdCliente(Long idCliente);
     public List<ObtenerPresupuestoDTO> obtenerPresupuestPorEstadoAndCliente(Long idCliente, EstadoPresupuestoEnum estado);
     public Long contarFacturasPendientes(Long idCliente);
+    public Long contarFacturas();
+    Double obtenerTotalFacturado();
+    Double obtenerTotalCobrado();
+    Double obtenerTotalPendiente();
 }

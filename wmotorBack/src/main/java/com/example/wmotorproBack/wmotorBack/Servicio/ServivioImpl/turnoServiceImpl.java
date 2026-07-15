@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.EstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.FechaDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
@@ -313,6 +314,34 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
             .stream()
             .map(this::toMapTurnoDto)
             .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public Long contarTurnosPendientes() {
+
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        return turnoRepository.countByEstado(estado);
+    }
+
+
+    @Override
+    public Long contarTurnosConfirmados() {
+
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.CONFIRMADO)
+        .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
+
+        return turnoRepository.countByEstado(estado);
+    }
+
+
+    @Override
+    public List<ServicioMasSolicitadosDTO> obtenerServicioMasSolicitados() {
+         List<ServicioMasSolicitadosDTO> servicio = turnoRepository.servicioMasSolicitado();
+
+         return servicio;
     }
 
     }

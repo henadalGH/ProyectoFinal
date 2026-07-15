@@ -6,108 +6,233 @@
 
     <main class="conten">
 
+        <app-header></app-header>
+
         <div class="contain">
 
-            <!-- HEADER (NO TOCADO) -->
-            <app-header></app-header>
+            <section class="hero">
 
-            <div class="cards-container">
-
-                <div class="cards">
-                    <h3>Turnos pendientes</h3>
-                    @if (pendiente) {
-                        <p>{{pendiente.length}}</p>
-                    }
+                <div>
+                    <h1>Panel de administración</h1>
+                    <p>Resumen general de la actividad del taller.</p>
                 </div>
 
-                <div class="kpi orange">
-                    <h3>Ingresos del día</h3>
-                    @if (ingreso != null) {
-                        <p>$ {{ingreso}}</p>
-                    }
-                </div>
+            </section>
 
-                <div class="kpi purple">
-                    <h3>Clientes</h3>
-                    <p>{{totalClientes}}</p>
-                </div>
+            <!-- ================= KPI ================= -->
 
-            </div>
-            
-                
+            <section class="dashboard-kpis">
 
-            
+                <article class="kpi blue">
 
-            <!-- GRID -->
-            <div class="grid">
-
-                
-
-                    <!-- TURNOS -->
-                    <div class="card">
-                        <h2>Turnos del día</h2>
-
-                        <div class="list">
-                            <ul>
-
-                                @if (pendiente != null && pendiente.length > 0) {
-
-                                    @for (pen of pendiente; track $index) {
-
-                                        <li >
-
-                                            <div class="turno-info">
-                                                <span class="cliente">
-                                                    {{pen.nombreCliente}} {{pen.apellidoCliente}}
-                                                </span>
-
-                                                <span class="vehiculo">
-                                                    {{pen.marca}} {{pen.modelo}}
-                                                </span>
-                                            </div>
-
-                                            <span class="servicio">
-                                                {{pen.nombreServicio}}
-                                            </span>
-
-                                        </li>
-
-                                    }
-
-                                } @else {
-                                    <p class="empty">No hay turnos este día</p>
-                                }
-
-                            </ul>
-                        </div>
+                    <div class="kpi-icon">
+                        <i class="fas fa-calendar-alt">
+                            <h2>{{contaTrunos}}</h2>
+                        </i>
                     </div>
 
-                    <!-- FACTURAS -->
-                    <div class="card">
-                        <h2>Facturación reciente</h2>
+                    <div class="kpi-info">
+                        <span>Turnos pendientes</span>
+                        
+                    </div>
 
-                        <table>
+                </article>
+
+                
+
+                <article class="kpi purple">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-users">
+                            <h2>{{totalClientes}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Clientes registrados</span>
+                        
+                    </div>
+
+                </article>
+
+                <article class="kpi red">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-check-circle">
+                            <h2>{{contarTurnosConf}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Turnos confirmados</span>
+                        
+                    </div>
+
+                </article>
+
+                <article class="kpi green">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-tools">
+                            <h2>{{contarOrdenFac}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Órdenes terminadas</span>
+                        
+                    </div>
+
+                </article>
+
+                <article class="kpi orange">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Ingresos de hoy</span>
+
+                        @if(ingreso != null){
+                            <h2>$ {{ingreso}}</h2>
+                        }@else{
+                            <h2>$ 0</h2>
+                        }
+
+                    </div>
+
+                </article>
+
+            </section>
+
+            <!-- ================= CONTENIDO ================= -->
+
+            <section class="dashboard-grid">
+
+                <!-- TURNOS -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>Turnos de hoy</h2>
+
+                        <span>{{pendiente.length}}</span>
+
+                    </div>
+
+                    @if(pendiente.length > 0){
+
+                        @for(pen of pendiente;track $index){
+
+                            <div class="turno-item">
+
+                                <div class="turno-avatar">
+                                    <i class="fas fa-car"></i>
+                                </div>
+
+                                <div class="turno-body">
+
+                                    <strong>
+                                        {{pen.nombreCliente}}
+                                        {{pen.apellidoCliente}}
+                                    </strong>
+
+                                    <span>
+                                        {{pen.marca}}
+                                        {{pen.modelo}}
+                                    </span>
+
+                                </div>
+
+                                <div class="turno-servicio">
+                                    {{pen.nombreServicio}}
+                                </div>
+
+                            </div>
+
+                        }
+
+                    }@else{
+
+                        <div class="panel-vacio">
+
+                            <i class="fas fa-calendar-times"></i>
+
+                            <p>No hay turnos para hoy.</p>
+
+                        </div>
+
+                    }
+
+                </article>
+
+                <!-- FACTURAS -->
+
+                <article class="panel">
+
+                    <div class="panel-header">
+
+                        <h2>Últimas facturas</h2>
+
+                    </div>
+
+                    <table>
+
+                        <thead>
+
                             <tr>
-                                <th>Factura</th>
+
+                                <th>N°</th>
+
                                 <th>Cliente</th>
-                                <th>Monto</th>
+
+                                <th>Total</th>
+
                                 <th>Estado</th>
+
                             </tr>
 
-                            @for (ult of ultimas; track $index) {
-                                <tr>
-                                    <td>{{ formatearFactura(ult.numeroFactura) }}</td>
-                                    <td>{{ult.nombreCliente}}</td>
-                                    <td>{{ult.monto}}</td>
-                                    <td class="estado {{ult.estado.toLowerCase()}}">
-                                        {{ult.estado}}
-                                    </td>
-                                </tr>
-                            }
-                        </table>
-                    </div>
+                        </thead>
 
-            </div>
+                        <tbody>
+
+                            @for(ult of ultimas;track $index){
+
+                                <tr>
+
+                                    <td>
+                                        {{formatearFactura(ult.numeroFactura)}}
+                                    </td>
+
+                                    <td>
+                                        {{ult.nombreCliente}}
+                                    </td>
+
+                                    <td>
+                                        $ {{ult.monto}}
+                                    </td>
+
+                                    <td>
+
+                                        <span class="estado {{ult.estado.toLowerCase()}}">
+                                            {{ult.estado}}
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </article>
+
+            </section>
 
         </div>
 

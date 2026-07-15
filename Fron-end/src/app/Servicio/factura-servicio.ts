@@ -59,5 +59,9 @@ export class FacturaServicio {
   contarFacturaPendientesPorCiente(idCliente: number){
     return this.http.get<any>(`${this.urlFactura}/contarFacturas/${idCliente}`);
   }
+
+  contarFacturasEmitida(){
+    return this.http.get<any>(`${this.urlFactura}/facturasEmitidad`);
+  }
   
 }

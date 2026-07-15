@@ -105,6 +105,12 @@ public class OrdenReparacionController {
         {
             return new ResponseEntity<List<OrdenTrabajoEmpleadoDTO>>(ordenReparacionService.obtenerHistorialOrdenes(idEmpleado), HttpStatus.OK); 
         }
+
+        @GetMapping("/contarOrdenFactura")
+        public ResponseEntity<Long> contarOrdenParaFacturar() {
+            return new ResponseEntity<Long>(ordenReparacionService.obtenerOrdenTerminadaParaFecturar(), HttpStatus.OK);
+        }
+        
     
 
 }
