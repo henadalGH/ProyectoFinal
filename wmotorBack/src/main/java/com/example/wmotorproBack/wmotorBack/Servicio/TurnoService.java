@@ -9,6 +9,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorEstadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorMesDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 
@@ -39,5 +41,8 @@ public interface TurnoService {
     public Long contarTurnosConfirmados();
 
     public List<ServicioMasSolicitadosDTO> obtenerServicioMasSolicitados();
+
+    public List<TurnosPorMesDTO> obtenerTurnosPorMes();
+    public List<TurnosPorEstadoDTO> obtenerTurnosPorEstado();
 
 }

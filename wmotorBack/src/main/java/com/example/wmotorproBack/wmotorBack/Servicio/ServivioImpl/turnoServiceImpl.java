@@ -12,6 +12,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorEstadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorMesDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import java.time.LocalDate;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ServicioEntity;
@@ -342,6 +344,22 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
          List<ServicioMasSolicitadosDTO> servicio = turnoRepository.servicioMasSolicitado();
 
          return servicio;
+    }
+
+
+    @Override
+    public List<TurnosPorMesDTO> obtenerTurnosPorMes() {
+
+        List<TurnosPorMesDTO> turnosMes = turnoRepository.contarTurnosPorMes();
+        return turnosMes;
+    }
+
+
+    @Override
+    public List<TurnosPorEstadoDTO> obtenerTurnosPorEstado() {
+
+        List<TurnosPorEstadoDTO> cantidadTurnos = turnoRepository.contarTurnosPorEstado();
+        return cantidadTurnos;
     }
 
     }

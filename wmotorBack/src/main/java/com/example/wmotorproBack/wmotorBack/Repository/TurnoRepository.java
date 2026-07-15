@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorEstadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorMesDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
@@ -38,7 +40,25 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Long>{
     """)
     List<ServicioMasSolicitadosDTO> servicioMasSolicitado();
 
-    
+    @Query("""
+    SELECT new com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorMesDTO(
+        MONTH(t.fechaHora), COUNT(t)
+    )
+    FROM TurnoEntity t
+    GROUP BY MONTH(t.fechaHora)
+    ORDER BY MONTH(t.fechaHora)
+    """)
+    List<TurnosPorMesDTO> contarTurnosPorMes();
+
+    @Query("""
+    SELECT new com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorEstadoDTO(
+        t.estado.estadoTurno,
+        COUNT(t)
+    )
+    FROM TurnoEntity t
+    GROUP BY t.estado.estadoTurno
+""")
+List<TurnosPorEstadoDTO> contarTurnosPorEstado();
 
 } 
  

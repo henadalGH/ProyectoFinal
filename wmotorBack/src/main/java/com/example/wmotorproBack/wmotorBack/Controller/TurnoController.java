@@ -18,6 +18,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ServicioMasSolicitadosDTO
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoEstadosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnoResponseDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorEstadoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorMesDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoTurnoEnums;
 import com.example.wmotorproBack.wmotorBack.Servicio.TurnoService;
@@ -138,13 +140,16 @@ public class TurnoController {
     public ResponseEntity<List<ServicioMasSolicitadosDTO>> ontenerServicioMasSolicitaods() {
         return new ResponseEntity<List<ServicioMasSolicitadosDTO>>(turnoService.obtenerServicioMasSolicitados(),HttpStatus.OK);
     }
-    
 
-    
+    @GetMapping("/turnosPorMes")
+    public ResponseEntity<List<TurnosPorMesDTO>> contarTrunosPorMes() {
+        return new ResponseEntity<List<TurnosPorMesDTO>>(turnoService.obtenerTurnosPorMes(), HttpStatus.OK);
+    }
 
-    
-    
-    
-    
-    
+    @GetMapping("/turnosPorEstado")
+    public ResponseEntity<List<TurnosPorEstadoDTO>> contarTrunosPorEstado() {
+        return new ResponseEntity<List<TurnosPorEstadoDTO>>(turnoService.obtenerTurnosPorEstado(), HttpStatus.OK);
+    }
+
+
 }
