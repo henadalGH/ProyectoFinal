@@ -1,23 +1,104 @@
 <div class="layout">
-  <aside class="sidebar">
-    <!-- menú -->
-     <app-header-admin></app-header-admin>
-  </aside>
 
-  <main class="content">
-    <!-- contenido principal -->
-     <app-header></app-header>
+    <aside class="sidebar">
+        <app-header-admin></app-header-admin>
+    </aside>
 
-     <div class="content">
+    <main class="content">
 
-        <div class="titulo">
-            <h1>Dashboard</h1>
-            <p>Resumen completo del taller</p>
+        <app-header></app-header>
+
+        <div class="dashboard-container">
+
+            <!-- Encabezado del Dashboard -->
+            <header class="dashboard-header">
+                <div class="header-text">
+                    <h1>Dashboard</h1>
+                    <p>Resumen general del taller y rendimiento de negocio</p>
+                </div>
+            </header>
+
+            <!-- Fila 1: Gráfico Principal de Balance -->
+            <section class="card balance-card glass-panel">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="icon">📈</span>
+                        <h2>Evolución anual de ingresos, gastos y balance</h2>
+                    </div>
+                </div>
+                <div class="chart-wrapper balance-chart">
+                    <canvas id="miGrafico"></canvas>
+                </div>
+            </section>
+
+            <!-- Fila 2: Grid de 3 Columnas Estilizadas -->
+            <section class="dashboard-grid">
+
+                <!-- Columna 1: Turnos por Estado -->
+                <article class="card glass-panel col-doughnut">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="icon">📊</span>
+                            <h2>Turnos por estado</h2>
+                        </div>
+                    </div>
+                    <!-- Contenedor flex optimizado para centrar la dona y su leyenda -->
+                    <div class="chart-wrapper doughnut-container">
+                        <canvas id="graficoEstado"></canvas>
+                    </div>
+                </article>
+
+                <!-- Columna 2: Turnos por Mes -->
+                <article class="card glass-panel col-bar">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="icon">📅</span>
+                            <h2>Turnos por mes</h2>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="graficoTurnos"></canvas>
+                    </div>
+                </article>
+
+                <!-- Columna 3: Servicios más solicitados (Ranking Dinámico) -->
+                <article class="card glass-panel col-services">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <span class="icon">🔧</span>
+                            <h2>Servicios más solicitados</h2>
+                        </div>
+                    </div>
+                    
+                    <div class="servicios-list">
+                        @for(servicio of servicioSolicitados; track servicio.nombre) {
+                            <div class="servicio-item">
+                                <div class="servicio-info">
+                                    <span class="servicio-nombre">{{ servicio.nombre }}</span>
+                                    <span class="servicio-contador">
+                                        <strong>{{ servicio.cantidad }}</strong>
+                                        <span class="label">solic.</span>
+                                    </span>
+                                </div>
+                                <div class="progreso-container">
+                                    <!-- Se usa el primer elemento como el máximo (100%) para escalar la barra proporcionalmente -->
+                                    <div class="progreso-bar" 
+                                         [style.width.%]="(servicio.cantidad / servicioSolicitados[0].cantidad) * 100">
+                                    </div>
+                                </div>
+                            </div>
+                        } @empty {
+                            <div class="empty-state">
+                                <p>No hay registros de servicios en este periodo.</p>
+                            </div>
+                        }
+                    </div>
+                </article>
+
+            </section>
+
         </div>
 
-        <canvas id="miGrafico"></canvas>
-     </div>
-  </main>
+    </main>
+
 </div>
-
-

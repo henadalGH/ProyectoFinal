@@ -1,16 +1,326 @@
+/* ==========================================================================
+   VARIABLES DE DISEÑO PREMIUM (Paleta Light Mode / Minimalist)
+   ========================================================================== */
+:host {
+  --bg-primary: #f8fafc;             /* Fondo gris claro muy limpio (estilo Tailwind) */
+  --bg-surface: #ffffff;             /* Tarjetas en blanco puro */
+  --border-light: #e2e8f0;           /* Borde sutil gris */
+  --text-main: #0f172a;              /* Slate oscuro para textos principales */
+  --text-muted: #64748b;             /* Gris suave para subtítulos */
+  
+  /* Colores de acento */
+  --accent-purple: #7b5cff;
+  --accent-purple-light: #f1edff;
+}
+
+/* ==========================================================================
+   ESTRUCTURA GENERAL CON SIDEBAR Y HEADER FIJOS (Desktop)
+   ========================================================================== */
 .layout {
   display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+  height: 100vh;                     /* Ocupa exactamente el alto de la pantalla */
+  width: 100vw;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;                  /* Evita scroll doble en la ventana global */
 }
 
+/* Sidebar Fijo a la izquierda */
 .sidebar {
-  width: 320px;   /* ancho del menú */
-  background: #f3f6fb;
-  color: white;
+  width: 260px;
+  height: 100vh;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-light);
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
+/* Contenedor de la derecha (Header + Contenedor de Contenido) */
 .content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  min-width: 0;
+  overflow: hidden;                  /* Mantiene el contenedor principal rígido */
+}
+
+/* Header Fijo con separación estética */
+.dashboard-header {
+  flex-shrink: 0;
+  background: var(--bg-primary);     /* Mismo fondo para simular flotabilidad */
+  padding: 1.5rem 2rem 0.5rem 2rem;  /* Separación de arriba (1.5rem) y laterales */
+}
+
+.dashboard-header h1 {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.25rem 0;
+  color: var(--text-main);
+}
+
+.dashboard-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* Contenedor del Dashboard que hace SCROLL */
+.dashboard-container {
+  flex-grow: 1;
+  overflow-y: auto;                  /* Solo el contenido tiene scrollbar */
+  padding: 1rem 2rem 2.5rem 2rem;    /* Espaciado interno cómodo */
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+/* Scrollbar fina y minimalista para el área de contenido */
+.dashboard-container::-webkit-scrollbar {
+  width: 6px;
+}
+.dashboard-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.dashboard-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+/* ==========================================================================
+   ESTILO DE TARJETAS (White Premium Card Style)
+   ========================================================================== */
+.glass-panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  /* Sombra sutil que da sensación de flotación */
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-panel:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 5px rgba(0, 0, 0, 0.03);
+}
+
+/* Cabecera interna de las tarjetas */
+.card-header {
+  padding: 1.25rem 1.5rem 0.25rem 1.5rem;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-title .icon {
+  font-size: 1.15rem;
+}
+
+.card-title h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* Contenedores de gráficos */
+.chart-wrapper {
+  padding: 1.25rem;
+  position: relative;
+  height: 310px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Especial para balance anual */
+.balance-chart {
+  height: 360px;
+}
+
+/* ==========================================================================
+   DASHBOARD GRID (3 Columnas fluidas)
+   ========================================================================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+/* Contenedor optimizado de la dona */
+.doughnut-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 310px;
+  padding: 0.5rem 1.5rem;
+}
+
+/* ==========================================================================
+   LISTA DE SERVICIOS MÁS SOLICITADOS (Fondo Claro)
+   ========================================================================== */
+.servicios-list {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  height: 310px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Scrollbar sutil */
+.servicios-list::-webkit-scrollbar {
+  width: 4px;
+}
+.servicios-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.servicios-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.servicio-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.servicio-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.servicio-nombre {
+  font-size: 0.9rem;
+  font-weight: 550;
+  color: var(--text-main);
+}
+
+.servicio-contador {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.servicio-contador strong {
+  color: var(--accent-purple);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.servicio-contador .label {
+  font-size: 0.75rem;
+  margin-left: 0.2rem;
+}
+
+/* Barras de progreso limpias */
+.progreso-container {
+  height: 6px;
+  background: #f1f5f9; /* Fondo gris muy suave */
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progreso-bar {
+  height: 100%;
+  background: var(--accent-purple); /* Color sólido de tu marca */
+  border-radius: 999px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES (Súper Adaptabilidad a cualquier pantalla)
+   ========================================================================== */
+
+/* Pantallas grandes y medianas intermedias (Laptops) */
+@media (max-width: 1300px) {
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .col-services {
+    grid-column: span 2; 
+  }
+}
+
+/* Tablets o pantallas con resolución horizontal pequeña */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px; /* Reducimos el ancho del sidebar para optimizar espacio */
+  }
+  .dashboard-header {
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+  }
+  .dashboard-container {
+    padding: 1rem 1.5rem 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+}
+
+/* Móviles y Tablets en vertical (Layout se vuelve vertical completo) */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+    overflow-y: auto;                  /* Permitimos scroll en el layout global en móviles */
+    height: auto;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;                /* Deja de ser fixed a la izquierda */
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .content {
+    height: auto;
+    overflow: visible;                 /* Desactivamos límites de altura en móvil */
+  }
+
+  .dashboard-header {
+    padding: 1.5rem 1rem 0.25rem 1rem;
+  }
+
+  .dashboard-container {
+    padding: 1rem;
+    gap: 1rem;
+    overflow-y: visible;               /* El scroll ahora lo maneja la pantalla del móvil */
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;        /* Una única columna en móviles */
+  }
+
+  .col-services, .col-doughnut, .col-bar {
+    grid-column: span 1;
+  }
+
+  .chart-wrapper {
+    height: 270px;
+  }
+
+  .balance-chart {
+    height: 290px;
+  }
 }

@@ -125,4 +125,19 @@ export class TurnosService {
   contarTurnoConfirmados(){
     return this.http.get(`${this.url}/contarTurnoConirmados`);
   }  
+
+
+  serviciosMasSolicitados()
+  {
+    return this.http.get<any[]>(`${this.url}/servicioMasSolicitados`);
+  }
+
+  cantidadTurnosPorMes(){
+    return this.http.get<any[]>(`${this.url}/turnosPorMes`);
+  }
+
+
+  turnosPorEstado(){
+    return this.http.get<any[]>(`${this.url}/turnosPorEstado`);
+  }
 }

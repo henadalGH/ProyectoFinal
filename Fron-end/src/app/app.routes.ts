@@ -40,6 +40,7 @@ import { FacturasCliente } from './Cliente/facturas-cliente/facturas-cliente';
 import { OrdenesProximas } from './Empleados/ordenes-proximas/ordenes-proximas';
 import { HistorialOrdenes } from './Empleados/historial-ordenes/historial-ordenes';
 import { Dashboard } from './Administrados/Adminstrador/dashboard/dashboard';
+import { Repuestos } from './Administrados/Adminstrador/repuestos/repuestos';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -67,6 +68,7 @@ export const routes: Routes = [
     {path:'factura', component: Factura},
     {path:'turnoCasual', component: TurnoClienteCasual},
     {path: 'dashboard', component: Dashboard},
+    {path: 'repuesto', component: Repuestos},
 
     //Retas de factura
     {path: 'paraFacturar', component: ParaFacturar},

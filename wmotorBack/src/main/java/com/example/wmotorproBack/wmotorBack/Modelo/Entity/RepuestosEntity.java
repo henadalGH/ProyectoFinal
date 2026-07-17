@@ -1,16 +1,14 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CategoriasRepuestoEnums;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -36,7 +34,22 @@ public class RepuestosEntity {
     @Column(name = "stock")
     private Long stock;
 
-    @OneToMany
-    @JsonIgnore
-    private List<DetalleRepuestoEntity> repuesto = new ArrayList<>();
+    @Column(name = "stock_minimo")
+    private Long stockMin;
+
+    @Column(name = "precio_compra")
+    private Double precioCompra;
+
+    @Column(name = "precio_venta")
+    private Double precioVenta;
+
+    @Column(name = "activo")
+    private Boolean activo;
+
+    @Column(name = "categoria_repuesto")
+    @Enumerated(EnumType.STRING)
+    private CategoriasRepuestoEnums categoria;
+
+
 }
+ 

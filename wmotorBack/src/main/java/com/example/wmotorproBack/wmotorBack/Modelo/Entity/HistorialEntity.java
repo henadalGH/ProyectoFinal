@@ -39,8 +39,6 @@ public class HistorialEntity {
     @JoinColumn(name = "id_vehiculo")
     private VehiculoEntity vehiculo;
 
-    @OneToMany
-    private List<DetalleRepuestoEntity> repuesto = new ArrayList<>();
 
     @OneToMany(mappedBy = "historial"    )
     private List<OrdenTrabajoEntity> orden = new ArrayList<>();
