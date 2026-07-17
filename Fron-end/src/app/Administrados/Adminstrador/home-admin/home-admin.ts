@@ -8,6 +8,7 @@ import { TurnosService } from '../../../Servicio/turnos-service';
 import { FacturaServicio } from '../../../Servicio/factura-servicio';
 import { MovimientosService } from '../../../Servicio/movimientos-service';
 import { OrdenTrabajoService } from '../../../Servicio/orden-trabajo-service';
+import { RepuestoService } from '../../../Servicio/repuesto-service';
 
 
 @Component({
@@ -33,10 +34,9 @@ export class HomeAdmin implements OnInit {
   contaTrunos!: any;
   contarOrdenFac!: any;
   contarTurnosConf!: any;
-
   ultimas: any[] = [];
-
   ingreso: any = null;
+  stockBajo: any[] = [];
 
 
 
@@ -45,7 +45,8 @@ export class HomeAdmin implements OnInit {
     private turnoService: TurnosService,
     private facturaService: FacturaServicio,
     private movimientoService: MovimientosService,
-    private ordenServicio: OrdenTrabajoService
+    private ordenServicio: OrdenTrabajoService,
+    private repuestoServicio: RepuestoService
   ) {}
 
 
@@ -65,9 +66,21 @@ export class HomeAdmin implements OnInit {
     this.obtenerUltimasFacturas();
 
     this.ingresosPorDia();
+    this.obtenerStockBajoRepuesto();
 
   }
 
+  // ==========================
+  // STOCK
+  // ==========================
+
+  obtenerStockBajoRepuesto(){
+    this.repuestoServicio.obtenerStockBajoRepuesto().subscribe(
+      (repuesta: any[]) => {
+        this.stockBajo = repuesta;
+      }
+    )
+  }
 
 
   // ==========================

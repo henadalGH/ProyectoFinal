@@ -1,0 +1,163 @@
+<div class="layout">
+
+  <aside class="sidebar">
+    <app-header-admin></app-header-admin>
+  </aside>
+
+  <main class="content">
+
+    <app-header></app-header>
+
+    @if (repuesto) {
+
+    <div class="content-verRep">
+
+      <!-- Encabezado -->
+      <div class="titulo-repuesto">
+
+        <div>
+          <h1>{{ repuesto.nombre }}</h1>
+          <p>Información detallada del repuesto</p>
+        </div>
+
+        @if (repuesto.activo) {
+
+          <span class="estado activo">
+            Activo
+          </span>
+
+        } @else {
+
+          <span class="estado inactivo">
+            Inactivo
+          </span>
+
+        }
+
+      </div>
+
+      <!-- Datos -->
+      <div class="card-detalle">
+
+        <div class="dato">
+          <label>Nombre</label>
+          <span>{{ repuesto.nombre }}</span>
+        </div>
+
+        <div class="dato">
+          <label>Marca</label>
+          <span>{{ repuesto.marca }}</span>
+        </div>
+
+        <div class="dato">
+          <label>Código</label>
+          <span>{{ repuesto.codigo }}</span>
+        </div>
+
+        <div class="dato">
+          <label>Categoría</label>
+          <span>{{ repuesto.categoria }}</span>
+        </div>
+
+        <div class="dato">
+          <label>Stock actual</label>
+          <span class="stock">
+            {{ repuesto.stock }}
+          </span>
+        </div>
+
+        <div class="dato">
+          <label>Stock mínimo</label>
+          <span>
+            {{ repuesto.stockMin }}
+          </span>
+        </div>
+
+        <div class="dato">
+          <label>Precio compra</label>
+          <span>
+            $ {{ repuesto.precioCompra }}
+          </span>
+        </div>
+
+        <div class="dato">
+          <label>Precio venta</label>
+          <span>
+            $ {{ repuesto.precioVenta }}
+          </span>
+        </div>
+
+      </div>
+
+      <!-- Modificar stock -->
+      <div class="card-stock">
+
+        <h2>Modificar stock</h2>
+
+        <div class="stock-control">
+
+          <input
+            type="number"
+            [(ngModel)]="cantidad"
+            min="1"
+            placeholder="Cantidad">
+
+          <button
+            class="btn aumentar"
+            (click)="aumentarStock()">
+            + Aumentar stock
+          </button>
+
+          @if (repuesto.stock > repuesto.stockMin) {
+
+            <button
+              class="btn quitar"
+              (click)="disminuirStock()"
+              [disabled]="cantidad <= 0">
+              - Quitar stock
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+      <!-- Estado -->
+      <div class="card-estado">
+
+        <h2>Estado del repuesto</h2>
+
+        @if (repuesto.activo) {
+
+          <button
+            class="btn desactivar"
+            (click)="desactivarRepuesto()">
+            Desactivar repuesto
+          </button>
+
+        } @else {
+
+          <button
+            class="btn activar"
+            (click)="activarRepuesto()">
+            Activar repuesto
+          </button>
+
+        }
+
+      </div>
+
+    </div>
+
+    } @else {
+
+      <div class="content-verRep">
+        <p>Cargando información del repuesto...</p>
+      </div>
+
+    }
+
+  </main>
+
+</div>

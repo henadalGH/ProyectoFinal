@@ -718,3 +718,90 @@
     }
 
 }
+
+.stock-bajo {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+
+.stock-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.stock-header h2 {
+  margin: 0;
+  font-size: 22px;
+  color: #1f2937;
+}
+
+.stock-header p {
+  margin-top: 5px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+/* Lista */
+
+.stock-list {
+  width: 100%;
+}
+
+
+.stock-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 80px;
+  align-items: center;
+
+  padding: 14px 10px;
+  border-bottom: 1px solid #e5e7eb;
+
+  font-size: 14px;
+  color: #374151;
+}
+
+
+.stock-title {
+  background: #f3f6fb;
+  border-radius: 8px;
+
+  font-weight: 600;
+  color: #374151;
+}
+
+
+.stock-row:last-child {
+  border-bottom: none;
+}
+
+
+/* cantidad */
+
+.stock-cantidad {
+
+  background: #fee2e2;
+  color: #dc2626;
+
+  padding: 5px 12px;
+  border-radius: 20px;
+
+  text-align: center;
+  font-weight: 600;
+  width: fit-content;
+}
+
+
+/* sin datos */
+
+.sin-stock {
+  padding: 25px;
+  text-align: center;
+  color: #6b7280;
+  background: #f9fafb;
+  border-radius: 8px;
+}

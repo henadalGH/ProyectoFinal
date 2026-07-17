@@ -104,6 +104,21 @@
 
                 </article>
 
+                <article class="kpi red">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-tools">
+                            <h2>{{stockBajo.length}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Repuestos bajo stock</span>
+                        
+                    </div>
+
+                </article>
+
             </section>
 
             <!-- ================= CONTENIDO ================= -->
@@ -235,6 +250,52 @@
             </section>
 
         </div>
+
+        <section class="stock-bajo">
+
+  <div class="stock-header">
+    <h2>Repuestos con stock bajo</h2>
+    <p>Repuestos que necesitan reposición</p>
+  </div>
+
+  @if (stockBajo.length > 0) {
+
+    <div class="stock-list">
+
+      <div class="stock-row stock-title">
+        <span>Repuesto</span>
+        <span>Marca</span>
+        <span>Código</span>
+        <span>Stock</span>
+      </div>
+
+      @for (stock of stockBajo; track $index) {
+
+        <div class="stock-row">
+          <span>{{stock.nombre}}</span>
+          <span>{{stock.marca}}</span>
+          <span>{{stock.codigo}}</span>
+
+          <span class="stock-cantidad">
+            {{stock.stock}}
+          </span>
+        </div>
+
+      }
+
+    </div>
+
+  } @else {
+
+    <div class="sin-stock">
+      <p>No hay repuestos bajos en stock</p>
+    </div>
+
+  }
+
+</section>
+
+        
 
     </main>
 

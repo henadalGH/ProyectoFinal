@@ -41,6 +41,7 @@ import { OrdenesProximas } from './Empleados/ordenes-proximas/ordenes-proximas';
 import { HistorialOrdenes } from './Empleados/historial-ordenes/historial-ordenes';
 import { Dashboard } from './Administrados/Adminstrador/dashboard/dashboard';
 import { Repuestos } from './Administrados/Adminstrador/repuestos/repuestos';
+import { VerRepuesto } from './Administrados/Adminstrador/repuestos/ver-repuesto/ver-repuesto';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -69,6 +70,7 @@ export const routes: Routes = [
     {path:'turnoCasual', component: TurnoClienteCasual},
     {path: 'dashboard', component: Dashboard},
     {path: 'repuesto', component: Repuestos},
+    {path: 'verRepuesto/:id', component: VerRepuesto},
 
     //Retas de factura
     {path: 'paraFacturar', component: ParaFacturar},

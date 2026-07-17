@@ -1,15 +1,167 @@
 <div class="layout">
   <aside class="sidebar">
-    <!-- menú -->
-     <app-header-admin></app-header-admin>
+    <app-header-admin></app-header-admin>
   </aside>
 
   <main class="content">
-    <!-- contenido principal -->
-     <app-header></app-header>
+    <app-header></app-header>
 
-     <div class="content-repuesto">
-        
-     </div>
+    <div class="content-repuesto">
+
+      <!-- Encabezado -->
+      <div class="titulo">
+        <div>
+          <h1>Repuestos del Taller</h1>
+          <p>Administración del stock de repuestos</p>
+        </div>
+
+        <button class="btn-nuevo">
+          + Nuevo Repuesto
+        </button>
+      </div>
+
+
+      <!-- Buscador -->
+      <div class="buscador">
+
+        <div class="campo">
+          <label>Nombre</label>
+
+          <input
+            type="text"
+            placeholder="Buscar por nombre..."
+            [(ngModel)]="nombreBuscar"
+          >
+
+        </div>
+
+
+        <div class="campo">
+
+          <label>Categoría</label>
+
+          <select [(ngModel)]="categoriaBuscar">
+
+            <option value="">Todas</option>
+            <option value="motor">Motor</option>
+            <option value="electricidad">Electricidad</option>
+            <option value="iluminacion">Iluminación</option>
+            <option value="frenos">Frenos</option>
+            <option value="bateria">Bateria</option>
+            <option value="alternadores">Alternadores</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="botones">
+
+          <button 
+            class="buscar"
+            (click)="buscarRepuesto()">
+
+            Buscar
+
+          </button>
+
+
+          <button 
+            class="limpiar"
+            (click)="limpiarBusqueda()">
+
+            Limpiar
+
+          </button>
+
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Tabla -->
+
+      <div class="tabla-container">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Stock</th>
+              <th>Precio</th>
+              <th>Acción</th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+
+            @for (rep of repuestos; track $index) {
+
+            <tr>
+
+              <td>
+                {{rep.codigo}}
+              </td>
+
+
+              <td>
+                {{rep.nombre}}
+              </td>
+
+
+              <td>
+                {{rep.categoria}}
+              </td>
+
+
+              <td>
+
+                <span class="stock">
+                  {{rep.stock}}
+                </span>
+
+              </td>
+
+
+              <td>
+                $ {{rep.precioVenta}}
+              </td>
+
+
+              <td>
+
+                <button class="btn-ver" (click)="verRepuesto(rep.id)">
+                  Ver Repuesto
+                </button>
+
+              </td>
+
+
+            </tr>
+
+            }
+
+          </tbody>
+
+
+        </table>
+
+
+      </div>
+
+
+    </div>
+
   </main>
+
 </div>

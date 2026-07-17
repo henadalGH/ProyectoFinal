@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.StockRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.RepuestosEntity;
@@ -80,7 +81,7 @@ public class RepuestoServiceImpl implements RepuestoService {
         RepuestosEntity repuestosEntity = repuestoRepository.findById(idRepuesto)
         .orElseThrow(() -> new RuntimeException("Id repuesto no encontrado"));
 
-        repuestosEntity.setStock(repuestosEntity.getStock() + stockRepuestoDTO.getCantidad());
+        repuestosEntity.setStock(repuestosEntity.getStock() - stockRepuestoDTO.getCantidad());
 
         repuestoRepository.save(repuestosEntity);
 
@@ -112,6 +113,11 @@ public class RepuestoServiceImpl implements RepuestoService {
         }
 
         return responceDTO;
+    }
+
+    @Override
+    public List<RepuestoStockBajoDTO> obtenerRepuestoBajoStock() {
+        return repuestoRepository.buscarStockBajo();
     }
 
 }

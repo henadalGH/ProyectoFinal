@@ -1,16 +1,532 @@
-.layout {
-  display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+/*==================================================
+LAYOUT
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.sidebar {
-  width: 320px;   /* ancho del menú */
-  background: #f3f6fb;
-  color: white;
+.layout{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+    background:#f3f6fb;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+/*==================================================
+SIDEBAR
+==================================================*/
+
+.sidebar{
+    width:320px;
+    min-width:320px;
+    height:100vh;
+    overflow:hidden;
+    background:#fff;
+    border-right:1px solid #e5e7eb;
+    flex-shrink:0;
+}
+
+/*==================================================
+CONTENIDO
+==================================================*/
+
+.content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    overflow:hidden;
+    background:#f3f6fb;
+}
+
+/*==================================================
+CONTENEDOR PRINCIPAL
+==================================================*/
+
+.content-repuesto{
+
+    flex:1;
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    padding:35px;
+
+}
+
+/*==================================================
+SCROLL
+==================================================*/
+
+.content-repuesto::-webkit-scrollbar{
+    width:10px;
+}
+
+.content-repuesto::-webkit-scrollbar-track{
+    background:#edf2f8;
+}
+
+.content-repuesto::-webkit-scrollbar-thumb{
+    background:#b7c0cb;
+    border-radius:30px;
+}
+
+.content-repuesto::-webkit-scrollbar-thumb:hover{
+    background:#9099a5;
+}
+
+/*==================================================
+TITULO
+==================================================*/
+
+.titulo{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.titulo h1{
+
+    color:#25364a;
+    font-size:32px;
+    font-weight:700;
+
+}
+
+.titulo p{
+
+    margin-top:8px;
+    color:#7a8696;
+    font-size:15px;
+
+}
+
+/*==================================================
+BOTON
+==================================================*/
+
+.btn-nuevo{
+
+    border:none;
+    background:#1976d2;
+    color:#fff;
+
+    padding:14px 24px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.btn-nuevo:hover{
+
+    background:#1565c0;
+
+}
+
+/*==================================================
+BUSCADOR
+==================================================*/
+
+.buscador{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:12px;
+
+    margin-bottom:30px;
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-end;
+
+    flex-wrap:wrap;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    flex:1;
+
+    min-width:220px;
+
+}
+
+.campo label{
+
+    margin-bottom:8px;
+
+    color:#374151;
+
+    font-weight:600;
+
+}
+
+.campo input,
+.campo select{
+
+    height:48px;
+
+    border:1px solid #d6dde7;
+
+    border-radius:8px;
+
+    padding:0 15px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.25s;
+
+}
+
+.campo input:focus,
+.campo select:focus{
+
+    border-color:#1976d2;
+
+    box-shadow:0 0 0 3px rgba(25,118,210,.15);
+
+}
+
+/*==================================================
+BOTONES BUSCADOR
+==================================================*/
+
+.botones{
+
+    display:flex;
+
+    gap:15px;
+
+}
+
+.buscar{
+
+    background:#1976d2;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:13px 25px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.buscar:hover{
+
+    background:#1565c0;
+
+}
+
+.limpiar{
+
+    background:#eceff3;
+
+    color:#444;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:13px 22px;
+
+    cursor:pointer;
+
+}
+
+.limpiar:hover{
+
+    background:#dde3ea;
+
+}
+
+/*==================================================
+TABLA
+==================================================*/
+
+.tabla-container{
+    width:100%;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1000px;
+}
+
+thead{
+    background:#1976d2;
+}
+
+thead tr{
+    height:60px;
+}
+
+thead th{
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    padding:18px;
+    text-align:left;
+    white-space:nowrap;
+}
+
+tbody tr{
+    transition:.25s;
+    border-bottom:1px solid #edf1f5;
+}
+
+tbody tr:nth-child(even){
+    background:#fafbfd;
+}
+
+tbody tr:hover{
+    background:#edf5ff;
+}
+
+tbody td{
+    padding:18px;
+    color:#394150;
+    font-size:15px;
+    white-space:nowrap;
+}
+
+/*==================================================
+STOCK
+==================================================*/
+
+.stock{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+
+    min-width:45px;
+    height:32px;
+
+    padding:0 12px;
+
+    border-radius:20px;
+
+    background:#e8f5e9;
+    color:#2e7d32;
+
+    font-weight:700;
+    font-size:14px;
+}
+
+/* Bajo stock */
+
+.stock-bajo{
+    background:#ffebee;
+    color:#c62828;
+}
+
+.stock-medio{
+    background:#fff8e1;
+    color:#ef6c00;
+}
+
+/*==================================================
+BOTON VER
+==================================================*/
+
+.btn-ver{
+
+    border:none;
+
+    background:#1976d2;
+
+    color:#fff;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.btn-ver:hover{
+
+    background:#1259a8;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 6px 12px rgba(25,118,210,.25);
+
+}
+
+/*==================================================
+PRECIO
+==================================================*/
+
+tbody td:nth-child(5){
+    font-weight:600;
+    color:#1565c0;
+}
+
+/*==================================================
+ACCION
+==================================================*/
+
+tbody td:last-child{
+    text-align:center;
+}
+
+/*==================================================
+BORDES
+==================================================*/
+
+tbody tr:last-child{
+    border-bottom:none;
+}
+
+/*==================================================
+SCROLL HORIZONTAL
+==================================================*/
+
+.tabla-container{
+    overflow-x:auto;
+}
+
+.tabla-container::-webkit-scrollbar{
+    height:10px;
+}
+
+.tabla-container::-webkit-scrollbar-track{
+    background:#edf2f8;
+}
+
+.tabla-container::-webkit-scrollbar-thumb{
+    background:#b7c0cb;
+    border-radius:20px;
+}
+
+.tabla-container::-webkit-scrollbar-thumb:hover{
+    background:#97a2af;
+}
+
+/*==================================================
+RESPONSIVE
+==================================================*/
+
+@media(max-width:1200px){
+
+    .titulo{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:20px;
+    }
+
+    .buscador{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .campo{
+        width:100%;
+    }
+
+    .botones{
+        justify-content:flex-end;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .content-repuesto{
+        padding:20px;
+    }
+
+    .titulo h1{
+        font-size:26px;
+    }
+
+    .titulo p{
+        font-size:14px;
+    }
+
+    table{
+        min-width:900px;
+    }
+
+    thead th{
+        padding:14px;
+        font-size:14px;
+    }
+
+    tbody td{
+        padding:14px;
+        font-size:14px;
+    }
+
+    .btn-ver{
+        padding:8px 14px;
+        font-size:13px;
+    }
+
+}
+
+/*==================================================
+ANIMACIONES
+==================================================*/
+
+.tabla-container{
+    animation:fade .3s ease;
+}
+
+@keyframes fade{
+
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }

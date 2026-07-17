@@ -1,6 +1,14 @@
 /* =========================
    BASE
 ========================= */
+.btn-secundario{
+    margin-top: 10px;
+    background-color: #dc2626af;
+}
+
+.btn-secundario:hover{
+    background-color: #dc2626;
+}
 
 *{
     margin:0;

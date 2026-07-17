@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../AuthServicio/auth-service';
 import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,8 @@ export class Login implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -69,5 +70,9 @@ export class Login implements OnInit {
     if (control?.hasError('required')) return 'La contraseña es requerida';
     if (control?.hasError('minlength')) return 'Mínimo 6 caracteres';
     return null;
+  }
+
+  volverAtras(){
+    this.location.back();
   }
 }
