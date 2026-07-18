@@ -90,6 +90,7 @@ public class SecurityConfig {
                                 .requestMatchers("/detalleOrden/agregarDetalle/{idOrden}").permitAll()
                                 .requestMatchers("/detalleOrden/obtenerDetalle/{idOrden}").permitAll()
                                 .requestMatchers("/repuesto/**").permitAll()
+                                .requestMatchers("/localidad/**").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )

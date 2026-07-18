@@ -48,6 +48,41 @@
           <input type="tel" name="contacto" [(ngModel)]="contacto" required placeholder="+54 11 0000-0000" />
         </div>
 
+        <div class="input-group">
+  <label for="provincia">Provincia</label>
+  <select
+        id="provincia"
+        name="provincia"
+        [(ngModel)]="provinciaSeleccionada"
+        (change)="filtrarLocalidades()">
+
+        <option value="">Seleccione una provincia</option>
+
+        @for (provincia of provincias; track $index) {
+          <option [value]="provincia">
+            {{ provincia }}
+          </option>
+        }
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="localidad">Localidad</label>
+      <select
+        id="localidad"
+        name="localidad"
+        [(ngModel)]="idLocalidad">
+
+        <option [ngValue]="null">Seleccione una localidad</option>
+
+        @for (loc of localidadesFiltradas; track loc.id) {
+          <option [ngValue]="loc.id">
+            {{ loc.nombreLocalidad }}
+          </option>
+        }
+      </select>
+    </div>
+
         <div class="campo">
           <label>Domicilio</label>
           <input type="text" name="direccion" [(ngModel)]="direccion" required placeholder="Dirección" />

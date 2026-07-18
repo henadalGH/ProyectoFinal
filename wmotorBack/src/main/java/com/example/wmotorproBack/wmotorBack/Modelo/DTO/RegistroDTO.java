@@ -20,6 +20,7 @@ public class RegistroDTO {
     private RolesEnum rol;
 
     // Cliente
+    private Long idLocalidad;
     private String direccion;
 
     // Empleado

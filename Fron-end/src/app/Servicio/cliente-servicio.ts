@@ -26,4 +26,5 @@ export class ClienteServicio {
     return this.http.get<number>(`${this.urlApi}/total`);
   }
   
+  
 }

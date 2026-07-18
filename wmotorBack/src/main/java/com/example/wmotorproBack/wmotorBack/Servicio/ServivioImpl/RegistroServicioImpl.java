@@ -12,6 +12,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CargosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ClienteEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.LocalidadEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.RolesEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.UsuarioEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
@@ -20,6 +21,7 @@ import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.CargoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.ClienteRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.LocalidadRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.RolesRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.UsuarioRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.RegistroService;
@@ -47,6 +49,9 @@ public class RegistroServicioImpl implements RegistroService {
 
     @Autowired
     private RolesRepository rolesRepository;
+
+    @Autowired
+    private LocalidadRepository localidadRepository;
 
 
     @Override
@@ -115,6 +120,10 @@ public class RegistroServicioImpl implements RegistroService {
 
             case CLIENTE -> {
                 ClienteEntity cliente = new ClienteEntity();
+                
+                LocalidadEntity localidadEntity = localidadRepository.findById(usuarioDTO.getIdLocalidad())
+                .orElseThrow(() -> new RuntimeException("Localidad no encontrada"));
+                cliente.setLocalidad(localidadEntity);
                 cliente.setDireccion(usuarioDTO.getDireccion());
                 cliente.setUsuario(nuevoUsuario);
                 clienteRepository.save(cliente);

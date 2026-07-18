@@ -2,6 +2,67 @@
    BASE
 ========================= */
 
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #344054;
+}
+
+.input-group select {
+  width: 100%;
+  height: 45px;
+  padding: 0 14px;
+
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+
+  background-color: #ffffff;
+  color: #344054;
+
+  font-size: 15px;
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  appearance: none;
+
+  background-image: linear-gradient(45deg, transparent 50%, #667085 50%),
+                    linear-gradient(135deg, #667085 50%, transparent 50%);
+  background-position:
+      calc(100% - 18px) 19px,
+      calc(100% - 13px) 19px;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.input-group select:hover {
+  border-color: #98a2b3;
+}
+
+.input-group select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Opción deshabilitada visualmente */
+.input-group select option:first-child {
+  color: #98a2b3;
+}
+
+/* Contenedor para que queden alineados si están juntos */
+.input-group + .input-group {
+  margin-top: 10px;
+}
+
 *{
     margin:0;
     padding:0;
