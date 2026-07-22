@@ -26,73 +26,272 @@ export class VerEmpleado implements OnInit {
   editarCargo = false;
   editarSueldo = false;
 
+  fechaMaxima!: string;
+  fechaNacimientoOriginal!: string;
+
   aumentoSueldo: number = 0;
+
 
   constructor(
     private route: ActivatedRoute,
     private empleadoService: EmpleadoService
   ) {}
 
+
   ngOnInit(): void {
+
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+
+
+    const hoy = new Date();
+
+    hoy.setFullYear(hoy.getFullYear() - 18);
+
+    this.fechaMaxima = hoy.toISOString().split('T')[0];
+
+
     this.cargarEmpleado();
   }
 
+
+
   cargarEmpleado(): void {
+
     this.empleadoService.verEmpleado(this.id).subscribe({
+
       next: (data: any) => {
+
         this.empleado = data;
+
 
         const sueldoGuardado = localStorage.getItem(
           'sueldoEmpleado_' + this.empleado.id
         );
 
+
         if (sueldoGuardado) {
+
           this.empleado.sueldo = Number(sueldoGuardado);
+
         }
+
       },
+
+
       error: (error) => {
+
         console.error(error);
+
       }
+
     });
+
   }
+
+
+
+  iniciarEdicionFechaNacimiento(): void {
+
+    this.fechaNacimientoOriginal = this.empleado.fechaNacimiento;
+
+    this.editarFechaNacimiento = true;
+
+  }
+
+
+
+  modificarFechaNacimiento(idEmpleado: number): void {
+
+
+    if (!this.validarEdad()) {
+
+
+      alert('El empleado debe ser mayor de 18 años');
+
+
+      this.empleado.fechaNacimiento = this.fechaNacimientoOriginal;
+
+      this.editarFechaNacimiento = false;
+
+
+      return;
+
+    }
+
+
+
+    if (!confirm('¿Guardar cambios de la fecha de nacimiento?')) {
+
+
+      this.empleado.fechaNacimiento = this.fechaNacimientoOriginal;
+
+      this.editarFechaNacimiento = false;
+
+
+      return;
+
+    }
+
+
+
+    this.empleadoService.modificarEmpleado(
+
+      idEmpleado,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      this.empleado.fechaNacimiento
+
+    ).subscribe({
+
+      next: () => {
+
+        this.editarFechaNacimiento = false;
+
+        this.cargarEmpleado();
+
+      },
+
+
+      error: (error) => {
+
+        console.error(error);
+
+        alert('Error al modificar la fecha de nacimiento');
+
+      }
+
+    });
+
+  }
+
+
+
+
+  validarEdad(): boolean {
+
+
+    if (!this.empleado?.fechaNacimiento) {
+
+      return false;
+
+    }
+
+
+
+    const nacimiento = new Date(this.empleado.fechaNacimiento);
+
+
+
+    if (isNaN(nacimiento.getTime())) {
+
+      return false;
+
+    }
+
+
+
+    const hoy = new Date();
+
+
+
+    let edad = hoy.getFullYear() - nacimiento.getFullYear();
+
+
+
+    const diferenciaMes =
+      hoy.getMonth() - nacimiento.getMonth();
+
+
+
+    if (
+      diferenciaMes < 0 ||
+      (diferenciaMes === 0 &&
+      hoy.getDate() < nacimiento.getDate())
+    ) {
+
+      edad--;
+
+    }
+
+
+
+    return edad >= 18;
+
+  }
+
+
+
+
 
   aumentarSueldo(): void {
 
+
     if (this.aumentoSueldo <= 0) {
+
       alert('Ingrese un monto válido.');
+
       return;
+
     }
+
 
     if (!confirm('¿Está seguro de aumentar el sueldo?')) {
+
       return;
+
     }
 
+
     this.empleado.sueldo += this.aumentoSueldo;
+
 
     localStorage.setItem(
       'sueldoEmpleado_' + this.empleado.id,
       this.empleado.sueldo.toString()
     );
 
+
     this.aumentoSueldo = 0;
 
+
     alert('Sueldo actualizado correctamente.');
+
   }
+
+
+
+
 
   restablecerSueldo(): void {
 
+
     if (!confirm('¿Desea restablecer el sueldo original?')) {
+
       return;
+
     }
 
-    localStorage.removeItem('sueldoEmpleado_' + this.empleado.id);
+
+    localStorage.removeItem(
+      'sueldoEmpleado_' + this.empleado.id
+    );
+
+
     this.cargarEmpleado();
+
   }
 
-  modificarNombre(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios del nombre?')) return;
+
+
+  modificarNombre(idEmpleado:number):void{
+
+    if(!confirm('¿Guardar cambios del nombre?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
@@ -100,21 +299,28 @@ export class VerEmpleado implements OnInit {
       undefined,
       undefined,
       this.empleado.nombre
+
     ).subscribe({
-      next: () => {
-        this.editarNombre = false;
+
+      next:()=>{
+
+        this.editarNombre=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el nombre');
+
       }
+
     });
+
   }
 
-  modificarApellido(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios del apellido?')) return;
+
+
+  modificarApellido(idEmpleado:number):void{
+
+    if(!confirm('¿Guardar cambios del apellido?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
@@ -123,62 +329,89 @@ export class VerEmpleado implements OnInit {
       undefined,
       undefined,
       this.empleado.apellido
+
     ).subscribe({
-      next: () => {
-        this.editarApellido = false;
+
+      next:()=>{
+
+        this.editarApellido=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el apellido');
+
       }
+
     });
+
   }
 
-  modificarEmail(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios del email?')) return;
+
+
+
+  modificarEmail(idEmpleado:number):void{
+
+
+    if(!confirm('¿Guardar cambios del email?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
       undefined,
       this.empleado.email
+
     ).subscribe({
-      next: () => {
-        this.editarEmail = false;
+
+      next:()=>{
+
+        this.editarEmail=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el email');
+
       }
+
     });
+
   }
 
-  modificarContacto(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios del contacto?')) return;
+
+
+
+  modificarContacto(idEmpleado:number):void{
+
+
+    if(!confirm('¿Guardar cambios del contacto?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
       undefined,
       undefined,
       this.empleado.contacto
+
     ).subscribe({
-      next: () => {
-        this.editarContacto = false;
+
+      next:()=>{
+
+        this.editarContacto=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el contacto');
+
       }
+
     });
+
   }
 
-  modificarDni(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios del DNI?')) return;
+
+
+
+  modificarDni(idEmpleado:number):void{
+
+
+    if(!confirm('¿Guardar cambios del DNI?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
@@ -188,46 +421,30 @@ export class VerEmpleado implements OnInit {
       undefined,
       undefined,
       this.empleado.dni
+
     ).subscribe({
-      next: () => {
-        this.editarDni = false;
+
+      next:()=>{
+
+        this.editarDni=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el DNI');
+
       }
+
     });
+
   }
 
-  modificarFechaNacimiento(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios de la fecha de nacimiento?')) return;
 
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      this.empleado.fechaNacimiento
-    ).subscribe({
-      next: () => {
-        this.editarFechaNacimiento = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar la fecha de nacimiento');
-      }
-    });
-  }
 
-  modificarFechaIngreso(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios de la fecha de ingreso?')) return;
+  modificarFechaIngreso(idEmpleado:number):void{
+
+
+    if(!confirm('¿Guardar cambios de la fecha de ingreso?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
@@ -239,49 +456,68 @@ export class VerEmpleado implements OnInit {
       undefined,
       undefined,
       this.empleado.fechaIngreso
+
     ).subscribe({
-      next: () => {
-        this.editarFechaIngreso = false;
+
+      next:()=>{
+
+        this.editarFechaIngreso=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar la fecha de ingreso');
+
       }
+
     });
+
   }
 
-  modificarCargo(idEmpleado: number): void {
 
-    if (!confirm('¿Guardar cambios del cargo?')) return;
+
+
+
+  modificarCargo(idEmpleado:number):void{
+
+
+    if(!confirm('¿Guardar cambios del cargo?')) return;
+
 
     this.empleadoService.modificarEmpleado(
       idEmpleado,
       this.empleado.cargo
+
     ).subscribe({
-      next: () => {
-        this.editarCargo = false;
+
+      next:()=>{
+
+        this.editarCargo=false;
+
         this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el cargo');
+
       }
+
     });
+
   }
 
-  cancelarEdicion(): void {
 
-    this.editarNombre = false;
-    this.editarApellido = false;
-    this.editarEmail = false;
-    this.editarContacto = false;
-    this.editarDni = false;
-    this.editarFechaNacimiento = false;
-    this.editarFechaIngreso = false;
-    this.editarCargo = false;
+
+
+
+  cancelarEdicion():void{
+
+
+    this.editarNombre=false;
+    this.editarApellido=false;
+    this.editarEmail=false;
+    this.editarContacto=false;
+    this.editarDni=false;
+    this.editarFechaNacimiento=false;
+    this.editarFechaIngreso=false;
+    this.editarCargo=false;
+
 
     this.cargarEmpleado();
+
   }
 
 }

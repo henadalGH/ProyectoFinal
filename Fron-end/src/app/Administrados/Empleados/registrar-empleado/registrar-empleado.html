@@ -95,7 +95,10 @@
                         <input
                             type="date"
                             name="fechaNacimmiento"
-                            [(ngModel)]="fechaNacimiento">
+                            [(ngModel)]="fechaNacimiento"
+                            [max]="fechaMaxima"
+                            >
+                            
                     </div>
 
                     <!-- CARGO -->

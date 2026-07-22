@@ -197,31 +197,37 @@
 
 
     <!-- FECHA NACIMIENTO -->
-    <div class="fila">
+<div class="fila">
 
-        <div class="etiqueta">
-            🎂 Fecha nacimiento
-        </div>
+    <div class="etiqueta">
+        🎂 Fecha nacimiento
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarFechaNacimiento) {
-                {{empleado.fechaNacimiento}}
-            }
-            @else {
-                <input type="date" [(ngModel)]="empleado.fechaNacimiento">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarFechaNacimiento ? modificarFechaNacimiento(empleado.id) : editarFechaNacimiento = true">
-
-            {{editarFechaNacimiento ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarFechaNacimiento) {
+            {{empleado.fechaNacimiento}}
+        }
+        @else {
+            <input 
+                type="date"
+                [(ngModel)]="empleado.fechaNacimiento"
+                [max]="fechaMaxima"
+                name="fechaNacimiento">
+        }
 
     </div>
+
+    <button class="btn-editar"
+            (click)="editarFechaNacimiento 
+            ? modificarFechaNacimiento(empleado.id) 
+            : iniciarEdicionFechaNacimiento()">
+
+        {{ editarFechaNacimiento ? '💾' : '✏️' }}
+
+    </button>
+
+</div>
 
 
     <!-- FECHA INGRESO -->

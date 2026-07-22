@@ -1,119 +1,169 @@
 html, body {
-    height: 100%;
-    margin: 0;
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    height:100%;
+    margin:0;
+    font-family:"Segoe UI",Roboto,Arial,sans-serif;
+    overflow:hidden;
 }
- 
+
 .layout {
-    display: flex;
-    height: 100vh;
+    display:flex;
+    width:100%;
+    height:100vh;
 }
 
 /* SIDEBAR */
 .sidebar {
-  width: 260px;
-  min-width: 260px;
-  background-color: #162454; /* Tu azul */
-  color: white;
-  padding: 24px 16px;
-  box-sizing: border-box;
-
-  /* CAMBIO CRUCIAL: Eliminamos alturas fijas y scroll interno */
-  height: auto !important; 
-  overflow-y: visible !important; 
-  position: relative !important; 
+    width:260px;
+    min-width:260px;
+    height:100vh;
+    background:#162454;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    padding:10px;
+    box-sizing:border-box;
 }
 
 /* LOGO */
 .logo-section {
-    padding: 25px;
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+    flex-shrink:0;
 }
 
 .logo-section h1 {
-    margin: 0;
-    font-size: 24px;
+    margin:0;
+    font-size:22px;
 }
 
 .logo-section span {
-    color: #38bdf8;
+    color:#38bdf8;
 }
 
 /* MENU */
 .nav-menu {
-    flex: 1;
-    padding: 15px;
-    overflow-y: auto;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
 }
 
 /* TITULOS */
 .section-title {
-    margin: 20px 10px 8px;
-    font-size: 11px;
-    text-transform: uppercase;
-    color: #93c5fd;
+    margin:10px 5px 4px;
+    font-size:10px;
+    text-transform:uppercase;
+    color:#93c5fd;
 }
 
 /* BOTONES */
 .nav-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    width:100%;
+    height:36px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:5px 10px;
+    margin-bottom:3px;
+    border:none;
+    border-radius:8px;
+    background:transparent;
+    color:#e8fee0;
+    cursor:pointer;
+    font-size:13px;
+    transition:.2s;
+}
 
-    padding: 12px 15px;
-    margin-bottom: 5px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: transparent;
-    color: #e8fee0;
-
-    cursor: pointer;
-    transition: .2s;
+.nav-btn i {
+    width:18px;
+    text-align:center;
 }
 
 .nav-btn:hover {
-    background: rgba(56,189,248,.15);
-    transform: translateX(2px);
+    background:rgba(56,189,248,.15);
+    transform:translateX(2px);
 }
 
 .nav-btn.active {
-    background: linear-gradient(90deg, #2563eb, #38bdf8);
-    color: white;
-}
-
-/* LOGOUT */
-.user-control {
-    padding: 15px;
-    border-top: 1px solid rgba(255,255,255,.08);
-}
-
-.logout-btn {
-    width: 100%;
-    padding: 12px;
-
-    border: none;
-    border-radius: 10px;
-
-    background: rgba(239,68,68,.15);
-    color: #fecaca;
-
-    cursor: pointer;
-    transition: .2s;
-}
-
-.logout-btn:hover {
-    background: #dc2626;
-    color: white;
+    background:linear-gradient(90deg,#2563eb,#38bdf8);
+    color:white;
 }
 
 /* CONTENIDO */
 .content {
-    flex: 1;
-    height: 100vh;
-    background: #f1f5f9;
-    overflow: auto;
-    padding: 20px;
+    flex:1;
+    height:100vh;
+    background:#f1f5f9;
+    overflow:auto;
+    padding:20px;
+    box-sizing:border-box;
+}
+
+
+/* PANTALLAS BAJAS */
+@media(max-height:750px){
+    .logo-section {
+        padding:6px;
+    }
+
+    .logo-section h1 {
+        font-size:20px;
+    }
+
+    .section-title {
+        margin:6px 5px 2px;
+    }
+
+    .nav-btn {
+        height:32px;
+        font-size:12px;
+    }
+}
+
+
+/* TABLET */
+@media(max-width:768px){
+
+    html,body {
+        overflow:auto;
+    }
+
+    .layout {
+        flex-direction:column;
+        height:auto;
+    }
+
+    .sidebar {
+        width:100%;
+        min-width:100%;
+        height:auto;
+    }
+
+    .nav-menu {
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:4px;
+    }
+
+    .section-title {
+        grid-column:1/-1;
+    }
+
+    .content {
+        height:auto;
+        min-height:calc(100vh - 250px);
+    }
+}
+
+
+/* CELULAR */
+@media(max-width:480px){
+
+    .nav-menu {
+        grid-template-columns:1fr;
+    }
+
+    .content {
+        padding:10px;
+    }
 }

@@ -1,32 +1,83 @@
 /* ==========================================================================
-   ESTRUCTURA GLOBAL
+   RESET GENERAL
+   ========================================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    overflow:hidden;                 /* CAMBIO: evita que el body haga scroll */
+    font-family:'Segoe UI',Roboto,Arial,sans-serif;
+    background:#f3f6fb;
+}
+
+
+
+/* ==========================================================================
+   ESTRUCTURA PRINCIPAL
    ========================================================================== */
 
 .layout{
     display:flex;
-    min-height:100vh;
+    width:100%;
+    height:100vh;                    /* CAMBIO */
+    overflow:hidden;                 /* CAMBIO */
     background:#f3f6fb;
-    font-family:'Segoe UI',Roboto,Arial,sans-serif;
 }
+
 
 
 /* ==========================================================================
-   MENU LATERAL FIJO
+   SIDEBAR
    ========================================================================== */
 
 .sidebar{
-    width:320px;
-    flex-shrink:0;
-    background:#f3f6fb;
 
-    position:fixed;
+    position:fixed;                  /* CAMBIO */
     top:0;
     left:0;
+
+    width:320px;
     height:100vh;
 
+    background:#f3f6fb;
+
     overflow-y:auto;
+
+    flex-shrink:0;
+
     z-index:1000;
+
+    border-right:1px solid #e5e7eb;
 }
+
+
+
+/* Scroll del menú */
+
+.sidebar::-webkit-scrollbar{
+    width:8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+    border-radius:20px;
+
+}
+
+.sidebar::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
 
 
 /* ==========================================================================
@@ -34,54 +85,114 @@
    ========================================================================== */
 
 .conten{
+
     flex:1;
 
-    margin-left:320px;
+    margin-left:320px;              /* CAMBIO */
+
+    width:calc(100% - 320px);
+
+    height:100vh;                   /* CAMBIO */
+
+    overflow-y:auto;                /* CAMBIO */
+
+    overflow-x:hidden;
 
     padding:30px;
 
-    min-height:100vh;
-    overflow-y:auto;
+    scroll-behavior:smooth;
+
 }
 
 
-.contain{
-    max-width:1350px;
-    margin:40px auto;
+
+/* Scroll contenido */
+
+.conten::-webkit-scrollbar{
+
+    width:9px;
+
+}
+
+.conten::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+    border-radius:30px;
+
+}
+
+.conten::-webkit-scrollbar-track{
+
+    background:transparent;
+
 }
 
 
 
 /* ==========================================================================
-   TITULO PRINCIPAL
+   CONTENEDOR CENTRAL
+   ========================================================================== */
+
+.contain{
+
+    width:100%;
+
+    max-width:1450px;
+
+    margin:35px auto;
+
+}
+
+
+
+/* ==========================================================================
+   HERO
    ========================================================================== */
 
 .hero{
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    margin-bottom:25px;
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
-    text-align: center;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    padding:35px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+    text-align:center;
+
 }
+
 
 
 .hero h1{
-    margin:0;
-    font-size:32px;
+
     color:#1e293b;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
 }
 
 
+
 .hero p{
-    margin:8px 0 0;
+
     color:#64748b;
+
+    font-size:16px;
+
 }
 
 
 
 /* ==========================================================================
-   TARJETAS KPI
+   KPIs
    ========================================================================== */
 
 .dashboard-kpis{
@@ -89,14 +200,19 @@
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(230px,1fr));
+    repeat(auto-fit,minmax(240px,1fr));
 
-    gap:20px;
+    gap:22px;
 
-    margin-bottom:30px;
+    margin-bottom:35px;
+
 }
 
 
+
+/* ==========================================================================
+   TARJETA KPI
+   ========================================================================== */
 
 .kpi{
 
@@ -112,26 +228,39 @@
 
     gap:18px;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    min-height:105px;
 
-    transition:.25s;
+    box-shadow:0 8px 24px rgba(0,0,0,.06);
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+
 }
+
 
 
 .kpi:hover{
 
     transform:translateY(-5px);
 
+    box-shadow:0 14px 30px rgba(0,0,0,.10);
+
 }
 
 
 
+/* ==========================================================================
+   ICONO
+   ========================================================================== */
+
 .kpi-icon{
 
-    width:60px;
-    height:60px;
+    width:65px;
 
-    border-radius:16px;
+    height:65px;
+
+    border-radius:18px;
 
     display:flex;
 
@@ -139,7 +268,34 @@
 
     align-items:center;
 
-    font-size:25px;
+    flex-shrink:0;
+
+}
+
+
+
+.kpi-icon i{
+
+    font-size:28px;
+
+}
+
+
+
+/* ==========================================================================
+   TEXTO KPI
+   ========================================================================== */
+
+.kpi-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    flex:1;
+
 }
 
 
@@ -152,23 +308,27 @@
 
     font-weight:600;
 
+    margin-bottom:6px;
+
 }
 
 
 
 .kpi-info h2{
 
-    margin:8px 0 0;
-
     color:#111827;
 
     font-size:30px;
+
+    font-weight:700;
 
 }
 
 
 
-/* COLORES KPI */
+/* ==========================================================================
+   COLORES KPI
+   ========================================================================== */
 
 .blue .kpi-icon{
 
@@ -176,6 +336,7 @@
     color:#2563eb;
 
 }
+
 
 
 .orange .kpi-icon{
@@ -186,6 +347,7 @@
 }
 
 
+
 .purple .kpi-icon{
 
     background:#ede9fe;
@@ -194,12 +356,14 @@
 }
 
 
+
 .red .kpi-icon{
 
     background:#fee2e2;
     color:#dc2626;
 
 }
+
 
 
 .green .kpi-icon{
@@ -212,6 +376,128 @@
 
 
 /* ==========================================================================
+   ANIMACIÓN
+   ========================================================================== */
+
+.hero,
+.kpi{
+
+    animation:aparecer .35s ease;
+
+}
+
+
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* ==========================================================================
+   RESPONSIVE INICIAL
+   ========================================================================== */
+
+@media (max-width:1200px){
+
+    .dashboard-kpis{
+
+        grid-template-columns:
+        repeat(auto-fit,minmax(220px,1fr));
+
+    }
+
+}
+
+
+
+@media (max-width:900px){
+
+    .layout{
+
+        flex-direction:column;
+
+        height:auto;
+
+        overflow:visible;
+
+    }
+
+    .sidebar{
+
+        position:relative;
+
+        width:100%;
+
+        height:auto;
+
+        border-right:none;
+
+    }
+
+    .conten{
+
+        width:100%;
+
+        margin-left:0;
+
+        height:auto;
+
+        overflow:visible;
+
+        padding:20px;
+
+    }
+
+}
+
+
+
+@media (max-width:600px){
+
+    .hero{
+
+        padding:25px;
+
+    }
+
+    .hero h1{
+
+        font-size:28px;
+
+    }
+
+    .hero p{
+
+        font-size:14px;
+
+    }
+
+    .dashboard-kpis{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* ==========================================================================
    GRID PRINCIPAL
    ========================================================================== */
 
@@ -219,17 +505,25 @@
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,minmax(0,1fr));
 
     gap:25px;
+
+    align-items:start;
+
+    margin-bottom:30px;
 
 }
 
 
 
+/* ==========================================================================
+   PANEL GENERAL
+   ========================================================================== */
+
 .panel{
 
-    background:white;
+    background:#ffffff;
 
     border-radius:20px;
 
@@ -237,9 +531,31 @@
 
     box-shadow:0 8px 25px rgba(0,0,0,.06);
 
+    transition:
+        transform .25s,
+        box-shadow .25s;
+
+    overflow:hidden;
+
+    animation:aparecer .35s ease;
+
 }
 
 
+
+.panel:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.08);
+
+}
+
+
+
+/* ==========================================================================
+   CABECERA PANEL
+   ========================================================================== */
 
 .panel-header{
 
@@ -249,11 +565,13 @@
 
     align-items:center;
 
-    padding-bottom:18px;
+    margin-bottom:22px;
+
+    padding-bottom:16px;
 
     border-bottom:1px solid #e5e7eb;
 
-    margin-bottom:20px;
+    gap:15px;
 
 }
 
@@ -261,11 +579,11 @@
 
 .panel-header h2{
 
-    margin:0;
-
     color:#1e293b;
 
-    font-size:20px;
+    font-size:22px;
+
+    font-weight:700;
 
 }
 
@@ -273,15 +591,27 @@
 
 .panel-header span{
 
+    min-width:40px;
+
+    height:34px;
+
+    padding:0 15px;
+
+    border-radius:30px;
+
     background:#2563eb;
 
     color:white;
 
-    padding:6px 14px;
+    display:flex;
 
-    border-radius:20px;
+    justify-content:center;
 
-    font-size:13px;
+    align-items:center;
+
+    font-size:14px;
+
+    font-weight:700;
 
 }
 
@@ -291,41 +621,59 @@
    TURNOS
    ========================================================================== */
 
-
 .turno-item{
 
     display:flex;
 
     align-items:center;
 
-    gap:15px;
+    gap:18px;
 
-    padding:15px;
+    padding:16px;
 
-    margin-bottom:12px;
+    margin-bottom:14px;
 
-    border-radius:14px;
+    border-radius:15px;
 
     background:#f8fafc;
 
-    transition:.2s;
+    border:1px solid transparent;
+
+    transition:.25s;
 
 }
+
+
+
+.turno-item:last-child{
+
+    margin-bottom:0;
+
+}
+
 
 
 .turno-item:hover{
 
     background:#eff6ff;
 
+    border-color:#bfdbfe;
+
+    transform:translateX(5px);
+
 }
 
 
 
+/* ==========================================================================
+   AVATAR
+   ========================================================================== */
+
 .turno-avatar{
 
-    width:45px;
+    width:52px;
 
-    height:45px;
+    height:52px;
 
     border-radius:50%;
 
@@ -339,26 +687,54 @@
 
     align-items:center;
 
+    flex-shrink:0;
+
 }
 
 
 
+.turno-avatar i{
+
+    font-size:20px;
+
+}
+
+
+
+/* ==========================================================================
+   INFORMACIÓN TURNO
+   ========================================================================== */
+
 .turno-body{
+
+    flex:1;
 
     display:flex;
 
     flex-direction:column;
 
-    flex:1;
+    gap:6px;
+
+    min-width:0;
 
 }
+
 
 
 .turno-body strong{
 
     color:#1f2937;
 
+    font-size:15px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
 }
+
 
 
 .turno-body span{
@@ -371,47 +747,75 @@
 
 
 
+/* ==========================================================================
+   SERVICIO
+   ========================================================================== */
+
 .turno-servicio{
 
     background:#2563eb;
 
     color:white;
 
-    padding:7px 14px;
+    border-radius:25px;
 
-    border-radius:20px;
+    padding:8px 15px;
 
     font-size:13px;
 
-}
+    font-weight:600;
 
-
-
-.panel-vacio{
-
-    text-align:center;
-
-    padding:50px 20px;
-
-    color:#94a3b8;
-
-}
-
-
-.panel-vacio i{
-
-    font-size:35px;
-
-    margin-bottom:15px;
+    white-space:nowrap;
 
 }
 
 
 
 /* ==========================================================================
-   TABLA FACTURAS
+   PANEL VACÍO
    ========================================================================== */
 
+.panel-vacio{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    min-height:220px;
+
+    color:#94a3b8;
+
+}
+
+
+
+.panel-vacio i{
+
+    font-size:42px;
+
+    margin-bottom:18px;
+
+}
+
+
+
+.panel-vacio p{
+
+    font-size:15px;
+
+}
+
+
+
+/* ==========================================================================
+   TABLA
+   ========================================================================== */
 
 .panel table{
 
@@ -422,6 +826,7 @@
 }
 
 
+
 .panel thead{
 
     background:#f8fafc;
@@ -429,9 +834,10 @@
 }
 
 
+
 .panel th{
 
-    padding:14px;
+    padding:15px;
 
     text-align:left;
 
@@ -439,20 +845,38 @@
 
     font-size:13px;
 
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.4px;
+
 }
+
 
 
 .panel td{
 
-    padding:15px 14px;
-
-    border-bottom:1px solid #e5e7eb;
+    padding:16px 15px;
 
     color:#374151;
 
+    border-bottom:1px solid #e5e7eb;
+
     font-size:14px;
 
+    vertical-align:middle;
+
 }
+
+
+
+.panel tbody tr{
+
+    transition:.2s;
+
+}
+
 
 
 .panel tbody tr:hover{
@@ -462,11 +886,20 @@
 }
 
 
+
+.panel tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+
 .panel td:first-child{
 
-    font-weight:700;
-
     color:#2563eb;
+
+    font-weight:700;
 
 }
 
@@ -476,7 +909,6 @@
    ESTADOS
    ========================================================================== */
 
-
 .estado{
 
     display:inline-flex;
@@ -485,13 +917,19 @@
 
     align-items:center;
 
-    padding:6px 14px;
+    min-width:100px;
+
+    height:34px;
+
+    padding:0 15px;
 
     border-radius:20px;
 
     font-size:12px;
 
     font-weight:700;
+
+    text-transform:capitalize;
 
 }
 
@@ -538,13 +976,288 @@
 
 
 /* ==========================================================================
+   RESPONSIVE GRID
+   ========================================================================== */
+
+@media(max-width:1200px){
+
+    .dashboard-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+@media(max-width:900px){
+
+    .panel{
+
+        padding:22px;
+
+    }
+
+    .turno-item{
+
+        align-items:flex-start;
+
+    }
+
+}
+
+
+
+@media(max-width:700px){
+
+    .turno-item{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .turno-servicio{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+    .panel{
+
+        overflow-x:auto;
+
+    }
+
+    .panel table{
+
+        min-width:650px;
+
+    }
+
+}
+
+
+
+@media(max-width:500px){
+
+    .panel{
+
+        padding:18px;
+
+    }
+
+    .panel-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .panel-header span{
+
+        align-self:flex-end;
+
+    }
+
+}
+/* ==========================================================================
+   STOCK BAJO
+   ========================================================================== */
+
+.stock-bajo{
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    margin-top:30px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+    animation:aparecer .35s ease;
+
+}
+
+
+
+/* ==========================================================================
+   CABECERA
+   ========================================================================== */
+
+.stock-header{
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+.stock-header h2{
+
+    color:#1e293b;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.stock-header p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+
+
+/* ==========================================================================
+   LISTA
+   ========================================================================== */
+
+.stock-list{
+
+    width:100%;
+
+    overflow-x:auto;
+
+}
+
+
+
+/* ==========================================================================
+   FILAS
+   ========================================================================== */
+
+.stock-row{
+
+    display:grid;
+
+    grid-template-columns:2fr 1.2fr 1.2fr .8fr;
+
+    gap:15px;
+
+    align-items:center;
+
+    padding:15px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    transition:.25s;
+
+}
+
+
+
+.stock-row:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+.stock-row:last-child{
+
+    border-bottom:none;
+
+}
+
+
+
+/* ==========================================================================
+   TITULO
+   ========================================================================== */
+
+.stock-title{
+
+    background:#f3f6fb;
+
+    border-radius:12px;
+
+    font-weight:700;
+
+    color:#374151;
+
+}
+
+
+
+/* ==========================================================================
+   STOCK
+   ========================================================================== */
+
+.stock-cantidad{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-width:55px;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    font-weight:700;
+
+}
+
+
+
+/* ==========================================================================
+   SIN DATOS
+   ========================================================================== */
+
+.sin-stock{
+
+    padding:45px;
+
+    text-align:center;
+
+    border-radius:14px;
+
+    background:#f8fafc;
+
+    color:#64748b;
+
+    font-size:15px;
+
+}
+
+
+
+/* ==========================================================================
    ANIMACIONES
    ========================================================================== */
 
-
 .hero,
 .kpi,
-.panel{
+.panel,
+.stock-bajo{
 
     animation:aparecer .35s ease;
 
@@ -558,10 +1271,9 @@
 
         opacity:0;
 
-        transform:translateY(15px);
+        transform:translateY(20px);
 
     }
-
 
     to{
 
@@ -576,32 +1288,62 @@
 
 
 /* ==========================================================================
-   SCROLL
+   SCROLL GENERAL
    ========================================================================== */
 
+.conten{
 
-.sidebar::-webkit-scrollbar,
-.conten::-webkit-scrollbar{
+    scrollbar-width:thin;
 
-    width:8px;
+    scrollbar-color:#cbd5e1 transparent;
 
 }
 
 
-.sidebar::-webkit-scrollbar-thumb,
-.conten::-webkit-scrollbar-thumb{
+
+.sidebar{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#cbd5e1 transparent;
+
+}
+
+
+
+.conten::-webkit-scrollbar,
+.sidebar::-webkit-scrollbar{
+
+    width:9px;
+
+}
+
+
+
+.conten::-webkit-scrollbar-track,
+.sidebar::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+
+.conten::-webkit-scrollbar-thumb,
+.sidebar::-webkit-scrollbar-thumb{
 
     background:#cbd5e1;
 
-    border-radius:20px;
+    border-radius:30px;
 
 }
 
 
-.sidebar::-webkit-scrollbar-track,
-.conten::-webkit-scrollbar-track{
 
-    background:transparent;
+.conten::-webkit-scrollbar-thumb:hover,
+.sidebar::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
 
 }
 
@@ -611,12 +1353,11 @@
    RESPONSIVE
    ========================================================================== */
 
+@media(max-width:1400px){
 
-@media(max-width:1100px){
+    .contain{
 
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
+        max-width:1200px;
 
     }
 
@@ -624,15 +1365,25 @@
 
 
 
-@media(max-width:800px){
+@media(max-width:1200px){
 
+    .stock-row{
+
+        grid-template-columns:2fr 1fr 1fr .8fr;
+
+    }
+
+}
+
+
+
+@media(max-width:992px){
 
     .layout{
 
         flex-direction:column;
 
     }
-
 
     .sidebar{
 
@@ -642,166 +1393,120 @@
 
         height:auto;
 
-    }
+        border-right:none;
 
+    }
 
     .conten{
 
+        width:100%;
+
+        height:auto;
+
         margin-left:0;
+
+        overflow:visible;
 
         padding:20px;
 
     }
 
+}
 
 
-    .dashboard-kpis{
+
+@media(max-width:768px){
+
+    .stock-bajo{
+
+        padding:22px;
+
+    }
+
+    .stock-row{
 
         grid-template-columns:1fr;
 
-    }
-
-
-
-    .turno-item{
-
-        flex-direction:column;
-
-        align-items:flex-start;
-
-    }
-
-
-
-    .turno-servicio{
-
-        width:100%;
+        gap:10px;
 
         text-align:center;
 
+        border-radius:12px;
+
+        margin-bottom:12px;
+
+        background:#ffffff;
+
+        box-shadow:0 2px 8px rgba(0,0,0,.05);
+
+        border:none;
+
+    }
+
+    .stock-title{
+
+        display:none;
+
+    }
+
+    .stock-cantidad{
+
+        margin:auto;
+
     }
 
 }
 
 
 
-@media(max-width:600px){
+@media(max-width:576px){
 
+    .conten{
+
+        padding:15px;
+
+    }
 
     .contain{
 
-        margin:20px auto;
+        margin:15px auto;
 
     }
 
+    .stock-header h2{
 
-    .hero h1{
-
-        font-size:26px;
-
-    }
-
-
-    .panel{
-
-        padding:18px;
-
-        overflow-x:auto;
+        font-size:22px;
 
     }
 
+    .stock-header p{
 
-    .panel table{
+        font-size:14px;
 
-        min-width:650px;
+    }
+
+    .sin-stock{
+
+        padding:30px 20px;
 
     }
 
 }
 
-.stock-bajo {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  margin-top: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
 
 
-.stock-header {
-  margin-bottom: 20px;
-  text-align: center;
-}
+@media(min-width:1800px){
 
-.stock-header h2 {
-  margin: 0;
-  font-size: 22px;
-  color: #1f2937;
-}
+    .contain{
 
-.stock-header p {
-  margin-top: 5px;
-  color: #6b7280;
-  font-size: 14px;
-}
+        max-width:1650px;
 
+    }
 
-/* Lista */
+    .dashboard-kpis{
 
-.stock-list {
-  width: 100%;
-}
+        grid-template-columns:repeat(6,1fr);
 
+    }
 
-.stock-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 80px;
-  align-items: center;
-
-  padding: 14px 10px;
-  border-bottom: 1px solid #e5e7eb;
-
-  font-size: 14px;
-  color: #374151;
-}
-
-
-.stock-title {
-  background: #f3f6fb;
-  border-radius: 8px;
-
-  font-weight: 600;
-  color: #374151;
-}
-
-
-.stock-row:last-child {
-  border-bottom: none;
-}
-
-
-/* cantidad */
-
-.stock-cantidad {
-
-  background: #fee2e2;
-  color: #dc2626;
-
-  padding: 5px 12px;
-  border-radius: 20px;
-
-  text-align: center;
-  font-weight: 600;
-  width: fit-content;
-}
-
-
-/* sin datos */
-
-.sin-stock {
-  padding: 25px;
-  text-align: center;
-  color: #6b7280;
-  background: #f9fafb;
-  border-radius: 8px;
 }
