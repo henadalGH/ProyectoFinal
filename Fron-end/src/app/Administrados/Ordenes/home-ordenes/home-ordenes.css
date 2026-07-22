@@ -1,282 +1,483 @@
-/* =======================
-   LAYOUT
-======================= */
+/*=================================================
+                    LAYOUT
+=================================================*/
 
 .layout{
-    display: flex;
-    min-height: 100vh;
-    background: #f4f7fb;
-    font-family: Arial, Helvetica, sans-serif;
+    display:flex;
+    height:100vh;
+    font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 }
 
 .sidebar{
-    width: 260px;
-    flex-shrink: 0;
-    background: #111827;
+    width:320px;
+    background:#f3f6fb;
+    box-shadow:4px 0 12px rgba(0,0,0,.05);
 }
 
 .content{
-    flex: 1;
-    padding: 30px;
-    overflow-y: auto;
+    flex:1;
+    background:#f3f6fb;
+    padding:30px;
+    overflow-y:auto;
 }
 
-/* =======================
-   TITULO
-======================= */
+/*=================================================
+                    TITULO
+=================================================*/
 
 .titulo{
+    margin-bottom:30px;
+    margin-top: 30px;
     text-align: center;
-    margin: 30px auto;
 }
 
 .titulo h1{
-    margin: 0;
-    font-size: 32px;
-    font-weight: 700;
-    color: #111827;
+    margin:0;
+    color:#1e293b;
+    font-size:34px;
+    font-weight:700;
 }
 
 .titulo p{
-    margin-top: 10px;
-    font-size: 15px;
-    color: #6b7280;
+    margin-top:8px;
+    color:#64748b;
+    font-size:15px;
 }
 
-/* =======================
-   ENCABEZADO
-======================= */
+/*=================================================
+                    CARD
+=================================================*/
 
-.encabezado{
-    max-width: 1400px;
-    margin: 0 auto 25px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
+.card{
+    background:white;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+.card-header{
+    padding:25px 30px;
+    border-bottom:1px solid #e5e7eb;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,.05);
 }
 
-.encabezado h2{
-    margin: 0;
-    color: #111827;
-    font-size: 24px;
+.card-header h2{
+    margin:0;
+    color:#1e293b;
+    font-size:24px;
 }
 
-.encabezado p{
-    margin-top: 8px;
-    color: #6b7280;
+.card-header p{
+    margin-top:6px;
+    color:#64748b;
 }
 
-/* =======================
-   TABLA
-======================= */
+/*=================================================
+                    TABLA
+=================================================*/
 
 .tabla-wrapper{
-    max-width: 1400px;
-    margin: auto;
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    padding:20px;
+    overflow-x:auto;
 }
 
-.tabla-roster{
-    width: 100%;
-    border-collapse: collapse;
-    border: none;
+.tabla{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0 12px;
 }
 
-.tabla-roster thead{
-    background: #2563eb;
-    color: white;
+.tabla th{
+
+    background:#eef3fb;
+
+    padding:16px;
+
+    color:#475569;
+
+    font-size:14px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    font-weight:700;
 }
 
-.tabla-roster th{
-    padding: 18px;
-    text-align: center;
-    border: none;
-    font-size: 14px;
-    font-weight: 600;
+.tabla th:first-child{
+    border-radius:12px 0 0 12px;
 }
 
-.tabla-roster td{
-    padding: 18px;
-    text-align: center;
-    border-bottom: 1px solid #e5e7eb;
+.tabla th:last-child{
+    border-radius:0 12px 12px 0;
 }
 
-.roster-row{
-    transition: .2s;
+.tabla td{
+
+    background:white;
+
+    padding:18px 16px;
+
+    color:#334155;
+
+    border-top:1px solid #edf2f7;
+    border-bottom:1px solid #edf2f7;
 }
 
-.roster-row:hover{
-    background: #f8fafc;
+.tabla td:first-child{
+    border-left:1px solid #edf2f7;
+    border-radius:12px 0 0 12px;
 }
 
-/* =======================
-   CLIENTE
-======================= */
-
-.player-info{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
+.tabla td:last-child{
+    border-right:1px solid #edf2f7;
+    border-radius:0 12px 12px 0;
 }
 
-.avatar-box{
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: #2563eb;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    flex-shrink: 0;
+.tabla tbody tr{
+
+    transition:.25s;
 }
 
-.player-name{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.tabla tbody tr:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 24px rgba(37,99,235,.10);
+}
+
+/*=================================================
+                  CLIENTE
+=================================================*/
+
+.cliente{
+
+    display:flex;
+    flex-direction:column;
 }
 
 .nombre{
-    font-weight: 600;
-    color: #111827;
+
+    font-weight:600;
+
+    color:#1e293b;
+
+    font-size:15px;
 }
 
-.apellido{
-    font-size: 14px;
-    color: #6b7280;
+/*=================================================
+                  VEHICULO
+=================================================*/
+
+.vehiculo{
+
+    color:#475569;
+
+    font-weight:500;
 }
 
-/* =======================
-   VEHICULO
-======================= */
+/*=================================================
+                  BADGES
+=================================================*/
 
-.contacto-wrapper{
-    display: flex;
-    justify-content: center;
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:8px 15px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
 }
 
-.email{
-    font-weight: 500;
-    color: #374151;
+.patente{
+
+    background:#eff6ff;
+
+    color:#2563eb;
 }
 
-.patente-sticker{
-    display: inline-block;
-    padding: 7px 14px;
-    background: #eff6ff;
-    color: #1d4ed8;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 14px;
+.servicio{
+
+    background:#ecfdf5;
+
+    color:#059669;
 }
 
-/* =======================
-   BOTONES
-======================= */
+/*=================================================
+                  BOTONES
+=================================================*/
 
-button{
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    transition: .2s;
+.btn-asignar{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:11px 18px;
+
+    border-radius:10px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    font-weight:600;
+
+    transition:.25s;
 }
 
-button:hover{
-    background: #1d4ed8;
-    transform: translateY(-2px);
+.btn-asignar:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 20px rgba(37,99,235,.30);
 }
 
-.text-center{
-    text-align: center;
-}
-
-/* =======================
-   TABLA VACIA
-======================= */
+/*=================================================
+                  TABLA VACIA
+=================================================*/
 
 .tabla-vacia{
-    padding: 50px;
+
+    padding:60px !important;
+
+    background:transparent !important;
+
+    border:none !important;
 }
 
-.vacio-content{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
+.vacio{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
 }
 
-.vacio-icon{
-    font-size: 40px;
+.icono{
+
+    font-size:55px;
 }
 
-/* =======================
-   MODAL
-======================= */
+.vacio h3{
 
-form{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    width: 400px;
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0,0,0,.25);
-    z-index: 1000;
+    margin:0;
+
+    color:#334155;
+}
+
+.vacio p{
+
+    margin:0;
+
+    color:#64748b;
+}
+
+/*=================================================
+                    MODAL
+=================================================*/
+
+.modal-fondo{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(15,23,42,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:1000;
+}
+
+.modal{
+
+    width:500px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+    animation:aparecer .25s ease;
+}
+
+.modal h2{
+
+    margin-top:0;
+
+    margin-bottom:25px;
+
+    color:#1e293b;
 }
 
 .item{
-    margin-bottom: 20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:20px;
 }
 
 .item label{
-    display: block;
-    margin-bottom: 8px;
-    text-align: center;
-    font-weight: 600;
-    color: #374151;
+
+    margin-bottom:8px;
+
+    color:#374151;
+
+    font-weight:600;
 }
 
 .item select{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
-    font-size: 14px;
+
+    padding:12px 14px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    outline:none;
+
+    transition:.2s;
 }
 
-form button{
-    width: 100%;
-    margin-top: 15px;
+.item select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
 }
 
-/* =======================
-   BOTON CERRAR MODAL
-======================= */
+/*=================================================
+                BOTONES MODAL
+=================================================*/
 
-main > button:last-child{
-    position: fixed;
-    left: 50%;
-    top: calc(50% + 170px);
-    transform: translateX(-50%);
-    background: #dc2626;
-    z-index: 1001;
+.acciones-modal{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:25px;
 }
 
-main > button:last-child:hover{
-    background: #b91c1c;
+.btn-cancelar{
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+    border:none;
+
+    padding:11px 18px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.btn-cancelar:hover{
+
+    background:#d1d5db;
+}
+
+.btn-guardar{
+
+    border:none;
+
+    cursor:pointer;
+
+    padding:11px 20px;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:600;
+}
+
+.btn-guardar:hover{
+
+    background:#1d4ed8;
+}
+
+/*=================================================
+                ANIMACION
+=================================================*/
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-20px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+/*=================================================
+                RESPONSIVE
+=================================================*/
+
+@media(max-width:900px){
+
+    .tabla{
+
+        min-width:900px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .content{
+
+        padding:20px;
+    }
+
+    .titulo h1{
+
+        font-size:28px;
+    }
+
+    .modal{
+
+        width:95%;
+    }
+
 }

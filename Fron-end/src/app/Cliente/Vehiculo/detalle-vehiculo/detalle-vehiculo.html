@@ -234,19 +234,6 @@
                 <div class="modal">
 
 
-                    <button
-                        class="btn-cerrar"
-                        (click)="cerrarModal()">
-
-
-                        <i class="fas fa-times"></i>
-
-
-                    </button>
-
-
-
-
                     <form
                         (ngSubmit)="solicitarTurno()">
 
@@ -305,52 +292,35 @@
 
                         </div>
 
-
-
-
-
                         <div class="campo">
-
-
                             <label>
                                 Describa su problema
                             </label>
 
-
-
-                            <input
-
-                                type="text"
-
-                                [(ngModel)]="descripcion"
-
-                                name="descripcion"
-
-                                placeholder="Ej: ruido en el motor, pérdida de aceite..."
-
-                            >
-
-
+                            <textarea 
+                            #descripcion
+                            name="descripcion" 
+                            (input)="ajustarAltura(descripcion)"
+                            placeholder="Ej: ruido en el motor, pérdida de aceite..."></textarea>
+                            
                         </div>
-
-
-
-
-
-                        <button
+                        <div class="btns">
+                            <button
                             class="btn-primary">
-
-
                             <i class="fas fa-paper-plane"></i>
-
                             Solicitar turno
-
-
                         </button>
 
+                        <button
+                            class="btn-second"
+                            (click)="cerrarModal()">
+                            <i class="fas fa-times"></i>
+                            Cancelar
+                        </button>
+                        </div>
 
-
-
+                        
+                        
                     </form>
 
 

@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -119,5 +120,12 @@ public class RepuestoServiceImpl implements RepuestoService {
     public List<RepuestoStockBajoDTO> obtenerRepuestoBajoStock() {
         return repuestoRepository.buscarStockBajo();
     }
+
+    @Override
+    public List<ObtenerRepuestoDTO> obtenerRepuestosOrden() {
+        return repuestoRepository.obtenerRepuesto();
+    }
+
+
 
 }

@@ -4,9 +4,8 @@
   </aside>
 
   <main class="content">
-
     <app-header></app-header>
-  
+    
     <div class="orden-container">
 
       <div class="titulo">
@@ -14,7 +13,7 @@
           <p>Detalle y ejecución de tareas asignadas</p>
       </div>
 
-      @if (orden != null) {
+    
 
       <div class="orden-card">
 
@@ -74,8 +73,8 @@
                         <tr>
                             <th>Cantidad</th>
                             <th>Código</th>
-                            <th>Trabajo realizado</th>
-                            <th>Tipo item</th>
+                            <th>Descricion</th>
+                            <th>Repuestos</th>
 
                             @if (!soloLectura) {
                             <th>Acción</th>
@@ -113,22 +112,22 @@
                         <td>
                             <input
                                 type="text"
-                                placeholder="Trabajo realizado"
                                 [(ngModel)]="detalle.trabajoRealizado"
                                 [disabled]="soloLectura">
                         </td>
 
 
                         <td>
-                            <select 
-                                [(ngModel)]="detalle.tipoItem"
-                                [disabled]="soloLectura">
-
-                                <option value="REPUESTO">Repuesto</option>
-                                <option value="MANO_OBRA">Mano de obra</option>
-                                <option value="SERVICIO">Servicio</option>
-
-                            </select>
+                            @if (!soloLectura) {
+                                <button
+                                    type="button"
+                                    class="btn-agregar"
+                                    (click)="abrirAgregarRepuestos(detalle)">
+                                    {{ detalle.selectedRepuestos.length > 0 ? 'Editar repuestos' : 'Agregar repuestos' }}
+                                </button>
+                            } @else {
+                                <span>{{ detalle.selectedRepuestos.length > 0 ? 'Repuesto' : '-' }}</span>
+                            }
                         </td>
 
 
@@ -145,6 +144,25 @@
                         }
 
                     </tr>
+
+                    @if (detalle.selectedRepuestos.length > 0) {
+                    <tr class="detalle-repuestos-row">
+                        <td colspan="5">
+                            <div class="detalle-repuestos-lista">
+                                <strong>Repuestos asociados:</strong>
+                                <ul>
+                                    @for (repuesto of detalle.selectedRepuestos; track repuesto.id) {
+                                    <li>
+                                        {{ repuesto.codigo }} - {{ repuesto.nombre }}
+                                        x{{ repuesto.cantidad }}
+                                        <span class="subtitulo">${{ repuesto.subtotal }}</span>
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    }
 
                     }
 
@@ -175,22 +193,23 @@
                         <td>
                             <input
                                 type="text"
-                                placeholder="Trabajo realizado"
+                                placeholder="ingresar una breve descripción"
                                 [(ngModel)]="fil.trabajoRealizado"
                                 [disabled]="soloLectura">
                         </td>
 
 
                         <td>
-                            <select 
-                                [(ngModel)]="fil.tipoItem"
-                                [disabled]="soloLectura">
-
-                                <option value="REPUESTO">Repuesto</option>
-                                <option value="MANO_OBRA">Mano de obra</option>
-                                <option value="SERVICIO">Servicio</option>
-
-                            </select>
+                            @if (!soloLectura) {
+                                <button
+                                    type="button"
+                                    class="btn-agregar"
+                                    (click)="abrirAgregarRepuestos(fil)">
+                                    {{ fil.selectedRepuestos.length > 0 ? 'Editar repuestos' : 'Agregar repuestos' }}
+                                </button>
+                            } @else {
+                                <span>{{ fil.selectedRepuestos.length > 0 ? 'Repuesto' : '-' }}</span>
+                            }
                         </td>
 
 
@@ -207,6 +226,25 @@
                         }
 
                     </tr>
+
+                    @if (fil.selectedRepuestos.length > 0) {
+                    <tr class="detalle-repuestos-row">
+                        <td colspan="5">
+                            <div class="detalle-repuestos-lista">
+                                <strong>Repuestos asociados:</strong>
+                                <ul>
+                                    @for (repuesto of fil.selectedRepuestos; track repuesto.id) {
+                                    <li>
+                                        {{ repuesto.codigo }} - {{ repuesto.nombre }}
+                                        x{{ repuesto.cantidad }}
+                                        <span class="subtitulo">${{ repuesto.subtotal }}</span>
+                                    </li>
+                                    }
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    }
 
                     }
 
@@ -263,13 +301,4 @@
 
         </div>
 
-
-      </div>
-
-      }
-
-    </div>
-
-  </main>
-
-</div>
+       

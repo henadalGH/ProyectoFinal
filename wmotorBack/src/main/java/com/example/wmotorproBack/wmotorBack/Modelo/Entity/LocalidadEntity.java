@@ -3,6 +3,8 @@ package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ public class LocalidadEntity {
     @Column(name = "idLocalidad")
     private Long id;
     
-    @Column
+    @Column(name = "nombre_localidad")
     private String nombreLocalidad;
 
     @ManyToOne
@@ -32,5 +34,6 @@ public class LocalidadEntity {
     private ProvinciaEntity provincia;
 
     @OneToMany(mappedBy = "localidad")
+    @JsonIgnore
     private List<ClienteEntity> cliente = new ArrayList<>();
 }

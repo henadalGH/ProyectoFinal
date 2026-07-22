@@ -57,6 +57,11 @@ export class DetalleVehiculo implements OnInit{
     this.router.navigate(['/miHistorial', id]);
   }
 
+  ajustarAltura(textarea: HTMLTextAreaElement): void {
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+}
+
 
   //Seccion de servisios
 

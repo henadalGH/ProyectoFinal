@@ -1,0 +1,124 @@
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <app-header-empleado></app-header-empleado>
+    </aside>
+
+    <!-- Contenido -->
+    <main class="content">
+
+        <app-header></app-header>
+
+        <div class="contenedor">
+
+            <!-- Encabezado -->
+            <div class="titulo">
+                <h1>Seleccionar Repuestos</h1>
+                <p>Busque y seleccione los repuestos que desea agregar a la orden de trabajo.</p>
+            </div>
+
+            <!-- Barra superior -->
+            <div class="barra-superior">
+
+                <div class="barra-busqueda">
+                    <input
+                        type="text"
+                        placeholder="Buscar por nombre o código..."
+                        [(ngModel)]="buscar"
+                        (input)="buscarRepuesto()">
+                </div>
+
+                <div class="acciones">
+
+                    <button
+                        type="button"
+                        class="btn-volver"
+                        (click)="volver()">
+                        Volver
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-agregar"
+                        (click)="agregarRepuestos()">
+                        Agregar repuestos
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Tabla -->
+            <div class="tabla-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th class="col-check"></th>
+                            <th>Nombre</th>
+                            <th>Marca</th>
+                            <th>Código</th>
+                            <th>Stock</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @if (repuestosFiltrados.length > 0) {
+
+                            @for (repuesto of repuestosFiltrados; track repuesto.id) {
+
+                                <tr>
+
+                                    <td class="col-check">
+                                        <input
+                                            type="checkbox"
+                                            (change)="seleccionarRepuesto($event, repuesto)">
+                                    </td>
+
+                                    <td>{{ repuesto.nombreRepuesto }}</td>
+
+                                    <td>{{ repuesto.marcaRepuesto }}</td>
+
+                                    <td>{{ repuesto.codigo }}</td>
+
+                                    <td>{{ repuesto.cantidad }}</td>
+
+                                    <td>
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            [max]="repuesto.cantidad"
+                                            [(ngModel)]="repuesto.cantidadSeleccionada">
+                                    </td>
+
+                                </tr>
+
+                            }
+
+                        } @else {
+
+                            <tr>
+
+                                <td colspan="6" class="sin-resultados">
+                                    No se encontraron repuestos.
+                                </td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

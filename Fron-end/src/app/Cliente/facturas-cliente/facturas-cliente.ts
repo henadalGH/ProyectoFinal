@@ -41,13 +41,10 @@ export class FacturasCliente implements OnInit{
           this.facturaService.obtenerUltimasFacturaCliente(idCliente).subscribe(
             (repuesta: any) =>{
               this.ultimas = repuesta;
-              console.log(this.ultimas.length)
+              console.log(this.ultimas)
             }
           )
         }
-
-
-      
       }
 
   facturas: any[]= [];
@@ -55,23 +52,5 @@ export class FacturasCliente implements OnInit{
   verFactura(idFactura: number){
     this.router.navigate(['/verFactura', idFactura]);
   }
-
-
-  pagarFactura(idFactura: number){
-    const estado: string = 'PAGADO'
-
-    this.facturaService.actualizarEstadoFactura(idFactura, estado).subscribe(
-      {
-        next: () =>{
-          
-        }
-      }
-    )
-  }
-
-  
-  
-
-
   
 }

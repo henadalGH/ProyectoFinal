@@ -1,347 +1,919 @@
-/*=========================
-    LAYOUT (AJUSTADO)
-=========================*/
+/*==================================================
+                    LAYOUT
+==================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
 .layout{
     display:flex;
     height:100vh;
-    background:#f4f6f9;
+    font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:#f4f6fa;
 }
-
 
 .sidebar{
     width:320px;
     flex-shrink:0;
+    background:#f4f6fa;
+    box-shadow:4px 0 15px rgba(0,0,0,.05);
 }
-
 
 .content{
     flex:1;
-    padding:30px;
     overflow-y:auto;
+    padding:35px;
+    background:#f4f6fa;
 }
 
-
-
-/*=========================
-    CONTENEDOR (AJUSTADO)
-=========================*/
+/*==================================================
+                    CONTENEDOR
+==================================================*/
 
 .orden-container{
 
-    max-width:1200px;
-
-    margin:50px auto 0;
+    max-width:1400px;
+    margin:auto;
+    margin-top: 30px;
 
 }
-/*=========================
-    TITULO
-=========================*/
+
+/*==================================================
+                      TITULO
+==================================================*/
 
 .titulo{
-    margin-bottom:25px;
+
+    margin-bottom:30px;
+    text-align: center;
+
 }
 
 .titulo h1{
+
     font-size:34px;
-    color:#1f2937;
-    margin-bottom:5px;
+    color:#1e293b;
+    font-weight:700;
+    margin-bottom:8px;
+
 }
 
 .titulo p{
-    color:#6b7280;
+
+    color:#64748b;
     font-size:15px;
+
 }
 
-
-/*=========================
-    CARD
-=========================*/
+/*==================================================
+                  TARJETA PRINCIPAL
+==================================================*/
 
 .orden-card{
-    background:#fff;
-    border-radius:15px;
-    box-shadow:0 5px 18px rgba(0,0,0,.08);
-    padding:30px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.08);
+
+    border:1px solid #e8edf5;
+
 }
 
-
-/*=========================
-    NUMERO ORDEN
-=========================*/
+/*==================================================
+              ENCABEZADO ORDEN
+==================================================*/
 
 .orden-numero{
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding-bottom:20px;
-    border-bottom:1px solid #e5e7eb;
-    margin-bottom:30px;
+
+    padding-bottom:25px;
+
+    border-bottom:2px solid #e5e7eb;
+
+    margin-bottom:35px;
+
 }
 
 .orden-numero h2{
-    color:#1f2937;
-    margin:0;
+
+    color:#1e293b;
+    font-size:28px;
+    letter-spacing:1px;
+
 }
 
 .orden-numero span{
+
     background:#2563eb;
-    color:#fff;
-    padding:8px 16px;
-    border-radius:20px;
-    font-weight:600;
+    color:white;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    font-weight:700;
+    font-size:15px;
+
+    box-shadow:0 6px 15px rgba(37,99,235,.25);
+
 }
 
-
-/*=========================
-    DATOS
-=========================*/
+/*==================================================
+          DATOS CLIENTE / VEHICULO
+==================================================*/
 
 .encabezadoOrden{
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
+
     gap:25px;
-    margin-bottom:30px;
+
+    margin-bottom:35px;
+
 }
 
 .datosCliente,
 .datosVehiculo{
+
     background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:20px;
+
+    border:1px solid #dbe3eb;
+
+    border-radius:15px;
+
+    padding:22px;
+
 }
+
+/*==================================================
+                TITULOS
+==================================================*/
 
 .datosCliente h3,
 .datosVehiculo h3{
-    color:#2563eb;
-    margin-bottom:15px;
+
+    color:#1e293b;
+
+    font-size:19px;
+
+    margin-bottom:18px;
+
+    padding-bottom:10px;
+
+    border-bottom:1px solid #dbe3eb;
+
 }
+
+/*==================================================
+                INFORMACION
+==================================================*/
 
 .datosCliente p,
 .datosVehiculo p{
-    margin:8px 0;
-    color:#374151;
+
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+    font-size:15px;
+
+    color:#475569;
+
+    line-height:1.5;
+
 }
 
 .datosCliente strong,
 .datosVehiculo strong{
-    color:#111827;
+
+    color:#1e293b;
+    font-weight:600;
+
 }
 
-
-/*=========================
-    SECCIONES
-=========================*/
+/*==================================================
+                  SECCIONES
+==================================================*/
 
 .seccion{
+
     margin-top:35px;
+
 }
 
 .seccion-header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
-    margin-bottom:15px;
+
+    margin-bottom:20px;
+
 }
 
 .seccion h3{
-    color:#1f2937;
+
+    color:#1e293b;
+
+    font-size:22px;
+
+    font-weight:600;
+
 }
 
-
-/*=========================
-    TABLA
-=========================*/
+/*==================================================
+                  TABLA TRABAJOS
+==================================================*/
 
 .tabla-wrapper{
+    width:100%;
     overflow-x:auto;
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    background:#fff;
 }
 
 .tabla-detalle{
     width:100%;
     border-collapse:collapse;
+    table-layout:fixed;
+}
+
+/* Distribución de columnas */
+.tabla-detalle th:nth-child(1),
+.tabla-detalle td:nth-child(1){
+    width:80px;
+}
+
+.tabla-detalle th:nth-child(2),
+.tabla-detalle td:nth-child(2){
+    width:140px;
+}
+
+.tabla-detalle th:nth-child(3),
+.tabla-detalle td:nth-child(3){
+    width:auto;
+}
+
+.tabla-detalle th:nth-child(4),
+.tabla-detalle td:nth-child(4){
+    width:180px;
+}
+
+.tabla-detalle th:nth-child(5),
+.tabla-detalle td:nth-child(5){
+    width:120px;
+}
+
+/* Cabecera */
+.tabla-detalle thead{
+    background:#f8fafc;
 }
 
 .tabla-detalle th{
-    background:#2563eb;
-    color:white;
-    padding:14px;
-    font-weight:600;
+    padding:16px 14px;
+    text-align:left;
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    color:#334155;
+    border-bottom:2px solid #dbe3eb;
 }
 
+/* Filas */
 .tabla-detalle td{
     padding:12px;
-    border-bottom:1px solid #e5e7eb;
-    background:white;
+    border-bottom:1px solid #edf2f7;
+    vertical-align:top;
 }
 
-.tabla-detalle tr:nth-child(even){
-    background:#f9fafb;
+.tabla-detalle tbody tr:last-child td{
+    border-bottom:none;
 }
 
-.tabla-detalle tr:hover td{
-    background:#eef4ff;
+.tabla-detalle tbody tr:hover{
+    background:#fafcff;
 }
 
-
-/*=========================
-    INPUTS
-=========================*/
+/*==================================================
+                    INPUTS
+==================================================*/
 
 .tabla-detalle input,
 .tabla-detalle select{
     width:100%;
-    padding:10px;
+    padding:10px 12px;
     border:1px solid #d1d5db;
     border-radius:8px;
+    background:#fff;
     font-size:14px;
-    background:white;
+    color:#1f2937;
+    transition:.2s ease;
 }
 
 .tabla-detalle input:focus,
-.tabla-detalle select:focus,
-textarea:focus{
+.tabla-detalle select:focus{
     outline:none;
     border-color:#2563eb;
-    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
 }
 
-
-/*=========================
-    TEXTAREA
-=========================*/
-
-textarea{
-    width:100%;
-    min-height:140px;
-    padding:15px;
-    border:1px solid #d1d5db;
-    border-radius:10px;
-    resize:vertical;
+/* Cantidad compacta */
+.tabla-detalle td:nth-child(1) input{
+    text-align:center;
+    font-weight:600;
+    padding-left:6px;
+    padding-right:6px;
 }
 
+/* Código compacto */
+.tabla-detalle td:nth-child(2) input{
+    font-family:'Consolas', monospace;
+    text-transform:uppercase;
+}
 
-/*=========================
-    BOTONES
-=========================*/
+/* Trabajo realizado ocupa el espacio */
+.tabla-detalle td:nth-child(3) input{
+    min-width:100%;
+}
+
+/*==================================================
+                    BOTONES
+==================================================*/
 
 .btn-agregar{
+    border:none;
     background:#2563eb;
     color:white;
-    border:none;
-    padding:10px 18px;
-    border-radius:8px;
+    padding:11px 18px;
+    border-radius:10px;
+    font-weight:600;
     cursor:pointer;
+    transition:.2s ease;
 }
 
 .btn-agregar:hover{
     background:#1d4ed8;
+    transform:translateY(-2px);
 }
 
 .btn-eliminar{
+    width:100%;
+    border:none;
     background:#ef4444;
     color:white;
-    border:none;
-    padding:8px 15px;
+    padding:10px 12px;
     border-radius:8px;
+    font-size:13px;
+    font-weight:600;
     cursor:pointer;
+    transition:.2s ease;
 }
 
 .btn-eliminar:hover{
     background:#dc2626;
+    transform:translateY(-1px);
 }
 
+/*==================================================
+                    TEXTAREA
+==================================================*/
 
-/*=========================
-    ACCIONES
-=========================*/
-
-.acciones{
-    display:flex;
-    justify-content:flex-end;
-    gap:15px;
-    margin-top:35px;
+textarea{
+    width:100%;
+    min-height:140px;
+    resize:vertical;
+    padding:16px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    background:#fff;
+    font-size:14px;
+    color:#1f2937;
+    line-height:1.5;
+    transition:.2s ease;
 }
 
-.bnt-volver{
-    background:#6b7280;
-    color:white;
-    border:none;
-    padding:12px 22px;
-    border-radius:8px;
-    cursor:pointer;
+textarea:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
 }
 
-.bnt-volver:hover{
-    background:#4b5563;
+textarea::placeholder{
+    color:#94a3b8;
 }
 
-.btn-guardar{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 22px;
-    border-radius:8px;
-    cursor:pointer;
-}
+/*==================================================
+                  SOLO LECTURA
+==================================================*/
 
-.btn-guardar:hover{
-    background:#1d4ed8;
-}
-
-.btn-finalizar{
-    background:#16a34a;
-    color:white;
-    border:none;
-    padding:12px 22px;
-    border-radius:8px;
-    cursor:pointer;
-}
-
-.btn-finalizar:hover{
-    background:#15803d;
-}
-
-.btn-finalizar:disabled{
-    background:#9ca3af;
+input:disabled,
+select:disabled,
+textarea:disabled{
+    background:#f8fafc;
+    color:#475569;
+    border-color:#e5e7eb;
     cursor:not-allowed;
 }
 
+/*==================================================
+                OBSERVACIONES
+==================================================*/
 
-/*=========================
-    RESPONSIVE
-=========================*/
+textarea{
+
+    width:100%;
+    min-height:140px;
+    resize:vertical;
+
+    padding:15px;
+
+    border:1px solid #d6dce5;
+    border-radius:12px;
+
+    background:#fff;
+
+    font-size:14px;
+    color:#334155;
+
+    transition:.25s;
+
+}
+
+textarea:focus{
+
+    outline:none;
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+textarea::placeholder{
+
+    color:#94a3b8;
+
+}
+
+/*==================================================
+                BOTONES
+==================================================*/
+
+.acciones{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-top:40px;
+
+    padding-top:25px;
+
+    border-top:1px solid #e5e7eb;
+
+}
+
+.btn-agregar,
+.btn-eliminar,
+.btn-guardar,
+.btn-finalizar,
+.bnt-volver{
+
+    border:none;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+/*------------------ Agregar ----------------*/
+
+.btn-agregar{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:11px 18px;
+
+}
+
+.btn-agregar:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+/*------------------ Eliminar ----------------*/
+
+.btn-eliminar{
+
+    width:100%;
+
+    padding:10px;
+
+    background:#ef4444;
+
+    color:white;
+
+}
+
+.btn-eliminar:hover{
+
+    background:#dc2626;
+
+}
+
+/*------------------ Volver ----------------*/
+
+.bnt-volver{
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+    padding:12px 22px;
+
+}
+
+.bnt-volver:hover{
+
+    background:#d1d5db;
+
+}
+
+/*------------------ Guardar ----------------*/
+
+.btn-guardar{
+
+    background:#16a34a;
+
+    color:white;
+
+    padding:12px 24px;
+
+}
+
+.btn-guardar:hover{
+
+    background:#15803d;
+
+}
+
+/*------------------ Finalizar ----------------*/
+
+.btn-finalizar{
+
+    background:#ea580c;
+
+    color:white;
+
+    padding:12px 24px;
+
+}
+
+.btn-finalizar:hover:not(:disabled){
+
+    background:#c2410c;
+
+}
+
+.btn-finalizar:disabled{
+
+    background:#cbd5e1;
+
+    color:#64748b;
+
+    cursor:not-allowed;
+
+}
+
+/*==================================================
+            INPUTS DESHABILITADOS
+==================================================*/
+
+input:disabled,
+select:disabled,
+textarea:disabled{
+
+    background:#f8fafc;
+
+    color:#64748b;
+
+    cursor:not-allowed;
+
+}
+
+/*==================================================
+            SCROLL TABLA
+==================================================*/
+
+.tabla-wrapper{
+
+    overflow-x:auto;
+
+}
+
+.tabla-wrapper::-webkit-scrollbar{
+
+    height:8px;
+
+}
+
+.tabla-wrapper::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:20px;
+
+}
+
+/*==================================================
+                ANIMACIONES
+==================================================*/
+
+.orden-card{
+
+    animation:entrada .35s ease;
+
+}
+
+@keyframes entrada{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*==================================================
+                RESPONSIVE
+==================================================*/
+
+@media(max-width:1100px){
+
+    .encabezadoOrden{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
 
 @media(max-width:900px){
 
-    .layout{
-        flex-direction:column;
+    .tabla-detalle{
+
+        min-width:900px;
+
     }
 
-    .sidebar{
-        width:100%;
-    }
+}
+
+@media(max-width:768px){
 
     .content{
-        padding:15px;
+
+        padding:20px;
+
     }
 
-    .encabezadoOrden{
-        grid-template-columns:1fr;
+    .orden-card{
+
+        padding:25px;
+
     }
 
     .orden-numero{
+
         flex-direction:column;
-        gap:10px;
+
         align-items:flex-start;
+
+        gap:15px;
+
     }
 
     .acciones{
-        flex-direction:column;
+
+        flex-direction:column-reverse;
+
+        align-items:stretch;
+
     }
 
-    .acciones button{
+    .btn-agregar,
+    .btn-guardar,
+    .btn-finalizar,
+    .bnt-volver{
+
         width:100%;
+
     }
+
+}
+
+@media(max-width:480px){
+
+    .titulo h1{
+
+        font-size:28px;
+
+    }
+
+    .datosCliente,
+    .datosVehiculo{
+
+        padding:18px;
+
+    }
+
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.65);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal {
+    width: min(980px, 100%);
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 20px 80px rgba(15, 23, 42, 0.22);
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 28px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8fafc;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 20px;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    color: #475569;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 24px 28px;
+}
+
+.modal-search {
+    margin-bottom: 18px;
+}
+
+.modal-search input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #334155;
+}
+
+.modal-table-wrapper {
+    max-height: 420px;
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+}
+
+.modal-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.modal-table th,
+.modal-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.modal-table thead {
+    background: #f8fafc;
+}
+
+.modal-table td input[type='number'] {
+    width: 90px;
+    padding: 8px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+}
+
+.modal-table td input[type='checkbox'] {
+    width: 18px;
+    height: 18px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    padding: 22px 28px 24px;
+    background: #f8fafc;
+}
+
+.modal-actions .btn-volver,
+.modal-actions .btn-guardar {
+    min-width: 140px;
+}
+
+.detalle-repuestos-row td {
+    padding: 16px 20px;
+    background: #f8fafc;
+}
+
+.detalle-repuestos-lista {
+    display: grid;
+    gap: 12px;
+}
+
+.detalle-repuestos-lista ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.detalle-repuestos-lista li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    color: #334155;
+    font-size: 14px;
+}
+
+.detalle-repuestos-lista .subtitulo {
+    color: #0f172a;
+    font-weight: 600;
 }

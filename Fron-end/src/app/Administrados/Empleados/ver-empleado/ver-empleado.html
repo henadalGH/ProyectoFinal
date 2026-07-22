@@ -5,12 +5,15 @@
         <app-header-admin></app-header-admin>
     </aside>
 
+
     <!-- CONTENIDO -->
     <main class="content">
 
         <app-header></app-header>
 
+
         @if (empleado) {
+
 
         <!-- HEADER EMPLEADO -->
         <section class="empleado-header">
@@ -20,6 +23,7 @@
                 <div class="avatar">
                     {{empleado.nombre.charAt(0)}}{{empleado.apellido.charAt(0)}}
                 </div>
+
 
                 <div class="info">
 
@@ -39,114 +43,284 @@
 
             </div>
 
+
             <button class="btn-volver" [routerLink]="['/gestionEmpleado']">
                 Volver
             </button>
 
+
         </section>
 
-        <!-- DATOS -->
+
+
+        <!-- DATOS EMPLEADO -->
         <section class="datos-empleado">
 
-            <!-- NOMBRE -->
-            <div class="fila">
-                <div class="etiqueta">👤 Nombre</div>
-                <div class="valor">{{empleado.nombre}}</div>
-            </div>
+    <!-- NOMBRE -->
+    <div class="fila">
 
-            <!-- APELLIDO -->
-            <div class="fila">
-                <div class="etiqueta">🧾 Apellido</div>
-                <div class="valor">{{empleado.apellido}}</div>
-            </div>
+        <div class="etiqueta">
+            👤 Nombre
+        </div>
 
-            <!-- EMAIL -->
-            <div class="fila">
-                <div class="etiqueta">📧 Email</div>
+        <div class="valor">
 
-                <div class="valor">
-                    @if (!editarEmail) {
-                        <span>{{empleado.email}}</span>
-                    } @else {
-                        <input type="email" [(ngModel)]="empleado.email">
-                    }
-                </div>
+            @if (!editarNombre) {
+                {{empleado.nombre}}
+            }
+            @else {
+                <input type="text" [(ngModel)]="empleado.nombre">
+            }
 
-                <button class="btn-editar"
-                        (click)="!editarEmail ? editarEmail = true : modificarEmail(empleado.id)">
-                    {{ editarEmail ? '💾' : '✏️' }}
-                </button>
-            </div>
+        </div>
 
-            <!-- CONTACTO -->
-            <div class="fila">
-                <div class="etiqueta">📱 Contacto</div>
+        <button class="btn-editar"
+                (click)="editarNombre ? modificarNombre(empleado.id) : editarNombre = true">
 
-                <div class="valor">
-                    @if (!editarContacto) {
-                        <span>{{empleado.contacto}}</span>
-                    } @else {
-                        <input type="text" [(ngModel)]="empleado.contacto">
-                    }
-                </div>
+            {{editarNombre ? '💾' : '✏️'}}
 
-                <button class="btn-editar"
-                        (click)="!editarContacto ? editarContacto = true : modificarContacto(empleado.id)">
-                    {{ editarContacto ? '💾' : '✏️' }}
-                </button>
-            </div>
+        </button>
 
-            <!-- DNI -->
-            <div class="fila">
-                <div class="etiqueta">🪪 DNI</div>
-                <div class="valor">{{empleado.dni}}</div>
-            </div>
+    </div>
 
-            <!-- FECHA NACIMIENTO -->
-            <div class="fila">
-                <div class="etiqueta">🎂 Fecha nacimiento</div>
-                <div class="valor">{{empleado.fechaNacimiento}}</div>
-            </div>
 
-            <!-- FECHA INGRESO -->
-            <div class="fila">
-                <div class="etiqueta">📅 Fecha ingreso</div>
-                <div class="valor">{{empleado.fechaIngreso}}</div>
-            </div>
+    <!-- APELLIDO -->
+    <div class="fila">
 
-            <!-- CARGO -->
-            <div class="fila">
-                <div class="etiqueta">💼 Cargo</div>
+        <div class="etiqueta">
+            🧾 Apellido
+        </div>
 
-                <div class="valor">
-                    @if (!editarCargo) {
-                        <span>{{empleado.cargo}}</span>
-                    } @else {
-                        <select [(ngModel)]="empleado.cargo">
-                            <option value="AYUDANTE">AYUDANTE</option>
-                            <option value="MECANICO">MECANICO</option>
-                            <option value="ENCARGADO">ENCARGADO</option>
-                            <option value="JEFE_TALLER">JEFE TALLER</option>
-                            <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
-                        </select>
-                    }
-                </div>
+        <div class="valor">
 
-                <button class="btn-editar"
-                        (click)="!editarCargo ? editarCargo = true : modificarCargo(empleado.id)">
-                    {{ editarCargo ? '💾' : '✏️' }}
-                </button>
-            </div>
+            @if (!editarApellido) {
+                {{empleado.apellido}}
+            }
+            @else {
+                <input type="text" [(ngModel)]="empleado.apellido">
+            }
 
-            <!-- SUELDO -->
-            <div class="fila">
-                <div class="etiqueta">💰 Sueldo</div>
-                <div class="valor">${{empleado.sueldo}}</div>
-            </div>
+        </div>
 
-        </section>
+        <button class="btn-editar"
+                (click)="editarApellido ? modificarApellido(empleado.id) : editarApellido = true">
+
+            {{editarApellido ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- EMAIL -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            📧 Email
+        </div>
+
+        <div class="valor">
+
+            @if (!editarEmail) {
+                {{empleado.email}}
+            }
+            @else {
+                <input type="email" [(ngModel)]="empleado.email">
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarEmail ? modificarEmail(empleado.id) : editarEmail = true">
+
+            {{editarEmail ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- CONTACTO -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            📱 Contacto
+        </div>
+
+        <div class="valor">
+
+            @if (!editarContacto) {
+                {{empleado.contacto}}
+            }
+            @else {
+                <input type="text" [(ngModel)]="empleado.contacto">
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarContacto ? modificarContacto(empleado.id) : editarContacto = true">
+
+            {{editarContacto ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- DNI -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            🪪 DNI
+        </div>
+
+        <div class="valor">
+
+            @if (!editarDni) {
+                {{empleado.dni}}
+            }
+            @else {
+                <input type="text" [(ngModel)]="empleado.dni">
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarDni ? modificarDni(empleado.id) : editarDni = true">
+
+            {{editarDni ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- FECHA NACIMIENTO -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            🎂 Fecha nacimiento
+        </div>
+
+        <div class="valor">
+
+            @if (!editarFechaNacimiento) {
+                {{empleado.fechaNacimiento}}
+            }
+            @else {
+                <input type="date" [(ngModel)]="empleado.fechaNacimiento">
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarFechaNacimiento ? modificarFechaNacimiento(empleado.id) : editarFechaNacimiento = true">
+
+            {{editarFechaNacimiento ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- FECHA INGRESO -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            📅 Fecha ingreso
+        </div>
+
+        <div class="valor">
+
+            @if (!editarFechaIngreso) {
+                {{empleado.fechaIngreso}}
+            }
+            @else {
+                <input type="date" [(ngModel)]="empleado.fechaIngreso">
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarFechaIngreso ? modificarFechaIngreso(empleado.id) : editarFechaIngreso = true">
+
+            {{editarFechaIngreso ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- CARGO -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            💼 Cargo
+        </div>
+
+        <div class="valor">
+
+            @if (!editarCargo) {
+                {{empleado.cargo}}
+            }
+            @else {
+
+                <select [(ngModel)]="empleado.cargo">
+
+                    <option value="AYUDANTE">AYUDANTE</option>
+                    <option value="MECANICO">MECANICO</option>
+                    <option value="ENCARGADO">ENCARGADO</option>
+                    <option value="JEFE_TALLER">JEFE TALLER</option>
+                    <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
+
+                </select>
+
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarCargo ? modificarCargo(empleado.id) : editarCargo = true">
+
+            {{editarCargo ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+
+    <!-- SUELDO -->
+    <div class="fila">
+
+        <div class="etiqueta">
+            💰 Sueldo
+        </div>
+
+        <div class="valor">
+
+            @if (!editarSueldo) {
+                ${{empleado.sueldo}}
+            }
+            @else {
+                <input type="number" [(ngModel)]="aumentoSueldo">
+            }
+
+        </div>
+
+        <button class="btn-editar"
+                (click)="editarSueldo ? aumentarSueldo() : editarSueldo = true">
+
+            {{editarSueldo ? '💾' : '✏️'}}
+
+        </button>
+
+    </div>
+
+</section>
 
         }
-
     </main>
+
+
 </div>

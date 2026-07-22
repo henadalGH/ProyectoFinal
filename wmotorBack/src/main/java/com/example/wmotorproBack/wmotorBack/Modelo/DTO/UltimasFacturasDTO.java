@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class UltimasFacturasDTO {
 
+    private Long id;
     private Long numeroFactura;
     private String nombreCliente;
     private Double monto;

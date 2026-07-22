@@ -57,10 +57,48 @@ export class EmpleadoService {
   idEmpleado: number,
   cargo?: string,
   email?: string,
-  contacto?: string
+  contacto?: string,
+  nombre?: string,
+  apellido?: string,
+  dni?: string,
+  fechaNacimiento?: string,
+  fechaIngreso?: string
 ) {
 
   const body: any = {};
+
+  // NOMBRE
+  if (nombre !== undefined && nombre !== null && nombre !== '') {
+    body.nombre = nombre;
+  }
+
+  // APELLIDO
+  if (apellido !== undefined && apellido !== null && apellido !== '') {
+    body.apellido = apellido;
+  }
+
+  // DNI
+  if (dni !== undefined && dni !== null && dni !== '') {
+    body.dni = dni;
+  }
+
+  // FECHA NACIMIENTO
+  if (
+    fechaNacimiento !== undefined &&
+    fechaNacimiento !== null &&
+    fechaNacimiento !== ''
+  ) {
+    body.fechaNacimiento = fechaNacimiento;
+  }
+
+  // FECHA INGRESO
+  if (
+    fechaIngreso !== undefined &&
+    fechaIngreso !== null &&
+    fechaIngreso !== ''
+  ) {
+    body.fechaIngreso = fechaIngreso;
+  }
 
   // CARGO
   if (cargo !== undefined && cargo !== null && cargo !== '') {

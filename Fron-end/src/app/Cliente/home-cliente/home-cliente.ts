@@ -25,7 +25,7 @@ export class HomeCliente implements OnInit{
 
   ngOnInit(): void {
     const clienteId = this.authService.getEntityId();
-
+    console.log(clienteId);
     if(clienteId){
       this.facturaService.contarFacturaPendientesPorCiente(clienteId).subscribe(
         (repuesta: any) =>

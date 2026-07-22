@@ -1,4 +1,5 @@
 <div class="layout">
+
   <aside class="sidebar">
     <app-header-admin></app-header-admin>
   </aside>
@@ -6,137 +7,215 @@
   <main class="content">
 
     <app-header></app-header>
-    <div class="titulo">
-    <h1>Ordenes de trabajos</h1>
-    <p>Gestina todas las ordenes de trabajos a partir de turno</p>
-</div>
 
-<div class="encabezado">
-    <h2>Turnos confirmados</h2>
-<p>Turnos listos para generar un orden</p>
+    <section class="titulo">
+      <h1>Órdenes de trabajo</h1>
+      <p>Gestioná todas las órdenes de trabajo generadas a partir de los turnos.</p>
+    </section>
 
+    <section class="card">
 
-</div>
+      <div class="card-header">
+        <div>
+          <h2>Turnos confirmados</h2>
+          <p>Turnos listos para asignar a un empleado.</p>
+        </div>
+      </div>
 
-<div class="tabla-wrapper">
-      <table class="tabla-roster" border="1">
-        <thead>
-          <tr>
-            <th>Fecha</th>
-            <th>Cliente</th>
-            <th>Vehiculo</th>
-            <th>Patente</th>
-            <th>Servicio</th>
-            
-            <th class="text-center">Acciones</th>
-          </tr>
-        </thead>
+      <div class="tabla-wrapper">
 
-        <tbody>
-          @for (tur of turnos; track $index) {
-            <tr class="roster-row">
-              
-                <td>{{tur.fecha}}</td>
-    
+        <table class="tabla">
 
-              <td class="col-perfil">
-                <div class="player-info">
-                  <div class="avatar-box">
-                    <span class="initials">{{ tur.nombreCliente }}{{ tur.apellidoCliente}}</span>
-                  </div>
-                  <div class="player-name">
-                    <span class="nombre">{{ tur.nombre }}</span>
-                    <span class="apellido">{{ tur.apellido }}</span>
-                  </div>
-                </div>
-              </td>
+          <thead>
 
-              <td class="col-contacto">
-                <div class="contacto-wrapper">
-                  <span class="email">{{ tur.marca }} {{tur.modelo}}</span>
-                </div>
-              </td>
-
-              <td class="col-vehiculo">
-                <div class="patente-sticker">
-                  {{ tur.patente || 'SIN VEHÍCULO' }}
-                </div>
-              </td>
-
-              <td class="text-center">
-                <div class="patente-sticker">
-                  {{ tur.nombreServicio}}
-                </div>
-              </td>
-
-              <td class="text-center">
-                <button (click)="abrilModal(tur.id)">
-                  Asignar empleado
-                </button>
-              </td>
-
-              
-
-            </tr>
-          } @empty {
             <tr>
-              <td colspan="6" class="tabla-vacia">
-                <div class="vacio-content">
-                  <span class="vacio-icon">👟</span>
-                  <p>No se encuentran mas turnos confirmados.</p>
-                </div>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
 
-   
-    
+              <th>Fecha</th>
+              <th>Cliente</th>
+              <th>Vehículo</th>
+              <th>Patente</th>
+              <th>Servicio</th>
+              <th>Acciones</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            @for (tur of turnos; track tur.id) {
+
+              <tr>
+
+                <td>{{tur.fecha}}</td>
+
+                <td>
+                  <div class="cliente">
+                    <span class="nombre">
+                      {{tur.nombre}} {{tur.apellido}}
+                    </span>
+                  </div>
+                </td>
+
+                <td>
+
+                  <span class="vehiculo">
+                    {{tur.marca}} {{tur.modelo}}
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <span class="badge patente">
+                    {{tur.patente || 'SIN PATENTE'}}
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <span class="badge servicio">
+                    {{tur.nombreServicio}}
+                  </span>
+
+                </td>
+
+                <td>
+
+                  <button
+                    class="btn-asignar"
+                    (click)="abrilModal(tur.id)">
+
+                    Asignar empleado
+
+                  </button>
+
+                </td>
+
+              </tr>
+
+            }
+
+            @empty {
+
+              <tr>
+
+                <td colspan="6" class="tabla-vacia">
+
+                  <div class="vacio">
+
+                    <span class="icono">📋</span>
+
+                    <h3>No hay turnos confirmados</h3>
+
+                    <p>
+                      Actualmente no existen turnos disponibles para generar órdenes de trabajo.
+                    </p>
+
+                  </div>
+
+                </td>
+
+              </tr>
+
+            }
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
 
     @if (modal) {
 
+      <div class="modal-fondo">
+
+        <div class="modal">
+
+          <h2>Asignar orden de trabajo</h2>
+
           <form (ngSubmit)="AsignarOrden()">
 
-      <div class="item">
-        <label>Seleccione un empleado</label>
+            <div class="item">
 
-        <select name="idEmpleado" [(ngModel)]="idEmpleado" required>
-          <option [ngValue]="null">Seleccione un empleado</option>
+              <label>Empleado</label>
 
-          @for (emp of empleados; track emp.id) {
-            <option [ngValue]="emp.id">
-              {{ emp.nombre }} {{ emp.apellido }}
-            </option>
-          }
-        </select>
+              <select
+                name="idEmpleado"
+                [(ngModel)]="idEmpleado"
+                required>
+
+                <option [ngValue]="null">
+                  Seleccione un empleado
+                </option>
+
+                @for (emp of empleados; track emp.id) {
+
+                  <option [ngValue]="emp.id">
+
+                    {{emp.nombre}} {{emp.apellido}}
+
+                  </option>
+
+                }
+
+              </select>
+
+            </div>
+
+            <div class="item">
+
+              <label>Prioridad</label>
+
+              <select
+                name="prioridad"
+                [(ngModel)]="prioridad"
+                required>
+
+                <option value="">
+                  Seleccione una prioridad
+                </option>
+
+                <option value="ALTA">Alta</option>
+                <option value="MEDIA">Media</option>
+                <option value="BAJA">Baja</option>
+
+              </select>
+
+            </div>
+
+            <div class="acciones-modal">
+
+              <button
+                type="button"
+                class="btn-cancelar"
+                (click)="cerrarmodal()">
+
+                Cancelar
+
+              </button>
+
+              <button
+                type="submit"
+                class="btn-guardar">
+
+                Asignar orden
+
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
       </div>
 
-      <div class="item">
-        <label>Elija su prioridad</label>
-
-        <select name="prioridad" [(ngModel)]="prioridad" required>
-          <option value="">Seleccione una prioridad</option>
-          <option value="ALTA">Alta</option>
-          <option value="MEDIA">Media</option>
-          <option value="BAJA">Baja</option>
-        </select>
-      </div>
-
-      <button type="submit">Asignar</button>
-
-    </form>
-
-    <button (click)="cerrarmodal()">Cerrar</button>
     }
+
   </main>
+
 </div>
-
-
-
-
-
-
-
-

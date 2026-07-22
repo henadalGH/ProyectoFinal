@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -61,6 +63,13 @@ public class RepuestoController {
     public ResponseEntity<List<RepuestoStockBajoDTO>> obtenerRepuestoBajo() {
         return new ResponseEntity<List<RepuestoStockBajoDTO>>(repuestoService.obtenerRepuestoBajoStock(), HttpStatus.OK);
     }
+
+
+    @GetMapping("obtenerRepuestoOrden")
+    public ResponseEntity<List<ObtenerRepuestoDTO>> obtenerRepuestoOrden() {
+        return new ResponseEntity<List<ObtenerRepuestoDTO>>(repuestoService.obtenerRepuestosOrden(), HttpStatus.OK);
+    }
+    
     
     
     

@@ -5,267 +5,75 @@
     <app-headercliente></app-headercliente>
   </aside>
 
-
   <!-- ================= CONTENIDO PRINCIPAL ================= -->
   <main class="content">
 
     <app-header></app-header>
-
-
     <div class="facturas-container">
-
 
       <!-- ================= TITULO ================= -->
       <section class="titulo">
 
         <h1>Mis Facturas</h1>
-
         <p>
           Consulta tus facturas, pagos pendientes y comprobantes.
         </p>
-
       </section>
-
-
-
-      <!-- ================= FACTURAS PENDIENTES ================= -->
-      <section class="bloque">
-
-
-        <h2>Facturas pendientes</h2>
-
-
-        @if (facturas.length > 0) {
-
-
-          @for (fac of facturas; track fac.id) {
-
-
-            <article class="factura-card">
-
-
-              <!-- ICONO -->
-              <div class="icono">
-
-                <i class="fas fa-file-invoice"></i>
-
-              </div>
-
-
-
-              <!-- INFORMACION -->
-              <div class="info">
-
-
-                <h3>
-                  Factura {{fac.numeroFactura}}
-                </h3>
-
-
-                <p>
-                  Reparación vehículo
-                  {{fac.marcaVehiculo}}
-                  {{fac.modeloVehiculo}}
-                </p>
-
-
-                <small>
-                  Fecha emisión:
-                  {{fac.fechaRegistro}}
-                </small>
-
-
-              </div>
-
-
-
-
-              <!-- IMPORTE -->
-              <div class="importe">
-
-
-                <strong>
-                  ${{fac.total}}
-                </strong>
-
-
-
-                @if (fac.estadoPresupuesto == 'ENVIADO') {
-
-                  <span class="pendiente">
-                    Pendiente
-                  </span>
-
-                }
-                @else {
-
-                  <span class="pagado">
-                    Pagado
-                  </span>
-
-                }
-
-
-              </div>
-
-
-
-
-              <!-- ACCIONES -->
-              <div class="acciones">
-
-
-                <button
-                  (click)="verFactura(fac.id)">
-                  Ver
-                </button>
-
-
-
-                @if (fac.estadoPresupuesto == 'ENVIADO') {
-
-                  <button
-                    class="pagar"
-                    (click)="pagarFactura(fac.id)">
-                    Pagar
-                  </button>
-
-                }
-
-
-              </div>
-
-
-
-            </article>
-
-
-          }
-
-
-        }
-        @else {
-
-
-          <p class="sin-datos">
-            No tienes facturas pendientes de pago.
-          </p>
-
-
-        }
-
-
-      </section>
-
-
-
-
-
 
       <!-- ================= ULTIMAS FACTURAS ================= -->
       <section class="bloque">
 
-
         <h2>Últimas facturas</h2>
-
-
-
         <div class="tabla">
-
-
           <!-- CABECERA -->
           <div class="fila cabecera">
 
-
             <span>N°</span>
-
-            <span>Detalle</span>
-
             <span>Fecha</span>
-
             <span>Monto</span>
-
             <span>Estado</span>
+            <span>Accion</span>
 
 
           </div>
 
-
-
-
-
           @for (ult of ultimas; track ult.id) {
 
-
             <div class="fila">
-
 
               <span>
                 Factura {{ult.numeroFactura}}
               </span>
 
-
-
-              <span>
-                {{ult.detalle}}
-              </span>
-
-
-
               <span>
                 {{ult.fechaRegistro}}
               </span>
-
-
 
               <span>
                 ${{ult.monto}}
               </span>
 
-
-
-
               <span
                 [class.pagada]="ult.estado != 'ENVIADO'"
                 [class.pendiente]="ult.estado == 'ENVIADO'">
 
-
                 @if (ult.estado == 'ENVIADO') {
-
-                  Pendiente
-
+                  Impaga
                 }
                 @else {
-
                   Pagada
-
                 }
-
-
               </span>
 
-
+              <span>
+                <button (click)="verFactura(ult.id)"
+                >Ver factura</button>
+              </span>
 
             </div>
-
-
           }
-
-
-
         </div>
-
-
-
       </section>
-
-
-
     </div>
-
-
-
   </main>
-
-
 </div>

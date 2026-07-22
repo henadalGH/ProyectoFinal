@@ -38,6 +38,10 @@ export class RepuestoService {
     return this.http.get<any[]>(`${this.urlRepuesto}/obtenerStockBajo`)
   }
 
+  obtenerRepuestosOrden(){
+    return this.http.get<any[]>(`${this.urlRepuesto}/obtenerRepuestoOrden`);
+  }
+
 
 
 }

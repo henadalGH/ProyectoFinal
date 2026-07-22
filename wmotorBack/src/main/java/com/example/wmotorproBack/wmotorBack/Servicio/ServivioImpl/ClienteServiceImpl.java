@@ -36,6 +36,15 @@ public class ClienteServiceImpl implements ClienteService {
         dto.setEmail(usuario.getEmail());
         dto.setDireccion(cliente.getDireccion());
         dto.setContacto(usuario.getContacto());
+        if (cliente.getLocalidad() != null) {
+
+    dto.setLocalidad(cliente.getLocalidad().getNombreLocalidad());
+
+    if (cliente.getLocalidad().getProvincia() != null) {
+        dto.setProvincia(cliente.getLocalidad().getProvincia().getNombreProvincia());
+    }
+
+}
 
         return dto;
     }

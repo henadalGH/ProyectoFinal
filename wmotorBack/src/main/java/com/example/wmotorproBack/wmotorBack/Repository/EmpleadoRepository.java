@@ -11,6 +11,7 @@ public interface EmpleadoRepository extends JpaRepository<EmpleadoEntity, Long> 
 
 
     List<EmpleadoEntity> findByCargo(CargosEntity cargo);    
+    boolean existsByDni(String dni);
 }
 
 

@@ -314,11 +314,14 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
 
     @Override
     public List<UltimasFacturasDTO> obtenerUltimasFactura() {
+        System.out.println("ENTRÉ AL MÉTODO obtenerUltimasFactura");
         return presuspuestoRepository.findTop5ByOrderByFechaRegistroDesc()
                 .stream()
                 .map(p -> {
 
                     UltimasFacturasDTO dto = new UltimasFacturasDTO();
+
+                    dto.setId(p.getId());
 
                     dto.setNumeroFactura(p.getNumeroPresupuesto());
 
@@ -335,6 +338,7 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
 
                     // servicio (ejemplo desde detalle)
                     dto.setEstado(p.getEstadoPresupuesto().getEstadoPresupuesto());
+                    System.out.println("ID = " + p.getId());
                     return dto;
                 })
                 .toList();
@@ -380,6 +384,8 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
             .map(p -> {
 
                 UltimasFacturasDTO dto = new UltimasFacturasDTO();
+
+                dto.setId(p.getId());
 
                 dto.setNumeroFactura(p.getNumeroPresupuesto());
 

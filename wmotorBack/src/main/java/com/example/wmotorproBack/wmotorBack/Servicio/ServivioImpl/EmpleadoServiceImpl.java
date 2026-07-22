@@ -1,5 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Servicio.ServivioImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.CargosEnum;
 import com.example.wmotorproBack.wmotorBack.Repository.CargoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.UsuarioRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.EmpleadoService;
 
 @Service
@@ -25,6 +27,9 @@ public class EmpleadoServiceImpl implements EmpleadoService{
 
     @Autowired 
     private CargoRepository cargoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Override
     public List<EmpleadoEntity> getAllEmpleado() {
@@ -99,30 +104,79 @@ public ResponceDTO modificarEmpleado(Long id, ModificaEmpleadoDTO empleadoDTO) {
     ResponceDTO responceDTO = new ResponceDTO();
 
     EmpleadoEntity empleadoEntity = empleadoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("No se encontro al empleado"));
+            .orElseThrow(() -> new RuntimeException("No se encontró el empleado"));
+
+    // NOMBRE
+    if (empleadoDTO.getNombre() != null && !empleadoDTO.getNombre().isBlank()) {
+        empleadoEntity.getUsuario().setNombre(empleadoDTO.getNombre().trim());
+    }
+
+    // APELLIDO
+    if (empleadoDTO.getApellido() != null && !empleadoDTO.getApellido().isBlank()) {
+        empleadoEntity.getUsuario().setApellido(empleadoDTO.getApellido().trim());
+    }
+
+    // DNI
+    if (empleadoDTO.getDni() != null && !empleadoDTO.getDni().isBlank()) {
+
+        if (!empleadoDTO.getDni().equals(empleadoEntity.getDni())
+                && empleadoRepository.existsByDni(empleadoDTO.getDni())) {
+
+            throw new RuntimeException("Ya existe un empleado con ese DNI");
+        }
+
+        empleadoEntity.setDni(empleadoDTO.getDni().trim());
+    }
+
+    // FECHA DE INGRESO
+    if (empleadoDTO.getFechaIngreso() != null) {
+
+        if (empleadoDTO.getFechaIngreso().isAfter(LocalDate.now())) {
+            throw new RuntimeException("La fecha de ingreso no puede ser futura");
+        }
+
+        empleadoEntity.setFechaIngreso(empleadoDTO.getFechaIngreso());
+    }
+
+    // FECHA DE NACIMIENTO
+    if (empleadoDTO.getFechaNacimiento() != null) {
+
+        if (empleadoDTO.getFechaNacimiento().isAfter(LocalDate.now())) {
+            throw new RuntimeException("La fecha de nacimiento no puede ser futura");
+        }
+
+        empleadoEntity.setFechaNacimiento(empleadoDTO.getFechaNacimiento());
+    }
 
     // EMAIL
     if (empleadoDTO.getEmail() != null && !empleadoDTO.getEmail().isBlank()) {
-        empleadoEntity.getUsuario().setEmail(empleadoDTO.getEmail());
+
+        if (!empleadoDTO.getEmail().equalsIgnoreCase(empleadoEntity.getUsuario().getEmail())
+                && usuarioRepository.existsByEmail(empleadoDTO.getEmail())) {
+
+            throw new RuntimeException("El email ya se encuentra registrado");
+        }
+
+        empleadoEntity.getUsuario().setEmail(empleadoDTO.getEmail().trim());
     }
 
     // CONTACTO
     if (empleadoDTO.getContacto() != null && !empleadoDTO.getContacto().isBlank()) {
-        empleadoEntity.getUsuario().setContacto(empleadoDTO.getContacto());
+        empleadoEntity.getUsuario().setContacto(empleadoDTO.getContacto().trim());
     }
 
     // CARGO
     if (empleadoDTO.getCargo() != null) {
 
-        CargosEntity cargosEntity = cargoRepository.findByCargo(empleadoDTO.getCargo())
-                .orElseThrow(() -> new RuntimeException("Cargo no encontrado"));
+        CargosEntity cargo = cargoRepository.findByCargo(empleadoDTO.getCargo())
+                .orElseThrow(() -> new RuntimeException("No se encontró el cargo"));
 
-        empleadoEntity.setCargo(cargosEntity);
+        empleadoEntity.setCargo(cargo);
     }
 
     empleadoRepository.save(empleadoEntity);
 
-    responceDTO.setMensage("Se ha actualizado un empleado correctamente");
+    responceDTO.setMensage("Se ha actualizado el empleado correctamente");
 
     return responceDTO;
 }

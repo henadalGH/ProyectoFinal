@@ -1,519 +1,215 @@
-/* ==========================================================================
-   ESTRUCTURA BASE (NO CAMBIAR)
-   ========================================================================== */
+/*==========================
+    LAYOUT (NO MODIFICADO)
+===========================*/
 
 .layout {
-  display:flex;
-  height:100vh;
-  font-family:'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  height: 100vh;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
-
 
 .sidebar {
-  width:320px;
-  background:#f3f6fb;
-  box-shadow:4px 0 10px rgba(0,0,0,0.05);
-}
-
+  width: 320px;
+  background: #f3f6fb;
+  color: white;}
 
 .content {
-  flex:1;
-  background:#f3f6fb;
-  padding:30px;
-  overflow-y:auto;
+  flex: 1;
+  background: #f3f6fb;
+  padding: 30px;
+  overflow-y: auto;
 }
 
+/*==========================
+      CONTENEDOR
+===========================*/
 
-
-/* ==========================================================================
-   CONTENEDOR PRINCIPAL
-   ========================================================================== */
-
-.facturas-container {
-
-  max-width:1200px;
-
-  margin:50px auto 0;
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:30px;
-
+.facturas-container{
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
+/*==========================
+         TITULO
+===========================*/
 
-
-/* ==========================================================================
-   TITULO
-   ========================================================================== */
-
-.titulo {
-
-  text-align:center;
-
+.titulo{
+    margin: 25px 0 35px;
+    text-align: center;
 }
 
-
-.titulo h1 {
-
-  margin:0;
-
-  color:#1e293b;
-
-  font-size:30px;
-
-  font-weight:700;
-
+.titulo h1{
+    margin: 0;
+    font-size: 34px;
+    color: #1d3557;
+    font-weight: 700;
 }
 
-
-
-.titulo p {
-
-  margin-top:8px;
-
-  color:#64748b;
-
-  font-size:15px;
-
+.titulo p{
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 15px;
 }
 
+/*==========================
+         TARJETA
+===========================*/
 
-
-
-
-/* ==========================================================================
-   BLOQUES
-   ========================================================================== */
-
-.bloque {
-
-  display:flex;
-
-  flex-direction:column;
-
-  gap:20px;
-
+.bloque{
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
 }
 
-
-
-.bloque h2 {
-
-  margin:0;
-
-  color:#1e293b;
-
-  font-size:21px;
-
-  font-weight:600;
-
+.bloque h2{
+    margin: 0 0 25px;
+    color: #1d3557;
+    font-size: 22px;
 }
 
+/*==========================
+         TABLA
+===========================*/
 
-
-
-
-/* ==========================================================================
-   FACTURA PENDIENTE CARD
-   ========================================================================== */
-
-.factura-card {
-
-  background:white;
-
-  border-radius:16px;
-
-  padding:22px;
-
-  display:grid;
-
-  grid-template-columns:auto 1fr auto auto;
-
-  align-items:center;
-
-  gap:20px;
-
-  border:1px solid rgba(226,232,240,0.8);
-
-  box-shadow:
-  0 4px 6px rgba(0,0,0,0.03);
-
-  transition:.25s;
-
+.tabla{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
+/* Encabezado y filas */
 
+.fila{
+    display: grid;
 
-.factura-card:hover {
+    grid-template-columns:
+    1.5fr
+    1.3fr
+    1fr
+    1fr
+    1.3fr;
 
-  transform:translateY(-3px);
+    align-items: center;
 
-  box-shadow:
-  0 10px 20px rgba(0,0,0,0.06);
+    padding: 18px 20px;
 
+    border-radius: 12px;
+
+    background: white;
+
+    border: 1px solid #e8edf5;
+
+    transition: .25s;
 }
 
-
-
-/* ICONO */
-
-.icono {
-
-  width:55px;
-
-  height:55px;
-
-  border-radius:12px;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  background:#e0f2fe;
-
-  color:#0369a1;
-
-  font-size:22px;
-
+.fila:not(.cabecera):hover{
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
 }
 
-
-
-
-/* INFORMACION */
-
-.info h3 {
-
-  margin:0 0 8px;
-
-  color:#1e293b;
-
-  font-size:19px;
-
+.cabecera{
+    background: #dddee2;
+    color: white;
+    border: none;
+    font-weight: 600;
 }
 
-
-
-.info p {
-
-  margin:0 0 5px;
-
-  color:#475569;
-
+.cabecera span{
+    color: white;
 }
 
+.fila span{
+    color: #374151;
+    font-size: 14px;
+}
 
+/*==========================
+        ESTADOS
+===========================*/
 
-.info small {
+.pagada{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
 
-  color:#64748b;
+    width: fit-content;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background: #dcfce7;
+    color: #15803d !important;
+    font-weight: 600;
+}
+
+.pendiente{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 7px 14px;
+
+    border-radius: 30px;
+
+    background: #fef3c7;
+    color: #b45309 !important;
+    font-weight: 600;
+}
+
+/*==========================
+         BOTON
+===========================*/
+
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    background: #2563eb;
+    color: white;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+
+    transition: .25s;
+}
+
+button:hover{
+    background: #1d4ed8;
+    transform: scale(1.04);
+}
+
+/*==========================
+      RESPONSIVE
+===========================*/
+
+@media (max-width:1100px){
+
+    .tabla{
+        overflow-x: auto;
+    }
+
+    .fila{
+        min-width: 850px;
+    }
 
 }
 
-
-
-
-
-/* IMPORTE */
-
-.importe {
-
-  text-align:right;
-
-}
-
-
-
-.importe strong {
-
-  display:block;
-
-  font-size:22px;
-
-  color:#1e293b;
-
-  margin-bottom:8px;
-
-}
-
-
-
-
-
-/* ESTADOS */
-
-.pendiente,
-.pagado {
-
-  display:inline-block;
-
-  padding:5px 12px;
-
-  border-radius:20px;
-
-  font-size:13px;
-
-  font-weight:600;
-
-}
-
-
-
-.pendiente {
-
-  background:#fef3c7;
-
-  color:#b45309;
-
-}
-
-
-
-.pagado {
-
-  background:#dcfce7;
-
-  color:#15803d;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   BOTONES
-   ========================================================================== */
-
-.acciones {
-
-  display:flex;
-
-  gap:10px;
-
-}
-
-
-
-.acciones button {
-
-  border:none;
-
-  padding:9px 18px;
-
-  border-radius:10px;
-
-  background:#2563eb;
-
-  color:white;
-
-  font-weight:600;
-
-  cursor:pointer;
-
-  transition:.2s;
-
-}
-
-
-
-.acciones button:hover {
-
-  background:#1d4ed8;
-
-}
-
-
-
-.acciones .pagar {
-
-  background:#16a34a;
-
-}
-
-
-
-.acciones .pagar:hover {
-
-  background:#15803d;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   SIN DATOS
-   ========================================================================== */
-
-.sin-datos {
-
-  background:white;
-
-  padding:30px;
-
-  border-radius:16px;
-
-  text-align:center;
-
-  color:#64748b;
-
-  border:1px solid rgba(226,232,240,0.8);
-
-}
-
-
-
-
-
-/* ==========================================================================
-   TABLA FACTURAS
-   ========================================================================== */
-
-.tabla {
-
-  background:white;
-
-  border-radius:16px;
-
-  overflow:hidden;
-
-  border:1px solid rgba(226,232,240,0.8);
-
-  box-shadow:
-  0 4px 6px rgba(0,0,0,0.03);
-
-}
-
-
-
-.fila {
-
-  display:grid;
-
-  grid-template-columns:1.2fr 2fr 1fr 1fr 1fr;
-
-  align-items:center;
-
-  padding:16px 20px;
-
-  border-bottom:1px solid #f1f5f9;
-
-  color:#475569;
-
-  font-size:14px;
-
-}
-
-
-
-.fila:last-child {
-
-  border-bottom:none;
-
-}
-
-
-
-.cabecera {
-
-  background:#f8fafc;
-
-  color:#1e293b;
-
-  font-weight:700;
-
-}
-
-
-
-.fila span {
-
-  padding:0 5px;
-
-}
-
-
-
-/* Estados tabla */
-
-.fila .pendiente {
-
-  width:max-content;
-
-}
-
-
-.fila .pagada {
-
-  background:#dcfce7;
-
-  color:#15803d;
-
-  padding:5px 12px;
-
-  border-radius:20px;
-
-  font-weight:600;
-
-  width:max-content;
-
-}
-
-
-
-
-
-/* ==========================================================================
-   RESPONSIVE
-   ========================================================================== */
-
-@media(max-width:1000px){
-
-
-  .factura-card {
-
-    grid-template-columns:1fr;
-
-    text-align:center;
-
-  }
-
-
-  .icono {
-
-    margin:auto;
-
-  }
-
-
-  .importe {
-
-    text-align:center;
-
-  }
-
-
-  .acciones {
-
-    justify-content:center;
-
-  }
-
-
-  .fila {
-
-    grid-template-columns:1fr;
-
-    gap:10px;
-
-  }
-
+@media (max-width:768px){
+
+    .content{
+        padding:20px;
+    }
+
+    .titulo h1{
+        font-size:28px;
+    }
 
 }
