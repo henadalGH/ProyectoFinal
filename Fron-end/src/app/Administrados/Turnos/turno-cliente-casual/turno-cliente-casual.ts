@@ -28,6 +28,15 @@ export class TurnoClienteCasual implements OnInit{
 
   ngOnInit(): void {
     this.obtenerServicios();
+
+    let inicio = 8 * 60;
+    let cierrre = 14 *60;
+    let minutos;
+    for(minutos = inicio; minutos<= cierrre; minutos += 30){
+      let hora = Math.floor(minutos/60).toString().padStart(2 , '0');
+      let minuto = Math.floor(minutos % 60).toString().padStart(2 , '0');
+      this.horarios.push(`${hora}:${minuto}`);
+    }
   }
 
   volverAtras(){
@@ -37,6 +46,7 @@ export class TurnoClienteCasual implements OnInit{
   //Definicion de variables
 
   nombre: string = '';
+  horarios: string[]=[];
   contacto: string = '';
   email: string = '';
   marcaVehiculo: string = '';
@@ -49,6 +59,7 @@ export class TurnoClienteCasual implements OnInit{
   cliente: any[] = [];
   idVehiculo: number = 0;
   tipoCliente: '' | 'registrado' | 'casual' = '';
+  horaAsignada: string ='';
 
 
   obtenerServicios(){

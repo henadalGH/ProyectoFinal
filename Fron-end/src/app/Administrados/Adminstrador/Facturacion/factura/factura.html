@@ -11,36 +11,48 @@
  
     <div class="titulo">
         <h1>Facturación</h1>
-        <p>Gestión de ingresos, facturas y cobros</p>
+        <p>Gestiona todas tus facturas</p>
     </div>
 
     <div class="cards">
 
         <div class="card">
-            <h3>📄 Facturas emitidas</h3>
-            <span>{{facEmitida}}</span>
-        </div>
-
-        <div class="card">
-            <h3>💰 Cobrado del mes</h3>
-            <span>$2.400.000</span>
-        </div>
-
-        <div class="card">
-            
+            <span class="icono">📋</span>
+            <h3>Órdenes pendientes</h3>
+            <h2>{{factura.length}}</h2>
             @if (factura.length > 0) {
-                <span>{{factura.length}}</span>
-                <h3>⚠ Pendientes</h3>
-                <button [routerLink]="['/paraFacturar']">Facturar</button>
-            } @else {
-                <p>No se encuntrar pendientes</p>
+                <button>Facturar</button>
             }
-            
+            <p>Listas para facturar</p>
         </div>
+
+        <div class="card">
+            <span class="icono">📨</span>
+            <h3>Sin enviar</h3>
+            <h2>3</h2>
+            <p>Esperando envío</p>
+        </div>
+
+        <div class="card">
+            <span class="icono">💰</span>
+            <h3>Pendientes de cobro</h3>
+            <h2>5</h2>
+            <p>$505.000</p>
+        </div>
+
+        <div class="card">
+            <span class="icono">✅</span>
+            <h3>Cobradas</h3>
+            <h2>126</h2>
+            <p>Este año</p>
+        </div>
+
 
     </div>
 
     <div class="contenido">
+
+
 
         <div class="facturas-recientes">
 

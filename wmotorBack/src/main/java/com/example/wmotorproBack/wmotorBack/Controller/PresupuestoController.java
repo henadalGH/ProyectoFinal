@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -139,5 +140,17 @@ public class PresupuestoController {
                 presupuestoService.obtenerTotalPendiente()
         );
     }
+
+    @PutMapping("pagarFactura/{idFactura}/{idAdmin}")
+    public ResponseEntity<ResponceDTO> pagarFactura(@PathVariable Long idFactura, @RequestBody MovimientoDTO movimientoDTO) {
+        
+        return new ResponseEntity<ResponceDTO>(presupuestoService.pagarFactura(idFactura, movimientoDTO, idFactura), HttpStatus.OK);
+    }
+
+    @GetMapping("/obtenerFacturasPendientes")
+    public ResponseEntity<List<ObtenerPresupuestoDTO>> obtenerFacturasPendientes() {
+        return new ResponseEntity<List<ObtenerPresupuestoDTO>>(presupuestoService.obtenerPresupuestoPendientes(), HttpStatus.OK);
+    }
+    
 
 }

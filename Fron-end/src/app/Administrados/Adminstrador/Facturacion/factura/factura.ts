@@ -8,7 +8,7 @@ import { Header } from "../../../../header/header";
 @Component({
   selector: 'app-factura',
   standalone: true,
-  imports: [HeaderAdmin, RouterLink, Header],
+  imports: [HeaderAdmin, Header],
   templateUrl: './factura.html',
   styleUrl: './factura.css',
 })
@@ -21,6 +21,7 @@ export class Factura implements OnInit{
 
   facturas: any[]= [];
   facEmitida!: any;
+  facaturaPendientes: any []=[];
   
   
   
@@ -44,6 +45,7 @@ export class Factura implements OnInit{
     }
 
 
+    
     obtenerFacturas(){
       this.facturaService.obtenerFacturas().subscribe(
         (repuesta: any) => {

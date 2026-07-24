@@ -4,8 +4,9 @@
   </aside>
 
   <main class="content">
+
     <app-header></app-header>
-    
+  
     <div class="orden-container">
 
       <div class="titulo">
@@ -13,30 +14,26 @@
           <p>Detalle y ejecución de tareas asignadas</p>
       </div>
 
-    
+      @if (orden != null) {
 
       <div class="orden-card">
 
         <div class="orden-numero">
             <h2>ORDEN DE REPARACIÓN</h2>
-            <span>N° {{orden.numeroOrden}}</span>
+            <span>N° {{orden.idOrden}}</span>
         </div>
-
 
         <div class="encabezadoOrden">
 
             <div class="datosCliente">
                 <h3>Cliente</h3>
-
                 <p><strong>Nombre:</strong> {{orden.nombreCliente}}</p>
                 <p><strong>Contacto:</strong> {{orden.contacto}}</p>
                 <p><strong>Email:</strong> {{orden.email}}</p>
             </div>
 
-
             <div class="datosVehiculo">
                 <h3>Vehículo</h3>
-
                 <p><strong>Marca:</strong> {{orden.marcaVehiculo}}</p>
                 <p><strong>Modelo:</strong> {{orden.modeloVehiculo}}</p>
                 <p><strong>Patente:</strong> {{orden.patenteVehiculo}}</p>
@@ -44,53 +41,49 @@
 
         </div>
 
-
         <div class="seccion">
 
             <div class="seccion-header">
-
                 <h3>Trabajos Realizados</h3>
 
-
                 @if (!soloLectura) {
+                <div class="acciones-header">
+                    <button
+                        type="button"
+                        class="btn-agregar"
+                        (click)="agregarFila()">
+                        + Agregar línea
+                    </button>
 
-                <button
-                    class="btn-agregar"
-                    (click)="agregarFila()">
-                    + Agregar línea
-                </button>
-
+                    <button
+                        type="button"
+                        class="btn-repuestos"
+                        (click)="irASeleccionarRepuestos()">
+                        + Seleccionar repuestos
+                    </button>
+                </div>
                 }
-
             </div>
 
-
             <div class="tabla-wrapper">
-
                 <table class="tabla-detalle">
-
                     <thead>
                         <tr>
                             <th>Cantidad</th>
                             <th>Código</th>
-                            <th>Descricion</th>
-                            <th>Repuestos</th>
-
+                            <th>Trabajo realizado</th>
+                            <th>Tipo item</th>
                             @if (!soloLectura) {
                             <th>Acción</th>
                             }
-
                         </tr>
                     </thead>
 
-
                     <tbody>
 
-
+                    <!-- 1. Ítems persistidos / traídos previamente de la base de datos -->
                     @for (detalle of detalleOrden; track detalle.id) {
-
                     <tr>
-
                         <td>
                             <input
                                 type="number"
@@ -98,7 +91,6 @@
                                 [(ngModel)]="detalle.cantidad"
                                 [disabled]="soloLectura">
                         </td>
-
 
                         <td>
                             <input
@@ -108,31 +100,25 @@
                                 [disabled]="soloLectura">
                         </td>
 
-
                         <td>
                             <input
                                 type="text"
+                                placeholder="Trabajo realizado"
                                 [(ngModel)]="detalle.trabajoRealizado"
                                 [disabled]="soloLectura">
                         </td>
 
-
                         <td>
-                            @if (!soloLectura) {
-                                <button
-                                    type="button"
-                                    class="btn-agregar"
-                                    (click)="abrirAgregarRepuestos(detalle)">
-                                    {{ detalle.selectedRepuestos.length > 0 ? 'Editar repuestos' : 'Agregar repuestos' }}
-                                </button>
-                            } @else {
-                                <span>{{ detalle.selectedRepuestos.length > 0 ? 'Repuesto' : '-' }}</span>
-                            }
+                            <select 
+                                [(ngModel)]="detalle.tipoItem"
+                                [disabled]="soloLectura">
+                                <option value="REPUESTO">Repuesto</option>
+                                <option value="MANO_OBRA">Mano de obra</option>
+                                <option value="SERVICIO">Servicio</option>
+                            </select>
                         </td>
 
-
                         @if (!soloLectura) {
-
                         <td>
                             <button
                                 class="btn-eliminar"
@@ -140,38 +126,13 @@
                                 Eliminar
                             </button>
                         </td>
-
                         }
-
-                    </tr>
-
-                    @if (detalle.selectedRepuestos.length > 0) {
-                    <tr class="detalle-repuestos-row">
-                        <td colspan="5">
-                            <div class="detalle-repuestos-lista">
-                                <strong>Repuestos asociados:</strong>
-                                <ul>
-                                    @for (repuesto of detalle.selectedRepuestos; track repuesto.id) {
-                                    <li>
-                                        {{ repuesto.codigo }} - {{ repuesto.nombre }}
-                                        x{{ repuesto.cantidad }}
-                                        <span class="subtitulo">${{ repuesto.subtotal }}</span>
-                                    </li>
-                                    }
-                                </ul>
-                            </div>
-                        </td>
                     </tr>
                     }
 
-                    }
-
-
-
+                    <!-- 2. Ítems dinámicos / agregados en la sesión actual -->
                     @for (fil of filas; track fil.id) {
-
                     <tr>
-
                         <td>
                             <input
                                 type="number"
@@ -179,7 +140,6 @@
                                 [(ngModel)]="fil.cantidad"
                                 [disabled]="soloLectura">
                         </td>
-
 
                         <td>
                             <input
@@ -189,32 +149,35 @@
                                 [disabled]="soloLectura">
                         </td>
 
-
                         <td>
                             <input
                                 type="text"
-                                placeholder="ingresar una breve descripción"
+                                placeholder="Trabajo realizado"
                                 [(ngModel)]="fil.trabajoRealizado"
                                 [disabled]="soloLectura">
                         </td>
 
-
                         <td>
-                            @if (!soloLectura) {
-                                <button
-                                    type="button"
-                                    class="btn-agregar"
-                                    (click)="abrirAgregarRepuestos(fil)">
-                                    {{ fil.selectedRepuestos.length > 0 ? 'Editar repuestos' : 'Agregar repuestos' }}
-                                </button>
+                            @if (fil.esRepuestoCat) {
+                                <!-- Si viene del catálogo de repuestos, queda fijo como Repuesto -->
+                                <input 
+                                    type="text" 
+                                    value="Repuesto" 
+                                    readonly 
+                                    disabled 
+                                    class="input-readonly" />
                             } @else {
-                                <span>{{ fil.selectedRepuestos.length > 0 ? 'Repuesto' : '-' }}</span>
+                                <!-- Si se creó a mano, solo permite Mano de Obra o Servicio -->
+                                <select 
+                                    [(ngModel)]="fil.tipoItem"
+                                    [disabled]="soloLectura">
+                                    <option value="MANO_OBRA">Mano de obra</option>
+                                    <option value="SERVICIO">Servicio</option>
+                                </select>
                             }
                         </td>
 
-
                         @if (!soloLectura) {
-
                         <td>
                             <button
                                 class="btn-eliminar"
@@ -222,70 +185,36 @@
                                 Eliminar
                             </button>
                         </td>
-
                         }
-
-                    </tr>
-
-                    @if (fil.selectedRepuestos.length > 0) {
-                    <tr class="detalle-repuestos-row">
-                        <td colspan="5">
-                            <div class="detalle-repuestos-lista">
-                                <strong>Repuestos asociados:</strong>
-                                <ul>
-                                    @for (repuesto of fil.selectedRepuestos; track repuesto.id) {
-                                    <li>
-                                        {{ repuesto.codigo }} - {{ repuesto.nombre }}
-                                        x{{ repuesto.cantidad }}
-                                        <span class="subtitulo">${{ repuesto.subtotal }}</span>
-                                    </li>
-                                    }
-                                </ul>
-                            </div>
-                        </td>
                     </tr>
                     }
-
-                    }
-
 
                     </tbody>
-
                 </table>
-
             </div>
 
         </div>
 
-
-
         <div class="seccion">
-
             <h3>Observaciones del Mecánico</h3>
-
             <textarea
                 rows="5"
                 placeholder="Detalle aquí observaciones, diagnósticos o recomendaciones..."
                 [disabled]="soloLectura">
             </textarea>
-
         </div>
 
         <div class="acciones">
-
             <button class="bnt-volver" (click)="volverAtras()">
                 Volver
             </button>
 
             @if (!soloLectura) {
-
             <button
                 type="button"
                 class="btn-guardar"
                 (click)="guardarDetalle()">
-
                 Guardar detalle
-
             </button>
 
             <button
@@ -293,12 +222,15 @@
                 (click)="terminarOrden()"
                 [disabled]="botonDeshabilitado">
                 Finalizar Trabajo
-
             </button>
-
             }
-
-
         </div>
 
-       
+      </div>
+
+      }
+
+    </div>
+
+  </main>
+</div>

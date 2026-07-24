@@ -11,6 +11,12 @@
     <section class="titulo">
       <h1>Órdenes de trabajo</h1>
       <p>Gestioná todas las órdenes de trabajo generadas a partir de los turnos.</p>
+
+      
+        <div class="btn-ir">
+          <p>Ordenes sin terminar</p>
+          <button [routerLink]="['/ordenesSinTerminar']">Ver ordenes</button>
+        </div>
     </section>
 
     <section class="card">
@@ -20,6 +26,7 @@
           <h2>Turnos confirmados</h2>
           <p>Turnos listos para asignar a un empleado.</p>
         </div>
+
       </div>
 
       <div class="tabla-wrapper">

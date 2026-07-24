@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -8,6 +8,6 @@ import lombok.Data;
 public class FechaDTO {
 
 
-    private LocalDate fechas;
+    private LocalDateTime fechas;
 
 }

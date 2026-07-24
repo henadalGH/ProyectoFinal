@@ -107,7 +107,7 @@ export const routes: Routes = [
 
     //Rutas de ordenes
     {path: 'homeOrdenes', component: HomeOrdenes},
-    {path: 'crearOrden/:id', component: CrearOrden},
+    {path: 'ordenesSinTerminar', component: CrearOrden},
 
 
     //DE Prueba

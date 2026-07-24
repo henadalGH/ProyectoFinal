@@ -1,81 +1,81 @@
+/* RESET BÁSICO */
+* {
+    box-sizing: border-box;
+}
+
 html, body {
     height: 100%;
     margin: 0;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
- 
+
+/* ESTRUCTURA PRINCIPAL (DESKTOP) */
 .layout {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* SIDEBAR */
 .sidebar {
-  width: 260px;
-  min-width: 260px;
-  background-color: #162454; /* Tu azul */
-  color: white;
-  padding: 24px 16px;
-  box-sizing: border-box;
-
-  /* CAMBIO CRUCIAL: Eliminamos alturas fijas y scroll interno */
-  height: auto !important; 
-  overflow-y: visible !important; 
-  position: relative !important; 
+    width: 260px;
+    min-width: 260px;
+    background-color: #162454;
+    color: white;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* LOGO */
 .logo-section {
-    padding: 25px;
-    border-bottom: 1px solid rgba(255,255,255,.08);
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
 
 .logo-section h1 {
     margin: 0;
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .logo-section span {
     color: #38bdf8;
 }
 
-/* MENU */
+/* MENÚ */
 .nav-menu {
     flex: 1;
-    padding: 15px;
+    padding: 15px 0;
     overflow-y: auto;
 }
 
-/* TITULOS */
+/* TÍTULOS DE SECCIÓN */
 .section-title {
     margin: 20px 10px 8px;
     font-size: 11px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
     color: #93c5fd;
 }
 
-/* BOTONES */
+/* BOTONES DE NAVEGACIÓN */
 .nav-btn {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 12px;
-
     padding: 12px 15px;
     margin-bottom: 5px;
-
     border: none;
     border-radius: 10px;
-
     background: transparent;
     color: #e8fee0;
-
     cursor: pointer;
-    transition: .2s;
+    transition: background 0.2s, transform 0.2s;
+    font-size: 14px;
 }
 
 .nav-btn:hover {
-    background: rgba(56,189,248,.15);
+    background: rgba(56, 189, 248, .15);
     transform: translateX(2px);
 }
 
@@ -84,24 +84,22 @@ html, body {
     color: white;
 }
 
-/* LOGOUT */
+/* USUARIO / CERRAR SESIÓN */
 .user-control {
-    padding: 15px;
-    border-top: 1px solid rgba(255,255,255,.08);
+    padding: 15px 0 0;
+    border-top: 1px solid rgba(255, 255, 255, .08);
 }
 
 .logout-btn {
     width: 100%;
     padding: 12px;
-
     border: none;
     border-radius: 10px;
-
-    background: rgba(239,68,68,.15);
+    background: rgba(239, 68, 68, .15);
     color: #fecaca;
-
     cursor: pointer;
-    transition: .2s;
+    transition: background 0.2s;
+    font-size: 14px;
 }
 
 .logout-btn:hover {
@@ -109,11 +107,45 @@ html, body {
     color: white;
 }
 
-/* CONTENIDO */
+/* ÁREA DE CONTENIDO */
 .content {
     flex: 1;
-    height: 100vh;
     background: #f1f5f9;
-    overflow: auto;
-    padding: 20px;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+
+/* ==========================================
+   ADAPTACIÓN RESPONSIVA (MÓVILES Y TABLETS)
+   ========================================== */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column; /* Apila el menú sobre el contenido */
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+        padding: 16px;
+    }
+
+    .logo-section {
+        padding: 5px 0 15px;
+        text-align: center;
+    }
+
+    .nav-menu {
+        overflow-y: visible; /* En móvil se desplaza con toda la página */
+    }
+
+    /* Opcional: disposición en horizontal para los botones en pantallas móviles */
+    .nav-btn {
+        padding: 10px 12px;
+    }
+
+    .content {
+        padding: 16px;
+    }
 }

@@ -9,20 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetallePresupuestoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimasFacturasDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CategoriaMovimientoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.CategoriaMovimientoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoOrdenRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
@@ -60,6 +64,9 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
     @Autowired
     private EstadoOrdenRepository estadoOrdenRepository;
+
+    @Autowired
+    private CategoriaMovimientoRepository categoriaMovimientoRepository;
 
 
 
@@ -439,6 +446,58 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
     @Override
     public Double obtenerTotalPendiente() {
         return presuspuestoRepository.totalPendiente();
+    }
+
+
+    @Override
+    public ResponceDTO pagarFactura(Long idFactura, MovimientoDTO movimientoDTO, Long idAdmin) {
+        
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        PresupuestoEntity presupuestoEntity = presuspuestoRepository.findById(idFactura)
+        .orElseThrow(() -> new RuntimeException("El id factura ingresado es invalido"));
+
+
+        MovimientoFinancieroEntity movimiento = new MovimientoFinancieroEntity();
+
+        movimiento.setTipoMovimiento(movimiento.getTipoMovimiento());
+        movimiento.setImporte(movimientoDTO.getImporte());
+        movimiento.setFechaRegistro(LocalDate.now());
+        
+        CategoriaMovimientoEntity categoria = categoriaMovimientoRepository.findByCategoria(movimientoDTO.getCategoria())
+        .orElseThrow();
+        movimiento.setCategoria(categoria);
+
+
+        AdminEntity adminEntity = adminRepository.findById(idAdmin)
+        .orElseThrow(() -> new RuntimeException("El id ingresado es invalido"));
+        movimiento.setAdmin(adminEntity);
+
+
+        EstadoPresupuestoEntity estadoPre = estadoPresupuestoReposistory.findByEstadoPresupuesto(EstadoPresupuestoEnum.PAGADO)
+        .orElseThrow(() -> new RuntimeException("El estado es incorecto"));
+
+        presupuestoEntity.setEstadoPresupuesto(estadoPre);
+
+        responceDTO.setMensage("La factura se a pagado con exito");
+        return responceDTO;
+    }
+
+
+
+    @Override
+    public List<ObtenerPresupuestoDTO> obtenerPresupuestoPendientes() {
+        
+        EstadoPresupuestoEntity estadoPre = estadoPresupuestoReposistory.findByEstadoPresupuesto(EstadoPresupuestoEnum.ENVIADO)
+        .orElseThrow(() -> new RuntimeException("El estado es incorecto"));
+        
+
+        return presuspuestoRepository.findByEstadoPresupuesto(estadoPre)
+        .stream()
+        .map( this::toMapPresupuestoDto)
+        .collect(Collectors.toList());
+
+
     }
 
 }
