@@ -25,6 +25,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoDescuentoEnums;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.CategoriaMovimientoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
@@ -70,6 +71,7 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
 
 
+
     @Override
 @Transactional
 public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
@@ -80,6 +82,11 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
     presupuestoEntity.setFechaRegistro(LocalDate.now());
     presupuestoEntity.setFechaValidez(LocalDate.now().plusDays(15));
     presupuestoEntity.setTipoFactura(presupuestoDTO.getTipoFactura());
+
+    // Mapeo de campos de descuento e IVA agregados
+    presupuestoEntity.setAplicaIva(presupuestoDTO.getAplicaIva());
+    presupuestoEntity.setTipoDescuento(presupuestoDTO.getTipoDescuento());
+    presupuestoEntity.setDescuento(presupuestoDTO.getDescuento());
 
     // Estado
     EstadoPresupuestoEntity estado = estadoPresupuestoReposistory
@@ -139,10 +146,32 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
         subTotalGeneral += subTotalLinea;
     }
 
-    // Totales
-    double iva = subTotalGeneral * 0.21;
-    double totalFinal = subTotalGeneral + iva;
+    // --- CÁLCULO DE TOTALES (DESCUENTO E IVA) ---
 
+    // 1. Calcular monto del descuento según el tipo
+    double montoDescuento = 0.0;
+    Double valorDescuento = presupuestoDTO.getDescuento() != null ? presupuestoDTO.getDescuento() : 0.0;
+
+    if (presupuestoDTO.getTipoDescuento() != null) {
+        if (presupuestoDTO.getTipoDescuento() == TipoDescuentoEnums.PORCENTAJE) {
+            montoDescuento = (subTotalGeneral * valorDescuento) / 100;
+        } else if (presupuestoDTO.getTipoDescuento() == TipoDescuentoEnums.MONTO) {
+            montoDescuento = valorDescuento;
+        }
+    }
+
+    // 2. Subtotal base luego de restar el descuento
+    double subtotalConDescuento = Math.max(0, subTotalGeneral - montoDescuento);
+
+    // 3. Calcular IVA (21%) únicamente si aplicaIva es true
+    boolean aplicaIva = Boolean.TRUE.equals(presupuestoDTO.getAplicaIva());
+    double iva = aplicaIva ? subtotalConDescuento * 0.21 : 0.0;
+
+    // 4. Total Final
+    double totalFinal = subtotalConDescuento + iva;
+
+    // Asignación de valores finales a la entidad
+    presupuestoEntity.setMontoDescuento(montoDescuento);
     presupuestoEntity.setDetalle(detalles);
     presupuestoEntity.setSubTotal(subTotalGeneral);
     presupuestoEntity.setIva(iva);

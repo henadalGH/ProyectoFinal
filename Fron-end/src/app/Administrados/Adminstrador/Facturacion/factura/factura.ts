@@ -8,7 +8,7 @@ import { Header } from "../../../../header/header";
 @Component({
   selector: 'app-factura',
   standalone: true,
-  imports: [HeaderAdmin, Header],
+  imports: [HeaderAdmin, Header,RouterLink],
   templateUrl: './factura.html',
   styleUrl: './factura.css',
 })

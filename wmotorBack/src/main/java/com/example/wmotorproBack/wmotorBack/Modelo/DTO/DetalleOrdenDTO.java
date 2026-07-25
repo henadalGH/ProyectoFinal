@@ -11,6 +11,7 @@ public class DetalleOrdenDTO {
     private Long cantidad;
     private TipoItemEnums tipoItem;
     private String codigo;
+    private Double precioUnitario;
     private String observaciones;
     private Long idorden;
     

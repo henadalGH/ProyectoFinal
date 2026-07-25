@@ -1,92 +1,77 @@
 <div class="layout">
   <aside class="sidebar">
-    <!-- menú -->
-     <app-header-empleado></app-header-empleado>
+    <!-- Menú lateral -->
+    <app-header-empleado></app-header-empleado>
   </aside>
 
   <main class="content">
-    <!-- contenido principal -->
-
+    <!-- Encabezado principal -->
     <app-header></app-header>
     
-<div class="titulo">
-    <h1>Trabajos del día {{ fecha | date:'dd/MM/yyyy' }}</h1>
-    <p>Órdenes asignadas para la jornada actual</p>
-</div>
+    <div class="titulo">
+      <h1>Trabajos del día {{ fecha | date:'dd/MM/yyyy' }}</h1>
+      <p>Órdenes asignadas para la jornada actual</p>
+    </div>
 
-<div class="ordenes">
+    <div class="ordenes">
 
-    @for (ord of ordenes; track $index) {
+      <!-- Recorremos la lista completa de órdenes -->
+      @for (ord of ordenes.concat(ordenesSinTerminar); track ord.idOrden) {
 
         <div class="orden-card">
 
-            <div class="orden-header">
-                <div class="icono">
-                    <i class="fas fa-car"></i>
-                </div>
-
-                <div class="prioridad">
-                    <h3>Prioridad</h3>
-                    <span>{{ord.prioridad}}</span>
-                </div>
-
-                @if(ord.estado == 'PARA_FACTURAR'){
-                    <div class="estado">
-                    <h3>Estado: </h3>
-                    <span>TERMINADA</span>
-                </div>
-                } @else {
-                    <div class="estado">
-                    <h3>Estado: </h3>
-                    <span>{{ord.estado}}</span>
-                </div>
-                }
-                <div class="vehiculo">
-                    <h3>{{ord.marca}} {{ord.modelo}}</h3>
-                    <span>{{ord.patente}}</span>
-                </div>
+          <div class="orden-header">
+            <div class="icono">
+              <i class="fas fa-car"></i>
             </div>
 
-            <div class="orden-body">
-
-                <div class="dato">
-                    <strong>Servicio</strong>
-                    <p>{{ord.nombreServicio}}</p>
-                </div>
-
+            <div class="prioridad">
+              <h3>Prioridad</h3>
+              <span>{{ ord.prioridad }}</span>
             </div>
 
-            @if(ord.estado == 'ASIGNADA'){
-                <div class="orden-footer">
-                <button class="btn-detalle" (click)="verOrden(ord.idOrden)">
-                    Ver detalle
-                </button>
-
-                @if (ord.estado == 'ASIGNADA') {
-                    
-                <button class="btn-cancelar" (click)="cancelarOrden(ord.idOrden)">
-                    Cancelar
-                </button>
-                }
+            <div class="estado">
+              <h3>Estado:</h3>
+              <span>{{ ord.estado === 'PARA_FACTURAR' ? 'TERMINADA' : ord.estado }}</span>
             </div>
-            }
 
-            
+            <div class="vehiculo">
+              <h3>{{ ord.marca }} {{ ord.modelo }}</h3>
+              <span>{{ ord.patente }}</span>
+            </div>
+          </div>
+
+          <div class="orden-body">
+            <div class="dato">
+              <strong>Servicio</strong>
+              <p>{{ ord.nombreServicio }}</p>
+            </div>
+          </div>
+
+          @if (ord.estado === 'ASIGNADA') {
+            <div class="orden-footer">
+              <button class="btn-detalle" (click)="verOrden(ord.idOrden ?? ord.id)">
+        Ver detalle
+        </button>
+
+        <button class="btn-cancelar" (click)="cancelarOrden(ord.idOrden ?? ord.id)">
+        Cancelar
+        </button>
+            </div>
+          }
 
         </div>
 
-    } @empty {
+      } @empty {
 
         <div class="sin-ordenes">
-            <i class="fas fa-clipboard-list"></i>
-            <h2>Sin trabajos asignados</h2>
-            <p>No hay órdenes para el día de hoy.</p>
+          <i class="fas fa-clipboard-list"></i>
+          <h2>Sin trabajos asignados</h2>
+          <p>No hay órdenes para el día de hoy.</p>
         </div>
 
-    }
+      }
 
-</div>
+    </div>
   </main>
 </div>
-
-

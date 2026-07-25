@@ -44,7 +44,7 @@ export class DetalleOrden implements OnInit {
         error: (err) => console.error('Error al obtener la orden:', err)
       });
 
-      // Cargar los detalles ya guardados previamente en base de datos
+      // Cargar los detalles ya guardados previamente en la base de datos
       this.ordenService.obtenerDetalleOrden(this.idOrden).subscribe({
         next: (respuesta: any) => {
           this.detalleOrden = respuesta;
@@ -66,6 +66,9 @@ export class DetalleOrden implements OnInit {
           esRepuestoCat: true // Bandera para bloquear la edición de tipoItem en el template
         });
       });
+
+      // CORRECCIÓN CLAVE: Limpiamos history.state para que no vuelvan a aparecer al hacer F5
+      history.replaceState({ ...history.state, repuestos: null }, '');
     }
   }
 
@@ -90,20 +93,30 @@ export class DetalleOrden implements OnInit {
     });
   }
 
-  // Elimina filas tanto temporales como traídas de la base de datos
+  // Elimina filas tanto temporales como de la vista local
   eliminarFila(id: number): void {
+    // 1. Si está en las filas temporales (no guardadas)
     const indexFilas = this.filas.findIndex(f => f.id === id);
     if (indexFilas !== -1) {
-      this.filas.splice(indexFilas, 1);
+      // Usamos .filter() para romper la referencia y forzar a Angular a refrescar el DOM
+      this.filas = this.filas.filter(f => f.id !== id);
       return;
     }
 
+    // 2. Si viene de los detalles traídos de la base de datos
     this.detalleOrden = this.detalleOrden.filter(detalle => detalle.id !== id);
   }
 
-  // Guarda la unificación de ítems previos y nuevos
+  // Guarda ÚNICAMENTE los ítems nuevos
   guardarDetalle(): void {
-    const todosLosDetalles = [...this.detalleOrden, ...this.filas].map(item => ({
+    // Si no hay filas temporales nuevas, no hacemos la petición
+    if (this.filas.length === 0) {
+      console.log('No hay ítems nuevos para guardar.');
+      return;
+    }
+
+    // Mapeamos SOLO las filas temporales nuevas
+    const nuevosDetalles = this.filas.map(item => ({
       cantidad: item.cantidad,
       codigo: item.codigo,
       trabajoRealizado: item.trabajoRealizado,
@@ -111,13 +124,13 @@ export class DetalleOrden implements OnInit {
     }));
 
     this.ordenService
-      .agregarDetalleOrden(this.idOrden, todosLosDetalles)
+      .agregarDetalleOrden(this.idOrden, nuevosDetalles)
       .subscribe({
         next: (resp) => {
-          console.log('Detalles guardados exitosamente:', resp);
+          console.log('Nuevos detalles guardados exitosamente:', resp);
           this.filas = []; // Limpiamos las filas dinámicas temporales
-          
-          // Recargamos el detalle desde la BD para mantener todo sincronizado
+
+          // Recargamos el detalle completo desde la BD para sincronizar
           this.ordenService.obtenerDetalleOrden(this.idOrden).subscribe(
             respuesta => this.detalleOrden = respuesta
           );
@@ -142,4 +155,19 @@ export class DetalleOrden implements OnInit {
   volverAtras(): void {
     this.location.back();
   }
+
+  cancelar(){
+    this.router.navigate(['/homeEmpleado']);
+  }
+
+
+  // 1. Quita solo las filas dinámicas NUEVAS (aún no guardadas en BD)
+    eliminarFilaTemporal(id: number): void {
+      this.filas = this.filas.filter(f => f.id !== id);
+    }
+
+    // 2. Quita elementos de la lista local de lo que YA ESTABA guardado
+    eliminarDetalleGuardado(id: number): void {
+      this.detalleOrden = this.detalleOrden.filter(d => d.id !== id);
+    }
 }

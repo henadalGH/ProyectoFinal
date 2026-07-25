@@ -21,7 +21,7 @@
             <h3>Órdenes pendientes</h3>
             <h2>{{factura.length}}</h2>
             @if (factura.length > 0) {
-                <button>Facturar</button>
+                <button [routerLink]="['/paraFacturar']">Facturar</button>
             }
             <p>Listas para facturar</p>
         </div>

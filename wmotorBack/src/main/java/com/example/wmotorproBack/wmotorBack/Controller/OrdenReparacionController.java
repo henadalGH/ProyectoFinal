@@ -110,6 +110,14 @@ public class OrdenReparacionController {
         public ResponseEntity<Long> contarOrdenParaFacturar() {
             return new ResponseEntity<Long>(ordenReparacionService.obtenerOrdenTerminadaParaFecturar(), HttpStatus.OK);
         }
+
+        @GetMapping("/obtenerOrdenesSinTerminar/{idEmpleado}/{estado}")
+        public ResponseEntity<List<ObtenerOrdenDTO>> obtenerOrdenSinTerminarIdEmpleado(@PathVariable Long idEmpleado,
+            @PathVariable EstadoOrdenEnums estado
+         ) {
+            return new ResponseEntity<List<ObtenerOrdenDTO>>(ordenReparacionService.ontenerOrdenesSinTerminarPorEmpeado(idEmpleado, estado), HttpStatus.OK);
+        }
+        
         
     
 

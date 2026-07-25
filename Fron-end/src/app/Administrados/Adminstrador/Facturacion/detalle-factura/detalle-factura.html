@@ -9,8 +9,6 @@
 
         <div class="factura-container">
 
-            
-
             <!-- CABECERA -->
             <div class="factura-header">
 
@@ -157,7 +155,7 @@
 
                                 <!-- IMPORTE -->
                                 <td>
-                                    {{ detalle.importe }}
+                                    {{ detalle.importe | number:'1.2-2' }}
                                 </td>
 
                             </tr>
@@ -187,12 +185,46 @@
 
                 <div>
                     <p>Subtotal:</p>
-                    <p>IVA (21%):</p>
+                    <p>
+                        Descuento:
+                        <select [(ngModel)]="tipoDescuento" (change)="calcularTotales()">
+                            <option value="porcentaje">%</option>
+                            <option value="monto">$</option>
+                        </select>
+                    </p>
+
+                    @if (montoDescuento > 0) {
+                        <p>Subtotal c/ Dcto:</p>
+                    }
+
+                    <p>
+                        <label>
+                            <input 
+                                type="checkbox" 
+                                [(ngModel)]="aplicaIva" 
+                                (change)="calcularTotales()">
+                            Aplicar IVA (21%)
+                        </label>
+                    </p>
                     <h2>Total:</h2>
                 </div>
 
                 <div>
                     <p>${{ subtotal | number:'1.2-2' }}</p>
+
+                    <p>
+                        <input 
+                            type="number" 
+                            min="0" 
+                            [(ngModel)]="descuento" 
+                            (input)="calcularTotales()"
+                            placeholder="0">
+                    </p>
+
+                    @if (montoDescuento > 0) {
+                        <p>-${{ montoDescuento | number:'1.2-2' }}</p>
+                    }
+
                     <p>${{ iva | number:'1.2-2' }}</p>
                     <h2>${{ total | number:'1.2-2' }}</h2>
                 </div>

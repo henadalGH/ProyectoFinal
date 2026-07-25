@@ -27,6 +27,7 @@ export class HistorialOrdenes implements OnInit{
       this.ordenServicio.obtenrHistorialOrdenes(idEmpleado).subscribe(
         (repuesta: any[]) =>{
           this.historial = repuesta;
+          console.log(this.historial);
         });}
   }
 

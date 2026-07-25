@@ -1,6 +1,7 @@
 package com.example.wmotorproBack.wmotorBack.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -37,6 +38,8 @@ public interface RepuestoRepository extends JpaRepository<RepuestosEntity, Long>
        
            """)
     List<ObtenerRepuestoDTO> obtenerRepuesto();
+
+    Optional<RepuestosEntity> findByCodigo(String codigo);
 
 
 

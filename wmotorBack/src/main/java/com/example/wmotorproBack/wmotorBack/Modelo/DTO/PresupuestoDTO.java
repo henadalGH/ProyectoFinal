@@ -3,6 +3,7 @@ package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 import java.time.LocalDate;
 import java.util.List;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoDescuentoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
 
 import lombok.Data;
@@ -23,6 +24,10 @@ public class PresupuestoDTO {
     private Long idOrden;
     private Long idAdmin;
     private Long idVehiculo;
+    private Boolean aplicaIva;
+    private Double descuento;
+    private TipoDescuentoEnums tipoDescuento; // "porcentaje" o "monto"
+    private Double montoDescuento;
     
 
 }

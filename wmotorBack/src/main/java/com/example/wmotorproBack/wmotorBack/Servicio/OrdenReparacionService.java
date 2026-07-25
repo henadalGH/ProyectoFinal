@@ -27,6 +27,7 @@ public interface OrdenReparacionService {
     List<OrdenTrabajoEmpleadoDTO> ordenesfuturasIdempleado(Long idEmpleado, LocalDate fecha);
     List<OrdenTrabajoEmpleadoDTO> obtenerHistorialOrdenes(Long idEmpleado);
     Long obtenerOrdenTerminadaParaFecturar();
+    List<ObtenerOrdenDTO> ontenerOrdenesSinTerminarPorEmpeado( Long IdEmpleado, EstadoOrdenEnums estado);
    
 
 }

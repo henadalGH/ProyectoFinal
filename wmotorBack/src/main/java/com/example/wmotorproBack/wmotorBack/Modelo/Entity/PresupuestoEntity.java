@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoDescuentoEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
 
 import jakarta.persistence.CascadeType;
@@ -68,6 +69,19 @@ public class PresupuestoEntity {
     @ManyToOne
     @JoinColumn(name = "id_estado")
     private EstadoPresupuestoEntity estadoPresupuesto;
+
+    @Column(name = "aplca_iva")
+    private Boolean aplicaIva;
+
+    @Column(name = "descuento")
+    private Double descuento;
+
+    @Column(name = "tipo_descuento")
+    @Enumerated(EnumType.STRING)
+    private TipoDescuentoEnums tipoDescuento; // "porcentaje" o "monto"
+    
+    @Column(name = "monto_descuento")
+    private Double montoDescuento; // Opcional pero recomendado para auditoría
 
     @ManyToOne
     @JoinColumn(name = "id_turno")
