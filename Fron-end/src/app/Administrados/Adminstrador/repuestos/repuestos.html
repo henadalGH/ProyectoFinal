@@ -15,6 +15,37 @@
           <p>Administración del stock de repuestos</p>
         </div>
 
+        <div class="btn-aumento">
+          <button (click)="abrirModal()">Aplicar aumento</button>
+        </div>
+
+        @if (mostarModal == true) {
+
+          <h2>Modificar precio de los repuesto</h2>
+          <p>Comlete el fromulario para modificar el precio de los productos</p>
+
+          <form (ngSubmit)="aumentarPrecioRepuesto()">
+
+            <div class="campos-pre">
+              <label>Ingrese la marca:</label>
+              <input type="text" name="marca" [(ngModel)]="marca">
+            </div>
+            <div class="campos-pre">
+              <label>Ingresar el nombre del repuesto</label>
+              <input type="text" name="nombre" [(ngModel)]="nombre">
+            </div>
+            <div class="campos-pre">
+              <label>Ingresar el porcentaje de aumento:</label>
+              <input type="number" name="porcentaje" [(ngModel)]="porcentaje" >
+            </div>
+
+            <button type="submit" >Aumentar</button>
+
+          </form>
+          <button (click)="cerrarModal()">Cancelar</button>
+        }
+        
+
         <button class="btn-nuevo">
           + Nuevo Repuesto
         </button>

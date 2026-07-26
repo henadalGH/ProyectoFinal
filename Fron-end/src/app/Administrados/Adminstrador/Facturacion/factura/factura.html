@@ -18,7 +18,7 @@
 
         <div class="card">
             <span class="icono">📋</span>
-            <h3>Órdenes pendientes</h3>
+            <h3>Órdenes pendientes para facturar</h3>
             <h2>{{factura.length}}</h2>
             @if (factura.length > 0) {
                 <button [routerLink]="['/paraFacturar']">Facturar</button>
@@ -26,12 +26,6 @@
             <p>Listas para facturar</p>
         </div>
 
-        <div class="card">
-            <span class="icono">📨</span>
-            <h3>Sin enviar</h3>
-            <h2>3</h2>
-            <p>Esperando envío</p>
-        </div>
 
         <div class="card">
             <span class="icono">💰</span>
@@ -81,7 +75,14 @@
                                 {{fac.fechaRegistro}}
                             </td>
                             <td>
-                                {{fac.estadoPresupuesto}}
+                                @if(fac.estadoPresupuesto == 'ENVIADO'){
+                                    <p>IMPAGA</p>
+                                }@else if(fac.estadoPresupuesto == 'PENDIENTE'){
+                                    <p>SIN ENVIAR</p>
+                                }@else if (fac.estadoPresupuesto == 'PAGADO') {
+                                    <p>PAGADA</p>
+                                }
+                               
                             </td>
                             <td>
                                 {{fac.total}}
@@ -101,27 +102,7 @@
         </div>
 
 
-        <div class="panel-lateral">
 
-    
-            <h2 class="resumen">Resumen</h2>
-
-            <div class="dato">
-                <span>Facturado</span>
-                <strong>$2.400.000</strong>
-            </div>
-
-            <div class="dato">
-                <span>Cobrado</span>
-                <strong>$2.100.000</strong>
-            </div>
-
-            <div class="dato">
-                <span>Pendiente</span>
-                <strong>$300.000</strong>
-            </div>
-
-        </div>
 
     </div>
 

@@ -42,6 +42,16 @@ export class RepuestoService {
     return this.http.get<any[]>(`${this.urlRepuesto}/obtenerRepuestoOrden`);
   }
 
+  modificarPrecioBase(porcentaje:number, marcaRepuesto: string, nombreRepuesto: string){
+
+    const body = {
+      porcentaje,
+      marcaRepuesto,
+      nombreRepuesto
+    }
+    return this.http.put(`${this.urlRepuesto}/modificaPrecio`, body);
+    
+  }
 
 
 }

@@ -25,12 +25,14 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoDescuentoEnums;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.CategoriaMovimientoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoOrdenRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
+import com.example.wmotorproBack.wmotorBack.Repository.MovimientoFinancieroRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
@@ -68,6 +70,9 @@ public class PresupuestoServiceImpl implements PresupuestoService {
 
     @Autowired
     private CategoriaMovimientoRepository categoriaMovimientoRepository;
+
+    @Autowired
+    private MovimientoFinancieroRepository movimientoFinancieroRepository;
 
 
 
@@ -479,9 +484,12 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
 
 
     @Override
+    @Transactional
     public ResponceDTO pagarFactura(Long idFactura, MovimientoDTO movimientoDTO, Long idAdmin) {
         
         ResponceDTO responceDTO = new ResponceDTO();
+
+        System.out.println(movimientoDTO.getTipoMovimiento()+ "MOVIMIENTO");
 
         PresupuestoEntity presupuestoEntity = presuspuestoRepository.findById(idFactura)
         .orElseThrow(() -> new RuntimeException("El id factura ingresado es invalido"));
@@ -489,8 +497,11 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
 
         MovimientoFinancieroEntity movimiento = new MovimientoFinancieroEntity();
 
-        movimiento.setTipoMovimiento(movimiento.getTipoMovimiento());
+
+        movimiento.setTipoMovimiento(
+        MovimientosEnum.valueOf(movimientoDTO.getTipoMovimiento()));
         movimiento.setImporte(movimientoDTO.getImporte());
+        movimiento.setConcepto(movimientoDTO.getConcepto());
         movimiento.setFechaRegistro(LocalDate.now());
         
         CategoriaMovimientoEntity categoria = categoriaMovimientoRepository.findByCategoria(movimientoDTO.getCategoria())
@@ -507,6 +518,7 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
         .orElseThrow(() -> new RuntimeException("El estado es incorecto"));
 
         presupuestoEntity.setEstadoPresupuesto(estadoPre);
+        movimientoFinancieroRepository.save(movimiento);
 
         responceDTO.setMensage("La factura se a pagado con exito");
         return responceDTO;

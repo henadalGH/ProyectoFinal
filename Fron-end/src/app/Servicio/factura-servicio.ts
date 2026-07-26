@@ -65,7 +65,7 @@ export class FacturaServicio {
   }
 
   pagarFactura(idFactura: number, idAdmin: number, body: any){
-    return this.http.put(`${this.urlFactura}pagarFactura/${idFactura}/${idAdmin}`, body);
+    return this.http.put(`${this.urlFactura}/pagarFactura/${idFactura}/${idAdmin}`, body);
   }
 
   obtenerFacturasPendientes(){

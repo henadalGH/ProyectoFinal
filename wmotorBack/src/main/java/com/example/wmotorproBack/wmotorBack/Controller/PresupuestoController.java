@@ -141,10 +141,12 @@ public class PresupuestoController {
         );
     }
 
-    @PutMapping("pagarFactura/{idFactura}/{idAdmin}")
-    public ResponseEntity<ResponceDTO> pagarFactura(@PathVariable Long idFactura, @RequestBody MovimientoDTO movimientoDTO) {
+    @PutMapping("/pagarFactura/{idFactura}/{idAdmin}")
+    public ResponseEntity<ResponceDTO> pagarFactura(@PathVariable Long idFactura, @RequestBody MovimientoDTO movimientoDTO,
+        @PathVariable Long idAdmin
+    ) {
         
-        return new ResponseEntity<ResponceDTO>(presupuestoService.pagarFactura(idFactura, movimientoDTO, idFactura), HttpStatus.OK);
+        return new ResponseEntity<ResponceDTO>(presupuestoService.pagarFactura(idFactura, movimientoDTO, idAdmin), HttpStatus.OK);
     }
 
     @GetMapping("/obtenerFacturasPendientes")

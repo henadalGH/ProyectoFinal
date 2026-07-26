@@ -41,6 +41,13 @@ public interface RepuestoRepository extends JpaRepository<RepuestosEntity, Long>
 
     Optional<RepuestosEntity> findByCodigo(String codigo);
 
+    List<RepuestosEntity> findByMarcaIgnoreCase(String marca);
 
+    List<RepuestosEntity> findByMarcaIgnoreCaseAndNombreIgnoreCase(
+            String marca,
+            String nombre
+    );
+
+    List<RepuestosEntity> findByNombreIgnoreCase(String nombre);
 
 }

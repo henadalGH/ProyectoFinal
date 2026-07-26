@@ -27,11 +27,14 @@ export class Repuestos implements OnInit{
 
   // copia de todos los repuestos
   repuestosOriginal: any[] = [];
-
-
   // filtros
   nombreBuscar: string = '';
   categoriaBuscar: string = '';
+
+  mostarModal: boolean = false;
+  marca: string = '';
+  nombre: string = '';
+  porcentaje: number = 0;
 
 
 
@@ -93,6 +96,28 @@ export class Repuestos implements OnInit{
   verRepuesto(idRepuesto: number){
 
     this.router.navigate(['/verRepuesto', idRepuesto]);
+  }
+
+  abrirModal(){
+    this.mostarModal = true;
+  }
+
+  cerrarModal(){
+    this.mostarModal = false;
+  }
+
+
+  aumentarPrecioRepuesto(){
+
+    this.repuetoService.modificarPrecioBase(this.porcentaje, this.marca, this.nombre).subscribe(
+      {
+        next: any =>{
+          this.cerrarModal();
+          this.obtenerRepuesto();
+          
+        }
+      }
+    )
   }
 
 
