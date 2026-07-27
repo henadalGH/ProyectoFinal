@@ -21,6 +21,7 @@ public interface RepuestoService {
     ResponceDTO modificarPrecioCompra(ModificarPrecioPorMarca modificarPrecio);
     List<RepuestoStockBajoDTO> obtenerRepuestoBajoStock();
     List<ObtenerRepuestoDTO> obtenerRepuestosOrden();
+    ResponceDTO crearRepuesto(RepuestoDTO repuestoDTO);
     
 
 }

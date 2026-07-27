@@ -33,7 +33,10 @@
 
                     <div class="kpi-info">
                         <span>Turnos pendientes</span>
-                        
+                    
+                        @if (contaTrunos > 0) {
+                            <button class="btn-asig" [routerLink]="['/turnosAsignacion']">Ir a turno</button>
+                        }
                     </div>
 
                 </article>
@@ -65,6 +68,10 @@
 
                     <div class="kpi-info">
                         <span>Turnos confirmados</span>
+
+                        @if (contarTurnosConf > 0) {
+                            <button class="btn-orden" [routerLink]="['/homeOrdenes']">Ir a orden</button>
+                        }
                         
                     </div>
 

@@ -3,11 +3,11 @@ import { HeaderAdmin } from "../header-admin/header-admin";
 import { Header } from "../../../header/header";
 import { RepuestoService } from '../../../Servicio/repuesto-service';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-repuestos',
-  imports: [HeaderAdmin, Header, FormsModule],
+  imports: [HeaderAdmin, Header, FormsModule, RouterLink],
   templateUrl: './repuestos.html',
   styleUrl: './repuestos.css',
 })

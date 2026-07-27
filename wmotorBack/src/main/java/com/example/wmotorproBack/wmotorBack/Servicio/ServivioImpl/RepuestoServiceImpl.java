@@ -183,5 +183,29 @@ public ResponceDTO modificarPrecioCompra(ModificarPrecioPorMarca modificarPrecio
     return response;
 }
 
+    @Override
+    public ResponceDTO crearRepuesto(RepuestoDTO repuestoDTO) {
+        
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        RepuestosEntity repuestosEntity = new RepuestosEntity();
+        repuestosEntity.setNombre(repuestoDTO.getNombre());
+        repuestosEntity.setMarca(repuestoDTO.getMarca());
+        repuestosEntity.setCodigo(repuestoDTO.getCodigo());
+        repuestosEntity.setPrecioCompra(repuestoDTO.getPrecioCompra());
+    
+        Double precioVenta = repuestoDTO.getPrecioCompra() * 0.5;
+        repuestosEntity.setPrecioVenta(precioVenta);
+        repuestosEntity.setStock(repuestoDTO.getStock());
+        repuestosEntity.setStockMin(repuestoDTO.getStockMin());
+        repuestosEntity.setCategoria(repuestoDTO.getCategoria());
+        repuestosEntity.setActivo(true);
+        
+        repuestoRepository.save(repuestosEntity);
+
+        responceDTO.setMensage("Repuesto creado corectamente");
+        return responceDTO;
+    }
+
 
 }

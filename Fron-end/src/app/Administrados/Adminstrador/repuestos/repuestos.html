@@ -19,34 +19,79 @@
           <button (click)="abrirModal()">Aplicar aumento</button>
         </div>
 
-        @if (mostarModal == true) {
+       @if (mostarModal) {
 
-          <h2>Modificar precio de los repuesto</h2>
-          <p>Comlete el fromulario para modificar el precio de los productos</p>
+<div class="modal-overlay">
 
-          <form (ngSubmit)="aumentarPrecioRepuesto()">
+  <div class="modal">
 
-            <div class="campos-pre">
-              <label>Ingrese la marca:</label>
-              <input type="text" name="marca" [(ngModel)]="marca">
-            </div>
-            <div class="campos-pre">
-              <label>Ingresar el nombre del repuesto</label>
-              <input type="text" name="nombre" [(ngModel)]="nombre">
-            </div>
-            <div class="campos-pre">
-              <label>Ingresar el porcentaje de aumento:</label>
-              <input type="number" name="porcentaje" [(ngModel)]="porcentaje" >
-            </div>
+    <div class="modal-header">
 
-            <button type="submit" >Aumentar</button>
+      <h2>Modificar precio de los repuestos</h2>
 
-          </form>
-          <button (click)="cerrarModal()">Cancelar</button>
-        }
+    </div>
+
+    <p class="modal-texto">
+      Complete el formulario para aplicar el aumento.
+    </p>
+
+    <form (ngSubmit)="aumentarPrecioRepuesto()">
+
+      <div class="campos-pre">
+        <label>Marca</label>
+        <input
+          type="text"
+          name="marca"
+          [(ngModel)]="marca">
+      </div>
+
+      <div class="campos-pre">
+        <label>Nombre del repuesto</label>
+        <input
+          type="text"
+          name="nombre"
+          [(ngModel)]="nombre">
+      </div>
+
+      <div class="campos-pre">
+        <label>Porcentaje de aumento</label>
+        <input
+          type="number"
+          name="porcentaje"
+          [(ngModel)]="porcentaje">
+      </div>
+
+      <div class="acciones-modal">
+
+        <button
+          type="button"
+          class="btn-cancelar"
+          (click)="cerrarModal()">
+
+          Cancelar
+
+        </button>
+
+        <button
+          type="submit"
+          class="btn-guardar">
+
+          Aplicar aumento
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+}
         
 
-        <button class="btn-nuevo">
+        <button class="btn-nuevo" [routerLink]="['/registrarRep']">
           + Nuevo Repuesto
         </button>
       </div>
@@ -104,7 +149,6 @@
             Limpiar
 
           </button>
-
 
         </div>
 

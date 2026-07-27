@@ -1,18 +1,39 @@
-/* RESET BÁSICO */
-* {
+/* ==========================================
+   RESET Y CONFIGURACIÓN GLOBAL
+   ========================================== */
+*, *::before, *::after {
     box-sizing: border-box;
 }
 
+/* Oculta barras de scroll globales pero mantiene el desplazamiento funcional */
 html, body {
     height: 100%;
     margin: 0;
+    padding: 0;
     font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background-color: #f1f5f9;
+    overflow-x: hidden; /* Evita desbordamiento horizontal */
 }
 
-/* ESTRUCTURA PRINCIPAL (DESKTOP) */
+/* Ocultar barra de scroll visual manteniendo el scroll activo */
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+/* ==========================================
+   ESTRUCTURA PRINCIPAL (DESKTOP)
+   ========================================== */
 .layout {
     display: flex;
-    min-height: 100vh;
+    height: 100vh; /* Se usa height fijo para controlar la zona de scroll interna */
+    width: 100vw;
+    overflow: hidden;
 }
 
 /* SIDEBAR */
@@ -20,21 +41,22 @@ html, body {
     width: 260px;
     min-width: 260px;
     background-color: #162454;
-    color: white;
-    padding: 24px 16px;
+    color: #ffffff;
+    padding: 20px 16px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 /* LOGO */
 .logo-section {
-    padding: 15px 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    padding: 10px 5px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .logo-section h1 {
     margin: 0;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .logo-section span {
@@ -46,11 +68,18 @@ html, body {
     flex: 1;
     padding: 15px 0;
     overflow-y: auto;
+    /* Aplicamos ocultamiento de barra visual */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.nav-menu::-webkit-scrollbar {
+    display: none;
 }
 
 /* TÍTULOS DE SECCIÓN */
 .section-title {
-    margin: 20px 10px 8px;
+    margin: 16px 10px 8px;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -64,7 +93,7 @@ html, body {
     align-items: center;
     gap: 12px;
     padding: 12px 15px;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     border: none;
     border-radius: 10px;
     background: transparent;
@@ -72,22 +101,23 @@ html, body {
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
     font-size: 14px;
+    text-align: left;
 }
 
 .nav-btn:hover {
-    background: rgba(56, 189, 248, .15);
+    background: rgba(56, 189, 248, 0.15);
     transform: translateX(2px);
 }
 
 .nav-btn.active {
     background: linear-gradient(90deg, #2563eb, #38bdf8);
-    color: white;
+    color: #ffffff;
 }
 
 /* USUARIO / CERRAR SESIÓN */
 .user-control {
     padding: 15px 0 0;
-    border-top: 1px solid rgba(255, 255, 255, .08);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .logout-btn {
@@ -95,7 +125,7 @@ html, body {
     padding: 12px;
     border: none;
     border-radius: 10px;
-    background: rgba(239, 68, 68, .15);
+    background: rgba(239, 68, 68, 0.15);
     color: #fecaca;
     cursor: pointer;
     transition: background 0.2s;
@@ -104,7 +134,7 @@ html, body {
 
 .logout-btn:hover {
     background: #dc2626;
-    color: white;
+    color: #ffffff;
 }
 
 /* ÁREA DE CONTENIDO */
@@ -113,6 +143,13 @@ html, body {
     background: #f1f5f9;
     padding: 24px;
     overflow-y: auto;
+    /* Oculta barras de scroll pero permite desplazar contenido largo */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.content::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -121,8 +158,16 @@ html, body {
    ========================================== */
 @media (max-width: 768px) {
     .layout {
-        flex-direction: column; /* Apila el menú sobre el contenido */
+        flex-direction: column;
+        height: auto;
         min-height: 100vh;
+        overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .layout::-webkit-scrollbar {
+        display: none;
     }
 
     .sidebar {
@@ -132,20 +177,16 @@ html, body {
     }
 
     .logo-section {
-        padding: 5px 0 15px;
+        padding: 5px 0 10px;
         text-align: center;
     }
 
     .nav-menu {
-        overflow-y: visible; /* En móvil se desplaza con toda la página */
-    }
-
-    /* Opcional: disposición en horizontal para los botones en pantallas móviles */
-    .nav-btn {
-        padding: 10px 12px;
+        overflow-y: visible;
     }
 
     .content {
         padding: 16px;
+        overflow-y: visible;
     }
 }

@@ -48,16 +48,23 @@ body{
     display:flex;
     flex-direction:column;
     gap:30px;
+    
 }
 
 /* ==========================================================================
    TITULO
 ========================================================================== */
+.titulo.reg{
+    text-align: center;
+}
+
+
 
 .titulo{
     display:flex;
     flex-direction:column;
     gap:8px;
+    text-align: center;
 }
 
 .titulo h1{

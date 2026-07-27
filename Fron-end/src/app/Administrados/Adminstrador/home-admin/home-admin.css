@@ -2,11 +2,26 @@
    ESTRUCTURA GLOBAL
    ========================================================================== */
 
-.layout{
-    display:flex;
-    min-height:100vh;
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
     background:#f3f6fb;
     font-family:'Segoe UI',Roboto,Arial,sans-serif;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+.layout{
+    display:flex;
+    width:100%;
+    height:100vh;
+    background:#f3f6fb;
 }
 
 
@@ -15,17 +30,25 @@
    ========================================================================== */
 
 .sidebar{
-    width:320px;
-    flex-shrink:0;
-    background:#f3f6fb;
 
     position:fixed;
+
     top:0;
     left:0;
+
+    width:320px;
     height:100vh;
 
-    overflow-y:auto;
+    background:#f3f6fb;
+
+    flex-shrink:0;
+
+    overflow:hidden;
+
     z-index:1000;
+
+    display:flex;
+    flex-direction:column;
 }
 
 
@@ -34,22 +57,31 @@
    ========================================================================== */
 
 .conten{
+
     flex:1;
 
     margin-left:320px;
 
+    width:calc(100% - 320px);
+
+    height:100vh;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
     padding:30px;
 
-    min-height:100vh;
-    overflow-y:auto;
+    background:#f3f6fb;
 }
 
 
 .contain{
+
+    width:100%;
     max-width:1350px;
+
     margin:40px auto;
 }
-
 
 
 /* ==========================================================================
@@ -57,27 +89,43 @@
    ========================================================================== */
 
 .hero{
+
     background:white;
+
     padding:30px;
+
     border-radius:20px;
+
     margin-bottom:25px;
+
     box-shadow:0 8px 25px rgba(0,0,0,.06);
-    text-align: center;
+
+    text-align:center;
+
+    animation:aparecer .35s ease;
 }
 
 
 .hero h1{
+
     margin:0;
+
     font-size:32px;
+
     color:#1e293b;
+
+    font-weight:700;
 }
 
 
 .hero p{
-    margin:8px 0 0;
-    color:#64748b;
-}
 
+    margin-top:8px;
+
+    color:#64748b;
+
+    font-size:15px;
+}
 
 
 /* ==========================================================================
@@ -88,8 +136,7 @@
 
     display:grid;
 
-    grid-template-columns:
-    repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 
     gap:20px;
 
@@ -115,6 +162,8 @@
     box-shadow:0 8px 25px rgba(0,0,0,.06);
 
     transition:.25s;
+
+    animation:aparecer .35s ease;
 }
 
 
@@ -122,6 +171,7 @@
 
     transform:translateY(-5px);
 
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 }
 
 
@@ -140,6 +190,125 @@
     align-items:center;
 
     font-size:25px;
+
+    flex-shrink:0;
+}
+
+.btn-asig{
+
+    margin-top:10px;
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:#ffffff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+    box-shadow:
+        0 4px 10px rgba(37,99,235,.20);
+
+}
+
+
+.btn-asig:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(37,99,235,.30);
+
+}
+
+
+.btn-asig:active{
+
+    transform:translateY(0);
+
+}
+
+
+.btn-asig:focus{
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.18);
+
+}
+
+.btn-orden{
+    margin-top:10px;
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#eb3525;
+
+    color:#ffffff;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:all .25s ease;
+
+    box-shadow:
+        0 4px 10px rgba(235, 44, 37, 0.2);
+}
+
+.btn-orden:hover{
+
+    background:#d81d1d;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(235, 37, 37, 0.3);
+
+}
+
+
+.btn-orden:active{
+
+    transform:translateY(0);
+
+}
+
+
+.btn-orden:focus{
+
+    outline:none;
+
+    box-shadow:
+        0 0 0 3px rgba(37,99,235,.18);
+}
+
+
+
+.kpi-info{
+
+    display:flex;
+
+    flex-direction:column;
 }
 
 
@@ -151,7 +320,6 @@
     font-size:14px;
 
     font-weight:600;
-
 }
 
 
@@ -164,11 +332,14 @@
 
     font-size:30px;
 
+    font-weight:700;
 }
 
 
 
-/* COLORES KPI */
+/* ==========================================================================
+   COLORES KPI
+   ========================================================================== */
 
 .blue .kpi-icon{
 
@@ -177,14 +348,12 @@
 
 }
 
-
 .orange .kpi-icon{
 
     background:#fef3c7;
     color:#d97706;
 
 }
-
 
 .purple .kpi-icon{
 
@@ -193,7 +362,6 @@
 
 }
 
-
 .red .kpi-icon{
 
     background:#fee2e2;
@@ -201,15 +369,12 @@
 
 }
 
-
 .green .kpi-icon{
 
     background:#dcfce7;
     color:#16a34a;
 
 }
-
-
 
 /* ==========================================================================
    GRID PRINCIPAL
@@ -223,9 +388,16 @@
 
     gap:25px;
 
+    align-items:start;
+
+    margin-bottom:25px;
 }
 
 
+
+/* ==========================================================================
+   PANELES
+   ========================================================================== */
 
 .panel{
 
@@ -237,6 +409,9 @@
 
     box-shadow:0 8px 25px rgba(0,0,0,.06);
 
+    animation:aparecer .35s ease;
+
+    overflow:hidden;
 }
 
 
@@ -249,12 +424,11 @@
 
     align-items:center;
 
+    margin-bottom:20px;
+
     padding-bottom:18px;
 
     border-bottom:1px solid #e5e7eb;
-
-    margin-bottom:20px;
-
 }
 
 
@@ -267,6 +441,7 @@
 
     font-size:20px;
 
+    font-weight:700;
 }
 
 
@@ -283,6 +458,7 @@
 
     font-size:13px;
 
+    font-weight:600;
 }
 
 
@@ -290,7 +466,6 @@
 /* ==========================================================================
    TURNOS
    ========================================================================== */
-
 
 .turno-item{
 
@@ -308,24 +483,31 @@
 
     background:#f8fafc;
 
-    transition:.2s;
-
+    transition:.25s;
 }
+
+
+
+.turno-item:last-child{
+
+    margin-bottom:0;
+}
+
 
 
 .turno-item:hover{
 
     background:#eff6ff;
 
+    transform:translateX(4px);
 }
 
 
 
 .turno-avatar{
 
-    width:45px;
-
-    height:45px;
+    width:48px;
+    height:48px;
 
     border-radius:50%;
 
@@ -339,26 +521,33 @@
 
     align-items:center;
 
+    font-size:18px;
+
+    flex-shrink:0;
 }
 
 
 
 .turno-body{
 
+    flex:1;
+
     display:flex;
 
     flex-direction:column;
 
-    flex:1;
-
+    gap:4px;
 }
+
 
 
 .turno-body strong{
 
     color:#1f2937;
 
+    font-size:15px;
 }
+
 
 
 .turno-body span{
@@ -366,7 +555,6 @@
     color:#64748b;
 
     font-size:14px;
-
 }
 
 
@@ -377,89 +565,127 @@
 
     color:white;
 
-    padding:7px 14px;
+    padding:7px 15px;
 
     border-radius:20px;
 
     font-size:13px;
 
-}
+    white-space:nowrap;
 
-
-
-.panel-vacio{
-
-    text-align:center;
-
-    padding:50px 20px;
-
-    color:#94a3b8;
-
-}
-
-
-.panel-vacio i{
-
-    font-size:35px;
-
-    margin-bottom:15px;
-
+    font-weight:600;
 }
 
 
 
 /* ==========================================================================
-   TABLA FACTURAS
+   PANEL VACÍO
    ========================================================================== */
 
+.panel-vacio{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:45px 20px;
+
+    color:#94a3b8;
+
+    text-align:center;
+}
+
+
+
+.panel-vacio i{
+
+    font-size:36px;
+
+    margin-bottom:15px;
+}
+
+
+
+.panel-vacio p{
+
+    margin:0;
+
+    font-size:15px;
+}
+
+
+
+/* ==========================================================================
+   TABLAS
+   ========================================================================== */
 
 .panel table{
 
     width:100%;
 
     border-collapse:collapse;
-
 }
+
 
 
 .panel thead{
 
     background:#f8fafc;
-
 }
+
 
 
 .panel th{
 
-    padding:14px;
+    padding:15px;
 
     text-align:left;
 
-    color:#475569;
-
     font-size:13px;
 
+    font-weight:700;
+
+    color:#475569;
 }
+
 
 
 .panel td{
 
-    padding:15px 14px;
+    padding:15px;
 
     border-bottom:1px solid #e5e7eb;
 
     color:#374151;
 
     font-size:14px;
-
 }
+
+
+
+.panel tbody tr{
+
+    transition:.2s;
+}
+
 
 
 .panel tbody tr:hover{
 
     background:#f8fafc;
-
 }
+
+
+
+.panel tbody tr:last-child td{
+
+    border-bottom:none;
+}
+
 
 
 .panel td:first-child{
@@ -467,7 +693,6 @@
     font-weight:700;
 
     color:#2563eb;
-
 }
 
 
@@ -475,7 +700,6 @@
 /* ==========================================================================
    ESTADOS
    ========================================================================== */
-
 
 .estado{
 
@@ -485,6 +709,8 @@
 
     align-items:center;
 
+    min-width:95px;
+
     padding:6px 14px;
 
     border-radius:20px;
@@ -492,7 +718,6 @@
     font-size:12px;
 
     font-weight:700;
-
 }
 
 
@@ -502,7 +727,6 @@
     background:#dcfce7;
 
     color:#15803d;
-
 }
 
 
@@ -512,7 +736,6 @@
     background:#fef3c7;
 
     color:#b45309;
-
 }
 
 
@@ -522,7 +745,6 @@
     background:#dbeafe;
 
     color:#2563eb;
-
 }
 
 
@@ -532,22 +754,169 @@
     background:#fee2e2;
 
     color:#dc2626;
-
 }
 
 
 
 /* ==========================================================================
+   STOCK BAJO
+   ========================================================================== */
+
+.stock-bajo{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    margin-top:25px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+
+    animation:aparecer .35s ease;
+}
+
+
+
+.stock-header{
+
+    text-align:center;
+
+    margin-bottom:22px;
+}
+
+
+
+.stock-header h2{
+
+    margin:0;
+
+    color:#1f2937;
+
+    font-size:22px;
+
+    font-weight:700;
+}
+
+
+
+.stock-header p{
+
+    margin-top:6px;
+
+    color:#6b7280;
+
+    font-size:14px;
+}
+
+
+
+/* Lista */
+
+.stock-list{
+
+    width:100%;
+}
+
+
+
+.stock-row{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr 90px;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 10px;
+
+    border-bottom:1px solid #e5e7eb;
+
+    transition:.2s;
+}
+
+
+
+.stock-row:hover{
+
+    background:#f8fafc;
+}
+
+
+
+.stock-row:last-child{
+
+    border-bottom:none;
+}
+
+
+
+.stock-title{
+
+    background:#f3f6fb;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    color:#374151;
+}
+
+
+
+/* Cantidad */
+
+.stock-cantidad{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:fit-content;
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    background:#fee2e2;
+
+    color:#dc2626;
+
+    font-weight:700;
+}
+
+
+
+/* Sin datos */
+
+.sin-stock{
+
+    padding:30px;
+
+    text-align:center;
+
+    color:#6b7280;
+
+    background:#f9fafb;
+
+    border-radius:10px;
+}
+
+/* ==========================================================================
    ANIMACIONES
    ========================================================================== */
 
-
 .hero,
 .kpi,
-.panel{
+.panel,
+.stock-bajo{
 
     animation:aparecer .35s ease;
-
 }
 
 
@@ -557,16 +926,13 @@
     from{
 
         opacity:0;
-
         transform:translateY(15px);
 
     }
 
-
     to{
 
         opacity:1;
-
         transform:translateY(0);
 
     }
@@ -576,11 +942,18 @@
 
 
 /* ==========================================================================
-   SCROLL
+   SCROLL DEL CONTENIDO
    ========================================================================== */
 
+.conten{
 
-.sidebar::-webkit-scrollbar,
+    scrollbar-width:thin;
+    scrollbar-color:#cbd5e1 transparent;
+
+}
+
+
+
 .conten::-webkit-scrollbar{
 
     width:8px;
@@ -588,7 +961,7 @@
 }
 
 
-.sidebar::-webkit-scrollbar-thumb,
+
 .conten::-webkit-scrollbar-thumb{
 
     background:#cbd5e1;
@@ -598,7 +971,15 @@
 }
 
 
-.sidebar::-webkit-scrollbar-track,
+
+.conten::-webkit-scrollbar-thumb:hover{
+
+    background:#94a3b8;
+
+}
+
+
+
 .conten::-webkit-scrollbar-track{
 
     background:transparent;
@@ -608,9 +989,8 @@
 
 
 /* ==========================================================================
-   RESPONSIVE
+   RESPONSIVE TABLET
    ========================================================================== */
-
 
 @media(max-width:1100px){
 
@@ -624,15 +1004,26 @@
 
 
 
+/* ==========================================================================
+   RESPONSIVE MOVIL
+   ========================================================================== */
+
 @media(max-width:800px){
 
+    html,
+    body{
+
+        overflow:auto;
+
+    }
 
     .layout{
 
         flex-direction:column;
 
-    }
+        height:auto;
 
+    }
 
     .sidebar{
 
@@ -642,18 +1033,29 @@
 
         height:auto;
 
-    }
+        overflow:visible;
 
+    }
 
     .conten{
 
         margin-left:0;
 
+        width:100%;
+
+        height:auto;
+
+        overflow:visible;
+
         padding:20px;
 
     }
 
+    .contain{
 
+        margin:20px auto;
+
+    }
 
     .dashboard-kpis{
 
@@ -661,7 +1063,13 @@
 
     }
 
+    .dashboard-grid{
 
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+    }
 
     .turno-item{
 
@@ -671,7 +1079,17 @@
 
     }
 
+    .turno-avatar{
 
+        margin-bottom:5px;
+
+    }
+
+    .turno-body{
+
+        width:100%;
+
+    }
 
     .turno-servicio{
 
@@ -679,21 +1097,41 @@
 
         text-align:center;
 
+        margin-top:10px;
+
+    }
+
+    .panel{
+
+        overflow-x:auto;
+
+    }
+
+    .stock-row{
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+
+        text-align:left;
+
     }
 
 }
 
 
 
+/* ==========================================================================
+   RESPONSIVE CELULARES
+   ========================================================================== */
+
 @media(max-width:600px){
 
+    .hero{
 
-    .contain{
-
-        margin:20px auto;
+        padding:22px;
 
     }
-
 
     .hero h1{
 
@@ -701,15 +1139,38 @@
 
     }
 
+    .hero p{
+
+        font-size:14px;
+
+    }
+
+    .kpi{
+
+        padding:18px;
+
+    }
+
+    .kpi-icon{
+
+        width:55px;
+        height:55px;
+
+        font-size:22px;
+
+    }
+
+    .kpi-info h2{
+
+        font-size:26px;
+
+    }
 
     .panel{
 
         padding:18px;
 
-        overflow-x:auto;
-
     }
-
 
     .panel table{
 
@@ -717,91 +1178,52 @@
 
     }
 
-}
+    .stock-bajo{
 
-.stock-bajo {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  margin-top: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-}
+        padding:18px;
 
+    }
 
-.stock-header {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.stock-header h2 {
-  margin: 0;
-  font-size: 22px;
-  color: #1f2937;
-}
-
-.stock-header p {
-  margin-top: 5px;
-  color: #6b7280;
-  font-size: 14px;
 }
 
 
-/* Lista */
 
-.stock-list {
-  width: 100%;
+/* ==========================================================================
+   AJUSTES FINALES
+   ========================================================================== */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
 }
 
 
-.stock-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 80px;
-  align-items: center;
 
-  padding: 14px 10px;
-  border-bottom: 1px solid #e5e7eb;
+button{
 
-  font-size: 14px;
-  color: #374151;
+    font-family:inherit;
+
 }
 
 
-.stock-title {
-  background: #f3f6fb;
-  border-radius: 8px;
 
-  font-weight: 600;
-  color: #374151;
+input,
+select,
+textarea{
+
+    font-family:inherit;
+
 }
 
 
-.stock-row:last-child {
-  border-bottom: none;
-}
 
+a{
 
-/* cantidad */
+    text-decoration:none;
 
-.stock-cantidad {
+    color:inherit;
 
-  background: #fee2e2;
-  color: #dc2626;
-
-  padding: 5px 12px;
-  border-radius: 20px;
-
-  text-align: center;
-  font-weight: 600;
-  width: fit-content;
-}
-
-
-/* sin datos */
-
-.sin-stock {
-  padding: 25px;
-  text-align: center;
-  color: #6b7280;
-  background: #f9fafb;
-  border-radius: 8px;
 }

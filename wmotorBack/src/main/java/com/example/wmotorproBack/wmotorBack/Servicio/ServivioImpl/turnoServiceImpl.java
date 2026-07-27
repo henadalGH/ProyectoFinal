@@ -323,7 +323,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
     @Override
     public Long contarTurnosPendientes() {
 
-        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         return turnoRepository.countByEstado(estado);

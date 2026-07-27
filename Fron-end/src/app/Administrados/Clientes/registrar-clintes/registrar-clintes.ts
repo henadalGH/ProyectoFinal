@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { RegistroClienteServicio } from '../../../Servicio/registro-cliente-servicio';
@@ -12,7 +12,7 @@ import { Header } from "../../../header/header";
   templateUrl: './registrar-clintes.html',
   styleUrl: './registrar-clintes.css',
 })
-export class RegistrarClintes {
+export class RegistrarClintes implements OnInit{
 
 
     // Localidades
@@ -40,6 +40,9 @@ export class RegistrarClintes {
     private router: Router
   ){
 
+  }
+  ngOnInit(): void {
+    this.obtenerLocalidad();
   }
 
 crearUsuario() {

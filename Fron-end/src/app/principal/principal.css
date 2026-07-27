@@ -139,10 +139,10 @@ a{
 
     background:
         linear-gradient(
-            rgba(0,0,0,.70),
-            rgba(0,0,0,.70)
+            rgba(0, 0, 0, 0.381),
+            rgba(0, 0, 0, 0.5)
         ),
-        url('/assets/images/taller.jpg');
+        url('../../assets/images/taller.jpg');
 
     background-size:cover;
     background-position:center;

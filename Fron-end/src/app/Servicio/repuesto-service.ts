@@ -54,4 +54,9 @@ export class RepuestoService {
   }
 
 
+  crearRepuesto(body: any){
+    return this.http.post(`${this.urlRepuesto}/crearRepuesto`, body);
+  }
+
+
 }
