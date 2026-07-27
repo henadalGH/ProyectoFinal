@@ -1,19 +1,20 @@
 .layout {
   display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+  height: 100vh;
 }
 
 .sidebar {
-  width: 320px;   /* ancho del menú */
+  width: 320px;
   background: #1f2937;
   color: white;
 }
 
 .content {
-  flex: 1;        /* ocupa todo el espacio restante */
+  flex: 1;
   background: #f3f6fb;
   padding: 20px;
 }
+
 
 /* =========================
    CONTENEDOR PRINCIPAL
@@ -31,6 +32,7 @@
 
     font-family:"Segoe UI",sans-serif;
 }
+
 
 /* =========================
    CARD FORMULARIO
@@ -51,6 +53,7 @@
     border:1px solid #e5e7eb;
 }
 
+
 /* =========================
    TITULOS
 ========================= */
@@ -69,6 +72,7 @@
     margin-bottom:30px;
 }
 
+
 /* =========================
    FORMULARIO
 ========================= */
@@ -80,6 +84,7 @@
 
     gap:22px;
 }
+
 
 /* =========================
    CAMPOS
@@ -98,8 +103,10 @@
     color:#374151;
 }
 
+
 .campo input,
-.campo select{
+.campo select,
+.campo textarea{
     width:100%;
 
     padding:14px 16px;
@@ -114,8 +121,17 @@
     transition:.2s;
 }
 
+
+.campo textarea{
+    resize:none;
+    overflow:hidden;
+    min-height:50px;
+}
+
+
 .campo input:focus,
-.campo select:focus{
+.campo select:focus,
+.campo textarea:focus{
     outline:none;
 
     border-color:#2563eb;
@@ -124,12 +140,14 @@
         0 0 0 4px rgba(37,99,235,.12);
 }
 
+
 /* =========================
    DESCRIPCION
 ========================= */
 .campo:last-of-type{
     grid-column:1/-1;
 }
+
 
 /* =========================
    BOTON CREAR
@@ -158,10 +176,12 @@ form button[type="submit"]{
     transition:.2s;
 }
 
+
 form button[type="submit"]:hover{
     background:#1d4ed8;
     transform:translateY(-2px);
 }
+
 
 /* =========================
    BOTON CANCELAR
@@ -189,9 +209,11 @@ form button[type="submit"]:hover{
     transition:.2s;
 }
 
+
 .cliente-casual > button:hover{
     background:#e5e7eb;
 }
+
 
 /* =========================
    RESPONSIVE
@@ -214,4 +236,47 @@ form button[type="submit"]:hover{
     .cliente-casual > button{
         width:100%;
     }
+}
+html, body {
+    height:100%;
+    margin:0;
+    overflow:hidden;
+}
+
+
+.layout {
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+}
+
+
+.sidebar {
+    width:320px;
+    height:100vh;
+
+    position:fixed;
+    left:0;
+    top:0;
+
+    background:#1f2937;
+    color:white;
+
+    overflow:hidden;
+}
+
+
+.content {
+
+    margin-left:320px;
+
+    height:100vh;
+
+    flex:1;
+
+    overflow-y:auto;
+
+    background:#f3f6fb;
+
+    padding:20px;
 }

@@ -47,4 +47,18 @@ public interface PresuspuestoRepository extends JpaRepository<PresupuestoEntity,
            """)
     Double totalPendiente();
 
+    @Query("""
+           SELECT COUNT(p)
+           FROM PresupuestoEntity p
+           WHERE p.estadoPresupuesto.estadoPresupuesto = 'PAGADO'
+           """)
+    Long contarFacturasCobradas();
+
+    @Query("""
+           SELECT COUNT(p)
+           FROM PresupuestoEntity p
+           WHERE p.estadoPresupuesto.estadoPresupuesto = 'ENVIADO'
+           """)
+    Long contarFacturasPendientes();
+
 }

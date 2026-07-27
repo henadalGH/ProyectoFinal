@@ -71,5 +71,17 @@ export class FacturaServicio {
   obtenerFacturasPendientes(){
     return this.http.get<any []>(`${this.urlFactura}/obtenerFacturasPendientes`);
   }
+
+  contarFacturasCobradas(){
+    return this.http.get<any>(`${this.urlFactura}/contaFacturaCobresas`);
+  }
   
+  contarFacturasImpagas(){
+    return this.http.get<any>(`${this.urlFactura}/contaFacturaImpagas`);
+  }
+
+  obternerTotalFacturaImpagas()
+  {
+    return this.http.get<any>(`${this.urlFactura}/total-pendiente`);
+  }
 }

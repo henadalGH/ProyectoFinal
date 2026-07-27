@@ -30,14 +30,14 @@
         <div class="card">
             <span class="icono">💰</span>
             <h3>Pendientes de cobro</h3>
-            <h2>5</h2>
-            <p>$505.000</p>
+            <h2>{{facturaImpagas}}</h2>
+            <p>${{total$Pendiente}}</p>
         </div>
 
         <div class="card">
             <span class="icono">✅</span>
             <h3>Cobradas</h3>
-            <h2>126</h2>
+            <h2>{{facturaCobradas}}</h2>
             <p>Este año</p>
         </div>
 
@@ -76,11 +76,13 @@
                             </td>
                             <td>
                                 @if(fac.estadoPresupuesto == 'ENVIADO'){
-                                    <p>IMPAGA</p>
-                                }@else if(fac.estadoPresupuesto == 'PENDIENTE'){
-                                    <p>SIN ENVIAR</p>
-                                }@else if (fac.estadoPresupuesto == 'PAGADO') {
-                                    <p>PAGADA</p>
+                                    <span class="estado estado-impaga">IMPAGA</span>
+                                }
+                                @else if(fac.estadoPresupuesto == 'PENDIENTE'){
+                                    <span class="estado estado-pendiente">SIN ENVIAR</span>
+                                }
+                                @else if(fac.estadoPresupuesto == 'PAGADO'){
+                                    <span class="estado estado-pagada">PAGADA</span>
                                 }
                                
                             </td>

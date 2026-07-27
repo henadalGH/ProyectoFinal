@@ -541,4 +541,18 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
 
     }
 
+
+
+    @Override
+    public Long contarFacturaCobradas() {
+        return presuspuestoRepository.contarFacturasCobradas();
+    }
+
+
+
+    @Override
+    public Long contarFacturasImpagas() {
+        return presuspuestoRepository.contarFacturasPendientes();
+    }
+
 }

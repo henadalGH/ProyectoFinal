@@ -31,4 +31,6 @@ public interface PresupuestoService {
     Double obtenerTotalFacturado();
     Double obtenerTotalCobrado();
     Double obtenerTotalPendiente();
+    Long contarFacturaCobradas();
+    Long contarFacturasImpagas();
 }

@@ -87,12 +87,23 @@ export class TurnoClienteCasual implements OnInit{
     
     }
 
+    autoResize(event:any){
+  const textarea = event.target;
+
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
+}
+
       crearTurnoCasual() {
+
+        const fechaHora = `${this.fecha}T${this.horaAsignada}`;
+
+  console.log('Fecha enviada:', fechaHora);
       this.turnoService.crearTurnoCasual(
         this.descripcion,
         this.idServicio,
         this.idVehiculo,
-        this.fecha,
+        fechaHora,
         {
           nombreCliente: this.nombre,
           contactoCliente: this.contacto,

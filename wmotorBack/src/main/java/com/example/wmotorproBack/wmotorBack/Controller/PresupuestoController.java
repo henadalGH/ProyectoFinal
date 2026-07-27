@@ -154,6 +154,16 @@ public class PresupuestoController {
         return new ResponseEntity<List<ObtenerPresupuestoDTO>>(presupuestoService.obtenerPresupuestoPendientes(), HttpStatus.OK);
     }
 
+    @GetMapping("/contaFacturaCobresas")
+    public ResponseEntity<Long> cantidadFaturasCobredas() {
+        return new ResponseEntity<>(presupuestoService.contarFacturaCobradas(), HttpStatus.OK);
+    }
+    
+    @GetMapping("/contaFacturaImpagas")
+    public ResponseEntity<Long> cantidadFaturasImpagas() {
+        return new ResponseEntity<>(presupuestoService.contarFacturasImpagas(), HttpStatus.OK);
+    }
+
     
 
 }
