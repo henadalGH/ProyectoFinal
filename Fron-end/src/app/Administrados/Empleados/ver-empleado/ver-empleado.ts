@@ -17,6 +17,7 @@ export class VerEmpleado implements OnInit {
 
   id!: number;
   empleado: any;
+  fechaMaxima!: string;
 
   // Copia para detectar cambios
   empleadoOriginal: any;
@@ -43,6 +44,7 @@ export class VerEmpleado implements OnInit {
     const hoy = new Date();
 
     hoy.setFullYear(hoy.getFullYear() - 18);
+    
 
     this.fechaMaxima = hoy.toISOString().split('T')[0];
 

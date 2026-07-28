@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { Router, RouterLink } from '@angular/router';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
-import { Header } from "../../../header/header";
+import { Header } from '../../../header/header';
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -12,7 +12,7 @@ import { Header } from "../../../header/header";
   templateUrl: './registrar-empleado.html',
   styleUrl: './registrar-empleado.css',
 })
-export class RegistrarEmpleado {
+export class RegistrarEmpleado implements OnInit {
   nombre: string = '';
   apellido: string = '';
   email: string = '';
@@ -24,17 +24,22 @@ export class RegistrarEmpleado {
   fechaNacimiento: string = '';
   cargo: string = '';
 
+  fechaMaxima!: string;
+
   mostrarPassword = false;
   mostrarConfirmPassword = false;
-
-  editarEmail = false;
-  editarContacto = false;
-  editarCargo = false;
 
   constructor(
     private empleadoService: EmpleadoService,
     private router: Router
   ) {}
+
+  ngOnInit(): void {
+    // Establece el límite máximo en el calendario para impedir seleccionar menores de 18
+    const hoy = new Date();
+    hoy.setFullYear(hoy.getFullYear() - 18);
+    this.fechaMaxima = hoy.toISOString().split('T')[0];
+  }
 
   get formularioValido(): boolean {
     return (
@@ -53,7 +58,7 @@ export class RegistrarEmpleado {
     );
   }
 
-  registrarEmpleado() {
+  registrarEmpleado(): void {
     if (!this.formularioValido) {
       alert('Complete todos los campos correctamente antes de registrar.');
       return;
@@ -63,51 +68,44 @@ export class RegistrarEmpleado {
       return;
     }
 
-
-    if (!this.validarEdad()) {
-      alert("El empleado debe ser mayor de 18 años");
-      return;
-    }
-
-
     const fechaFormateada = this.formatearFecha(this.fechaNacimiento);
     const dniSinPuntos = this.dni.replace(/\./g, '');
 
-
-    this.empleadoService.crearEmpleado(
-      this.nombre,
-      this.apellido,
-      this.email,
-      this.password,
-      this.contacto,
-      dniSinPuntos,
-      fechaFormateada,
-      this.rol,
-      this.cargo
-    ).subscribe({
-      next: () => {
-        this.router.navigate(['/gestionEmpleado']);
-      },
-      error: (err) => {
-        console.error('Error al registrar empleado:', err);
-      }
-    });
+    this.empleadoService
+      .crearEmpleado(
+        this.nombre,
+        this.apellido,
+        this.email,
+        this.password,
+        this.contacto,
+        dniSinPuntos,
+        fechaFormateada,
+        this.rol,
+        this.cargo
+      )
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/gestionEmpleado']);
+        },
+        error: (err) => {
+          console.error('Error al registrar empleado:', err);
+          alert('Ocurrió un error al registrar el empleado.');
+        },
+      });
   }
 
   formatearDniVista(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const valor = input.value.replace(/[^\d]/g, '');
-    const limpio = valor.slice(0, 8);
+    const valor = input.value.replace(/[^\d]/g, '').slice(0, 8);
 
-    let formateado = '';
-    for (let i = 0; i < limpio.length; i++) {
-      if (i === 2 || i === 5) {
-        formateado += '.';
-      }
-      formateado += limpio[i];
+    // Formatea agregando puntos según la longitud real
+    if (valor.length > 5) {
+      this.dni = `${valor.slice(0, -6)}.${valor.slice(-6, -3)}.${valor.slice(-3)}`;
+    } else if (valor.length > 2) {
+      this.dni = `${valor.slice(0, -3)}.${valor.slice(-3)}`;
+    } else {
+      this.dni = valor;
     }
-
-    this.dni = formateado;
   }
 
   private validarEmail(email: string): boolean {
@@ -169,18 +167,12 @@ export class RegistrarEmpleado {
     return null;
   }
 
-  // 🔧 Convierte yyyy-MM-dd → dd-MM-yyyy
   formatearFecha(fecha: string): string {
-
     if (!fecha) return '';
-
     const partes = fecha.split('-');
-
     if (partes.length !== 3) return fecha;
 
     const [anio, mes, dia] = partes;
-
     return `${dia}-${mes}-${anio}`;
   }
-
 }
