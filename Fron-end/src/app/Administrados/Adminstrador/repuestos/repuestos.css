@@ -117,7 +117,7 @@ BOTON
 .btn-nuevo{
 
     border:none;
-    background:#1976d2;
+    background:#2563eb;
     color:#fff;
 
     padding:14px 24px;
@@ -136,7 +136,7 @@ BOTON
 
 .btn-nuevo:hover{
 
-    background:#1565c0;
+    background:#1d4ed8;
 
 }
 
@@ -230,7 +230,7 @@ BOTONES BUSCADOR
 
 .buscar{
 
-    background:#1976d2;
+    background:#2563eb;
 
     color:#fff;
 
@@ -248,7 +248,7 @@ BOTONES BUSCADOR
 
 .buscar:hover{
 
-    background:#1565c0;
+    background:#1d4ed8;
 
 }
 
@@ -538,7 +538,7 @@ ANIMACIONES
 =========================*/
 
 .btn-aumento button{
-    background:#1473d2;
+    background:#2563eb;
     color:#fff;
     border:none;
     border-radius:10px;
@@ -550,10 +550,26 @@ ANIMACIONES
 }
 
 .btn-aumento button:hover{
-    background:#0d63bb;
+    background:#1d4ed8;
     transform:translateY(-2px);
 }
 
+.btn-ajuste button{
+    background:#059669;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-ajuste button:hover{
+    background:#047857;
+    transform:translateY(-2px);
+}
 
 /*=========================
           MODAL
@@ -664,7 +680,7 @@ ANIMACIONES
 }
 
 .btn-guardar{
-    background:#1473d2;
+    background:#2563eb;
     color:#fff;
     border:none;
     border-radius:8px;
@@ -674,5 +690,178 @@ ANIMACIONES
 }
 
 .btn-guardar:hover{
+    background:#1d4ed8;
+}
+
+.modal-ajuste{
+    width:min(460px, 100%);
+}
+
+.modal-ajuste-form .item-ajuste{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:14px;
+}
+
+.modal-ajuste-form label{
+    font-weight:600;
+    color:#374151;
+}
+
+.modal-ajuste-form input,
+.modal-ajuste-form select{
+    height:45px;
+    padding:0 14px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
+}
+
+.modal-ajuste-form input:focus,
+.modal-ajuste-form select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.16);
+}
+
+.modal-ajuste-form .btn-form{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:16px;
+}
+
+.modal-ajuste-form .btn-form button{
+    border:none;
+    border-radius:8px;
+    padding:10px 18px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.modal-ajuste-form .btn-form button[type="submit"]{
+    background:#2563eb;
+    color:#fff;
+}
+
+.modal-ajuste-form .btn-form button[type="submit"]:hover{
+    background:#1d4ed8;
+}
+
+.modal-ajuste-form .btn-form button[type="button"]{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.modal-ajuste-form .btn-form button[type="button"]:hover{
+    background:#d1d5db;
+}
+
+/* Botón ajustar precio */
+.btn-ajuste button{
+    background:#2e7d32;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-ajuste button:hover{
+    background:#1b5e20;
+    transform:translateY(-2px);
+}
+
+/* Formulario de ajuste */
+.item-ajuste{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:14px;
+}
+
+.item-ajuste label{
+    font-weight:600;
+    color:#374151;
+}
+
+.item-ajuste input,
+.item-ajuste select,
+.campos-pre input,
+.campos-pre select,
+.campo-pre input,
+.campo-pre select{
+    height:45px;
+    padding:0 14px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
+}
+
+.item-ajuste input:focus,
+.item-ajuste select:focus,
+.campos-pre input:focus,
+.campos-pre select:focus,
+.campo-pre input:focus,
+.campo-pre select:focus{
+    border-color:#1473d2;
+    box-shadow:0 0 0 3px rgba(20,115,210,.16);
+}
+
+.btn-form{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:16px;
+}
+
+.btn-form button{
+    border:none;
+    border-radius:8px;
+    padding:10px 18px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-form button[type="submit"]{
+    background:#1473d2;
+    color:#fff;
+}
+
+.btn-form button[type="submit"]:hover{
     background:#0d63bb;
+}
+
+.btn-form button[type="button"]{
+    background:#e5e7eb;
+    color:#374151;
+}
+
+.btn-form button[type="button"]:hover{
+    background:#d1d5db;
+}
+
+.campo-pre{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:18px;
+}
+
+.campo-pre label{
+    font-weight:600;
+    color:#374151;
+}
+
+.campo-pre p{
+    margin:0;
+    font-size:13px;
+    color:#6b7280;
 }

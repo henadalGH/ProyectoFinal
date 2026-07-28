@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.AjusteDePrecioDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ModificarPrecioPorMarca;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerNombreMarcaRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
@@ -184,28 +186,111 @@ public ResponceDTO modificarPrecioCompra(ModificarPrecioPorMarca modificarPrecio
 }
 
     @Override
-    public ResponceDTO crearRepuesto(RepuestoDTO repuestoDTO) {
-        
-        ResponceDTO responceDTO = new ResponceDTO();
+public ResponceDTO crearRepuesto(RepuestoDTO repuestoDTO) {
 
-        RepuestosEntity repuestosEntity = new RepuestosEntity();
-        repuestosEntity.setNombre(repuestoDTO.getNombre());
-        repuestosEntity.setMarca(repuestoDTO.getMarca());
-        repuestosEntity.setCodigo(repuestoDTO.getCodigo());
-        repuestosEntity.setPrecioCompra(repuestoDTO.getPrecioCompra());
-    
-        Double precioVenta = repuestoDTO.getPrecioCompra() * 0.5;
-        repuestosEntity.setPrecioVenta(precioVenta);
-        repuestosEntity.setStock(repuestoDTO.getStock());
-        repuestosEntity.setStockMin(repuestoDTO.getStockMin());
-        repuestosEntity.setCategoria(repuestoDTO.getCategoria());
-        repuestosEntity.setActivo(true);
-        
-        repuestoRepository.save(repuestosEntity);
+    ResponceDTO responceDTO = new ResponceDTO();
 
-        responceDTO.setMensage("Repuesto creado corectamente");
+    RepuestosEntity repuestosEntity = new RepuestosEntity();
+
+    repuestosEntity.setNombre(repuestoDTO.getNombre());
+    repuestosEntity.setMarca(repuestoDTO.getMarca());
+    repuestosEntity.setCodigo(repuestoDTO.getCodigo());
+    repuestosEntity.setPrecioCompra(repuestoDTO.getPrecioCompra());
+    repuestosEntity.setStock(repuestoDTO.getStock());
+    repuestosEntity.setStockMin(repuestoDTO.getStockMin());
+    repuestosEntity.setCategoria(repuestoDTO.getCategoria());
+    repuestosEntity.setActivo(true);
+
+
+    // Si no viene porcentaje usa 50% por defecto
+    Double porcentajeGanancia = repuestoDTO.getPorcentajeGanancia();
+
+    if (porcentajeGanancia == null) {
+        porcentajeGanancia = 50.0;
+    }
+
+
+    // Calcular precio de venta
+    Double precioVenta = repuestoDTO.getPrecioCompra()
+            + (repuestoDTO.getPrecioCompra() * porcentajeGanancia / 100);
+
+
+    // Redondear a 2 decimales
+    precioVenta = Math.round(precioVenta * 100.0) / 100.0;
+
+
+    repuestosEntity.setPrecioVenta(precioVenta);
+
+
+    repuestoRepository.save(repuestosEntity);
+
+
+    responceDTO.setMensage("Repuesto creado correctamente");
+
+    return responceDTO;
+}
+
+    @Override
+    public List<ObtenerNombreMarcaRepuestoDTO> obtenerNombreRepuestos() {
+        return repuestoRepository.obtenerNombreMarca();
+    }
+
+   @Override
+   @Transactional
+public ResponceDTO ajustarPreciosRepuestos(AjusteDePrecioDTO dto) {
+
+    ResponceDTO responceDTO = new ResponceDTO();
+
+
+    if (dto.getPorcentaje() == null || dto.getPorcentaje() <= 0) {
+        responceDTO.setMensage("El porcentaje debe ser mayor a cero");
         return responceDTO;
     }
 
+
+    if (dto.getTipoDescuento() == null) {
+        responceDTO.setMensage("Debe indicar si es AUMENTO o DESCUENTO");
+        return responceDTO;
+    }
+
+
+    List<RepuestosEntity> repuestos = repuestoRepository.findAll();
+
+
+    for (RepuestosEntity repuesto : repuestos) {
+
+        Double precioActual = repuesto.getPrecioVenta();
+
+
+        Double ajuste = precioActual * dto.getPorcentaje() / 100;
+
+
+        Double nuevoPrecio;
+
+
+        if (dto.getTipoDescuento().equalsIgnoreCase("AUMENTO")) {
+
+            nuevoPrecio = precioActual + ajuste;
+
+
+        } else if (dto.getTipoDescuento().equalsIgnoreCase("DESCUENTO")) {
+
+            nuevoPrecio = precioActual - ajuste;
+
+
+        } else {
+
+            responceDTO.setMensage("Tipo inválido. Use AUMENTO o DESCUENTO");
+            return responceDTO;
+        }
+        // Redondear a 2 decimales
+        nuevoPrecio = Math.round(nuevoPrecio * 100.0) / 100.0;
+        repuesto.setPrecioVenta(nuevoPrecio);
+    }
+    repuestoRepository.saveAll(repuestos);
+    responceDTO.setMensage("Precios actualizados correctamente");
+
+    return responceDTO;
+}
 
 }

@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.AjusteDePrecioDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ModificarPrecioPorMarca;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerNombreMarcaRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -83,5 +86,21 @@ public class RepuestoController {
 
         return new ResponseEntity<ResponceDTO>(repuestoService.crearRepuesto(repuestoDTO), HttpStatus.OK);
     }
+
+    @GetMapping("obtenerNombreMarcaRepuesto")
+    public ResponseEntity<List<ObtenerNombreMarcaRepuestoDTO>> obtenerNombre() {
+        return new ResponseEntity<List<ObtenerNombreMarcaRepuestoDTO>>(repuestoService.obtenerNombreRepuestos(), HttpStatus.OK);
+    }
+
+    @PutMapping("/ajustar-precios")
+public ResponseEntity<ResponceDTO> ajustarPreciosRepuestos(
+        @RequestBody AjusteDePrecioDTO ajustePrecioRepuestoDTO) {
+
+    ResponceDTO respuesta = repuestoService
+            .ajustarPreciosRepuestos(ajustePrecioRepuestoDTO);
+
+    return ResponseEntity.ok(respuesta);
+}
+    
 
 }

@@ -15,6 +15,7 @@ public class RepuestoDTO {
     private Double precioCompra;
     private Double precioVenta;
     private Boolean activo;
+    private Double porcentajeGanancia;
     private CategoriasRepuestoEnums categoria;
 
 }

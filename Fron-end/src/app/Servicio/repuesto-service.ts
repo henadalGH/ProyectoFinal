@@ -58,5 +58,19 @@ export class RepuestoService {
     return this.http.post(`${this.urlRepuesto}/crearRepuesto`, body);
   }
 
+  obtenerNombreMarcasRepuesto(){
+    return this.http.get<any[]>(`${this.urlRepuesto}/obtenerNombreMarcaRepuesto`);
+  }
+
+  modificarGananciaRepuesto(porcentaje: number, tipoDescuento: string){
+
+    const body = {
+
+      porcentaje,
+      tipoDescuento
+    }
+    return this.http.put(`${this.urlRepuesto}/ajustar-precios`, body);
+  }
+
 
 }

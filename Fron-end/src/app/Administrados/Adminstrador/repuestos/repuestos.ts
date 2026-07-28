@@ -33,10 +33,31 @@ export class Repuestos implements OnInit{
   categoriaBuscar: string = '';
 
   mostarModal: boolean = false;
+  mostarModalAjuste: boolean = false;
+  
   marca: string = '';
   nombre: string = '';
   porcentaje: number = 0;
+  nombreMarca: any[]=[];
+  porcentajeVenta: number = 0; 
+  tipoDescuento: string = '';
 
+  abrirAjuste(){
+    this.mostarModalAjuste = true;
+  }
+
+  cerrarAjuste(){
+    this.mostarModalAjuste = false;
+  }
+
+  modificaPrecioVenta(){
+    this.repuetoService.modificarGananciaRepuesto(this.porcentajeVenta, this.tipoDescuento).subscribe(
+      { next: any =>{
+          this.cerrarAjuste();
+          this.obtenerRepuesto();
+          
+        }});
+  }
 
 
   obtenerRepuesto(){
@@ -101,6 +122,7 @@ export class Repuestos implements OnInit{
 
   abrirModal(){
     this.mostarModal = true;
+    this.obtenerNombreMarcaRepuesto();
   }
 
   cerrarModal(){
@@ -117,6 +139,14 @@ export class Repuestos implements OnInit{
           this.obtenerRepuesto();
           
         }
+      }
+    )
+  }
+
+  obtenerNombreMarcaRepuesto(){
+    this.repuetoService.obtenerNombreMarcasRepuesto().subscribe(
+      (repuesta: any) => {
+        this.nombreMarca = repuesta;
       }
     )
   }

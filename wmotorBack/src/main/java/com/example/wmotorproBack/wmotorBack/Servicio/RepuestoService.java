@@ -2,7 +2,9 @@ package com.example.wmotorproBack.wmotorBack.Servicio;
 
 import java.util.List;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.AjusteDePrecioDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ModificarPrecioPorMarca;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerNombreMarcaRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
@@ -22,6 +24,8 @@ public interface RepuestoService {
     List<RepuestoStockBajoDTO> obtenerRepuestoBajoStock();
     List<ObtenerRepuestoDTO> obtenerRepuestosOrden();
     ResponceDTO crearRepuesto(RepuestoDTO repuestoDTO);
+    List<ObtenerNombreMarcaRepuestoDTO> obtenerNombreRepuestos();
+    ResponceDTO ajustarPreciosRepuestos(AjusteDePrecioDTO dto);
     
 
 }

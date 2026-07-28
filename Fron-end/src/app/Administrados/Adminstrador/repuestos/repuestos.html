@@ -19,6 +19,45 @@
           <button (click)="abrirModal()">Aplicar aumento</button>
         </div>
 
+        <div class="btn-ajuste">
+          <button (click)="abrirAjuste()">Ajustar precio venta</button>
+        </div>
+
+        @if (mostarModalAjuste) {
+          <div class="modal-overlay">
+            <div class="modal modal-ajuste">
+              <div class="modal-header">
+                <h2>Ajustar precio de venta</h2>
+                <button type="button" class="btn-cerrar" (click)="cerrarAjuste()">×</button>
+              </div>
+
+              <p class="modal-texto">
+                Define el porcentaje y el tipo de ajuste que deseas aplicar a los precios.
+              </p>
+
+              <form class="modal-ajuste-form" (ngSubmit)="modificaPrecioVenta()">
+                <div class="item-ajuste">
+                  <label>Ingrese un porcentaje</label>
+                  <input type="number" name="porcentajeVenta" [(ngModel)]="porcentajeVenta">
+                </div>
+
+                <div class="item-ajuste">
+                  <label>Seleccione tipo de ajuste</label>
+                  <select name="tipoDescuento" [(ngModel)]="tipoDescuento">
+                    <option value="AUMENTO">Aumento</option>
+                    <option value="DESCUENTO">Descuento</option>
+                  </select>
+                </div>
+
+                <div class="btn-form">
+                  <button type="button" (click)="cerrarAjuste()">Cancelar</button>
+                  <button type="submit">Aplicar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        }
+
        @if (mostarModal) {
 
 <div class="modal-overlay">
@@ -39,18 +78,22 @@
 
       <div class="campos-pre">
         <label>Marca</label>
-        <input
-          type="text"
-          name="marca"
-          [(ngModel)]="marca">
+        <select name="marca" [(ngModel)]="marca">
+          <option>Seleccione una marca</option>
+          @for (nom of nombreMarca; track $index) {
+            <option value="{{nom.marcaRepuesto}}">{{nom.marcaRepuesto}}</option>
+          }
+        </select>
       </div>
 
       <div class="campos-pre">
         <label>Nombre del repuesto</label>
-        <input
-          type="text"
-          name="nombre"
-          [(ngModel)]="nombre">
+        <select name="nombre" [(ngModel)]="nombre">
+          <option>Seleccione un nombre</option>
+          @for (nom of nombreMarca; track $index) {
+            <option value="{{nom.nombreRepuesto}}">{{nom.nombreRepuesto}}</option>
+          }
+        </select>
       </div>
 
       <div class="campos-pre">
@@ -59,6 +102,14 @@
           type="number"
           name="porcentaje"
           [(ngModel)]="porcentaje">
+      </div>
+
+      <div class="campo-pre">
+        <label>Ingrese el porcentaje de aumento de venta</label>
+        <p>Opcional</p>
+        <input type="number"
+        name="porcentajeVenta"
+        [(ngModel)]="porcentajeVenta">
       </div>
 
       <div class="acciones-modal">
