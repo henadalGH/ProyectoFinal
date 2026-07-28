@@ -36,6 +36,7 @@ import com.example.wmotorproBack.wmotorBack.Repository.EstadoTurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.PrioridadRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.RepuestoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.ServicioRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.TurnoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.NumeracionService;
 import com.example.wmotorproBack.wmotorBack.Servicio.OrdenReparacionService;
@@ -66,6 +67,9 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService {
 
     @Autowired
     private RepuestoRepository repuestoRepository;
+
+    @Autowired
+    private ServicioRepository servicioRepository;
 
     @Override
     public ResponceDTO crearReparacion(OrdenReparacionDTO orden) {
@@ -233,8 +237,22 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService {
 
                 if (detalleOrdenDTO.getTipoItem() == TipoItemEnums.REPUESTO && detalleOrdenDTO.getCodigo() != null) {
                     Double precio = repuestoRepository.findByCodigo(detalleOrdenDTO.getCodigo())
-                            .map(repuesto -> repuesto.getPrecioVenta())
-                            .orElse(0.0); // O manejar excepción según tu caso de negocio
+                        .map(repuesto -> repuesto.getPrecioVenta())
+                        .orElse(0.0);
+
+                    detalleOrdenDTO.setPrecioUnitario(precio);
+                } else if (detalleOrdenDTO.getTipoItem() == TipoItemEnums.SERVICIO) {
+                    String nombreServicio = detalleOrdenEntity.getServicio() != null
+                        ? detalleOrdenEntity.getServicio().getNombre()
+                        : detalleOrdenDTO.getTrabajoRealizado();
+
+                    Double precio = 0.0;
+                    if (nombreServicio != null && !nombreServicio.isBlank()) {
+                    precio = servicioRepository.findByNombreIgnoreCase(nombreServicio)
+                        .map(servicio -> servicio.getPrecion_base())
+                        .orElseGet(() -> servicioRepository.findByNombreContainingIgnoreCase(nombreServicio)
+                            .map(servicio -> servicio.getPrecion_base()).orElse(0.0));
+                    }
 
                     detalleOrdenDTO.setPrecioUnitario(precio);
                 }
@@ -350,16 +368,29 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService {
 
                 if (detalleDTO.getTipoItem() == TipoItemEnums.REPUESTO && detalleDTO.getCodigo() != null) {
                     Double precio = repuestoRepository.findByCodigo(detalleDTO.getCodigo())
-                            .map(repuesto -> repuesto.getPrecioVenta())
-                            .orElse(0.0);
+                        .map(repuesto -> repuesto.getPrecioVenta())
+                        .orElse(0.0);
+
+                    detalleDTO.setPrecioUnitario(precio);
+                } else if (detalleDTO.getTipoItem() == TipoItemEnums.SERVICIO) {
+                    String nombreServicio = detalleEntity.getServicio() != null
+                        ? detalleEntity.getServicio().getNombre()
+                        : detalleDTO.getTrabajoRealizado();
+
+                    Double precio = 0.0;
+                    if (nombreServicio != null && !nombreServicio.isBlank()) {
+                    precio = servicioRepository.findByNombreIgnoreCase(nombreServicio)
+                        .map(servicio -> servicio.getPrecion_base())
+                        .orElseGet(() -> servicioRepository.findByNombreContainingIgnoreCase(nombreServicio)
+                            .map(servicio -> servicio.getPrecion_base()).orElse(0.0));
+                    }
 
                     detalleDTO.setPrecioUnitario(precio);
                 }
 
                 listaDetalles.add(detalleDTO);
             }
-            // Si tu OrdenTrabajoEmpleadoDTO tiene el atributo setDetalleOrden, se asigna aquí:
-            // ordenTrabajoEmpleado.setDetalleOrden(listaDetalles);
+            ordenTrabajoEmpleado.setDetalleOrden(listaDetalles);
         }
 
         if (orden.getPrioridad() != null) {

@@ -15,6 +15,7 @@ import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
 import com.example.wmotorproBack.wmotorBack.Repository.DetalleOrdenReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.RepuestoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.ServicioRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.DetalleOrdenService;
 
 @Service
@@ -28,6 +29,9 @@ public class DetalleOrdenServiceImpl implements DetalleOrdenService {
 
     @Autowired
     private RepuestoRepository repuestoRepository;
+    
+    @Autowired
+    private ServicioRepository servicioRepository;
     
     @Override
     public DetalleOrdenDTO toMapDetalleDTO(DetalleOrdenEntity detalleOrden) {
@@ -47,8 +51,22 @@ public class DetalleOrdenServiceImpl implements DetalleOrdenService {
         if (detalleOrden.getTipoItem() == TipoItemEnums.REPUESTO && detalleOrden.getCodigo() != null) {
 
             Double precio = repuestoRepository.findByCodigo(detalleOrden.getCodigo())
-                    .map(repuesto -> repuesto.getPrecioVenta())
-                    .orElse(0.0); // O asigna null si prefieres no mostrar valor
+                .map(repuesto -> repuesto.getPrecioVenta())
+                .orElse(0.0); // O asigna null si prefieres no mostrar valor
+
+            detalleOrdenDTO.setPrecioUnitario(precio);
+        } else if (detalleOrden.getTipoItem() == TipoItemEnums.SERVICIO) {
+            String nombreServicio = detalleOrden.getServicio() != null
+                ? detalleOrden.getServicio().getNombre()
+                : detalleOrden.getTrabajoRealizados();
+
+            Double precio = 0.0;
+            if (nombreServicio != null && !nombreServicio.isBlank()) {
+            precio = servicioRepository.findByNombreIgnoreCase(nombreServicio)
+                .map(servicio -> servicio.getPrecion_base())
+                .orElseGet(() -> servicioRepository.findByNombreContainingIgnoreCase(nombreServicio)
+                    .map(servicio -> servicio.getPrecion_base()).orElse(0.0));
+            }
 
             detalleOrdenDTO.setPrecioUnitario(precio);
         }

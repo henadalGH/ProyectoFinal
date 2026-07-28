@@ -142,6 +142,8 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
         detalleEntity.setPrecioUnitario(detalleDTO.getPrecioUnitario());
 
         double subTotalLinea = detalleDTO.getCantidad() * detalleDTO.getPrecioUnitario();
+        // Redondear a 2 decimales
+        subTotalLinea = Math.round(subTotalLinea * 100.0) / 100.0;
 
         detalleEntity.setSubTotal(subTotalLinea);
         detalleEntity.setPresupuesto(presupuestoEntity);
@@ -165,22 +167,28 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
         }
     }
 
+    // Redondear monto de descuento
+    montoDescuento = Math.round(montoDescuento * 100.0) / 100.0;
+
     // 2. Subtotal base luego de restar el descuento
     double subtotalConDescuento = Math.max(0, subTotalGeneral - montoDescuento);
+    subtotalConDescuento = Math.round(subtotalConDescuento * 100.0) / 100.0;
 
     // 3. Calcular IVA (21%) únicamente si aplicaIva es true
     boolean aplicaIva = Boolean.TRUE.equals(presupuestoDTO.getAplicaIva());
     double iva = aplicaIva ? subtotalConDescuento * 0.21 : 0.0;
+    iva = Math.round(iva * 100.0) / 100.0;
 
     // 4. Total Final
     double totalFinal = subtotalConDescuento + iva;
+    totalFinal = Math.round(totalFinal * 100.0) / 100.0;
 
     // Asignación de valores finales a la entidad
-    presupuestoEntity.setMontoDescuento(montoDescuento);
+    presupuestoEntity.setMontoDescuento(Math.round(montoDescuento * 100.0) / 100.0);
     presupuestoEntity.setDetalle(detalles);
-    presupuestoEntity.setSubTotal(subTotalGeneral);
-    presupuestoEntity.setIva(iva);
-    presupuestoEntity.setTotal(totalFinal);
+    presupuestoEntity.setSubTotal(Math.round(subTotalGeneral * 100.0) / 100.0);
+    presupuestoEntity.setIva(Math.round(iva * 100.0) / 100.0);
+    presupuestoEntity.setTotal(Math.round(totalFinal * 100.0) / 100.0);
 
     // Guardar
     presuspuestoRepository.save(presupuestoEntity);
@@ -252,6 +260,19 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
         obtenerPresupuesto.setSubTotal(presupuesto.getSubTotal());
         obtenerPresupuesto.setTipoFacturaDTO(presupuesto.getTipoFactura());
         obtenerPresupuesto.setEstadoPresupuesto(presupuesto.getEstadoPresupuesto().getEstadoPresupuesto());
+        // Descuento y IVA
+        obtenerPresupuesto.setDescuento(presupuesto.getDescuento());
+        obtenerPresupuesto.setTipoDescuento(presupuesto.getTipoDescuento());
+        obtenerPresupuesto.setAplicaIva(presupuesto.getAplicaIva());
+        // Calcular montoDescuento si no está explícito
+        Double montoDesc = presupuesto.getMontoDescuento() != null ? presupuesto.getMontoDescuento()
+            : (presupuesto.getDescuento() != null && presupuesto.getTipoDescuento() != null
+                ? (presupuesto.getTipoDescuento() == TipoDescuentoEnums.PORCENTAJE
+                    ? Math.round((presupuesto.getSubTotal() * presupuesto.getDescuento() / 100.0) * 100.0)
+                        / 100.0
+                    : presupuesto.getDescuento())
+                : 0.0);
+        obtenerPresupuesto.setMontoDescuento(montoDesc);
         
 
 
@@ -300,23 +321,58 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
             detallePresupuestoRepository.deleteAll(presupuesto.getDetalle());
         }
 
-        double total = 0;
+        double subTotalGeneral = 0.0;
         List<DetallePresupuestoEntity> nuevosDetalles = new ArrayList<>();
-        for (DetallePresupuestoDTO detalleDto : presupuestoDTO.getDetallePresupuesto()) {
-            DetallePresupuestoEntity detalleEntity = new DetallePresupuestoEntity();
-            detalleEntity.setCantidad(detalleDto.getCantidad());
-            detalleEntity.setDescripcion(detalleDto.getDescripcion());
-            detalleEntity.setPrecioUnitario(detalleDto.getPrecioUnitario());
-            double subTotal = detalleDto.getCantidad() * detalleDto.getPrecioUnitario();
-            detalleEntity.setSubTotal(subTotal);
-            detalleEntity.setPresupuesto(presupuesto);
-            nuevosDetalles.add(detalleEntity);
-            detallePresupuestoRepository.save(detalleEntity);
-            total += subTotal;
+
+        if (presupuestoDTO.getDetallePresupuesto() != null) {
+            for (DetallePresupuestoDTO detalleDto : presupuestoDTO.getDetallePresupuesto()) {
+                DetallePresupuestoEntity detalleEntity = new DetallePresupuestoEntity();
+                detalleEntity.setCantidad(detalleDto.getCantidad());
+                detalleEntity.setDescripcion(detalleDto.getDescripcion());
+                detalleEntity.setPrecioUnitario(detalleDto.getPrecioUnitario());
+
+                double subTotal = detalleDto.getCantidad() * detalleDto.getPrecioUnitario();
+                subTotal = Math.round(subTotal * 100.0) / 100.0;
+
+                detalleEntity.setSubTotal(subTotal);
+                detalleEntity.setPresupuesto(presupuesto);
+                nuevosDetalles.add(detalleEntity);
+                detallePresupuestoRepository.save(detalleEntity);
+
+                subTotalGeneral += subTotal;
+            }
         }
 
+        // Aplicar descuento y IVA similares a crearPresupuesto
+        double montoDescuento = 0.0;
+        Double valorDescuento = presupuestoDTO.getDescuento() != null ? presupuestoDTO.getDescuento() : 0.0;
+        if (presupuestoDTO.getTipoDescuento() != null) {
+            if (presupuestoDTO.getTipoDescuento() == TipoDescuentoEnums.PORCENTAJE) {
+                montoDescuento = (subTotalGeneral * valorDescuento) / 100.0;
+            } else if (presupuestoDTO.getTipoDescuento() == TipoDescuentoEnums.MONTO) {
+                montoDescuento = valorDescuento;
+            }
+        }
+        montoDescuento = Math.round(montoDescuento * 100.0) / 100.0;
+
+        double subtotalConDescuento = Math.max(0, subTotalGeneral - montoDescuento);
+        subtotalConDescuento = Math.round(subtotalConDescuento * 100.0) / 100.0;
+
+        boolean aplicaIva = Boolean.TRUE.equals(presupuestoDTO.getAplicaIva());
+        double iva = aplicaIva ? subtotalConDescuento * 0.21 : 0.0;
+        iva = Math.round(iva * 100.0) / 100.0;
+
+        double totalFinal = subtotalConDescuento + iva;
+        totalFinal = Math.round(totalFinal * 100.0) / 100.0;
+
         presupuesto.setDetalle(nuevosDetalles);
-        presupuesto.setTotal(total);
+        presupuesto.setSubTotal(Math.round(subTotalGeneral * 100.0) / 100.0);
+        presupuesto.setMontoDescuento(montoDescuento);
+        presupuesto.setDescuento(presupuestoDTO.getDescuento());
+        presupuesto.setTipoDescuento(presupuestoDTO.getTipoDescuento());
+        presupuesto.setAplicaIva(presupuestoDTO.getAplicaIva());
+        presupuesto.setIva(iva);
+        presupuesto.setTotal(totalFinal);
 
         presuspuestoRepository.save(presupuesto);
 

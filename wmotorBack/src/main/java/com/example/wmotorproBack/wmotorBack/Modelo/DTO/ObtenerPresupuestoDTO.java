@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoFacturaDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoDescuentoEnums;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Data;
@@ -21,6 +22,10 @@ public class ObtenerPresupuestoDTO {
     private Double total;
     private Double subTotal;
     private Double iva;
+    private Boolean aplicaIva;
+    private Double descuento;
+    private TipoDescuentoEnums tipoDescuento;
+    private Double montoDescuento;
     private String observaciones;
     private EstadoPresupuestoEnum estadoPresupuesto;
     private List<DetallePresupuestoDTO> detallePresupuesto;

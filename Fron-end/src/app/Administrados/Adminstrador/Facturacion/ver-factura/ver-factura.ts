@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderAdmin } from "../../header-admin/header-admin";
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FacturaServicio } from '../../../../Servicio/factura-servicio';
 import { Header } from "../../../../header/header";
 import { AuthService } from '../../../../AuthServicio/auth-service';
@@ -10,7 +10,7 @@ import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-ver-factura',
-  imports: [HeaderAdmin, Header, Headercliente],
+  imports: [HeaderAdmin, Header, Headercliente, CommonModule],
   templateUrl: './ver-factura.html',
   styleUrl: './ver-factura.css',
 })
@@ -31,8 +31,8 @@ export class VerFactura implements OnInit{
   idFactura!: any;
   idAdmin!: any;
   tipoMovimiento: string ='INGRESO';
-  concepto: string = 'Pago de factura';
-  categoria: string = 'PAGO_FACTURA';
+  concepto: string = 'Se crobó la factura N° ' + this.numeroFacturaFormateado;
+  categoria: string = 'COBRO_FACTURA';
 
   
   
@@ -46,6 +46,7 @@ export class VerFactura implements OnInit{
       this.facturaService.obtenerFacturaPorid(this.idFactura).subscribe(
         (repuesta: any) => {
           this.factura = repuesta;
+          console.log(this.factura);
           this.numeroFacturaFormateado ='0001-' +
           String(this.factura.numeroPresupuesto).padStart(8, '0');
         }

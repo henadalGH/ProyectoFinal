@@ -139,10 +139,10 @@ public ResponceDTO modificarPrecioCompra(ModificarPrecioPorMarca modificarPrecio
     List<RepuestosEntity> repuestos;
 
     boolean tieneMarca = modificarPrecio.getMarcaRepuesto() != null &&
-                         !modificarPrecio.getMarcaRepuesto().isBlank();
+                        !modificarPrecio.getMarcaRepuesto().isBlank();
 
     boolean tieneNombre = modificarPrecio.getNombreRepuesto() != null &&
-                          !modificarPrecio.getNombreRepuesto().isBlank();
+                        !modificarPrecio.getNombreRepuesto().isBlank();
 
     if (tieneMarca && tieneNombre) {
 

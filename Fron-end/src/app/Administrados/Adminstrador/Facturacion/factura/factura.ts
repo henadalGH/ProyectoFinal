@@ -4,11 +4,12 @@ import { OrdenTrabajoService } from '../../../../Servicio/orden-trabajo-service'
 import { Route, Router, RouterLink } from "@angular/router";
 import { FacturaServicio } from '../../../../Servicio/factura-servicio';
 import { Header } from "../../../../header/header";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-factura',
   standalone: true,
-  imports: [HeaderAdmin, Header,RouterLink],
+  imports: [HeaderAdmin, Header,RouterLink, CommonModule],
   templateUrl: './factura.html',
   styleUrl: './factura.css',
 })

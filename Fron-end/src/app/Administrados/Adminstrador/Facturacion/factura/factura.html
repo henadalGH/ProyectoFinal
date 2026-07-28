@@ -31,7 +31,7 @@
             <span class="icono">💰</span>
             <h3>Pendientes de cobro</h3>
             <h2>{{facturaImpagas}}</h2>
-            <p>${{total$Pendiente}}</p>
+            <p>{{total$Pendiente | currency:'ARS'}}</p>
         </div>
 
         <div class="card">
@@ -72,7 +72,7 @@
                                 {{fac.nombreCliente}} {{fac.apellidoCliente}}
                             </td>
                             <td>
-                                {{fac.fechaRegistro}}
+                                {{fac.fechaRegistro | date:'dd/MM/yyyy'}}
                             </td>
                             <td>
                                 @if(fac.estadoPresupuesto == 'ENVIADO'){
@@ -87,7 +87,7 @@
                                
                             </td>
                             <td>
-                                {{fac.total}}
+                                {{fac.total | currency:'ARS'}}
                             </td>
                             <td>
                                 <button (click)="verFactura(fac.id)">Ver factura</button>
