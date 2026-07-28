@@ -53,6 +53,10 @@ public class OrdenTrabajoEntity {
     @JoinColumn(name = "id_empleado")
     private EmpleadoEntity empleado;
 
+    @ManyToOne
+    @JoinColumn(name = "id_empleado_origen")
+    private EmpleadoEntity empleadoOrigen;
+
     @OneToOne
     @JoinColumn(name = "id_turno")
     private TurnoEntity turno;

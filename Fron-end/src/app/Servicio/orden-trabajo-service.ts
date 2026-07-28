@@ -77,4 +77,9 @@ export class OrdenTrabajoService {
     return this.http.get<any[]>(`${this.urlOrden}/obtenerOrdenesSinTerminar/${idEmpleado}/${estado}`);
 
   }
+
+  reasiganrOrden(idOrden: number, idNuevoEmpleado: number){
+
+    return this.http.put(`${this.urlOrden}/reasignar/${idOrden}/${idNuevoEmpleado}`, {});
+  }
 }

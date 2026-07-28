@@ -1,2 +1,138 @@
-<app-header-admin></app-header-admin>
+<div class="layout">
 
+  <!-- MENÚ LATERAL -->
+  <aside class="sidebar">
+    <app-header-admin></app-header-admin>
+  </aside>
+
+  <!-- CONTENIDO -->
+  <main class="content">
+
+    <app-header></app-header>
+
+    <div class="content-orden">
+
+      <div class="titulo">
+        <h1>Órdenes sin terminar</h1>
+        <p>Reasigná las órdenes que aún no fueron finalizadas.</p>
+      </div>
+
+      <div class="lista-ordenes">
+
+        @for (ord of ordenes; track ord.idOrden) {
+
+          <div class="card-orden">
+
+            <div class="card-header">
+              <h3>Orden #{{ ord.idOrden }}</h3>
+
+              <span class="prioridad">
+                {{ ord.prioridad }}
+              </span>
+            </div>
+
+            <div class="card-body">
+
+              <div class="dato">
+                <span class="label">Estado</span>
+                <span>{{ ord.estado }}</span>
+              </div>
+
+              <div class="dato">
+                <span class="label">Servicio</span>
+                <span>{{ ord.nombreServicio }}</span>
+              </div>
+
+              <div class="dato">
+                <span class="label">Vehículo</span>
+                <span>{{ ord.marcaVehiculo }} {{ ord.modeloVehiculo }}</span>
+              </div>
+
+              <div class="dato">
+                <span class="label">patente</span>
+                <span>{{ ord.patenteVehiculo }}</span>
+              </div>
+
+            </div>
+
+            <div class="card-footer">
+              <button class="btn-reasignar"
+                      (click)="abrirModal(ord.idOrden)">
+                Reasignar empleado
+              </button>
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+@if (modal) {
+
+<div class="modal-overlay">
+
+  <div class="modal-content">
+
+    <h2>Reasignar Orden #{{ idOrden }}</h2>
+
+    <form (ngSubmit)="reasignarOrden()">
+
+      <div class="campo">
+
+        <label for="empleadoSelect">
+          Seleccione un empleado
+        </label>
+
+        <select
+          id="empleadoSelect"
+          [(ngModel)]="idEmpleado"
+          name="idEmpleado"
+          required>
+
+          <option [ngValue]="null" disabled>
+            -- Seleccionar un empleado --
+          </option>
+
+          @for (emp of empleados; track emp.id) {
+            <option [ngValue]="emp.id">
+              {{ emp.nombre }}
+            </option>
+          }
+
+        </select>
+
+      </div>
+
+      <div class="modal-acciones">
+
+        <button
+          class="btn-guardar"
+          type="submit"
+          [disabled]="!idEmpleado">
+          Reasignar
+        </button>
+
+        <button
+          class="btn-cancelar"
+          type="button"
+          (click)="cerrarModal()">
+          Cancelar
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+}

@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.CancelarOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetalleOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenReasignarDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -424,4 +426,56 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService {
                 .map(this::toMapObtenerOrdenDTO)
                 .collect(Collectors.toList());
     }
+
+   @Override
+    @Transactional
+    public ResponceDTO reasignarOrdenEmpleado(Long idOrden, Long idNuevoEmpleado) {
+        OrdenTrabajoEntity orden = ordenTrabajoRepository.findById(idOrden)
+                .orElseThrow(() -> new RuntimeException("Orden no encontrada con ID: " + idOrden));
+
+        EmpleadoEntity nuevoEmpleado = empleadoRepository.findById(idNuevoEmpleado)
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado con ID: " + idNuevoEmpleado));
+
+        // Usamos empleadoOrigen para que coincida con tu entidad
+        if (orden.getEmpleadoOrigen() == null) {
+            orden.setEmpleadoOrigen(orden.getEmpleado());
+        }
+
+        orden.setEmpleado(nuevoEmpleado);
+        ordenTrabajoRepository.save(orden);
+
+        // Ajusta la respuesta según los constructores/setters de tu ResponceDTO
+        ResponceDTO response = new ResponceDTO();
+        // response.setMensaje("Orden reasignada correctamente"); 
+        return response; 
+    }
+
+   @Override
+   public List<ObtenerOrdenReasignarDTO> obtenerOrdenPendientes() {
+    
+        EstadoOrdenEntity estadoOrdenEntity = estadoOrdenRepository.findByEstadoOrden(EstadoOrdenEnums.ASIGNADA)
+        .orElseThrow();
+
+        return ordenTrabajoRepository.findByEstadoOrden(estadoOrdenEntity)
+        .stream()
+        .map(this::toMapObtenerOrdenReasignarDTO)
+        .collect(Collectors.toList());
+   }
+
+   @Override
+   public ObtenerOrdenReasignarDTO toMapObtenerOrdenReasignarDTO(OrdenTrabajoEntity ordenTrabajoEntity) {
+        
+    ObtenerOrdenReasignarDTO reasignarDTO = new ObtenerOrdenReasignarDTO();
+
+    reasignarDTO.setNombreCompletoEmpelado(ordenTrabajoEntity.getEmpleado().getUsuario().getNombre()
+    + " " + ordenTrabajoEntity.getEmpleado().getUsuario().getApellido());
+    reasignarDTO.setFecha(ordenTrabajoEntity.getFechaEminsion());
+    reasignarDTO.setNombreServicio(ordenTrabajoEntity.getTurno().getServicio().getNombre());
+    reasignarDTO.setVehiculo(ordenTrabajoEntity.getTurno().getVehiculo().getMarca()+ " " +
+    ordenTrabajoEntity.getTurno().getVehiculo().getModelo());
+    reasignarDTO.setPatente(ordenTrabajoEntity.getTurno().getVehiculo().getPatente());
+    
+
+    return reasignarDTO;
+   }
 }

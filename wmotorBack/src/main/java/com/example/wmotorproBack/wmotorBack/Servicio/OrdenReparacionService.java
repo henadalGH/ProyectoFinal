@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.CancelarOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenReasignarDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -28,6 +29,9 @@ public interface OrdenReparacionService {
     List<OrdenTrabajoEmpleadoDTO> obtenerHistorialOrdenes(Long idEmpleado);
     Long obtenerOrdenTerminadaParaFecturar();
     List<ObtenerOrdenDTO> ontenerOrdenesSinTerminarPorEmpeado( Long IdEmpleado, EstadoOrdenEnums estado);
+    ResponceDTO reasignarOrdenEmpleado(Long idOrden, Long idNuevoEmpleado);
+    List<ObtenerOrdenReasignarDTO> obtenerOrdenPendientes();
+    ObtenerOrdenReasignarDTO toMapObtenerOrdenReasignarDTO(OrdenTrabajoEntity ordenTrabajoEntity);
    
 
 }

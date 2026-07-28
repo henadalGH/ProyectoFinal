@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.CancelarOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerOrdenReasignarDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenReparacionDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.OrdenTrabajoEmpleadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -117,8 +118,21 @@ public class OrdenReparacionController {
          ) {
             return new ResponseEntity<List<ObtenerOrdenDTO>>(ordenReparacionService.ontenerOrdenesSinTerminarPorEmpeado(idEmpleado, estado), HttpStatus.OK);
         }
+
+        @PutMapping("/reasignar/{idOrden}/{idNuevoEmpleado}")
+    public ResponseEntity<ResponceDTO> reasignarOrdenEmpleado(
+            @PathVariable Long idOrden, 
+            @PathVariable Long idNuevoEmpleado) {
         
-        
-    
+        return new ResponseEntity<ResponceDTO>(
+            ordenReparacionService.reasignarOrdenEmpleado(idOrden, idNuevoEmpleado), 
+            HttpStatus.OK
+        );
+    }
+
+    @GetMapping("/obtenerOrdenesAsignar")
+    public ResponseEntity<List<ObtenerOrdenReasignarDTO>> obtenerOrdenesAReasignar() {
+        return new ResponseEntity<List<ObtenerOrdenReasignarDTO>>(ordenReparacionService.obtenerOrdenPendientes(), HttpStatus.OK);
+    }
 
 }
