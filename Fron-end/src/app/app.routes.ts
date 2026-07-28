@@ -43,6 +43,7 @@ import { Dashboard } from './Administrados/Adminstrador/dashboard/dashboard';
 import { Repuestos } from './Administrados/Adminstrador/repuestos/repuestos';
 import { VerRepuesto } from './Administrados/Adminstrador/repuestos/ver-repuesto/ver-repuesto';
 import { AgregarRepuestos } from './Empleados/agregar-repuestos/agregar-repuestos';
+import { AgregarServicio } from './Empleados/agregar-servicio/agregar-servicio';
 import { RegistrarRepuesto } from './Administrados/Adminstrador/repuestos/registrar-repuesto/registrar-repuesto';
 
 export const routes: Routes = [ 
@@ -99,6 +100,7 @@ export const routes: Routes = [
     {path:'proximasOrdenes', component: OrdenesProximas},
     {path:'historialOrdenes', component: HistorialOrdenes},
     {path: 'agregarRepuestos', component: AgregarRepuestos},
+    {path: 'agregarServicios', component: AgregarServicio},
 
     
 

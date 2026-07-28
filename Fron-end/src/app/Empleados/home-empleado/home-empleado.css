@@ -43,7 +43,7 @@
 
   max-width:1200px;
 
-  margin:50px auto 30px;
+  margin:50px auto 20px;
 
   text-align:center;
 
@@ -75,9 +75,83 @@
 
 }
 
+/* ==========================================================================
+   BUSCADOR
+   ========================================================================== */
 
+.buscador {
+  max-width:1200px;
+  margin:0 auto 30px;
+  background:#fff;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+  gap:16px;
+  box-shadow:0 8px 20px rgba(15, 23, 42, 0.05);
+}
 
+.campo {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
 
+.campo label {
+  font-size:13px;
+  font-weight:700;
+  color:#475569;
+}
+
+.campo input,
+.campo select {
+  height:44px;
+  border:1px solid #cbd5e1;
+  border-radius:10px;
+  padding:0 12px;
+  font-size:14px;
+  outline:none;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color:#2563eb;
+  box-shadow:0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+.botones {
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.btn-buscar,
+.btn-limpiar {
+  border:none;
+  border-radius:10px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.btn-buscar {
+  background:#2563eb;
+  color:#fff;
+}
+
+.btn-buscar:hover {
+  background:#1d4ed8;
+}
+
+.btn-limpiar {
+  background:#e2e8f0;
+  color:#334155;
+}
+
+.btn-limpiar:hover {
+  background:#cbd5e1;
+}
 
 /* ==========================================================================
    CONTENEDOR ORDENES
@@ -104,6 +178,110 @@
 /* ==========================================================================
    TARJETA ORDEN
    ========================================================================== */
+
+.orden-body {
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:16px;
+  margin:18px 0;
+}
+
+.dato {
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:12px 14px;
+}
+
+.dato strong {
+  display:block;
+  font-size:12px;
+  color:#64748b;
+  margin-bottom:4px;
+  text-transform:uppercase;
+}
+
+.dato p {
+  margin:0;
+  color:#0f172a;
+  font-weight:600;
+}
+
+.orden-footer {
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
+
+.btn-detalle,
+.btn-cancelar {
+  border:none;
+  border-radius:10px;
+  padding:10px 14px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.btn-detalle {
+  background:#2563eb;
+  color:#fff;
+}
+
+.btn-detalle:hover {
+  background:#1d4ed8;
+}
+
+.btn-cancelar {
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.btn-cancelar:hover {
+  background:#fecaca;
+}
+
+.sin-ordenes {
+  background:#fff;
+  border:1px dashed #cbd5e1;
+  border-radius:16px;
+  padding:30px;
+  text-align:center;
+  color:#64748b;
+}
+
+.sin-ordenes i {
+  font-size:28px;
+  margin-bottom:10px;
+  color:#94a3b8;
+}
+
+@media (max-width: 900px) {
+  .buscador {
+    grid-template-columns:1fr 1fr;
+  }
+
+  .botones {
+    grid-column:span 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .buscador {
+    grid-template-columns:1fr;
+  }
+
+  .botones {
+    grid-column:span 1;
+  }
+
+  .orden-body {
+    grid-template-columns:1fr;
+  }
+
+  .orden-footer {
+    flex-direction:column;
+  }
+}
 
 .orden-card {
 

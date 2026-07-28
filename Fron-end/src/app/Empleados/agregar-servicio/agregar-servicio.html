@@ -1,0 +1,109 @@
+<div class="layout">
+
+    <!-- Contenido Principal -->
+    <main class="content">
+
+        <app-header></app-header>
+
+        <div class="contenedor">
+
+            <!-- Encabezado -->
+            <div class="titulo">
+                <h1>Seleccionar Servicios</h1>
+                <p>Busque y seleccione los servicios que desea agregar a la orden de trabajo.</p>
+            </div>
+
+            <!-- Barra Superior de Acciones y Búsqueda -->
+            <div class="barra-superior">
+
+                <div class="barra-busqueda">
+                    <input
+                        type="text"
+                        placeholder="Buscar por nombre o descripción..."
+                        [(ngModel)]="buscar"
+                        (input)="buscarServicio()">
+                </div>
+
+                <div class="acciones">
+
+                    <button
+                        type="button"
+                        class="btn-volver"
+                        (click)="volver()">
+                        Volver
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-agregar"
+                        [disabled]="seleccionados.length === 0"
+                        (click)="agregarServicios()">
+                        Agregar servicios ({{ seleccionados.length }})
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Tabla de Servicios -->
+            <div class="tabla-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th class="col-check">
+                                <!-- Columna de Checkbox -->
+                            </th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @if (serviciosFiltrados.length > 0) {
+
+                            @for (servicio of serviciosFiltrados; track servicio.id) {
+
+                                <tr>
+
+                                    <td class="col-check">
+                                        <input
+                                            type="checkbox"
+                                            [checked]="servicio.seleccionado"
+                                            (change)="seleccionarServicio($event, servicio)">
+                                    </td>
+
+                                    <td class="nombre">{{ servicio.nombre || servicio.nombreServicio }}</td>
+
+                                    <td class="descripcion">{{ servicio.descripcion || 'Sin descripción' }}</td>
+
+                                    <td class="precio">{{ servicio.precio ? ('$' + servicio.precio) : 'N/A' }}</td>
+
+                                </tr>
+
+                            }
+
+                        } @else {
+
+                            <tr>
+                                <td colspan="4" class="sin-resultados">
+                                    No se encontraron servicios que coincidan con la búsqueda.
+                                </td>
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

@@ -1,7 +1,5 @@
 <div class="layout"> 
-  <aside class="sidebar">
-    <app-header-empleado></app-header-empleado>
-  </aside>
+  
 
   <main class="content">
 
@@ -52,7 +50,7 @@
                         type="button"
                         class="btn-agregar"
                         (click)="agregarFila()">
-                        + Agregar línea
+                        + Agregar ítem
                     </button>
 
                     <button
@@ -60,6 +58,13 @@
                         class="btn-repuestos"
                         (click)="irASeleccionarRepuestos()">
                         + Seleccionar repuestos
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn-servicios"
+                        (click)="irASeleccionarServicios()">
+                        + Agregar servicio
                     </button>
                 </div>
                 }
@@ -89,7 +94,7 @@
                                 type="number"
                                 placeholder="Cantidad"
                                 [(ngModel)]="detalle.cantidad"
-                                [disabled]="soloLectura">
+                                disabled>
                         </td>
 
                         <td>
@@ -97,7 +102,7 @@
                                 type="text"
                                 placeholder="Código"
                                 [(ngModel)]="detalle.codigo"
-                                [disabled]="soloLectura">
+                                disabled>
                         </td>
 
                         <td>
@@ -105,13 +110,13 @@
                                 type="text"
                                 placeholder="Trabajo realizado"
                                 [(ngModel)]="detalle.trabajoRealizado"
-                                [disabled]="soloLectura">
+                                disabled>
                         </td>
 
                         <td>
                             <select 
                                 [(ngModel)]="detalle.tipoItem"
-                                [disabled]="soloLectura">
+                                disabled>
                                 <option value="REPUESTO">Repuesto</option>
                                 <option value="MANO_OBRA">Mano de obra</option>
                                 <option value="SERVICIO">Servicio</option>
@@ -120,11 +125,7 @@
 
                         @if (!soloLectura) {
                         <td>
-                            <button
-                                class="btn-eliminar"
-                                (click)="eliminarFila(detalle.id)">
-                                Eliminar
-                            </button>
+                            <!-- No se permite eliminar ítems cargados desde el backend -->
                         </td>
                         }
                     </tr>
@@ -158,7 +159,15 @@
                         </td>
 
                         <td>
-                            @if (fil.esRepuestoCat) {
+                            @if (fil.esServicioCat) {
+                                <!-- Si viene del catálogo de servicios, queda fijo -->
+                                <input 
+                                    type="text" 
+                                    value="Servicio" 
+                                    readonly 
+                                    disabled 
+                                    class="input-readonly" />
+                            } @else if (fil.esRepuestoCat) {
                                 <!-- Si viene del catálogo de repuestos, queda fijo como Repuesto -->
                                 <input 
                                     type="text" 
@@ -167,13 +176,13 @@
                                     disabled 
                                     class="input-readonly" />
                             } @else {
-                                <!-- Si se creó a mano, solo permite Mano de Obra o Servicio -->
-                                <select 
-                                    [(ngModel)]="fil.tipoItem"
-                                    [disabled]="soloLectura">
-                                    <option value="MANO_OBRA">Mano de obra</option>
-                                    <option value="SERVICIO">Servicio</option>
-                                </select>
+                                <!-- Si se creó a mano, solo permite Mano de Obra -->
+                                <input 
+                                    type="text" 
+                                    value="Mano de obra" 
+                                    readonly 
+                                    disabled 
+                                    class="input-readonly" />
                             }
                         </td>
 
@@ -220,7 +229,8 @@
             <button
                 class="btn-finalizar"
                 (click)="terminarOrden()"
-                [disabled]="botonDeshabilitado">
+                [disabled]="!puedeTerminarOrden"
+                title="Debe guardar los detalles antes de finalizar">
                 Finalizar Trabajo
             </button>
             }

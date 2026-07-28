@@ -1,22 +1,52 @@
 <div class="layout">
-  <aside class="sidebar">
-    <!-- Menú lateral -->
-    <app-header-empleado></app-header-empleado>
-  </aside>
+
 
   <main class="content">
     <!-- Encabezado principal -->
     <app-header></app-header>
     
     <div class="titulo">
-      <h1>Trabajos del día {{ fecha | date:'dd/MM/yyyy' }}</h1>
-      <p>Órdenes asignadas para la jornada actual</p>
+      <h1>Órdenes del empleado</h1>
+      <p>Buscá por fecha, estado o patente para encontrar órdenes rápidamente.</p>
+    </div>
+
+    <div class="buscador">
+      <div class="campo">
+        <label>Fecha desde</label>
+        <input type="date" [(ngModel)]="filtroFechaDesde" name="filtroFechaDesde">
+      </div>
+
+      <div class="campo">
+        <label>Fecha hasta</label>
+        <input type="date" [(ngModel)]="filtroFechaHasta" name="filtroFechaHasta">
+      </div>
+
+      <div class="campo">
+        <label>Estado</label>
+        <select [(ngModel)]="filtroEstado" name="filtroEstado">
+          <option value="">Todos</option>
+          <option value="PENDIENTE">Pendiente</option>
+          <option value="ASIGNADA">Asignada</option>
+          <option value="TERMINADA">Terminada</option>
+          <option value="PARA_FACTURAR">Para facturar</option>
+          <option value="CANCELADA">Cancelada</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label>Patente</label>
+        <input type="text" placeholder="Ej: ABC123" [(ngModel)]="filtroPatente" name="filtroPatente">
+      </div>
+
+      <div class="botones">
+        <button class="btn-buscar" type="button" (click)="aplicarFiltros()">Buscar</button>
+        <button class="btn-limpiar" type="button" (click)="limpiarFiltros()">Limpiar</button>
+      </div>
     </div>
 
     <div class="ordenes">
 
-      <!-- Recorremos la lista completa de órdenes -->
-      @for (ord of ordenes.concat(ordenesSinTerminar); track ord.idOrden) {
+      @for (ord of ordenesFiltradas; track ord.idOrden ?? ord.id) {
 
         <div class="orden-card">
 
@@ -46,17 +76,21 @@
               <strong>Servicio</strong>
               <p>{{ ord.nombreServicio }}</p>
             </div>
+            <div class="dato">
+              <strong>Cliente</strong>
+              <p>{{ ord.nombreCliente }}</p>
+            </div>
           </div>
 
           @if (ord.estado === 'ASIGNADA') {
             <div class="orden-footer">
               <button class="btn-detalle" (click)="verOrden(ord.idOrden ?? ord.id)">
-        Ver detalle
-        </button>
+                Ver detalle
+              </button>
 
-        <button class="btn-cancelar" (click)="cancelarOrden(ord.idOrden ?? ord.id)">
-        Cancelar
-        </button>
+              <button class="btn-cancelar" (click)="cancelarOrden(ord.idOrden ?? ord.id)">
+                Cancelar
+              </button>
             </div>
           }
 
@@ -66,8 +100,8 @@
 
         <div class="sin-ordenes">
           <i class="fas fa-clipboard-list"></i>
-          <h2>Sin trabajos asignados</h2>
-          <p>No hay órdenes para el día de hoy.</p>
+          <h2>No se encontraron órdenes</h2>
+          <p>Probá con otra fecha, estado o patente.</p>
         </div>
 
       }

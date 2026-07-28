@@ -9,7 +9,7 @@ import { RepuestoOrden } from '../detalle-orden/detalle-orden.interfaces';
 
 @Component({
   selector: 'app-agregar-repuestos',
-  imports: [FormsModule, HeaderEmpleado, Header],
+  imports: [FormsModule, Header],
   templateUrl: './agregar-repuestos.html',
   styleUrl: './agregar-repuestos.css',
 })
