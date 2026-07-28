@@ -22,10 +22,13 @@ export class HomeEmpleado implements OnInit{
   
   fecha: string = '';
   ordenes: any[]= [];
+  ordenesSinTerminar: any[]= [];
   motivo: string = '';
   
   ngOnInit(): void {
-    this.fecha = new Date().toISOString().split('T')[0];
+    this.fecha = new Date().toLocaleDateString('sv-SE', {
+  timeZone: 'America/Argentina/Buenos_Aires'
+});
 
     const idEmpleado = this.authService.getEntityId();
 
@@ -34,8 +37,20 @@ export class HomeEmpleado implements OnInit{
         this.ordenService.obtenerOrdenPorfechaEmpleado(idEmpleado, this.fecha).subscribe(
           (repuesta: any) => {
             this.ordenes = repuesta;
+            console.log(this.ordenes)
           }
         )
+    }
+
+    if(idEmpleado){
+      const estado: string = 'ASIGNADA';
+
+      this.ordenService.obtenerOrdenSinTerminar(idEmpleado, estado).subscribe(
+        (repuesta: any) => {
+          this.ordenesSinTerminar = repuesta;
+          console.log(this.ordenesSinTerminar)
+        }
+      )
     }
   }
 
@@ -60,5 +75,6 @@ export class HomeEmpleado implements OnInit{
   }
 
 }
+
 
 }

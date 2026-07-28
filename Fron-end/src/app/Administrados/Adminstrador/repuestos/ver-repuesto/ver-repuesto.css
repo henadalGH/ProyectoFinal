@@ -1,490 +1,494 @@
-/* =========================
-   LAYOUT GENERAL
-========================= */
+/*==================================================
+LAYOUT GENERAL
+==================================================*/
 
 .layout{
 
-  display:flex;
+    display:flex;
 
-  min-height:100vh;
+    height:100vh;
 
-  background:#f3f6fb;
+    overflow:hidden;
+
+    background:#f3f6fb;
 
 }
 
 
-
-/* =========================
-   MENU LATERAL
-========================= */
-
+/*==================================================
+SIDEBAR
+==================================================*/
 
 .sidebar{
 
-  width:320px;
+    width:320px;
 
-  min-width:320px;
+    min-width:320px;
 
-  height:100vh;
+    height:100vh;
 
-  position:fixed;
+    position:fixed;
 
-  left:0;
+    top:0;
 
-  top:0;
+    left:0;
 
-  z-index:1000;
+    overflow:hidden;
+
+    background:#f3f6fb;
+
+    z-index:1000;
 
 }
 
 
-
-/* =========================
-   CONTENIDO PRINCIPAL
-========================= */
-
+/*==================================================
+CONTENIDO PRINCIPAL
+==================================================*/
 
 .content{
 
-  margin-left:320px;
+    margin-left:320px;
 
-  width:calc(100% - 320px);
+    width:calc(100% - 320px);
 
-  min-height:100vh;
+    height:100vh;
 
-  overflow-x:hidden;
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    background:#f3f6fb;
+
+    padding:20px 30px 0;
 
 }
 
-
-
-
-/* =========================
-   CONTENIDO REPUESTO
-========================= */
-
+/*==================================================
+HEADER
+(No scrollea)
+==================================================*/
 
 .content-verRep{
 
-  padding:30px;
+    flex:1;
 
-  background:#f3f6fb;
+    overflow-y:auto;
 
-  min-height:calc(100vh - 70px);
+    overflow-x:hidden;
+
+    padding:25px 5px 40px;
 
 }
 
 
+/*==================================================
+CONTENEDOR DEL CONTENIDO
+(ÚNICO QUE SCROLLEA)
+==================================================*/
 
-/* =========================
-   TITULO
-========================= */
+.content-verRep{
 
+    flex:1;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:30px 35px 40px;
+
+}
+
+
+/*==================================================
+ANCHO DEL CONTENIDO
+==================================================*/
+
+.content-verRep > *{
+
+    max-width:1100px;
+
+    margin-left:auto;
+
+    margin-right:auto;
+
+}
+
+
+/*==================================================
+CONTENEDOR PRINCIPAL
+==================================================*/
+
+.content-repuesto{
+    flex:1;
+
+    overflow-y:auto;
+
+    overflow-x:hidden;
+
+    padding:25px 30px 40px;
+
+}
+/*==================================================
+TITULO
+==================================================*/
 
 .titulo-repuesto{
 
-  display:flex;
+    display:flex;
 
-  justify-content:space-between;
+    justify-content:space-between;
 
-  align-items:center;
+    align-items:center;
 
-  margin-bottom:30px;
+    margin-bottom:30px;
+
+    padding-bottom:20px;
+
+    border-bottom:2px solid #e5e7eb;
 
 }
-
 
 
 .titulo-repuesto h1{
 
-  margin:0;
+    margin:0;
 
-  font-size:28px;
+    font-size:32px;
 
-  color:#1f2937;
+    color:#111827;
+
+    font-weight:700;
 
 }
-
 
 
 .titulo-repuesto p{
 
-  margin:8px 0 0;
+    margin-top:6px;
 
-  color:#6b7280;
+    color:#6b7280;
 
-  font-size:15px;
+    font-size:16px;
 
 }
 
 
 
-/* =========================
-   ESTADO
-========================= */
-
+/*==================================================
+ESTADO
+==================================================*/
 
 .estado{
 
-  padding:8px 20px;
+    padding:10px 20px;
 
-  border-radius:20px;
+    border-radius:30px;
 
-  font-weight:600;
+    font-size:14px;
 
-  font-size:14px;
+    font-weight:700;
 
 }
-
 
 
 .activo{
 
-  background:#dcfce7;
+    background:#dcfce7;
 
-  color:#15803d;
+    color:#15803d;
 
 }
-
 
 
 .inactivo{
 
-  background:#fee2e2;
+    background:#fee2e2;
 
-  color:#dc2626;
+    color:#dc2626;
 
 }
 
-
-
-
-/* =========================
-   INFORMACION DEL REPUESTO
-========================= */
-
+/*==================================================
+CARD DATOS
+==================================================*/
 
 .card-detalle{
 
-  background:white;
+    display:grid;
 
-  padding:30px;
+    grid-template-columns:repeat(2,1fr);
 
-  border-radius:15px;
+    gap:20px;
 
-  display:grid;
+    background:white;
 
-  grid-template-columns:repeat(4,1fr);
+    border-radius:16px;
 
-  gap:25px;
+    padding:30px;
 
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom:30px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
 
 }
-
 
 
 .dato{
 
-  display:flex;
+    display:flex;
 
-  flex-direction:column;
+    flex-direction:column;
 
-  gap:7px;
+    gap:6px;
 
 }
-
 
 
 .dato label{
 
-  color:#6b7280;
+    color:#64748b;
 
-  font-size:14px;
+    font-size:13px;
 
-  font-weight:500;
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
 
 }
-
 
 
 .dato span{
 
-  color:#111827;
+    color:#111827;
 
-  font-size:17px;
+    font-size:18px;
 
-  font-weight:600;
+    font-weight:600;
 
 }
-
 
 
 .stock{
 
-  color:#2563eb !important;
-
-  font-size:20px !important;
+    color:#2563eb;
 
 }
 
-
-
-
-/* =========================
-   CARD STOCK Y ESTADO
-========================= */
-
+/*==================================================
+CARDS
+==================================================*/
 
 .card-stock,
 .card-estado{
 
-  margin-top:25px;
+    background:white;
 
-  background:white;
+    border-radius:16px;
 
-  padding:25px 30px;
+    padding:30px;
 
-  border-radius:15px;
+    margin-bottom:25px;
 
-  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
 
 }
-
 
 
 .card-stock h2,
 .card-estado h2{
 
-  margin:0 0 20px;
+    margin-bottom:20px;
 
-  font-size:20px;
-
-  color:#1f2937;
+    color:#111827;
 
 }
 
 
 
-/* =========================
-   CONTROL STOCK
-========================= */
-
+/*==================================================
+CONTROL STOCK
+==================================================*/
 
 .stock-control{
 
-  display:flex;
+    display:flex;
 
-  align-items:center;
+    gap:15px;
 
-  gap:15px;
+    align-items:center;
+
+    flex-wrap:wrap;
 
 }
-
 
 
 .stock-control input{
 
-  width:150px;
+    width:150px;
 
-  padding:12px;
+    height:44px;
 
-  border-radius:8px;
+    padding:0 15px;
 
-  border:1px solid #d1d5db;
+    border:1px solid #d1d5db;
 
-  font-size:16px;
+    border-radius:10px;
+
+    font-size:15px;
 
 }
-
 
 
 .stock-control input:focus{
 
-  outline:none;
+    outline:none;
 
-  border-color:#2563eb;
+    border-color:#2563eb;
 
 }
 
 
 
-/* =========================
-   BOTONES
-========================= */
-
+/*==================================================
+BOTONES
+==================================================*/
 
 .btn{
 
-  border:none;
+    border:none;
 
-  padding:12px 22px;
+    border-radius:10px;
 
-  border-radius:8px;
+    padding:12px 22px;
 
-  cursor:pointer;
+    font-size:14px;
 
-  font-weight:600;
+    font-weight:600;
 
-  font-size:15px;
+    cursor:pointer;
 
-  transition:0.2s;
-
-}
-
-
-
-.btn:hover{
-
-  transform:translateY(-2px);
+    transition:.2s;
 
 }
 
-
-
-/* aumentar stock */
 
 .aumentar{
 
-  background:#16a34a;
+    background:#16a34a;
 
-  color:white;
+    color:white;
 
 }
 
 
+.aumentar:hover{
 
-/* quitar stock */
+    background:#15803d;
+
+}
+
 
 .quitar{
 
-  background:#dc2626;
+    background:#dc2626;
 
-  color:white;
+    color:white;
 
 }
 
 
+.quitar:hover{
 
-/* activar */
+    background:#b91c1c;
+
+}
+
 
 .activar{
 
-  background:#16a34a;
+    background:#16a34a;
 
-  color:white;
+    color:white;
 
 }
 
 
+.activar:hover{
 
-/* desactivar */
+    background:#15803d;
+
+}
+
 
 .desactivar{
 
-  background:#6b7280;
+    background:#dc2626;
 
-  color:white;
-
-}
-
-
-
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-
-@media(max-width:1200px){
-
-
-  .card-detalle{
-
-    grid-template-columns:repeat(2,1fr);
-
-  }
-
+    color:white;
 
 }
 
 
+.desactivar:hover{
 
-@media(max-width:800px){
-
-
-  .sidebar{
-
-    width:250px;
-
-    min-width:250px;
-
-  }
-
-
-  .content{
-
-    margin-left:250px;
-
-    width:calc(100% - 250px);
-
-  }
-
-
-  .titulo-repuesto{
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-  }
-
-
-  .card-detalle{
-
-    grid-template-columns:1fr;
-
-  }
-
-
-  .stock-control{
-
-    flex-direction:column;
-
-    align-items:stretch;
-
-  }
-
-
-  .stock-control input{
-
-    width:100%;
-
-  }
-
+    background:#b91c1c;
 
 }
 
 
-@media(max-width:600px){
+.btn:disabled{
 
+    opacity:.5;
 
-  .sidebar{
+    cursor:not-allowed;
 
-    display:none;
+}
 
-  }
+/*==================================================
+RESPONSIVE
+==================================================*/
 
+@media(max-width:900px){
 
-  .content{
+    .titulo-repuesto{
 
-    margin-left:0;
+        flex-direction:column;
 
-    width:100%;
+        align-items:flex-start;
 
-  }
+        gap:15px;
 
+    }
+
+    .card-detalle{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .stock-control{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .stock-control input{
+
+        width:100%;
+
+    }
+
+    .btn{
+
+        width:100%;
+
+    }
 
 }

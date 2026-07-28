@@ -3,11 +3,12 @@ import { HeaderAdmin } from "../header-admin/header-admin";
 import { Header } from "../../../header/header";
 import { RepuestoService } from '../../../Servicio/repuesto-service';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-repuestos',
-  imports: [HeaderAdmin, Header, FormsModule],
+  imports: [HeaderAdmin, Header, FormsModule, RouterLink, CommonModule],
   templateUrl: './repuestos.html',
   styleUrl: './repuestos.css',
 })
@@ -27,11 +28,14 @@ export class Repuestos implements OnInit{
 
   // copia de todos los repuestos
   repuestosOriginal: any[] = [];
-
-
   // filtros
   nombreBuscar: string = '';
   categoriaBuscar: string = '';
+
+  mostarModal: boolean = false;
+  marca: string = '';
+  nombre: string = '';
+  porcentaje: number = 0;
 
 
 
@@ -93,6 +97,28 @@ export class Repuestos implements OnInit{
   verRepuesto(idRepuesto: number){
 
     this.router.navigate(['/verRepuesto', idRepuesto]);
+  }
+
+  abrirModal(){
+    this.mostarModal = true;
+  }
+
+  cerrarModal(){
+    this.mostarModal = false;
+  }
+
+
+  aumentarPrecioRepuesto(){
+
+    this.repuetoService.modificarPrecioBase(this.porcentaje, this.marca, this.nombre).subscribe(
+      {
+        next: any =>{
+          this.cerrarModal();
+          this.obtenerRepuesto();
+          
+        }
+      }
+    )
   }
 
 

@@ -26,9 +26,21 @@ export class AsignacionTurnos implements OnInit {
 
   fechaMinima: string = '';
   fechaAsignada: string = '';
+  horaAsignada: string = '';
+  horarios: string[] = [];
 
   ngOnInit(): void {
     this.asignarTurno();
+
+
+    let inicio = 8 * 60;
+    let cierrre = 14 *60;
+    let minutos;
+    for(minutos = inicio; minutos<= cierrre; minutos += 30){
+      let hora = Math.floor(minutos/60).toString().padStart(2 , '0');
+      let minuto = Math.floor(minutos % 60).toString().padStart(2 , '0');
+      this.horarios.push(`${hora}:${minuto}`);
+    }
 
   }
 
@@ -36,6 +48,8 @@ export class AsignacionTurnos implements OnInit {
   abrirModal(id: number){
     this.turnoSeleccionado = id;
     this.mostrarModal = true;
+
+    
   }
 
   cerrarModal(){
@@ -64,15 +78,18 @@ export class AsignacionTurnos implements OnInit {
       return;
     }
 
+    if (!this.horaAsignada) {
+      alert('Seccione una hora')      
+    }
+
     const hoy = new Date().toISOString().split('T')[0];
 
     if (this.fechaAsignada < hoy) {
       alert('No podés elegir una fecha pasada');
       return;
     }
-    
-
-    this.turnoService.asignarFecha(this.turnoSeleccionado, this.fechaAsignada)
+    const fechaHora = `${this.fechaAsignada}T${this.horaAsignada.trim()}`;
+    this.turnoService.asignarFecha(this.turnoSeleccionado, fechaHora)
       .subscribe({
         next: () => {
           alert('Fecha asignada correctamente');

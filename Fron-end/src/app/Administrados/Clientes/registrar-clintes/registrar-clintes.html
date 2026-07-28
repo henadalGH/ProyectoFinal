@@ -12,14 +12,13 @@
 
             <div class="titulo">
                 <h1>Registrar cliente</h1>
-                <p>Complete los datos para crear un nuevo cliente.</p>
             </div>
 
             <div class="card">
 
                 <div class="card-header">
 
-                    <div>
+                    <div class="titulo.reg">
                         <h2>Nuevo cliente</h2>
                         <p>Ingrese la información del cliente.</p>
                     </div>
@@ -57,13 +56,40 @@
                             required>
                     </div>
 
-                    <div class="campo">
+                    <div class="campo password-field">
                         <label>Contraseña</label>
-                        <input
-                            type="password"
-                            name="password"
-                            [(ngModel)]="password"
-                            required>
+                        <div class="input-wrapper">
+                            <input
+                                [type]="showPassword ? 'text' : 'password'"
+                                name="password"
+                                [(ngModel)]="password"
+                                required>
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                (click)="showPassword = !showPassword">
+                                {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+                            </button>
+                        </div>
+                        <small class="helper-text">Debe tener al menos 7 caracteres, incluir letras y números y solo letras minúsculas.</small>
+                    </div>
+
+                    <div class="campo password-field">
+                        <label>Repetir contraseña</label>
+                        <div class="input-wrapper">
+                            <input
+                                [type]="showConfirmPassword ? 'text' : 'password'"
+                                name="confirmarPassword"
+                                [(ngModel)]="confirmarPassword"
+                                required>
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                (click)="showConfirmPassword = !showConfirmPassword">
+                                {{ showConfirmPassword ? 'Ocultar' : 'Mostrar' }}
+                            </button>
+                        </div>
+                        <small class="helper-text">Debe coincidir con la contraseña anterior.</small>
                     </div>
 
                     <div class="campo">
@@ -76,39 +102,39 @@
                     </div>
 
                     <div class="input-group">
-            <label for="provincia">Provincia</label>
-            <select
-                id="provincia"
-                name="provincia"
-                [(ngModel)]="provinciaSeleccionada"
-                (change)="filtrarLocalidades()">
+                        <label for="provincia">Provincia</label>
+                        <select
+                            id="provincia"
+                            name="provincia"
+                            [(ngModel)]="provinciaSeleccionada"
+                            (change)="filtrarLocalidades()">
 
-                <option value="">Seleccione una provincia</option>
+                            <option value="">Seleccione una provincia</option>
 
-                @for (provincia of provincias; track $index) {
-                <option [value]="provincia">
-                    {{ provincia }}
-                </option>
-                }
-            </select>
-            </div>
+                            @for (provincia of provincias; track $index) {
+                                <option [value]="provincia">
+                                    {{ provincia }}
+                                </option>
+                            }
+                        </select>
+                    </div>
 
-            <div class="input-group">
-            <label for="localidad">Localidad</label>
-            <select
-                id="localidad"
-                name="localidad"
-                [(ngModel)]="idLocalidad">
+                    <div class="input-group">
+                        <label for="localidad">Localidad</label>
+                        <select
+                            id="localidad"
+                            name="localidad"
+                            [(ngModel)]="idLocalidad">
 
-                <option [ngValue]="null">Seleccione una localidad</option>
+                            <option [ngValue]="null">Seleccione una localidad</option>
 
-                @for (loc of localidadesFiltradas; track loc.id) {
-                <option [ngValue]="loc.id">
-                    {{ loc.nombreLocalidad }}
-                </option>
-                }
-            </select>
-            </div>
+                            @for (loc of localidadesFiltradas; track loc.id) {
+                                <option [ngValue]="loc.id">
+                                    {{ loc.nombreLocalidad }}
+                                </option>
+                            }
+                        </select>
+                    </div>
 
                     <div class="campo">
                         <label>Domicilio</label>
@@ -120,24 +146,19 @@
                     </div>
 
                     <div class="botones">
-
                         <button
                             type="submit"
-                            class="btn-primary">
-
+                            class="btn-primary"
+                            [disabled]="!formularioValido">
                             Registrar cliente
-
                         </button>
 
                         <button
                             type="button"
                             class="btn-secondary"
                             [routerLink]="['/gestionCliente']">
-
                             Cancelar
-
                         </button>
-
                     </div>
 
                 </form>

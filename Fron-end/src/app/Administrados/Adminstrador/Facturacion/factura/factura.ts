@@ -8,7 +8,7 @@ import { Header } from "../../../../header/header";
 @Component({
   selector: 'app-factura',
   standalone: true,
-  imports: [HeaderAdmin, RouterLink, Header],
+  imports: [HeaderAdmin, Header,RouterLink],
   templateUrl: './factura.html',
   styleUrl: './factura.css',
 })
@@ -21,6 +21,10 @@ export class Factura implements OnInit{
 
   facturas: any[]= [];
   facEmitida!: any;
+  facaturaPendientes: any []=[];
+  facturaCobradas!: any;
+  facturaImpagas!: any;
+  total$Pendiente: any;
   
   
   
@@ -28,6 +32,9 @@ export class Factura implements OnInit{
    this.obtenerOrdenParaFacturar();
    this.obtenerFacturas();
    this.contarFacturasEmitidas();
+   this.contarFacturasCobradas();
+   this.contarFacturasImpagas();
+   this.totalACobrar()
   }
 
   factura: any[] = [];
@@ -44,6 +51,7 @@ export class Factura implements OnInit{
     }
 
 
+    
     obtenerFacturas(){
       this.facturaService.obtenerFacturas().subscribe(
         (repuesta: any) => {
@@ -63,6 +71,34 @@ export class Factura implements OnInit{
             this.facEmitida = repuesta;
             console.log("Facturas emitidad " + this.facEmitida)
           });
+    }
+
+    contarFacturasCobradas(){
+      this.facturaService.contarFacturasCobradas().subscribe(
+        (repuesta: any) =>{
+          this.facturaCobradas = repuesta;
+          console.log("Factura cobrada: " + this.facturaCobradas)
+        }
+      )
+    }
+
+    
+    contarFacturasImpagas(){
+      this.facturaService.contarFacturasImpagas().subscribe(
+        (repuesta: any) =>{
+          this.facturaImpagas = repuesta;
+          console.log("Factura impagas: " + this.facturaImpagas)
+        }
+      )
+    }
+
+    totalACobrar(){
+      this.facturaService.obternerTotalFacturaImpagas().subscribe(
+        (repuesta: any) =>{
+          this.total$Pendiente = repuesta;
+          console.log("Total Factura a cobrar: " + this.total$Pendiente)
+        }
+      )
     }
 
 }

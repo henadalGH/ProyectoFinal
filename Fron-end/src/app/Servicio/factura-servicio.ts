@@ -63,5 +63,25 @@ export class FacturaServicio {
   contarFacturasEmitida(){
     return this.http.get<any>(`${this.urlFactura}/facturasEmitidad`);
   }
+
+  pagarFactura(idFactura: number, idAdmin: number, body: any){
+    return this.http.put(`${this.urlFactura}/pagarFactura/${idFactura}/${idAdmin}`, body);
+  }
+
+  obtenerFacturasPendientes(){
+    return this.http.get<any []>(`${this.urlFactura}/obtenerFacturasPendientes`);
+  }
+
+  contarFacturasCobradas(){
+    return this.http.get<any>(`${this.urlFactura}/contaFacturaCobresas`);
+  }
   
+  contarFacturasImpagas(){
+    return this.http.get<any>(`${this.urlFactura}/contaFacturaImpagas`);
+  }
+
+  obternerTotalFacturaImpagas()
+  {
+    return this.http.get<any>(`${this.urlFactura}/total-pendiente`);
+  }
 }

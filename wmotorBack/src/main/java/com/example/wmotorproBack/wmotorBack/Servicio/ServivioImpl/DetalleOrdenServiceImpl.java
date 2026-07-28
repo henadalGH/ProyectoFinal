@@ -11,30 +11,49 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetalleOrdenDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetalleOrdenEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoItemEnums;
 import com.example.wmotorproBack.wmotorBack.Repository.DetalleOrdenReposistory;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.RepuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.DetalleOrdenService;
 
 @Service
-public class DetalleOrdenServiceImpl implements DetalleOrdenService{
+public class DetalleOrdenServiceImpl implements DetalleOrdenService {
 
     @Autowired
     private DetalleOrdenReposistory detalleOrdenReposistory;
 
     @Autowired
     private OrdenTrabajoRepository ordenTrabajoRepository;
+
+    @Autowired
+    private RepuestoRepository repuestoRepository;
     
     @Override
     public DetalleOrdenDTO toMapDetalleDTO(DetalleOrdenEntity detalleOrden) {
 
         DetalleOrdenDTO detalleOrdenDTO = new DetalleOrdenDTO();
+
         detalleOrdenDTO.setCantidad(detalleOrden.getCantidad());
         detalleOrdenDTO.setCodigo(detalleOrden.getCodigo());
         detalleOrdenDTO.setTipoItem(detalleOrden.getTipoItem());
         detalleOrdenDTO.setTrabajoRealizado(detalleOrden.getTrabajoRealizados());
+        
+        if (detalleOrden.getOrden() != null) {
+            detalleOrdenDTO.setIdorden(detalleOrden.getOrden().getId());
+        }
+
+        // Completa automáticamente el precio si es un REPUESTO y tiene código asociado
+        if (detalleOrden.getTipoItem() == TipoItemEnums.REPUESTO && detalleOrden.getCodigo() != null) {
+
+            Double precio = repuestoRepository.findByCodigo(detalleOrden.getCodigo())
+                    .map(repuesto -> repuesto.getPrecioVenta())
+                    .orElse(0.0); // O asigna null si prefieres no mostrar valor
+
+            detalleOrdenDTO.setPrecioUnitario(precio);
+        }
 
         return detalleOrdenDTO;
-       
     }
 
     @Override
@@ -43,13 +62,11 @@ public class DetalleOrdenServiceImpl implements DetalleOrdenService{
         ResponceDTO responceDTO = new ResponceDTO();
 
         OrdenTrabajoEntity ordenEntity = ordenTrabajoRepository.findById(idOrden)
-        .orElseThrow(() -> new RuntimeException("Id orden trabajo no encontrada"));
+                .orElseThrow(() -> new RuntimeException("Id orden trabajo no encontrada con ID: " + idOrden));
 
         List<DetalleOrdenEntity> detalles = new ArrayList<>();
 
-        
-        for(DetalleOrdenDTO detalle: detalleOrden){
-
+        for (DetalleOrdenDTO detalle : detalleOrden) {
 
             DetalleOrdenEntity detalleOrdenEntity = new DetalleOrdenEntity();
             detalleOrdenEntity.setCantidad(detalle.getCantidad());
@@ -60,11 +77,9 @@ public class DetalleOrdenServiceImpl implements DetalleOrdenService{
 
             detalles.add(detalleOrdenEntity);
             detalleOrdenReposistory.save(detalleOrdenEntity);
-
         }
 
         responceDTO.setMensage("Detalles agregados con exito");
-
         return responceDTO;
     }
 
@@ -72,11 +87,8 @@ public class DetalleOrdenServiceImpl implements DetalleOrdenService{
     public List<DetalleOrdenDTO> obtenerDetallePorIdOrden(Long idOrden) {
     
         return detalleOrdenReposistory.findByOrdenId(idOrden)
-        .stream()
-        .map(this::toMapDetalleDTO)
-        .collect(Collectors.toList());
+                .stream()
+                .map(this::toMapDetalleDTO)
+                .collect(Collectors.toList());
     }
-
-    
-
 }

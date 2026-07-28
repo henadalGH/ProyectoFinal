@@ -16,6 +16,11 @@
     <div class="titulo">
         <h1>Nuestros Servicios</h1>
         <p>Los precios corresponden únicamente a la mano de obra.</p>
+        <div class="acciones">
+            <button class="btn-volver" (click)="volver()">
+                Volver
+            </button>
+        </div>
     </div>
 
     @if(servicios){
@@ -54,10 +59,6 @@
 
         </div>
 
-        <div class="acciones">
-            <button class="btn-volver" (click)="volver()">
-                Volver
-            </button>
-        </div>
+        
     }
 </div>

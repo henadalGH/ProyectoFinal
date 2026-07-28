@@ -72,7 +72,11 @@
 
                 <div>
                     <span class="estado">
-                        {{ ord.estado }}
+                        @if(ord.estado == "PARA_FACTURAR"){
+                            <p>TERMINADA</p>
+                        }@else if(ord.estado == 'ASIGNADA'){
+                            <p>PENDIENTE</p>
+                        }
                     </span>
                 </div>
 

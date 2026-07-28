@@ -76,14 +76,14 @@
         <div class="dato">
           <label>Precio compra</label>
           <span>
-            $ {{ repuesto.precioCompra }}
+            {{ repuesto.precioCompra | currency:'ARS'}}
           </span>
         </div>
 
         <div class="dato">
           <label>Precio venta</label>
           <span>
-            $ {{ repuesto.precioVenta }}
+            {{ repuesto.precioVenta | currency:'ARS'}}
           </span>
         </div>
 

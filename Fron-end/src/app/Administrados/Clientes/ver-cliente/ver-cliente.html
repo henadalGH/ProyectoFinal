@@ -38,7 +38,8 @@
       
       <div class="campo">
         <h4>Teléfono</h4>
-        <p>{{cliente.contacto}}</p>
+        {{ '+54 ' + cliente.contacto.slice(2,5) + ' ' + cliente.contacto.slice(5,8) + '-' + cliente.contacto.slice(8) }}
+        
       </div>
 
       <div class="campo">

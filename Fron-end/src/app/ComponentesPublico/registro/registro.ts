@@ -11,15 +11,16 @@ import { Location } from '@angular/common';
   styleUrl: './registro.css',
 })
 export class Registro implements OnInit {
-
   nombre: string = '';
   apellido: string = '';
   email: string = '';
   password: string = '';
+  confirmarPassword: string = '';
   contacto: string = '';
   direccion: string = '';
   rol: string = 'CLIENTE';
   mostrarPassword: boolean = false;
+  mostrarConfirmPassword: boolean = false;
 
   // Localidades
   localidad: any[] = [];
@@ -42,37 +43,65 @@ export class Registro implements OnInit {
     this.obtenerLocalidad();
   }
 
+  get formularioValido(): boolean {
+    return (
+      this.nombre.trim().length > 0 &&
+      this.apellido.trim().length > 0 &&
+      this.email.trim().length > 0 &&
+      this.validarEmail(this.email) &&
+      this.password.trim().length > 0 &&
+      this.validarPassword(this.password) &&
+      this.confirmarPassword.trim().length > 0 &&
+      this.password === this.confirmarPassword &&
+      this.contacto.trim().length > 0 &&
+      this.direccion.trim().length > 0 &&
+      this.provinciaSeleccionada.trim().length > 0 &&
+      this.idLocalidad != null
+    );
+  }
+
   crearUsuario() {
-  this.registroCliente.crearCliente(
-    this.nombre,
-    this.apellido,
-    this.email,
-    this.password,
-    this.contacto,
-    this.direccion,
-    this.rol,
-    this.idLocalidad
-    
-  ).subscribe(() => {
-    this.router.navigate(['/inicio']);
-  });
-}
+    if (!this.formularioValido) {
+      alert('Complete todos los campos correctamente antes de registrarse.');
+      return;
+    }
+
+    if (!this.validarPassword(this.password)) {
+      alert('La contraseña debe tener al menos 7 caracteres, incluir letras y números, y solo letras minúsculas.');
+      return;
+    }
+
+    if (this.password !== this.confirmarPassword) {
+      alert('Las contraseñas no coinciden.');
+      return;
+    }
+
+    this.registroCliente
+      .crearCliente(
+        this.nombre,
+        this.apellido,
+        this.email,
+        this.password,
+        this.contacto,
+        this.direccion,
+        this.rol,
+        this.idLocalidad
+      )
+      .subscribe(() => {
+        this.router.navigate(['/inicio']);
+      });
+  }
 
   volverAtras() {
     this.location.back();
   }
 
   obtenerLocalidad() {
-    this.registroCliente.obtenerLocalidad().subscribe(
-      (respuesta: any) => {
-        this.localidad = respuesta;
+    this.registroCliente.obtenerLocalidad().subscribe((respuesta: any) => {
+      this.localidad = respuesta;
 
-        // Provincias sin repetir
-        this.provincias = [...new Set(
-          this.localidad.map((l: any) => l.nombreProvincia)
-        )];
-      }
-    );
+      this.provincias = [...new Set(this.localidad.map((l: any) => l.nombreProvincia))];
+    });
   }
 
   filtrarLocalidades() {
@@ -80,8 +109,16 @@ export class Registro implements OnInit {
       (l: any) => l.nombreProvincia === this.provinciaSeleccionada
     );
 
-    // Limpia la selección anterior
     this.idLocalidad = null;
   }
 
+  private validarEmail(email: string): boolean {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email.trim());
+  }
+
+  private validarPassword(password: string): boolean {
+    const regex = /^(?=.*[a-z])(?=.*\d)[a-z\d]{7,}$/;
+    return regex.test(password.trim());
+  }
 }

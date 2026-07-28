@@ -43,6 +43,7 @@ import { Dashboard } from './Administrados/Adminstrador/dashboard/dashboard';
 import { Repuestos } from './Administrados/Adminstrador/repuestos/repuestos';
 import { VerRepuesto } from './Administrados/Adminstrador/repuestos/ver-repuesto/ver-repuesto';
 import { AgregarRepuestos } from './Empleados/agregar-repuestos/agregar-repuestos';
+import { RegistrarRepuesto } from './Administrados/Adminstrador/repuestos/registrar-repuesto/registrar-repuesto';
 
 export const routes: Routes = [ 
     // 🔓 RUTAS PÚBLICAS
@@ -72,6 +73,7 @@ export const routes: Routes = [
     {path: 'dashboard', component: Dashboard},
     {path: 'repuesto', component: Repuestos},
     {path: 'verRepuesto/:id', component: VerRepuesto},
+    {path: 'registrarRep', component: RegistrarRepuesto},
 
     //Retas de factura
     {path: 'paraFacturar', component: ParaFacturar},
@@ -107,7 +109,7 @@ export const routes: Routes = [
 
     //Rutas de ordenes
     {path: 'homeOrdenes', component: HomeOrdenes},
-    {path: 'crearOrden/:id', component: CrearOrden},
+    {path: 'ordenesSinTerminar', component: CrearOrden},
 
 
     //DE Prueba

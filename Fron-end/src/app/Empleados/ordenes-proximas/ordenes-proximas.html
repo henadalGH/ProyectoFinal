@@ -26,7 +26,9 @@
 
             </div>
 
-            @for (ord of ordenFutura; track $index) {
+            @if (ordenFutura.length > 0) {
+
+                 @for (ord of ordenFutura; track $index) {
 
                 <div class="fila">
 
@@ -57,8 +59,13 @@
                     </div>
 
                 </div>
+                 } 
+        }@else {
+            <p>No se encontraron orden programadas</p>
+        }
+           
 
-            }
+            
 
         </div>
 

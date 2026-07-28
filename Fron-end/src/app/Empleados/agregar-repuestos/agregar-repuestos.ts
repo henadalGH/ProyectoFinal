@@ -37,71 +37,69 @@ export class AgregarRepuestos implements OnInit {
     this.obtenerRepuestos();
   }
 
-  obtenerRepuestos() {
-
+  obtenerRepuestos(): void {
     this.repuestoServicio.obtenerRepuestosOrden().subscribe({
-
       next: (respuesta: any[]) => {
-
         this.repuestos = respuesta.map(repuesto => ({
           ...repuesto,
           seleccionado: false,
           cantidadSeleccionada: 1
         }));
 
-        this.repuestosFiltrados = [...this.repuestos];
-
+        this.aplicarFiltroYOrden();
       },
-
       error: (error) => {
-        console.error(error);
+        console.error('Error al obtener los repuestos:', error);
       }
-
     });
-
   }
 
   buscarRepuesto(): void {
-
-    const texto = this.buscar.toLowerCase().trim();
-
-    if (!texto) {
-      this.repuestosFiltrados = [...this.repuestos];
-      return;
-    }
-
-    this.repuestosFiltrados = this.repuestos.filter((repuesto: any) =>
-      repuesto.nombreRepuesto.toLowerCase().includes(texto) ||
-      repuesto.codigo.toLowerCase().includes(texto) ||
-      repuesto.marcaRepuesto.toLowerCase().includes(texto)
-    );
-
+    this.aplicarFiltroYOrden();
   }
 
   seleccionarRepuesto(event: any, repuesto: any): void {
+    const estaSeleccionado = event.target.checked;
+    repuesto.seleccionado = estaSeleccionado;
 
-    if (event.target.checked) {
-
-      repuesto.seleccionado = true;
-
+    if (estaSeleccionado) {
       if (!this.seleccionados.some(r => r.id === repuesto.id)) {
         this.seleccionados.push(repuesto);
       }
-
     } else {
-
-      repuesto.seleccionado = false;
-
       this.seleccionados = this.seleccionados.filter(
         r => r.id !== repuesto.id
       );
-
     }
 
+    // Al marcar o desmarcar, volvemos a aplicar el ordenamiento para subir los seleccionados
+    this.aplicarFiltroYOrden();
+  }
+
+  /**
+   * Filtra por búsqueda y ordena la lista priorizando los marcados en la parte superior.
+   */
+  private aplicarFiltroYOrden(): void {
+    const texto = this.buscar.toLowerCase().trim();
+
+    // 1. Filtrar según el texto ingresado
+    let resultado = this.repuestos.filter((repuesto: any) => {
+      if (!texto) return true;
+      return (
+        repuesto.nombreRepuesto?.toLowerCase().includes(texto) ||
+        repuesto.codigo?.toLowerCase().includes(texto) ||
+        repuesto.marcaRepuesto?.toLowerCase().includes(texto)
+      );
+    });
+
+    // 2. Ordenar: los seleccionados (seleccionado === true) van primero
+    this.repuestosFiltrados = resultado.sort((a, b) => {
+      if (a.seleccionado === b.seleccionado) return 0;
+      return a.seleccionado ? -1 : 1;
+    });
   }
 
   agregarRepuestos(): void {
-
     const repuestosOrden: RepuestoOrden[] = this.seleccionados.map(repuesto => ({
       id: repuesto.id,
       nombre: repuesto.nombreRepuesto,
@@ -121,11 +119,9 @@ export class AgregarRepuestos implements OnInit {
         }
       }
     );
-
   }
 
   volver(): void {
     this.location.back();
   }
-
 }

@@ -2,6 +2,7 @@
 LAYOUT
 ==================================================*/
 
+
 *{
     margin:0;
     padding:0;
@@ -27,6 +28,7 @@ SIDEBAR
     background:#fff;
     border-right:1px solid #e5e7eb;
     flex-shrink:0;
+    
 }
 
 /*==================================================
@@ -40,6 +42,7 @@ CONTENIDO
     height:100vh;
     overflow:hidden;
     background:#f3f6fb;
+    margin-top: 25px;
 }
 
 /*==================================================
@@ -529,4 +532,147 @@ ANIMACIONES
         transform:translateY(0);
     }
 
+}
+/*=========================
+        BOTON ABRIR
+=========================*/
+
+.btn-aumento button{
+    background:#1473d2;
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    padding:12px 22px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-aumento button:hover{
+    background:#0d63bb;
+    transform:translateY(-2px);
+}
+
+
+/*=========================
+          MODAL
+=========================*/
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal{
+    width:500px;
+    max-width:90%;
+    background:#fff;
+    border-radius:14px;
+    padding:28px;
+    box-shadow:0 18px 45px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.modal-header h2{
+    font-size:24px;
+    color:#1f2937;
+}
+
+.btn-cerrar{
+    border:none;
+    background:none;
+    font-size:24px;
+    cursor:pointer;
+    color:#6b7280;
+}
+
+.btn-cerrar:hover{
+    color:#dc2626;
+}
+
+.modal-texto{
+    color:#6b7280;
+    margin-bottom:22px;
+}
+
+
+/*=========================
+          CAMPOS
+=========================*/
+
+.campos-pre{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:18px;
+}
+
+.campos-pre label{
+    margin-bottom:6px;
+    font-weight:600;
+    color:#374151;
+}
+
+.campos-pre input{
+    height:45px;
+    padding:0 14px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+.campos-pre input:focus{
+    border-color:#1473d2;
+}
+
+
+/*=========================
+        BOTONES
+=========================*/
+
+.acciones-modal{
+    display:flex;
+    justify-content:flex-end;
+    gap:12px;
+    margin-top:20px;
+}
+
+.btn-cancelar{
+    background:#e5e7eb;
+    color:#374151;
+    border:none;
+    border-radius:8px;
+    padding:11px 20px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-cancelar:hover{
+    background:#d1d5db;
+}
+
+.btn-guardar{
+    background:#1473d2;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:11px 22px;
+    cursor:pointer;
+    font-weight:600;
+}
+
+.btn-guardar:hover{
+    background:#0d63bb;
 }

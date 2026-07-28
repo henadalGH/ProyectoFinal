@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ModificarPrecioPorMarca;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerRepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.RepuestoStockBajoDTO;
@@ -126,6 +128,84 @@ public class RepuestoServiceImpl implements RepuestoService {
         return repuestoRepository.obtenerRepuesto();
     }
 
+    @Override
+@Transactional
+public ResponceDTO modificarPrecioCompra(ModificarPrecioPorMarca modificarPrecio) {
+
+    ResponceDTO response = new ResponceDTO();
+
+    List<RepuestosEntity> repuestos;
+
+    boolean tieneMarca = modificarPrecio.getMarcaRepuesto() != null &&
+                         !modificarPrecio.getMarcaRepuesto().isBlank();
+
+    boolean tieneNombre = modificarPrecio.getNombreRepuesto() != null &&
+                          !modificarPrecio.getNombreRepuesto().isBlank();
+
+    if (tieneMarca && tieneNombre) {
+
+        repuestos = repuestoRepository.findByMarcaIgnoreCaseAndNombreIgnoreCase(
+                modificarPrecio.getMarcaRepuesto(),
+                modificarPrecio.getNombreRepuesto());
+
+    } else if (tieneMarca) {
+
+        repuestos = repuestoRepository.findByMarcaIgnoreCase(
+                modificarPrecio.getMarcaRepuesto());
+
+    } else if (tieneNombre) {
+
+        repuestos = repuestoRepository.findByNombreIgnoreCase(
+                modificarPrecio.getNombreRepuesto());
+
+    } else {
+        throw new RuntimeException("Debe ingresar una marca, un nombre o ambos.");
+    }
+
+    if (repuestos.isEmpty()) {
+        throw new RuntimeException("No se encontraron repuestos.");
+    }
+
+    for (RepuestosEntity repuesto : repuestos) {
+
+        double precioActual = repuesto.getPrecioCompra();
+        double nuevoPrecio = precioActual + (precioActual * (modificarPrecio.getPorcentaje() / 100.0));
+
+        repuesto.setPrecioCompra(nuevoPrecio);
+
+        // 50% de ganancia
+        repuesto.setPrecioVenta(nuevoPrecio * 1.5);
+    }
+
+    repuestoRepository.saveAll(repuestos);
+
+    response.setMensage("Precios actualizados correctamente.");
+    return response;
+}
+
+    @Override
+    public ResponceDTO crearRepuesto(RepuestoDTO repuestoDTO) {
+        
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        RepuestosEntity repuestosEntity = new RepuestosEntity();
+        repuestosEntity.setNombre(repuestoDTO.getNombre());
+        repuestosEntity.setMarca(repuestoDTO.getMarca());
+        repuestosEntity.setCodigo(repuestoDTO.getCodigo());
+        repuestosEntity.setPrecioCompra(repuestoDTO.getPrecioCompra());
+    
+        Double precioVenta = repuestoDTO.getPrecioCompra() * 0.5;
+        repuestosEntity.setPrecioVenta(precioVenta);
+        repuestosEntity.setStock(repuestoDTO.getStock());
+        repuestosEntity.setStockMin(repuestoDTO.getStockMin());
+        repuestosEntity.setCategoria(repuestoDTO.getCategoria());
+        repuestosEntity.setActivo(true);
+        
+        repuestoRepository.save(repuestosEntity);
+
+        responceDTO.setMensage("Repuesto creado corectamente");
+        return responceDTO;
+    }
 
 
 }

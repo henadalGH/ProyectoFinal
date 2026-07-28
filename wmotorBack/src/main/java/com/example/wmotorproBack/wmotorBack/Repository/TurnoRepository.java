@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Repository;
 
-import java.time.LocalDate; 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,14 +19,23 @@ public interface TurnoRepository extends JpaRepository<TurnoEntity, Long>{
 
     List<TurnoEntity> findByEstado(EstadoTurnosEntity estado);
 
+    List<TurnoEntity> findByFechaHora(LocalDateTime fechaHora);
+
     List<TurnoEntity> findByVehiculo_IdAndEstado(Long idVehiculo, EstadoTurnosEntity estado);
 
     List<TurnoEntity> findByVehiculoClienteIdAndEstado(Long idCliente, EstadoTurnosEntity estado);
 
-    List<TurnoEntity> findByFechaHora(LocalDate fecha);
-    List<TurnoEntity> findByFechaHoraGreaterThanEqual(LocalDate fecha);
+    List<TurnoEntity> findByFechaHoraBetween(
+        LocalDateTime inicio,
+        LocalDateTime fin
+);
 
-    List<TurnoEntity> findByVehiculoClienteIdAndFechaHoraGreaterThanEqual(Long id, LocalDate fecha);
+List<TurnoEntity> findByFechaHoraGreaterThanEqual(LocalDateTime fecha);
+
+List<TurnoEntity> findByVehiculoClienteIdAndFechaHoraGreaterThanEqual(
+        Long idCliente,
+        LocalDateTime fecha
+);
     Long countByEstado(EstadoTurnosEntity estado);
 
         @Query("""

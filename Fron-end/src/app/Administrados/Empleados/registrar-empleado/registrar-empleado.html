@@ -57,11 +57,32 @@
                     <!-- PASSWORD -->
                     <div class="campos">
                         <label>Contraseña</label>
-                        <input
-                            type="password"
-                            name="password"
-                            [(ngModel)]="password"
-                            placeholder="••••••••">
+                        <div class="password-wrapper">
+                            <input
+                                [type]="mostrarPassword ? 'text' : 'password'"
+                                name="password"
+                                [(ngModel)]="password"
+                                placeholder="••••••••">
+                            <button type="button" class="password-toggle" (click)="mostrarPassword = !mostrarPassword">
+                                {{ mostrarPassword ? 'Ocultar' : 'Mostrar' }}
+                            </button>
+                        </div>
+                        <small class="helper-text">Debe tener al menos 7 caracteres, incluir letras y números y solo letras minúsculas.</small>
+                    </div>
+
+                    <div class="campos">
+                        <label>Repetir contraseña</label>
+                        <div class="password-wrapper">
+                            <input
+                                [type]="mostrarConfirmPassword ? 'text' : 'password'"
+                                name="confirmarPassword"
+                                [(ngModel)]="confirmarPassword"
+                                placeholder="••••••••">
+                            <button type="button" class="password-toggle" (click)="mostrarConfirmPassword = !mostrarConfirmPassword">
+                                {{ mostrarConfirmPassword ? 'Ocultar' : 'Mostrar' }}
+                            </button>
+                        </div>
+                        <small class="helper-text">Debe coincidir con la contraseña anterior.</small>
                     </div>
 
                     <!-- CONTACTO -->
@@ -85,7 +106,9 @@
                         <input
                             type="text"
                             name="dni"
-                            [(ngModel)]="dni"
+                            [ngModel]="dni"
+                            (ngModelChange)="dni = $event"
+                            (input)="formatearDniVista($event)"
                             placeholder="Sin puntos">
                     </div>
 
@@ -146,7 +169,8 @@
 
                         <button
                             class="agregar"
-                            type="submit">
+                            type="submit"
+                            [disabled]="!formularioValido">
 
                             <i class="fas fa-save"></i>
                             Registrar Empleado

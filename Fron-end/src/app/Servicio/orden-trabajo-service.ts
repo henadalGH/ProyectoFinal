@@ -71,5 +71,15 @@ export class OrdenTrabajoService {
 
   contarOrdenesParaFacturar(){
     return this.http.get(`${this.urlOrden}/contarOrdenFactura`);
-  }  
+  }
+
+  obtenerOrdenSinTerminar(idEmpleado: number, estado: string){
+    return this.http.get<any[]>(`${this.urlOrden}/obtenerOrdenesSinTerminar/${idEmpleado}/${estado}`);
+
+  }
+
+  reasiganrOrden(idOrden: number, idNuevoEmpleado: number){
+
+    return this.http.put(`${this.urlOrden}/reasignar/${idOrden}/${idNuevoEmpleado}`, {});
+  }
 }

@@ -29,6 +29,7 @@ export class OrdenesProximas  implements OnInit{
 
         (respuesta: any[]) =>{
           this.ordenFutura = respuesta;
+          console.log(this.ordenFutura);
         }); }
     
       }

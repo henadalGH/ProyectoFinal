@@ -9,14 +9,18 @@ import { FacturaServicio } from '../../../Servicio/factura-servicio';
 import { MovimientosService } from '../../../Servicio/movimientos-service';
 import { OrdenTrabajoService } from '../../../Servicio/orden-trabajo-service';
 import { RepuestoService } from '../../../Servicio/repuesto-service';
+import { RouterLink } from "@angular/router";
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-home-admin',
   imports: [
     HeaderAdmin,
-    Header
-  ],
+    Header,
+    RouterLink,
+    CommonModule
+],
   templateUrl: './home-admin.html',
   styleUrl: './home-admin.css',
 })

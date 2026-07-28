@@ -12,8 +12,11 @@
 
         <div class="cliente-casual">
 
-          <h1>Complete el formulario</h1>
+          <div class="titulo">
+            <h1>Complete el formulario</h1>
           <p>Complete todos los campos</p>
+          </div>
+          
 
           <form (ngSubmit)="crearTurnoCasual()">
 
@@ -47,6 +50,19 @@
                 type="date"
                 name="fecha"
                 [(ngModel)]="fecha">
+            </div>
+
+            <div class="campo">
+              <label>Hora del turno</label>
+              <select name="horaAsignada"
+              [(ngModel)]="horaAsignada">
+                <option>Selecione una hora</option>
+              @for (hora of horarios; track hora) {
+                <option value="{{hora}}">{{hora}}</option>
+              }
+            
+            </select>
+
             </div>
 
             <div class="campo">
@@ -91,10 +107,12 @@
 
             <div class="campo">
               <label>Descripción del problema</label>
-              <input
-                type="text"
-                name="descripcion"
-                [(ngModel)]="descripcion">
+            <textarea
+                [(ngModel)]="descripcion"
+                (input)="autoResize($event)"
+                placeholder="Ingrese una descripción">
+            </textarea>  
+              
             </div>
 
             <button type="submit">

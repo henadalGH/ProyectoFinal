@@ -40,13 +40,6 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
     @Override
     public ResponceDTO crearMovimiento(MovimientoDTO movimiento) throws Exception {
 
-        System.out.println("===== DATOS RECIBIDOS =====");
-        System.out.println("Tipo: " + movimiento.getTipoMovimiento());
-        System.out.println("Categoria: " + movimiento.getCategoria());
-        System.out.println("Concepto: " + movimiento.getConcepto());
-        System.out.println("Importe: " + movimiento.getImporte());
-        System.out.println("Id Admin: " + movimiento.getIdAdmin());
-        System.out.println("===========================");
 
         // Buscar categoría
         CategoriaMovimientoEntity categoria =
@@ -247,6 +240,7 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
                 dto.setCategoria( m.getCategoria().getCategoria());
                 dto.setMonto(m.getImporte());
                 dto.setFechaRegistro(m.getFechaRegistro());
+                dto.setConcepto(m.getConcepto());
 
                 return dto;
         })

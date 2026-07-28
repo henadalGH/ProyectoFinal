@@ -89,10 +89,27 @@
 
         <h2>Asignar fecha</h2>
 
-        <input
+        <div class="campos">
+            <label>Selecionar la fecha:</label>
+        
+            <input
             type="date"
             [min]="fechaMinima"
             [(ngModel)]="fechaAsignada">
+        </div>
+
+        <div class="campos">
+            <label>Selecionar la hora:</label>
+            <select name="horaAsignada" [(ngModel)]="horaAsignada">
+            @for (hor of horarios; track hor) {
+                <option value="{{hor}}">{{hor}}</option>    
+            }
+        </select>
+        </div>
+
+    
+        
+        
 
         <div class="acciones-modal">
 
@@ -113,6 +130,6 @@
     </div>
 
 </div>
-
+ 
 }
 

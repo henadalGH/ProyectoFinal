@@ -10,17 +10,12 @@
 
             <app-header></app-header>
 
-            <div class="titulo">
-                <h1>Registrar movimiento</h1>
-                <p>Registre un nuevo ingreso o gasto del taller.</p>
-            </div>
-
             <div class="card">
 
                 <div class="card-header">
 
-                    <div>
-                        <h2>Nuevo movimiento</h2>
+                    <div class="titulo">
+                        <h2>Registrar nuevo movimiento</h2>
                         <p>Complete la información del movimiento financiero.</p>
                     </div>
 
@@ -135,9 +130,11 @@
                         <label>Importe</label>
 
                         <input
-                            type="number"
+                            type="text"
                             name="importe"
-                            [(ngModel)]="importe"
+                            [ngModel]="importeVista"
+                            (ngModelChange)="importeVista = $event"
+                            (input)="formatearImporte($event)"
                             placeholder="$ 0,00">
 
                         @if(errorImporte){

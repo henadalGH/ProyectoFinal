@@ -1,6 +1,8 @@
 package com.example.wmotorproBack.wmotorBack.Servicio;
 
 import java.util.List;
+
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
@@ -13,6 +15,8 @@ public interface PresupuestoService {
     public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO);
     public ResponceDTO cambiarEstadoPresupuesto(EstadoPresupuestoEnum estado, Long idPresupuesto);
     public List<ObtenerPresupuestoDTO> obtenerPresupuestoPorIdVehiculo(Long id);
+    public ResponceDTO pagarFactura(Long idFactura, MovimientoDTO movimientoDTO, Long admin);
+    public List<ObtenerPresupuestoDTO> obtenerPresupuestoPendientes();
     public ObtenerPresupuestoDTO toMapPresupuestoDto(PresupuestoEntity presupuesto);
     public ObtenerPresupuestoDTO obtenerPresupuestoPorId(Long id);
     public ResponceDTO actualizarPresupuesto(PresupuestoDTO presupuestoDTO, Long idPresupuesto);
@@ -27,4 +31,6 @@ public interface PresupuestoService {
     Double obtenerTotalFacturado();
     Double obtenerTotalCobrado();
     Double obtenerTotalPendiente();
+    Long contarFacturaCobradas();
+    Long contarFacturasImpagas();
 }

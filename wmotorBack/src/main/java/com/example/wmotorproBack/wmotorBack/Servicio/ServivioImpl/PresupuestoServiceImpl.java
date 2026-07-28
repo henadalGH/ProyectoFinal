@@ -9,23 +9,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.DetallePresupuestoDTO;
+import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ObtenerPresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.PresupuestoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimasFacturasDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CategoriaMovimientoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.DetallePresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoOrdenEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoPresupuestoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.OrdenTrabajoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.PresupuestoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.VehiculoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoOrdenEnums;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.EstadoPresupuestoEnum;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
+import com.example.wmotorproBack.wmotorBack.Modelo.Enums.TipoDescuentoEnums;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.CategoriaMovimientoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.DetallePresupuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoOrdenRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.EstadoPresupuestoReposistory;
+import com.example.wmotorproBack.wmotorBack.Repository.MovimientoFinancieroRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.OrdenTrabajoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.PresuspuestoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.VehiculoRepository;
@@ -61,6 +68,13 @@ public class PresupuestoServiceImpl implements PresupuestoService {
     @Autowired
     private EstadoOrdenRepository estadoOrdenRepository;
 
+    @Autowired
+    private CategoriaMovimientoRepository categoriaMovimientoRepository;
+
+    @Autowired
+    private MovimientoFinancieroRepository movimientoFinancieroRepository;
+
+
 
 
     @Override
@@ -73,6 +87,11 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
     presupuestoEntity.setFechaRegistro(LocalDate.now());
     presupuestoEntity.setFechaValidez(LocalDate.now().plusDays(15));
     presupuestoEntity.setTipoFactura(presupuestoDTO.getTipoFactura());
+
+    // Mapeo de campos de descuento e IVA agregados
+    presupuestoEntity.setAplicaIva(presupuestoDTO.getAplicaIva());
+    presupuestoEntity.setTipoDescuento(presupuestoDTO.getTipoDescuento());
+    presupuestoEntity.setDescuento(presupuestoDTO.getDescuento());
 
     // Estado
     EstadoPresupuestoEntity estado = estadoPresupuestoReposistory
@@ -132,10 +151,32 @@ public ResponceDTO crearPresupuesto(PresupuestoDTO presupuestoDTO) {
         subTotalGeneral += subTotalLinea;
     }
 
-    // Totales
-    double iva = subTotalGeneral * 0.21;
-    double totalFinal = subTotalGeneral + iva;
+    // --- CÁLCULO DE TOTALES (DESCUENTO E IVA) ---
 
+    // 1. Calcular monto del descuento según el tipo
+    double montoDescuento = 0.0;
+    Double valorDescuento = presupuestoDTO.getDescuento() != null ? presupuestoDTO.getDescuento() : 0.0;
+
+    if (presupuestoDTO.getTipoDescuento() != null) {
+        if (presupuestoDTO.getTipoDescuento() == TipoDescuentoEnums.PORCENTAJE) {
+            montoDescuento = (subTotalGeneral * valorDescuento) / 100;
+        } else if (presupuestoDTO.getTipoDescuento() == TipoDescuentoEnums.MONTO) {
+            montoDescuento = valorDescuento;
+        }
+    }
+
+    // 2. Subtotal base luego de restar el descuento
+    double subtotalConDescuento = Math.max(0, subTotalGeneral - montoDescuento);
+
+    // 3. Calcular IVA (21%) únicamente si aplicaIva es true
+    boolean aplicaIva = Boolean.TRUE.equals(presupuestoDTO.getAplicaIva());
+    double iva = aplicaIva ? subtotalConDescuento * 0.21 : 0.0;
+
+    // 4. Total Final
+    double totalFinal = subtotalConDescuento + iva;
+
+    // Asignación de valores finales a la entidad
+    presupuestoEntity.setMontoDescuento(montoDescuento);
     presupuestoEntity.setDetalle(detalles);
     presupuestoEntity.setSubTotal(subTotalGeneral);
     presupuestoEntity.setIva(iva);
@@ -439,6 +480,79 @@ public List<UltimasFacturasDTO> obtenerUltimasFacturaPorCliente(Long idCliente) 
     @Override
     public Double obtenerTotalPendiente() {
         return presuspuestoRepository.totalPendiente();
+    }
+
+
+    @Override
+    @Transactional
+    public ResponceDTO pagarFactura(Long idFactura, MovimientoDTO movimientoDTO, Long idAdmin) {
+        
+        ResponceDTO responceDTO = new ResponceDTO();
+
+        System.out.println(movimientoDTO.getTipoMovimiento()+ "MOVIMIENTO");
+
+        PresupuestoEntity presupuestoEntity = presuspuestoRepository.findById(idFactura)
+        .orElseThrow(() -> new RuntimeException("El id factura ingresado es invalido"));
+
+
+        MovimientoFinancieroEntity movimiento = new MovimientoFinancieroEntity();
+
+
+        movimiento.setTipoMovimiento(
+        MovimientosEnum.valueOf(movimientoDTO.getTipoMovimiento()));
+        movimiento.setImporte(movimientoDTO.getImporte());
+        movimiento.setConcepto(movimientoDTO.getConcepto());
+        movimiento.setFechaRegistro(LocalDate.now());
+        
+        CategoriaMovimientoEntity categoria = categoriaMovimientoRepository.findByCategoria(movimientoDTO.getCategoria())
+        .orElseThrow();
+        movimiento.setCategoria(categoria);
+
+
+        AdminEntity adminEntity = adminRepository.findById(idAdmin)
+        .orElseThrow(() -> new RuntimeException("El id ingresado es invalido"));
+        movimiento.setAdmin(adminEntity);
+
+
+        EstadoPresupuestoEntity estadoPre = estadoPresupuestoReposistory.findByEstadoPresupuesto(EstadoPresupuestoEnum.PAGADO)
+        .orElseThrow(() -> new RuntimeException("El estado es incorecto"));
+
+        presupuestoEntity.setEstadoPresupuesto(estadoPre);
+        movimientoFinancieroRepository.save(movimiento);
+
+        responceDTO.setMensage("La factura se a pagado con exito");
+        return responceDTO;
+    }
+
+
+
+    @Override
+    public List<ObtenerPresupuestoDTO> obtenerPresupuestoPendientes() {
+        
+        EstadoPresupuestoEntity estadoPre = estadoPresupuestoReposistory.findByEstadoPresupuesto(EstadoPresupuestoEnum.ENVIADO)
+        .orElseThrow(() -> new RuntimeException("El estado es incorecto"));
+        
+
+        return presuspuestoRepository.findByEstadoPresupuesto(estadoPre)
+        .stream()
+        .map( this::toMapPresupuestoDto)
+        .collect(Collectors.toList());
+
+
+    }
+
+
+
+    @Override
+    public Long contarFacturaCobradas() {
+        return presuspuestoRepository.contarFacturasCobradas();
+    }
+
+
+
+    @Override
+    public Long contarFacturasImpagas() {
+        return presuspuestoRepository.contarFacturasPendientes();
     }
 
 }

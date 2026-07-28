@@ -1,492 +1,515 @@
 /* ==========================================================================
-   RESET
-========================================================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-}
-
-body{
-    background:#f3f6fb;
-    color:#111827;
-}
-
-/* ==========================================================================
-   LAYOUT
+   LAYOUT GENERAL
 ========================================================================== */
 
 .layout{
+
     display:flex;
-    height:100vh;
-    overflow:hidden;
-}
 
-.sidebar{
-    width:320px;
-    min-width:320px;
-    background:#1f2937;
-    flex-shrink:0;
-}
+    min-height:100vh;
 
-.content{/* ==========================================================================
-   RESET
-========================================================================== */
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
-}
-
-body{
     background:#f3f6fb;
-    color:#111827;
+
 }
+
 
 /* ==========================================================================
-   LAYOUT
+   SIDEBAR FIJO
 ========================================================================== */
 
-.layout{
-    display:flex;
-    height:100vh;
+.sidebar{
+
+    width:320px;
+
+    flex-shrink:0;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    bottom:0;
+
+    background:#f3f6fb;
+
     overflow:hidden;
+
 }
 
-.sidebar{
-    width:320px;
-    min-width:320px;
-    background:#1f2937;
-    flex-shrink:0;
-}
+
+
+/* ==========================================================================
+   CONTENIDO
+========================================================================== */
 
 .content{
-    flex:1;
-    background:#f3f6fb;
-    padding:20px;
+
+    margin-left:320px;
+
+    width:calc(100% - 320px);
+
+    min-height:100vh;
+
+    padding:15px 35px;
+
     overflow-y:auto;
+
 }
 
-/* ==========================================================================
-   CONTENEDOR
-========================================================================== */
+
 
 .container{
-    max-width:1200px;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    gap:30px;
+
+    width:100%;
+
 }
+
+
 
 /* ==========================================================================
    TITULO
 ========================================================================== */
 
 .titulo{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+
+    margin-top:15px;
+
+    margin-bottom:18px;
+
 }
+
+
 
 .titulo h1{
-    font-size:32px;
+
+    font-size:26px;
+
     font-weight:700;
+
     color:#111827;
+
+    margin-bottom:5px;
+
 }
+
+
 
 .titulo p{
-    color:#64748b;
-    font-size:15px;
+
+    font-size:14px;
+
+    color:#6b7280;
+
 }
 
+
+
 /* ==========================================================================
-   CARD
+   CARD PRINCIPAL
 ========================================================================== */
 
 .card{
-    background:#fff;
+
+    background:#ffffff;
+
+    max-width:1000px;
+
     border-radius:16px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
-    overflow:hidden;
+
+    padding:25px 30px;
+
+    box-shadow:
+
+    0 8px 20px rgba(0,0,0,0.06);
+    margin-top: 25px;
+
 }
 
+
+
 /* ==========================================================================
-   CARD HEADER
+   HEADER CARD
 ========================================================================== */
 
 .card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:20px;
-    padding:24px 30px;
-    border-bottom:2px solid #e5e7eb;
+
+    padding-bottom:15px;
+
+    margin-bottom:18px;
+
+    border-bottom:1px solid #e5e7eb;
+
 }
+
+
 
 .card-header h2{
-    font-size:25px;
+
+    font-size:21px;
+
     font-weight:700;
+
     color:#111827;
-    margin-bottom:5px;
+
+    margin-bottom:4px;
+
 }
 
+
+
 .card-header p{
-    color:#64748b;
+
     font-size:14px;
+
+    color:#6b7280;
+
 }
+
+
 
 /* ==========================================================================
    FORMULARIO
 ========================================================================== */
 
 .formulario{
-    padding:30px;
 
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:24px 30px;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:16px 25px;
+
 }
+
+
 
 /* ==========================================================================
    CAMPOS
 ========================================================================== */
 
 .campo{
+
     display:flex;
+
     flex-direction:column;
-    gap:8px;
+
+    gap:6px;
+
 }
 
+
+
 .campo label{
+
     font-size:14px;
+
     font-weight:600;
+
     color:#374151;
+
 }
+
+
+
+/* ==========================================================================
+   INPUTS Y SELECT
+========================================================================== */
 
 .campo input,
 .campo select{
+
+
     width:100%;
-    padding:14px 16px;
+
+
+    height:40px;
+
+
+    padding:0 12px;
+
+
+    border-radius:9px;
+
+
     border:1px solid #d1d5db;
-    border-radius:10px;
-    background:#fff;
-    font-size:15px;
+
+
+    background:white;
+
+
+    font-size:14px;
+
+
+    color:#111827;
+
+
+    outline:none;
+
+
     transition:.2s;
+
+
 }
 
-.campo input:hover,
-.campo select:hover{
-    border-color:#94a3b8;
-}
+
 
 .campo input:focus,
 .campo select:focus{
-    outline:none;
+
+
     border-color:#2563eb;
-    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+
+    box-shadow:
+
+    0 0 0 3px rgba(37,99,235,.15);
+
+
 }
+
+
+
+/* Concepto ocupa todo */
+
+.campo:nth-child(3){
+
+    grid-column:1 / 3;
+
+}
+
+
 
 /* ==========================================================================
    ERRORES
 ========================================================================== */
 
 .error{
+
     color:#dc2626;
-    font-size:13px;
-    font-weight:500;
+
+    font-size:12px;
+
 }
+
+
 
 /* ==========================================================================
    BOTONES
 ========================================================================== */
 
 .botones{
-    grid-column:1/-1;
+
+    grid-column:1 / 3;
+
 
     display:flex;
+
+
     justify-content:flex-end;
-    gap:15px;
 
-    padding-top:10px;
-    border-top:1px solid #e5e7eb;
+
+    gap:12px;
+
+
+    margin-top:8px;
+
+
 }
 
-.btn-primary,
-.btn-secondary{
+
+
+button{
+
+
+    height:40px;
+
+
+    padding:0 24px;
+
+
     border:none;
-    border-radius:12px;
-    padding:13px 24px;
+
+
+    border-radius:9px;
+
+
     font-size:14px;
+
+
     font-weight:600;
+
+
     cursor:pointer;
+
+
     transition:.2s;
+
+
 }
+
+
+
+/* Registrar */
 
 .btn-primary{
+
+
     background:#2563eb;
-    color:#fff;
+
+
+    color:white;
+
+
 }
 
-.btn-primary:hover:not(:disabled){
+
+
+.btn-primary:hover{
+
+
     background:#1d4ed8;
-    transform:translateY(-2px);
+
+
+    transform:translateY(-1px);
+
+
 }
 
-.btn-primary:disabled{
-    background:#94a3b8;
-    cursor:not-allowed;
-}
+
+
+/* Cancelar */
 
 .btn-secondary{
+
+
     background:#e5e7eb;
+
+
     color:#374151;
+
+
 }
+
+
 
 .btn-secondary:hover{
+
+
     background:#d1d5db;
-    transform:translateY(-2px);
+
+
 }
+
+
 
 /* ==========================================================================
    RESPONSIVE
 ========================================================================== */
 
-@media(max-width:992px){
+@media(max-width:1100px){
+
 
     .formulario{
+
+
         grid-template-columns:1fr;
+
     }
+
+
+    .campo:nth-child(3){
+
+        grid-column:auto;
+
+    }
+
 
     .botones{
-        flex-direction:column;
+
+        grid-column:auto;
+
+        justify-content:stretch;
+
     }
 
-    .btn-primary,
-    .btn-secondary{
-        width:100%;
+
+    button{
+
+        flex:1;
+
     }
+
 
 }
 
-@media(max-width:768px){
 
-    .layout{
-        flex-direction:column;
-    }
+
+@media(max-width:900px){
+
 
     .sidebar{
-        width:100%;
-        min-width:100%;
+
+        width:90px;
+
     }
+
+
 
     .content{
+
+        margin-left:90px;
+
+        width:calc(100% - 90px);
+
         padding:15px;
+
     }
 
-    .container{
-        gap:20px;
-    }
-
-    .titulo h1{
-        font-size:28px;
-    }
-
-    .card-header{
-        padding:20px;
-    }
-
-    .formulario{
-        padding:20px;
-    }
 
 }
-    flex:1;
-    background:#f3f6fb;
-    padding:20px;
-    overflow-y:auto;
+
+
+
+@media(max-width:600px){
+
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+
+
+    .content{
+
+        margin-left:0;
+
+        width:100%;
+
+    }
+
+
+
+    .botones{
+
+        flex-direction:column;
+
+    }
+
+
+
+    button{
+
+        width:100%;
+
+    }
+
+
 }
-
-/* ==========================================================================
-   CONTENEDOR
-========================================================================== */
-
-.container{
-    max-width:900px;
-    margin:0 auto;
-    display:flex;
-    flex-direction:column;
-    gap:30px;
-}
-
-/* ==========================================================================
-   TITULO
-========================================================================== */
 
 .titulo{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.titulo h1{
-    font-size:30px;
-    color:#111827;
-    font-weight:700;
-}
-
-.titulo p{
-    color:#64748b;
-    font-size:15px;
-}
-
-/* ==========================================================================
-   FORMULARIO (CARD)
-========================================================================== */
-
-.formulario{
-    background:#fff;
-    border-radius:16px;
-    padding:30px;
-    box-shadow:0 8px 20px rgba(0,0,0,.05);
-
-    display:flex;
-    flex-direction:column;
-    gap:24px;
-}
-
-/* ==========================================================================
-   CAMPOS
-========================================================================== */
-
-.campo{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.campo label{
-    font-size:14px;
-    font-weight:600;
-    color:#374151;
-}
-
-.campo input,
-.campo select{
-    width:100%;
-    padding:13px 15px;
-    border:1px solid #d1d5db;
-    border-radius:10px;
-    background:#fff;
-    font-size:15px;
-    transition:.2s;
-}
-
-.campo input:focus,
-.campo select:focus{
-    outline:none;
-    border-color:#2563eb;
-    box-shadow:0 0 0 4px rgba(37,99,235,.15);
-}
-
-/* ==========================================================================
-   ERRORES
-========================================================================== */
-
-.error{
-    color:#dc2626;
-    font-size:13px;
-    font-weight:500;
-}
-
-/* ==========================================================================
-   BOTONES
-========================================================================== */
-
-.botones{
-    display:flex;
-    justify-content:flex-end;
-    gap:15px;
-    margin-top:10px;
-}
-
-.btn-guardar,
-.btn-cancelar{
-    border:none;
-    border-radius:12px;
-    padding:13px 24px;
-    font-size:14px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.btn-guardar{
-    background:#2563eb;
-    color:#fff;
-}
-
-.btn-guardar:hover:not(:disabled){
-    background:#1d4ed8;
-    transform:translateY(-2px);
-}
-
-.btn-guardar:disabled{
-    background:#94a3b8;
-    cursor:not-allowed;
-}
-
-.btn-cancelar{
-    background:#e5e7eb;
-    color:#374151;
-}
-
-.btn-cancelar:hover{
-    background:#d1d5db;
-}
-
-/* ==========================================================================
-   RESPONSIVE
-========================================================================== */
-
-@media(max-width:992px){
-
-    .botones{
-        flex-direction:column;
-    }
-
-    .btn-guardar,
-    .btn-cancelar{
-        width:100%;
-    }
-
-}
-
-@media(max-width:768px){
-
-    .layout{
-        flex-direction:column;
-    }
-
-    .sidebar{
-        width:100%;
-        min-width:100%;
-    }
-
-    .content{
-        padding:15px;
-    }
-
-    .container{
-        gap:20px;
-    }
-
-    .formulario{
-        padding:20px;
-    }
-
+    text-align: center;
+    margin-top: 50px;
 }

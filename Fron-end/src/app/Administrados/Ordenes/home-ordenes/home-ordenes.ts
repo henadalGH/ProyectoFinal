@@ -7,11 +7,12 @@ import { TurnosService } from '../../../Servicio/turnos-service';
 import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { OrdenTrabajoService } from '../../../Servicio/orden-trabajo-service';
 import { Header } from "../../../header/header";
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-home-ordenes',
   standalone: true,
-  imports: [CommonModule, HeaderAdmin, FormsModule, Header],
+  imports: [CommonModule, HeaderAdmin, FormsModule, Header, RouterLink],
   templateUrl: './home-ordenes.html',
   styleUrls: ['./home-ordenes.css']
 })

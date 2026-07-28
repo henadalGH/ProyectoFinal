@@ -32,13 +32,69 @@
                     </div>
 
                     <div class="kpi-info">
-                        <span>Turnos pendientes</span>
+                        <span>Turnos pendientes asignacion</span>
+                    
+                        @if (contaTrunos > 0) {
+                            <button class="btn-asig" [routerLink]="['/turnosAsignacion']">Ir a turno</button>
+                        }
+                    </div>
+
+                </article>
+
+            
+                <article class="kpi red">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-check-circle">
+                            <h2>{{contarTurnosConf}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Turnos confirmados para orden</span>
+
+                        @if (contarTurnosConf > 0) {
+                            <button class="btn-orden" [routerLink]="['/homeOrdenes']">Ir a orden</button>
+                        }
                         
                     </div>
 
                 </article>
 
-                
+                <article class="kpi green">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-tools">
+                            <h2>{{contarOrdenFac}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Órdenes terminadas</span>
+
+                        @if (contarOrdenFac > 0) {
+                            <button class="btn-fac" [routerLink]="['/paraFacturar']">Ir facturas</button>
+                        }
+                        
+                    </div>
+
+                </article>
+
+
+                <article class="kpi red">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-tools">
+                            <h2>{{stockBajo.length}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Repuestos bajo stock</span>
+                        
+                    </div>
+
+                </article>
 
                 <article class="kpi purple">
 
@@ -55,69 +111,24 @@
 
                 </article>
 
-                <article class="kpi red">
+                <article class="kpi orange kpi-ingresos">
 
-                    <div class="kpi-icon">
-                        <i class="fas fa-check-circle">
-                            <h2>{{contarTurnosConf}}</h2>
-                        </i>
-                    </div>
+                <div class="kpi-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
 
-                    <div class="kpi-info">
-                        <span>Turnos confirmados</span>
-                        
-                    </div>
+                <div class="kpi-info">
+                    <span>Ingresos de hoy</span>
 
-                </article>
+                    @if(ingreso != null){
+                        <h2>{{ingreso | currency:'ARS'}}</h2>
+                    }@else{
+                        <h2>$ 0</h2>
+                    }
 
-                <article class="kpi green">
+                </div>
 
-                    <div class="kpi-icon">
-                        <i class="fas fa-tools">
-                            <h2>{{contarOrdenFac}}</h2>
-                        </i>
-                    </div>
-
-                    <div class="kpi-info">
-                        <span>Órdenes terminadas</span>
-                        
-                    </div>
-
-                </article>
-
-                <article class="kpi orange">
-
-                    <div class="kpi-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-
-                    <div class="kpi-info">
-                        <span>Ingresos de hoy</span>
-
-                        @if(ingreso != null){
-                            <h2>$ {{ingreso}}</h2>
-                        }@else{
-                            <h2>$ 0</h2>
-                        }
-
-                    </div>
-
-                </article>
-
-                <article class="kpi red">
-
-                    <div class="kpi-icon">
-                        <i class="fas fa-tools">
-                            <h2>{{stockBajo.length}}</h2>
-                        </i>
-                    </div>
-
-                    <div class="kpi-info">
-                        <span>Repuestos bajo stock</span>
-                        
-                    </div>
-
-                </article>
+            </article>
 
             </section>
 
@@ -226,7 +237,7 @@
                                     </td>
 
                                     <td>
-                                        $ {{ult.monto}}
+                                        {{ult.monto | currency:'ARS'}}
                                     </td>
 
                                     <td>

@@ -18,8 +18,12 @@
     <div class="btn">
         <button class="btn-volver" (click)="volverAtras()">Volver</button>
 
-        @if (factura.estadoPresupuesto == 'PENDIENTE') {
+        @if (factura?.estadoPresupuesto == 'PENDIENTE') {
              <button class="btn-enviar" (click)="enviarFactura(factura.id)">Enviar al Cliente</button>
+        }
+
+        @if (factura?.estadoPresupuesto == 'ENVIADO') {
+            <button (click)="pagarFactura(factura.total)">Pagar factura</button>
         }
        
     </div>

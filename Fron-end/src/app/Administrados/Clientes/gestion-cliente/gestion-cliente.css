@@ -1,246 +1,386 @@
 /* ==================================
-   LAYOUT
+   LAYOUT GENERAL
 ================================== */
 
 .layout{
+
     display:flex;
+
     height:100vh;
+
     overflow:hidden;
+
+    background:#f3f6fb;
+
 }
+
+
+
+/* ==================================
+   SIDEBAR FIJO
+================================== */
 
 .sidebar{
+
     width:320px;
+
     min-width:320px;
 
+    height:100vh;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
     background:#1f2937;
+
     color:white;
 
-    height:100vh;
     overflow:hidden;
+
+    z-index:1000;
+
 }
 
+
+
+/* ==================================
+   CONTENIDO PRINCIPAL
+   (ÚNICA ZONA CON SCROLL)
+================================== */
+
 .content{
-    flex:1;
+
+    margin-left:320px;
+
+    width:calc(100% - 320px);
+
+    height:100vh;
 
     background:#f3f6fb;
 
     padding:20px;
 
     overflow-y:auto;
+
+    overflow-x:hidden;
+
 }
 
+
+
 /* ==================================
-   CONTENEDOR
+   PAGINA INTERNA
 ================================== */
 
 .page{
-    max-width:900px;
-    margin:25px auto;
-}
 
+    max-width:900px;
+
+    margin:25px auto;
+
+    padding-bottom:40px;
+
+}
 /* ==================================
-   HEADER
+   HEADER DE LA PAGINA
 ================================== */
 
 .page-header{
+
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
 
     gap:25px;
 
-    padding-bottom:25px;
     margin-bottom:30px;
 
+    padding-bottom:20px;
+
     border-bottom:2px solid #e5e7eb;
+
 }
 
+
+
 .page-header h1{
+
     margin:0;
 
     font-size:30px;
+
     font-weight:700;
 
     color:#111827;
+
 }
+
+
 
 .page-header p{
+
     margin-top:6px;
 
+    font-size:16px;
+
     color:#6b7280;
-    font-size:18px;
+
 }
+
+
 
 /* ==================================
    BOTON PRINCIPAL
 ================================== */
 
 .btn-primary{
+
     background:#2563eb;
-    color:white;
+
+    color:#ffffff;
 
     border:none;
+
     border-radius:12px;
 
     padding:14px 28px;
 
     font-size:15px;
+
     font-weight:600;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:all .25s ease;
 
-    box-shadow:
-        0 6px 18px rgba(37,99,235,.20);
+    box-shadow:0 6px 18px rgba(37,99,235,.20);
+
 }
+
+
 
 .btn-primary:hover{
+
     background:#1d4ed8;
+
     transform:translateY(-2px);
+
 }
+
+
+
+.btn-primary:active{
+
+    transform:translateY(0);
+
+}
+
+
 
 /* ==================================
    BUSCADOR
 ================================== */
 
 .search-box{
+
     margin-bottom:25px;
+
 }
+
+
 
 .search-box input{
+
     width:100%;
-
-    padding:16px 20px;
-
-    border:1px solid #d1d5db;
-    border-radius:14px;
-
-    background:white;
-
+    padding:15px 18px;
     font-size:15px;
+    color:#111827;
+    background:#ffffff;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    transition:all .2s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,.03);
 
-    box-shadow:
-        0 4px 12px rgba(0,0,0,.03);
-
-    transition:.2s;
 }
 
+
+
+.search-box input::placeholder{
+    color:#9ca3af;
+
+}
+
+
+
 .search-box input:focus{
+
     outline:none;
 
     border-color:#2563eb;
 
-    box-shadow:
-        0 0 0 3px rgba(37,99,235,.15);
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+
 }
 
 /* ==================================
-   TABLA
+   TARJETA DE LA TABLA
 ================================== */
 
 .table-card{
-    background:white;
+
+    background:#ffffff;
 
     border-radius:16px;
 
     overflow:hidden;
 
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.05);
+    box-shadow:0 8px 20px rgba(0,0,0,.05);
+
 }
+
+
+
+/* ==================================
+   TABLA
+================================== */
 
 .table{
+
     width:100%;
+
     border-collapse:collapse;
+
 }
+
+
+
+/* ==================================
+   ENCABEZADO
+================================== */
 
 .table thead{
+
     background:#f8fafc;
+
 }
 
+
+
 .table th{
+
     padding:18px 20px;
 
     text-align:left;
 
-    color:#64748b;
-
     font-size:13px;
+
     font-weight:700;
 
+    color:#64748b;
+
     text-transform:uppercase;
+
     letter-spacing:1px;
 
     border-bottom:1px solid #e5e7eb;
+
 }
 
+
+
+/* ==================================
+   CUERPO
+================================== */
+
 .table td{
+
     padding:18px 20px;
 
     font-size:15px;
+
     color:#111827;
 
     border-bottom:1px solid #f1f5f9;
+
+    vertical-align:middle;
+
 }
 
-.table tbody tr{
-    transition:.2s;
-}
 
-.table tbody tr:hover{
-    background:#f8fafc;
-}
-
-.table tbody tr:last-child td{
-    border-bottom:none;
-}
 
 /* ==================================
-   BOTON ACCION
+   FILAS
+================================== */
+
+.table tbody tr{
+
+    transition:background .2s ease;
+
+}
+
+
+
+.table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+.table tbody tr:last-child td{
+
+    border-bottom:none;
+
+}
+
+
+
+/* ==================================
+   BOTONES DE ACCION
 ================================== */
 
 .btn-action{
+
     background:#2563eb;
-    color:white;
+
+    color:#ffffff;
 
     border:none;
+
     border-radius:10px;
 
     padding:10px 18px;
 
     font-size:14px;
+
     font-weight:600;
 
     cursor:pointer;
 
-    transition:.2s;
+    transition:all .2s ease;
+
 }
+
+
 
 .btn-action:hover{
+
     background:#1d4ed8;
+
+    transform:translateY(-1px);
+
 }
 
-/* ==================================
-   RESPONSIVE
-================================== */
 
-@media(max-width:900px){
 
-    .page-header{
-        flex-direction:column;
-        align-items:flex-start;
-    }
+.btn-action:active{
 
-    .btn-primary{
-        width:100%;
-    }
+    transform:translateY(0);
 
-    .table-card{
-        overflow-x:auto;
-    }
-
-    .table{
-        min-width:700px;
-    }
 }

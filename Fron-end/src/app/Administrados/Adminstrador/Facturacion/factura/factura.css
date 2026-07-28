@@ -2,7 +2,7 @@
    RESET
 ========================================================================== */
 
-* {
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -16,81 +16,54 @@ body{
 
 
 /* ==========================================================================
-   ESTRUCTURA PRINCIPAL (Layout Base)
+   LAYOUT PRINCIPAL
 ========================================================================== */
 
-.layout {
-
+.layout{
     display:flex;
-
-    height:100vh;
-
     width:100%;
-
+    height:100vh;
     overflow:hidden;
-
 }
 
 
-
 /* ==========================================================================
-   SIDEBAR FIJO
+   SIDEBAR
 ========================================================================== */
 
-.sidebar {
-
+.sidebar{
     width:320px;
-
     min-width:320px;
-
     height:100vh;
 
-    background:#f8fafc;
-
-    color:#fff;
-
+    display:flex;
+    flex-direction:column;
     flex-shrink:0;
 
-    display:flex;
-
-    flex-direction:column;
+    background:#f8fafc;
+    color:#fff;
 
     overflow:hidden;
-
 }
 
-
-
-.sidebar * {
-
+.sidebar *{
     margin:0;
-
     padding:0;
-
 }
 
-
-
-app-header-admin {
-
+app-header-admin{
     display:block;
-
     width:100%;
-
     height:100%;
-
 }
-
 
 
 /* ==========================================================================
-   CONTENIDO CON SCROLL
+   CONTENIDO
 ========================================================================== */
 
-.content {
-
+.content{
     flex:1;
-
     height:100vh;
 
     padding:20px;
@@ -98,459 +71,340 @@ app-header-admin {
     background:#f3f6fb;
 
     overflow-y:auto;
-
     overflow-x:hidden;
-
 }
-
 
 
 /* ==========================================================================
-   CONTENEDOR FACTURACION
+   CONTENEDOR GENERAL
 ========================================================================== */
 
-.facturacion {
-
+.facturacion{
     max-width:1200px;
-
-    margin:0 auto;
+    margin:auto;
 
     display:flex;
-
     flex-direction:column;
-
     gap:2rem;
-
 }
-
 
 
 /* ==========================================================================
    TITULO
 ========================================================================== */
 
-.titulo {
-
+.titulo{
     text-align:center;
-
     margin-top:20px;
-
 }
 
-
-
-.titulo h1 {
-
+.titulo h1{
     font-size:1.75rem;
-
+    font-weight:700;
     color:#0f172a;
 
-    font-weight:700;
-
     margin-bottom:.25rem;
-
 }
 
-
-
-.titulo p {
-
-    color:#64748b;
-
+.titulo p{
     font-size:.95rem;
-
+    color:#64748b;
 }
-
 
 
 /* ==========================================================================
    TARJETAS KPI
 ========================================================================== */
 
-.cards {
-
+.cards{
     display:grid;
-
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-
     gap:1.5rem;
-
 }
 
+.cards .card{
+    position:relative;
+    overflow:hidden;
 
-
-.cards .card {
-
-    background:#ffffff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 
     padding:1.5rem;
 
+    background:#fff;
+    border:1px solid #e2e8f0;
     border-radius:12px;
 
     box-shadow:0 4px 6px -1px rgba(0,0,0,.05);
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border:1px solid #e2e8f0;
-
 }
 
-
-
-.cards .card h3 {
-
-    font-size:.9rem;
-
-    color:#64748b;
-
-    font-weight:600;
-
+.cards .card h3{
     margin-bottom:.5rem;
 
+    font-size:.9rem;
+    font-weight:600;
+    color:#64748b;
 }
 
-
-
-.cards .card span {
-
+.cards .card span{
     font-size:1.75rem;
-
     font-weight:700;
-
     color:#0f172a;
-
 }
 
-
-
-/* tarjeta pendientes */
+/* Tarjeta con botón */
 
 .cards .card:has(button){
-
     border-left:4px solid #ef4444;
-
 }
 
-
-
-.cards .card button {
-
-    margin-top:.75rem;
-
-    background:#ef4444;
-
-    color:white;
-
-    border:none;
-
-    padding:.5rem 1rem;
-
-    border-radius:6px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
+.cards .card button{
     width:max-content;
 
-    transition:.2s;
+    margin-top:.75rem;
+    padding:.5rem 1rem;
 
-}
+    border:none;
+    border-radius:6px;
 
-
-
-.cards .card button:hover{
-
-    background:#dc2626;
-
-}
-
-
-
-/* ==========================================================================
-   CONTENIDO INFERIOR
-========================================================================== */
-
-.contenido {
-
-    display:grid;
-
-    grid-template-columns:2fr 1fr;
-
-    gap:2rem;
-
-    align-items:start;
-
-}
-
-
-
-@media(max-width:1024px){
-
-    .contenido{
-
-        grid-template-columns:1fr;
-
-    }
-
-}
-
-
-
-/* ==========================================================================
-   CONTENEDORES
-========================================================================== */
-
-.facturas-recientes,
-.panel-lateral {
-
-
-    background:#ffffff;
-
-    padding:1.75rem;
-
-    border-radius:12px;
-
-    box-shadow:0 4px 6px -1px rgba(0,0,0,.05);
-
-    border:1px solid #e2e8f0;
-
-}
-
-
-
-.facturas-recientes h2,
-.panel-lateral h2 {
-
-
-    font-size:1.2rem;
-
-    color:#0f172a;
-
-    margin-bottom:1.25rem;
+    background:#ef4444;
+    color:#fff;
 
     font-weight:600;
+    cursor:pointer;
 
+    transition:.2s;
 }
 
+.cards .card button:hover{
+    background:#dc2626;
+}
+
+/* ==========================================================================
+   CONTENIDO
+========================================================================== */
+
+.contenido{
+    display:flex;
+    flex-direction:column;
+    gap:2rem;
+}
+
+
+/* ==========================================================================
+   FACTURAS RECIENTES
+========================================================================== */
+
+.facturas-recientes{
+    background:#fff;
+    padding:2rem;
+
+    border:1px solid #e2e8f0;
+    border-radius:14px;
+
+    box-shadow:0 8px 24px rgba(15,23,42,.06);
+
+    overflow-x:auto;
+}
+
+.facturas-recientes h2{
+    margin-bottom:1.5rem;
+
+    font-size:1.35rem;
+    font-weight:700;
+    color:#0f172a;
+}
+
+
+/* ==========================================================================
+   TARJETAS
+========================================================================== */
+
+.cards .card{
+    align-items:flex-start;
+}
+
+.cards .card .icono{
+    font-size:2.2rem;
+    margin-bottom:.8rem;
+}
+
+.cards .card h2{
+    margin:.3rem 0;
+
+    font-size:2rem;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.cards .card p{
+    margin-top:.5rem;
+
+    font-size:.9rem;
+    color:#64748b;
+    line-height:1.4;
+}
 
 
 /* ==========================================================================
    TABLA
 ========================================================================== */
 
-.facturas-recientes{
-
-    overflow-x:auto;
-
+table{
+    width:100%;
+    min-width:720px;
+    border-collapse:collapse;
 }
 
+thead{
+    background:#f8fafc;
+}
 
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
+th{
+    padding:1rem;
 
     text-align:left;
 
-}
-
-
-
-th{
+    font-size:.82rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.6px;
 
     color:#64748b;
 
-    font-size:.85rem;
-
-    font-weight:600;
-
-    text-transform:uppercase;
-
-    padding:.75rem 1rem;
-
-    border-bottom:2px solid #f1f5f9;
-
+    border-bottom:2px solid #e2e8f0;
 }
-
-
 
 td{
-
     padding:1rem;
 
-    border-bottom:1px solid #f1f5f9;
-
-    color:#334155;
-
     font-size:.95rem;
-
-}
-
-
-
-tr:hover td{
-
-    background:#f8fafc;
-
-}
-
-
-
-/* boton tabla */
-
-table button{
-
-    background:#f1f5f9;
-
     color:#334155;
 
-    border:1px solid #cbd5e1;
-
-    padding:.4rem .8rem;
-
-    border-radius:6px;
-
-    cursor:pointer;
-
+    border-bottom:1px solid #eef2f7;
+    vertical-align:middle;
 }
 
-
-
-table button:hover{
-
-    background:#e2e8f0;
-
+tbody tr{
+    transition:.2s ease;
 }
 
+tbody tr:hover{
+    background:#f8fafc;
+}
 
 
 /* ==========================================================================
-   PANEL RESUMEN
+   BOTONES
 ========================================================================== */
 
-.panel-lateral{
+table button{
+    padding:.55rem 1rem;
 
-    display:flex;
+    background:#2563eb;
+    color:#fff;
 
-    flex-direction:column;
-
-    gap:1rem;
-
-}
-
-
-
-.alerta{
-
-    background:#fffbeb;
-
-    border-left:4px solid #f59e0b;
-
-    color:#b45309;
-
-    padding:.85rem 1rem;
-
-    border-radius:6px;
-
-}
-
-
-
-.panel-lateral .resumen{
-
-    margin-top:1.5rem;
-
-    border-top:1px solid #e2e8f0;
-
-    padding-top:1.5rem;
-
-}
-
-
-
-.dato{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:.5rem 0;
-
-}
-
-
-
-.dato span{
-
-    color:#64748b;
-
-}
-
-
-
-.dato strong{
-
-    color:#0f172a;
+    border:none;
+    border-radius:8px;
 
     font-weight:600;
+    cursor:pointer;
 
+    transition:.2s;
+}
+
+table button:hover{
+    background:#1d4ed8;
+    transform:translateY(-1px);
 }
 
 
+/* ==========================================================================
+   BADGES DE ESTADO
+========================================================================== */
 
-.dato:last-of-type strong{
+.estado{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
 
-    color:#ef4444;
+    min-width:110px;
 
+    padding:.45rem .9rem;
+
+    border-radius:999px;
+
+    font-size:.78rem;
+    font-weight:700;
+    letter-spacing:.3px;
 }
 
+
+/* SIN ENVIAR */
+
+.estado-pendiente{
+    background:#fef3c7;
+    color:#b45309;
+}
+
+
+/* IMPAGA */
+
+.estado-impaga{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+
+/* PAGADA */
+
+.estado-pagada{
+    background:#dcfce7;
+    color:#15803d;
+}
 
 
 /* ==========================================================================
    RESPONSIVE
 ========================================================================== */
 
-@media(max-width:768px){
+@media (max-width:900px){
 
-
-    .layout{
-
-        flex-direction:column;
-
+    .cards{
+        grid-template-columns:1fr;
     }
 
-
-    .sidebar{
-
-        width:100%;
-
-        min-width:100%;
-
-        height:auto;
-
+    .facturas-recientes{
+        padding:1.5rem;
     }
 
+    table{
+        min-width:650px;
+    }
+
+}
+
+@media (max-width:768px){
 
     .content{
-
-        height:calc(100vh - 80px);
-
         padding:1rem;
-
     }
 
+    .titulo h1{
+        font-size:1.5rem;
+    }
+
+    .cards .card{
+        padding:1.2rem;
+    }
+
+    .cards .card h2{
+        font-size:1.7rem;
+    }
+
+    .facturas-recientes h2{
+        font-size:1.15rem;
+    }
 
 }

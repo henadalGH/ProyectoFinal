@@ -1,0 +1,438 @@
+/* ===========================
+   LAYOUT
+=========================== */
+
+.layout{
+    display:flex;
+    height:100vh;
+    overflow:hidden;
+    background:#f3f6fb;
+}
+
+.sidebar{
+    width:320px;
+    flex-shrink:0;
+    height:100vh;
+    overflow-y:auto;
+    background:#1f2937;
+}
+
+.content{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+    background:#f3f6fb;
+}
+
+
+/* ===========================
+   CONTENIDO
+=========================== */
+
+.content-orden{
+    padding:30px;
+}
+
+
+/* ===========================
+   TITULO
+=========================== */
+
+.titulo{
+    margin-bottom:30px;
+}
+
+.titulo h1{
+    margin:0;
+    font-size:32px;
+    color:#1f2937;
+}
+
+.titulo p{
+    margin-top:8px;
+    color:#6b7280;
+    font-size:16px;
+}
+
+
+/* ===========================
+   LISTA
+=========================== */
+
+.lista-ordenes{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
+    gap:25px;
+}
+
+
+/* ===========================
+   TARJETA
+=========================== */
+
+.card-orden{
+
+    background:#fff;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.card-orden:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 28px rgba(0,0,0,.12);
+}
+
+
+/* ===========================
+   HEADER CARD
+=========================== */
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    border-bottom:1px solid #ececec;
+
+    padding-bottom:15px;
+}
+
+.card-header h3{
+
+    margin:0;
+
+    color:#1f2937;
+
+    font-size:20px;
+}
+
+
+/* ===========================
+   PRIORIDAD
+=========================== */
+
+.prioridad{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+
+/* ===========================
+   DATOS
+=========================== */
+
+.card-body{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    margin-bottom:25px;
+}
+
+.dato{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    border-bottom:1px solid #f2f2f2;
+
+    padding-bottom:10px;
+}
+
+.label{
+
+    font-weight:600;
+
+    color:#6b7280;
+}
+
+.dato span:last-child{
+
+    color:#111827;
+
+    font-weight:500;
+}
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.card-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+}
+
+
+/* ===========================
+   BOTON
+=========================== */
+
+.btn-reasignar{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.btn-reasignar:hover{
+
+    background:#1d4ed8;
+}
+
+
+/* ===========================
+   MODAL
+=========================== */
+
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+}
+
+.modal-content{
+
+    width:420px;
+
+    background:white;
+
+    border-radius:16px;
+
+    padding:30px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+    animation:aparecer .25s ease;
+}
+
+.modal-content h2{
+
+    margin-top:0;
+
+    margin-bottom:25px;
+
+    color:#1f2937;
+
+    text-align:center;
+}
+
+
+/* ===========================
+   FORMULARIO
+=========================== */
+
+.campo{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+    margin-bottom:25px;
+}
+
+.campo label{
+
+    font-weight:600;
+
+    color:#374151;
+}
+
+.campo select{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+    transition:.2s;
+}
+
+.campo select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+
+/* ===========================
+   ACCIONES
+=========================== */
+
+.modal-acciones{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+}
+
+.btn-guardar{
+
+    background:#16a34a;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.btn-guardar:hover{
+
+    background:#15803d;
+}
+
+.btn-guardar:disabled{
+
+    background:#9ca3af;
+
+    cursor:not-allowed;
+}
+
+.btn-cancelar{
+
+    background:#ef4444;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+.btn-cancelar:hover{
+
+    background:#dc2626;
+}
+
+
+/* ===========================
+   ANIMACION
+=========================== */
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.9);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+}
+
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:900px){
+
+    .lista-ordenes{
+
+        grid-template-columns:1fr;
+    }
+
+    .modal-content{
+
+        width:90%;
+    }
+
+}

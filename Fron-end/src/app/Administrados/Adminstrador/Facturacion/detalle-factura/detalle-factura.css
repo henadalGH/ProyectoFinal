@@ -87,9 +87,7 @@ app-header{
 
     display:block;
 
-    width:calc(100% + 40px);
-
-    margin-left:-20px;
+    width:100%;
 
     margin-bottom:25px;
 
@@ -435,7 +433,7 @@ select:focus{
 
     margin-left:auto;
 
-    width:300px;
+    width:350px;
 
     padding:20px;
 
@@ -445,16 +443,104 @@ select:focus{
 
     border:1px solid #e5e7eb;
 
-}
+    display:flex;
 
+    justify-content:space-between;
 
-
-.totales p{
-
-    margin:10px 0;
+    gap:15px;
 
 }
 
+
+.totales > div{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+
+.totales > div:first-child{
+
+    flex:1;
+
+    text-align:left;
+
+}
+
+
+.totales > div:last-child{
+
+    flex:1;
+
+    text-align:right;
+
+}
+
+
+.totales p,
+.totales h2{
+
+    height:32px;
+
+    display:flex;
+
+    align-items:center;
+
+    margin:0;
+
+}
+
+
+.totales > div:last-child p{
+
+    justify-content:flex-end;
+
+}
+
+
+.totales select{
+
+    padding:3px 6px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:6px;
+
+    margin-left:5px;
+
+}
+
+
+.totales input[type="number"]{
+
+    width:80px;
+
+    padding:5px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:6px;
+
+    text-align:right;
+
+}
+
+
+.totales label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    cursor:pointer;
+
+}
 
 
 .totales h2{

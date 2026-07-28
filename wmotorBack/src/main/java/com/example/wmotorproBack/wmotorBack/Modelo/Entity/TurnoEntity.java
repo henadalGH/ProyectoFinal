@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.Entity;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class TurnoEntity {
     private String descripcion;
 
     @Column(name = "fecha_hora")
-    private LocalDate fechaHora;
+    private LocalDateTime fechaHora;
 
     @ManyToOne
     @JoinColumn(name = "id_vehiculo")

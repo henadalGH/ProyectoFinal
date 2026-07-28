@@ -1,61 +1,113 @@
 <div class="layout">
 
+  <!-- MENU LATERAL -->
   <aside class="sidebar">
     <app-header-admin></app-header-admin>
   </aside>
 
+
+  <!-- CONTENIDO PRINCIPAL -->
   <main class="content">
 
     <app-header></app-header>
 
-    <section class="titulo">
-      <h1>Órdenes de trabajo</h1>
-      <p>Gestioná todas las órdenes de trabajo generadas a partir de los turnos.</p>
-    </section>
 
+    <!-- TITULO Y ACCIONES -->
+    <section class="titulo">
+
+    <div class="titulo-texto">
+
+        <h1>Órdenes de trabajo</h1>
+
+        <p>
+            Gestioná todas las órdenes de trabajo generadas a partir de los turnos confirmados.
+        </p>
+
+    </div>
+
+
+    <div class="titulo-acciones">
+
+        <button 
+            class="btn-secundario"
+            [routerLink]="['/ordenesSinTerminar']">
+
+            Ver órdenes sin terminar
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+    <!-- TABLA DE TURNOS -->
     <section class="card">
 
-      <div class="card-header">
+
+      <header class="card-header">
+
         <div>
           <h2>Turnos confirmados</h2>
-          <p>Turnos listos para asignar a un empleado.</p>
+
+          <p>
+            Turnos disponibles para asignar un empleado y generar una orden.
+          </p>
+
         </div>
-      </div>
+
+      </header>
+
+
 
       <div class="tabla-wrapper">
 
         <table class="tabla">
 
+
           <thead>
 
             <tr>
-
               <th>Fecha</th>
               <th>Cliente</th>
               <th>Vehículo</th>
               <th>Patente</th>
               <th>Servicio</th>
               <th>Acciones</th>
-
             </tr>
 
           </thead>
 
+
+
           <tbody>
+
 
             @for (tur of turnos; track tur.id) {
 
               <tr>
 
-                <td>{{tur.fecha}}</td>
 
                 <td>
+                  {{tur.fecha}}
+                </td>
+
+
+
+                <td>
+
                   <div class="cliente">
+
                     <span class="nombre">
                       {{tur.nombre}} {{tur.apellido}}
                     </span>
+
                   </div>
+
                 </td>
+
+
 
                 <td>
 
@@ -65,6 +117,8 @@
 
                 </td>
 
+
+
                 <td>
 
                   <span class="badge patente">
@@ -73,6 +127,8 @@
 
                 </td>
 
+
+
                 <td>
 
                   <span class="badge servicio">
@@ -80,6 +136,8 @@
                   </span>
 
                 </td>
+
+
 
                 <td>
 
@@ -93,9 +151,11 @@
 
                 </td>
 
+
               </tr>
 
             }
+
 
             @empty {
 
@@ -103,17 +163,27 @@
 
                 <td colspan="6" class="tabla-vacia">
 
+
                   <div class="vacio">
 
-                    <span class="icono">📋</span>
 
-                    <h3>No hay turnos confirmados</h3>
+                    <span class="icono">
+                      📋
+                    </span>
+
+
+                    <h3>
+                      No hay turnos confirmados
+                    </h3>
+
 
                     <p>
                       Actualmente no existen turnos disponibles para generar órdenes de trabajo.
                     </p>
 
+
                   </div>
+
 
                 </td>
 
@@ -121,36 +191,59 @@
 
             }
 
+
           </tbody>
+
 
         </table>
 
+
       </div>
+
 
     </section>
 
+
+
+
+    <!-- MODAL ASIGNAR ORDEN -->
+
     @if (modal) {
+
 
       <div class="modal-fondo">
 
+
         <div class="modal">
 
-          <h2>Asignar orden de trabajo</h2>
+
+          <h2>
+            Asignar orden de trabajo
+          </h2>
+
+
 
           <form (ngSubmit)="AsignarOrden()">
 
+
+
             <div class="item">
 
-              <label>Empleado</label>
+              <label>
+                Empleado
+              </label>
+
 
               <select
                 name="idEmpleado"
                 [(ngModel)]="idEmpleado"
                 required>
 
+
                 <option [ngValue]="null">
                   Seleccione un empleado
                 </option>
+
 
                 @for (emp of empleados; track emp.id) {
 
@@ -162,32 +255,61 @@
 
                 }
 
+
               </select>
+
 
             </div>
 
+
+
+
+
             <div class="item">
 
-              <label>Prioridad</label>
+
+              <label>
+                Prioridad
+              </label>
+
 
               <select
                 name="prioridad"
                 [(ngModel)]="prioridad"
                 required>
 
+
                 <option value="">
                   Seleccione una prioridad
                 </option>
 
-                <option value="ALTA">Alta</option>
-                <option value="MEDIA">Media</option>
-                <option value="BAJA">Baja</option>
+
+                <option value="ALTA">
+                  Alta
+                </option>
+
+
+                <option value="MEDIA">
+                  Media
+                </option>
+
+
+                <option value="BAJA">
+                  Baja
+                </option>
+
 
               </select>
 
+
             </div>
 
+
+
+
+
             <div class="acciones-modal">
+
 
               <button
                 type="button"
@@ -198,6 +320,8 @@
 
               </button>
 
+
+
               <button
                 type="submit"
                 class="btn-guardar">
@@ -206,16 +330,24 @@
 
               </button>
 
+
             </div>
+
+
 
           </form>
 
+
         </div>
+
 
       </div>
 
+
     }
 
+
   </main>
+
 
 </div>

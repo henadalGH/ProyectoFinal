@@ -1,202 +1,200 @@
 <div class="layout">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <app-header-admin></app-header-admin>
     </aside>
 
-
-    <!-- CONTENIDO -->
     <main class="content">
 
         <app-header></app-header>
 
-
         @if (empleado) {
 
+<!-- HEADER EMPLEADO -->
+<section class="empleado-header">
 
-        <!-- HEADER EMPLEADO -->
-        <section class="empleado-header">
+    <div class="perfil">
 
-            <div class="perfil">
+        <div class="avatar">
+            {{empleado.nombre.charAt(0)}}{{empleado.apellido.charAt(0)}}
+        </div>
 
-                <div class="avatar">
-                    {{empleado.nombre.charAt(0)}}{{empleado.apellido.charAt(0)}}
-                </div>
+        <div class="info">
 
+            <h1>
+                {{empleado.nombre}} {{empleado.apellido}}
+            </h1>
 
-                <div class="info">
+            <span class="cargo">
+                {{empleado.cargo}}
+            </span>
 
-                    <h1>
-                        {{empleado.nombre}} {{empleado.apellido}}
-                    </h1>
+            <p>
+                Empleado registrado desde {{empleado.fechaIngreso | date:'dd/MM/yyyy'}}
+            </p>
 
-                    <span class="cargo">
-                        {{empleado.cargo}}
-                    </span>
+        </div>
 
-                    <p>
-                        Empleado registrado desde {{empleado.fechaIngreso}}
-                    </p>
+    </div>
 
-                </div>
+    <button class="btn-volver"
+            [routerLink]="['/gestionEmpleado']">
+        Volver
+    </button>
 
-            </div>
+</section>
 
+<!-- BOTONES GENERALES -->
+<div class="acciones-empleado">
 
-            <button class="btn-volver" [routerLink]="['/gestionEmpleado']">
-                Volver
-            </button>
+    @if(!editarTodo){
 
+        <button class="btn-editar-general"
+                type="button"
+                (click)="activarEdicion()">
 
-        </section>
+            ✏️ Editar datos
 
+        </button>
 
+    }
 
-        <!-- DATOS EMPLEADO -->
-        <section class="datos-empleado">
+    @else {
+
+        <button class="btn-guardar-general"
+                type="button"
+                (click)="guardarCambios()">
+
+            💾 Guardar cambios
+
+        </button>
+
+        <button class="btn-cancelar-general"
+                type="button"
+                (click)="cancelarEdicion()">
+
+            ❌ Cancelar
+
+        </button>
+
+    }
+
+</div>
+
+<!-- DATOS EMPLEADO -->
+<section class="datos-empleado">
 
     <!-- NOMBRE -->
-    <div class="fila">
+<div class="fila">
 
-        <div class="etiqueta">
-            👤 Nombre
-        </div>
+    <div class="etiqueta">
+        👤 Nombre
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarNombre) {
-                {{empleado.nombre}}
-            }
-            @else {
-                <input type="text" [(ngModel)]="empleado.nombre">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarNombre ? modificarNombre(empleado.id) : editarNombre = true">
-
-            {{editarNombre ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarTodo) {
+            {{empleado.nombre}}
+        }
+        @else {
+            <input
+                type="text"
+                [(ngModel)]="empleado.nombre">
+        }
 
     </div>
 
+</div>
 
-    <!-- APELLIDO -->
-    <div class="fila">
+<!-- APELLIDO -->
+<div class="fila">
 
-        <div class="etiqueta">
-            🧾 Apellido
-        </div>
+    <div class="etiqueta">
+        🧾 Apellido
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarApellido) {
-                {{empleado.apellido}}
-            }
-            @else {
-                <input type="text" [(ngModel)]="empleado.apellido">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarApellido ? modificarApellido(empleado.id) : editarApellido = true">
-
-            {{editarApellido ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarTodo) {
+            {{empleado.apellido}}
+        }
+        @else {
+            <input
+                type="text"
+                [(ngModel)]="empleado.apellido">
+        }
 
     </div>
 
+</div>
 
-    <!-- EMAIL -->
-    <div class="fila">
+<!-- EMAIL -->
+<div class="fila">
 
-        <div class="etiqueta">
-            📧 Email
-        </div>
+    <div class="etiqueta">
+        📧 Email
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarEmail) {
-                {{empleado.email}}
-            }
-            @else {
-                <input type="email" [(ngModel)]="empleado.email">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarEmail ? modificarEmail(empleado.id) : editarEmail = true">
-
-            {{editarEmail ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarTodo) {
+            {{empleado.email}}
+        }
+        @else {
+            <input
+                type="email"
+                [(ngModel)]="empleado.email">
+        }
 
     </div>
 
+</div>
 
-    <!-- CONTACTO -->
-    <div class="fila">
+<!-- CONTACTO -->
+<div class="fila">
 
-        <div class="etiqueta">
-            📱 Contacto
-        </div>
+    <div class="etiqueta">
+        📱 Contacto
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarContacto) {
-                {{empleado.contacto}}
-            }
-            @else {
-                <input type="text" [(ngModel)]="empleado.contacto">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarContacto ? modificarContacto(empleado.id) : editarContacto = true">
-
-            {{editarContacto ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarTodo) {
+            {{ '+54 ' + empleado.contacto.slice(2,5) + ' ' + empleado.contacto.slice(5,8) + '-' + empleado.contacto.slice(8) }}
+        }
+        @else {
+            <input
+                type="text"
+                [(ngModel)]="empleado.contacto">
+        }
 
     </div>
 
+</div>
 
-    <!-- DNI -->
-    <div class="fila">
+<!-- DNI -->
+<div class="fila">
 
-        <div class="etiqueta">
-            🪪 DNI
-        </div>
+    <div class="etiqueta">
+        🪪 DNI
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarDni) {
-                {{empleado.dni}}
-            }
-            @else {
-                <input type="text" [(ngModel)]="empleado.dni">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarDni ? modificarDni(empleado.id) : editarDni = true">
-
-            {{editarDni ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarTodo) {
+            {{empleado.dni | number}}
+        }
+        @else {
+            <input
+                type="text"
+                [(ngModel)]="empleado.dni">
+        }
 
     </div>
 
+</div>
 
-    <!-- FECHA NACIMIENTO -->
+<!-- FECHA NACIMIENTO -->
 <div class="fila">
 
     <div class="etiqueta">
@@ -205,128 +203,140 @@
 
     <div class="valor">
 
-        @if (!editarFechaNacimiento) {
-            {{empleado.fechaNacimiento}}
+        @if (!editarTodo) {
+            {{empleado.fechaNacimiento | date:'dd/MM/yyyy'}}
         }
         @else {
-            <input 
+            <input
                 type="date"
-                [(ngModel)]="empleado.fechaNacimiento"
-                [max]="fechaMaxima"
-                name="fechaNacimiento">
+                [(ngModel)]="empleado.fechaNacimiento">
         }
 
     </div>
-
-    <button class="btn-editar"
-            (click)="editarFechaNacimiento 
-            ? modificarFechaNacimiento(empleado.id) 
-            : iniciarEdicionFechaNacimiento()">
-
-        {{ editarFechaNacimiento ? '💾' : '✏️' }}
-
-    </button>
 
 </div>
 
+<!-- FECHA INGRESO -->
+<div class="fila">
 
-    <!-- FECHA INGRESO -->
-    <div class="fila">
+    <div class="etiqueta">
+        📅 Fecha ingreso
+    </div>
 
-        <div class="etiqueta">
-            📅 Fecha ingreso
-        </div>
+    <div class="valor">
 
-        <div class="valor">
-
-            @if (!editarFechaIngreso) {
-                {{empleado.fechaIngreso}}
-            }
-            @else {
-                <input type="date" [(ngModel)]="empleado.fechaIngreso">
-            }
-
-        </div>
-
-        <button class="btn-editar"
-                (click)="editarFechaIngreso ? modificarFechaIngreso(empleado.id) : editarFechaIngreso = true">
-
-            {{editarFechaIngreso ? '💾' : '✏️'}}
-
-        </button>
+        @if (!editarTodo) {
+            {{empleado.fechaIngreso | date:'dd/MM/yyyy'}}
+        }
+        @else {
+            <input
+                type="date"
+                [(ngModel)]="empleado.fechaIngreso">
+        }
 
     </div>
 
+</div>
 
-    <!-- CARGO -->
-    <div class="fila">
+<!-- CARGO -->
+<div class="fila">
 
-        <div class="etiqueta">
-            💼 Cargo
-        </div>
+    <div class="etiqueta">
+        💼 Cargo
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarCargo) {
-                {{empleado.cargo}}
-            }
-            @else {
+        @if (!editarTodo) {
 
-                <select [(ngModel)]="empleado.cargo">
+            {{empleado.cargo}}
 
-                    <option value="AYUDANTE">AYUDANTE</option>
-                    <option value="MECANICO">MECANICO</option>
-                    <option value="ENCARGADO">ENCARGADO</option>
-                    <option value="JEFE_TALLER">JEFE TALLER</option>
-                    <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
+        } @else {
 
-                </select>
+            <select [(ngModel)]="empleado.cargo">
 
-            }
+                <option value="AYUDANTE">AYUDANTE</option>
+                <option value="MECANICO">MECANICO</option>
+                <option value="ENCARGADO">ENCARGADO</option>
+                <option value="JEFE_TALLER">JEFE TALLER</option>
+                <option value="ADMINISTRATIVO">ADMINISTRATIVO</option>
 
-        </div>
+            </select>
 
-        <button class="btn-editar"
-                (click)="editarCargo ? modificarCargo(empleado.id) : editarCargo = true">
-
-            {{editarCargo ? '💾' : '✏️'}}
-
-        </button>
+        }
 
     </div>
 
+</div>
 
-    <!-- SUELDO -->
-    <div class="fila">
+<!-- SUELDO -->
+<div class="fila">
 
-        <div class="etiqueta">
-            💰 Sueldo
-        </div>
+    <div class="etiqueta">
+        💰 Sueldo
+    </div>
 
-        <div class="valor">
+    <div class="valor">
 
-            @if (!editarSueldo) {
-                ${{empleado.sueldo}}
-            }
-            @else {
-                <input type="number" [(ngModel)]="aumentoSueldo">
-            }
+        @if (!editarTodo) {
 
-        </div>
+            {{empleado.sueldo | currency:'ARS'}}
 
-        <button class="btn-editar"
-                (click)="editarSueldo ? aumentarSueldo() : editarSueldo = true">
+        } @else {
 
-            {{editarSueldo ? '💾' : '✏️'}}
+            <input
+                type="number"
+                [(ngModel)]="empleado.sueldo">
 
-        </button>
+        }
 
     </div>
+
+</div>
+
+<!-- BONIFICACIÓN -->
+<div class="fila">
+
+    <div class="etiqueta">
+        🎁 Bonificación
+    </div>
+
+    <div class="valor">
+
+        @if (!editarTodo) {
+
+            {{bonificacion || 0 | currency:'ARS'}}
+
+        } @else {
+
+            <input
+                type="number"
+                [(ngModel)]="bonificacion">
+
+        }
+
+    </div>
+
+</div>
+
+<!-- SUELDO TOTAL -->
+<div class="fila total">
+
+    <div class="etiqueta">
+        💵 Total a cobrar
+    </div>
+
+    <div class="valor">
+
+        {{empleado.sueldo + (bonificacion || 0) | currency:'ARS'}}
+
+    </div>
+
+</div>
 
 </section>
 
         }
     </main>
-
 
 </div>

@@ -15,7 +15,8 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorEstadoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.TurnosPorMesDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EstadoTurnosEntity;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.ServicioEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoClienteCasualEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.TurnoEntity;
@@ -290,7 +291,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
 
 
     @Override
-    public List<TurnoEstadosDTO> obtenerTurnosPorFecha(LocalDate fecha) {
+    public List<TurnoEstadosDTO> obtenerTurnosPorFecha(LocalDateTime fecha) {
 
         return turnoRepository.findByFechaHora(fecha)
             .stream()
@@ -301,7 +302,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
 
 
     @Override
-    public List<TurnoEstadosDTO> obtenerTurnofuturos(LocalDate fecha) {
+    public List<TurnoEstadosDTO> obtenerTurnofuturos(LocalDateTime fecha) {
 
         return turnoRepository.findByFechaHoraGreaterThanEqual(fecha)
             .stream()
@@ -311,7 +312,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
 
 
     @Override
-    public List<TurnoEstadosDTO> obtenrTurnoFururosPorCliente(Long id, LocalDate fecha) {
+    public List<TurnoEstadosDTO> obtenrTurnoFururosPorCliente(Long id, LocalDateTime fecha) {
        return turnoRepository.findByVehiculoClienteIdAndFechaHoraGreaterThanEqual(id, fecha)
             .stream()
             .map(this::toMapTurnoDto)
@@ -322,7 +323,7 @@ public TurnoEstadosDTO toMapTurnoDto(TurnoEntity turno) {
     @Override
     public Long contarTurnosPendientes() {
 
-        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE)
+        EstadoTurnosEntity estado = estadoTurnoRepository.findByEstadoTurno(EstadoTurnoEnums.PENDIENTE_ASIGNACION)
         .orElseThrow(() -> new RuntimeException("Estado no encontrado"));
 
         return turnoRepository.countByEstado(estado);

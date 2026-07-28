@@ -1,6 +1,6 @@
 package com.example.wmotorproBack.wmotorBack.Modelo.DTO;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -8,7 +8,7 @@ import lombok.Data;
 public class TurnoEstadosDTO {
 
     private Long id;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
     private String descripcion;
     private Long idVehiculo;
     private String Marca;

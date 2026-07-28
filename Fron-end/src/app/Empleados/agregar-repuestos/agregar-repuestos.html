@@ -5,7 +5,7 @@
         <app-header-empleado></app-header-empleado>
     </aside>
 
-    <!-- Contenido -->
+    <!-- Contenido Principal -->
     <main class="content">
 
         <app-header></app-header>
@@ -18,13 +18,13 @@
                 <p>Busque y seleccione los repuestos que desea agregar a la orden de trabajo.</p>
             </div>
 
-            <!-- Barra superior -->
+            <!-- Barra Superior de Acciones y Búsqueda -->
             <div class="barra-superior">
 
                 <div class="barra-busqueda">
                     <input
                         type="text"
-                        placeholder="Buscar por nombre o código..."
+                        placeholder="Buscar por nombre, código o marca..."
                         [(ngModel)]="buscar"
                         (input)="buscarRepuesto()">
                 </div>
@@ -41,22 +41,25 @@
                     <button
                         type="button"
                         class="btn-agregar"
+                        [disabled]="seleccionados.length === 0"
                         (click)="agregarRepuestos()">
-                        Agregar repuestos
+                        Agregar repuestos ({{ seleccionados.length }})
                     </button>
 
                 </div>
 
             </div>
 
-            <!-- Tabla -->
+            <!-- Tabla de Repuestos -->
             <div class="tabla-container">
 
                 <table>
 
                     <thead>
                         <tr>
-                            <th class="col-check"></th>
+                            <th class="col-check">
+                                <!-- Columna de Checkbox -->
+                            </th>
                             <th>Nombre</th>
                             <th>Marca</th>
                             <th>Código</th>
@@ -76,6 +79,7 @@
                                     <td class="col-check">
                                         <input
                                             type="checkbox"
+                                            [checked]="repuesto.seleccionado"
                                             (change)="seleccionarRepuesto($event, repuesto)">
                                     </td>
 
@@ -92,7 +96,8 @@
                                             type="number"
                                             min="1"
                                             [max]="repuesto.cantidad"
-                                            [(ngModel)]="repuesto.cantidadSeleccionada">
+                                            [(ngModel)]="repuesto.cantidadSeleccionada"
+                                            [disabled]="!repuesto.seleccionado">
                                     </td>
 
                                 </tr>
@@ -102,11 +107,9 @@
                         } @else {
 
                             <tr>
-
                                 <td colspan="6" class="sin-resultados">
-                                    No se encontraron repuestos.
+                                    No se encontraron repuestos que coincidan con la búsqueda.
                                 </td>
-
                             </tr>
 
                         }
