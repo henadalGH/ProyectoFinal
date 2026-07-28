@@ -58,12 +58,12 @@
 
                     <div class="fecha-factura">
                         <label>Fecha emisión</label>
-                        <span class="valor">{{ factura.fechaRegistro }}</span>
+                        <span class="valor">{{ factura.fechaRegistro | date:'dd/MM/yyyy'}}</span>
                     </div>
 
                     <div class="fecha-vencimiento">
                         <label>Vencimiento</label>
-                        <span class="valor">{{ factura.fechaVencimiento }}</span>
+                        <span class="valor">{{ factura.fechaVencimiesto | date:'dd/MM/yyyy'}}</span>
                     </div>
 
                     <div class="estado-factura">

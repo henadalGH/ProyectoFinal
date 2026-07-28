@@ -1,25 +1,80 @@
+/* ==========================================================================
+   RESET GENERAL Y ESTRUCTURA DE PANTALLA COMPLETA
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
 
-/*==============================
-        GENERAL
-===============================*/
-/* ==========================
-   CONTENEDOR DE BOTONES
-========================== */
+html, body {
+    height: 100%;
+    overflow: hidden; /* Evita el scroll general del cuerpo */
+    background: #eceff3;
+    color: #111;
+}
 
-.btn{
+/* ==========================================================================
+   LAYOUT CON SIDEBAR FIJO Y CONTENIDO CON SCROLL
+   ========================================================================== */
+.layout {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Sidebar más ancho y totalmente fijo */
+.sidebar {
+    width: 280px;              /* Ancho aumentado */
+    min-width: 280px;          /* Impide que se comprima */
+    height: 100vh;
+    background: #1f2937;
+    color: white;
+    flex-shrink: 0;
+}
+
+/* Área de contenido que ocupa el resto del espacio */
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Header fijo en la parte superior del contenido */
+.content-header {
+    height: 60px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    flex-shrink: 0;
+}
+
+/* Área deslizable independiente (donde vive la factura) */
+.content {
+    flex: 1;
+    background: #f3f6fb;
+    padding: 25px;
+    overflow-y: auto;          /* Solo esta área hace scroll */
+}
+
+/* ==========================================================================
+   CONTENEDOR DE BOTONES (ACCIONES)
+   ========================================================================== */
+.btn {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
     margin-top: 30px;
-    margin-bottom: 50px; /* separación con lo de abajo */
+    margin-bottom: 50px;
 }
 
-/* ==========================
-   ESTILO BASE
-========================== */
-
-.btn button{
+.btn button {
     border: none;
     outline: none;
     padding: 14px 30px;
@@ -30,497 +85,399 @@
     cursor: pointer;
     transition: all .25s ease;
     box-shadow:
-        0 2px 10px rgba(0,0,0,.05),
-        0 8px 20px rgba(0,0,0,.04);
+        0 2px 10px rgba(0, 0, 0, .05),
+        0 8px 20px rgba(0, 0, 0, .04);
 }
 
-/* ==========================
-   BOTON VOLVER
-========================== */
-
-.btn-volver{
+.btn-volver {
     background: white;
     color: #374151;
     border: 1px solid #d1d5db;
 }
 
-.btn-volver:hover{
+.btn-volver:hover {
     background: #f3f4f6;
     transform: translateY(-2px);
-    box-shadow:
-        0 6px 15px rgba(0,0,0,.08);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .08);
 }
 
-.btn-volver:active{
+.btn-volver:active {
     transform: translateY(0);
 }
 
-/* ==========================
-   BOTON ENVIAR
-========================== */
-
-.btn-enviar{
+.btn-enviar {
     background: #3b82f6;
     color: white;
 }
 
-.btn-enviar:hover{
+.btn-enviar:hover {
     background: #2563eb;
     transform: translateY(-2px);
-    box-shadow:
-        0 6px 15px rgba(59,130,246,.35);
+    box-shadow: 0 6px 15px rgba(59, 130, 246, .35);
 }
 
-.btn-enviar:active{
+.btn-enviar:active {
     transform: translateY(0);
 }
 
-/* ==========================
-   RESPONSIVE
-========================== */
-
-@media(max-width:600px){
-
-    .btn{
-        flex-direction: column;
-    }
-
-    .btn button{
-        width: 100%;
-    }
-
+/* ==========================================================================
+   HOJA PRINCIPAL (CONTENEDOR DE FACTURA)
+   ========================================================================== */
+.factura-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .12);
+    padding: 30px;
 }
 
-.layout {
-  display: flex;
-  height: 100vh; /* ocupa toda la pantalla */
+/* ==========================================================================
+   ENCABEZADO DE FACTURA
+   ========================================================================== */
+.factura-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 3px solid #184a78;
+    padding-bottom: 20px;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-.sidebar {
-  width: 250px;   /* ancho del menú */
-  background: #1f2937;
-  color: white;
+.empresa {
+    width: 60%;
 }
 
-.content {
-  flex: 1;        /* ocupa todo el espacio restante */
-  background: #f3f6fb;
-  padding: 20px;
+.empresa h1 {
+    font-size: 36px;
+    color: #123d68;
+    margin-bottom: 8px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Segoe UI', Arial, sans-serif;
+.empresa p {
+    font-size: 15px;
+    color: #111;
+    margin: 7px 0;
 }
 
-body{
-    background:#eceff3;
-    padding:35px;
-    color:#111;
+/* ==========================================================================
+   DATOS METADATA FACTURA
+   ========================================================================== */
+.factura-datos {
+    width: 320px;
 }
 
-/*==============================
-        HOJA
-===============================*/
-
-.factura-container{
-
-    max-width:1100px;
-    margin:20px auto;
-    background:#fff;
-    border-radius:12px;
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
-    padding:30px;
+.factura-datos .meta {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/*==============================
-        HEADER
-===============================*/
-
-.factura-header{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    border-bottom:3px solid #184a78;
-    padding-bottom:20px;
-    gap:20px;
-    margin-bottom:20px;
+.factura-datos label {
+    display: block;
+    font-size: 12px;
+    color: #374151;
+    margin-bottom: 3px;
 }
 
-/*==============================
-        EMPRESA
-===============================*/
-
-.empresa{
-
-    width:60%;
+.factura-datos .valor {
+    font-weight: 700;
+    color: #0f172a;
 }
 
-.empresa h1{
-    font-size:36px;
-    color:#123d68;
-    margin-bottom:8px;
-    font-weight:700;
-    letter-spacing:1px;
+.tipo-factura {
+    border: 2px solid #184a78;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
 }
 
-.empresa p{
-
-    font-size:15px;
-
-    color:#111;
-
-    margin:7px 0;
-
+.tipo-factura .titulo {
+    display: block;
+    background: #184a78;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
-/*==============================
-    DATOS FACTURA
-===============================*/
-
-.factura-datos{
-
-    width:320px;
-
-
-.factura-datos .meta{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-}
-
-.factura-datos label{
-    display:block;
-    font-size:12px;
-    color:#374151;
-    margin-bottom:3px;
-}
-
-.factura-datos .valor{
-    font-weight:700;
-    color:#0f172a;
-}
-}
-
-.tipo-factura{
-
-    border:2px solid #184a78;
-
-    border-radius:10px;
-
-    overflow:hidden;
-
-    margin-bottom:15px;
-
-}
-
-.tipo-factura .titulo{
-
-    display:block;
-
-    background:#184a78;
-
-    color:white;
-
-    text-align:center;
-
-    padding:10px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-
-}
-
-.tipo-factura .letra{
-
-    display:block;
-    text-align:center;
-    font-size:42px;
-    color:#123d68;
-    font-weight:bold;
-    padding:12px;
-
+.tipo-factura .letra {
+    display: block;
+    text-align: center;
+    font-size: 42px;
+    color: #123d68;
+    font-weight: bold;
+    padding: 12px;
 }
 
 .numero-factura,
-.fecha-factura{
-    border:1px solid #e5e7eb;
-    border-radius:8px;
-    padding:10px 12px;
-    text-align:left;
-    margin-bottom:8px;
-    background:#fafafa;
+.fecha-factura,
+.fecha-vencimiento,
+.estado-factura {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: left;
+    margin-bottom: 8px;
+    background: #fafafa;
+    color: #111;
+    font-weight: 600;
 }
 
-.numero-factura label{
-
-    display:block;
-
-    color:#111;
-
-    font-weight:600;
-
-    margin-bottom:5px;
-
+.numero-factura label {
+    display: block;
+    color: #111;
+    font-weight: 600;
+    margin-bottom: 5px;
 }
 
-.numero-factura span{
-
-    font-size:22px;
-
-    color:#000;
-
-    font-weight:bold;
-
+.numero-factura span {
+    font-size: 22px;
+    color: #000;
+    font-weight: bold;
 }
 
-.fecha-factura{
-
-    color:#111;
-
-    font-weight:600;
-
-}
-
-/*==============================
-        DATOS
-===============================*/
-
-.factura-info{
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-    margin-bottom:20px;
-
+/* ==========================================================================
+   BLOQUES DE DATOS (CLIENTE Y VEHÍCULO)
+   ========================================================================== */
+.factura-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .cliente-box,
-.vehiculo-box{
-
-    border:1px solid #d5d5d5;
-
-    border-radius:10px;
-
-    padding:20px;
-
+.vehiculo-box {
+    border: 1px solid #d5d5d5;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .cliente-box h3,
-.vehiculo-box h3{
-
-    text-align:center;
-
-    color:#123d68;
-
-    margin-bottom:18px;
-
-    padding-bottom:8px;
-
-    border-bottom:2px solid #184a78;
-
+.vehiculo-box h3 {
+    text-align: center;
+    color: #123d68;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #184a78;
 }
 
 .cliente-box p,
-.vehiculo-box p{
-
-    color:#111;
-
-    font-size:15px;
-
-    margin:12px 0;
-
-    line-height:1.6;
-
+.vehiculo-box p {
+    color: #111;
+    font-size: 15px;
+    margin: 12px 0;
+    line-height: 1.6;
 }
 
 .cliente-box strong,
-.vehiculo-box strong{
-
-    color:#000;
-
+.vehiculo-box strong {
+    color: #000;
 }
 
-/*==============================
-        TABLA
-===============================*/
-
-.detalle-factura{
-
-    margin-top:25px;
-
+/* ==========================================================================
+   TABLA DETALLE DE PRODUCTOS/SERVICIOS
+   ========================================================================== */
+.detalle-factura {
+    margin-top: 25px;
 }
 
-.detalle-factura table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
+.detalle-factura table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.detalle-factura thead{
-    background:#184a78;
+.detalle-factura thead {
+    background: #184a78;
 }
 
-.detalle-factura th{
-    color:white;
-    padding:12px 10px;
-    text-align:left;
-    font-size:13px;
+.detalle-factura th {
+    color: white;
+    padding: 12px 10px;
+    text-align: left;
+    font-size: 13px;
 }
 
 .detalle-factura th.col-cantidad,
-.detalle-factura td.col-cantidad{
-    width:60px;
-    text-align:center;
+.detalle-factura td.col-cantidad {
+    width: 60px;
+    text-align: center;
 }
 
 .detalle-factura th.col-unitario,
 .detalle-factura td.col-unitario,
 .detalle-factura th.col-importe,
-.detalle-factura td.col-importe{
-    text-align:right;
-    width:140px;
+.detalle-factura td.col-importe {
+    text-align: right;
+    width: 140px;
 }
 
 .detalle-factura th.col-descripcion,
-.detalle-factura td.col-descripcion{
-    padding-left:8px;
+.detalle-factura td.col-descripcion {
+    padding-left: 8px;
 }
 
-.detalle-factura td{
-    padding:12px 10px;
-    border-bottom:1px solid #e6e6e6;
-    color:#111;
+.detalle-factura td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e6e6e6;
+    color: #111;
 }
 
-.detalle-factura tbody tr:nth-child(even){
-
-    background:#f6f8fb;
-
+.detalle-factura tbody tr:nth-child(even) {
+    background: #f6f8fb;
 }
 
-/*==============================
-        OBSERVACIONES
-===============================*/
-
-.observaciones{
-    margin-top:20px;
-    border:1px solid #d5d5d5;
-    border-radius:8px;
-    padding:16px;
+/* ==========================================================================
+   OBSERVACIONES
+   ========================================================================== */
+.observaciones {
+    margin-top: 20px;
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+    padding: 16px;
 }
 
-.observaciones h3{
-
-    text-align:center;
-
-    color:#123d68;
-
-    margin-bottom:15px;
-
+.observaciones h3 {
+    text-align: center;
+    color: #123d68;
+    margin-bottom: 15px;
 }
 
-.observaciones p{
-
-    color:#111;
-
-    line-height:1.7;
-
+.observaciones p {
+    color: #111;
+    line-height: 1.7;
 }
 
-/*==============================
-        TOTALES
-===============================*/
-
-.totales{
-    display:flex;
-    justify-content:flex-end;
-    margin-top:20px;
+/* ==========================================================================
+   TABLA DE TOTALES
+   ========================================================================== */
+.totales {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
-.totales table{
-    width:360px;
-    border-collapse:collapse;
+.totales table {
+    width: 360px;
+    border-collapse: collapse;
 }
 
-.totales td{
-    border:1px solid #e6e6e6;
-    padding:10px 12px;
-    color:#111;
-    font-weight:600;
+.totales td {
+    border: 1px solid #e6e6e6;
+    padding: 10px 12px;
+    color: #111;
+    font-weight: 600;
 }
 
-.totales td.importe{
-    text-align:right;
+.totales td.importe {
+    text-align: right;
 }
 
-.total-final td{
-    background:#184a78;
-    color:white;
+.total-final td {
+    background: #184a78;
+    color: white;
 }
 
-/*==============================
-        PIE
-===============================*/
-
-.pie-factura{
-
-    margin-top:40px;
-
-    text-align:center;
-
-    border-top:2px solid #184a78;
-
-    padding-top:18px;
-
-    color:#111;
-
-    font-weight:500;
-
+/* ==========================================================================
+   PIE DE PÁGINA
+   ========================================================================== */
+.pie-factura {
+    margin-top: 40px;
+    text-align: center;
+    border-top: 2px solid #184a78;
+    padding-top: 18px;
+    color: #111;
+    font-weight: 500;
 }
 
-/*==============================
-        IMPRESIÓN
-===============================*/
-
-@page{
-
-    size:A4;
-
-    margin:12mm;
-
-}
-
-@media print{
-
-    body{
-
-        background:white;
-
-        padding:0;
-
-    }
-
-    .factura-container{
-        width:100%;
-        margin:0;
-        box-shadow:none;
-        border-radius:0;
-    }
-
-}
-
-
+/* ==========================================================================
+   MEDIA QUERIES (RESPONSIVE & IMPRESIÓN)
+   ========================================================================== */
 @media (max-width: 800px) {
-    .factura-container{ padding:16px; }
-    .factura-header{ flex-direction:column; }
-    .factura-datos{ width:100%; margin-top:12px; }
-    .detalle-factura th, .detalle-factura td{ font-size:13px; }
-    .totales{ justify-content:flex-start; }
+    .factura-container {
+        padding: 16px;
+    }
+
+    .factura-header {
+        flex-direction: column;
+    }
+
+    .empresa {
+        width: 100%;
+    }
+
+    .factura-datos {
+        width: 100%;
+        margin-top: 12px;
+    }
+
+    .factura-info {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle-factura th,
+    .detalle-factura td {
+        font-size: 13px;
+    }
+
+    .totales {
+        justify-content: flex-start;
+    }
+
+    .totales table {
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .btn {
+        flex-direction: column;
+    }
+
+    .btn button {
+        width: 100%;
+    }
+}
+
+/* Estilos de impresión para papel A4 */
+@page {
+    size: A4;
+    margin: 12mm;
+}
+
+@media print {
+    html, body {
+        overflow: visible;
+        height: auto;
+    }
+
+    .btn,
+    .sidebar,
+    .content-header {
+        display: none !important;
+    }
+
+    .layout, .main-wrapper {
+        display: block;
+        height: auto;
+    }
+
+    .content {
+        padding: 0;
+        background: transparent;
+        overflow: visible;
+    }
+
+    .factura-container {
+        width: 100%;
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 0;
+    }
 }

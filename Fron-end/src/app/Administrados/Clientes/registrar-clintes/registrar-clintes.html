@@ -53,7 +53,9 @@
                             type="email"
                             name="email"
                             [(ngModel)]="email"
-                            required>
+                            #correo="ngModel"
+                            required
+                            email>
                     </div>
 
                     <div class="campo password-field">

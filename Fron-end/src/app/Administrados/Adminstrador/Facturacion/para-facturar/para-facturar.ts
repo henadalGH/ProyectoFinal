@@ -46,4 +46,8 @@ export class ParaFacturar implements OnInit{
           this.location.back();
         }
 
+        irFacturas(){
+          this.router.navigate(['/factura']);
+        }
+
 }

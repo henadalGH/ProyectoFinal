@@ -18,6 +18,7 @@
    ========================================================================== */
 .layout {
   display: flex;
+  flex-direction: row;               /* Forzamos alineación horizontal explícita */
   height: 100vh;                     /* Ocupa exactamente el alto de la pantalla */
   width: 100vw;
   background-color: var(--bg-primary);
@@ -33,19 +34,18 @@
   flex-shrink: 0;
   border-right: 1px solid var(--border-light);
   background: #ffffff;
-  position: sticky;
-  top: 0;
-  left: 0;
+  position: relative;                /* Cambiado de sticky a relative para no romper la fila flex */
   z-index: 100;
+  box-sizing: border-box;
 }
 
 /* Contenedor de la derecha (Header + Contenedor de Contenido) */
 .content {
-  flex-grow: 1;
+  flex: 1;                           /* Toma todo el espacio restante horizontal */
   display: flex;
   flex-direction: column;
   height: 100vh;
-  min-width: 0;
+  min-width: 0;                      /* Vital para prevenir desbordamientos en layouts flex */
   overflow: hidden;                  /* Mantiene el contenedor principal rígido */
 }
 
@@ -103,7 +103,6 @@
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
   border-radius: 14px;
-  /* Sombra sutil que da sensación de flotación */
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -228,14 +227,14 @@
 /* Barras de progreso limpias */
 .progreso-container {
   height: 6px;
-  background: #f1f5f9; /* Fondo gris muy suave */
+  background: #f1f5f9;
   border-radius: 999px;
   overflow: hidden;
 }
 
 .progreso-bar {
   height: 100%;
-  background: var(--accent-purple); /* Color sólido de tu marca */
+  background: var(--accent-purple);
   border-radius: 999px;
   transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -266,7 +265,7 @@
 /* Tablets o pantallas con resolución horizontal pequeña */
 @media (max-width: 1024px) {
   .sidebar {
-    width: 220px; /* Reducimos el ancho del sidebar para optimizar espacio */
+    width: 220px;
   }
   .dashboard-header {
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;
@@ -277,25 +276,25 @@
   }
 }
 
-/* Móviles y Tablets en vertical (Layout se vuelve vertical completo) */
+/* Móviles y Tablets en vertical */
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
-    overflow-y: auto;                  /* Permitimos scroll en el layout global en móviles */
+    overflow-y: auto;
     height: auto;
   }
   
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;                /* Deja de ser fixed a la izquierda */
+    position: relative;
     border-right: none;
     border-bottom: 1px solid var(--border-light);
   }
 
   .content {
     height: auto;
-    overflow: visible;                 /* Desactivamos límites de altura en móvil */
+    overflow: visible;
   }
 
   .dashboard-header {
@@ -305,11 +304,11 @@
   .dashboard-container {
     padding: 1rem;
     gap: 1rem;
-    overflow-y: visible;               /* El scroll ahora lo maneja la pantalla del móvil */
+    overflow-y: visible;
   }
 
   .dashboard-grid {
-    grid-template-columns: 1fr;        /* Una única columna en móviles */
+    grid-template-columns: 1fr;
   }
 
   .col-services, .col-doughnut, .col-bar {

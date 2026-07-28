@@ -4,11 +4,12 @@ import { TurnosService } from '../../../Servicio/turnos-service';
 import { Router } from '@angular/router';
 import { Headercliente } from "../../headercliente/headercliente";
 import { Header } from "../../../header/header";
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-mis-turnos',
-  imports: [Headercliente, Header],
+  imports: [Headercliente, Header, DatePipe],
   templateUrl: './mis-turnos.html',
   styleUrl: './mis-turnos.css',
 })

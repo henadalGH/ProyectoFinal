@@ -87,10 +87,10 @@
             @for (tur of turnos; track tur.id) {
 
               <tr>
+                
 
-
-                <td>
-                  {{tur.fecha}}
+              <td>
+                  {{tur.fecha | date:'dd-MM-yyyy HH:mm:ss' }}
                 </td>
 
 
@@ -100,7 +100,7 @@
                   <div class="cliente">
 
                     <span class="nombre">
-                      {{tur.nombre}} {{tur.apellido}}
+                      {{tur.nombreCliente}} {{tur.apellidoCliente}}
                     </span>
 
                   </div>

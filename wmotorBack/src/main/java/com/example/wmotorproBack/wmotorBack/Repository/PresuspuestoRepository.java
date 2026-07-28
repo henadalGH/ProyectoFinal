@@ -43,7 +43,7 @@ public interface PresuspuestoRepository extends JpaRepository<PresupuestoEntity,
     @Query("""
            SELECT COALESCE(SUM(p.total),0)
            FROM PresupuestoEntity p
-           WHERE p.estadoPresupuesto.estadoPresupuesto = 'PENDIENTE'
+           WHERE p.estadoPresupuesto.estadoPresupuesto = 'ENVIADO'
            """)
     Double totalPendiente();
 

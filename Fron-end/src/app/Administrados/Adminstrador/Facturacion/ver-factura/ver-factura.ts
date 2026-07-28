@@ -81,8 +81,11 @@ export class VerFactura implements OnInit{
 
     console.log(body);
     this.facturaService.pagarFactura(this.idFactura, this.idAdmin, body).subscribe(
+      {
+        next: () => {
+          this.router.navigate(['/factura']);
+        }});
       
-    );
   }
 
   
