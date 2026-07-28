@@ -122,6 +122,7 @@
     box-shadow:
 
     0 8px 20px rgba(0,0,0,0.06);
+    margin-top: 25px;
 
 }
 
@@ -506,4 +507,9 @@ button{
     }
 
 
+}
+
+.titulo{
+    text-align: center;
+    margin-top: 50px;
 }

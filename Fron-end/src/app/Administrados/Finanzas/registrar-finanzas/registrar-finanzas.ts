@@ -26,6 +26,7 @@ export class RegistrarFinanzas {
   categoria: string = '';
   concepto: string = '';
   importe: number | null = null;
+  importeVista: string = '';
 
   // Variables para mostrar errores
   errorMovimiento = false;
@@ -95,4 +96,30 @@ export class RegistrarFinanzas {
         }
       });
   }
+
+  formatearImporte(event: any) {
+
+  let valor = event.target.value;
+
+  valor = valor.replace(/[^\d,]/g, '');
+
+  const partes = valor.split(',');
+
+  let entero = partes[0];
+  let decimal = partes[1] ?? '';
+
+  decimal = decimal.substring(0, 2);
+
+  entero = entero.replace(/\./g, '');
+
+  this.importe = Number(
+    entero + '.' + decimal
+  );
+
+  entero = entero.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  this.importeVista = decimal
+    ? `${entero},${decimal}`
+    : entero;
+}
 }

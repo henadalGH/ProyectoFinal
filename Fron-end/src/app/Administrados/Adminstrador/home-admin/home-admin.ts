@@ -10,6 +10,7 @@ import { MovimientosService } from '../../../Servicio/movimientos-service';
 import { OrdenTrabajoService } from '../../../Servicio/orden-trabajo-service';
 import { RepuestoService } from '../../../Servicio/repuesto-service';
 import { RouterLink } from "@angular/router";
+import { CommonModule } from '@angular/common';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { RouterLink } from "@angular/router";
   imports: [
     HeaderAdmin,
     Header,
-    RouterLink
+    RouterLink,
+    CommonModule
 ],
   templateUrl: './home-admin.html',
   styleUrl: './home-admin.css',

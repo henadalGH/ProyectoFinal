@@ -4,10 +4,11 @@ import { Header } from "../../../../header/header";
 import { RepuestoService } from '../../../../Servicio/repuesto-service';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ver-repuesto',
-  imports: [HeaderAdmin, Header, FormsModule],
+  imports: [HeaderAdmin, Header, FormsModule, CommonModule],
   templateUrl: './ver-repuesto.html',
   styleUrl: './ver-repuesto.css',
 })

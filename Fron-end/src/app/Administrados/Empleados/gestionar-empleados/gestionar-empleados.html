@@ -108,7 +108,9 @@
                     <i class="fas fa-phone"></i>
 
                     <span>
-                      {{empl.usuario.contacto}}
+                      {{ empl.usuario.contacto
+                      ? '+54 ' + empl.usuario.contacto.slice(2,5) + ' ' + empl.usuario.contacto.slice(5,8) + '-' + empl.usuario.contacto.slice(8)
+                      : ''}}
                     </span>
                   </div>
 

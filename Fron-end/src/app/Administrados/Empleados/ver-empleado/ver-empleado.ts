@@ -4,29 +4,29 @@ import { EmpleadoService } from '../../../Servicio/empleado-service';
 import { HeaderAdmin } from '../../Adminstrador/header-admin/header-admin';
 import { Header } from '../../../header/header';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ver-empleado',
+  standalone: true,
   templateUrl: './ver-empleado.html',
-  styleUrl: './ver-empleado.css',
-  imports: [HeaderAdmin, RouterLink, Header, FormsModule],
+  styleUrls: ['./ver-empleado.css'],
+  imports: [HeaderAdmin, RouterLink, Header, FormsModule, CommonModule],
 })
 export class VerEmpleado implements OnInit {
 
   id!: number;
   empleado: any;
 
-  editarNombre = false;
-  editarApellido = false;
-  editarEmail = false;
-  editarContacto = false;
-  editarDni = false;
-  editarFechaNacimiento = false;
-  editarFechaIngreso = false;
-  editarCargo = false;
-  editarSueldo = false;
+  // Copia para detectar cambios
+  empleadoOriginal: any;
 
-  aumentoSueldo: number = 0;
+  // Un solo modo edición
+  editarTodo = false;
+
+  // Bonificación solo en la vista / localStorage
+  bonificacion = 0;
+  bonificacionOriginal = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,13 +42,27 @@ export class VerEmpleado implements OnInit {
     this.empleadoService.verEmpleado(this.id).subscribe({
       next: (data: any) => {
         this.empleado = data;
+        this.empleadoOriginal = structuredClone(data);
 
         const sueldoGuardado = localStorage.getItem(
           'sueldoEmpleado_' + this.empleado.id
         );
 
-        if (sueldoGuardado) {
+        if (sueldoGuardado !== null) {
           this.empleado.sueldo = Number(sueldoGuardado);
+          this.empleadoOriginal.sueldo = Number(sueldoGuardado);
+        }
+
+        const bonificacionGuardada = localStorage.getItem(
+          'bonificacionEmpleado_' + this.empleado.id
+        );
+
+        if (bonificacionGuardada !== null) {
+          this.bonificacion = Number(bonificacionGuardada);
+          this.bonificacionOriginal = Number(bonificacionGuardada);
+        } else {
+          this.bonificacion = 0;
+          this.bonificacionOriginal = 0;
         }
       },
       error: (error) => {
@@ -57,231 +71,174 @@ export class VerEmpleado implements OnInit {
     });
   }
 
-  aumentarSueldo(): void {
+  activarEdicion(): void {
+    this.editarTodo = true;
+  }
 
-    if (this.aumentoSueldo <= 0) {
-      alert('Ingrese un monto válido.');
+  guardarCambios(): void {
+    if (!confirm('¿Guardar cambios?')) {
       return;
     }
 
-    if (!confirm('¿Está seguro de aumentar el sueldo?')) {
+    if (!this.validarMayorDeEdad(this.empleado?.fechaNacimiento)) {
       return;
     }
 
-    this.empleado.sueldo += this.aumentoSueldo;
+    const cargo =
+      this.empleado.cargo !== this.empleadoOriginal.cargo
+        ? this.empleado.cargo
+        : undefined;
 
-    localStorage.setItem(
-      'sueldoEmpleado_' + this.empleado.id,
-      this.empleado.sueldo.toString()
-    );
+    const email =
+      this.empleado.email !== this.empleadoOriginal.email
+        ? this.empleado.email
+        : undefined;
 
-    this.aumentoSueldo = 0;
+    const contacto =
+      this.empleado.contacto !== this.empleadoOriginal.contacto
+        ? this.empleado.contacto
+        : undefined;
 
-    alert('Sueldo actualizado correctamente.');
-  }
+    const nombre =
+      this.empleado.nombre !== this.empleadoOriginal.nombre
+        ? this.empleado.nombre
+        : undefined;
 
-  restablecerSueldo(): void {
+    const apellido =
+      this.empleado.apellido !== this.empleadoOriginal.apellido
+        ? this.empleado.apellido
+        : undefined;
 
-    if (!confirm('¿Desea restablecer el sueldo original?')) {
+    const dni =
+      this.empleado.dni !== this.empleadoOriginal.dni
+        ? this.empleado.dni
+        : undefined;
+
+    const fechaNacimiento =
+      this.empleado.fechaNacimiento !== this.empleadoOriginal.fechaNacimiento
+        ? this.empleado.fechaNacimiento
+        : undefined;
+
+    const fechaIngreso =
+      this.empleado.fechaIngreso !== this.empleadoOriginal.fechaIngreso
+        ? this.empleado.fechaIngreso
+        : undefined;
+
+    const cambiosBackend = [
+      cargo,
+      email,
+      contacto,
+      nombre,
+      apellido,
+      dni,
+      fechaNacimiento,
+      fechaIngreso,
+    ].some((value) => value !== undefined);
+
+    this.guardarSueldoLocalStorage();
+    this.guardarBonificacionLocalStorage();
+
+    if (!cambiosBackend) {
+      this.editarTodo = false;
+      this.empleadoOriginal = structuredClone(this.empleado);
+      alert('No hay cambios en los campos guardables en el backend.');
       return;
     }
 
-    localStorage.removeItem('sueldoEmpleado_' + this.empleado.id);
-    this.cargarEmpleado();
-  }
-
-  modificarNombre(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios del nombre?')) return;
-
     this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      undefined,
-      this.empleado.nombre
+      this.empleado.id,
+      cargo,
+      email,
+      contacto,
+      nombre,
+      apellido,
+      dni,
+      fechaNacimiento,
+      fechaIngreso
     ).subscribe({
       next: () => {
-        this.editarNombre = false;
+        this.editarTodo = false;
         this.cargarEmpleado();
+        alert('Empleado actualizado correctamente.');
       },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el nombre');
-      }
-    });
-  }
-
-  modificarApellido(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios del apellido?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      this.empleado.apellido
-    ).subscribe({
-      next: () => {
-        this.editarApellido = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el apellido');
-      }
-    });
-  }
-
-  modificarEmail(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios del email?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      this.empleado.email
-    ).subscribe({
-      next: () => {
-        this.editarEmail = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el email');
-      }
-    });
-  }
-
-  modificarContacto(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios del contacto?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      this.empleado.contacto
-    ).subscribe({
-      next: () => {
-        this.editarContacto = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el contacto');
-      }
-    });
-  }
-
-  modificarDni(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios del DNI?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      this.empleado.dni
-    ).subscribe({
-      next: () => {
-        this.editarDni = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el DNI');
-      }
-    });
-  }
-
-  modificarFechaNacimiento(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios de la fecha de nacimiento?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      this.empleado.fechaNacimiento
-    ).subscribe({
-      next: () => {
-        this.editarFechaNacimiento = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar la fecha de nacimiento');
-      }
-    });
-  }
-
-  modificarFechaIngreso(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios de la fecha de ingreso?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      undefined,
-      this.empleado.fechaIngreso
-    ).subscribe({
-      next: () => {
-        this.editarFechaIngreso = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar la fecha de ingreso');
-      }
-    });
-  }
-
-  modificarCargo(idEmpleado: number): void {
-
-    if (!confirm('¿Guardar cambios del cargo?')) return;
-
-    this.empleadoService.modificarEmpleado(
-      idEmpleado,
-      this.empleado.cargo
-    ).subscribe({
-      next: () => {
-        this.editarCargo = false;
-        this.cargarEmpleado();
-      },
-      error: (error) => {
-        console.error(error);
-        alert('Error al modificar el cargo');
+      error: (err) => {
+        console.error(err);
+        alert('Error al actualizar el empleado.');
       }
     });
   }
 
   cancelarEdicion(): void {
-
-    this.editarNombre = false;
-    this.editarApellido = false;
-    this.editarEmail = false;
-    this.editarContacto = false;
-    this.editarDni = false;
-    this.editarFechaNacimiento = false;
-    this.editarFechaIngreso = false;
-    this.editarCargo = false;
-
-    this.cargarEmpleado();
+    this.editarTodo = false;
+    this.empleado = structuredClone(this.empleadoOriginal);
+    this.bonificacion = this.bonificacionOriginal;
   }
 
+  private validarMayorDeEdad(fecha: string | null | undefined): boolean {
+    if (!fecha) {
+      alert('Debe ingresar la fecha de nacimiento.');
+      return false;
+    }
+
+    const fechaNacimiento = this.parsearFecha(fecha);
+
+    if (!fechaNacimiento) {
+      alert('La fecha de nacimiento tiene un formato inválido.');
+      return false;
+    }
+
+    const hoy = new Date();
+    let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mesDiferencia = hoy.getMonth() - fechaNacimiento.getMonth();
+    const diaDiferencia = hoy.getDate() - fechaNacimiento.getDate();
+
+    if (mesDiferencia < 0 || (mesDiferencia === 0 && diaDiferencia < 0)) {
+      edad--;
+    }
+
+    if (edad < 18) {
+      alert('La fecha de nacimiento debe ser de una persona mayor de 18 años.');
+      return false;
+    }
+
+    return true;
+  }
+
+  private parsearFecha(fecha: string): Date | null {
+    const fechaLimpia = fecha.trim();
+
+    const formatoIso = /^\d{4}-\d{2}-\d{2}$/;
+    const formatoLocal = /^\d{2}-\d{2}-\d{4}$/;
+
+    if (formatoIso.test(fechaLimpia)) {
+      const [anio, mes, dia] = fechaLimpia.split('-').map(Number);
+      return new Date(anio, mes - 1, dia);
+    }
+
+    if (formatoLocal.test(fechaLimpia)) {
+      const [dia, mes, anio] = fechaLimpia.split('-').map(Number);
+      return new Date(anio, mes - 1, dia);
+    }
+
+    return null;
+  }
+
+  private guardarSueldoLocalStorage(): void {
+    if (this.empleado?.id != null && this.empleado?.sueldo != null) {
+      localStorage.setItem(
+        'sueldoEmpleado_' + this.empleado.id,
+        this.empleado.sueldo.toString()
+      );
+    }
+  }
+
+  private guardarBonificacionLocalStorage(): void {
+    if (this.id != null) {
+      localStorage.setItem(
+        'bonificacionEmpleado_' + this.id,
+        this.bonificacion.toString()
+      );
+      this.bonificacionOriginal = this.bonificacion;
+    }
+  }
 }

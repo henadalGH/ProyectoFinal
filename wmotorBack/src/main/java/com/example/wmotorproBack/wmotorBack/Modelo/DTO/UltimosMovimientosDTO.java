@@ -13,7 +13,7 @@ public class UltimosMovimientosDTO {
     private Double monto;
     private LocalDate fechaRegistro;
     private String categoria;
-
+    private String concepto;
 
 
 }

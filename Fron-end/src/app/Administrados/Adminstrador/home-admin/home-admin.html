@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="kpi-info">
-                        <span>Turnos pendientes</span>
+                        <span>Turnos pendientes asignacion</span>
                     
                         @if (contaTrunos > 0) {
                             <button class="btn-asig" [routerLink]="['/turnosAsignacion']">Ir a turno</button>
@@ -41,23 +41,7 @@
 
                 </article>
 
-                
-
-                <article class="kpi purple">
-
-                    <div class="kpi-icon">
-                        <i class="fas fa-users">
-                            <h2>{{totalClientes}}</h2>
-                        </i>
-                    </div>
-
-                    <div class="kpi-info">
-                        <span>Clientes registrados</span>
-                        
-                    </div>
-
-                </article>
-
+            
                 <article class="kpi red">
 
                     <div class="kpi-icon">
@@ -67,7 +51,7 @@
                     </div>
 
                     <div class="kpi-info">
-                        <span>Turnos confirmados</span>
+                        <span>Turnos confirmados para orden</span>
 
                         @if (contarTurnosConf > 0) {
                             <button class="btn-orden" [routerLink]="['/homeOrdenes']">Ir a orden</button>
@@ -87,29 +71,15 @@
 
                     <div class="kpi-info">
                         <span>Órdenes terminadas</span>
+
+                        @if (contarOrdenFac > 0) {
+                            <button class="btn-fac" [routerLink]="['/paraFacturar']">Ir facturas</button>
+                        }
                         
                     </div>
 
                 </article>
 
-                <article class="kpi orange">
-
-                    <div class="kpi-icon">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-
-                    <div class="kpi-info">
-                        <span>Ingresos de hoy</span>
-
-                        @if(ingreso != null){
-                            <h2>$ {{ingreso}}</h2>
-                        }@else{
-                            <h2>$ 0</h2>
-                        }
-
-                    </div>
-
-                </article>
 
                 <article class="kpi red">
 
@@ -125,6 +95,40 @@
                     </div>
 
                 </article>
+
+                <article class="kpi purple">
+
+                    <div class="kpi-icon">
+                        <i class="fas fa-users">
+                            <h2>{{totalClientes}}</h2>
+                        </i>
+                    </div>
+
+                    <div class="kpi-info">
+                        <span>Clientes registrados</span>
+                        
+                    </div>
+
+                </article>
+
+                <article class="kpi orange kpi-ingresos">
+
+                <div class="kpi-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+
+                <div class="kpi-info">
+                    <span>Ingresos de hoy</span>
+
+                    @if(ingreso != null){
+                        <h2>{{ingreso | currency:'ARS'}}</h2>
+                    }@else{
+                        <h2>$ 0</h2>
+                    }
+
+                </div>
+
+            </article>
 
             </section>
 
@@ -233,7 +237,7 @@
                                     </td>
 
                                     <td>
-                                        $ {{ult.monto}}
+                                        {{ult.monto | currency:'ARS'}}
                                     </td>
 
                                     <td>

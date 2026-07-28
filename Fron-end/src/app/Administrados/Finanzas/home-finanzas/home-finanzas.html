@@ -18,23 +18,19 @@
 
         <div class="card kpi ingreso">
           <p>Ingresos del mes</p>
-          <h2>${{ ingresosMensuales }}</h2>
+          <h2>{{ ingresosMensuales  | currency:'ARS'}}</h2>
         </div>
 
         <div class="card kpi gasto">
           <p>Gastos del mes</p>
-          <h2>${{ egresosMensuales }}</h2>
+          <h2>{{ egresosMensuales | currency:'ARS' }}</h2>
         </div>
 
         <div class="card kpi balance">
           <p>Balance del mes</p>
-          $@if (balanceMensual > 0) {
-            <h2>{{balanceMensual}} </h2>
+           
+            <h2>{{balanceMensual  | currency:'ARS'}} </h2>
                
-          } @else {
-            <h2>{{balanceMensual}}</h2>
-              
-          }
         
         </div>
 
@@ -63,13 +59,14 @@
               <div class="movimiento">
               <div>
                 <h4>{{ult.categoria}}</h4>
-                <span>{{ult.fechaRegistro}}</span>
+                <p>{{ult.concepto}}</p>
+                <span>{{ult.fechaRegistro}}</span>  
               </div>
 
               @if (ult.tipoMovimiento == 'INGRESO') {
-                <strong class="ingreso-text" style="color: #22c55e;">+${{ult.monto}}</strong>
+                <strong class="ingreso-text" style="color: #22c55e;">+{{ult.monto  | currency:'ARS'}}</strong>
               } @else {
-                <strong class="ingreso-text" style="color: #d6371f;">-${{ult.monto}}</strong>
+                <strong class="ingreso-text" style="color: #d6371f;">-{{ult.monto  | currency:'ARS'}}</strong>
               }
               
             </div>

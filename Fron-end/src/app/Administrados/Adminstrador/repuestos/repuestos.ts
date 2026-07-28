@@ -4,10 +4,11 @@ import { Header } from "../../../header/header";
 import { RepuestoService } from '../../../Servicio/repuesto-service';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-repuestos',
-  imports: [HeaderAdmin, Header, FormsModule, RouterLink],
+  imports: [HeaderAdmin, Header, FormsModule, RouterLink, CommonModule],
   templateUrl: './repuestos.html',
   styleUrl: './repuestos.css',
 })
