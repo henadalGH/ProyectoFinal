@@ -12,11 +12,14 @@ import com.example.wmotorproBack.wmotorBack.Modelo.DTO.MovimientoDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.ResponceDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.DTO.UltimosMovimientosDTO;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.AdminEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CargosEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CategoriaMovimientoEntity;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.EmpleadoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 import com.example.wmotorproBack.wmotorBack.Repository.AdminRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.CategoriaMovimientoRepository;
+import com.example.wmotorproBack.wmotorBack.Repository.EmpleadoRepository;
 import com.example.wmotorproBack.wmotorBack.Repository.MovimientoFinancieroRepository;
 import com.example.wmotorproBack.wmotorBack.Servicio.MovimientoFinService;
 
@@ -31,6 +34,9 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
 
     @Autowired
     private AdminRepository adminRepository;
+
+    @Autowired
+    private EmpleadoRepository empleadoRepository;
 
     @Override
     public List<MovimientoFinancieroEntity> getAllMovimiento() {
@@ -247,5 +253,92 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
         .toList();
     }
 
-    
+    @Override
+    public Double totalSueldos() {
+        return empleadoRepository.findAll()
+                .stream()
+                .filter(e -> Boolean.TRUE.equals(e.getActivo()))
+                .map(EmpleadoEntity::getCargo)
+                .filter(c -> c != null && c.getSueldoBase() != null)
+                .mapToDouble(CargosEntity::getSueldoBase)
+                .sum();
+    }
+
+    @Override
+    public boolean sueldosYaPagadosEsteMes() throws Exception {
+        CategoriaMovimientoEntity categoria = categoriaMovimientoRepository
+                .findByCategoria("Sueldos")
+                .orElse(null);
+
+        if (categoria == null) {
+            return false;
+        }
+
+        LocalDate ahora = LocalDate.now();
+        LocalDate mesInicio = LocalDate.of(ahora.getYear(), ahora.getMonthValue(), 1);
+        LocalDate mesFin = mesInicio.withDayOfMonth(mesInicio.lengthOfMonth());
+
+        return !movimientoFinancieroRepository
+                .findByCategoriaAndTipoMovimientoAndFechaRegistroBetween(
+                        categoria,
+                        MovimientosEnum.GASTOS,
+                        mesInicio,
+                        mesFin)
+                .isEmpty();
+    }
+
+    @Override
+    public ResponceDTO pagarSueldos(Long idAdmin) throws Exception {
+        Double importeTotal = totalSueldos();
+
+        if (importeTotal == null || importeTotal <= 0) {
+            throw new Exception("No hay sueldos activos para registrar.");
+        }
+
+        CategoriaMovimientoEntity categoria = categoriaMovimientoRepository
+                .findByCategoria("Sueldos")
+                .orElseGet(() -> {
+                    CategoriaMovimientoEntity nuevaCategoria = new CategoriaMovimientoEntity();
+                    nuevaCategoria.setCategoria("Sueldos");
+                    nuevaCategoria.setTipoMovimiento(MovimientosEnum.GASTOS);
+                    return categoriaMovimientoRepository.save(nuevaCategoria);
+                });
+
+        AdminEntity admin = adminRepository
+                .findById(idAdmin)
+                .orElseThrow(() -> new Exception("Administrador no encontrado"));
+
+        LocalDate ahora = LocalDate.now();
+        LocalDate mesInicio = LocalDate.of(ahora.getYear(), ahora.getMonthValue(), 1);
+        LocalDate mesFin = mesInicio.withDayOfMonth(mesInicio.lengthOfMonth());
+
+        boolean yaPagado = !movimientoFinancieroRepository
+                .findByCategoriaAndTipoMovimientoAndFechaRegistroBetween(
+                        categoria,
+                        MovimientosEnum.GASTOS,
+                        mesInicio,
+                        mesFin)
+                .isEmpty();
+
+        if (yaPagado) {
+            throw new Exception("El pago de sueldos ya fue registrado para este mes.");
+        }
+
+        MovimientoFinancieroEntity entity = new MovimientoFinancieroEntity();
+        entity.setTipoMovimiento(MovimientosEnum.GASTOS);
+        entity.setConcepto("Pago de sueldos");
+        entity.setImporte(importeTotal);
+        entity.setFechaRegistro(ahora);
+        entity.setCategoria(categoria);
+        entity.setAdmin(admin);
+
+        movimientoFinancieroRepository.save(entity);
+
+        ResponceDTO response = new ResponceDTO();
+        response.setNumOfErrors(0);
+        response.setMensage("Pago de sueldos registrado correctamente.");
+        response.setTotal(importeTotal);
+
+        return response;
+    }
 }

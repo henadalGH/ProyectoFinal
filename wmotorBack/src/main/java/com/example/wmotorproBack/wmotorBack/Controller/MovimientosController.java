@@ -204,5 +204,35 @@ public class MovimientosController {
             @RequestParam int anio) {
         return ResponseEntity.ok(movimientoFinService.obtenerBalanceMensual(anio));
     }
-    
+
+    @GetMapping("/sueldos/ya-pagados")
+    public ResponseEntity<ResponceDTO> sueldosYaPagados() {
+        try {
+            boolean yaPagado = movimientoFinService.sueldosYaPagadosEsteMes();
+            ResponceDTO response = new ResponceDTO();
+            response.setNumOfErrors(0);
+            response.setMensage(yaPagado ? "Ya se pagaron los sueldos este mes." : "No se han pagado los sueldos este mes.");
+            response.setTotal(yaPagado ? 1.0 : 0.0);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            ResponceDTO response = new ResponceDTO();
+            response.setNumOfErrors(1);
+            response.setMensage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @PostMapping("/pagar-sueldos/{idAdmin}")
+    public ResponseEntity<ResponceDTO> pagarSueldos(@PathVariable Long idAdmin) {
+        try {
+            return new ResponseEntity<>(
+                    movimientoFinService.pagarSueldos(idAdmin),
+                    HttpStatus.CREATED);
+        } catch (Exception e) {
+            ResponceDTO response = new ResponceDTO();
+            response.setNumOfErrors(1);
+            response.setMensage(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 }

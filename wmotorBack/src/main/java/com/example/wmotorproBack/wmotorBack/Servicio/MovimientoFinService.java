@@ -34,6 +34,12 @@ public interface MovimientoFinService {
 
     Double balanceGeneral(LocalDate desde,  LocalDate hasta);
 
+    Double totalSueldos();
+
+    boolean sueldosYaPagadosEsteMes() throws Exception;
+
+    ResponceDTO pagarSueldos(Long idAdmin) throws Exception;
+
     List<BalanceMensualDTO> obtenerBalanceMensual(int anio);
 
     List<UltimosMovimientosDTO> ultimosMovimientos();

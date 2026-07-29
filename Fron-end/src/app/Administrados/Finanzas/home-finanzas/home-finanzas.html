@@ -36,6 +36,28 @@
 
       </div>
 
+      <div class="card sueldos-card">
+        <div class="card-header">
+          <h2>Gestión de sueldos</h2>
+        </div>
+
+        <div class="sueldos-body">
+          <div class="sueldos-badge" [class.paid]="yaPagado" [class.pending]="!yaPagado">
+            {{ yaPagado ? 'Sueldos del mes pagados sin bonificación' : 'Pendiente de pago este mes' }}
+          </div>
+
+          <p class="sueldos-message">{{ mensajeSueldos }}</p>
+
+          <button
+            type="button"
+            class="btn-primary"
+            [disabled]="yaPagado || cargando"
+            (click)="ejecutarPagoSueldos()">
+            {{ cargando ? 'Procesando...' : 'Pagar Sueldos del Mes' }}
+          </button>
+        </div>
+      </div>
+
       <!-- GRID -->
       <div class="finanzas-grid">
 

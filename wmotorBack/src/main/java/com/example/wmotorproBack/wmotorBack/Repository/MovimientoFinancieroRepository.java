@@ -4,6 +4,7 @@ package com.example.wmotorproBack.wmotorBack.Repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.wmotorproBack.wmotorBack.Modelo.Entity.CategoriaMovimientoEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Entity.MovimientoFinancieroEntity;
 import com.example.wmotorproBack.wmotorBack.Modelo.Enums.MovimientosEnum;
 
@@ -19,6 +20,12 @@ List<MovimientoFinancieroEntity> findByFechaRegistroBetween(
 
 List<MovimientoFinancieroEntity> findByCategoriaId(
         Long idCategoria);
+
+List<MovimientoFinancieroEntity> findByCategoriaAndTipoMovimientoAndFechaRegistroBetween(
+        CategoriaMovimientoEntity categoria,
+        MovimientosEnum tipoMovimiento,
+        LocalDate inicio,
+        LocalDate fin);
 
 List<MovimientoFinancieroEntity> findByCategoriaMovimientos(
         MovimientosEnum movimiento);

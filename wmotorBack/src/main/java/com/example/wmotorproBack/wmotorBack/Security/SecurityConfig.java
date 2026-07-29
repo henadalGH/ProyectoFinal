@@ -57,6 +57,7 @@ public class SecurityConfig {
                                 .requestMatchers("/movimiento/registro").permitAll()
                                 .requestMatchers("/movimiento/{fecha}").permitAll()
                                 .requestMatchers("/movimiento/entre").permitAll()
+                                .requestMatchers("/movimiento/**").permitAll()
                                 .requestMatchers("/mes").permitAll()
                                 .requestMatchers("/turno/crear").permitAll()
                                 .requestMatchers("/turno/{id}").permitAll()

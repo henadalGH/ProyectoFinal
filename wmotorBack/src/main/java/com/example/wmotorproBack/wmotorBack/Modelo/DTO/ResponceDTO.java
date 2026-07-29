@@ -4,6 +4,7 @@ public class ResponceDTO {
     
     private int numOfErrors;
     private String mensage;
+    private Double total;
 
     public int getNumOfErrors() {
         return numOfErrors;
@@ -16,5 +17,11 @@ public class ResponceDTO {
     }
     public void setMensage(String mensage) {
         this.mensage = mensage;
+    }
+    public Double getTotal() {
+        return total;
+    }
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }
