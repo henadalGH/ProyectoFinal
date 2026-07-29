@@ -366,3 +366,62 @@ body{
         text-align:center;
     }
 }
+/* Botón mostrar contraseña */
+
+.pwd-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: .25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pwd-eye i {
+    font-size: 22px;
+    color: #64748b;
+    transition: .25s;
+}
+
+.pwd-eye:hover {
+    background: #eef4ff;
+}
+
+.pwd-eye:hover i {
+    color: #2563eb;
+}
+
+/* Error contraseña */
+
+.input-error {
+    border: 2px solid #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239,68,68,.15);
+}
+
+.mensaje-error {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #dc2626;
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+.mensaje-error i {
+    font-size: 18px;
+}
+
+.helper-text {
+    margin-top: 8px;
+    display: block;
+    color: #64748b;
+}

@@ -2,6 +2,19 @@
    RESET
 ========================================================================== */
 
+.error-text {
+    color: #dc3545;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+
+.success-text {
+    color: #198754;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
 *{
     margin:0;
     padding:0;

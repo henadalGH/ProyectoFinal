@@ -1,112 +1,412 @@
 <div class="page">
+
   <div class="card">
 
+    <!-- CABECERA -->
     <div class="card-header">
+
       <div class="avatar">
         <i class="ti ti-user-plus"></i>
       </div>
+
       <div class="header-text">
         <h1>Crear cuenta</h1>
         <p>Completá tus datos para registrarte</p>
       </div>
-    </div>
-    <div class="progress-bar"><div class="progress-fill"></div></div>
 
+    </div>
+
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
+
+    <!-- CONTENIDO -->
     <div class="card-body">
-      <p class="section-label">Datos personales</p>
+
       <form (ngSubmit)="crearUsuario()" #registroForm="ngForm">
+
+
+        <!-- DATOS PERSONALES -->
+        <p class="section-label">
+          Datos personales
+        </p>
+
+
         <div class="row">
+
           <div class="campo">
             <label>Nombre</label>
-            <input type="text" name="nombre" [(ngModel)]="nombre" required placeholder="Juan" />
+
+            <input
+              type="text"
+              name="nombre"
+              [(ngModel)]="nombre"
+              required
+              placeholder="Juan">
           </div>
+
+
           <div class="campo">
             <label>Apellido</label>
-            <input type="text" name="apellido" [(ngModel)]="apellido" required placeholder="García" />
+
+            <input
+              type="text"
+              name="apellido"
+              [(ngModel)]="apellido"
+              required
+              placeholder="García">
           </div>
+
         </div>
 
+
+
         <div class="campo">
+
           <label>Correo electrónico</label>
-          <input type="email" name="email" [(ngModel)]="email" required placeholder="correo@ejemplo.com" />
+
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            required
+            placeholder="correo@ejemplo.com">
+
         </div>
 
+
+
+
+        <!-- PASSWORD -->
         <div class="campo">
+
           <label>Contraseña</label>
+
+
           <div class="pwd-wrap">
-            <input [type]="mostrarPassword ? 'text' : 'password'" name="password" [(ngModel)]="password" required placeholder="Mínimo 7 caracteres" />
-            <button type="button" class="pwd-eye" (click)="mostrarPassword = !mostrarPassword">
-              <i [class]="mostrarPassword ? 'ti ti-eye-off' : 'ti ti-eye'"></i>
+
+            <input
+              [type]="mostrarPassword ? 'text' : 'password'"
+              name="password"
+              [(ngModel)]="password"
+              required
+              placeholder="Mínimo 7 caracteres">
+
+
+            <button
+              type="button"
+              class="pwd-eye"
+              (click)="mostrarPassword = !mostrarPassword">
+
+              <i
+                [class]="mostrarPassword ? 'ti ti-eye-off' : 'ti ti-eye'">
+              </i>
+
             </button>
+
+
           </div>
-          <small class="helper-text">Debe tener al menos 7 caracteres, incluir letras y números y solo letras minúsculas.</small>
+
+
+          <small class="helper-text">
+            Mínimo 7 caracteres, letras minúsculas y números.
+          </small>
+
+
         </div>
+
+
+
+
+
+        <!-- CONFIRMAR PASSWORD -->
+        <div class="campo">
+
+
+          <label>
+            Repetir contraseña
+          </label>
+
+
+
+          <div class="pwd-wrap">
+
+
+            <input
+              [type]="mostrarConfirmPassword ? 'text' : 'password'"
+              name="confirmarPassword"
+              [(ngModel)]="confirmarPassword"
+              required
+              placeholder="Repetí la contraseña"
+              [class.input-error]="contrasenasNoCoinciden">
+
+
+
+            <button
+              type="button"
+              class="pwd-eye"
+              (click)="mostrarConfirmPassword = !mostrarConfirmPassword">
+
+
+              <i
+                [class]="mostrarConfirmPassword ? 'ti ti-eye-off' : 'ti ti-eye'">
+              </i>
+
+
+            </button>
+
+
+          </div>
+
+
+
+
+          @if (contrasenasNoCoinciden) {
+
+            <small class="mensaje-error">
+
+              <i class="ti ti-alert-circle"></i>
+
+              Las contraseñas no coinciden.
+
+            </small>
+
+
+          } @else {
+
+
+            <small class="helper-text">
+
+              Debe coincidir con la contraseña anterior.
+
+            </small>
+
+
+          }
+
+
+
+        </div>
+
+
+
+
+
+
+        <!-- CONTACTO -->
+        <p class="section-label mt">
+          Información de contacto
+        </p>
+
+
 
         <div class="campo">
-          <label>Repetir contraseña</label>
-          <div class="pwd-wrap">
-            <input [type]="mostrarConfirmPassword ? 'text' : 'password'" name="confirmarPassword" [(ngModel)]="confirmarPassword" required placeholder="Repetí la contraseña" />
-            <button type="button" class="pwd-eye" (click)="mostrarConfirmPassword = !mostrarConfirmPassword">
-              <i [class]="mostrarConfirmPassword ? 'ti ti-eye-off' : 'ti ti-eye'"></i>
-            </button>
-          </div>
-          <small class="helper-text">Debe coincidir con la contraseña anterior.</small>
+
+          <label>
+            Teléfono de contacto
+          </label>
+
+
+          <input
+            type="tel"
+            name="contacto"
+            [(ngModel)]="contacto"
+            required
+            placeholder="+54 11 0000-0000">
+
+
         </div>
 
-        <p class="section-label mt">Información de contacto</p>
 
-        <div class="campo">
-          <label>Teléfono de contacto</label>
-          <input type="tel" name="contacto" [(ngModel)]="contacto" required placeholder="+54 11 0000-0000" />
+
+
+
+        <!-- UBICACION -->
+        <div class="input-group">
+
+          <label>
+            Provincia
+          </label>
+
+
+          <select
+            name="provincia"
+            [(ngModel)]="provinciaSeleccionada"
+            (change)="filtrarLocalidades()">
+
+
+
+            <option value="">
+              Seleccione una provincia
+            </option>
+
+
+
+            @for (provincia of provincias; track provincia) {
+
+
+              <option [value]="provincia">
+
+                {{provincia}}
+
+              </option>
+
+
+            }
+
+
+
+          </select>
+
+
+
         </div>
+
+
+
+
+
 
         <div class="input-group">
-  <label for="provincia">Provincia</label>
-  <select
-        id="provincia"
-        name="provincia"
-        [(ngModel)]="provinciaSeleccionada"
-        (change)="filtrarLocalidades()">
 
-        <option value="">Seleccione una provincia</option>
 
-        @for (provincia of provincias; track $index) {
-          <option [value]="provincia">
-            {{ provincia }}
-          </option>
-        }
-      </select>
-    </div>
+          <label>
+            Localidad
+          </label>
 
-    <div class="input-group">
-      <label for="localidad">Localidad</label>
-      <select
-        id="localidad"
-        name="localidad"
-        [(ngModel)]="idLocalidad">
 
-        <option [ngValue]="null">Seleccione una localidad</option>
 
-        @for (loc of localidadesFiltradas; track loc.id) {
-          <option [ngValue]="loc.id">
-            {{ loc.nombreLocalidad }}
-          </option>
-        }
-      </select>
-    </div>
+          <select
+            name="localidad"
+            [(ngModel)]="idLocalidad">
+
+
+
+            <option [ngValue]="null">
+
+              Seleccione una localidad
+
+            </option>
+
+
+
+
+            @for (loc of localidadesFiltradas; track loc.id) {
+
+
+              <option [ngValue]="loc.id">
+
+                {{loc.nombreLocalidad}}
+
+              </option>
+
+
+            }
+
+
+
+          </select>
+
+
+
+        </div>
+
+
+
+
+
+
 
         <div class="campo">
-          <label>Domicilio</label>
-          <input type="text" name="direccion" [(ngModel)]="direccion" required placeholder="Dirección" />
+
+
+          <label>
+            Domicilio
+          </label>
+
+
+
+          <input
+            type="text"
+            name="direccion"
+            [(ngModel)]="direccion"
+            required
+            placeholder="Dirección">
+
+
+
         </div>
+
+
+
+
+
+
+        <!-- BOTONES -->
 
         <div class="card-footer">
-          <button type="submit" class="btn-primary" [disabled]="!formularioValido">Registrarme</button>
-          <button type="button" class="btn-cancel" (click)="volverAtras()">Cancelar</button>
-          <p class="trust">Tus datos están protegidos con cifrado SSL</p>
+
+
+          <button
+            type="submit"
+            class="btn-primary"
+            [disabled]="!formularioValido">
+
+
+            <i class="ti ti-user-plus"></i>
+
+            Registrarme
+
+
+          </button>
+
+
+
+
+
+          <button
+            type="button"
+            class="btn-cancel"
+            (click)="volverAtras()">
+
+
+
+            <i class="ti ti-arrow-left"></i>
+
+            Cancelar
+
+
+
+          </button>
+
+
+
+
+          <p class="trust">
+
+            <i class="ti ti-lock"></i>
+
+            Tus datos están protegidos con cifrado SSL.
+
+
+          </p>
+
+
+
+
         </div>
+
+
+
       </form>
+
+
     </div>
 
+
   </div>
+
+
 </div>

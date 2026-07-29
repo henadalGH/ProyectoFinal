@@ -11,6 +11,7 @@ import { Location } from '@angular/common';
   styleUrl: './registro.css',
 })
 export class Registro implements OnInit {
+
   nombre: string = '';
   apellido: string = '';
   email: string = '';
@@ -19,6 +20,7 @@ export class Registro implements OnInit {
   contacto: string = '';
   direccion: string = '';
   rol: string = 'CLIENTE';
+
   mostrarPassword: boolean = false;
   mostrarConfirmPassword: boolean = false;
 
@@ -31,7 +33,7 @@ export class Registro implements OnInit {
   provinciaSeleccionada: string = '';
 
   // Localidad seleccionada
-  idLocalidad!: any;
+  idLocalidad: any = null;
 
   constructor(
     private registroCliente: RegistroClienteServicio,
@@ -52,7 +54,7 @@ export class Registro implements OnInit {
       this.password.trim().length > 0 &&
       this.validarPassword(this.password) &&
       this.confirmarPassword.trim().length > 0 &&
-      this.password === this.confirmarPassword &&
+      !this.contrasenasNoCoinciden &&
       this.contacto.trim().length > 0 &&
       this.direccion.trim().length > 0 &&
       this.provinciaSeleccionada.trim().length > 0 &&
@@ -60,18 +62,23 @@ export class Registro implements OnInit {
     );
   }
 
-  crearUsuario() {
+  // Valida si las contraseñas no coinciden
+  get contrasenasNoCoinciden(): boolean {
+    return (
+      this.password.trim().length > 0 &&
+      this.confirmarPassword.trim().length > 0 &&
+      this.password !== this.confirmarPassword
+    );
+  }
+
+  crearUsuario(): void {
+
     if (!this.formularioValido) {
       alert('Complete todos los campos correctamente antes de registrarse.');
       return;
     }
 
-    if (!this.validarPassword(this.password)) {
-      alert('La contraseña debe tener al menos 7 caracteres, incluir letras y números, y solo letras minúsculas.');
-      return;
-    }
-
-    if (this.password !== this.confirmarPassword) {
+    if (this.contrasenasNoCoinciden) {
       alert('Las contraseñas no coinciden.');
       return;
     }
@@ -87,24 +94,40 @@ export class Registro implements OnInit {
         this.rol,
         this.idLocalidad
       )
-      .subscribe(() => {
-        this.router.navigate(['/inicio']);
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/inicio']);
+        },
+        error: (error) => {
+          console.error(error);
+          alert('Ocurrió un error al registrar el usuario.');
+        }
       });
   }
 
-  volverAtras() {
+  volverAtras(): void {
     this.location.back();
   }
 
-  obtenerLocalidad() {
-    this.registroCliente.obtenerLocalidad().subscribe((respuesta: any) => {
-      this.localidad = respuesta;
+  obtenerLocalidad(): void {
+    this.registroCliente.obtenerLocalidad().subscribe({
+      next: (respuesta: any) => {
+        this.localidad = respuesta;
 
-      this.provincias = [...new Set(this.localidad.map((l: any) => l.nombreProvincia))];
+        this.provincias = [
+          ...new Set(
+            this.localidad.map((l: any) => l.nombreProvincia)
+          ),
+        ] as string[];
+      },
+      error: (error) => {
+        console.error(error);
+      }
     });
   }
 
-  filtrarLocalidades() {
+  filtrarLocalidades(): void {
+
     this.localidadesFiltradas = this.localidad.filter(
       (l: any) => l.nombreProvincia === this.provinciaSeleccionada
     );
@@ -121,4 +144,5 @@ export class Registro implements OnInit {
     const regex = /^(?=.*[a-z])(?=.*\d)[a-z\d]{7,}$/;
     return regex.test(password.trim());
   }
+
 }

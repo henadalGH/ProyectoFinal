@@ -13,6 +13,7 @@ import { Header } from '../../../header/header';
   styleUrl: './registrar-clintes.css',
 })
 export class RegistrarClintes implements OnInit {
+
   // Localidades
   localidad: any[] = [];
   localidadesFiltradas: any[] = [];
@@ -24,6 +25,7 @@ export class RegistrarClintes implements OnInit {
   // Localidad seleccionada
   idLocalidad!: any;
 
+
   nombre: string = '';
   apellido: string = '';
   email: string = '';
@@ -31,52 +33,94 @@ export class RegistrarClintes implements OnInit {
   confirmarPassword: string = '';
   contacto: string = '';
   direccion: string = '';
+  patente: string = '';
+
   rol: string = 'CLIENTE';
+
 
   showPassword = false;
   showConfirmPassword = false;
+
+
+  mensajePatente: string = '';
+
 
   constructor(
     private registroCliente: RegistroClienteServicio,
     private router: Router
   ) {}
 
+
   ngOnInit(): void {
     this.obtenerLocalidad();
   }
 
+
   get formularioValido(): boolean {
+
     return (
       this.nombre.trim().length > 0 &&
       this.apellido.trim().length > 0 &&
       this.email.trim().length > 0 &&
       this.validarEmail(this.email) &&
+
       this.password.trim().length > 0 &&
       this.validarPassword(this.password) &&
+
       this.confirmarPassword.trim().length > 0 &&
       this.password === this.confirmarPassword &&
+
       this.contacto.trim().length > 0 &&
       this.direccion.trim().length > 0 &&
+
+      this.validarPatente(this.patente) &&
+
       this.provinciaSeleccionada.trim().length > 0 &&
       this.idLocalidad != null
     );
   }
 
+
+
   crearUsuario() {
+
+
     if (!this.formularioValido) {
+
       alert('Complete todos los campos correctamente antes de registrar.');
       return;
+
     }
+
 
     if (!this.validarPassword(this.password)) {
-      alert('La contraseña debe tener al menos 7 caracteres, incluir letras y números, y solo letras minúsculas.');
+
+      alert(
+        'La contraseña debe tener al menos 7 caracteres, incluir letras y números, y solo letras minúsculas.'
+      );
+
       return;
     }
 
+
+
     if (this.password !== this.confirmarPassword) {
+
       alert('Las contraseñas no coinciden.');
       return;
+
     }
+
+
+
+    if (!this.validarPatente(this.patente)) {
+
+      alert(this.mensajePatente);
+      return;
+
+    }
+
+
 
     this.registroCliente
       .crearCliente(
@@ -90,33 +134,121 @@ export class RegistrarClintes implements OnInit {
         this.idLocalidad
       )
       .subscribe(() => {
+
         this.router.navigate(['/gestionCliente']);
+
       });
+
   }
+
+
 
   obtenerLocalidad() {
-    this.registroCliente.obtenerLocalidad().subscribe((respuesta: any) => {
-      this.localidad = respuesta;
 
-      this.provincias = [...new Set(this.localidad.map((l: any) => l.nombreProvincia))];
-    });
+    this.registroCliente.obtenerLocalidad()
+      .subscribe((respuesta: any) => {
+
+        this.localidad = respuesta;
+
+        this.provincias = [
+          ...new Set(
+            this.localidad.map(
+              (l: any) => l.nombreProvincia
+            )
+          )
+        ];
+
+      });
+
   }
+
+
 
   filtrarLocalidades() {
-    this.localidadesFiltradas = this.localidad.filter(
-      (l: any) => l.nombreProvincia === this.provinciaSeleccionada
-    );
+
+    this.localidadesFiltradas =
+      this.localidad.filter(
+        (l: any) =>
+          l.nombreProvincia === this.provinciaSeleccionada
+      );
+
 
     this.idLocalidad = null;
+
   }
+
+
+
+
+  validarPatente(patente: string): boolean {
+
+
+    patente = patente
+      .toUpperCase()
+      .replace(/\s/g, '');
+
+
+
+    // Formato viejo Argentina hasta 2016
+    const formatoViejo = /^[A-Z]{3}[0-9]{3}$/;
+
+
+
+    // Formato Mercosur desde 2016
+    const formatoMercosur = /^[A-Z]{2}[0-9]{3}[A-Z]{2}$/;
+
+
+
+    if (formatoViejo.test(patente)) {
+
+      this.mensajePatente = '';
+
+      return true;
+
+    }
+
+
+
+    if (formatoMercosur.test(patente)) {
+
+      this.mensajePatente = '';
+
+      return true;
+
+    }
+
+
+
+    this.mensajePatente =
+      'Patente inválida. Use formato anterior ABC123 o Mercosur AB123CD.';
+
+
+    return false;
+
+  }
+
+
+
 
   private validarEmail(email: string): boolean {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const regex =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     return regex.test(email.trim());
+
   }
 
+
+
+
   private validarPassword(password: string): boolean {
-    const regex = /^(?=.*[a-z])(?=.*\d)[a-z\d]{7,}$/;
+
+    const regex =
+      /^(?=.*[a-z])(?=.*\d)[a-z\d]{7,}$/;
+
     return regex.test(password.trim());
+
   }
+
 }

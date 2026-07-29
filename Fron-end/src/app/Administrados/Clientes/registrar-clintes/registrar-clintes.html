@@ -4,17 +4,21 @@
         <app-header-admin></app-header-admin>
     </aside>
 
+
     <main class="content">
 
         <div class="container">
 
             <app-header></app-header>
 
+
             <div class="titulo">
                 <h1>Registrar cliente</h1>
             </div>
 
+
             <div class="card">
+
 
                 <div class="card-header">
 
@@ -25,12 +29,17 @@
 
                 </div>
 
+
+
                 <form
                     class="formulario"
                     (ngSubmit)="crearUsuario()">
 
+
+
                     <div class="campo">
                         <label>Nombre</label>
+
                         <input
                             type="text"
                             name="nombre"
@@ -38,8 +47,11 @@
                             required>
                     </div>
 
+
+
                     <div class="campo">
                         <label>Apellido</label>
+
                         <input
                             type="text"
                             name="apellido"
@@ -47,128 +59,294 @@
                             required>
                     </div>
 
+
+
+
                     <div class="campo">
                         <label>Correo electrónico</label>
+
                         <input
                             type="email"
                             name="email"
                             [(ngModel)]="email"
-                            #correo="ngModel"
-                            required
-                            email>
+                            required>
+
                     </div>
 
+
+
+
                     <div class="campo password-field">
+
                         <label>Contraseña</label>
+
                         <div class="input-wrapper">
+
                             <input
                                 [type]="showPassword ? 'text' : 'password'"
                                 name="password"
                                 [(ngModel)]="password"
                                 required>
+
+
                             <button
                                 type="button"
                                 class="password-toggle"
                                 (click)="showPassword = !showPassword">
+
                                 {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+
                             </button>
+
                         </div>
-                        <small class="helper-text">Debe tener al menos 7 caracteres, incluir letras y números y solo letras minúsculas.</small>
+
+
+                        <small class="helper-text">
+                            Debe tener al menos 7 caracteres, incluir letras y números y solo letras minúsculas.
+                        </small>
+
+
                     </div>
 
+
+
+
                     <div class="campo password-field">
+
                         <label>Repetir contraseña</label>
+
+
                         <div class="input-wrapper">
+
                             <input
                                 [type]="showConfirmPassword ? 'text' : 'password'"
                                 name="confirmarPassword"
                                 [(ngModel)]="confirmarPassword"
                                 required>
+
+
+
                             <button
                                 type="button"
                                 class="password-toggle"
                                 (click)="showConfirmPassword = !showConfirmPassword">
+
                                 {{ showConfirmPassword ? 'Ocultar' : 'Mostrar' }}
+
                             </button>
+
+
                         </div>
-                        <small class="helper-text">Debe coincidir con la contraseña anterior.</small>
+
+
+                        <small class="helper-text">
+                            Debe coincidir con la contraseña anterior.
+                        </small>
+
+
                     </div>
 
+
+
+
+
                     <div class="campo">
+
                         <label>Contacto</label>
+
+
                         <input
                             type="text"
                             name="contacto"
                             [(ngModel)]="contacto"
                             required>
+
                     </div>
 
+
+
+
+
+                    <!-- PATENTE -->
+
+                    <div class="campo">
+
+                        <label>Patente del vehículo</label>
+
+
+                        <input
+                            type="text"
+                            name="patente"
+                            [(ngModel)]="patente"
+                            (input)="validarPatente(patente)"
+                            maxlength="7"
+                            placeholder="Ej: ABC123 o AB123CD"
+                            required>
+
+
+                        @if (mensajePatente) {
+
+                            <small class="error-text">
+                                {{ mensajePatente }}
+                            </small>
+
+                        }
+
+
+                        @if (!mensajePatente && patente) {
+
+                            <small class="success-text">
+                                Patente válida
+                            </small>
+
+                        }
+
+
+                    </div>
+
+
+
+
+
                     <div class="input-group">
-                        <label for="provincia">Provincia</label>
+
+                        <label for="provincia">
+                            Provincia
+                        </label>
+
+
                         <select
                             id="provincia"
                             name="provincia"
                             [(ngModel)]="provinciaSeleccionada"
                             (change)="filtrarLocalidades()">
 
-                            <option value="">Seleccione una provincia</option>
+
+
+                            <option value="">
+                                Seleccione una provincia
+                            </option>
+
+
 
                             @for (provincia of provincias; track $index) {
+
                                 <option [value]="provincia">
+
                                     {{ provincia }}
+
                                 </option>
+
                             }
+
+
                         </select>
+
+
                     </div>
 
+
+
+
+
+
                     <div class="input-group">
-                        <label for="localidad">Localidad</label>
+
+                        <label for="localidad">
+                            Localidad
+                        </label>
+
+
+
                         <select
                             id="localidad"
                             name="localidad"
                             [(ngModel)]="idLocalidad">
 
-                            <option [ngValue]="null">Seleccione una localidad</option>
+
+
+                            <option [ngValue]="null">
+                                Seleccione una localidad
+                            </option>
+
+
+
 
                             @for (loc of localidadesFiltradas; track loc.id) {
+
+
                                 <option [ngValue]="loc.id">
+
                                     {{ loc.nombreLocalidad }}
+
                                 </option>
+
+
                             }
+
+
                         </select>
+
+
                     </div>
 
+
+
+
+
+
+
                     <div class="campo">
+
                         <label>Domicilio</label>
+
+
                         <input
                             type="text"
                             name="direccion"
                             [(ngModel)]="direccion"
                             required>
+
                     </div>
 
+
+
+
+
+
+
                     <div class="botones">
+
+
                         <button
                             type="submit"
                             class="btn-primary"
                             [disabled]="!formularioValido">
+
+
                             Registrar cliente
+
+
                         </button>
+
+
+
+
 
                         <button
                             type="button"
                             class="btn-secondary"
                             [routerLink]="['/gestionCliente']">
+
+
                             Cancelar
+
+
                         </button>
+
                     </div>
-
                 </form>
-
             </div>
-
         </div>
-
     </main>
-
 </div>
