@@ -8,11 +8,11 @@ import { TurnosService } from '../../../Servicio/turnos-service';
 import { AuthService } from '../../../AuthServicio/auth-service';
 import { HeaderAdmin } from "../../../Administrados/Adminstrador/header-admin/header-admin";
 import { Header } from "../../../header/header";
-import { Location } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-vehiculo',
-  imports: [Headercliente, FormsModule, HeaderAdmin, Header],
+  imports: [Headercliente, FormsModule, HeaderAdmin, Header, CommonModule],
   standalone: true,
   templateUrl: './detalle-vehiculo.html',
   styleUrl: './detalle-vehiculo.css',

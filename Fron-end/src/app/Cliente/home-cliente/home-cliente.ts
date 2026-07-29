@@ -6,10 +6,11 @@ import { Router, RouterLink } from '@angular/router';
 import { TurnosService } from '../../Servicio/turnos-service';
 import { Header } from "../../header/header";
 import { FacturaServicio } from '../../Servicio/factura-servicio';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home-cliente',
-  imports: [RouterLink, Headercliente, Header],
+  imports: [RouterLink, Headercliente, Header, CommonModule],
   templateUrl: './home-cliente.html',
   styleUrl: './home-cliente.css',
 })
@@ -58,6 +59,7 @@ export class HomeCliente implements OnInit{
         this.turnoService.obtenerTurnosFuturosPorCliente(hoy, clienteId).subscribe({
           next: (datos) =>{
               this.turFuturos = datos;
+              console.log(this.turFuturos)
             }});
           }
   }
