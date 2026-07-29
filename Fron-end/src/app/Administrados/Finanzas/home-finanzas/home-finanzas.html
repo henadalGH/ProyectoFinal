@@ -60,7 +60,7 @@
               <div>
                 <h4>{{ult.categoria}}</h4>
                 <p>{{ult.concepto}}</p>
-                <span>{{ult.fechaRegistro}}</span>  
+                <span>{{ult.fechaRegistro | date:'dd/MM/yyyy'}}</span>  
               </div>
 
               @if (ult.tipoMovimiento == 'INGRESO') {

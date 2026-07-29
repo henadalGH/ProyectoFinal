@@ -54,7 +54,7 @@ export class HomeCliente implements OnInit{
       }
 
       if(clienteId){
-        const hoy = new Date().toISOString().split('T')[0];
+        const hoy = new Date().toISOString().slice(0, 19);
         this.turnoService.obtenerTurnosFuturosPorCliente(hoy, clienteId).subscribe({
           next: (datos) =>{
               this.turFuturos = datos;

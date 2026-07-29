@@ -113,12 +113,13 @@ export class HomeAdmin implements OnInit {
 
   obtenerTurnosDelDia(){
 
-    const fecha = this.obtenerFechaActual();
+    const fecha = this.obtenerFechaActualTurnos();
 
     this.turnoService.obtenerPorFecha(fecha)
       .subscribe({
         next: (respuesta) => {
           this.pendiente = respuesta;
+          console.log(this.pendiente)
         },
         error: (err) => {
           console.error(err);
@@ -231,7 +232,19 @@ export class HomeAdmin implements OnInit {
   // FECHA ARGENTINA
   // ==========================
 
-  obtenerFechaActual(): string {
+  obtenerFechaActualTurnos(): string {
+
+  const fecha = new Date();
+
+  const año = fecha.getFullYear();
+  const mes = String(fecha.getMonth() + 1).padStart(2, '0');
+  const dia = String(fecha.getDate()).padStart(2, '0');
+
+  return `${año}-${mes}-${dia}T00:00:00`;
+
+}
+
+ obtenerFechaActual(): string {
 
     const fecha = new Date();
 

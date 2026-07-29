@@ -1,119 +1,133 @@
-/* ==========================================================================
-   VARIABLES DE DISEÑO PREMIUM (Paleta Light Mode / Minimalist)
-   ========================================================================== */
+/* ==========================================
+   VARIABLES Y ESTILOS TEMA CLARO (LIGHT MODE)
+   ========================================== */
 :host {
-  --bg-primary: #f8fafc;             /* Fondo gris claro muy limpio (estilo Tailwind) */
-  --bg-surface: #ffffff;             /* Tarjetas en blanco puro */
-  --border-light: #e2e8f0;           /* Borde sutil gris */
-  --text-main: #0f172a;              /* Slate oscuro para textos principales */
-  --text-muted: #64748b;             /* Gris suave para subtítulos */
+  --bg-main: #f4f6f9;
+  --bg-card: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --border-color: #e2e8f0;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --primary-color: #3b82f6;
+  --primary-light: #eff6ff;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --radius: 12px;
   
-  /* Colores de acento */
-  --accent-purple: #7b5cff;
-  --accent-purple-light: #f1edff;
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-main);
 }
 
-/* ==========================================================================
-   ESTRUCTURA GENERAL CON SIDEBAR Y HEADER FIJOS (Desktop)
-   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================
+   ESTRUCTURA Y LAYOUT PRINCIPAL
+   ========================================== */
 .layout {
   display: flex;
-  flex-direction: row;               /* Forzamos alineación horizontal explícita */
-  height: 100vh;                     /* Ocupa exactamente el alto de la pantalla */
   width: 100vw;
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  overflow: hidden;                  /* Evita scroll doble en la ventana global */
-}
-
-/* Sidebar Fijo a la izquierda */
-.sidebar {
-  width: 260px;
   height: 100vh;
-  flex-shrink: 0;
-  border-right: 1px solid var(--border-light);
-  background: #ffffff;
-  position: relative;                /* Cambiado de sticky a relative para no romper la fila flex */
-  z-index: 100;
-  box-sizing: border-box;
+  overflow: hidden; /* Evita scrolls dobles en toda la ventana */
 }
 
-/* Contenedor de la derecha (Header + Contenedor de Contenido) */
+/* Sidebar Fijo a la Izquierda */
+.sidebar {
+  width: 260px; /* Ancho fijo para el menú lateral */
+  min-width: 260px;
+  height: 100vh;
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  overflow-y: auto; /* Permite scroll interno SOLO si el menú es muy alto */
+  
+  /* Ocultar barra de scroll en navegadores */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Área de Contenido Principal */
 .content {
-  flex: 1;                           /* Toma todo el espacio restante horizontal */
+  flex: 1;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  min-width: 0;                      /* Vital para prevenir desbordamientos en layouts flex */
-  overflow: hidden;                  /* Mantiene el contenedor principal rígido */
+  overflow-y: auto; /* Todo el contenido scrollea aquí de forma fluida */
+  overflow-x: hidden;
+  background-color: var(--bg-main);
 }
 
-/* Header Fijo con separación estética */
+/* Header Superior Fijo en scroll */
+app-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Dashboard Header */
 .dashboard-header {
-  flex-shrink: 0;
-  background: var(--bg-primary);     /* Mismo fondo para simular flotabilidad */
-  padding: 1.5rem 2rem 0.5rem 2rem;  /* Separación de arriba (1.5rem) y laterales */
+  padding: 1.5rem 2rem 0.5rem 2rem;
 }
 
 .dashboard-header h1 {
-  font-size: 1.85rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  letter-spacing: -0.025em;
-  margin: 0 0 0.25rem 0;
-  color: var(--text-main);
+  color: var(--text-primary);
 }
 
 .dashboard-header p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
 }
 
-/* Contenedor del Dashboard que hace SCROLL */
+/* Contenedor Interior del Dashboard */
 .dashboard-container {
-  flex-grow: 1;
-  overflow-y: auto;                  /* Solo el contenido tiene scrollbar */
-  padding: 1rem 2rem 2.5rem 2rem;    /* Espaciado interno cómodo */
-  max-width: 1600px;
-  width: 100%;
-  margin: 0 auto;
+  padding: 1.5rem 2rem 2.5rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  box-sizing: border-box;
+  gap: 1.5rem;
 }
 
-/* Scrollbar fina y minimalista para el área de contenido */
-.dashboard-container::-webkit-scrollbar {
-  width: 6px;
-}
-.dashboard-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-.dashboard-container::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 999px;
-}
-
-/* ==========================================================================
-   ESTILO DE TARJETAS (White Premium Card Style)
-   ========================================================================== */
-.glass-panel {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: 14px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.02);
+/* ==========================================
+   TARJETAS Y PANELES (GLASS / LIGHT MODE)
+   ========================================== */
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.glass-panel:hover {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 1px 5px rgba(0, 0, 0, 0.03);
+.card:hover {
+  box-shadow: var(--shadow-md);
 }
 
-/* Cabecera interna de las tarjetas */
+.glass-panel {
+  background: var(--bg-glass);
+  backdrop-filter: blur(10px);
+}
+
 .card-header {
-  padding: 1.25rem 1.5rem 0.25rem 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .card-title {
@@ -122,72 +136,59 @@
   gap: 0.5rem;
 }
 
-.card-title .icon {
-  font-size: 1.15rem;
-}
-
 .card-title h2 {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--text-main);
-  margin: 0;
+  color: var(--text-primary);
 }
 
-/* Contenedores de gráficos */
+.card-title .icon {
+  font-size: 1.2rem;
+}
+
+/* Wrappers de Gráficos */
 .chart-wrapper {
-  padding: 1.25rem;
   position: relative;
-  height: 310px;
   width: 100%;
-  box-sizing: border-box;
+  height: 280px;
 }
 
-/* Especial para balance anual */
 .balance-chart {
-  height: 360px;
+  height: 320px;
 }
 
-/* ==========================================================================
-   DASHBOARD GRID (3 Columnas fluidas)
-   ========================================================================== */
+/* ==========================================
+   GRID DEL DASHBOARD
+   ========================================== */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(12, 1fr);
   gap: 1.5rem;
 }
 
-/* Contenedor optimizado de la dona */
-.doughnut-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 310px;
-  padding: 0.5rem 1.5rem;
+/* Distribución de columnas */
+.col-doughnut {
+  grid-column: span 4;
 }
 
-/* ==========================================================================
-   LISTA DE SERVICIOS MÁS SOLICITADOS (Fondo Claro)
-   ========================================================================== */
+.col-bar {
+  grid-column: span 4;
+}
+
+.col-services {
+  grid-column: span 4;
+}
+
+/* ==========================================
+   LISTA DE SERVICIOS Y BARRAS DE PROGRESO
+   ========================================== */
 .servicios-list {
-  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  height: 310px;
+  gap: 1rem;
+  max-height: 280px;
   overflow-y: auto;
-  box-sizing: border-box;
-}
-
-/* Scrollbar sutil */
-.servicios-list::-webkit-scrollbar {
-  width: 4px;
-}
-.servicios-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-.servicios-list::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 10px;
+  padding-right: 0.25rem;
 }
 
 .servicio-item {
@@ -200,126 +201,73 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 0.875rem;
 }
 
 .servicio-nombre {
-  font-size: 0.9rem;
-  font-weight: 550;
-  color: var(--text-main);
+  font-weight: 500;
+  color: var(--text-primary);
 }
 
 .servicio-contador {
-  font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
 }
 
 .servicio-contador strong {
-  color: var(--accent-purple);
-  font-size: 1rem;
-  font-weight: 700;
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
-.servicio-contador .label {
-  font-size: 0.75rem;
-  margin-left: 0.2rem;
-}
-
-/* Barras de progreso limpias */
 .progreso-container {
-  height: 6px;
-  background: #f1f5f9;
+  width: 100%;
+  height: 8px;
+  background-color: var(--primary-light);
   border-radius: 999px;
   overflow: hidden;
 }
 
 .progreso-bar {
   height: 100%;
-  background: var(--accent-purple);
+  background-color: var(--primary-color);
   border-radius: 999px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.4s ease-in-out;
 }
 
 .empty-state {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
-/* ==========================================================================
-   MEDIA QUERIES (Súper Adaptabilidad a cualquier pantalla)
-   ========================================================================== */
-
-/* Pantallas grandes y medianas intermedias (Laptops) */
-@media (max-width: 1300px) {
-  .dashboard-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .col-services {
-    grid-column: span 2; 
-  }
-}
-
-/* Tablets o pantallas con resolución horizontal pequeña */
+/* ==========================================
+   RESPONSIVE (DISPOSITIVOS MÓVILES Y TABLAS)
+   ========================================== */
 @media (max-width: 1024px) {
-  .sidebar {
-    width: 220px;
-  }
-  .dashboard-header {
-    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-  }
-  .dashboard-container {
-    padding: 1rem 1.5rem 2rem 1.5rem;
-    gap: 1.5rem;
+  .col-doughnut,
+  .col-bar,
+  .col-services {
+    grid-column: span 12; /* Cambia a full width en pantallas pequeñas */
   }
 }
 
-/* Móviles y Tablets en vertical */
 @media (max-width: 768px) {
   .layout {
     flex-direction: column;
-    overflow-y: auto;
-    height: auto;
   }
-  
+
   .sidebar {
     width: 100%;
     height: auto;
-    position: relative;
+    min-width: 100%;
     border-right: none;
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-color);
   }
 
-  .content {
-    height: auto;
-    overflow: visible;
-  }
-
-  .dashboard-header {
-    padding: 1.5rem 1rem 0.25rem 1rem;
-  }
-
+  .dashboard-header,
   .dashboard-container {
-    padding: 1rem;
-    gap: 1rem;
-    overflow-y: visible;
-  }
-
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .col-services, .col-doughnut, .col-bar {
-    grid-column: span 1;
-  }
-
-  .chart-wrapper {
-    height: 270px;
-  }
-
-  .balance-chart {
-    height: 290px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

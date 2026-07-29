@@ -21,12 +21,14 @@ export class Dashboard implements OnInit {
   ) {}
   
   ngOnInit(): void {
+    // 1. PRIMERO registrar plugins globales de Chart.js
+    Chart.register(ChartDataLabels);
+
+    // 2. LUEGO ejecutar las llamadas a APIs y generación de gráficos
     this.obtenerBalance();
     this.graficoServicioMasSolicitado();
     this.graficoTurnosPorMes();
     this.graficoTurnosEstado();
-    // Registramos datalabels de manera global
-    Chart.register(ChartDataLabels);
   }
 
   balances: any[] = [];
@@ -34,12 +36,10 @@ export class Dashboard implements OnInit {
   turnosPorMes: any[] = [];
   turnosEstado: any[] = [];
   
-  // Guardamos las instancias para evitar duplicados al recargar componentes
   chartInstance: any;       // Gráfico de Balances
   graficoTurnos!: Chart;    // Gráfico de Turnos por Mes
   graficoEstado!: Chart;    // Gráfico de Dona por Estado
 
-  // Formateador de números elegante (ej: 1500000 -> $1.5M, 78000 -> $78k)
   private formatCurrency(value: number): string {
     if (value >= 1e6) {
       return '$' + (value / 1e6).toFixed(1).replace('.0', '') + 'M';
@@ -51,12 +51,13 @@ export class Dashboard implements OnInit {
 
   obtenerBalance() {
     const anio = 2026;
-    this.balanceService.obtenerBalance(anio).subscribe(
-      (respuesta: any) => {
-        this.balances = respuesta;
+    this.balanceService.obtenerBalance(anio).subscribe({
+      next: (respuesta: any) => {
+        this.balances = respuesta || [];
         this.crearGrafico();
-      }
-    );
+      },
+      error: (err) => console.error('Error cargando balances:', err)
+    });
   }
 
   /* ==========================================================
@@ -67,14 +68,17 @@ export class Dashboard implements OnInit {
       this.chartInstance.destroy();
     }
 
+    // Si la API devuelve datos, los usamos; de lo contrario mantenemos el array original
     const balancesFiltrados = this.balances.filter((item: any) => 
       item.totalIngresos > 0 || item.totalGastos > 0 || item.balance !== 0
     );
 
-    const labels = balancesFiltrados.map((item: any) => item.nombreMes);
-    const ingresos = balancesFiltrados.map((item: any) => item.totalIngresos);
-    const gastos = balancesFiltrados.map((item: any) => item.totalGastos);
-    const balance = balancesFiltrados.map((item: any) => item.balance);
+    const datosUsar = balancesFiltrados.length > 0 ? balancesFiltrados : this.balances;
+
+    const labels = datosUsar.map((item: any) => item.nombreMes);
+    const ingresos = datosUsar.map((item: any) => item.totalIngresos);
+    const gastos = datosUsar.map((item: any) => item.totalGastos);
+    const balance = datosUsar.map((item: any) => item.balance);
 
     const data = {
       labels: labels,
@@ -83,10 +87,10 @@ export class Dashboard implements OnInit {
           label: 'Ingresos',
           data: ingresos,
           type: 'bar' as const,
-          backgroundColor: '#10b981', // Verde esmeralda moderno
+          backgroundColor: '#10b981',
           borderColor: '#10b981',
           borderWidth: 0,
-          borderRadius: 6, // Bordes superiores redondeados en las barras
+          borderRadius: 6,
           borderSkipped: false,
           yAxisID: 'y',
           order: 2,
@@ -97,7 +101,7 @@ export class Dashboard implements OnInit {
           label: 'Gastos',
           data: gastos,
           type: 'bar' as const,
-          backgroundColor: '#f43f5e', // Rosa/Rojo moderno
+          backgroundColor: '#f43f5e',
           borderColor: '#f43f5e',
           borderWidth: 0,
           borderRadius: 6,
@@ -111,8 +115,8 @@ export class Dashboard implements OnInit {
           label: 'Balance Neto',
           data: balance,
           type: 'line' as const,
-          borderColor: '#3b82f6', // Azul brillante
-          backgroundColor: 'rgba(59, 130, 246, 0.05)', // Sombreado de área suave debajo de la línea
+          borderColor: '#3b82f6',
+          backgroundColor: 'rgba(59, 130, 246, 0.05)',
           fill: true,
           borderWidth: 3,
           pointRadius: 4,
@@ -122,7 +126,7 @@ export class Dashboard implements OnInit {
           pointBorderWidth: 2,
           yAxisID: 'y1',
           order: 1,
-          tension: 0.35 // Curvatura suave
+          tension: 0.35
         }
       ]
     };
@@ -132,7 +136,7 @@ export class Dashboard implements OnInit {
       data: data,
       options: {
         responsive: true,
-        maintainAspectRatio: false, // El HTML/CSS controla la altura
+        maintainAspectRatio: false,
         interaction: {
           mode: 'index' as const,
           intersect: false
@@ -140,7 +144,7 @@ export class Dashboard implements OnInit {
         plugins: {
           legend: {
             display: true,
-            position: 'bottom' as const, // Leyenda abajo estilizada
+            position: 'bottom' as const,
             labels: {
               usePointStyle: true,
               pointStyle: 'circle' as const,
@@ -148,13 +152,13 @@ export class Dashboard implements OnInit {
               font: {
                 family: "'Inter', sans-serif",
                 size: 12,
-                weight: 'normal' as const // Corregido: tipo estricto válido
+                weight: 'normal' as const
               },
               color: '#64748b'
             }
           },
           datalabels: {
-            display: false // Desactiva números estáticos molestos
+            display: false
           },
           tooltip: {
             backgroundColor: '#0f172a',
@@ -167,12 +171,10 @@ export class Dashboard implements OnInit {
         },
         scales: {
           x: {
-            grid: {
-              display: false // Remueve líneas verticales del fondo
-            },
+            grid: { display: false },
             ticks: {
               color: '#64748b',
-              font: { family: "'Inter', sans-serif", size: 11, weight: 'normal' as const } // Corregido
+              font: { family: "'Inter', sans-serif", size: 11, weight: 'normal' as const }
             }
           },
           y: {
@@ -180,26 +182,20 @@ export class Dashboard implements OnInit {
             display: true,
             position: 'left' as const,
             beginAtZero: true,
-            grid: {
-              color: '#f1f5f9' // Línea de grilla horizontal muy sutil
-            },
+            grid: { color: '#f1f5f9' },
             ticks: {
               color: '#94a3b8',
               font: { family: "'Inter', sans-serif", size: 11 },
               callback: (value: any) => this.formatCurrency(value)
             },
-            border: {
-              dash: [5, 5] // Eje punteado moderno
-            }
+            border: { dash: [5, 5] }
           },
           y1: {
             type: 'linear' as const,
             display: true,
             position: 'right' as const,
             beginAtZero: true,
-            grid: {
-              drawOnChartArea: false // Evita cruces de líneas de grilla
-            },
+            grid: { drawOnChartArea: false },
             ticks: {
               color: '#94a3b8',
               font: { family: "'Inter', sans-serif", size: 11 },
@@ -213,23 +209,19 @@ export class Dashboard implements OnInit {
     this.chartInstance = new Chart('miGrafico', config);
   }
 
-
   /* ==========================================================
-     2. SERVICIOS MÁS SOLICITADOS (RANKING DE BARRAS HTML)
+     2. SERVICIOS MÁS SOLICITADOS
      ========================================================== */
   graficoServicioMasSolicitado(): void {
     this.turnoService.serviciosMasSolicitados().subscribe({
       next: (respuesta: any[]) => {
-        this.servicioSolicitados = respuesta
+        this.servicioSolicitados = (respuesta || [])
           .sort((a, b) => b.cantidad - a.cantidad)
           .slice(0, 5);
       },
-      error: (error) => {
-        console.error(error);
-      }
+      error: (error) => console.error('Error cargando servicios:', error)
     });
   }
-
 
   /* ==========================================================
      3. GRÁFICO DE TURNOS POR MES
@@ -237,13 +229,13 @@ export class Dashboard implements OnInit {
   graficoTurnosPorMes(): void {
     this.turnoService.cantidadTurnosPorMes().subscribe({
       next: (respuesta: any[]) => {
-        this.turnosPorMes = respuesta;
+        this.turnosPorMes = respuesta || [];
 
         const meses = [
           '', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
         ];
 
-        const labels = this.turnosPorMes.map(item => meses[item.mes]);
+        const labels = this.turnosPorMes.map(item => meses[item.mes] || item.mes);
         const cantidades = this.turnosPorMes.map(item => item.cantidad);
 
         if (this.graficoTurnos) {
@@ -257,8 +249,8 @@ export class Dashboard implements OnInit {
             datasets: [{
               label: 'Turnos',
               data: cantidades,
-              backgroundColor: '#7B5CFF', // Violeta estético de la imagen de referencia
-              borderRadius: 6, // Esquinas suaves superiores
+              backgroundColor: '#7B5CFF',
+              borderRadius: 6,
               borderSkipped: false,
               barPercentage: 0.5,
               categoryPercentage: 0.7
@@ -266,14 +258,10 @@ export class Dashboard implements OnInit {
           },
           options: {
             responsive: true,
-            maintainAspectRatio: false, // Permite ajustar el contenedor perfectamente
+            maintainAspectRatio: false,
             plugins: {
-              legend: {
-                display: false // Ocultamos la leyenda ya que el título de tarjeta es suficiente
-              },
-              datalabels: {
-                display: false // Limpieza de números redundantes
-              },
+              legend: { display: false },
+              datalabels: { display: false },
               tooltip: {
                 backgroundColor: '#0f172a',
                 padding: 10,
@@ -283,61 +271,48 @@ export class Dashboard implements OnInit {
             scales: {
               y: {
                 beginAtZero: true,
-                grid: {
-                  color: '#f1f5f9'
-                },
+                grid: { color: '#f1f5f9' },
                 ticks: {
                   precision: 0,
                   color: '#94a3b8',
                   font: { family: "'Inter', sans-serif", size: 11 }
                 },
-                border: {
-                  dash: [5, 5]
-                }
+                border: { dash: [5, 5] }
               },
               x: {
-                grid: {
-                  display: false
-                },
+                grid: { display: false },
                 ticks: {
                   color: '#64748b',
-                  font: { family: "'Inter', sans-serif", size: 11, weight: 'normal' as const } // Corregido
+                  font: { family: "'Inter', sans-serif", size: 11, weight: 'normal' as const }
                 }
               }
             }
           }
         });
       },
-      error: (error) => {
-        console.error(error);
-      }
+      error: (error) => console.error('Error cargando turnos por mes:', error)
     });
   }
-
 
   /* ==========================================================
      4. GRÁFICO DE DONA (TURNOS POR ESTADO)
      ========================================================== */
-  /* ==========================================================
-     4. GRÁFICO DE DONA (SÓLO CONFIRMADOS, CANCELADOS Y PENDIENTES)
-     ========================================================== */
   graficoTurnosEstado(): void {
     this.turnoService.turnosPorEstado().subscribe({
       next: (respuesta: any[]) => {
-        // 1. Filtramos para quedarnos solo con los 4 estados requeridos
+        const respuestaSegura = respuesta || [];
         const estadosPermitidos = ['CONFIRMADO', 'CANCELADO', 'PENDIENTE', 'TERMINADO', 'TERMINADOS', 'FINALIZADO'];
         
-        const datosFiltrados = respuesta.filter(e => 
-          estadosPermitidos.includes(e.estado.toUpperCase())
+        const datosFiltrados = respuestaSegura.filter(e => 
+          e.estado && estadosPermitidos.includes(e.estado.toUpperCase())
         );
 
-        // 2. Mapeamos los nombres para que se vean prolijos en la leyenda
         const labels = datosFiltrados.map(e => {
           const est = e.estado.toUpperCase();
           if (est === 'CONFIRMADO') return 'Confirmados';
           if (est === 'CANCELADO') return 'Cancelados';
           if (est === 'PENDIENTE') return 'Pendientes';
-          if (est === 'TERMINADO' || est === 'TERMINADOS' || est === 'FINALIZADO') return 'Terminados';
+          if (['TERMINADO', 'TERMINADOS', 'FINALIZADO'].includes(est)) return 'Terminados';
           return e.estado;
         });
 
@@ -348,14 +323,13 @@ export class Dashboard implements OnInit {
           this.graficoEstado.destroy();
         }
 
-        // Plugin interno estilizado adaptado a fondo claro
         const centerText = {
           id: 'centerText',
           afterDraw(chart: any) {
             const { ctx } = chart;
             const meta = chart.getDatasetMeta(0);
 
-            if (!meta.data.length) return;
+            if (!meta || !meta.data.length) return;
 
             const x = meta.data[0].x;
             const y = meta.data[0].y;
@@ -364,13 +338,11 @@ export class Dashboard implements OnInit {
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
 
-            // Etiqueta "Total" arriba
-            ctx.fillStyle = '#64748b'; // Gris medio para fondo claro
+            ctx.fillStyle = '#64748b';
             ctx.font = "500 13px 'Inter', sans-serif";
             ctx.fillText('Total', x, y - 18);
 
-            // Cifra numérica en negrita oscura
-            ctx.fillStyle = '#1e293b'; // Slate muy oscuro
+            ctx.fillStyle = '#1e293b';
             ctx.font = "bold 26px 'Inter', sans-serif";
             ctx.fillText(total.toString(), x, y + 6);
 
@@ -384,21 +356,16 @@ export class Dashboard implements OnInit {
             labels,
             datasets: [{
               data: cantidades,
-              backgroundColor: [
-                '#3b82f6', // Confirmados -> Azul
-                '#ef4444', // Cancelados -> Rojo
-                '#f59e0b', // Pendientes -> Amarillo/Naranja
-                '#10b981'  // Terminados -> Verde esmeralda premium
-              ],
+              backgroundColor: ['#3b82f6', '#ef4444', '#f59e0b', '#10b981'],
               borderWidth: 3,
-              borderColor: '#ffffff', // Borde blanco que separa los gajos
+              borderColor: '#ffffff',
               hoverBorderWidth: 3
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '75%', // Dona fina y elegante
+            cutout: '75%',
             plugins: {
               legend: {
                 position: 'right' as const,
@@ -411,7 +378,7 @@ export class Dashboard implements OnInit {
                     size: 13,
                     weight: 'normal' as const
                   },
-                  color: '#334155', // Color de texto oscuro suave
+                  color: '#334155',
                   generateLabels(chart) {
                     const dataset = chart.data.datasets[0];
                     return chart.data.labels!.map((label: any, i: number) => ({
@@ -450,9 +417,7 @@ export class Dashboard implements OnInit {
           plugins: [centerText]
         });
       },
-      error: (error) => {
-        console.error(error);
-      }
+      error: (error) => console.error('Error cargando turnos por estado:', error)
     });
   }
 }
