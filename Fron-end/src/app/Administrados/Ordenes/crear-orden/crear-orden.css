@@ -11,18 +11,37 @@
 
 .sidebar{
     width:320px;
-    flex-shrink:0;
-    height:100vh;
-    overflow-y:auto;
+    min-width:320px;
     background:#1f2937;
+    color:white;
+    flex-shrink:0;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow:hidden;
+    z-index:1000;
 }
 
 .content{
     flex:1;
-    display:flex;
-    flex-direction:column;
-    overflow-y:auto;
     background:#f3f6fb;
+    padding:25px;
+    margin-left:320px;
+    overflow-y:auto;
+    min-height:100vh;
+}
+
+@media(max-width:900px){
+    .sidebar{
+        width:250px;
+        min-width:250px;
+    }
+
+    .content{
+        margin-left:250px;
+        padding:15px;
+    }
 }
 
 
@@ -31,7 +50,9 @@
 =========================== */
 
 .content-orden{
-    padding:30px;
+    display:flex;
+    flex-direction:column;
+    gap:26px;
 }
 
 
@@ -40,17 +61,24 @@
 =========================== */
 
 .titulo{
-    margin-bottom:30px;
+    background:white;
+    border-radius:20px;
+    padding:35px;
+    margin-bottom:25px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+    margin-top: 30px;
 }
 
 .titulo h1{
     margin:0;
-    font-size:32px;
-    color:#1f2937;
+    font-size:34px;
+    color:#111827;
 }
 
 .titulo p{
-    margin-top:8px;
+    margin-top:12px;
+    margin-bottom:0;
     color:#6b7280;
     font-size:16px;
 }
@@ -60,177 +88,174 @@
    LISTA
 =========================== */
 
-.lista-ordenes{
+.filtros{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(380px,1fr));
-    gap:25px;
-}
-
-
-/* ===========================
-   TARJETA
-=========================== */
-
-.card-orden{
-
-    background:#fff;
-
-    border-radius:14px;
-
-    padding:22px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.08);
-
-    transition:.25s;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-}
-
-.card-orden:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:0 12px 28px rgba(0,0,0,.12);
-}
-
-
-/* ===========================
-   HEADER CARD
-=========================== */
-
-.card-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:20px;
-
-    border-bottom:1px solid #ececec;
-
-    padding-bottom:15px;
-}
-
-.card-header h3{
-
-    margin:0;
-
-    color:#1f2937;
-
-    font-size:20px;
-}
-
-
-/* ===========================
-   PRIORIDAD
-=========================== */
-
-.prioridad{
-
-    background:#fef3c7;
-
-    color:#92400e;
-
-    padding:6px 14px;
-
-    border-radius:30px;
-
-    font-size:13px;
-
-    font-weight:600;
-}
-
-
-/* ===========================
-   DATOS
-=========================== */
-
-.card-body{
-
-    display:flex;
-
-    flex-direction:column;
-
+    grid-template-columns:1fr 1fr 1fr auto;
     gap:18px;
-
-    margin-bottom:25px;
+    align-items:end;
+    margin-bottom:28px;
+    padding:18px 22px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    box-shadow:0 8px 16px rgba(15,23,42,.04);
 }
 
-.dato{
-
+.filtro-item{
     display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    border-bottom:1px solid #f2f2f2;
-
-    padding-bottom:10px;
+    flex-direction:column;
+    gap:8px;
 }
 
-.label{
-
+.filtro-item label{
+    color:#374151;
+    font-size:14px;
     font-weight:600;
-
-    color:#6b7280;
 }
 
-.dato span:last-child{
-
+.filtro-item input{
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    padding:12px 14px;
+    background:#f9fafb;
     color:#111827;
-
-    font-weight:500;
+    font-size:14px;
+    outline:none;
+    transition:all .2s ease;
 }
 
-
-/* ===========================
-   FOOTER
-=========================== */
-
-.card-footer{
-
-    display:flex;
-
-    justify-content:flex-end;
+.filtro-item input:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+    background:#fff;
 }
 
+.filtro-accion{
+    justify-self:end;
+}
 
-/* ===========================
-   BOTON
-=========================== */
-
-.btn-reasignar{
-
-    background:#2563eb;
-
-    color:white;
-
-    border:none;
-
+.btn-limpiar{
+    border:1px solid #d1d5db;
+    background:#ffffff;
+    color:#111827;
+    border-radius:12px;
     padding:12px 22px;
-
-    border-radius:10px;
-
+    font-size:14px;
+    font-weight:700;
     cursor:pointer;
-
-    font-size:15px;
-
-    font-weight:600;
-
     transition:.2s;
 }
 
-.btn-reasignar:hover{
+.btn-limpiar:hover{
+    background:#f3f4f6;
+}
 
+.lista-ordenes{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.fila-orden{
+    display:grid;
+    grid-template-columns:200px 1fr 200px 240px 180px;
+    gap:16px;
+    align-items:center;
+    min-height:88px;
+    padding:18px 20px;
+    background:#ffffff;
+    border-radius:16px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 4px 20px rgba(15,23,42,.05);
+}
+
+.fila-orden:hover{
+    transform:translateY(-1px);
+    box-shadow:0 12px 28px rgba(15,23,42,.10);
+}
+
+.fila-col{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.fila-label{
+    font-size:12px;
+    color:#6b7280;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+}
+
+.fila-col span:last-child{
+    font-size:15px;
+    color:#111827;
+    font-weight:600;
+}
+
+.fila-col.accion{
+    justify-self:end;
+    align-items:flex-end;
+}
+
+.sin-resultados{
+    padding:22px;
+    border-radius:16px;
+    border:1px dashed #d1d5db;
+    background:#f8fafc;
+    color:#475569;
+    text-align:center;
+    font-size:15px;
+}
+
+.btn-reasignar{
+    background:#2563eb;
+    color:#ffffff;
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:700;
+    transition:.2s;
+    min-width:160px;
+}
+
+.btn-reasignar:hover{
     background:#1d4ed8;
 }
+
+@media (max-width: 1100px) {
+    .fila-orden{
+        grid-template-columns:1fr;
+        gap:14px;
+        padding:18px;
+    }
+
+    .fila-col.accion{
+        align-items:flex-start;
+    }
+}
+
+@media (max-width: 720px) {
+    .filtros{
+        grid-template-columns:1fr;
+    }
+}
+
+/* ===========================
+   REMOVE OLD CARD STYLES
+=========================== */
+
+.card-orden,
+.card-header,
+.prioridad,
+.card-body,
+.dato,
+.card-footer {
+    display:none;
+}
+
 
 
 /* ===========================

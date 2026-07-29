@@ -39,6 +39,8 @@ public class ObtenerOrdenDTO {
     private String nombreCliente;
     private String contacto;
     private String email;
+
+    private String nombreServicio;
     
 
 }

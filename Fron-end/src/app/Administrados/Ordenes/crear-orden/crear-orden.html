@@ -17,54 +17,85 @@
         <p>Reasigná las órdenes que aún no fueron finalizadas.</p>
       </div>
 
+      <div class="filtros">
+        <div class="filtro-item">
+          <label for="empleadoFiltro">Empleado</label>
+          <input
+            id="empleadoFiltro"
+            type="text"
+            [(ngModel)]="empleadoFiltro"
+            name="empleadoFiltro"
+            placeholder="Buscar por empleado"
+            (ngModelChange)="aplicarFiltros()"
+          />
+        </div>
+
+        <div class="filtro-item">
+          <label for="fechaDesde">Fecha desde</label>
+          <input
+            id="fechaDesde"
+            type="date"
+            [(ngModel)]="fechaDesde"
+            name="fechaDesde"
+            (ngModelChange)="aplicarFiltros()"
+          />
+        </div>
+
+        <div class="filtro-item">
+          <label for="fechaHasta">Fecha hasta</label>
+          <input
+            id="fechaHasta"
+            type="date"
+            [(ngModel)]="fechaHasta"
+            name="fechaHasta"
+            (ngModelChange)="aplicarFiltros()"
+          />
+        </div>
+
+        <div class="filtro-item filtro-accion">
+          <button type="button" class="btn-limpiar" (click)="limpiarFiltros()">
+            Limpiar filtros
+          </button>
+        </div>
+      </div>
+
       <div class="lista-ordenes">
 
-        @for (ord of ordenes; track ord.idOrden) {
+        @for (ord of ordenesFiltradas; track ord.id) {
 
-          <div class="card-orden">
-
-            <div class="card-header">
-              <h3>Orden #{{ ord.idOrden }}</h3>
-
-              <span class="prioridad">
-                {{ ord.prioridad }}
-              </span>
+          <div class="fila-orden">
+            <div class="fila-col fecha">
+              <span class="fila-label">Fecha emisión</span>
+              <span>{{ ord.fechaEmicion | date:'dd/MM/yyyy' }}</span>
             </div>
 
-            <div class="card-body">
-
-              <div class="dato">
-                <span class="label">Estado</span>
-                <span>{{ ord.estadoOrden }}</span>
-              </div>
-
-              <div class="dato">
-                <span class="label">Servicio</span>
-                <span>{{ ord.nombreServicio }}</span>
-              </div>
-
-              <div class="dato">
-                <span class="label">Vehículo</span>
-                <span>{{ ord.marcaVehiculo }} {{ ord.modeloVehiculo }}</span>
-              </div>
-
-              <div class="dato">
-                <span class="label">patente</span>
-                <span>{{ ord.patenteVehiculo }}</span>
-              </div>
-
+            <div class="fila-col servicio">
+              <span class="fila-label">Servicio</span>
+              <span>{{ ord.nombreServicio }}</span>
             </div>
 
-            <div class="card-footer">
-              <button class="btn-reasignar"
-                      (click)="abrirModal(ord.idOrden)">
+            <div class="fila-col patente">
+              <span class="fila-label">Patente</span>
+              <span>{{ ord.patenteVehiculo }}</span>
+            </div>
+
+            <div class="fila-col empleado">
+              <span class="fila-label">Empleado</span>
+              <span>{{ ord.nombreEmpleado }}</span>
+            </div>
+
+            <div class="fila-col accion">
+              <button class="btn-reasignar" (click)="abrirModal(ord.id)">
                 Reasignar empleado
               </button>
             </div>
-
           </div>
 
         }
+
+        <div *ngIf="ordenesFiltradas.length === 0" class="sin-resultados">
+          No se encontraron órdenes con los filtros aplicados.
+        </div>
 
       </div>
 

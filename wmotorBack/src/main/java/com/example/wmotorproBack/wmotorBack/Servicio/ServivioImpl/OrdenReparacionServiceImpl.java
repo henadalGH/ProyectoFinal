@@ -192,6 +192,8 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService {
         ordenDTO.setFechaEmicion(ordenTrabajo.getFechaEminsion());
         ordenDTO.setFechaCierre(ordenTrabajo.getFechaFin());
         ordenDTO.setFechaEntragaCliente(ordenTrabajo.getFechaEntragaCliente());
+
+        ordenDTO.setNombreServicio(ordenTrabajo.getTurno().getServicio().getNombre());
         
         if (ordenTrabajo.getEstadoOrden() != null) {
             ordenDTO.setEstado(ordenTrabajo.getEstadoOrden().getEstadoOrden());
@@ -205,7 +207,7 @@ public class OrdenReparacionServiceImpl implements OrdenReparacionService {
         // Datos del empleado
         if (ordenTrabajo.getEmpleado() != null && ordenTrabajo.getEmpleado().getUsuario() != null) {
             ordenDTO.setNombreEmpleado(ordenTrabajo.getEmpleado().getUsuario().getNombre() + " " + 
-                                       ordenTrabajo.getEmpleado().getUsuario().getApellido());
+                                    ordenTrabajo.getEmpleado().getUsuario().getApellido());
         }
 
         // Datos del vehículo y cliente a través del turno
