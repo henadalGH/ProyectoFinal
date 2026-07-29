@@ -1,0 +1,643 @@
+/*Scrip fanal de base de datos proyecto final*/
+
+insert into roles (nombre) values ('ADMIN'),('CLIENTE'), ('EMPLEADO');
+
+-- 2. CARGOS
+INSERT IGNORE INTO cargos (cargo, sueldo_base) VALUES 
+('AYUDANTE', 1200000.00), 
+('MECANICO', 1700000.00), 
+('ENCARGADO', 2200000.00),
+('JEFE_TALLER', 2800000.00), 
+('ADMINISTRATIVO', 1500000.00);
+
+-- 3. PROVINCIAS Y LOCALIDADES
+INSERT IGNORE INTO provincia (nombre) VALUES
+('Santa Fe'),
+('Entre Ríos');
+
+-- provincia por localidad
+
+INSERT IGNORE INTO localidad (nombre_localidad, id_provincia) VALUES
+('Santa Fe', 1),
+('Santo Tomé', 1),
+('Recreo', 1),
+('Sauce Viejo', 1),
+('San José del Rincón', 1),
+('Arroyo Leyes', 1),
+('Monte Vera', 1),
+('Esperanza', 1),
+('Paraná', 2),
+('Oro Verde', 2),
+('San Benito', 2),
+('Colonia Avellaneda', 2),
+('Sauce Montrull', 2),
+('Villa Urquiza', 2),
+('Crespo', 2),
+('Viale', 2);
+
+
+-- 7. ESTADOS Y AUXILIARES
+INSERT IGNORE INTO estado_turno (estado_turno) VALUES
+('PENDIENTE'),
+('CONFIRMADO'),
+('EN_PROCESO'),
+('FINALIZADO'),
+('CANCELADO'),
+('AUSENTE'),
+('PENDIENTE_ASIGNACION'),
+('ASIGNADO_ORDEN');
+
+INSERT IGNORE INTO estado_orden (estado) VALUES
+('ABIERTA'),
+('ASIGNADA'),
+('EN_PROCESO'),
+('EN_PAUSA'),
+('ESPERANDO_REPUESTOS'),
+('COMPLETADA'),
+('PARA_FACTURAR'),
+('FACTURADA'),
+('CERRADA'),
+('CANCELADA');
+
+INSERT IGNORE INTO estado_presupuesto (tipo_estado) VALUES
+('BORRADOR'),
+('ENVIADO'),
+('APROBADO'),
+('RECHAZADO'),
+('VENCIDO'),
+('CANCELADO'),
+('EN_REVISION'),
+('PENDIENTE'),
+('PAGADO');
+
+INSERT IGNORE into priorodad (prioridad) VALUES 
+('ALTA'), 
+('MEDIA'), 
+('BAJA');
+
+INSERT IGNORE INTO numero_presupuesto (id, valor) VALUES 
+('PRESUPUESTO', 0), 
+('ORDEN', 0);
+
+INSERT IGNORE INTO servicio (descripcion, duracion_estimada, nombre, precion_base) VALUES
+('Diagnóstico completo del sistema eléctrico del vehículo.', 30, 'Diagnóstico eléctrico', 15000),
+('Revisión y reparación del motor de arranque.', 90, 'Reparación de motor de arranque', 45000),
+('Revisión y reparación del alternador.', 120, 'Reparación de alternador', 55000),
+('Cambio de batería e instalación.', 30, 'Cambio de batería', 10000),
+('Control del sistema de carga y medición de voltaje.', 20, 'Control del sistema de carga', 8000),
+('Reparación del cableado eléctrico del vehículo.', 180, 'Reparación de cableado', 60000),
+('Instalación de luces LED o auxiliares.', 60, 'Instalación de luces', 25000),
+('Reparación del sistema de iluminación.', 45, 'Reparación de iluminación', 18000),
+('Instalación y conexión de alarma vehicular.', 120, 'Instalación de alarma', 50000),
+('Instalación de cierre centralizado.', 120, 'Instalación de cierre centralizado', 45000),
+('Reparación de levantavidrios eléctricos.', 90, 'Reparación de levantavidrios', 35000),
+('Reparación del sistema de limpiaparabrisas.', 60, 'Reparación de limpiaparabrisas', 22000),
+('Diagnóstico mediante escáner automotriz.', 30, 'Escaneo electrónico', 18000),
+('Revisión y reparación de fusibles y relés.', 30, 'Revisión de fusibles y relés', 12000),
+('Instalación de estéreo y parlantes.', 90, 'Instalación de audio', 35000),
+('Instalación de cámara de retroceso.', 90, 'Instalación de cámara de retroceso', 30000),
+('Reparación del sistema de encendido.', 120, 'Reparación del sistema de encendido', 50000),
+('Revisión del consumo eléctrico del vehículo.', 60, 'Detección de consumo eléctrico', 20000),
+('Reparación del sistema de inyección electrónica.', 180, 'Reparación de inyección electrónica', 75000),
+('Instalación de sensores de estacionamiento.', 90, 'Instalación de sensores', 32000);
+
+
+INSERT IGNORE INTO repuesto 
+(nombre, marca, codigo, stock, stock_minimo, precio_compra, precio_venta, activo, categoria_repuesto)
+VALUES
+('Batería 45Ah', 'Moura', 'BAT-001', 8, 2, 85000, 110000, true, 'BATERIAS'),
+('Batería 45Ah', 'Willard', 'BAT-002', 5, 2, 79000, 102000, true, 'BATERIAS'),
+('Batería 65Ah', 'Moura', 'BAT-003', 6, 2, 98000, 126000, true, 'BATERIAS'),
+('Batería 75Ah', 'Bosch', 'BAT-004', 4, 1, 118000, 149000, true, 'BATERIAS'),
+('Regulador de Voltaje', 'Bosch', 'ALT-001', 6, 2, 22000, 34000, true, 'ALTERNADORES'),
+('Regulador de Voltaje', 'Genérico', 'ALT-002', 8, 3, 15000, 25000, true, 'ALTERNADORES'),
+('Porta Carbones', 'Bosch', 'ALT-003', 10, 3, 12000, 21000, true, 'ALTERNADORES'),
+('Porta Carbones', 'Genérico', 'ALT-004', 12, 4, 8000, 15000, true, 'ALTERNADORES'),
+('Puente Rectificador', 'Bosch', 'ALT-005', 5, 2, 28000, 42000, true, 'ALTERNADORES'),
+('Puente Rectificador', 'Genérico', 'ALT-006', 6, 2, 19000, 31000, true, 'ALTERNADORES'),
+('Rodamiento Delantero', 'SKF', 'ALT-007', 10, 3, 9500, 17000, true, 'ALTERNADORES'),
+('Rodamiento Trasero', 'SKF', 'ALT-008', 10, 3, 8200, 15500, true, 'ALTERNADORES'),
+('Bendix', 'ZM', 'ARR-001', 8, 2, 18500, 30000, true, 'MOTORES_ARRANQUE'),
+('Bendix', 'Genérico', 'ARR-002', 10, 3, 12500, 22000, true, 'MOTORES_ARRANQUE'),
+('Solenoide', 'Bosch', 'ARR-003', 5, 2, 33000, 49000, true, 'MOTORES_ARRANQUE'),
+('Solenoide', 'Genérico', 'ARR-004', 7, 2, 22000, 36000, true, 'MOTORES_ARRANQUE'),
+('Porta Carbones', 'Bosch', 'ARR-005', 6, 2, 13000, 22000, true, 'MOTORES_ARRANQUE'),
+('Porta Carbones', 'Genérico', 'ARR-006', 8, 2, 9000, 16000, true, 'MOTORES_ARRANQUE'),
+('Buje Delantero', 'Original', 'ARR-007', 15, 5, 2800, 5200, true, 'MOTORES_ARRANQUE'),
+('Buje Trasero', 'Original', 'ARR-008', 15, 5, 2800, 5200, true, 'MOTORES_ARRANQUE'),
+('Lámpara H1 55W', 'Philips', 'ILU-001', 20, 5, 4500, 7500, true, 'ILUMINACION'),
+('Lámpara H1 55W', 'Genérico', 'ILU-002', 25, 5, 2800, 5000, true, 'ILUMINACION'),
+('Lámpara H4 60/55W', 'Osram', 'ILU-003', 18, 5, 6200, 9800, true, 'ILUMINACION'),
+('Lámpara H4 60/55W', 'Genérico', 'ILU-004', 20, 5, 3500, 6200, true, 'ILUMINACION'),
+('Lámpara H7 55W', 'Philips', 'ILU-005', 18, 5, 6500, 9900, true, 'ILUMINACION'),
+('Lámpara H7 55W', 'Genérico', 'ILU-006', 22, 5, 3800, 6500, true, 'ILUMINACION'),
+('Lámpara T10', 'Philips', 'ILU-007', 30, 10, 1200, 2500, true, 'ILUMINACION'),
+('Portalámpara H4', 'Original', 'ILU-008', 12, 4, 3200, 6200, true, 'ILUMINACION'),
+('Portalámpara T10', 'Original', 'ILU-009', 15, 5, 1800, 3600, true, 'ILUMINACION'),
+('Ficha Faro Delantero', 'Original', 'ILU-010', 10, 3, 4200, 7500, true, 'ILUMINACION'),
+('Bobina de Encendido', 'Bosch', 'ENC-001', 6, 2, 52000, 78000, true, 'ENCENDIDO'),
+('Bobina de Encendido', 'Genérico', 'ENC-002', 8, 2, 36000, 59000, true, 'ENCENDIDO'),
+('Cable de Bujía', 'NGK', 'ENC-003', 8, 2, 18000, 30000, true, 'ENCENDIDO'),
+('Cable de Bujía', 'Genérico', 'ENC-004', 10, 3, 12000, 22000, true, 'ENCENDIDO'),
+('Bujía de Níquel', 'NGK', 'ENC-005', 30, 10, 4500, 7800, true, 'ENCENDIDO'),
+('Bujía Iridium', 'NGK', 'ENC-006', 20, 5, 9800, 16500, true, 'ENCENDIDO'),
+('Módulo de Encendido', 'Bosch', 'ENC-007', 4, 1, 38000, 59000, true, 'ENCENDIDO'),
+('Módulo de Encendido', 'Genérico', 'ENC-008', 5, 2, 26000, 43000, true, 'ENCENDIDO'),
+('Rotor Distribuidor', 'Bosch', 'ENC-009', 6, 2, 8500, 15000, true, 'ENCENDIDO'),
+('Tapa Distribuidor', 'Bosch', 'ENC-010', 6, 2, 16500, 27000, true, 'ENCENDIDO');
+
+INSERT IGNORE INTO categoria_movimiento (categoria, tipo_movimiento) VALUES 
+('REPARACIONES', 'INGRESO'),
+('MANO_OBRA', 'INGRESO'),
+('VENTA_REPUESTOS', 'INGRESO'),
+('SERVICIOS', 'INGRESO'),
+('DIAGNOSTICOS', 'INGRESO'),
+('OTROS_INGRESOS', 'INGRESO'),
+('COMPRA_REPUESTOS', 'GASTOS'),
+('SUELDOS', 'GASTOS'),
+('SERVICIOS PUBLICOS', 'GASTOS'),
+('ALQUILER', 'GASTOS'),
+('HERRAMIENTAS', 'GASTOS'),
+('IMPUESTOS', 'GASTOS'),
+('MANTENIMIENTO', 'GASTOS'),
+('OTROS_GASTOS', 'GASTOS'),
+('PAGO_FACTURA', 'GASTOS'),
+('COBRO_FACTURA', 'INGRESO');
+
+INSERT IGNORE INTO movimientos_financieros
+(concepto, fecha_registro, importe, tipo_movimiento, id_admin, id_categoria)
+VALUES
+('Reparación Fiat Palio','2026-01-04',180000,'INGRESO',1,1),
+('Cambio batería Bosch','2026-01-06',95000,'INGRESO',1,3),
+('Diagnóstico electrónico','2026-01-08',45000,'INGRESO',1,5),
+('Cambio instalación eléctrica','2026-01-11',170000,'INGRESO',1,2),
+('Reparación alternador','2026-01-15',260000,'INGRESO',1,1),
+('Venta lámparas LED','2026-01-20',80000,'INGRESO',1,3),
+('Instalación alarma','2026-01-27',220000,'INGRESO',1,4),
+('Compra repuestos inicial','2026-01-03',180000,'GASTOS',1,7),
+('Pago de sueldos','2026-01-30',500000,'GASTOS',1,8),
+('Factura EPE','2026-01-15',70000,'GASTOS',1,9),
+('Alquiler del taller','2026-01-01',300000,'GASTOS',1,10),
+('Compra herramientas','2026-01-10',180000,'GASTOS',1,11),
+('Pago impuestos','2026-01-26',80000,'GASTOS',1,12),
+('Reparación Renault Kangoo','2026-02-02',240000,'INGRESO',1,1),
+('Cambio cableado completo','2026-02-04',160000,'INGRESO',1,2),
+('Venta batería Moura','2026-02-06',145000,'INGRESO',1,3),
+('Diagnóstico scanner','2026-02-09',60000,'INGRESO',1,5),
+('Reparación sistema eléctrico','2026-02-13',320000,'INGRESO',1,1),
+('Instalación luces auxiliares','2026-02-18',210000,'INGRESO',1,4),
+('Venta fusibles','2026-02-24',120000,'INGRESO',1,3),
+('Compra repuestos','2026-02-03',210000,'GASTOS',1,7),
+('Pago de sueldos','2026-02-28',550000,'GASTOS',1,8),
+('Factura EPE','2026-02-15',75000,'GASTOS',1,9),
+('Alquiler del taller','2026-02-01',300000,'GASTOS',1,10),
+('Compra herramientas','2026-02-11',90000,'GASTOS',1,11),
+('Pago impuestos','2026-02-25',90000,'GASTOS',1,12),
+('Reparación Peugeot 208','2026-03-02',320000,'INGRESO',1,1),
+('Cambio instalación eléctrica','2026-03-04',180000,'INGRESO',1,2),
+('Venta batería Bosch','2026-03-05',180000,'INGRESO',1,3),
+('Diagnóstico electrónico','2026-03-08',70000,'INGRESO',1,5),
+('Reparación alternador','2026-03-12',420000,'INGRESO',1,1),
+('Venta lámparas LED','2026-03-18',90000,'INGRESO',1,3),
+('Servicio eléctrico camión','2026-03-22',390000,'INGRESO',1,4),
+('Compra de repuestos','2026-03-03',220000,'GASTOS',1,7),
+('Pago de sueldos','2026-03-30',680000,'GASTOS',1,8),
+('Factura EPE','2026-03-15',92000,'GASTOS',1,9),
+('Alquiler del taller','2026-03-01',300000,'GASTOS',1,10),
+('Compra herramientas','2026-03-11',95000,'GASTOS',1,11),
+('Pago impuestos','2026-03-25',110000,'GASTOS',1,12),
+('Reparación Ford Ranger','2026-04-02',360000,'INGRESO',1,1),
+('Cambio cableado completo','2026-04-05',220000,'INGRESO',1,2),
+('Venta alternador','2026-04-06',170000,'INGRESO',1,3),
+('Diagnóstico scanner','2026-04-09',80000,'INGRESO',1,5),
+('Reparación sistema eléctrico','2026-04-14',470000,'INGRESO',1,1),
+('Venta fusibles','2026-04-18',70000,'INGRESO',1,3),
+('Instalación luces auxiliares','2026-04-24',480000,'INGRESO',1,4),
+('Compra repuestos','2026-04-04',280000,'GASTOS',1,7),
+('Pago sueldos','2026-04-30',680000,'GASTOS',1,8),
+('Factura EPE','2026-04-17',97000,'GASTOS',1,9),
+('Alquiler','2026-04-01',300000,'GASTOS',1,10),
+('Compra herramientas','2026-04-20',80000,'GASTOS',1,11),
+('Impuestos','2026-04-26',120000,'GASTOS',1,12),
+('Reparación Toyota Hilux','2026-05-02',420000,'INGRESO',1,1),
+('Cambio motor de arranque','2026-05-04',270000,'INGRESO',1,2),
+('Venta batería Moura','2026-05-06',190000,'INGRESO',1,3),
+('Diagnóstico ECU','2026-05-09',90000,'INGRESO',1,5),
+('Reparación sistema ABS','2026-05-14',520000,'INGRESO',1,1),
+('Instalación alarma','2026-05-18',330000,'INGRESO',1,4),
+('Venta sensores','2026-05-24',330000,'INGRESO',1,3),
+('Compra repuestos','2026-05-03',330000,'GASTOS',1,7),
+('Pago sueldos','2026-05-30',700000,'GASTOS',1,8),
+('Factura EPE','2026-05-15',98000,'GASTOS',1,9),
+('Alquiler','2026-05-01',300000,'GASTOS',1,10),
+('Mantenimiento compresor','2026-05-20',60000,'GASTOS',1,13),
+('Impuestos','2026-05-27',130000,'GASTOS',1,12),
+('Reparación Chevrolet Cruze','2026-06-02',480000,'INGRESO',1,1),
+('Cambio instalación completa','2026-06-04',330000,'INGRESO',1,2),
+('Venta batería Bosch','2026-06-06',220000,'INGRESO',1,3),
+('Diagnóstico eléctrico','2026-06-08',100000,'INGRESO',1,5),
+('Servicio flota empresa','2026-06-14',650000,'INGRESO',1,4),
+('Reparación alternador','2026-06-18',420000,'INGRESO',1,1),
+('Venta sensores','2026-06-25',250000,'INGRESO',1,3),
+('Compra repuestos','2026-06-03',360000,'GASTOS',1,7),
+('Pago sueldos','2026-06-30',720000,'GASTOS',1,8),
+('Factura EPE','2026-06-15',105000,'GASTOS',1,9),
+('Alquiler','2026-06-01',300000,'GASTOS',1,10),
+('Compra herramientas','2026-06-12',140000,'GASTOS',1,11),
+('Impuestos','2026-06-26',145000,'GASTOS',1,12);
+
+
+INSERT IGNORE INTO usuario (apellido, contacto, email, nombre, password, id_rol) VALUES
+('Gomez', '3425111222', 'gomez.juan@example.com', 'Juan', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Rodriguez', '3425333444', 'rodriguez.ana@example.com', 'Ana', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Fernandez', '3425555666', 'fernandez.luis@example.com', 'Luis', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Martinez', '3425777888', 'martinez.marta@example.com', 'Marta', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Lopez', '3425999000', 'lopez.carlos@example.com', 'Carlos', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Diaz', '3425111333', 'diaz.lucia@example.com', 'Lucia', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Perez', '3425444666', 'perez.diego@example.com', 'Diego', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Romero', '3425777999', 'romero.sofia@example.com', 'Sofia', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Sanchez', '3425222444', 'sanchez.pedro@example.com', 'Pedro', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Alvarez', '3425555777', 'alvarez.maria@example.com', 'Maria', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Torres', '3425888000', 'torres.jorge@example.com', 'Jorge', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Ramirez', '3425111555', 'ramirez.elena@example.com', 'Elena', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Flores', '3425666999', 'flores.gabriel@example.com', 'Gabriel', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Benitez', '3425222888', 'benitez.clara@example.com', 'Clara', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2),
+('Acosta', '3425444111', 'acosta.raul@example.com', 'Raul', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 2);
+
+
+
+-- 5. CLIENTES
+INSERT IGNORE INTO cliente (direccion, id_usuario, id_localidad) VALUES
+('Av. San Martín 123', 1 ,1),
+('Belgrano 456', 2, 2),
+('Sarmiento 789', 3, 1),
+('Mitre 101', 4, 1),
+('Rivadavia 250', 5, 2),
+('25 de Mayo 350', 6, 2),
+('Hipólito Yrigoyen 480', 7, 2),
+('España 520', 8, 1),
+('Colón 640', 9, 1),
+('Independencia 710', 10, 1),
+('Urquiza 890', 11, 1),
+('Las Heras 930', 12, 1),
+('Moreno 1050', 13 , 2),
+('Alvear 1175', 14, 2),
+('Buenos Aires 1300', 15, 1);
+
+-- 6. VEHICULOS
+INSERT IGNORE INTO vehiculo (anio, kilometraje, marca, modelo, patente, id_cliente) VALUES
+(2018, 85000, 'Toyota', 'Corolla', 'AB123CD', 1),
+(2020, 45000, 'Ford', 'Focus', 'AC234DE', 2),
+(2016, 120000, 'Volkswagen', 'Gol', 'AD345EF', 3),
+(2022, 18000, 'Chevrolet', 'Tracker', 'AE456FG', 3),
+(2019, 70000, 'Peugeot', '208', 'AF567GH', 4),
+(2017, 98000, 'Renault', 'Sandero', 'AG678HI', 5),
+(2021, 30000, 'Fiat', 'Cronos', 'AH789IJ', 6),
+(2015, 145000, 'Honda', 'Civic', 'AI890JK', 7),
+(2018, 90000, 'Toyota', 'Hilux', 'AJ901KL', 8),
+(2023, 10000, 'Volkswagen', 'Taos', 'AK012LM', 8),
+(2020, 40000, 'Nissan', 'Versa', 'AL123MN', 9),
+(2014, 165000, 'Ford', 'Ka', 'AM234NO', 10),
+(2019, 55000, 'Chevrolet', 'Onix', 'AN345OP', 11),
+(2017, 105000, 'Renault', 'Duster', 'AO456PQ', 12),
+(2022, 15000, 'Fiat', 'Pulse', 'AP567QR', 12),
+(2021, 28000, 'Jeep', 'Renegade', 'AQ678RS', 13),
+(2016, 130000, 'Citroen', 'C4 Lounge', 'AR789ST', 14),
+(2018, 76000, 'Peugeot', '308', 'AS890TU', 15);
+
+select * from usuario u 
+
+
+INSERT IGNORE INTO turno 
+(descripcion, fecha_hora, id_estado_turno, id_servicio, id_vehiculo)
+VALUES
+('Diagnóstico eléctrico falla arranque','2026-01-03 09:00:00',4,1,1),
+('Cambio batería','2026-01-05 10:30:00',4,4,2),
+('Revisión sistema eléctrico general','2026-01-07 11:00:00',4,1,3),
+('Reparación instalación eléctrica','2026-01-09 14:00:00',4,6,4),
+('Reparación alternador','2026-01-12 08:30:00',4,3,5),
+('Instalación luces LED','2026-01-14 15:00:00',4,7,6),
+('Instalación alarma vehicular','2026-01-17 10:00:00',4,9,7),
+('Cambio fusibles y relés','2026-01-20 16:00:00',4,14,8),
+('Revisión consumo eléctrico','2026-01-22 09:30:00',5,18,9),
+('Diagnóstico scanner','2026-01-24 11:30:00',4,13,10),
+('Cambio motor arranque','2026-01-27 13:00:00',4,2,11),
+('Diagnóstico Renault falla eléctrica','2026-02-02 08:00:00',4,1,14),
+('Cambio batería Moura','2026-02-04 10:00:00',4,4,15),
+('Reparación cableado puerta','2026-02-06 14:30:00',4,6,16),
+('Escaneo electrónico','2026-02-09 11:00:00',4,13,17),
+('Cambio alternador completo','2026-02-11 15:30:00',4,3,18),
+('Cliente canceló turno','2026-02-26 16:00:00',5,4,7),
+('Diagnóstico Peugeot 208','2026-03-02 09:00:00',4,1,9),
+('Reparación cableado completo','2026-03-04 12:00:00',4,6,10),
+('Cambio batería vehículo','2026-03-06 10:30:00',4,4,11),
+('Diagnóstico Ford Ranger','2026-04-02 08:30:00',4,1,6),
+('Cambio instalación eléctrica','2026-04-04 14:00:00',4,6,7),
+('Reparación alternador','2026-04-06 09:00:00',4,3,8),
+('Diagnóstico Toyota Hilux','2026-05-02 11:00:00',4,1,3),
+('Reparación motor arranque','2026-05-04 15:00:00',4,2,4),
+('Cambio batería Bosch','2026-05-06 10:00:00',4,4,5),
+('Diagnóstico Chevrolet Cruze','2026-06-02 09:30:00',4,1,18),
+('Instalación eléctrica completa','2026-06-04 13:00:00',4,6,1),
+('Diagnóstico falla arranque','2026-07-01 08:30:00',4,1,15),
+('Cambio batería vehículo particular','2026-07-05 10:00:00',4,4,16),
+('Reparación instalación eléctrica','2026-07-10 14:00:00',4,6,17),
+('Escaneo electrónico completo','2026-07-15 11:30:00',4,13,18),
+('Cliente canceló turno','2026-07-18 16:00:00',5,1,8),
+('Cambio alternador programado','2026-07-23 09:00:00',2,3,1),
+('Instalación luces LED auxiliares','2026-07-24 11:00:00',2,7,2),
+('Revisión consumo batería','2026-07-25 10:30:00',1,1,3),
+('Cambio motor arranque','2026-07-27 14:00:00',2,2,4),
+('Instalación alarma vehicular','2026-07-28 08:30:00',2,9,5),
+('Cambio sensores electrónicos','2026-07-29 15:00:00',1,18,6),
+('Reparación cableado completo','2026-07-30 10:00:00',2,6,7),
+('Diagnóstico sistema eléctrico','2026-08-01 09:00:00',1,1,9),
+('Mantenimiento eléctrico general','2026-08-03 11:00:00',2,1,10),
+('Escaneo electrónico preventivo','2026-08-05 14:30:00',1,13,11),
+('Instalación cierre centralizado','2026-08-07 10:00:00',2,10,12);
+
+
+
+
+INSERT INTO usuario (apellido, contacto, email, nombre, password, id_rol) VALUES
+-- Mecánicos
+('Gómez', '3424111111', 'mecanico1@taller.com', 'Carlos', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('López', '3424222222', 'mecanico2@taller.com', 'Juan', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Fernández', '3424333333', 'mecanico3@taller.com', 'Martin', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Martínez', '3424444444', 'mecanico4@taller.com', 'Diego', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Pérez', '3424555555', 'mecanico5@taller.com', 'Lucas', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+
+-- Ayudantes
+('Sánchez', '3424666666', 'ayudante1@taller.com', 'Mateo', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Romero', '3424777777', 'ayudante2@taller.com', 'Joaquín', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Torres', '3424888888', 'ayudante3@taller.com', 'Nicolás', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Díaz', '3424999999', 'ayudante4@taller.com', 'Agustín', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+('Álvarez', '3424000000', 'ayudante5@taller.com', 'Santiago', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+
+-- Encargado
+('Benítez', '3424123456', 'encargado@taller.com', 'Roberto', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3),
+
+-- Jefe de Taller
+('Acosta', '3424654321', 'jefe@taller.com', 'Marcelo', '$2a$12$suWVZ0cQdGU2XRD5jJzYmOk0pba7B/vI5BrPT65nwfETQNAw8Z3d6', 3);
+
+INSERT INTO empleado (id_empleado, activo, dni, fecha_ingreso, fecha_nacimiento, id_cargo, id_usuario) VALUES
+-- 5 Mecánicos (id_cargo = 2 | id_usuario del 3 al 7)
+(19, 1, '38111111', '2026-07-28', '1995-03-12', 2, 3),
+(20, 1, '38222222', '2026-07-28', '1994-06-20', 2, 4),
+(21, 1, '38333333', '2026-07-28', '1996-01-15', 2, 5),
+(22, 1, '38444444', '2026-07-28', '1993-11-05', 2, 6),
+(23, 1, '38555555', '2026-07-28', '1997-08-25', 2, 7),
+
+-- 5 Ayudantes (id_cargo = 1 | id_usuario del 8 al 12)
+(24, 1, '40111111', '2026-07-28', '2000-04-10', 1, 8),
+(25, 1, '40222222', '2026-07-28', '2001-09-18', 1, 9),
+(26, 1, '40333333', '2026-07-28', '1999-12-01', 1, 10),
+(27, 1, '40444444', '2026-07-28', '2002-02-14', 1, 11),
+(28, 1, '40555555', '2026-07-28', '2000-07-30', 1, 12),
+
+-- 1 Encargado (id_cargo = 3 | id_usuario = 13)
+(29, 1, '35111111', '2026-07-28', '1988-05-22', 3, 13),
+
+-- 1 Jefe de Taller (id_cargo = 4 | id_usuario = 14)
+(30, 1, '33111111', '2026-07-28', '1985-10-10', 4, 14);
+
+
+INSERT INTO orden_trabajo (
+    fecha_emicion,
+    numero_orden,
+    id_empleado,
+    id_empleado_origen,
+    id_estado_orden,
+    id_prioridad,
+    id_turno
+) VALUES
+-- Órdenes FACTURADAS (id_estado_orden = 8) - Turnos de Enero a Mayo 2026
+('2026-01-09 14:00:00', 7, 22, 29, 8, 2, 4),
+('2026-01-12 08:30:00', 8, 23, 30, 8, 1, 5),
+('2026-01-14 15:00:00', 9, 19, 29, 8, 3, 6),
+('2026-01-17 10:00:00', 10, 20, 29, 8, 2, 7),
+('2026-01-20 16:00:00', 11, 21, 29, 8, 3, 8),
+('2026-01-24 11:30:00', 12, 22, 30, 8, 2, 10),
+('2026-01-27 13:00:00', 13, 23, 29, 8, 1, 11),
+('2026-02-02 08:00:00', 14, 19, 29, 8, 1, 12),
+('2026-02-04 10:00:00', 15, 20, 29, 8, 2, 13),
+('2026-02-06 14:30:00', 16, 21, 29, 8, 2, 14),
+('2026-02-09 11:00:00', 17, 22, 30, 8, 2, 15),
+('2026-02-11 15:30:00', 18, 23, 29, 8, 1, 16),
+('2026-03-02 09:00:00', 19, 19, 29, 8, 1, 18),
+('2026-03-04 12:00:00', 20, 20, 29, 8, 2, 19),
+('2026-03-06 10:30:00', 21, 21, 29, 8, 2, 20),
+('2026-04-02 08:30:00', 22, 22, 30, 8, 1, 21),
+('2026-04-04 14:00:00', 23, 23, 29, 8, 2, 22),
+('2026-04-06 09:00:00', 24, 19, 29, 8, 2, 23),
+('2026-05-02 11:00:00', 25, 20, 29, 8, 1, 24),
+('2026-05-04 15:00:00', 26, 21, 30, 8, 1, 25),
+('2026-05-06 10:00:00', 27, 22, 29, 8, 2, 26),
+
+-- Órdenes PARA FACTURAR (id_estado_orden = 7) - Turnos de Junio y Julio 2026
+('2026-06-02 09:30:00', 28, 23, 29, 7, 1, 27),
+('2026-06-04 13:00:00', 29, 19, 30, 7, 2, 28),
+('2026-07-01 08:30:00', 30, 20, 29, 7, 1, 29),
+('2026-07-05 10:00:00', 31, 21, 29, 7, 2, 30),
+('2026-07-10 14:00:00', 32, 22, 29, 7, 2, 31),
+('2026-07-15 11:30:00', 33, 23, 30, 7, 2, 32),
+
+-- Órdenes ASIGNADAS (id_estado_orden = 2) - Turnos de Julio y Agosto 2026
+('2026-07-23 09:00:00', 34, 19, 29, 2, 1, 34),
+('2026-07-24 11:00:00', 35, 20, 29, 2, 3, 35),
+('2026-07-28 08:30:00', 36, 22, 29, 2, 2, 38),
+('2026-08-03 11:00:00', 37, 19, 30, 2, 2, 42),
+('2026-08-07 10:00:00', 38, 20, 29, 2, 2, 44);
+
+
+select  * from detalle_presupuesto dp;
+
+INSERT INTO detalle_ordenes (cantidad, codigo, tipo_item, trabajo_realizado, id_asignacion)
+SELECT 1, NULL, 'SERVICIO', 'Reparación de cableado', id_asignacion FROM orden_trabajo WHERE numero_orden = 7
+UNION ALL
+SELECT 1, NULL, 'MANO_OBRA', 'Aislamiento y soldado de conectores principales', id_asignacion FROM orden_trabajo WHERE numero_orden = 7
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de alternador', id_asignacion FROM orden_trabajo WHERE numero_orden = 8
+UNION ALL
+SELECT 1, 'ALT-002', 'REPUESTO', 'Regulador de Voltaje Genérico', id_asignacion FROM orden_trabajo WHERE numero_orden = 8
+UNION ALL
+SELECT 1, NULL, 'MANO_OBRA', 'Prueba y calibración en banco', id_asignacion FROM orden_trabajo WHERE numero_orden = 8
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Instalación de luces', id_asignacion FROM orden_trabajo WHERE numero_orden = 9
+UNION ALL
+SELECT 2, 'ILU-005', 'REPUESTO', 'Lámpara H7 55W Philips', id_asignacion FROM orden_trabajo WHERE numero_orden = 9
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Instalación de alarma', id_asignacion FROM orden_trabajo WHERE numero_orden = 10
+UNION ALL
+SELECT 1, NULL, 'MANO_OBRA', 'Montaje de sirena y sensores de impacto', id_asignacion FROM orden_trabajo WHERE numero_orden = 10
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Revisión de fusibles y relés', id_asignacion FROM orden_trabajo WHERE numero_orden = 11
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Escaneo electrónico', id_asignacion FROM orden_trabajo WHERE numero_orden = 12
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de motor de arranque', id_asignacion FROM orden_trabajo WHERE numero_orden = 13
+UNION ALL
+SELECT 1, 'ARR-001', 'REPUESTO', 'Bendix ZM', id_asignacion FROM orden_trabajo WHERE numero_orden = 13
+UNION ALL
+SELECT 1, 'ARR-003', 'REPUESTO', 'Solenoide Bosch', id_asignacion FROM orden_trabajo WHERE numero_orden = 13
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 14
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Cambio de batería', id_asignacion FROM orden_trabajo WHERE numero_orden = 15
+UNION ALL
+SELECT 1, 'BAT-001', 'REPUESTO', 'Batería 45Ah Moura', id_asignacion FROM orden_trabajo WHERE numero_orden = 15
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de cableado', id_asignacion FROM orden_trabajo WHERE numero_orden = 16
+UNION ALL
+SELECT 1, NULL, 'MANO_OBRA', 'Reparación de mazo de cables en fuelle de puerta', id_asignacion FROM orden_trabajo WHERE numero_orden = 16
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Escaneo electrónico', id_asignacion FROM orden_trabajo WHERE numero_orden = 17
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de alternador', id_asignacion FROM orden_trabajo WHERE numero_orden = 18
+UNION ALL
+SELECT 1, 'ALT-005', 'REPUESTO', 'Puente Rectificador Bosch', id_asignacion FROM orden_trabajo WHERE numero_orden = 18
+UNION ALL
+SELECT 1, 'ALT-007', 'REPUESTO', 'Rodamiento Delantero SKF', id_asignacion FROM orden_trabajo WHERE numero_orden = 18
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 19
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de cableado', id_asignacion FROM orden_trabajo WHERE numero_orden = 20
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Cambio de batería', id_asignacion FROM orden_trabajo WHERE numero_orden = 21
+UNION ALL
+SELECT 1, 'BAT-003', 'REPUESTO', 'Batería 65Ah Moura', id_asignacion FROM orden_trabajo WHERE numero_orden = 21
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 22
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de cableado', id_asignacion FROM orden_trabajo WHERE numero_orden = 23
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de alternador', id_asignacion FROM orden_trabajo WHERE numero_orden = 24
+UNION ALL
+SELECT 1, 'ALT-003', 'REPUESTO', 'Porta Carbones Bosch', id_asignacion FROM orden_trabajo WHERE numero_orden = 24
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 25
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de motor de arranque', id_asignacion FROM orden_trabajo WHERE numero_orden = 26
+UNION ALL
+SELECT 1, 'ARR-007', 'REPUESTO', 'Buje Delantero Original', id_asignacion FROM orden_trabajo WHERE numero_orden = 26
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Cambio de batería', id_asignacion FROM orden_trabajo WHERE numero_orden = 27
+UNION ALL
+SELECT 1, 'BAT-004', 'REPUESTO', 'Batería 75Ah Bosch', id_asignacion FROM orden_trabajo WHERE numero_orden = 27
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 28
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de cableado', id_asignacion FROM orden_trabajo WHERE numero_orden = 29
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 30
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Cambio de batería', id_asignacion FROM orden_trabajo WHERE numero_orden = 31
+UNION ALL
+SELECT 1, 'BAT-002', 'REPUESTO', 'Batería 45Ah Willard', id_asignacion FROM orden_trabajo WHERE numero_orden = 31
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de cableado', id_asignacion FROM orden_trabajo WHERE numero_orden = 32
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Escaneo electrónico', id_asignacion FROM orden_trabajo WHERE numero_orden = 33
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Reparación de alternador', id_asignacion FROM orden_trabajo WHERE numero_orden = 34
+UNION ALL
+SELECT 1, 'ALT-001', 'REPUESTO', 'Regulador de Voltaje Bosch', id_asignacion FROM orden_trabajo WHERE numero_orden = 34
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Instalación de luces', id_asignacion FROM orden_trabajo WHERE numero_orden = 35
+UNION ALL
+SELECT 2, 'ILU-001', 'REPUESTO', 'Lámpara H1 55W Philips', id_asignacion FROM orden_trabajo WHERE numero_orden = 35
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Instalación de alarma', id_asignacion FROM orden_trabajo WHERE numero_orden = 36
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Diagnóstico eléctrico', id_asignacion FROM orden_trabajo WHERE numero_orden = 37
+UNION ALL
+SELECT 1, NULL, 'SERVICIO', 'Instalación de cierre centralizado', id_asignacion FROM orden_trabajo WHERE numero_orden = 38;
+
+
+INSERT INTO presupuesto (
+    aplca_iva, 
+    descuento, 
+    fecha_registro, 
+    fecha_validez, 
+    iva, 
+    tipo_factura, 
+    total, 
+    id_orden, 
+    id_estado
+)
+SELECT 1, 0.0, '2026-01-03', '2026-01-18', 25200.00, 'A', 145200.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 7
+UNION ALL
+SELECT 1, 5.0, '2026-01-05', '2026-01-20', 31500.00, 'B', 181500.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 8
+UNION ALL
+SELECT 1, 0.0, '2026-01-07', '2026-01-22', 18900.00, 'A', 108900.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 9
+UNION ALL
+SELECT 0, 0.0, '2026-01-09', '2026-01-24', 0.00, 'C', 95000.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 10
+UNION ALL
+SELECT 1, 0.0, '2026-01-12', '2026-01-27', 10500.00, 'A', 60500.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 11
+UNION ALL
+SELECT 1, 0.0, '2026-01-14', '2026-01-29', 12600.00, 'B', 72600.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 12
+UNION ALL
+SELECT 1, 10.0, '2026-01-17', '2026-02-01', 35700.00, 'A', 205700.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 13
+UNION ALL
+SELECT 0, 0.0, '2026-01-20', '2026-02-04', 0.00, 'C', 50000.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 14
+UNION ALL
+SELECT 1, 0.0, '2026-01-24', '2026-02-08', 29400.00, 'A', 169400.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 15
+UNION ALL
+SELECT 1, 0.0, '2026-01-27', '2026-02-11', 16800.00, 'B', 96800.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 16
+UNION ALL
+SELECT 1, 0.0, '2026-02-02', '2026-02-17', 10500.00, 'A', 60500.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 17
+UNION ALL
+SELECT 1, 5.0, '2026-02-04', '2026-02-19', 37800.00, 'A', 217800.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 18
+UNION ALL
+SELECT 0, 0.0, '2026-02-06', '2026-02-21', 0.00, 'C', 45000.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 19
+UNION ALL
+SELECT 1, 0.0, '2026-02-09', '2026-02-24', 14700.00, 'B', 84700.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 20
+UNION ALL
+SELECT 1, 0.0, '2026-02-11', '2026-02-26', 31500.00, 'A', 181500.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 21
+UNION ALL
+SELECT 0, 0.0, '2026-03-02', '2026-03-17', 0.00, 'C', 55000.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 22
+UNION ALL
+SELECT 1, 0.0, '2026-03-04', '2026-03-19', 16800.00, 'B', 96800.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 23
+UNION ALL
+SELECT 1, 0.0, '2026-03-06', '2026-03-21', 27300.00, 'A', 157300.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 24
+UNION ALL
+SELECT 1, 0.0, '2026-04-02', '2026-04-17', 10500.00, 'A', 60500.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 25
+UNION ALL
+SELECT 1, 0.0, '2026-04-04', '2026-04-19', 23100.00, 'B', 133100.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 26
+UNION ALL
+SELECT 1, 0.0, '2026-04-06', '2026-04-21', 33600.00, 'A', 193600.00, id_asignacion, 9 FROM orden_trabajo WHERE numero_orden = 27;
+
+
+INSERT INTO detalle_presupuesto (cantidad, descricion, precio_unitario, sub_total, id_presupuesto)
+SELECT 
+    d.cantidad,
+    d.trabajo_realizado AS descricion,
+    -- Asignación de precio unitario estimado según el tipo de ítem
+    CASE 
+        WHEN d.tipo_item = 'SERVICIO' THEN 55000.00
+        WHEN d.tipo_item = 'MANO_OBRA' THEN 35000.00
+        WHEN d.tipo_item = 'REPUESTO' THEN 45000.00
+        ELSE 25000.00
+    END AS precio_unitario,
+    -- Cálculo del subtotal: cantidad * precio_unitario
+    (d.cantidad * CASE 
+        WHEN d.tipo_item = 'SERVICIO' THEN 55000.00
+        WHEN d.tipo_item = 'MANO_OBRA' THEN 35000.00
+        WHEN d.tipo_item = 'REPUESTO' THEN 45000.00
+        ELSE 25000.00
+    END) AS sub_total,
+    p.id_presupuesto
+FROM detalle_ordenes d
+JOIN orden_trabajo o ON d.id_asignacion = o.id_asignacion
+JOIN presupuesto p ON o.id_asignacion = p.id_orden;
+
+
+UPDATE presupuesto p
+JOIN orden_trabajo o ON p.id_orden = o.id_asignacion
+JOIN turno t ON o.id_turno = t.id_turno
+SET p.id_vehiculo = t.id_vehiculo
+WHERE p.id_vehiculo IS NULL;
+
+UPDATE presupuesto 
+SET id_administrador = 1 
+WHERE id_administrador IS NULL;
