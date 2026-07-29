@@ -66,7 +66,7 @@ app-header-admin{
     flex:1;
     height:100vh;
 
-    padding:20px;
+    padding:16px 20px;
 
     background:#f3f6fb;
 
@@ -85,7 +85,7 @@ app-header-admin{
 
     display:flex;
     flex-direction:column;
-    gap:2rem;
+    gap:1.2rem;
 }
 
 
@@ -95,19 +95,19 @@ app-header-admin{
 
 .titulo{
     text-align:center;
-    margin-top:20px;
+    margin-top:5px;
 }
 
 .titulo h1{
-    font-size:1.75rem;
+    font-size:1.6rem;
     font-weight:700;
     color:#0f172a;
 
-    margin-bottom:.25rem;
+    margin-bottom:.15rem;
 }
 
 .titulo p{
-    font-size:.95rem;
+    font-size:.9rem;
     color:#64748b;
 }
 
@@ -118,68 +118,143 @@ app-header-admin{
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:1.5rem;
+    grid-template-columns:repeat(auto-fit,minmax(240px,300px));
+    gap:1rem;
+    justify-content:center;
 }
 
 .cards .card{
     position:relative;
     overflow:hidden;
-
     display:flex;
     flex-direction:column;
     justify-content:center;
+    align-items:center;
+    gap:0.25rem;
+    padding:1rem;
+    max-width:300px;
+    width:100%;
+    min-height:170px;
+    margin:auto;
+    background:linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border:1px solid rgba(37,99,235,.16);
+    border-radius:14px;
+    box-shadow:0 6px 14px rgba(15,23,42,.06);
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
 
-    padding:1.5rem;
+.cards .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 36px rgba(15,23,42,.12);
+    border-color:rgba(37,99,235,.3);
+}
 
-    background:#fff;
-    border:1px solid #e2e8f0;
-    border-radius:12px;
+.cards .card .icono{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    border-radius:10px;
+    background:rgba(37,99,235,.12);
+    font-size:1.2rem;
+    margin-bottom:.15rem;
+    transition:background .25s ease;
+}
 
-    box-shadow:0 4px 6px -1px rgba(0,0,0,.05);
+.cards .card:hover .icono{
+    background:rgba(37,99,235,.2);
 }
 
 .cards .card h3{
-    margin-bottom:.5rem;
-
-    font-size:.9rem;
-    font-weight:600;
-    color:#64748b;
+    margin-bottom:.15rem;
+    font-size:.88rem;
+    font-weight:700;
+    color:#334155;
+    text-align:center;
 }
 
-.cards .card span{
-    font-size:1.75rem;
-    font-weight:700;
+.cards .card h2{
+    margin:.1rem 0;
+    font-size:1.8rem;
+    font-weight:800;
     color:#0f172a;
 }
 
-/* Tarjeta con botón */
+.cards .card p{
+    margin-top:.1rem;
+    font-size:.85rem;
+    font-weight:600;
+    color:#64748b;
+    text-align:center;
+}
 
 .cards .card:has(button){
-    border-left:4px solid #ef4444;
+    border-left:4px solid #2563eb;
 }
 
 .cards .card button{
     width:max-content;
-
-    margin-top:.75rem;
-    padding:.5rem 1rem;
-
+    margin-top:0.4rem;
+    padding:.45rem 1rem;
     border:none;
-    border-radius:6px;
-
-    background:#ef4444;
+    border-radius:10px;
+    background:linear-gradient(135deg, #2563eb, #3b82f6);
     color:#fff;
-
-    font-weight:600;
+    font-size:.85rem;
+    font-weight:700;
     cursor:pointer;
-
-    transition:.2s;
+    box-shadow:0 8px 16px rgba(37, 99, 235, .18);
+    transition:.25s;
 }
 
 .cards .card button:hover{
-    background:#dc2626;
+    background:linear-gradient(135deg, #1d4ed8, #2563eb);
+    transform:translateY(-1px);
 }
+
+
+/* ==========================================================================
+   FILTROS DE FACTURAS
+========================================================================== */
+
+.filtros-facturas{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:0;
+    padding:12px 16px;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+}
+
+.campo-filtro{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    min-width:200px;
+    flex:1;
+}
+
+.campo-filtro label{
+    font-size:.82rem;
+    font-weight:700;
+    color:#334155;
+}
+
+.campo-filtro input,
+.campo-filtro select{
+    width:100%;
+    height:38px;
+    padding:0 12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    background:#f8fafc;
+    color:#0f172a;
+    font-size:.9rem;
+}
+
 
 /* ==========================================================================
    CONTENIDO
@@ -188,7 +263,7 @@ app-header-admin{
 .contenido{
     display:flex;
     flex-direction:column;
-    gap:2rem;
+    gap:1.5rem;
 }
 
 
@@ -198,7 +273,7 @@ app-header-admin{
 
 .facturas-recientes{
     background:#fff;
-    padding:2rem;
+    padding:1.5rem;
 
     border:1px solid #e2e8f0;
     border-radius:14px;
@@ -209,41 +284,11 @@ app-header-admin{
 }
 
 .facturas-recientes h2{
-    margin-bottom:1.5rem;
+    margin-bottom:1rem;
 
-    font-size:1.35rem;
+    font-size:1.25rem;
     font-weight:700;
     color:#0f172a;
-}
-
-
-/* ==========================================================================
-   TARJETAS
-========================================================================== */
-
-.cards .card{
-    align-items:flex-start;
-}
-
-.cards .card .icono{
-    font-size:2.2rem;
-    margin-bottom:.8rem;
-}
-
-.cards .card h2{
-    margin:.3rem 0;
-
-    font-size:2rem;
-    font-weight:700;
-    color:#0f172a;
-}
-
-.cards .card p{
-    margin-top:.5rem;
-
-    font-size:.9rem;
-    color:#64748b;
-    line-height:1.4;
 }
 
 
@@ -262,11 +307,11 @@ thead{
 }
 
 th{
-    padding:1rem;
+    padding:.8rem;
 
     text-align:left;
 
-    font-size:.82rem;
+    font-size:.8rem;
     font-weight:700;
     text-transform:uppercase;
     letter-spacing:.6px;
@@ -277,9 +322,9 @@ th{
 }
 
 td{
-    padding:1rem;
+    padding:.8rem;
 
-    font-size:.95rem;
+    font-size:.9rem;
     color:#334155;
 
     border-bottom:1px solid #eef2f7;
@@ -296,11 +341,11 @@ tbody tr:hover{
 
 
 /* ==========================================================================
-   BOTONES
+   BOTONES EN TABLA
 ========================================================================== */
 
 table button{
-    padding:.55rem 1rem;
+    padding:.45rem .85rem;
 
     background:#2563eb;
     color:#fff;
@@ -309,6 +354,7 @@ table button{
     border-radius:8px;
 
     font-weight:600;
+    font-size:.85rem;
     cursor:pointer;
 
     transition:.2s;
@@ -329,13 +375,13 @@ table button:hover{
     align-items:center;
     justify-content:center;
 
-    min-width:110px;
+    min-width:100px;
 
-    padding:.45rem .9rem;
+    padding:.35rem .75rem;
 
     border-radius:999px;
 
-    font-size:.78rem;
+    font-size:.75rem;
     font-weight:700;
     letter-spacing:.3px;
 }
@@ -376,7 +422,7 @@ table button:hover{
     }
 
     .facturas-recientes{
-        padding:1.5rem;
+        padding:1.2rem;
     }
 
     table{
@@ -388,23 +434,23 @@ table button:hover{
 @media (max-width:768px){
 
     .content{
-        padding:1rem;
+        padding:0.8rem;
     }
 
     .titulo h1{
-        font-size:1.5rem;
+        font-size:1.4rem;
     }
 
     .cards .card{
-        padding:1.2rem;
+        padding:1rem;
     }
 
     .cards .card h2{
-        font-size:1.7rem;
+        font-size:1.5rem;
     }
 
     .facturas-recientes h2{
-        font-size:1.15rem;
+        font-size:1.1rem;
     }
 
 }

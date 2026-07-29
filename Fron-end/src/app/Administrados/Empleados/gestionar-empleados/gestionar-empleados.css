@@ -120,45 +120,258 @@
 }
 
 /* ==========================
-   GRID
+   GRID / LISTA
 ========================== */
 
-.grid-empleados{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fill,minmax(340px,1fr));
-    gap:20px;
+.filtros-empleados{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+    margin-bottom:24px;
+    padding:20px;
+    background:#ffffff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+}
+
+.campo-filtro{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    min-width:200px;
+    flex:1;
+}
+
+.campo-filtro label{
+    font-size:14px;
+    font-weight:600;
+    color:#111827;
+}
+
+.campo-filtro input,
+.campo-filtro select{
+    height:44px;
+    padding:0 14px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    background:#fff;
+    color:#111827;
+    font-size:14px;
+}
+
+.empleados-lista{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
 }
 
 /* ==========================
-   TARJETAS
+   TABLA DE EMPLEADOS
 ========================== */
 
-.card-empleado{
-    background:white;
+.tabla-empleados{
+    width:100%;
+    border-collapse:separate;
+    border-spacing:0 18px;
+}
 
+.tabla-empleados thead th{
+    text-align:left;
+    padding:16px 18px;
+    font-size:14px;
+    font-weight:700;
+    color:#334155;
+}
+
+.tabla-empleados tbody tr{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
     border-radius:16px;
+    box-shadow:0 8px 20px rgba(0,0,0,.03);
+}
 
-    padding:24px;
+.tabla-empleados tbody tr td{
+    padding:18px;
+    vertical-align:middle;
+    border:none;
+    color:#475569;
+    font-size:14px;
+}
 
-    border:1px solid #eef2f7;
+.empleado-td-nombre{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
 
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.05);
+.avatar-sm{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:linear-gradient(135deg, #2563eb, #60a5fa);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:14px;
+}
 
+.cargo-inline{
+    display:none;
+}
+
+.badge-estado{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:84px;
+    padding:8px 12px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.badge-estado.activo{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.badge-estado.inactivo{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.acciones-col{
+    min-width:220px;
+}
+
+.acciones-col button{
+    margin-right:10px;
+}
+
+.btn-ver,
+.btn-baja,
+.btn-alta{
+    border:none;
+    border-radius:10px;
+    padding:10px 14px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
     transition:.2s;
 }
 
-.card-empleado:hover{
-    transform:translateY(-2px);
+.btn-ver{
+    background:#2563eb;
+    color:#fff;
+}
 
+.btn-ver:hover{
+    background:#1d4ed8;
+}
+
+.btn-baja{
+    background:#fef2f2;
+    color:#dc2626;
+}
+
+.btn-baja:hover{
+    background:#fee2e2;
+}
+
+.btn-alta{
+    background:#28a745;
+    color:#fff;
+}
+
+.btn-alta:hover{
+    background:#218838;
+}
+
+.alerta-estado{
+    background:white;
+    padding:40px;
+    border-radius:16px;
+    text-align:center;
     box-shadow:
-        0 12px 24px rgba(0,0,0,.08);
+        0 8px 20px rgba(0,0,0,.05);
+}
+
+.icon-circle{
+    width:85px;
+    height:85px;
+    margin:auto;
+    border-radius:50%;
+    background:#fee2e2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.icon-circle i{
+    font-size:32px;
+    color:#dc2626;
+}
+
+.alerta-estado h2{
+    margin-top:20px;
+    color:#111827;
+}
+
+.alerta-estado p{
+    margin:15px auto;
+    max-width:450px;
+    color:#6b7280;
+    line-height:1.5;
+}
+
+.btn-accion{
+    margin-top:20px;
+    border:none;
+    background:#2563eb;
+    color:white;
+    padding:14px 24px;
+    border-radius:12px;
+    font-weight:600;
+    cursor:pointer;
+}
+
+.btn-accion:hover{
+    background:#1d4ed8;
 }
 
 /* ==========================
-   HEADER CARD
+   RESPONSIVE
 ========================== */
+
+@media(max-width:900px){
+
+    .titulo-seccion{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .filtros-empleados{
+        flex-direction:column;
+    }
+
+    .empleado-td-nombre{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .acciones-col{
+        display:flex;
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .acciones-col button{
+        width:100%;
+        margin-right:0;
+    }
+}
 
 .card-header{
     display:flex;

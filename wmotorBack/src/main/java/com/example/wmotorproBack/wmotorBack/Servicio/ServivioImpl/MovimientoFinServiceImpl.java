@@ -289,6 +289,15 @@ public class MovimientoFinServiceImpl implements MovimientoFinService {
 
     @Override
     public ResponceDTO pagarSueldos(Long idAdmin) throws Exception {
+        long empleadosActivos = empleadoRepository.findAll()
+                .stream()
+                .filter(e -> Boolean.TRUE.equals(e.getActivo()))
+                .count();
+
+        if (empleadosActivos == 0) {
+            throw new Exception("No hay empleados activos para registrar el pago de sueldos.");
+        }
+
         Double importeTotal = totalSueldos();
 
         if (importeTotal == null || importeTotal <= 0) {

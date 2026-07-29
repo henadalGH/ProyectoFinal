@@ -8,7 +8,7 @@
     <!-- contenido principal -->
      <app-header></app-header>
      <div class="facturacion">
- 
+
     <div class="titulo">
         <h1>Facturación</h1>
         <p>Gestiona todas tus facturas</p>
@@ -20,12 +20,11 @@
             <span class="icono">📋</span>
             <h3>Órdenes pendientes para facturar</h3>
             <h2>{{factura.length}}</h2>
+            <p>Listas para facturar</p>
             @if (factura.length > 0) {
                 <button [routerLink]="['/paraFacturar']">Facturar</button>
             }
-            <p>Listas para facturar</p>
         </div>
-
 
         <div class="card">
             <span class="icono">💰</span>
@@ -36,9 +35,34 @@
 
     </div>
 
+    <div class="filtros-facturas">
+      <div class="campo-filtro">
+        <label>Buscar por cliente</label>
+        <input type="text" [(ngModel)]="searchCliente" placeholder="Nombre o apellido" />
+      </div>
+
+      <div class="campo-filtro">
+        <label>Filtrar por estado</label>
+        <select [(ngModel)]="filterEstado">
+          <option value="">Todos</option>
+          <option value="impaga">IMPAGA</option>
+          <option value="pagada">PAGADA</option>
+          <option value="sin-enviar">SIN ENVIAR</option>
+        </select>
+      </div>
+
+      <div class="campo-filtro">
+        <label>Fecha desde</label>
+        <input type="date" [(ngModel)]="fechaDesde" />
+      </div>
+
+      <div class="campo-filtro">
+        <label>Fecha hasta</label>
+        <input type="date" [(ngModel)]="fechaHasta" />
+      </div>
+    </div>
+
     <div class="contenido">
-
-
 
         <div class="facturas-recientes">
 
@@ -57,7 +81,7 @@
                 </thead>
 
                 <tbody>
-                    @for (fac of facturas; track $index) {
+                    @for (fac of facturasFiltradas; track $index) {
 
                         <tr>
                             <td>
@@ -85,7 +109,6 @@
                                 <button (click)="verFactura(fac.id)">Ver factura</button>
                             </td>
 
-
                         </tr>
                     }
 
@@ -95,13 +118,9 @@
 
         </div>
 
-
-
-
     </div>
 
 </div>
 
   </main>
 </div>
-

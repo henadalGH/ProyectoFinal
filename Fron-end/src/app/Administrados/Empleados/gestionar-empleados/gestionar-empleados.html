@@ -10,40 +10,60 @@
 
     <div class="gestion-container">
 
-      <!-- TITULO -->
+      <!-- TÍTULO -->
       <div class="titulo-seccion">
-
         <div class="texto">
           <h1>Panel de Empleados</h1>
-          <p>
-            Administración y control del personal del taller
-          </p>
+          <p>Administración y control del personal del taller</p>
         </div>
 
         <button
           class="boton-agregar"
           [routerLink]="['/registrarEmpleado']">
-
           <i class="fas fa-plus"></i>
           Agregar Nuevo
-
         </button>
-
       </div>
 
       <!-- CONTENIDO -->
       <div class="contenido-principal">
 
+        <!-- FILTROS -->
+        <div class="filtros-empleados">
+          <div class="campo-filtro">
+            <label>Buscar por nombre</label>
+            <input type="text" [(ngModel)]="searchName" placeholder="Nombre o apellido" />
+          </div>
+
+          <div class="campo-filtro">
+            <label>Filtrar por cargo</label>
+            <select [(ngModel)]="filterCargo">
+              <option value="">Todos</option>
+              <option value="ENCARGADO">Encargado</option>
+              <option value="AYUDANTE">Ayudante mecánico</option>
+              <option value="JEFE_TALTAR">Jefe del taller</option>
+              <option value="MECANICO">Mecanico</option>
+            </select>
+          </div>
+
+          <div class="campo-filtro">
+            <label>Filtrar por activo</label>
+            <select [(ngModel)]="filterActivo">
+              <option value="">Todos</option>
+              <option value="si">Sí</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ESTADO DE ERROR -->
         @if (error) {
-
           <div class="alerta-estado error">
-
             <div class="icon-circle">
               <i class="fas fa-wifi-slash"></i>
             </div>
 
             <h2>Error de Conexión</h2>
-
             <p>
               No pudimos obtener la lista del servidor.
               Por favor, verifica tu conexión.
@@ -52,125 +72,69 @@
             <button
               class="btn-accion"
               (click)="obtenerEmpleado()">
-
               <i class="fas fa-sync-alt"></i>
               Intentar de nuevo
-
             </button>
-
           </div>
-
         }
-
         @else {
-
-          <div class="grid-empleados">
-
-            @for (empl of empleados; track empl.id) {
-
-              <div class="card-empleado">
-
-                <!-- HEADER -->
-                <div class="card-header">
-
-                  <div class="avatar">
-                    {{empl.usuario.nombre.charAt(0)}}
-                    {{empl.usuario.apellido.charAt(0)}}
-                  </div>
-
-                  <div class="user-info">
-
-                    <h3>
-                      {{empl.usuario.nombre}}
-                      {{empl.usuario.apellido}}
-                    </h3>
-
-                    <span class="badge-cargo">
-                      {{empl.cargo.cargo}}
-                    </span>
-
-                  </div>
-
-                </div>
-
-                <!-- BODY -->
-                <div class="card-body">
-
-                  <div class="info-row">
-                    <i class="fas fa-envelope"></i>
-
-                    <span>
-                      {{empl.usuario.email}}
-                    </span>
-                  </div>
-
-                  <div class="info-row">
-                    <i class="fas fa-phone"></i>
-
-                    <span>
-                      {{ empl.usuario.contacto
-                      ? '+54 ' + empl.usuario.contacto.slice(2,5) + ' ' + empl.usuario.contacto.slice(5,8) + '-' + empl.usuario.contacto.slice(8)
-                      : ''}}
-                    </span>
-                  </div>
-
-                </div>
-
-                <!-- FOOTER -->
-                <div class="card-footer">
-
-                  <button
-                    class="btn-ver"
-                    (click)="verEmpleado(empl.id)">
-
-                    Gestionar Perfil
-                    <i class="fas fa-chevron-right"></i>
-
-                  </button>
-
-
-                  @if(empl.activo == true){
-                    <button class="btn-baja" (click)="desactivarEmpleado(empl.id)">
-                    Dar baja
-                    <i class="fas fa-user-minus"></i>
-                  </button> 
-                  }@else if (empl.activo == false) {
-
-                    <button class="btn-alta" (click)="activarEmpleado(empl.id)">
-                      <i class="fas fa-user-check"></i>
-                      Dar de alta
-                    </button>
-                  }
-
-                  
-
-                </div>
-
-              </div>
-
-            }
-
-            @empty {
-
-              <div class="alerta-estado vacio">
-
-                <div class="icon-circle">
-                  <i class="fas fa-users-slash"></i>
-                </div>
-
-                <h2>Sin Personal</h2>
-
-                <p>
-                  Aún no has registrado empleados
-                  en el sistema.
-                </p>
-
-              </div>
-
-            }
-
+          <!-- LISTADO DE EMPLEADOS -->
+          <div class="empleados-lista">
+            <table class="tabla-empleados">
+              <thead>
+                <tr>
+                  <th>Empleado</th>
+                  <th>Cargo</th>
+                  <th>Estado</th>
+                  <th class="acciones-col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (empl of empleadosFiltrados; track empl.id) {
+                  <tr>
+                    <td>
+                      <div class="empleado-td-nombre">
+                        <span class="avatar avatar-sm">
+                          {{ empl.usuario.nombre.charAt(0) }}{{ empl.usuario.apellido.charAt(0) }}
+                        </span>
+                        <div>
+                          <strong>{{ empl.usuario.nombre }} {{ empl.usuario.apellido }}</strong>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{ empl.cargo.cargo }}</td>
+                    <td>
+                      <span class="badge-estado" [class.activo]="empl.activo" [class.inactivo]="!empl.activo">
+                        {{ empl.activo ? 'Activo' : 'Inactivo' }}
+                      </span>
+                    </td>
+                    <td class="acciones-col">
+                      <button class="btn-ver" (click)="verEmpleado(empl.id)">Gestionar</button>
+                      @if (empl.activo) {
+                        <button class="btn-baja" (click)="desactivarEmpleado(empl.id)">Dar baja</button>
+                      } @else {
+                        <button class="btn-alta" (click)="activarEmpleado(empl.id)">Dar de alta</button>
+                      }
+                    </td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="6">
+                      <div class="alerta-estado vacio">
+                        <div class="icon-circle">
+                          <i class="fas fa-users-slash"></i>
+                        </div>
+                        <h2>Sin Personal</h2>
+                        <p>
+                          Aún no has registrado empleados en el sistema (o no coinciden con los filtros).
+                        </p>
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
           </div>
-
         }
 
       </div>
